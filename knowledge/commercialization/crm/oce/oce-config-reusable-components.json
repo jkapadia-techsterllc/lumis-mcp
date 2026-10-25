@@ -1,0 +1,48 @@
+[
+  {
+    "id": "oce-cfg-wf-001",
+    "category": "crm-configuration",
+    "title": "Generic Workflow — Architecture and Core Concepts",
+    "products": ["CRM Platform"],
+    "summary": "The Generic Workflow is a configurable state machine that controls record lifecycle, field editability, and available actions based on a controlling picklist field. It replaced the Legacy Workflow (which was hardcoded for Meetings only). Generic Workflow supports any managed package object, other managed package objects, or custom objects not part of a managed package.",
+    "findings": {
+      "core_metadata_objects": "Workflow Path — defines nodes (path) for an object using a Controlling Field (must be a picklist type). Context Type — stores information about the configured object and links all related data. Context — groups conditions that determine CRUD permissions and available actions. Context Condition — rules that grant or deny permissions. Context Action — actions triggered when a Context applies on a particular node (record update, open component, or call Platform Event).",
+      "object_workflow_path_association": "When a Workflow Path is activated and a user creates a record, an Object Workflow Path Association record is automatically created to track which Workflow Path governs that record. If a Record Type changes, the association updates to link to the relevant Workflow Path for the new Record Type.",
+      "legacy_workflow_retirement": "The Legacy Workflow is retired. To verify no hybrid model exists: (1) check Workflow Paths are active for Generic Workflow (inactive means Legacy), (2) verify 'Is Controlled By Workflow Path' on all Context Types is true (false means Legacy).",
+      "transaction_behavior": "When a record update triggers another record that has a Generic Workflow, the workflow validates permissions on the secondary record. If the user lacks edit permission on the secondary record, the entire transaction fails. If the first object in the transaction has a Generic Workflow that allows the update, downstream objects are not checked."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Reusable Components: Generic Workflow",
+    "tags": ["generic-workflow", "state-machine", "CRUD-permissions", "context", "workflow-path"]
+  },
+  {
+    "id": "oce-cfg-wf-002",
+    "category": "crm-configuration",
+    "title": "Generic Workflow — Migration to sObjects and Export/Import",
+    "products": ["CRM Platform"],
+    "summary": "Generic Workflow configurations were originally stored in custom metadata but now use sObjects to avoid metadata character limit deployment failures. Organizations must migrate to the sObject approach. Export and cross-org deployment use a static resource packaging mechanism.",
+    "findings": {
+      "migration_steps": "1) Run WorkflowPathMigrationJob from Developer Console: new OCE.UniversalJobRunner('OCE.WorkflowPathMigrationJob').runNow(). 2) Update DB Schema records for all 7 Workflow objects (WorkflowPath, WorkflowPathNode, WorkflowContext, WorkflowContextType, WorkflowContextCondition, WorkflowContextAction, WorkflowAction) with permission sets: ;OCE__GenericWorkflowAdmin;OCE__GenericWorkflowUser; (keep Profiles as ;OCE Admin). 3) Activate all 9 related DB Schema records from Admin Console > Mobile > Entities. 4) Enable 'Use sObjects for Generic Workflow' in Admin Console > Generic Workflow > Workflow Settings. This is a one-way switch — cannot revert to metadata. 5) Generate metadata cache for all user profiles.",
+      "export_workflow": "Export via Admin Console > Workflow Configuration — each Workflow Path has an Export action that prompts for a new name, creates a Generic Workflow metadata record, and generates a static resource with configurations. Use standard change sets to deploy the cloned metadata record plus static resource to another org. After deployment, the imported Workflow appears as 'Not deployed' and must be cloned and deployed by the admin.",
+      "disable_metadata_updates": "After migration, enable 'Stop Updating Generic Workflow Metadata' to prevent dual writes. Exception: do NOT enable this setting if using the Engage package (Engage depends on metadata-based workflow configurations).",
+      "mobile_sync_requirement": "Mobile users must accept the latest metadata cache after migration. Until they do, mobile continues using custom metadata configurations."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Generic Workflow sObject Migration",
+    "tags": ["generic-workflow", "migration", "sObjects", "metadata", "export", "change-sets"]
+  },
+  {
+    "id": "oce-cfg-wf-003",
+    "category": "crm-configuration",
+    "title": "Generic Workflow — Permission Sets and Activation Requirements",
+    "products": ["CRM Platform"],
+    "summary": "Activating the Generic Workflow requires specific permission set assignments for administrators and users, along with Bulk Update Blacklist configuration and admin console access setup.",
+    "findings": {
+      "admin_permission_sets": "Generic Workflow Admin (all admin users). Meeting Admin or Meeting Admin 2 if workflow is used with Meetings. Meeting Speaker Admin if workflow includes speaker management. Workflow Configuration custom permission for Admin Console tile access.",
+      "user_permission_sets": "Generic Workflow User (all end users). Meeting User if used with Meetings. Meeting Speaker User if workflow includes speaker management.",
+      "bulk_update_blacklist": "Any sObject with an active Generic Workflow must be added to the Bulk Update Blacklist. This prevents bulk operations from bypassing workflow permission checks.",
+      "record_type_behavior": "If a Record Type change results in no Workflow Path configured for the new type, but at least one Record Type on the object has a Workflow Path and the object is not a Child Context on another Workflow Path, the record becomes locked — no CRUD operations are possible. Generic Workflow Create/Update/Delete permissions are NOT validated on Salesforce for synchronization transactions from mobile. Mobile validates permissions independently.",
+      "admin_console_path": "All workflow configuration is managed through Admin Console > Workflow Configuration tile. Manual changes outside Admin Console are not recommended and can cause misconfiguration."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Generic Workflow Activation",
+    "tags": ["generic-workflow", "permission-sets", "activation", "bulk-update", "record-types"]
+  }
+]

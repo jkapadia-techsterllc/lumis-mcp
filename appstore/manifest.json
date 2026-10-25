@@ -1,0 +1,218 @@
+{
+  "name": "lumis",
+  "display_name": "Lumis",
+  "version": "1.0.0",
+  "description": "Life sciences CRM migration intelligence — expert-level guidance for module selection, data migration, validation, and go-live readiness.",
+  "author": {
+    "name": "Lumis AI",
+    "url": "https://lumis-lifesciences.com"
+  },
+  "license": "Proprietary",
+  "category": "industry/life-sciences",
+  "tags": [
+    "life-sciences",
+    "pharma",
+    "crm-migration",
+    "regulatory-compliance",
+    "data-validation",
+    "implementation",
+    "multi-country-rollout",
+    "wave-planning",
+    "change-management"
+  ],
+  "icon": "assets/icon.svg",
+  "banner": "assets/banner.svg",
+  "homepage": "https://lumis-lifesciences.com",
+  "repository": "https://github.com/jkapadia-techsterllc/lumis-mcp",
+  "documentation": "https://docs.lumis-lifesciences.com",
+
+  "mcp_server": {
+    "transport": "stdio",
+    "command": "lumis-mcp",
+    "args": [],
+    "runtime": "python",
+    "min_python_version": "3.10",
+    "pip_package": "lumis-mcp",
+    "dependencies": ["mcp>=1.0,<3.0", "pyyaml>=6.0"]
+  },
+
+  "remote_server": {
+    "transport": "streamable-http",
+    "url": "https://api.lumis-lifesciences.com/mcp",
+    "authentication": {
+      "type": "api-key",
+      "header": "X-Api-Key",
+      "registration_url": "https://lumis-lifesciences.com/signup"
+    }
+  },
+
+  "tools": [
+    {
+      "name": "search_knowledge",
+      "description": "Search the Lumis knowledge base for life sciences CRM expertise across modules, decision trees, gotchas, country rules, validation rules, and terminology.",
+      "parameters": {
+        "query": "Natural language search query",
+        "category": "Filter: modules, decision-trees, gotchas, country-rules, validation-rules, terminology, or 'all'",
+        "limit": "Max results (default 5)"
+      }
+    },
+    {
+      "name": "get_module_mapping",
+      "description": "Get the target cloud platform equivalent for a legacy CRM module, including coverage level and known gaps.",
+      "parameters": {
+        "source_module": "Source module name (e.g. 'CLM', 'Events', 'Approved Email')"
+      }
+    },
+    {
+      "name": "get_gotchas",
+      "description": "Retrieve non-obvious pitfalls, edge cases, and gotchas for a specific module or country.",
+      "parameters": {
+        "module": "Filter by module name (optional)",
+        "country": "Filter by country (optional)"
+      }
+    },
+    {
+      "name": "traverse_decision_tree",
+      "description": "Walk a decision tree (module selection, migration path) with user inputs to produce a structured recommendation.",
+      "parameters": {
+        "tree_name": "Decision tree name (e.g. 'module-selection', 'migration-path')",
+        "inputs": "JSON string of input parameters"
+      }
+    },
+    {
+      "name": "get_country_rules",
+      "description": "Get regulatory and configuration rules for a specific country — GDPR, APPI, FDA, and module-specific constraints.",
+      "parameters": {
+        "country": "Country name or code (e.g. 'Germany', 'DE', 'Japan')",
+        "module": "Optional module filter"
+      }
+    },
+    {
+      "name": "run_validation",
+      "description": "Run a validation rule by ID or match rules against a reported symptom to diagnose configuration issues.",
+      "parameters": {
+        "rule_id": "Specific rule ID (optional)",
+        "symptom": "User-reported problem description (optional)"
+      }
+    },
+    {
+      "name": "get_terminology",
+      "description": "Look up correct terminology to prevent hallucinations — maps incorrect legacy terms to correct modern platform terms.",
+      "parameters": {
+        "term": "Term to look up (e.g. 'CLM', 'Approved Email', 'Call')"
+      }
+    },
+    {
+      "name": "get_agent_workflow",
+      "description": "Get the full workflow, phases, and checklists for a specialized Lumis agent (migration, implementation, audit, operations).",
+      "parameters": {
+        "agent": "Agent name: 'migration', 'implementation', 'audit', or 'operations'"
+      }
+    },
+    {
+      "name": "assess_migration_readiness",
+      "description": "Run a free migration readiness assessment — returns complexity score, module mappings, gaps, risks, and estimated timeline.",
+      "parameters": {
+        "source_platform": "Current platform (e.g. 'legacy CRM', 'hybrid')",
+        "modules_in_use": "Comma-separated list of modules currently in use",
+        "country_count": "Number of countries in scope",
+        "user_count": "Approximate number of CRM users"
+      },
+      "free": true
+    },
+    {
+      "name": "plan_multi_country_rollout",
+      "description": "Generate a wave-based multi-country rollout plan — country clustering, wave sequencing, execution timelines, and risk warnings for global pharma CRM deployments.",
+      "parameters": {
+        "country_count": "Total countries in scope",
+        "modules": "Comma-separated list of modules to deploy",
+        "regions": "Comma-separated regions in scope (e.g. 'EU, Americas, APAC, LATAM')",
+        "includes_us": "Whether the US is in scope (adds regulatory complexity)",
+        "includes_japan": "Whether Japan is in scope (requires standalone wave)"
+      }
+    },
+    {
+      "name": "compare_entities",
+      "description": "Compare two entities side-by-side — countries, modules, regulatory frameworks, or any knowledge base entries.",
+      "parameters": {
+        "entity_a": "First entity to compare (e.g. 'Germany', 'CLM', 'Wave 1')",
+        "entity_b": "Second entity to compare (e.g. 'France', 'Events', 'Wave 2')",
+        "dimension": "Optional focus dimension (e.g. 'sample rules', 'regulatory', 'complexity')"
+      }
+    },
+    {
+      "name": "get_taxonomy",
+      "description": "Browse the Lumis value chain taxonomy — phases, areas, and knowledge categories.",
+      "parameters": {
+        "phase": "Filter by phase (e.g. 'commercialization', 'all')",
+        "area": "Filter by area within the phase (optional)"
+      },
+      "free": true
+    },
+    {
+      "name": "plan_system_validation",
+      "description": "Plan a computer system validation (CSV/CSA) for a life sciences system — returns regulations, GAMP classification, deliverables, effort estimates, and gap areas.",
+      "parameters": {
+        "system_name": "Name of the system being validated",
+        "system_type": "Type: 'saas', 'cots', 'configured', 'custom', 'hybrid'",
+        "platform": "Platform name (optional)",
+        "regulatory_geography": "Regulatory geography (default 'US')",
+        "gxp_context": "GxP context (optional)",
+        "modules_in_use": "Comma-separated modules (optional)",
+        "has_mobile": "Whether system has mobile component",
+        "has_integrations": "Whether system has integrations",
+        "has_custom_code": "Whether system has custom code",
+        "user_count": "Approximate number of users",
+        "country_count": "Number of countries in scope"
+      }
+    }
+  ],
+
+  "instructions": "Lumis provides expert-level intelligence for life sciences CRM implementations. Use ONLY the knowledge returned by these tools to answer questions. Do not improvise or guess. If the knowledge base does not cover a topic, say so. Always cite the source entry for every factual claim.",
+
+  "pricing": {
+    "model": "freemium",
+    "tiers": {
+      "free": {
+        "description": "Migration readiness assessment, terminology lookup, and taxonomy browser — no API key needed",
+        "rate_limit": "10 requests/minute",
+        "tools": ["assess_migration_readiness", "get_terminology", "get_taxonomy"]
+      },
+      "starter": {
+        "description": "Full knowledge base access for individual consultants",
+        "price": "$49/month",
+        "rate_limit": "60 requests/minute",
+        "tools": "all"
+      },
+      "professional": {
+        "description": "Team access with priority support for implementation partners",
+        "price": "$199/month",
+        "rate_limit": "300 requests/minute",
+        "tools": "all"
+      },
+      "enterprise": {
+        "description": "Custom knowledge overlays, SLA, and dedicated support",
+        "price": "Contact sales",
+        "rate_limit": "1000 requests/minute",
+        "tools": "all"
+      }
+    }
+  },
+
+  "favicon": "assets/favicon.svg",
+
+  "screenshots": [
+    {
+      "path": "assets/screenshot-assessment.svg",
+      "caption": "Migration readiness assessment with complexity scoring"
+    },
+    {
+      "path": "assets/screenshot-decision-tree.svg",
+      "caption": "Interactive decision tree for module selection"
+    },
+    {
+      "path": "assets/screenshot-validation.svg",
+      "caption": "Validation rule matching against reported symptoms"
+    }
+  ]
+}

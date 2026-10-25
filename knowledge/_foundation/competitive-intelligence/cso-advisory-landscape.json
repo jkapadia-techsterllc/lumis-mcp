@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ci-cso-advisory-001",
+    "category": "competitive-intelligence",
+    "title": "Contract Sales and Advisory Services Competitive Landscape",
+    "products": [
+      "oce"
+    ],
+    "summary": "Assessment of a major merged contract sales, marketing, medical affairs, and advisory organization formed through PE consolidation with $1B+ annual revenue.",
+    "findings": {
+      "org_structure": "PE-backed merger of 40+ operating companies into four divisions: marketing communications (~$340M), field engagement (~$300M), medical affairs (~$290M), and strategic advisory (~$85M). 10,500+ employees.",
+      "technology_influence": "CSOs deploy field teams using client CRM systems. Platform preferences and training capabilities influence CRM selection. Internal engineering teams build custom integrations and field tools on top of client platforms.",
+      "market_consolidation": "PE-backed consolidation creating fewer, larger players with deeper technology capabilities, concentrating CRM platform influence and pressuring vendors to maintain strong CSO partnerships."
+    },
+    "source": "Competitive assessment of PE-backed contract sales and advisory services organization",
+    "tags": [
+      "competitive-intelligence",
+      "cso",
+      "contract-sales",
+      "field-engagement"
+    ]
+  }
+]

@@ -1,0 +1,69 @@
+{
+  "id": "agent-audit",
+  "name": "Configuration Auditor",
+  "persona_prompt": "prompts/operations-specialist.md",
+  "description": "Audits an existing life sciences CRM implementation for configuration gaps, compliance issues, and optimization opportunities. Runs validation rules systematically and produces a scored report.",
+  "platform_knowledge": ["modules", "gotchas", "country-rules", "validation-rules", "terminology"],
+  "workflow": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Scope & Inventory",
+        "description": "Identify which modules are deployed and what countries are in scope.",
+        "tools": ["search_knowledge", "get_module_mapping"],
+        "checklist": [
+          "Deployed modules inventoried",
+          "Countries in deployment scope confirmed",
+          "User count and license types documented",
+          "Custom objects and fields inventoried (beyond standard modules)",
+          "Integration touchpoints catalogued"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "Validation Sweep",
+        "description": "Run all applicable validation rules against current configuration.",
+        "tools": ["run_validation", "get_country_rules"],
+        "scoring": {
+          "pass": "Rule passes — configuration is correct",
+          "warn": "Rule partially passes — non-critical gap found",
+          "fail": "Rule fails — configuration gap could cause issues",
+          "critical": "Rule fails on a compliance-critical item — must fix before production use"
+        },
+        "checklist": [
+          "Sample Management validation rules executed (if module deployed)",
+          "Consent Management validation rules executed (if module deployed)",
+          "Country-specific rules executed for each country in scope",
+          "Each finding categorized: pass / warn / fail / critical",
+          "Evidence captured for each finding"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "Gotcha Check",
+        "description": "Cross-reference deployed configuration against known gotchas.",
+        "tools": ["get_gotchas", "search_knowledge"],
+        "checklist": [
+          "Each deployed module checked against gotcha database",
+          "Migration-specific gotchas checked (if post-migration audit)",
+          "Mobile-specific gotchas checked (if mobile deployed)",
+          "Integration-specific gotchas checked (if integrations present)",
+          "Each applicable gotcha flagged as: mitigated / at-risk / impacted"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "Report & Recommendations",
+        "description": "Produce the audit report with prioritized findings and remediation steps.",
+        "tools": ["search_knowledge"],
+        "outputs": ["Audit scorecard (% pass rate)", "Prioritized findings list", "Remediation roadmap"],
+        "report_format": {
+          "executive_summary": "Overall health score and top 3 risks",
+          "findings": "Grouped by severity (Critical → High → Medium → Low)",
+          "each_finding": "Description, evidence, impact, remediation steps, effort estimate",
+          "appendix": "Validation rule results, gotcha check results, raw data"
+        }
+      }
+    ]
+  }
+}

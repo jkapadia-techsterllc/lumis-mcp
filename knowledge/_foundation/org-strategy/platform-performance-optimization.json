@@ -1,0 +1,29 @@
+[
+  {
+    "id": "fnd-perf-001",
+    "category": "modules",
+    "title": "Force.com Platform Performance Optimization and Index Strategy",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Platform performance optimization guidelines for large-volume Salesforce implementations covering index selectivity thresholds, skinny table configuration, SOQL query optimization, data archiving strategy, API load patterns, and search performance. These patterns are critical for life sciences implementations where data volumes in objects like Call Activity, Sample Transactions, and Events Management can reach millions of records.",
+    "findings": {
+      "index_selectivity_thresholds": "Custom indexes are useful only below threshold: lower of (10% of first 1M records + 5% over 1M) or 333,333 records. Standard indexes: lower of (30% of first 1M + 15% over 1M) or 1M records. AND conditions require below 20% of total or 666K for custom index. OR conditions sum across all indexes, requiring below 10% or 333K total. Predicates that bypass indexes: not-equal (!=), NOT, NOT IN.",
+      "skinny_tables": "Skinny tables (enabled via Salesforce support request) provide: reduced I/O, better cache utilization, reduced joins. They are invisible to end users and supported in reports, list views, and SOQL queries. Requirement: all queried fields must be present in the skinny table. This is particularly valuable for high-volume reporting objects in life sciences (activity history, sample transactions).",
+      "data_load_optimization": "During data uploads, triggers, rollup summaries, and formula fields all consume execution time. Bulk API reduces per-record overhead. Operation performance ranking: Insert (fastest) > Update > Upsert. Delta-only loads outperform full loads. Parent records get locked when children are updated (batch child updates carefully). Record size limit: 3 MB. Large volume calculations should run outside Salesforce.",
+      "query_and_search_optimization": "SOQL anti-patterns that degrade performance: too many joins, LIKE with leading wildcards (%Acme), use of NOT and !=, complex multi-join queries, queries against Recycle Bin data. For search: keep terms specific, avoid complex sharing models, maximize single-object searches, account for LDV data changes. Reduce data accessed per query and make parameters as specific as possible.",
+      "sharing_and_report_optimization": "Avoid over-protection in sharing models (each additional sharing rule adds query overhead). Do not nest groups deeply. For reports: use filters aggressively, pre-aggregate data where possible, denormalize for reporting, and consider external data warehouse for complex analytics.",
+      "archiving_strategy": "Design archiving into initial data architecture. Salesforce provides multiple archiving features. Critical for life sciences where regulatory retention requirements (7+ years) conflict with query performance needs for active data."
+    },
+    "source": "Force.com Platform \u2014 Nexxus Engage Help Center (March 2016)",
+    "tags": [
+      "performance",
+      "indexing",
+      "skinny-tables",
+      "soql",
+      "data-load",
+      "archiving",
+      "ldv"
+    ]
+  }
+]

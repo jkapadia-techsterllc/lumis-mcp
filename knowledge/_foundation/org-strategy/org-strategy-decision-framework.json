@@ -1,0 +1,118 @@
+{
+  "id": "org-strategy-001",
+  "name": "Org Strategy Decision Framework",
+  "description": "Comprehensive framework for evaluating single-org vs. multi-org Salesforce architecture for pharma/life sciences enterprises. Based on four decision dimensions, an operating model quadrant, and a scenario matrix.",
+  "version": "1.0",
+  "source": "Org Strategy And Design — Salesforce Life Sciences",
+
+  "four_dimensions": {
+    "description": "Four dimensions for making org strategy decisions. Evaluate customers against all four before recommending single or multi-org.",
+    "dimensions": [
+      {
+        "name": "Business",
+        "sub_factors": [
+          {"factor": "Business Strategy", "description": "Prioritize speed of innovation vs. managing common business processes in a common org."},
+          {"factor": "Business Units and Locations", "description": "Decide whether to handle complexity within an expanding single org or multiple new orgs."},
+          {"factor": "Operating Model", "description": "Determine if standard business processes and data consistency are better achieved with single or multiple orgs."}
+        ]
+      },
+      {
+        "name": "Technology",
+        "sub_factors": [
+          {"factor": "Application Architecture", "description": "Assess cost-effectiveness of implementing standards in single vs. multiple-org environments."},
+          {"factor": "Functionality", "description": "Consider complexity of managing standard requirements within a single org vs. multiple orgs."},
+          {"factor": "Data Strategies", "description": "Governance framework to ensure a common data model across business units."},
+          {"factor": "Salesforce Limitations", "description": "Whether higher data volumes risk impacting performance in a single-org environment."}
+        ]
+      },
+      {
+        "name": "Governance and Culture",
+        "sub_factors": [
+          {"factor": "Sponsorship, Ownership, Budgets", "description": "Ensure organizational buy-in to single-org strategy before implementing. Ensure enterprise architecture oversight exists."},
+          {"factor": "Business and IT Governance", "description": "Balance strong controls over multiple project teams in single org vs. individual controls per org."},
+          {"factor": "Appetite for Change", "description": "Assess company maturity and readiness in handling change management for the chosen approach."}
+        ]
+      },
+      {
+        "name": "Operations",
+        "sub_factors": [
+          {"factor": "Design and Delivery", "description": "Fast deployment of shared functionality in single org vs. reuse of functionality across multiple orgs. Profile cost in single vs. multi-org."},
+          {"factor": "Deployment and Support", "description": "Multi-level support in single org via integrated service desk vs. dedicated support teams per org."},
+          {"factor": "DevOps Lifecycle", "description": "Dedicated release management per org vs. centralized process across multiple orgs."}
+        ]
+      }
+    ]
+  },
+
+  "operating_model_quadrant": {
+    "description": "2x2 matrix adapted from MIT CISR framework. X-axis: Business Process Standardization (Low→High). Y-axis: Business Process Integration (Low→High).",
+    "quadrants": [
+      {
+        "name": "Diversification",
+        "position": "Low standardization, Low integration",
+        "definition": "Independent business units with different customers and expertise.",
+        "it_capability": "Provide economies of scale without limiting independence.",
+        "org_recommendation": "Most likely always multiple orgs. Consolidating different business processes and data models into one org is usually very complicated.",
+        "pharma_example": "Separate pharma and consumer health divisions with no shared customers or processes."
+      },
+      {
+        "name": "Coordination",
+        "position": "Low standardization, High integration",
+        "definition": "Unique business units with a need to know each other's transactions.",
+        "it_capability": "Access to shared data through standard technology interfaces.",
+        "org_recommendation": "As few orgs as technically possible. High process integration requirements can be met with integration middleware. Single org value is much higher. Use multiple profiles in fewer orgs to keep LOBs orchestrated.",
+        "pharma_example": "Commercial and Medical Affairs sharing HCP accounts but running different engagement processes."
+      },
+      {
+        "name": "Replication",
+        "position": "High standardization, Low integration",
+        "definition": "Independent but similar business units.",
+        "it_capability": "Provide standard infrastructure and application components for global efficiencies.",
+        "org_recommendation": "Multiple orgs, but deploy unlocked packages from a central org into all replicated BUs. Maintain standard processes with local control/administration.",
+        "pharma_example": "Country affiliates running identical commercial processes independently — same workflows, no cross-country data needs."
+      },
+      {
+        "name": "Unification",
+        "position": "High standardization, High integration",
+        "definition": "Single business with global process standards and global data access.",
+        "it_capability": "Enterprise systems reinforcing standard processes and providing global data access.",
+        "org_recommendation": "As few orgs as possible. Use multiple profiles within the same org rather than one profile per org.",
+        "pharma_example": "Global commercial operations with shared KOL lists, global sample tracking, and unified reporting across all affiliates."
+      }
+    ]
+  },
+
+  "scenario_matrix": {
+    "description": "Implementation scenario matrix. Cross-reference Data Sharing requirements against Governance model to determine the starting recommendation.",
+    "axes": {
+      "rows": "Data Sharing: Required | Not Required | Not Allowed",
+      "columns": "Governance: Centralized | Mixed | Localized"
+    },
+    "outcomes": [
+      {"data_sharing": "Required", "governance": "Centralized", "scenario": "Single Org"},
+      {"data_sharing": "Required", "governance": "Mixed", "scenario": "Single Org"},
+      {"data_sharing": "Required", "governance": "Localized", "scenario": "Multi-Org"},
+      {"data_sharing": "Not Required", "governance": "Centralized", "scenario": "Single Org — Review Constraints"},
+      {"data_sharing": "Not Required", "governance": "Mixed", "scenario": "Single Org — Review Constraints"},
+      {"data_sharing": "Not Required", "governance": "Localized", "scenario": "Single Org — Review Constraints"},
+      {"data_sharing": "Not Allowed", "governance": "Centralized", "scenario": "Multi-Org"},
+      {"data_sharing": "Not Allowed", "governance": "Mixed", "scenario": "Single Org — Review Constraints"},
+      {"data_sharing": "Not Allowed", "governance": "Localized", "scenario": "Single Org — Review Constraints"}
+    ]
+  },
+
+  "impact_dimensions": [
+    "Reporting",
+    "Salesforce Limits (including storage)",
+    "Time to Market",
+    "Deployment Strategy",
+    "Security",
+    "Governance",
+    "Collaboration",
+    "Integrations",
+    "Change Management",
+    "Compliance, Data Sharing and Regulations",
+    "Licensing (CRM and AppExchange)",
+    "Agility"
+  ]
+}

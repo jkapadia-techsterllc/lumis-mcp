@@ -1,0 +1,17 @@
+[
+  {
+    "id": "fnd-strat-012",
+    "category": "org-strategy",
+    "title": "Cloud Platform Transformation Architecture and Principles",
+    "products": ["lsc"],
+    "summary": "Reference for the multi-year cloud platform transformation addressing public cloud adoption, data residency, real-time scale, AI/ML integration, and cybersecurity requirements. Documents the architectural principles underlying the platform that hosts life sciences applications.",
+    "findings": {
+      "transformation_drivers": "Five forces driving platform transformation: (1) emergence of public cloud providers with massive infrastructure investment, (2) increasing data residency and regulatory demands across sectors and countries, (3) need for real-time data and transactions at scale driven by social and mobile technologies, (4) rapid advancement in ML/AI and generative AI, (5) growing requirements for cybersecurity, availability, performance, and resilience.",
+      "architectural_principles": "Core principles maintained through transformation: Enterprise-Grade Trust (availability, security, access control, and compliance features enabling customers to meet their own compliance standards), Multitenant (all services and infrastructure host multiple customers, providing scaling patterns and standardized security regardless of customer size), Metadata-Driven (metadata at the heart of customizable multitenant services).",
+      "migration_scope": "More than 85 percent of customers transitioned to the new platform architecture. The migration included customers with the most demanding workloads, validating the architecture's capability to handle enterprise-scale operations.",
+      "platform_implications_for_ls": "Life sciences applications built on this platform inherit: enterprise-grade trust and compliance infrastructure, multi-tenant isolation for regulated data, metadata-driven customization enabling per-customer configuration without code changes, public cloud infrastructure for global deployment and data residency compliance, and AI/ML capabilities for intelligent features like next-best-action recommendations."
+    },
+    "source": "The Salesforce Platform - Transformed for Tomorrow, Salesforce Architects (October 2024)",
+    "tags": ["platform", "architecture", "cloud-transformation", "multitenant", "metadata-driven", "trust", "ai-ml", "data-residency"]
+  }
+]

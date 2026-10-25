@@ -1,0 +1,110 @@
+[
+  {
+    "id": "sq-ta-001",
+    "category": "territory-alignment",
+    "question": "What permission is needed for Admin Console territory alignment?",
+    "answer": "'View Setup and Configuration' system permission is required. This is a common pain point because customers want local admins to do territory alignment but don't want to grant broad setup permissions. Removing this permission blocks Product and Territory Alignment access in Admin Console entirely.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["territory", "permissions", "admin-console", "local-admin"]
+  },
+  {
+    "id": "sq-ta-002",
+    "category": "territory-alignment",
+    "question": "Can the 'Align to Territory' button be conditionally shown?",
+    "answer": "No. The 'Align to Territory' button in Search Before Create cannot be conditionally shown or hidden based on user permissions or profile settings. This is a current platform limitation with no workaround.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["territory", "ui", "button-visibility", "limitation"]
+  },
+  {
+    "id": "sq-ta-003",
+    "category": "territory-alignment",
+    "question": "What happens to manual territory associations when alignment jobs run?",
+    "answer": "When running 'Align Account to Territory', manually created ObjectTerritory2Association (OTA) records are DELETED if the associated HealthcareProvider record has IsPrimaryProvider = true. This is destructive behavior that has caught multiple implementations by surprise. Always audit IsPrimaryProvider values before running alignment jobs in production.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["territory", "alignment-job", "manual-associations", "destructive"]
+  },
+  {
+    "id": "sq-ta-004",
+    "category": "territory-alignment",
+    "question": "Does updating Territory Geo Assignment Rule end date retroactively unassign accounts?",
+    "answer": "Yes. Updating the Effective End Date on a TerrGeoAssignmentRule retroactively unassigns already-linked accounts when alignment jobs run after that date. It does NOT preserve existing associations. This can cause unexpected mass unassignment if date changes are made carelessly.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["territory", "geo-assignment", "end-date", "retroactive"]
+  },
+  {
+    "id": "sq-ta-005",
+    "category": "territory-alignment",
+    "question": "What are affiliation alignment rules?",
+    "answer": "After territory alignment jobs run, affiliation alignment rules automatically add accounts with Provider Affiliation records to the territory and create PATI (Provider Account Territory Info) records. These rules work as a secondary pass after the primary territory alignment, capturing affiliated accounts that wouldn't be caught by geo-assignment alone.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["territory", "affiliation", "pati", "alignment"]
+  },
+  {
+    "id": "sq-ta-006",
+    "category": "territory-alignment",
+    "question": "How does Zip-to-Territory alignment work?",
+    "answer": "Uses TerrGeoAssignmentRule records. Alignment is handled by configuring Effective Start Date and Effective End Date on each rule. An Effective End Date in the past automatically unaligns the Zip code when the 'Align Zip Code to Territory' job next runs. The alignment job processes these rules and creates or removes associations accordingly.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["territory", "zip-code", "geo-assignment", "effective-dates"]
+  },
+  {
+    "id": "sq-ta-007",
+    "category": "territory-alignment",
+    "question": "What bridges Enterprise Territory Management and the life sciences territory features?",
+    "answer": "The 'Territory Management - Align Account to Territory' job. It creates PATI (Provider Account Territory Info) records that bridge standard ETM associations with life sciences-specific territory data. The AssociationCause field on Object2TerritoryAssociation records indicates whether an association was created manually or by the alignment job.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["territory", "etm", "pati", "alignment-job"]
+  },
+  {
+    "id": "sq-ta-008",
+    "category": "territory-alignment",
+    "question": "Where should territory parent alignment settings be configured?",
+    "answer": "Business Group and Product Territory Parent alignment toggles should be on the admin-only setup page, NOT in the Product Configuration page accessible to local business admins. Having them on the Product Configuration page risks individual admins changing settings that affect other regions or business units.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["territory", "admin-console", "parent-alignment", "access-control"]
+  },
+  {
+    "id": "sq-ta-009",
+    "category": "territory-alignment",
+    "question": "Does 'Allow Un-Aligned Selection' override exist for content?",
+    "answer": "Yes. The 'Allow Un-Aligned Selection' setting controls whether presentations can be aligned to a territory even when the product is not aligned to that territory. Useful for content that spans multiple products or is not product-specific, such as corporate branding or compliance materials.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["territory", "content-alignment", "unaligned-selection"]
+  },
+  {
+    "id": "sq-ta-010",
+    "category": "territory-alignment",
+    "question": "How does HCP-HCO address linking affect territory alignment?",
+    "answer": "ContactPointAddress.RelatedContactPointAddressId links HCP address to HCO address. After territory alignment, the target user can see the account in the Account Filter list view but cannot select it for a visit in the Planner/Calendar without access to the parent HCO account. This HCO access requirement is a frequent gap in implementations.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["territory", "hcp-hco", "address-linking", "access-gap"]
+  },
+  {
+    "id": "sq-ta-011",
+    "category": "territory-alignment",
+    "question": "Can local admins manage territories without full setup access?",
+    "answer": "This is a known challenge. There is no workaround to allow territory alignment, DCR Rejection, Content alignment, or Survey creation without 'View Setup and Configuration' or 'Customize Application' system permissions. Custom cloned profiles and permission sets do not solve this limitation.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["territory", "local-admin", "permissions", "limitation"]
+  },
+  {
+    "id": "sq-ta-012",
+    "category": "territory-alignment",
+    "question": "What is the role of IsPrimaryProvider in territory alignment?",
+    "answer": "When IsPrimaryProvider = true on a HealthcareProvider record, the 'Align Account to Territory' job has special behavior regarding ObjectTerritory2Association records. It may delete manual associations for primary providers. This field should be audited across all accounts before running alignment jobs in production to avoid unexpected data loss.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["territory", "is-primary-provider", "alignment-job", "audit"]
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "id": "country-jp-appi",
+  "region": "Japan",
+  "countries": ["Japan"],
+  "regulation": "APPI (Act on the Protection of Personal Information), JPMA Code, MR Certification",
+  "modules_affected": ["Consent Management", "Visit Management", "Sample Management", "Field Email"],
+  "rules": [
+    {
+      "rule": "APPI Consent Requirements",
+      "description": "Personal information requires consent for collection and use. Cross-border data transfer requires additional consent or equivalent safeguards.",
+      "implementation": "Consent Management must track: purpose of use, cross-border transfer consent separately. Data residency may require Japan-based data center or additional contractual safeguards.",
+      "penalty": "Up to ¥100M for corporations, criminal penalties for individuals"
+    },
+    {
+      "rule": "MR Certification (Medical Representative)",
+      "description": "Medical Representatives (MRs) must be certified by MR Education Center. CRM must support MR certification tracking and visit compliance.",
+      "implementation": "User Management must track MR certification status and expiration. Visit Management should validate that only certified MRs conduct product detailing visits.",
+      "affected_modules": ["User Management", "Visit Management"]
+    },
+    {
+      "rule": "JPMA Code of Practice",
+      "description": "Japan Pharmaceutical Manufacturers Association self-regulatory code governs HCP interactions, hospitality, and promotional activities.",
+      "implementation": "Visit Management and Events Management must enforce: (1) Meal/hospitality caps per interaction, (2) Promotional material approval tracking, (3) Off-label discussion prohibition enforcement.",
+      "affected_modules": ["Visit Management", "Events Management", "Content Management"]
+    },
+    {
+      "rule": "Sample Distribution Regulations",
+      "description": "Japan's pharmaceutical sample regulations differ from US PDMA. Samples classified as 'trial-use drugs' have specific handling requirements.",
+      "implementation": "Sample Management must support: (1) Trial-use drug classification, (2) Ministry of Health, Labour and Welfare reporting requirements, (3) Different lot tracking granularity than US/EU.",
+      "affected_modules": ["Sample Management"]
+    }
+  ],
+  "migration_notes": "Japan implementations often have unique customizations due to MR culture and JPMA requirements. Key migration considerations: (1) MR visit patterns (high-frequency, short-duration) may require different Activity Plan configuration than Western markets, (2) Language/localization: full Japanese UI and data support required, (3) Data residency: confirm target platform's data center location meets APPI cross-border requirements.",
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Country Rules / Japan APPI",
+    "confidence": "Medium — fewer production deployments to reference"
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "sq-sm-001",
+    "category": "sample-management",
+    "question": "What happens when no sample limit template is assigned to an account?",
+    "answer": "The account is BLOCKED from receiving samples. If a product is assigned to a template but no ProviderSampleLimit record exists for that account+product combination, visit submission is blocked with an error.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["sample-limits", "blocking", "visit-submission"]
+  },
+  {
+    "id": "sq-sm-002",
+    "category": "sample-management",
+    "question": "How does sample limit validation work per account and product?",
+    "answer": "Sample limit is enforced per account+product combination. If template X has products P1 and P2, and an account only has a limit record for P1, visits disbursing P2 will be blocked even though the template is assigned. Every product in a template needs corresponding ProviderSampleLimit records for every account.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["sample-limits", "per-product", "validation"]
+  },
+  {
+    "id": "sq-sm-003",
+    "category": "sample-management",
+    "question": "Can sample limit templates be bulk loaded via API?",
+    "answer": "There is no native bulk upload for sample limit template structures (defined in JSON). Customers migrating from Veeva where limits were loaded via integration frequently request API/data loader support for creating templates, assigning to accounts/products, and deleting templates. This is a common migration pain point requiring manual configuration or custom tooling.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["sample-limits", "bulk-load", "migration", "api-gap"]
+  },
+  {
+    "id": "sq-sm-004",
+    "category": "sample-management",
+    "question": "What are the prerequisites for sample limit validation to work?",
+    "answer": "All must be true: (1) Sample Limit configured against physical Sample SKU with blockType set to Error, (2) SamplesPerVisit and SamplesInPeriod limits configured, (3) ProviderSampleLimit records generated for the Account, (4) Product/inventory/ProductItem/ProductionBatch/ProductBatchItem valid and active, (5) 'Validate Sample Limit' setting enabled in Admin Console.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["sample-limits", "prerequisites", "configuration"]
+  },
+  {
+    "id": "sq-sm-005",
+    "category": "sample-management",
+    "question": "What is PrvdVstSmplLmtTransaction?",
+    "answer": "Provider Visit Sample Limit Transaction records track visit-level sample limit enforcement. They are created automatically when a visit involves sample disbursement and limits are configured. If someone deletes a PrvdVstSmplLmtTransaction record, limit calculations may become inconsistent. These records should not be manually edited or deleted.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["sample-limits", "transactions", "data-integrity"]
+  },
+  {
+    "id": "sq-sm-006",
+    "category": "sample-management",
+    "question": "Is the Allocated Quantity field required for Drop allocations?",
+    "answer": "Yes, the Allocated Quantity field in Territory Product Quantity Allocation is required at the database level even when Allocation Type is 'Drop'. This is a known gap. For drop-type allocations, quantities are managed in inventory management, making this field logically unnecessary. Workaround: provide a placeholder value (e.g., 0 or 1).",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["sample-inventory", "allocation", "required-field", "gap"]
+  },
+  {
+    "id": "sq-sm-007",
+    "category": "sample-management",
+    "question": "How do sample inventory and sample limits relate?",
+    "answer": "They are separate but interconnected feature areas. Sample Inventory manages physical stock tracking (receipts, transfers, counts, adjustments). Sample Limits enforce regulatory and business rules on how many samples can be distributed per account per time period. Both must be configured together for a complete sample management implementation.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["sample-inventory", "sample-limits", "architecture"]
+  },
+  {
+    "id": "sq-sm-008",
+    "category": "sample-management",
+    "question": "What is the sample limit calculation hierarchy?",
+    "answer": "The target platform uses a hierarchical Batch Limit Calculation Framework: Brand > Molecule > SKU. This differs from Veeva which uses flat product-level caps. Migrating customers must restructure their limit definitions to fit this three-tier hierarchy, which can be a significant data transformation effort.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["sample-limits", "hierarchy", "migration", "veeva-difference"]
+  },
+  {
+    "id": "sq-sm-009",
+    "category": "sample-management",
+    "question": "Can sample limit templates be customized with field sets?",
+    "answer": "The platform does not provide field sets out of the box for sample inventory management. This limitation is specific to sample inventory; other features may have field set support. Custom field sets must be configured manually through setup if needed.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["sample-inventory", "field-sets", "customization"]
+  },
+  {
+    "id": "sq-sm-010",
+    "category": "sample-management",
+    "question": "What happens during sample limit validation at visit submission?",
+    "answer": "When a rep submits a visit with sample disbursement, the system checks: (1) whether a limit template is assigned to the account, (2) whether the product has a ProviderSampleLimit record for that account, (3) whether SamplesPerVisit or SamplesInPeriod thresholds would be exceeded. If any check fails and blockType is Error, submission is blocked. If blockType is Warning, a warning message appears but submission proceeds.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["sample-limits", "visit-submission", "validation-flow"]
+  }
+]

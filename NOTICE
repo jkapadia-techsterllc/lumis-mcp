@@ -1,0 +1,34 @@
+Lumis AI — Copyright and Intellectual Property Notice
+
+Copyright (c) 2024-2026 Lumis AI. All rights reserved.
+
+This repository contains proprietary software and curated knowledge base
+content that are the exclusive intellectual property of Lumis AI.
+
+KNOWLEDGE BASE CONTENT
+The knowledge base (knowledge/, agents/, prompts/ directories) contains
+original, curated content representing substantial investment in domain
+research, regulatory analysis, and life sciences CRM expertise. This
+content is protected by copyright law and constitutes trade secrets of
+Lumis AI. Unauthorized copying, extraction, reproduction, or use of this
+content outside the licensed MCP server interface is strictly prohibited.
+
+SOFTWARE
+The server code and package wrapper are proprietary software licensed
+under the terms described in the LICENSE file. Use of this software is
+restricted to connecting via MCP-compatible clients subject to the
+applicable pricing tier.
+
+TRADEMARKS
+"Lumis" and "Lumis AI" are trademarks of Lumis AI. All other trademarks
+referenced in the knowledge base are the property of their respective
+owners and are used for informational purposes only.
+
+THIRD-PARTY NOTICES
+This software depends on:
+- mcp (MIT License) — Model Context Protocol SDK
+- pyyaml (MIT License) — YAML parser
+
+No third-party code is included directly in this repository.
+
+Contact: hello@lumis-lifesciences.com

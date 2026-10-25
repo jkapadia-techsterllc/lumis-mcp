@@ -1,0 +1,151 @@
+[
+  {
+    "id": "crm-dm-001",
+    "category": "crm-data-model",
+    "title": "Veeva CRM Object Inventory \u2014 Standard Objects by Module",
+    "products": [
+      "oce"
+    ],
+    "summary": "The Veeva CRM data model includes approximately 80+ standard custom objects, all carrying the _vod suffix. These objects are organized by functional module and represent the core data structures for pharmaceutical commercial operations.",
+    "modules_and_objects": {
+      "call_management": {
+        "description": "Objects supporting field rep call reporting, scheduling, and activity tracking against HCPs and HCOs.",
+        "key_objects": "Call report header and detail objects, call objectives, pre-call planning records.",
+        "approximate_count": "10-15 objects"
+      },
+      "sample_management": {
+        "description": "Objects handling sample inventory, distribution, lot tracking, reconciliation, and regulatory compliance.",
+        "key_objects": "Sample lot, sample transaction, sample inventory, sample receipt, cold chain record, and signature capture objects.",
+        "approximate_count": "12-18 objects"
+      },
+      "approved_email": {
+        "description": "Objects managing the creation, approval, and distribution of compliant email communications to HCPs.",
+        "key_objects": "Approved email template, email fragment, sent email record, content module, and template fragment junction objects.",
+        "approximate_count": "8-12 objects"
+      },
+      "clm_content": {
+        "description": "Objects supporting Closed Loop Marketing \u2014 digital content presentations during in-person HCP interactions.",
+        "key_objects": "Presentation, key message, slide, content interaction, and media tracking objects.",
+        "approximate_count": "6-10 objects"
+      },
+      "consent_management": {
+        "description": "Objects tracking HCP communication preferences, opt-in/opt-out status, and regulatory consent across channels.",
+        "key_objects": "Consent header, consent line, consent type, channel consent, and multichannel consent objects.",
+        "approximate_count": "5-8 objects"
+      },
+      "territory_management": {
+        "description": "Objects defining sales territory hierarchies, account-territory assignments, and alignment rules.",
+        "key_objects": "Territory, territory-to-account association, alignment rule, and zip-territory mapping objects.",
+        "approximate_count": "4-6 objects"
+      },
+      "events_management": {
+        "description": "Objects supporting speaker programs, medical education events, attendee tracking, and event budgets.",
+        "key_objects": "Event header, event attendee, speaker contract, event budget, and event material objects.",
+        "approximate_count": "8-12 objects"
+      },
+      "coaching_and_training": {
+        "description": "Objects for field manager coaching activities, ride-along assessments, and competency tracking.",
+        "key_objects": "Coaching report, coaching objective, assessment score, and development plan objects.",
+        "approximate_count": "4-6 objects"
+      },
+      "medical_and_msl": {
+        "description": "Objects supporting Medical Science Liaison workflows, including scientific exchange tracking and medical inquiry management.",
+        "key_objects": "Medical inquiry, scientific discussion, publication reference, and medical event objects.",
+        "approximate_count": "5-8 objects"
+      }
+    },
+    "naming_convention": "All Veeva standard objects use the _vod suffix (e.g., Call2_vod__c, Sample_Transaction_vod__c). Custom fields also carry the _vod suffix.",
+    "migration_relevance": "The object inventory is the starting point for any migration assessment. Each module must be evaluated for data volume, field-level mapping, automation dependencies, and relationship integrity.",
+    "source": "veeva-crm-data-model-guide-v14",
+    "tags": [
+      "veeva-crm",
+      "data-model",
+      "objects",
+      "inventory",
+      "modules",
+      "migration-scoping"
+    ]
+  },
+  {
+    "id": "crm-dm-002",
+    "category": "crm-data-model",
+    "title": "Veeva CRM Field Taxonomy and Security Model",
+    "products": [
+      "oce"
+    ],
+    "summary": "Veeva CRM fields follow a structured taxonomy with the _vod suffix convention and fall into distinct functional categories.",
+    "field_categories": {
+      "system_fields": {
+        "description": "Fields managed by Veeva platform logic \u2014 auto-populated timestamps, calculated status fields, system-generated identifiers.",
+        "migration_note": "Often replaced by equivalent platform capabilities on the target system."
+      },
+      "configuration_fields": {
+        "description": "Fields that control application behavior \u2014 picklist values, checkbox flags, formula fields, reference fields.",
+        "migration_note": "Configuration fields require functional analysis, not just data migration."
+      },
+      "data_fields": {
+        "description": "Fields storing user-entered or integration-sourced business data \u2014 text, dates, numbers, lookups.",
+        "migration_note": "Most straightforward to migrate. Primary concerns: data type compatibility and referential integrity."
+      },
+      "formula_fields": {
+        "description": "Calculated fields that derive values from other fields. May reference Veeva-specific functions.",
+        "migration_note": "Must be re-implemented on the target platform using equivalent formula syntax."
+      }
+    },
+    "field_level_security": {
+      "model": "Uses Salesforce standard FLS model \u2014 visibility and editability per profile or permission set.",
+      "veeva_specifics": "Veeva adds dynamic layout rules controlling field visibility based on record type, user role, or other field values.",
+      "sharing_model": "Record-level access follows Salesforce OWD + sharing rules + role hierarchy. Veeva territory-based sharing adds complexity."
+    },
+    "relationship_patterns": {
+      "lookup_relationships": "Standard lookup relationships \u2014 flexible, nullable references.",
+      "master_detail_relationships": "Tight parent-child with cascading delete and roll-up summary support.",
+      "junction_objects": "Many-to-many bridges between parent objects.",
+      "polymorphic_lookups": "Fields referencing multiple object types \u2014 used sparingly."
+    },
+    "source": "veeva-crm-data-model-guide-v14",
+    "tags": [
+      "veeva-crm",
+      "data-model",
+      "fields",
+      "field-taxonomy",
+      "field-level-security",
+      "relationships"
+    ]
+  },
+  {
+    "id": "crm-dm-003",
+    "category": "crm-data-model",
+    "title": "Veeva CRM Object Relationship Patterns and Salesforce Platform Dependencies",
+    "products": [
+      "oce"
+    ],
+    "summary": "Veeva CRM is built on the Salesforce platform, creating a layered architecture where Veeva custom objects coexist with standard Salesforce objects.",
+    "salesforce_standard_object_dependencies": {
+      "account": "Veeva uses standard Account for HCP and HCO records, adding custom fields and record types.",
+      "contact": "Standard Contact for stakeholder tracking with custom fields for credentials and specialty.",
+      "user": "User object drives territory assignments, sample limits, coaching hierarchies.",
+      "task_and_event": "Standard activity objects used alongside Veeva custom call reporting object."
+    },
+    "tsf_model": {
+      "description": "Territory/Stakeholder Framework defines field rep-to-territory-to-account assignments.",
+      "components": "Territory hierarchy, territory-to-user assignments, account-to-territory alignments, stakeholder access records.",
+      "migration_complexity": "One of the most complex migration areas \u2014 interacts with sharing rules, role hierarchy, and Veeva custom visibility logic."
+    },
+    "cross_module_relationships": {
+      "call_to_sample": "Call reports reference sample transactions for cross-module traceability.",
+      "call_to_content": "CLM interactions linked to call reports.",
+      "consent_to_email": "Consent records gate approved email functionality.",
+      "territory_to_everything": "Territory assignments influence visibility across all modules."
+    },
+    "source": "veeva-crm-data-model-guide-v14",
+    "tags": [
+      "veeva-crm",
+      "data-model",
+      "relationships",
+      "salesforce-platform",
+      "tsf",
+      "migration-complexity"
+    ]
+  }
+]

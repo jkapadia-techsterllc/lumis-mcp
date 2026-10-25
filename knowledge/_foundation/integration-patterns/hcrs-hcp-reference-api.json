@@ -1,0 +1,31 @@
+[
+  {
+    "id": "ip-hcrs-001",
+    "category": "modules",
+    "title": "IMS HCRS Web Service API for HCP/HCO Reference Data",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "The IMS Health HCRS (Health Care Reference Service) Web Service API provides programmatic access to HCP and HCO reference data through 15 XML-based web service operations. The API supports lookup (search), profile (detail retrieval), matching (duplicate resolution), and regulatory data access for healthcare professionals and organizations. Results are capped at 50 matches per query with error handling for over-broad searches.",
+    "findings": {
+      "api_operations_v1": "Core V1 operations: LookupHCP (search by name/NPI/SLN, returns up to 50 matches), GetHCPProfile (detailed profile by IMS ID), LookupHCO (organization search), GetHCOProfile (organization details), GetUsage (API consumption reporting by user/account), SubmitForHCPMatching (asynchronous duplicate resolution), SubmitForHCOMatching (organization matching), GetHCPLicenseData (state license details), GetHCPRegulatoryData (DEA and prescribing authority).",
+      "api_operations_v2": "V2 operations add enhanced data access: LookupHCPV2 and GetHCPProfileV2 (expanded data elements including birth year, PDRP indicator, state IDs), GetHCPLicenseDataV2 (enhanced license information), GetHCPRegulatoryDataV2 (configurable request type for licenses vs CSRs vs both), GetHCPCSRDataV2 (controlled substance registration data), GetHCPSourceDetailDataV2 (source-level detail including birth country).",
+      "search_capabilities": "Search criteria support five logical operators: Equals (exact match), Not Equal, Begins With, Contains, and Soundex (phonetic matching). SLN (State License Number) searches require additional state code context. Results exceeding 50 matches return an error requesting search refinement.",
+      "data_elements": "HCP profiles include: status code/description, date of birth, PDRP indicator and effective date, state IDs, DEA numbers (returned at address level), specialty codes, and NPI. HCO profiles include: multiple NPIs, DDD outlet numbers and names. License data covers state-level license details. Regulatory data includes controlled substance prescribing flags (non-controlled and controlled sample request authorization).",
+      "backward_compatibility_policy": "API versioning follows a backward-compatible enhancement model where V1 operations remain available alongside V2 additions. Method signature changes or data representation changes may break compatibility between major versions."
+    },
+    "source": "IMS HCRS Web Service API Reference v1.7 (October 2013)",
+    "tags": [
+      "hcrs",
+      "ims-health",
+      "hcp-reference",
+      "hco-reference",
+      "api",
+      "integration",
+      "npi",
+      "dea",
+      "license"
+    ]
+  }
+]

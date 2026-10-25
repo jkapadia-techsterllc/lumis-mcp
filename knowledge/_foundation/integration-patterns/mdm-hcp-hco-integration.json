@@ -1,0 +1,104 @@
+[
+  {
+    "id": "ip-mdm-001",
+    "category": "integration-patterns",
+    "title": "MDM Reference Data Integration — OneKey Architecture",
+    "products": ["oce", "lsc"],
+    "summary": "OneKey is IQVIA's master data management (MDM) reference database for healthcare professionals (HCPs) and healthcare organizations (HCOs). It serves as the authoritative source of provider identity, credentials, and organizational relationships across markets. Integration with CRM systems occurs through two primary mechanisms: flat file delivery via SFTP (OKConnect) and real-time webservice APIs. The integration architecture was analyzed in a February 2016 brainstorming session by Rodolfo and Manish Goel (Lumis co-founder), focusing on improving the E2E integration experience for SFDC and Veeva CRM deployments.",
+    "integration_details": {
+      "flat_file_integration": {
+        "mechanism": "OKConnect delivers HCP/HCO reference data as flat files via SFTP",
+        "characteristics": [
+          "Batch-oriented — data is delivered on a scheduled cadence, not in real time",
+          "Requires middleware or ETL to transform flat file formats into CRM-compatible records",
+          "Country-specific data formats and field mappings — each market may have different data structures",
+          "Dependent on third-party integrators to configure and maintain the SFTP-to-CRM data pipeline"
+        ]
+      },
+      "webservice_apis": {
+        "mechanism": "OneKey Webservices provide REST APIs for real-time HCP/HCO data operations",
+        "available_operations": [
+          "Search API — query the OneKey database for HCP/HCO records matching specified criteria",
+          "Validation Request Submit — submit a request to validate or update an HCP/HCO record",
+          "Validation Request Trace — track the status of a previously submitted validation request",
+          "Population Submit — submit new HCP/HCO records for inclusion in the OneKey database",
+          "Code Search — look up reference codes and classifications used in the OneKey taxonomy",
+          "Refresh — synchronize local CRM records with the latest OneKey data for a specific set of records"
+        ]
+      },
+      "deployment_reference": "SHIRE was documented as the first large-scale client deployment, covering 26 countries on the Veeva platform. This deployment demonstrated the complexity of multi-country OneKey integration at scale."
+    },
+    "migration_relevance": "MDM reference data integration is a mandatory migration workstream for any organization using OneKey (or equivalent HCP/HCO data services). The CRM migration must either replicate the existing OneKey integration in the target platform, establish new integration patterns, or transition to an alternative reference data provider. The SFTP flat file approach may be platform-agnostic (it can feed any CRM), but the webservice API integration requires platform-specific development.",
+    "source": "onekey-sfdc-veeva-integration-feb2016",
+    "tags": ["mdm", "onekey", "hcp-data", "hco-data", "sftp", "reference-data", "integration-architecture"]
+  },
+  {
+    "id": "ip-mdm-002",
+    "category": "integration-patterns",
+    "title": "MDM Integration Pain Points and Gaps",
+    "products": ["oce", "lsc"],
+    "summary": "The February 2016 analysis identified systemic pain points in the OneKey-to-CRM integration model that persist across implementations. These challenges are not specific to any single CRM platform — they reflect structural issues in how reference data flows between MDM systems and CRM applications in life sciences. Understanding these pain points is critical for designing migration architectures that improve on the status quo rather than replicating existing problems.",
+    "integration_details": {
+      "pain_points": [
+        {
+          "issue": "High integrator dependency",
+          "detail": "Third-party integrators (systems integrators, middleware vendors) sit between OneKey and the CRM, creating a dependency chain where changes require coordination across three or more parties. Customers reported frustration with this model because troubleshooting integration failures requires engaging both the data provider and the integrator.",
+          "impact_on_migration": "Migration adds another party to the coordination chain — the target CRM vendor. Without simplifying the integration model during migration, the new platform inherits the same dependency problems"
+        },
+        {
+          "issue": "Limited end-to-end visibility",
+          "detail": "No single party has visibility into the full data flow from OneKey source through integration middleware into the CRM. When data discrepancies appear in the CRM, diagnosing whether the issue originated in OneKey, the integration layer, or the CRM requires cross-party investigation.",
+          "impact_on_migration": "Migration creates a period where data flows through both old and new CRM systems simultaneously. Without E2E monitoring, data integrity issues during the transition period may go undetected until users report discrepancies"
+        },
+        {
+          "issue": "Configuration complexity per country",
+          "detail": "Each country market has different OneKey data structures, field mappings, regulatory identifiers, and update frequencies. A global CRM deployment requires country-by-country integration configuration, which scales linearly with geographic footprint.",
+          "impact_on_migration": "Multi-country migrations must replicate or rebuild these country-specific configurations in the target platform. Organizations with 20+ country deployments face months of integration configuration work"
+        },
+        {
+          "issue": "No reusable E2E integration offering",
+          "detail": "As of the analysis, there was no productized end-to-end integration module that customers could deploy and configure for their specific CRM and country mix. Each implementation was custom-built, which increases cost and implementation risk.",
+          "impact_on_migration": "The absence of a standard integration module means migration teams must design the integration from first principles for the target platform, rather than deploying a pre-built connector"
+        }
+      ]
+    },
+    "migration_relevance": "These pain points represent an opportunity during CRM migration — rather than replicating the existing flawed integration model, the migration can implement a better architecture. A target platform with native MDM connector capabilities, API-first integration, and built-in data quality monitoring would address the structural issues that customers experience with the current approach.",
+    "source": "onekey-sfdc-veeva-integration-feb2016",
+    "tags": ["mdm-pain-points", "integrator-dependency", "data-visibility", "country-configuration", "integration-gaps"]
+  },
+  {
+    "id": "ip-mdm-003",
+    "category": "integration-patterns",
+    "title": "MDM Integration — Migration Workstream Requirements",
+    "products": ["oce", "lsc"],
+    "summary": "HCP/HCO master data integration is a critical migration workstream that must be planned alongside — not after — the CRM platform migration. The reference data integration architecture affects territory alignment, sample compliance, call planning, and regulatory reporting. Organizations that treat MDM integration as a post-migration afterthought risk operating with stale or incomplete provider data during the transition period.",
+    "integration_details": {
+      "migration_workstream_components": [
+        {
+          "component": "Data Continuity Assessment",
+          "description": "Determine whether the existing MDM data feed (OneKey, Veeva Network, or alternative) can be redirected to the target CRM platform without a gap in data delivery. If the current data contract is bundled with the CRM license, a separate data agreement may be needed."
+        },
+        {
+          "component": "Integration Architecture Decision",
+          "description": "Choose between replicating the existing integration pattern (flat file SFTP + webservices), migrating to an API-first integration model, or adopting the target platform's native MDM connector if one exists. Each approach has different implementation timelines and ongoing maintenance costs."
+        },
+        {
+          "component": "Country-by-Country Mapping",
+          "description": "Document the field mappings, regulatory identifiers, and data transformation rules for each country market in the current CRM. These mappings must be replicated or rebuilt in the target platform's integration layer. Incomplete mapping results in missing regulatory identifiers that can block sample compliance."
+        },
+        {
+          "component": "Parallel Operation Period",
+          "description": "Plan for a period where MDM data feeds both the legacy and target CRM systems simultaneously. This parallel operation ensures data continuity during the migration cutover and provides a rollback path if integration issues surface in the target platform."
+        },
+        {
+          "component": "Data Quality Baseline",
+          "description": "Establish data quality metrics (match rates, record completeness, duplicate rates) in the legacy system before migration. These baselines provide the acceptance criteria for validating that the target system's MDM integration meets or exceeds the legacy system's data quality."
+        }
+      ],
+      "goal_state": "The aspiration documented in the February 2016 analysis was a reusable E2E integration module that could be configured per customer and deployed across CRM platforms with minimal custom development. This goal remains relevant for migration planning — organizations migrating to platforms with pre-built MDM connectors reduce integration risk and timeline."
+    },
+    "migration_relevance": "MDM integration is the migration workstream most likely to be underestimated in scope and timeline. The combination of country-specific configurations, third-party dependencies, regulatory identifiers, and parallel operation requirements makes it a planning-intensive effort. Migration readiness assessments should include an explicit MDM integration evaluation with timeline estimates per country market.",
+    "source": "onekey-sfdc-veeva-integration-feb2016",
+    "tags": ["mdm-migration", "data-continuity", "integration-architecture", "country-mapping", "parallel-operation", "data-quality"]
+  }
+]

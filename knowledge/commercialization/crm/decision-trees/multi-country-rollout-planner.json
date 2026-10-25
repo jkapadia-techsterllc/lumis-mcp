@@ -1,0 +1,201 @@
+{
+  "id": "dt-rollout",
+  "name": "Multi-Country Rollout Planner",
+  "description": "Interactive decision tree that builds a wave-based rollout plan for multi-country pharma CRM migrations. Asks about country count, modules, regulatory complexity, and SI bench strength to recommend wave count, sequencing, and timeline.",
+  "version": "1.0",
+  "root": "q_country_count",
+  "nodes": {
+    "q_country_count": {
+      "type": "question",
+      "text": "How many countries are in scope for the migration?",
+      "options": [
+        {"label": "1-5 countries", "next": "q_modules_small"},
+        {"label": "5-15 countries", "next": "q_modules_small"},
+        {"label": "15-30 countries", "next": "q_modules_mid"},
+        {"label": "30-50 countries", "next": "q_modules_large"},
+        {"label": "50+ countries", "next": "q_modules_enterprise"}
+      ]
+    },
+    "q_modules_small": {
+      "type": "question",
+      "text": "How many modules are being deployed? (CLM, Samples, Events, Approved Email, Consent, Territory Alignment, Field Coaching, Order Management count as separate modules)",
+      "options": [
+        {"label": "1-2 modules", "next": "q_regions_small"},
+        {"label": "3-4 modules", "next": "q_regions_small"},
+        {"label": "5+ modules", "next": "q_regions_mid"}
+      ]
+    },
+    "q_modules_mid": {
+      "type": "question",
+      "text": "How many modules are being deployed?",
+      "options": [
+        {"label": "1-3 modules", "next": "q_regions_mid"},
+        {"label": "4-5 modules", "next": "q_regions_mid"},
+        {"label": "6+ modules", "next": "q_regions_large"}
+      ]
+    },
+    "q_modules_large": {
+      "type": "question",
+      "text": "How many modules are being deployed?",
+      "options": [
+        {"label": "1-3 modules", "next": "q_regions_large"},
+        {"label": "4-5 modules", "next": "q_regions_large"},
+        {"label": "6+ modules", "next": "q_regions_enterprise"}
+      ]
+    },
+    "q_modules_enterprise": {
+      "type": "question",
+      "text": "How many modules are being deployed?",
+      "options": [
+        {"label": "1-4 modules", "next": "q_regions_enterprise"},
+        {"label": "5+ modules", "next": "q_regions_enterprise"}
+      ]
+    },
+    "q_regions_small": {
+      "type": "question",
+      "text": "Which regions are in scope?",
+      "options": [
+        {"label": "Single region (e.g., EU only or Americas only)", "next": "rec_single_wave"},
+        {"label": "Two regions (e.g., EU + Americas)", "next": "q_us_japan_small"},
+        {"label": "Three+ regions", "next": "q_us_japan_mid"}
+      ]
+    },
+    "q_regions_mid": {
+      "type": "question",
+      "text": "Which regions are in scope?",
+      "options": [
+        {"label": "EU + Americas", "next": "q_us_japan_mid"},
+        {"label": "EU + Americas + APAC", "next": "q_us_japan_large"},
+        {"label": "EU + Americas + APAC + LATAM (global)", "next": "q_us_japan_large"},
+        {"label": "Other combination", "next": "q_us_japan_mid"}
+      ]
+    },
+    "q_regions_large": {
+      "type": "question",
+      "text": "Which regions are in scope?",
+      "options": [
+        {"label": "EU + Americas + APAC", "next": "q_us_japan_large"},
+        {"label": "EU + Americas + APAC + LATAM (global)", "next": "q_us_japan_enterprise"},
+        {"label": "Other combination", "next": "q_us_japan_large"}
+      ]
+    },
+    "q_regions_enterprise": {
+      "type": "question",
+      "text": "Confirming: this is a global deployment spanning multiple continents?",
+      "options": [
+        {"label": "Yes — full global rollout (EU, Americas, Japan, APAC, LATAM)", "next": "q_us_japan_enterprise"},
+        {"label": "Global minus LATAM", "next": "q_us_japan_large"},
+        {"label": "Global minus Japan", "next": "q_us_japan_large"}
+      ]
+    },
+    "q_us_japan_small": {
+      "type": "question",
+      "text": "Does the deployment include the US or Japan?",
+      "options": [
+        {"label": "Neither", "next": "rec_2_waves"},
+        {"label": "US only", "next": "rec_2_waves_us"},
+        {"label": "Japan only", "next": "rec_3_waves_japan"},
+        {"label": "Both US and Japan", "next": "rec_3_waves"}
+      ]
+    },
+    "q_us_japan_mid": {
+      "type": "question",
+      "text": "Does the deployment include the US or Japan?",
+      "options": [
+        {"label": "Neither", "next": "rec_3_waves"},
+        {"label": "US only", "next": "rec_3_waves_us"},
+        {"label": "Japan only", "next": "rec_3_waves_japan"},
+        {"label": "Both US and Japan", "next": "rec_4_waves"}
+      ]
+    },
+    "q_us_japan_large": {
+      "type": "question",
+      "text": "Does the deployment include the US or Japan?",
+      "options": [
+        {"label": "Neither", "next": "rec_4_waves"},
+        {"label": "US only", "next": "rec_4_waves_us"},
+        {"label": "Japan only", "next": "rec_4_waves_japan"},
+        {"label": "Both US and Japan", "next": "rec_5_waves"}
+      ]
+    },
+    "q_us_japan_enterprise": {
+      "type": "question",
+      "text": "This is a global enterprise deployment. Confirming US and Japan are both in scope?",
+      "options": [
+        {"label": "Yes — both US and Japan", "next": "rec_5_waves"},
+        {"label": "US only (no Japan)", "next": "rec_4_waves_us"},
+        {"label": "Japan only (no US)", "next": "rec_4_waves_japan"}
+      ]
+    },
+    "rec_single_wave": {
+      "type": "recommendation",
+      "text": "Single-wave deployment recommended",
+      "details": "For a single-region, limited-country deployment, a single wave with optional sub-waves is sufficient.\n\n**Recommended approach:**\n- Duration: 6-9 months\n- Pilot 2-3 countries first (include one complex market)\n- Full deployment 6-8 weeks after pilot stabilizes\n- No standalone Japan/US wave needed unless they're in scope\n\n**Sub-wave strategy:** If deploying to 5+ countries in the region, split into 2 sub-waves with 6-week spacing.\n\n**Key risk:** Don't skip the pilot. Even in a single wave, piloting 2-3 countries first surfaces data migration gaps and sync edge cases at manageable volume.",
+      "wave_count": 1,
+      "estimated_months": "6-9"
+    },
+    "rec_2_waves": {
+      "type": "recommendation",
+      "text": "2-wave deployment recommended",
+      "details": "Two waves for a dual-region deployment without US/Japan complexity.\n\n**Wave 1 (Months 1-7):** Primary region — pilot 3-5 countries, then remaining countries. Include at least one market with strict sample rules.\n**Wave 2 (Months 10-14):** Secondary region — full deployment.\n\n**Total duration:** 12-18 months\n**Inter-wave gap:** 3 months minimum for stabilization and next-wave discovery.\n\n**Tip:** Start Wave 2 discovery in parallel with Wave 1 build — by the time Wave 1 goes live, Wave 2 requirements should be finalized.",
+      "wave_count": 2,
+      "estimated_months": "12-18"
+    },
+    "rec_2_waves_us": {
+      "type": "recommendation",
+      "text": "2-wave deployment recommended (with US)",
+      "details": "Two waves, with the US getting its own focused wave due to regulatory complexity.\n\n**Wave 1 (Months 1-7):** Non-US region — pilot 3-5 countries, then remaining. This builds platform stability before tackling US complexity.\n**Wave 2 (Months 10-16):** US deployment with state-by-state sample licensing, Sunshine Act transparency reporting, and PDMA compliance.\n\n**Total duration:** 14-18 months\n\n**Critical:** US must NOT be Wave 1. The 50-state licensing rules, DEA registration, California furnishing numbers, and Sunshine Act configuration need a proven platform foundation.",
+      "wave_count": 2,
+      "estimated_months": "14-18"
+    },
+    "rec_3_waves": {
+      "type": "recommendation",
+      "text": "3-wave deployment recommended",
+      "details": "Three waves for a multi-region deployment.\n\n**Wave 1 (Months 1-7):** Largest region with pilot sub-wave (3-5 pilot countries first, then remaining).\n**Wave 2 (Months 10-16):** Second region + any standalone complex markets.\n**Wave 3 (Months 19-24):** Remaining regions.\n\n**Total duration:** 18-24 months\n**Inter-wave gap:** 3 months minimum.\n\n**Sub-wave strategy for Wave 1:** If deploying to 10+ countries, use 3 sub-waves with 6-week spacing (e.g., EU North → EU Central + AFME → EU East).",
+      "wave_count": 3,
+      "estimated_months": "18-24"
+    },
+    "rec_3_waves_us": {
+      "type": "recommendation",
+      "text": "3-wave deployment recommended (US in Wave 2)",
+      "details": "Three waves with the US getting a dedicated focus in Wave 2.\n\n**Wave 1 (Months 1-7):** Primary non-US region with pilot sub-wave.\n**Wave 2 (Months 10-16):** US + Canada. Dedicated state-by-state compliance configuration, Sunshine Act, PDMA.\n**Wave 3 (Months 19-24):** Remaining regions.\n\n**Total duration:** 20-24 months\n\n**Rule:** Never combine US with a large set of other countries in the same wave. US regulatory complexity demands focused attention.",
+      "wave_count": 3,
+      "estimated_months": "20-24"
+    },
+    "rec_3_waves_japan": {
+      "type": "recommendation",
+      "text": "3-wave deployment recommended (Japan standalone)",
+      "details": "Three waves with Japan as a standalone wave due to APPI, PMDA, and full CJK localization requirements.\n\n**Wave 1 (Months 1-7):** Primary region with pilot sub-wave.\n**Wave 2 (Months 10-16):** Second region.\n**Wave 3 (Months 19-24):** Japan standalone — dedicated APPI compliance, PMDA pharmaceutical regulations, full Japanese localization, and culturally specific go-live requirements.\n\n**Total duration:** 20-24 months\n\n**Rule:** Japan is ALWAYS a standalone wave. Bundling it with other APAC markets guarantees one of them gets short-changed.",
+      "wave_count": 3,
+      "estimated_months": "20-24"
+    },
+    "rec_4_waves": {
+      "type": "recommendation",
+      "text": "4-wave deployment recommended",
+      "details": "Four waves following the tri-regional pattern with sub-waves.\n\n**Wave 1 (Months 1-9):** EU with 3 sub-go-lives:\n  - 1a: EU North/pilot countries (Month 4)\n  - 1b: EU Central + AFME (Month 7)\n  - 1c: EU East (Month 9)\n**Wave 2 (Months 12-16):** Americas\n**Wave 3 (Months 19-24):** APAC\n**Wave 4 (Months 27-30):** Remaining regions (LATAM or late additions)\n\n**Total duration:** 24-30 months\n**Inter-wave gap:** 3 months\n**Sub-wave gap within Wave 1:** 6 weeks minimum",
+      "wave_count": 4,
+      "estimated_months": "24-30"
+    },
+    "rec_4_waves_us": {
+      "type": "recommendation",
+      "text": "4-wave deployment recommended (US dedicated)",
+      "details": "Four waves with the US getting dedicated Wave 2.\n\n**Wave 1 (Months 1-9):** EU with sub-waves (pilot → central → east)\n**Wave 2 (Months 12-16):** US + Canada — dedicated compliance wave\n**Wave 3 (Months 19-24):** APAC (or next largest region)\n**Wave 4 (Months 27-30):** LATAM or remaining regions\n\n**Total duration:** 26-30 months\n\n**US Wave 2 complexity drivers:** 50-state sample licensing, Sunshine Act, PDMA, NP/PA prescriptive authority, DEA registration, California furnishing numbers. Budget an extra 2-4 weeks compared to a standard wave.",
+      "wave_count": 4,
+      "estimated_months": "26-30"
+    },
+    "rec_4_waves_japan": {
+      "type": "recommendation",
+      "text": "4-wave deployment recommended (Japan standalone)",
+      "details": "Four waves with Japan getting a dedicated wave.\n\n**Wave 1 (Months 1-9):** EU with sub-waves\n**Wave 2 (Months 12-16):** Americas\n**Wave 3 (Months 19-24):** Japan standalone — APPI, PMDA, full CJK\n**Wave 4 (Months 27-30):** Remaining APAC + LATAM\n\n**Total duration:** 26-30 months\n\n**Japan requires:** Dedicated BA and testing team, full Japanese localization (kanji, hiragana, katakana), culturally specific training approach (train-the-trainer won't work without local context), APPI data handling compliance.",
+      "wave_count": 4,
+      "estimated_months": "26-30"
+    },
+    "rec_5_waves": {
+      "type": "recommendation",
+      "text": "5-wave enterprise deployment recommended",
+      "details": "The full 5-wave pattern for global enterprise pharma rollouts covering 50+ countries.\n\n**Wave 1 — Europe (Months 1-9, 3 sub-go-lives):**\n  - 1a (Month 4): EU North pilot — 5-8 countries including Germany, UK, France, Finland, Netherlands. Diverse regulatory requirements for maximum early learning.\n  - 1b (Month 7): EU Central + AFME — 15-20 countries including Italy, Turkey, Saudi Arabia, Gulf states, North Africa, Austria, Switzerland, Belgium, Portugal, Ireland, Poland, Czech Republic, Israel.\n  - 1c (Month 9): EU East — 10-15 countries including Serbia, Slovenia, Lithuania, Croatia, Hungary, Ukraine, Kazakhstan.\n\n**Wave 2 — Americas (Months 12-16):**\n  US + Canada. Dedicated state-by-state compliance, Sunshine Act, PDMA configuration. Canada pairs as a simpler follow-on.\n\n**Wave 3 — Japan (Months 19-24):**\n  Japan standalone. APPI compliance, PMDA alignment, full Japanese localization, dedicated BAT with local stakeholders. Never bundle with other APAC markets.\n\n**Wave 4 — APAC (Months 27-30):**\n  Australia, India, Korea, New Zealand, Hong Kong, Indonesia, Malaysia, Singapore, Taiwan, Thailand, Vietnam, Philippines, Pakistan, Brunei.\n\n**Wave 5 — LATAM (Months 33-36):**\n  Brazil (LGPD + ANVISA), Mexico, Argentina, Chile, Colombia, Peru, Ecuador, Uruguay, plus Caribbean and Central America micro-markets.\n\n**Total duration:** 30-36 months\n**Inter-wave gap:** 3 months for stabilization + next-wave discovery\n**Sub-wave gap:** 6 weeks minimum\n\n**Critical rules:**\n- Japan and US are NEVER in the same wave\n- LATAM is always last (benefits from all prior learnings)\n- Wave 1 must include at least one complex market (Germany or France)\n- Each wave's discovery runs in parallel with the prior wave's execution\n- Consider a Wave 0 pilot (2-3 countries, 3 months) before the formal program starts",
+      "wave_count": 5,
+      "estimated_months": "30-36"
+    }
+  }
+}

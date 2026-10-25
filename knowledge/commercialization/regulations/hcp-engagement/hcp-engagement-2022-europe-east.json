@@ -1,0 +1,82 @@
+[
+  {
+    "id": "hcp-engagement-2022-europe-east-1",
+    "category": "knowledge/commercialization/regulations/hcp-engagement",
+    "title": "HCP Engagement Regulations — Eastern Europe (2022)",
+    "products": [
+      "Life Sciences CRM",
+      "Compliance"
+    ],
+    "summary": "Regulatory requirements for HCP/HCO engagement and meeting sponsorship across Eastern European countries, current as of September 2022. Most Eastern European countries follow code-based industry self-regulation with standard written contract requirements.",
+    "findings": [
+      {
+        "name": "Bosnia and Herzegovina",
+        "detail": "Industry: Pharma. Competent authority: Udruženje inovativnih proizvođača lijekova (UIPL). Code-based regulation. Engagement: Standard written contract requirements — legitimate need, compatible criteria, appropriate number, fair market value compensation, records maintained. Meetings: Companies may finance or organize meetings provided event is in appropriate venue conducive to scientific/educational objectives; main purpose must be educational/professional/scientific, promotional elements must be secondary. Meal thresholds: Up to 100 BAM per person per meal; restricted to refreshments and/or food and beverages during the meeting."
+      },
+      {
+        "name": "Bulgaria",
+        "detail": "Industry: Pharma. Competent authority: Association of research-based pharmaceutical manufacturers in Bulgaria (ARPharM). Code-based regulation. Engagement: Standard written contract requirements. Meetings: Companies may provide financial support including HCP sponsorship; preliminary assessment via ARPharM events database recommended. Meal thresholds: 100 BGN incl. VAT."
+      },
+      {
+        "name": "Croatia",
+        "detail": "Industry: Pharma. Competent authority: Innovative Pharmaceutical Initiative (IPI). Code-based regulation. Engagement: Standard written contract requirements with fair market value compensation. Meetings: Companies may sponsor or organize meetings in appropriate venue conducive to scientific/educational objectives; main purpose must be educational/professional/scientific. Meal thresholds: Up to 500 HRK per person per meal; restricted to refreshments and/or food and beverages during the meeting."
+      },
+      {
+        "name": "Czech Republic",
+        "detail": "Industry: Pharma. Competent authority: Association of Innovative Pharmaceutical Industries (AIFP). Code-based regulation. Engagement: Written contract with detailed requirements including legitimate need, clearly identified services, appropriate number of consultants, fair market value, records maintained. Meetings: All events must be held in appropriate locations and venues conducive to main purposes; avoidance of venues that are extravagant or known for entertainment/leisure facilities. Sponsorship includes financial contribution to support an event/meeting organized by HCO/Third Party and Contribution to Costs related to Events of Third Parties (i.e., HCPs costs support) in the AIFP public database. Meal thresholds: Various limits — 6 hours of scientific activities 3000 CZK incl. VAT (total per day); shorter events proportionally less."
+      },
+      {
+        "name": "Hungary",
+        "detail": "Industry: Pharma-Generics. Competent authority: Association of Innovative Pharmaceutical Manufacturers (AIPM); Hungarian Association of Generic Manufacturers and Distributors. Code-based regulation. Engagement: Standard written contract requirements. Meetings: Companies may sponsor or organize meetings with appropriate venue, scientific/educational objectives. Meal thresholds: Meal 50 EUR incl. VAT (for AIPM members only); Max value per day 90 EUR incl. VAT (for AIPM members only); 7650 HUF/25 EUR for meals in promotional events."
+      },
+      {
+        "name": "Latvia",
+        "detail": "Industry: Pharma. Competent authority: Association of International Research-based Pharmaceutical Manufacturers (SIFFA). Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds: Meals 80K incl. VAT (up to 100 EUR per day)."
+      },
+      {
+        "name": "Lithuania",
+        "detail": "Industry: Pharma. Competent authority: 'Innovative Pharmaceutical Industry' Association (IFPA); Pharmaceutical Manufacturers Association (VGA). Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules with appropriate venue. Meal thresholds: Meals 60 incl. VAT."
+      },
+      {
+        "name": "Poland (Pharma)",
+        "detail": "Industry: Pharma. Competent authority: The Employers' Union of Innovative Pharmaceutical Companies (INFARMA). Engagement: Written contract with employer duty authorization. Pre-approval: Authorization required from HCP's employer. Submission: No specific form prescribed and need to be a written notice. Meetings: All scientific events certified in advance by INFARMA; request for certification must be filed by organizer. Pre-approval: Scientific event must be positively assessed and certified by INFARMA in order to be held. Meeting submission: INFARMA platform for electronic procedures (website). Meeting timelines: Request must be sent at least two (2) months before the event; INFARMA will decide within five (5) days upon receiving the form. In exceptional cases, the certification process may take up to ten (10) days. Meal thresholds: 200 PLN incl. VAT."
+      },
+      {
+        "name": "Poland (Medical Devices)",
+        "detail": "Industry: Medical Devices. Competent authority: POLMED. Engagement: Written contract required for all HCP interactions. Notification ('Declaration'): HCPs employer notification requested for any interaction or collaboration providing purpose and scope of engagement except for incidental educational meetings/business or small gifts. Pre-approval ('Authorization'): Two centralized and independent validation systems in place to review and authorize physical Third Party Organized Educational Events. Meeting timelines: No specific timeline set, but general rules are provided. Meal thresholds: No thresholds have been set but general rules are provided."
+      },
+      {
+        "name": "Romania",
+        "detail": "Industry: Pharma. Competent authority: Asociatia Producatorilor Internationali de Medicamente (ARPIM). Code-based regulation. Engagement: Standard written contract requirements with fair market value compensation. Meetings: Standard sponsorship rules. Meal thresholds — Domestic: Meals (drinks included) 200 RON incl. VAT; Coffee/break/drinks incl. 40 RON VAT and tip incl.; 2 meals and 2 coffee breaks if duration > 6 hours. International: If no local requirements, 150/day incl. VAT and tip incl. (lunch and dinner)."
+      },
+      {
+        "name": "Russia",
+        "detail": "Industry: Pharma. Competent authority: Association of International Pharmaceutical Manufacturers (AIPM). Code-based regulation. Engagement: Standard written contract requirements with reasonable compensation at fair market value. Meetings: Standard sponsorship rules with appropriate venue. Meal thresholds: No thresholds have been set but meals and drinks should serve soft drinks, tea/coffee, snacks, and/or hot dishes in a buffet style."
+      },
+      {
+        "name": "Serbia",
+        "detail": "Industry: Pharma. Competent authority: Association of producers of innovative medicines (INOVIA). Code-based regulation. Engagement: Standard written contract with comprehensive requirements including no inducement clause. Meetings: Standard sponsorship rules. Meal thresholds: Meals up to 10 EUR (763 RSD incl. VAT)."
+      },
+      {
+        "name": "Slovakia",
+        "detail": "Industry: Pharma. Competent authority: Association of the Innovative Pharmaceutical Industry (AIFP). Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds: Meals up to 75K and 100K for 1h day."
+      },
+      {
+        "name": "Slovenia",
+        "detail": "Industry: Pharma. Competent authority: Forum of International Research and Development Pharmaceutical Companies (BS). Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds: Meals up to 60 EUR incl. VAT."
+      },
+      {
+        "name": "Ukraine",
+        "detail": "Industry: Pharma. Competent authority: Association of Pharmaceutical Research and Development (APRaD). Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds: Up to 1200 UAH incl. VAT per meal (with a maximum two (2) meals per day)."
+      }
+    ],
+    "source": "Global HCP Engagement Regulations Snapshot, September 2022",
+    "tags": [
+      "regulations",
+      "hcp-engagement",
+      "compliance",
+      "europe-east",
+      "2022"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "fnd-crmdata-001",
+    "category": "modules",
+    "title": "CRM Vendor Data Products and Prescriber Intelligence",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Analysis of CRM platform vendor data product suites, including longitudinal patient data, prescriber-level intelligence, and privacy-safe identity linking technology for life sciences commercial analytics.",
+    "findings": {
+      "vendor_data_product_evolution": "Major CRM platform vendors have expanded from software-only models to integrated data-plus-software offerings. One leading vendor (NASDAQ-listed, 5,400+ employees, 1,200+ global customers, ~$1.85B annual revenue as of FY2022) launched a comprehensive data product suite that directly competes with established data providers in the prescriber and patient data space.",
+      "prescriber_data_capabilities": "Prescriber-level data products provide: individual prescribing volumes by therapeutic area and product, affiliation mapping (hospital, practice group, health system), specialty and sub-specialty classification, NPI-linked demographic and credential data, and near-real-time prescription trends for territory planning and targeting.",
+      "longitudinal_patient_data": "Patient data products offer privacy-safe, longitudinal patient journeys across multiple data sources. Key capabilities include: diagnosis-to-treatment pathway analysis, therapy switching and adherence patterns, time-to-therapy metrics, and patient population segmentation for market research and commercial strategy.",
+      "identity_linking_technology": "Privacy-safe identity linking connects anonymized patient records across disparate data sources (claims, EMR, pharmacy) without exposing personally identifiable information. This enables cross-source longitudinal analysis that was previously limited to proprietary data networks. Token-based matching algorithms achieve high linkage rates while maintaining HIPAA compliance.",
+      "competitive_dynamics": "The entry of CRM platform vendors into the data space disrupts the traditional model where separate companies provided data vs. software. Integrated data-plus-CRM creates competitive advantage through: reduced integration complexity, native analytics within field-force workflows, and unified data governance. Established data providers respond by deepening their own software capabilities.",
+      "implications_for_platform_selection": "Organizations selecting life sciences CRM platforms must now evaluate data product breadth and quality alongside software functionality. Key evaluation criteria include: data coverage by geography and therapeutic area, refresh frequency and latency, integration depth with the CRM user experience, and total cost relative to standalone data licensing plus integration labor."
+    },
+    "source": "Vendor profile analysis, Sept 2022",
+    "tags": [
+      "crm-data",
+      "prescriber-data",
+      "patient-data",
+      "identity-linking",
+      "commercial-analytics",
+      "data-products"
+    ]
+  }
+]

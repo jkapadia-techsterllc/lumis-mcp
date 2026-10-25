@@ -1,0 +1,28 @@
+[
+  {
+    "id": "crm-bp-008",
+    "category": "org-strategy",
+    "title": "CRM Implementation Project Execution Practices",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Covers implementation project governance, customization avoidance, compliance documentation planning, naming standards, performance testing, and the Architect role for CRM projects on Salesforce.",
+    "findings": {
+      "customization_avoidance": "Minimize development customizations as they add risk, increase maintenance cost, and extend project timelines. Schedule technical resources toward the end of the project for necessary work like test class creation in Apex rather than front-loading custom development.",
+      "governance_setup": "Agree on project roles, responsibilities, and escalation procedures at project launch. Some customers require heavy documentation for compliance regulations; discuss documentation requirements early to avoid late-stage surprises. Decide on object naming and documentation standards before any configuration work begins.",
+      "architect_role": "Establish a designated Architect role for the implementation. The Architect governs data model changes, trigger design, scheduled job configuration, and overall technical design decisions. This role prevents inconsistent design patterns across work streams.",
+      "performance_testing": "Conduct performance tests from the customer's actual network environment. Bandwidth constraints, browser versions, and network latency all affect the user experience and may not be apparent when testing from a development environment.",
+      "admin_account_restriction": "Never use the platform admin user ID for development or support access to new orgs. The admin account is reserved exclusively for production administration."
+    },
+    "source": "Project Execution Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "implementation",
+      "project-management",
+      "governance",
+      "architect",
+      "performance-testing",
+      "compliance"
+    ]
+  }
+]

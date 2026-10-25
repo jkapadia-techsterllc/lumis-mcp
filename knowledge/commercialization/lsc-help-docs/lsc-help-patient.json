@@ -1,0 +1,387 @@
+[
+  {
+    "id": "lsc-help-patient-ind-lsc-setup-life-sciences-cloud-patient-engagement-features",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Patient Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set up Patient Engagement for Life Sciences by implementing features such as Care Programs, Financial Assistance Programs, Patient Program Outcome Management, and Pharmacy Benefits Verification. Set Up Advanced Therapy Management Advanced Therapy Management’s Multi-Step Scheduling feature supports...",
+    "findings": [
+      {
+        "name": "Set Up Patient Engagement",
+        "detail": "Set up Patient Engagement for Life Sciences by implementing features such as Care Programs, Financial Assistance Programs, Patient Program Outcome Management, and Pharmacy Benefits Verification. Set Up Advanced Therapy Management Advanced Therapy Management’s Multi-Step Scheduling feature supports slot management and scheduling across multiple territories in a single place, to help users easily search for and book appointments across multiple sites. Advanced Therapy Orchestration provides flexible workflows that automatically execute all the components of an advanced therapy, from therapy stages and substages to individual tasks. Set Up Benefit Verification Integrate benefit verification into the end-to-end patient access workflow to help caregivers and patients reduce the time and effort it takes to find out what coverage is available under each patient's health benefits. Set Up Care Programs Maximize the impact of your care programs with enrollment and management tools to help drive adherence and improve outcomes. Care programs can cover services such as patient outreach, access to medications, access to care, financial assistance, or remote monitoring. Set Up Financial Assistance Programs Financial Assistance Program streamlines the enrollment of patients, helping them manage out-of-pocket medical expenses. Patient service reps can identify suitable assistance programs based on specific criteria and apply on behalf of the enrollees. Reps can view the status of the application and the history of any financial assistance that was provided to the enrollee. If the application is rejected, the patient service rep can file an appeal. After the application is approved, another patient service rep can view the details of the benefit disbursement, such as the count and benefit of reimbursed Copay coupons. Home Health for Life Sciences Cloud Use Home Health in Life Sciences Cloud to efficiently schedule and manage visits for your organization’s home healthcare services. Help your users automate large parts of their operations, such as scheduling recurring visits and managing field resource assignments using Home Health. Set Up Patient Program Outcome Management Patient Program Outcome Management streamlines the process of defining program outcomes and indicators, and connects program outcomes with patient progress, enabling measurement at the outcome level. Enhance care program efficacy and get clear insights into patient and program performance through Patient Program Outcome Management. Improve patient experience and adherence by building your customized assessments and logic to compute indicator results, and evaluate outcomes to refine patient service programs. Set Up Patient Support Programs Analytics for Life Sciences Cloud Patient Support Programs (PSP) Analytics provides a complete solution, including Tableau Einstein dashboards, to improve patient and program outcomes. The dashboards give program leads and patient services reps the data-driven insights they need to optimize operational efficiency. Set Up Pharmacy Benefits Verification Gain quick access to patient care and verify benefit coverage details. Patient services representatives can use a streamlined process to assist patients in getting an accurate summary of their pharmacy benefits. Representatives can use a guided flow to initiate a verification request to payers and receive a response for pharmacy coverage details, including coverage status, co-pay, co-insurance, and deductibles. Set Up Provider Relationship Cards Set up provider relationship cards to quickly and efficiently show users what they need to know about providers and the facilities where they work, all in one place. Identify the information your users look for on each Provider Relationship Card, then use the card setup wizard to connect the various objects that contain that information. Set Up Provider Search for Life Sciences Powered by the provider data model, Provider Search helps your users find healthcare providers based on criteria such as location, specialty, and whether the provider is accepting new patients. You can see the location of each provider right in Agentforce Life Sciences."
+      },
+      {
+        "name": "See Also",
+        "detail": "Trailhead : Patient Services Programs for Agentforce Life Sciences"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_setup_life_sciences_cloud_patient_engagement_features.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-program-outcome-management-add-care-program-and-care-program-enrollee",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Define Care Programs and Care Program Enrollees",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Patient Program Outcome Management uses care program and care program enrollee as the backbone of its operation. To create a care program, define the program and the relationships and activities within it. To create a care program enrollee, define a person",
+    "findings": [
+      {
+        "name": "Define Care Programs and Care Program Enrollees",
+        "detail": "Patient Program Outcome Management uses care program and care program enrollee as the backbone of its operation. To create a care program, define the program and the relationships and activities within it. To create a care program enrollee, define a person account."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud or Health Cloud User Permissions Needed To create care program records: | Health Cloud Starter (for Life Sciences Cloud) permission set OR Health Cloud Foundation (for Health Cloud) permission set To create care program enrollee records: | Health Cloud Starter (for Life Sciences Cloud) permission set OR Health Cloud Foundation (for Health Cloud) permission set Make sure that you create records for the Account object to represent the patient. Create a care program. From the App Launcher, find and select Care Programs . Click New , and enter the name of the care program. For example, create a care program called Diabetes Control for patients who have high blood sugar. If needed, select the parent program associated with the care program. Select a category for the care program. For example, to use a care program in the patient support program record, select Patient Services as the category. Note Make sure that you add the Category field to the Care Program page layout. Enter the start date of the care program. If necessary, enter the program’s end date. Add a description for the care program. Select the status of the care program. Find and select a program sponsor, if any. Save your changes. Create a care program enrollee. From the App Launcher, find and select Care Program Enrollees . Click New , and enter the name of the care program enrollee. In Care Program, select the care program record that you want to enroll the care program enrollee to. Select an account. Select the status of the care program enrollee. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_program_outcome_management_add_care_program_and_care_program_enrollee.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-program-outcome-management-define-outcomes",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Define Outcomes and Outcome Activities",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add outcomes to track the changes that you expect to see in care program enrollees and ultimately at a care program level. Use outcome activities to connect outcomes to the efforts, such as care programs or care program enrollees, that contribute to the end",
+    "findings": [
+      {
+        "name": "Define Outcomes and Outcome Activities",
+        "detail": "Add outcomes to track the changes that you expect to see in care program enrollees and ultimately at a care program level. Use outcome activities to connect outcomes to the efforts, such as care programs or care program enrollees, that contribute to the end goal."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud or Health Cloud User Permissions Needed To create an outcome: | Patient Program Outcome Management permission set To create an outcome activity: | Patient Program Outcome Management permission set From the App Launcher, find and select Outcomes . Click New . Enter a name that describes the outcome. Select the status. If needed, select the intended direction and term, and enter a description. Save your work. In the Outcome Activities related list, click New . Name the outcome activity. Select the type. For example, the Care Program. Enter the record that you want to track in the lookup field that matches what you selected in the Type field. For example, if you selected Care Program as the type, use the Care Program field to look up and connect to the care program that you want to measure. Save your work. Similarly, add other outcome activities as needed."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_program_outcome_management_define_outcomes.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-program-outcome-management-measure-strategy-with-indicators",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Indicators for Measuring Results",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Measure outcomes consistently by creating a library of indicators, connect those indicators to what you’re measuring, and add time-bound baseline and target values to track your results against. Connect indicator definitions to programs to track the effectiveness of programs. Connect indicator...",
+    "findings": [
+      {
+        "name": "Indicators for Measuring Results",
+        "detail": "Measure outcomes consistently by creating a library of indicators, connect those indicators to what you’re measuring, and add time-bound baseline and target values to track your results against. Connect indicator definitions to programs to track the effectiveness of programs. Connect indicator definitions to outcomes to track the effectiveness of the tasks that are done by participants."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud or Health Cloud User Permissions Needed To use Patient Program Outcome Management: | Patient Program Outcome Management permission set Define Indicator Definitions Use Indicator Definitions to build your library of indicators to consistently measure your outcomes. Define Indicator Assignments Use Indicator Assignments to connect indicator definitions to multiple outcomes or care programs. Define Time Periods Define time periods to calculate the indicator performance and result. This time period is used in indicator performance period. Define Indicator Performance Periods Define indicator performance periods so that you can measure time-bound indicator results."
+      },
+      {
+        "name": "Define Indicator Definitions",
+        "detail": "Use Indicator Definitions to build your library of indicators to consistently measure your outcomes. From the App Launcher, find and select Indicator Definitions . Click New . Enter a name that describes the indicator definition. Select the status. Select the unit of measure. Tip If you don’t see the unit of measure that you want to use, talk to your Salesforce admin before you add any unit of measure so that you can maintain a clean list. If needed, enter a description. Save your changes."
+      },
+      {
+        "name": "Define Indicator Assignments",
+        "detail": "Use Indicator Assignments to connect indicator definitions to multiple outcomes or care programs. From the App Launcher, find and select Indicator Definitions . Click the indicator definition that you want to connect to what you’re measuring. Go to the related lists. In the Indicator Assignments related list, click New . Enter a name that describes the indicator assignment. Select the indicator assignment type. For example, Care Program or Outcome. Enter the record that you want to measure this lookup field for the selected indicator assignment type. For example, if you selected Outcome as the type, use the Outcome field to look up and connect to the outcome that you want to measure. Select the status. Save your work."
+      },
+      {
+        "name": "Define Time Periods",
+        "detail": "Define time periods to calculate the indicator performance and result. This time period is used in indicator performance period. From the App Launcher, find and select Time Periods . Click New . Enter a name that describes the time period. For example, if you measure indicators by quarters, name the time period Q1FY23. Enter the start date and time. Enter the end date and time. Save your work. Similarly, define more time periods, if needed."
+      },
+      {
+        "name": "Define Indicator Performance Periods",
+        "detail": "Define indicator performance periods so that you can measure time-bound indicator results. From the App Launcher, find and select Indicator Performance Periods . Click New . Enter a name that describes the indicator performance period. Select the time period. Select the indicator assignment. To track the target values for this time period, enter a target value and select the target progress. To track the baseline values for this time period, enter a baseline value. In Description and Baseline Description, enter additional details, if necessary. Save your work."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_program_outcome_management_measure_strategy_with_indicators.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-program-outcome-management-track-progress-indicator-results",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Indicator Results for Tracking Progress",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Measure the value of indicator assignments with indicator",
+    "findings": [
+      {
+        "name": "Indicator Results for Tracking Progress",
+        "detail": "Measure the value of indicator assignments with indicator results."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud or Health Cloud User Permissions Needed To use Patient Program Outcome Management: | Patient Program Outcome Management permission set Data Aggregation for Indicator Results Before you enter an aggregated result value, you must collect the data about what you’re measuring. To collect data for indicator result calculation, you can use various venues, such as by talking to care program enrollees in person or on the phone, and through the assessment or survey tools available in Salesforce, online forms, and external datasets. Automatically Calculate Indicator Results from Data in Your Org Add a flow to calculate the indicator results to an indicator definition and, with the click of a button, generate the indicator results associated with an indicator performance period. Manually Add and Manage Indicator Results Enter indicator results to track them against time-bound, baseline, and target values. Manually Add and Manage Party Indicator Results Enter the party indicator results associated with the indicator results."
+      },
+      {
+        "name": "Data Aggregation for Indicator Results",
+        "detail": "Before you enter an aggregated result value, you must collect the data about what you’re measuring. To collect data for indicator result calculation, you can use various venues, such as by talking to care program enrollees in person or on the phone, and through the assessment or survey tools available in Salesforce, online forms, and external datasets. Use Discovery Framework and Assessments, a survey or assessment tool from Salesforce, to collect data. Program leads can set up custom assessments by using Discovery Framework. See Create an Assessment with Discovery Framework . You can use Patient Program Outcome Management data model with Discovery Framework and Assessments to gather data for indicator result calculation. You can use Salesforce flows with your own outcome calculation algorithms to store results in the Patient Program Outcome Management data model."
+      },
+      {
+        "name": "Automatically Calculate Indicator Results from Data in Your Org",
+        "detail": "Add a flow to calculate the indicator results to an indicator definition and, with the click of a button, generate the indicator results associated with an indicator performance period. Add the flow to an indicator definition. From Setup, in the Quick Find box, enter Flows , and then select Flows . Copy the API name of the flow that your admin created to calculate indicator results. From the App Launcher, find and select the indicator definition associated with the indicator performance period that you want to calculate indicator results for. On the indicator definition, in Flow Definition API Name, paste the flow API name. Run the flow to create indicator results. Go to the related lists on the indicator definition, and select an indicator assignment. Go to the related lists on the indicator assignment, and select the indicator performance period that you want to measure the results for. Click Calculate Indicator Results ."
+      },
+      {
+        "name": "Manually Add and Manage Indicator Results",
+        "detail": "Enter indicator results to track them against time-bound, baseline, and target values. Aggregate the data collected. Find the indicator performance period that you want to add an indicator result to. Click Related . On the Indicator Results related list, click New . Enter a result value. Enter a measurement date. To track interim or final results, select the result type. In Description, provide more information about the results. Save your work. Similarly, you can create a flow to automatically populate the indicator results."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Indicator Result Calculation Flow"
+      },
+      {
+        "name": "Manually Add and Manage Party Indicator Results",
+        "detail": "Enter the party indicator results associated with the indicator results. From the App Launcher, find and select Party Indicator Results . Click New . Find the indicator result. Enter a measurement date. Enter a result value. In Party, find and select the care program enrollee. Save your work. Similarly, you can create a flow to automatically populate the party indicator results."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_program_outcome_management_track_progress_indicator_results.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-program-outcome-management-patient-support-program-console-app",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Patient Support Programs Console App",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Patient Support Programs console app in Life Sciences Cloud is a single-stop shop for patient services reps and program leads to monitor different aspects of care programs and care program enrollees. Program leads and patient services reps can customize this app to suit their needs and can...",
+    "findings": [
+      {
+        "name": "Patient Support Programs Console App",
+        "detail": "The Patient Support Programs console app in Life Sciences Cloud is a single-stop shop for patient services reps and program leads to monitor different aspects of care programs and care program enrollees. Program leads and patient services reps can customize this app to suit their needs and can effectively manage their daily tasks by accessing the functionalities of patient support programs via this app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud or Health Cloud"
+      },
+      {
+        "name": "Assign Permissions to Users",
+        "detail": "To access the Patient Support Programs console app, admins must assign the Access Patient Support Programs as a Program Lead permission set to themselves and the Access Patient Support Programs as a Case Agent permission set to patient services reps."
+      },
+      {
+        "name": "Patient Support Programs Console App for Program Leads",
+        "detail": "Program leads can configure this app to create customized dashboards and reports to track program performance. They can create custom components to track the number of enrollees enrolled in a particular care program and how well that program is performing. This app acts as a single stop to evaluate the performance of programs and to identify the ones that don't meet the intended outcomes, helping program leads take preventive actions to mitigate any risks."
+      },
+      {
+        "name": "Patient Support Programs Console App for Patient Services Reps",
+        "detail": "Patient services reps can also personalize this app by creating custom dashboards and reports related to the care program enrollees, and can track their performance against defined outcomes. This personalized space can be enhanced using custom components and can help reps improve patient engagement and adherence, and can reduce patient drop-off risks."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_program_outcome_management_patient_support_program_console_app.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-services-programs-analytics-build-data-cloud-connection",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Build Your Data 360 Connection",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure your Data 360 connection for Life Sciences Cloud. Data 360 is automatically provisioned in your Salesforce",
+    "findings": [
+      {
+        "name": "Build Your Data 360 Connection",
+        "detail": "Configure your Data 360 connection for Life Sciences Cloud. Data 360 is automatically provisioned in your Salesforce org."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud User Permissions Needed To access Data Cloud Setup: | Data Cloud Architect To check if Data 360 is enabled on your Salesforce org, from Setup, in the Quick Find box enter Data Cloud Setup , and select Data Cloud Setup Home . If Data 360 is enabled, you can see details regarding your Data 360 instance on your home org along with your org’s details. To enable data exchange between your org and Data 360, connect Data 360 to your Salesforce org. From Setup, in the Quick Find box, enter Salesforce CRM and select Salesforce CRM . Click New . Click Connect to a Salesforce org . After your org is connected, verify that the connection is visible and active."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Connect Data"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_services_programs_analytics_build_data_cloud_connection.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-services-program-analytics-data-cloud-permission-sets",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Access to Patient Support Programs Analytics",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Assign permissions to view and manage Patient Support Programs",
+    "findings": [
+      {
+        "name": "Configure Access to Patient Support Programs Analytics",
+        "detail": "Assign permissions to view and manage Patient Support Programs Analytics."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud User Permissions Needed To ingest objects and fields: | Data Cloud Architect AND View All Records and Read permission on the object being ingested. AND Data Cloud Salesforce Connector AND Clinical Trial Manager AND Health Cloud Starter (for Life Sciences Cloud) AND Life Sciences Commercial Admin In your Salesforce org, assign Read and View All permissions to the Data Cloud Salesforce Connector permission set to ingest data from different patient support programs of Life Sciences Cloud. Assign the Data Cloud User, Clinical Trial Manager, and Tableau Next Admin permission sets to your program leads and patient services reps. Enable Discovery Framework. From Setup, in the Quick Find box, enter Discovery Framework , and then select General Settings . Turn on Discovery Framework, and Enhanced Questions. Enable Surveys. From Setup, in the Quick Find box, enter Survey , and then select Survey Settings . Turn on Surveys. Enable Site Management. From Setup, in the Quick Find box, enter Site Management , and then select Site Management Settings . Turn on Site Management. Enable Participant Management, Adverse Events, and Research Study Randomization. From Setup, in the Quick Find box, enter Participant Management , and then select Participant Management Settings . Turn on Participant Recruitment and Enrollment, Adverse Events, and Research Study Randomization. To ingest Life Sciences Cloud data, update the system settings of Data Cloud Salesforce Connector permission set. From Setup, in the Quick Find box, enter Permission Sets , and then select Permission Sets . Select Data Cloud Salesforce Connector . To update the system settings to ingest Life Sciences Cloud data, select System Permissions . Click Edit . Enable access to the these system permissions - Access PSP Financial Assistance, Manage Patient Program Outcomes, Gives users access to verify and reverify pharmacy benefits, Manage Site Management, Discovery Framework Platform User, and Design and run clinical trials. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Manage Permission Set Assignments Salesforce Help : Discovery Framework and Assessments Prerequisites Salesforce Help : Site Management Salesforce Help : Surveys Salesforce Help : Participant Management"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_services_program_analytics_data_cloud_permission_sets.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-services-program-analytics-install-deploy-data-kit",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Install and Deploy Patient Support Programs Analytics",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To view components such as data streams, calculated insights, and data graphs from Data 360, install and deploy the Patient Support Programs Analytics data kits from Data 360 in your Salesforce",
+    "findings": [
+      {
+        "name": "Install and Deploy Patient Support Programs Analytics",
+        "detail": "To view components such as data streams, calculated insights, and data graphs from Data 360, install and deploy the Patient Support Programs Analytics data kits from Data 360 in your Salesforce org."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud Install the Patient Support Programs Data Kit To access data mappings, data streams, and generate calculated insights in Data 360, install the data kit bundles available in your Salesforce org. Verify Data Kit Installation Verify that your data kit is installed and the required Data Model Objects (DMO) are created. Deploy the Patient Support Programs Analytics Data Kit Create data streams from a data kit to connect your Salesforce org to Data 360. Data streams help you install data bundles which contain stream source objects."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_services_program_analytics_install_deploy_data_kit.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-services-program-verify-data-kit-installation",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Verify Data Kit Installation",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Verify that your data kit is installed and the required Data Model Objects (DMO) are",
+    "findings": [
+      {
+        "name": "Verify Data Kit Installation",
+        "detail": "Verify that your data kit is installed and the required Data Model Objects (DMO) are created."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud User Permissions Needed To install a data kit: | Data Cloud Admin Important In Setup, on the Installed Packages page, verify that the Salesforce Standard Data Model SSOT version is 1GP or later. If the version is older than 1GP, contact your Salesforce account executive. From Setup, in the Quick Find box, enter Data Kits and select Data Kits . Verify that your installed data kit and the details of the data kit package are visible. To ensure that all your associated data streams and mappings are created, from the App Launcher, find and select Data Cloud . To ensure that your data model objects are ingested into Data 360, select the Data Model tab."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_services_program_verify_data_kit_installation.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-services-program-deploy-data-kit",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Deploy the Patient Support Programs Analytics Data Kit",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create data streams from a data kit to connect your Salesforce org to Data 360. Data streams help you install data bundles which contain stream source",
+    "findings": [
+      {
+        "name": "Deploy the Patient Support Programs Analytics Data Kit",
+        "detail": "Create data streams from a data kit to connect your Salesforce org to Data 360. Data streams help you install data bundles which contain stream source objects."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud User Permissions Needed To deploy the data kit components: | Data Cloud Architect From the App Launcher, find and select Data Cloud . Select Data Streams . Click New . Select Salesforce CRM , and then select Next . Under Custom Bundles, select Life Sciences Cloud Data Bundle . Select Next . Select Default as your data space, and select Next . Verify the objects under your selected bundle, and select Next . Verify the fields associated with the objects in the bundle, and select Next . Verify that the data model objects for the selected bundle are available and select Deploy ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_services_program_deploy_data_kit.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-services-program-install-analytics-app",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Install Patient Support Programs Analytics App",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "After your Patient Support Program Analytics data is ingested into Data 360, you’re ready to install the app to help you get insights on all your patient support programs in Life Sciences",
+    "findings": [
+      {
+        "name": "Install Patient Support Programs Analytics App",
+        "detail": "After your Patient Support Program Analytics data is ingested into Data 360, you’re ready to install the app to help you get insights on all your patient support programs in Life Sciences Cloud."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud User Permissions Needed To install Patient Support Program Analytics apps: | Data Cloud Architect AND Any admin or design time user permission set in Life Sciences Cloud From Setup, in the Quick Find box, enter Life Sciences , and then select Patient Support Program Analytics Setup . Under Patient Support Programs Analytics, select Dataspace , and click Install . If the installation fails, use an API tool to delete the app and repeat the steps in Set Up Patient Support Programs Analytics . To retrieve the ID of the app you want to delete, first, send a GET request to /services/data/{version}/app-framework/apps . Then, use that ID to send a DELETE request to /services/data/{version}/app-framework/apps/{id} ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_services_program_install_analytics_app.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  },
+  {
+    "id": "lsc-help-patient-ind-lsc-patient-services-program-analytics-add-dashboards",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add Patient Support Programs Analytics Dashboards",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "After your Patient Support Program Analytics app is installed, add analytics dashboards for your program leads and patient services reps to gain real-time insights into program performance. The dashboards provide a clear view of patient enrollment and adherence, which helps program leads optimize...",
+    "findings": [
+      {
+        "name": "Add Patient Support Programs Analytics Dashboards",
+        "detail": "After your Patient Support Program Analytics app is installed, add analytics dashboards for your program leads and patient services reps to gain real-time insights into program performance. The dashboards provide a clear view of patient enrollment and adherence, which helps program leads optimize operational efficiency and resource allocation. The data also help reps proactively intervene and personalize support, and drive better patient outcomes."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud User Permissions Needed To add Patient Services Program Analytics dashboards: | Data Cloud Architect AND Any admin or design time user permission set in Life Sciences Cloud Before you add analytics dashboards, make sure that you Install Patient Support Programs Analytics App . From the App Launcher, find and select Patient Support Programs . On home page, Click Setup , and select Edit Page . Place the Tableau Next Dashboard component at an appropriate spot. In Dashboard, find and select Program Lead Analytics . Under the Set Component Visibility section, click Add Filter . In Field, click Select . On the Select Field window, from the dropdown, select User , then select Profile , then select Name , and then click Done . Select Equal as operator, and enter the name of profile of your program lead as value. Click Done . Place another Tableau Next Dashboard component at an appropriate spot. In the Dashboard search field, find and select Patient Services Rep Analytics . Optionally, you can customize the visibility of individual dashboard. Save your changes, and activate the page."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Create an App Home Page with the Lightning App Builder"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_patient_services_program_analytics_add_dashboards.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "patient"
+    ]
+  }
+]

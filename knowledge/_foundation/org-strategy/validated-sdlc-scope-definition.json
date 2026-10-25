@@ -1,0 +1,35 @@
+[
+  {
+    "id": "fnd-sdlc-001",
+    "category": "org-strategy",
+    "title": "Product Release Scope Definition Process for Validated Systems",
+    "products": [
+      "lsc",
+      "oce",
+      "veeva_vault"
+    ],
+    "summary": "Defines how new product release content is identified, evaluated, and prioritized within a QMS-governed SDLC. Covers the journey from customer needs gathering through enhancement selection to approved release backlog, with GxP validation gates.",
+    "findings": {
+      "purpose_and_scope": "Describes how new product release content is defined, from gathering customer requirements to delivering an approved enhancements list with validations to move into development. Aligned to ISO 9001:2015 section 8.3.",
+      "key_roles": "General Manager owns vision, financial targets, and roadmap. Product Management performs market analysis, competitive intelligence, and writes user stories. Product Engineering assesses technical interdependencies and module impacts. Solution Architecture reviews business, technical, and integration requirements for consistency. QMS Core Team maintains quality management system alignment.",
+      "new_product_process": "Product Management gathers market rationale from competition, clients, and market studies to produce a candidate module list. A Concept Document is created (supported by business case and mockups), then reviewed by Solution Architecture for workload estimation. General Manager prioritizes first release content. Architecture validation and business case approval lead to a high-level release plan.",
+      "new_release_process": "Product Management creates candidate enhancement requests from client feedback, internal teams, market studies, and regulatory changes. General Manager pre-selects by strategic pillar. Global product management discussion across regions reconciles priorities. Engineering provides effort estimates. Final selection by General Manager and Product Management Lead produces a prioritized backlog, release plan, and updated roadmap.",
+      "gxp_validation_gate": "When candidate requirements introduce GxP risk, QMS Validation is mandatory before proceeding to development. This gate ensures regulatory compliance for any enhancement that could impact validated system behavior.",
+      "systems_and_tools": "Requires a tool for managing and prioritizing enhancement requests (write, share, update, comment, status tracking) and a tool for managing discussions around prioritization decisions.",
+      "key_outputs": "Concept Document, High-Level Release Plan, Business Case, Prioritized Backlog, Architecture Validation, Product Roadmap, Release Plan. Each output has a designated owner (General Manager or Product Management Lead).",
+      "cross_references": "References Solution Architecture SOP for technical review, Product Release Development SOP for downstream execution, and Technology Solutions Life Cycle appendix for the overarching process framework.",
+      "kpi": "Number of improvement requests completed versus number of improvement requests originally planned for the release."
+    },
+    "source": "SOP-0013[3] Product Release Scope Definition, ISO 9001:2015, effective Apr 2019",
+    "tags": [
+      "sdlc",
+      "scope-definition",
+      "validated-system",
+      "gxp",
+      "qms",
+      "iso-9001",
+      "release-planning",
+      "requirements"
+    ]
+  }
+]

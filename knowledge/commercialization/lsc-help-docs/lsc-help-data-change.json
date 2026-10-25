@@ -1,0 +1,122 @@
+[
+  {
+    "id": "lsc-help-data-change-ind-lsc-data-change-request-setup-validation-types",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Data Change Request Validation Types",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use validation types to define the validation of data change requests for different record types. Configure each request to go through internal validation, which your organization manages, or external validation, managed by OneKey. Select the option that aligns with your organization's quality...",
+    "findings": [
+      {
+        "name": "Set Up Data Change Request Validation Types",
+        "detail": "Use validation types to define the validation of data change requests for different record types. Configure each request to go through internal validation, which your organization manages, or external validation, managed by OneKey. Select the option that aligns with your organization's quality requirements."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up and configure Data Change Request features and objects: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select the Account Management tile. In the left navigation pane, click Data Change Request Validation Types . In the Data Change Request Validation Types page, add record types for a specific country or for all countries, and provide the validation type. Select the account type. For example, Person Account. Select the country. Select the validation type. For internal validation, turn on Requires Approval to restrict the creation of records, either through the related list or Search Before Create, without approval. If Requires Approval is active and an account is generated using a configured record type, only a Data Change Request record is produced. The insertion of the actual record is blocked. If Requires Approval is inactive and an account is generated using a configured record type, both the actual record and its corresponding Data Change Request record are produced. Whether Requires Approval is active or inactive, if the record type of the new record isn't configured, the new record is inserted without creating a Data Change Request record. For external validation, enter the name of the external validation system. Uses OneKey by default. If your organization uses a OneKey contract, restrict external DCR configuration (Record Types and Managed Fields) to only the regions supported by that contract. Including unsupported regions can cause access issues and prevent DCR records from being processed. In such cases, manually update the status of the DCR records for unsupported regions. To add a specific country, click Add Country . Adding a specific country is useful when you have different configurations for multiple countries. Save your changes. Similarly, set up Data Change Request validation types for the other objects as needed. External Validation Requirements for Data Change Requests Prevent downstream OneKey rejections and rework by making sure your setup is aligned from the start. Before enabling external validation for data change requests, make sure your data model and integration mappings meet specific requirements."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_data_change_request_setup_validation_types.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "data-change"
+    ]
+  },
+  {
+    "id": "lsc-help-data-change-ind-lsc-data-change-request-considerations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "External Validation Requirements for Data Change Requests",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Prevent downstream OneKey rejections and rework by making sure your setup is aligned from the start. Before enabling external validation for data change requests, make sure your data model and integration mappings meet specific",
+    "findings": [
+      {
+        "name": "External Validation Requirements for Data Change Requests",
+        "detail": "Prevent downstream OneKey rejections and rework by making sure your setup is aligned from the start. Before enabling external validation for data change requests, make sure your data model and integration mappings meet specific requirements."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Supported Operations",
+        "detail": "External validation via OneKey supports Create and Update operations. Delete operations aren't supported out of the box. If a delete request is submitted for external validation, the request is rejected before it reaches the external provider. Handle the delete operation through manual data governance processes or custom logic. For the Create operation to succeed, follow this sequence: Create a business account. When creating a business account, make sure these objects and their respective fields are created: Account, ContactPointAddress, HealthcareProvider, and HealthcareProviderSpecialty. After it’s approved, create a person account associated with the business account. When creating a person account, make sure these objects and their respective fields are created: Account, ContactPointAddress, HealthcareProvider, HealthcareProviderSpecialty, and ProviderAffiliation."
+      },
+      {
+        "name": "Minimum Data Threshold",
+        "detail": "To pass validation, records must meet specific minimum data threshold. If the minimum data threshold is not met, the data change request will be rejected before it reaches the external provider. A Person Account record must include at least one primary Provider Affiliation and one primary Healthcare Provider Specialty. A Business Account record must include at least one primary Healthcare Provider Specialty. Only workplace-to-individual (Hard) affiliations are supported for Data Change Request syncing."
+      },
+      {
+        "name": "Mandatory External Managed Fields",
+        "detail": "Mandatory External Managed Fields for the Create operation to succeed: Account: Name, Phone, Fax, PersonGender, PersonMobilePhone, and PersonBirthdate ContactPointAddress: Name and Address HealthcareProvider: Name, Status, ProfessionalTitle, TotalLicensedBeds, ProviderType, and ProviderClass HealthcareProviderSpecialty: Name and SpecialtyId ProviderAffiliation: Role, EffectiveStartDate, and EffectiveEndDate"
+      },
+      {
+        "name": "Integration and Mapping (MuleSoft)",
+        "detail": "Picklist Alignment: Each picklist value in Salesforce must have a corresponding mapping in your MuleSoft transformation layer. Failure Risk: If a user selects a value in Salesforce that isn't mapped, the data change request will fail with a Missing Fields error, even if the field itself is populated."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_data_change_request_considerations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "data-change"
+    ]
+  },
+  {
+    "id": "lsc-help-data-change-ind-lsc-data-change-request-create-managed-fields",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create Life Science Data Change Definition Managed Fields",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Managed fields determine which updates trigger a data change request for supported objects. Creating records for each object makes sure that changes to critical data are reviewed, validated, and approved through the Data Change Request",
+    "findings": [
+      {
+        "name": "Create Life Science Data Change Definition Managed Fields",
+        "detail": "Managed fields determine which updates trigger a data change request for supported objects. Creating records for each object makes sure that changes to critical data are reviewed, validated, and approved through the Data Change Request workflow."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up and configure Data Change Request features and objects: | Life Sciences Commercial Admin permission set Create managed field records for all the supported Data Change Request objects: Account, HealthcareProvider, HealthcareProviderNpi, HealthcareProviderSpecialty, ContactPointAddress, ContactPointEmail, ContactPointPhone, ContactPointSocial, BusinessLicense, and ProviderAffiliation. From the App Launcher, find and select Life Science Data Change Definition Managed Fields . Click New . Enter the name of the record. Use objectname_fieldname format, for example, HealthCareProvider_SourceSystemIdentifier. In the Life Science Data Change Definition field, select an object that it applies to. For example, Account. Enter the Field API name. To apply the data changes immediately, select Apply Change Immediately . This option is relevant when Default Settings is set to Apply changes to each field individually. It makes sure that changes appear on the iPad immediately and a DCR is created. If the changes are later rejected by the approver, those changes are reverted on the iPad after the next sync. Select a validation type. For example, select Internal or External . Make sure that the validation type matches the one configured in the validation types setup in the Admin Console. If needed, search for and select the country. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_data_change_request_create_managed_fields.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "data-change"
+    ]
+  },
+  {
+    "id": "lsc-help-data-change-ind-lsc-data-change-request-use",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Data Change Requests",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "As a user working on the Life Sciences Cloud mobile app, when you update supported records or create records, your changes go through a validation process to make sure they meet your organization’s data",
+    "findings": [
+      {
+        "name": "Data Change Requests",
+        "detail": "As a user working on the Life Sciences Cloud mobile app, when you update supported records or create records, your changes go through a validation process to make sure they meet your organization’s data policies."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Here are the ways that you update records of supported Data Change Request objects. Update records by using Bulk Updates on the mobile app Update records from the Account Details tab and the Account Related tab Create accounts from SBC Create new records for the objects listed on the Account Details tab After you submit your changes, Life Sciences Cloud creates a data change request based on how your admin has configured it in your Salesforce org. The request is automatically routed to the admin, the manager, or other authorized approver, who then approves or rejects the changes. Your changes appear on the mobile app only after approval and after the next sync. If the request is rejected, the existing record remains unchanged. If your admin configures Data Change Request to apply changes immediately, your updates appear on the mobile app immediately. If the request is later rejected, the changes are then reverted. Note When the primary flag is cleared on an affiliation as a result of marking another affiliation as primary, the Data Change Request approval process isn't started for that automatic change. See Considerations for Primary Affiliations ."
+      },
+      {
+        "name": "See Also",
+        "detail": "Data Change Request"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_data_change_request_use.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "data-change"
+    ]
+  }
+]

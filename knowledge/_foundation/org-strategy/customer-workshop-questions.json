@@ -1,0 +1,112 @@
+[
+  {
+    "id": "osq-001",
+    "category": "org-strategy-workshop",
+    "question_number": 1,
+    "question": "What is your Enterprise Architecture operating model?",
+    "purpose": "Classify the customer into one of four operating model quadrants: Unification, Coordination, Replication, or Diversification.",
+    "guidance": "Use the 2x2 quadrant (Process Standardization × Process Integration). Unification and Coordination customers should target fewest orgs. Replication customers use multiple orgs with unlocked packages from a hub. Diversification customers always need multiple orgs.",
+    "follow_up": "Once quadrant is identified, validate with the scenario matrix (Data Sharing × Governance).",
+    "tags": ["discovery", "alignment", "first-question"]
+  },
+  {
+    "id": "osq-002",
+    "category": "org-strategy-workshop",
+    "question_number": 2,
+    "question": "Who is paying for it? What is your scope of control?",
+    "purpose": "Understand budget ownership, decision authority, and whether org decisions are being made at the right level.",
+    "guidance": "If the architect cannot influence org strategy at the enterprise level: (1) Create coordination and awareness of the entire Salesforce community, (2) Organize workshops with enterprise data architects about shared data objects, (3) Set up a Global Center of Excellence, (4) Design a Reference Architecture that defines when a new org is reasonable. Data problems caused by uncoordinated orgs will be the death of Salesforce at the company.",
+    "follow_up": "Identify the executive sponsor and ensure architecture decisions are made at the right level.",
+    "tags": ["stakeholder", "budget", "governance"]
+  },
+  {
+    "id": "osq-003",
+    "category": "org-strategy-workshop",
+    "question_number": 3,
+    "question": "What is your preparation for the complexity of having multiple Lines of Business in a single org?",
+    "purpose": "Assess technical readiness for single-org complexity.",
+    "guidance": "Single org with multiple LOBs requires: (1) Proper naming standards across data model, config, and code, (2) Well-designed profiles, permission sets, role hierarchy, sharing model, and public groups — these are difficult to design, maintain, and especially difficult to refactor, (3) Mature Apex design with strict separation of concerns and technical architect review, (4) A dedicated person to manage and maintain the data model.",
+    "follow_up": "If the customer lacks mature Salesforce engineering practices, multi-org may be safer despite higher cost.",
+    "tags": ["complexity", "technical-readiness", "engineering-maturity"]
+  },
+  {
+    "id": "osq-004",
+    "category": "org-strategy-workshop",
+    "question_number": 4,
+    "question": "How much change can you effectively manage in a single org?",
+    "purpose": "Assess change management capacity and governance maturity.",
+    "guidance": "Recommendations: (1) Use separate profiles for geographically separated users or distinct LOBs needing different innovation pace, (2) Global CoE manages business architecture and common standards, (3) Each org needs a governance committee that manages product direction and defines RACI for all change types, (4) Architectural review board to approve all technical changes, (5) Tiered administration to let LOBs make some changes without production releases.",
+    "follow_up": "Map current change management process and identify bottlenecks that would worsen with additional LOBs.",
+    "tags": ["change-management", "governance", "capacity"]
+  },
+  {
+    "id": "osq-005",
+    "category": "org-strategy-workshop",
+    "question_number": 5,
+    "question": "How many Lines of Business can you support in a single org?",
+    "purpose": "Evaluate operational overhead and support scalability.",
+    "guidance": "As LOBs increase: request backlogs grow, time-to-market decreases, stakeholders become anxious — driving pressure for separate orgs. Mitigations: (1) CoE for roadmap articulation, (2) Tiered administration (Tier 0: LOB business SME with delegated admin, Tier 1: single service desk, Tier 2/3: per-org troubleshooting), (3) Chargeback via license tax — LOBs fund their own development. Larger LOBs may fund and support their own org; smaller LOBs pool around centralized CoE.",
+    "follow_up": "Count current LOBs and planned additions. Map each to profile/org boundary.",
+    "tags": ["scalability", "lob-count", "support-model"]
+  },
+  {
+    "id": "osq-006",
+    "category": "org-strategy-workshop",
+    "question_number": 6,
+    "question": "What are the regulatory, compliance, or security requirements?",
+    "purpose": "Identify hard constraints that force multi-org or special isolation.",
+    "guidance": "In pharma/life sciences: (1) PII has different security requirements than business data — Medical Science Liaison and Sales Rep data visibility must be separated, (2) Some LOBs have complex encryption requirements, IP restrictions, or confidential data requiring 'walled gardens', (3) GDPR consent management requires granular per-purpose per-channel tracking — no single API for bulk opt-out exists, (4) Data residency laws (China, Russia, Turkey, EU) may force org isolation.",
+    "follow_up": "Map each regulatory requirement to a technical solution: sharing rules, encryption, org isolation, or data residency.",
+    "tags": ["compliance", "regulatory", "security", "gdpr", "data-residency"]
+  },
+  {
+    "id": "osq-007",
+    "category": "org-strategy-workshop",
+    "question_number": 7,
+    "question": "Are you willing to pay for the overhead of multiple orgs?",
+    "purpose": "Quantify the cost differential between single and multi-org.",
+    "guidance": "Multi-org costs include: increased licensing (CRM + AppExchange per org), third-party integration costs per org, environment management overhead, SSO configuration per org, integration development and maintenance, separate DevOps pipelines. Compare: cost of multiple profiles in single org vs. cost of multiple orgs with shared profiles.",
+    "follow_up": "Build a rough TCO comparison for the customer's specific scenario.",
+    "tags": ["cost", "licensing", "tco"]
+  },
+  {
+    "id": "osq-008",
+    "category": "org-strategy-workshop",
+    "question_number": 8,
+    "question": "Who will modify and maintain your org(s)?",
+    "purpose": "Design the administration model and support structure.",
+    "guidance": "Recommendations: (1) Minimize true System Administrators — use custom profiles and permission sets, (2) Tier 0: LOB business SMEs with delegated admin privileges for reports, user management, (3) Tier 1: Single service desk entry point across all orgs, (4) Tier 2/3: Per-org support teams for troubleshooting and escalation. Each org needs a dedicated environment manager for code/metadata movement.",
+    "follow_up": "Map current admin headcount and skills against the tiered model. Identify gaps.",
+    "tags": ["administration", "support", "staffing"]
+  },
+  {
+    "id": "osq-009",
+    "category": "org-strategy-workshop",
+    "question_number": 9,
+    "question": "Have you reached the limits of a single org?",
+    "purpose": "Evaluate whether Salesforce platform limits force multi-org.",
+    "guidance": "Distinguish three types of limits: (1) Soft limits — can be worked around (API calls, storage), (2) Hard limits — cannot be overcome by features, only by org splitting (custom object count, permission set max), (3) Purchasable limits — can be bought (storage, API calls). Key thresholds: <5,000 users per org, <10,000,000 records per entity, 3,000 custom objects, 800 fields per object, 1,500 permission sets, 6MB Apex code. Multiple profiles may resolve some limits. Org splitting gives a fresh set of limits.",
+    "follow_up": "Run a limits audit on the customer's current org. Compare current usage against thresholds.",
+    "tags": ["platform-limits", "capacity", "hard-limits"]
+  },
+  {
+    "id": "osq-010",
+    "category": "org-strategy-workshop",
+    "question_number": 10,
+    "question": "What is your integration strategy across multiple orgs?",
+    "purpose": "Evaluate integration architecture readiness for multi-org.",
+    "guidance": "Without an integration platform, multi-org creates a spider web of brittle point-to-point connections and data replication. Recommendations: (1) Enterprise Integration Platform (e.g., MuleSoft) for decoupling, (2) Unlocked packages for deploying functionality from hub org to spoke orgs, (3) MDM + Data Warehouse for consolidated data maintenance and visibility. Integration services should correlate to the Salesforce object model.",
+    "follow_up": "Assess whether the customer has or is willing to invest in an enterprise integration platform.",
+    "tags": ["integration", "middleware", "data-warehouse"]
+  },
+  {
+    "id": "osq-011",
+    "category": "org-strategy-workshop",
+    "question_number": 11,
+    "question": "Do you have Customer 360 or global case management requirements?",
+    "purpose": "Determine whether cross-org reporting needs favor single org.",
+    "guidance": "Enterprises with an integration platform + data warehouse can achieve Customer 360 regardless of org count — impact is low. Small-to-mid companies without those tools should favor fewer orgs for reporting simplicity.",
+    "follow_up": "Map reporting requirements to data sources. If all reports need cross-org data and no integration platform exists, single org is strongly preferred.",
+    "tags": ["reporting", "customer-360", "analytics"]
+  }
+]

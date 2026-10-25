@@ -1,0 +1,110 @@
+[
+  {
+    "id": "sq-cm-001",
+    "category": "consent-management",
+    "question": "Is WhatsApp consent supported natively?",
+    "answer": "No native way to capture WhatsApp-specific consent. GDPR and local privacy rules require channel-specific consent. Without WhatsApp support, organizations legally cannot use WhatsApp for HCP communication in EU markets. No OOTB resolution. Options include custom configuration or roadmap feature request.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["consent", "whatsapp", "gdpr", "channel-gap"]
+  },
+  {
+    "id": "sq-cm-002",
+    "category": "consent-management",
+    "question": "What happens to Subscription Consent records when consent status changes?",
+    "answer": "When consent changes from Opt-In to Opt-Out, the EXISTING Subscription Consent record is UPDATED in place (not a new record created). This is expected behavior by design. The audit trail is maintained through field history tracking, not through separate records.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["consent", "subscription", "record-behavior"]
+  },
+  {
+    "id": "sq-cm-003",
+    "category": "consent-management",
+    "question": "How do I enable the 'Not Asked' consent status?",
+    "answer": "Enable in Admin Console > Consent Administration > 'Allow users to select Not Asked as the consent status'. Despite enabling this setting, the 'Not Asked' option may not appear if the data schema or UI configuration is incomplete. Verify that the DbSchema and metadata cache include the necessary consent status values.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["consent", "not-asked", "admin-console", "configuration"]
+  },
+  {
+    "id": "sq-cm-004",
+    "category": "consent-management",
+    "question": "Does consent work for HCO (organization) accounts?",
+    "answer": "Consent is currently supported for HCP (individual practitioner) accounts only. HCO (healthcare organization) account consent is not supported OOTB. This is a significant limitation for implementations that need organization-level consent tracking.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["consent", "hco", "limitation"]
+  },
+  {
+    "id": "sq-cm-005",
+    "category": "consent-management",
+    "question": "Is consent supported in Intelligent Content (CLM detailing)?",
+    "answer": "No. Consent is NOT currently supported for Intelligent Content presentations. If consent checking is attempted from within an Intelligent Content session, it will error for both HCP and HCO accounts. This is a platform limitation that affects implementations requiring consent verification during detailing.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["consent", "intelligent-content", "clm", "limitation"]
+  },
+  {
+    "id": "sq-cm-006",
+    "category": "consent-management",
+    "question": "Can I require signatures only for specific consent transitions?",
+    "answer": "Conditional signature collection (e.g., require signature only for Opt-Out to Opt-In transitions, based on country) is NOT supported OOTB and is not currently on the roadmap. All consent transitions either require or do not require signatures, with no per-transition or per-country conditional logic.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["consent", "signature", "conditional", "gap"]
+  },
+  {
+    "id": "sq-cm-007",
+    "category": "consent-management",
+    "question": "Do new channels (SMS, WhatsApp) require code changes for consent?",
+    "answer": "Adding new channels for consent requires only channel addition configuration (no code changes needed). However, automation tests should be updated to cover the new channel's consent flow. The consent framework is designed to be channel-extensible through configuration.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["consent", "channels", "extensibility"]
+  },
+  {
+    "id": "sq-cm-008",
+    "category": "consent-management",
+    "question": "What is consent capture without contact point?",
+    "answer": "A capability allowing consent capture even when no email or phone contact point exists for the HCP. The 'Add Channel' functionality lets reps add a missing email or phone number directly from the Consent screen. This is a newer feature that may not be available in older releases.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["consent", "contact-point", "add-channel"]
+  },
+  {
+    "id": "sq-cm-009",
+    "category": "consent-management",
+    "question": "How does the opt-out confirmation setting work?",
+    "answer": "Admin Console > Consent Administration > 'Don't ask for confirmation when opting out of a subscription'. When disabled (default), a confirmation popup appears before opt-out is saved. When enabled, opt-out proceeds immediately without confirmation. Consider regulatory requirements before enabling, as some jurisdictions may require explicit confirmation of opt-out.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["consent", "opt-out", "confirmation", "admin-console"]
+  },
+  {
+    "id": "sq-cm-010",
+    "category": "consent-management",
+    "question": "What metadata is required for mobile consent?",
+    "answer": "DbSchema_EngagementChannelType must be created in the org for mobile consent features to function. Without it, the consent UI on mobile may be incomplete or non-functional. This is a prerequisite that is easy to miss during initial setup.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["consent", "mobile", "metadata", "prerequisite"]
+  },
+  {
+    "id": "sq-cm-011",
+    "category": "consent-management",
+    "question": "How does the consent data model differ from Veeva?",
+    "answer": "The target platform uses Individual + ContactPointConsent per channel per consent type, which is more granular than Veeva's consent model. Mapping: Opt-In maps to OptIn, Opt-Out maps to OptOut. Default consent status (opt-in vs opt-out) depends on country regulation: EU requires explicit opt-in (default is not consented), US varies by state.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["consent", "data-model", "migration", "veeva-difference"]
+  },
+  {
+    "id": "sq-cm-012",
+    "category": "consent-management",
+    "question": "How do verbal consent and document references work?",
+    "answer": "When consent is captured without a written signature (verbal consent), the question of linking consent to an authorization form for proof arises. The implementation design depends on whether the customer's regulatory environment requires verbal consent documentation and reference linking to a specific authorization form or document.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["consent", "verbal", "authorization", "compliance"]
+  }
+]

@@ -1,0 +1,94 @@
+[
+  {
+    "id": "ci-sfhc-001",
+    "category": "competitive-intelligence",
+    "title": "Salesforce Health Cloud — Platform and Industry Clouds",
+    "products": ["lsc"],
+    "summary": "Salesforce Health Cloud sits within a portfolio of 13 industry-specific clouds built on the Customer 360 platform. Industry Cloud Building Blocks include MuleSoft (integration), AppExchange (ecosystem), Genie/Data Cloud (real-time CDP), Slack (collaboration), and IoT Cloud. Salesforce industry clouds deliver approximately 30% higher average selling prices, 2% lower attrition, and 45% new logos compared to horizontal product sales. Healthcare adoption grew approximately 35% since 2018 according to Everest Group analysis, reaching approximately $700M in 2020.",
+    "capabilities": [
+      {
+        "capability": "Customer 360 Platform Foundation",
+        "detail": "All industry clouds share the Customer 360 platform — Sales Cloud, Service Cloud, Marketing Cloud, Commerce Cloud, MuleSoft, Tableau, and Slack. This means any CRM migration to a Salesforce-native solution inherits the full horizontal platform, not just the industry-specific layer"
+      },
+      {
+        "capability": "Industry Cloud Building Blocks",
+        "detail": "Pre-built data models, workflows, and UI components specific to healthcare and life sciences. These building blocks reduce implementation time compared to building industry-specific capabilities on the horizontal platform"
+      },
+      {
+        "capability": "MuleSoft Integration",
+        "detail": "Native integration platform with pre-built healthcare connectors for EHR/EMR systems, claims processors, pharmacy benefit managers, and regulatory reporting systems. Reduces integration development effort for CRM migrations that require connecting to existing healthcare IT infrastructure"
+      },
+      {
+        "capability": "AppExchange Ecosystem",
+        "detail": "Marketplace of third-party applications built for Salesforce, including life sciences-specific tools for sample management, compliance, medical affairs, and field force analytics. This ecosystem does not transfer to Vault CRM, giving Salesforce-native solutions an integration advantage"
+      }
+    ],
+    "market_metrics": {
+      "industry_cloud_count": 13,
+      "healthcare_adoption_growth": "Approximately 35% since 2018 (Everest Group estimate)",
+      "healthcare_market_size_2020": "Approximately $700M",
+      "asp_uplift": "Industry clouds command approximately 30% higher ASPs than horizontal products",
+      "attrition_reduction": "Industry cloud customers show approximately 2% lower attrition",
+      "new_logo_contribution": "Industry clouds contribute approximately 45% of new logo acquisitions"
+    },
+    "migration_relevance": "For organizations migrating from Veeva or IQVIA to a Salesforce-native life sciences CRM, Health Cloud provides the platform foundation. The industry cloud building blocks reduce the delta between the horizontal Salesforce platform and a purpose-built life sciences CRM. The AppExchange ecosystem provides extensibility that Vault CRM customers will lose post-migration.",
+    "source": "sfdc-marketing-healthcloud-components-oct2022",
+    "tags": ["health-cloud", "customer-360", "industry-cloud", "mulesoft", "appexchange", "market-sizing"]
+  },
+  {
+    "id": "ci-sfhc-002",
+    "category": "competitive-intelligence",
+    "title": "Health Cloud — Life Sciences and Pharma Capabilities",
+    "products": ["lsc"],
+    "summary": "Salesforce's life sciences and pharma capabilities are organized around two primary solution areas: Enhance Patient Services and Accelerate Clinical Trials. Health Cloud also provides vertical-specific modules for Payers, Public Sector, MedTech, and Providers. The analysis noted that a slide in the source presentation was originally from Jay Kapadia, confirming prior involvement in this competitive positioning work. The pharma solution set addresses the patient journey from clinical trials through commercialization.",
+    "capabilities": [
+      {
+        "capability": "Enhance Patient Services",
+        "detail": "Patient engagement and support program management — hub services, patient assistance programs, copay card management, and patient journey orchestration. Addresses the post-prescription patient experience that field CRM systems feed into"
+      },
+      {
+        "capability": "Accelerate Clinical Trials",
+        "detail": "Clinical trial site identification, investigator management, patient recruitment, and trial operations coordination. Connects the clinical development workflow to the commercial CRM data (e.g., using HCP engagement data to identify potential investigators)"
+      },
+      {
+        "capability": "MedTech Vertical",
+        "detail": "Device and equipment-specific workflows including field service, implant tracking, surgical scheduling, and device complaint management. MedTech is a growth area where Veeva faces domain expansion restrictions on its Vault platform"
+      },
+      {
+        "capability": "Customer 360 for Health",
+        "detail": "Unified patient/member/provider view combining data from clinical, commercial, payer, and engagement systems. Built on the Genie/Data Cloud real-time CDP for sub-second data unification"
+      }
+    ],
+    "migration_relevance": "Life sciences CRM migration rarely involves just the field force automation layer. Organizations also need patient services, clinical trial connections, and potentially MedTech capabilities. Salesforce Health Cloud's breadth across these verticals means a single platform can address multiple business units' needs, potentially simplifying the migration from a multi-product Veeva environment to a single Salesforce environment.",
+    "source": "sfdc-marketing-healthcloud-components-oct2022",
+    "tags": ["pharma", "patient-services", "clinical-trials", "medtech", "health-cloud"]
+  },
+  {
+    "id": "ci-sfhc-003",
+    "category": "competitive-intelligence",
+    "title": "Salesforce Genie and Data Cloud — Real-Time CRM",
+    "products": ["lsc"],
+    "summary": "Salesforce Genie (now branded as Data Cloud) provides a real-time customer data platform (CDP) that processes data at scale. At the time of analysis (October 2022), Salesforce cited processing approximately 175 billion predictions per day and 40 billion automated workflows per day. Genie functions as a high-speed data lake that unifies customer data across all Salesforce clouds and external sources in real time, powering personalization, analytics, and AI across the platform.",
+    "capabilities": [
+      {
+        "capability": "Real-Time Data Unification",
+        "detail": "Ingests and harmonizes data from CRM interactions, marketing touchpoints, service cases, and external sources into a unified customer profile. Updates propagate across all connected clouds in real time rather than through batch synchronization"
+      },
+      {
+        "capability": "Scale Metrics",
+        "detail": "Approximately 175 billion predictions per day and 40 billion automated workflow executions per day across the Salesforce platform. These numbers represent platform-wide capacity, not per-customer allocation"
+      },
+      {
+        "capability": "AI Foundation",
+        "detail": "Serves as the data foundation for Salesforce Einstein AI capabilities. Real-time data availability means AI models operate on current data rather than stale batch-loaded snapshots — this is a differentiation point against CRM platforms that rely on overnight batch processing for analytics"
+      },
+      {
+        "capability": "CDP++ Positioning",
+        "detail": "Positioned as more than a traditional CDP — combines data lake, real-time processing, and embedded AI in a way that eliminates the need for a separate CDP purchase for many use cases"
+      }
+    ],
+    "migration_relevance": "For organizations migrating CRM platforms, Genie/Data Cloud represents a capability that may not have an equivalent on the source platform. Veeva CRM customers moving to Salesforce-native solutions gain access to real-time data unification that their current CRM does not provide. This is a capability uplift, not just a platform swap — migration advisory should highlight the analytics and AI capabilities that become available post-migration.",
+    "source": "sfdc-marketing-healthcloud-components-oct2022",
+    "tags": ["genie", "data-cloud", "cdp", "real-time", "einstein", "predictions", "analytics"]
+  }
+]

@@ -1,0 +1,173 @@
+[
+  {
+    "id": "ct-001",
+    "category": "consent-management",
+    "topic": "Consent Management Architecture",
+    "description": "Consent Management records and manages healthcare providers communication preferences across different channels and subscriptions. The model includes CommunicationSubscription (what the HCP is subscribing to), CommunicationSubscriptionConsent (the consent record linking subscription to channel), and CommunicationSubscriptionChannelType (available channels). Consent must be captured per-channel per-subscription. Organizations can deliver personalized communications while supporting regulatory compliance (GDPR, HIPAA).",
+    "objects": [
+      "CommunicationSubscription",
+      "CommunicationSubscriptionConsent",
+      "CommunicationSubscriptionChannelType",
+      "ConsentType"
+    ],
+    "setup_steps": [
+      "Create Communication Subscriptions for each product/program requiring consent",
+      "Define Channel Types (Email, Phone, In-Person, SMS)",
+      "Link subscriptions to channel types before reps can capture consent",
+      "Configure consent capture workflows on visit and account pages",
+      "Set up consent validation in email send and visit workflows"
+    ],
+    "gotchas": [
+      "Subscription and channel must be connected BEFORE reps can capture consent for that channel",
+      "The platform has no native unsubscribe-all API - each subscription must be individually managed",
+      "Consent records are per-channel per-subscription - not a single global opt-out",
+      "GDPR requires explicit opt-in, not just absence of opt-out"
+    ],
+    "migration_relevance": "Veeva Multichannel Consent maps to CommunicationSubscriptionConsent. Channel types must be explicitly configured. The subscription-channel linking step is a common migration miss."
+  },
+  {
+    "id": "ct-002",
+    "category": "territory-management",
+    "topic": "Territory Management Architecture",
+    "description": "Territory Management structures sales and engagement territories by aligning HCPs and HCOs with appropriate territories and teams. The platform extends Enterprise Territory Management with industry-specific capabilities. Territory assignment can use geographic rules, affiliation alignment rules, or manual assignment. Territory is separate from security/sharing - it controls resource distribution and engagement scope, not data access.",
+    "objects": [
+      "Territory2",
+      "ObjectTerritory2Association",
+      "TerritoryProductAlignment"
+    ],
+    "setup_steps": [
+      "Enable Enterprise Territory Management",
+      "Create territory hierarchy (regions, districts, territories)",
+      "Configure territory assignment rules (geographic or affiliation-based)",
+      "Set up territory-product alignment",
+      "Configure territory-based account visibility",
+      "Run territory assignment batch jobs after configuration changes"
+    ],
+    "gotchas": [
+      "Territory alignment is separate from security/sharing - do not conflate them",
+      "Affiliation alignment rules support specialty-based filtering (e.g., oncology-only)",
+      "Territory changes require batch job execution to take effect",
+      "Account filter on visit planner depends on territory alignment"
+    ],
+    "migration_relevance": "Veeva Territory Management maps to Enterprise Territory Management with industry extensions. Territory2 replaces Territory_vod. Territory-product alignment replaces My Setup product associations."
+  },
+  {
+    "id": "ct-003",
+    "category": "territory-management",
+    "topic": "Territory Alignment for Affiliated Accounts",
+    "description": "Affiliation alignment rules automatically align affiliated accounts to territories based on HCP-HCO relationships. Admins can define rules that use criteria like Care Specialty to filter which affiliated HCPs are included. This enables oncology-specialty HCPs affiliated with a specific HCO to be automatically aligned while excluding other specialties at the same HCO. Geo assignment rules evaluate geographic/account-level criteria and do NOT model affiliated-account relationships.",
+    "objects": [
+      "Territory2",
+      "ProviderAffiliation",
+      "CareSpecialty"
+    ],
+    "setup_steps": [
+      "Configure affiliation alignment rules for territories",
+      "Select filter criteria (e.g., Care Specialty = Oncology)",
+      "Test alignment with sample affiliated account data",
+      "Run territory alignment batch job"
+    ],
+    "gotchas": [
+      "Geo assignment rules evaluate account-level criteria, NOT affiliation relationships",
+      "Sharing rules control record visibility, NOT territory alignment",
+      "Affiliation alignment rules are the ONLY way to filter by HCP-HCO relationship + specialty"
+    ],
+    "migration_relevance": "Veeva Territory Brick alignment maps partially. Affiliation-based alignment is more sophisticated than Veeva geography-only model."
+  },
+  {
+    "id": "ct-004",
+    "category": "territory-management",
+    "topic": "Territory Product Alignment and Distribution",
+    "description": "Product alignment determines which products and information are available to specific users. Access can be aligned with the target HCP/HCO to ensure reps only promote/discuss permitted products. Territory Product Quantity Allocations manage sample product distribution at the territory level for strategic distribution limits. The Allow Un-Aligned Selection setting controls whether non-aligned products can be associated with presentations in a territory.",
+    "objects": [
+      "TerritoryProductAlignment",
+      "TerritoryProductQuantityAllocation"
+    ],
+    "setup_steps": [
+      "Configure product-territory alignment rules",
+      "Set up Territory Product Quantity Allocations for sample limits",
+      "Configure Allow Un-Aligned Selection for content presentations",
+      "Define product hierarchies for alignment"
+    ],
+    "gotchas": [
+      "Territory Product Quantity Allocations are for STRATEGIC distribution limits, not per-visit limits",
+      "Product alignment affects both what reps can promote AND what content they see",
+      "Allow Un-Aligned Selection must be explicitly configured for content flexibility"
+    ],
+    "migration_relevance": "Veeva Product_vod territory alignment maps to TerritoryProductAlignment. My Setup product selection maps to alignment configuration."
+  },
+  {
+    "id": "ct-005",
+    "category": "samples-management",
+    "topic": "Sample Management Architecture",
+    "description": "Samples Management handles distribution of product samples to eligible HCPs. Field reps track sample inventory, record distributions, and maintain accurate records. Compliance is enforced through eligibility rules, distribution limits, and regulatory requirements. Product Disbursement records are created when samples are delivered. Inventory Count Assessment records support self-audits. Unresolved disbursements occur when reps deliver samples they received but have not yet acknowledged in the system.",
+    "objects": [
+      "ProductDisbursement",
+      "ProductItem",
+      "InventoryCountAssessment",
+      "SampleLimitTemplate",
+      "ProviderVisitSampleLimitTransaction"
+    ],
+    "setup_steps": [
+      "Configure sample products and lot management",
+      "Set up sample limit templates (standard and advanced)",
+      "Configure territory product quantity allocations",
+      "Enable sample eligibility validation",
+      "Set up electronic signature requirements for sample disbursement",
+      "Configure inventory count assessment for self-audits",
+      "Set up disbursement acknowledgment workflows"
+    ],
+    "gotchas": [
+      "Sample limit blocking visits when limits are not fully configured is the most common issue",
+      "Unresolved disbursements need a specific fix process - not a simple deletion",
+      "Perform audits of Inventory Count Assessment records requires specific user permission",
+      "Advanced Sample Limit Templates are required for custom/complex limit rules"
+    ],
+    "migration_relevance": "Veeva Sample_Transaction_vod maps to ProductDisbursement. Sample_Lot_vod maps to lot management. Sample_Limit_vod maps to SampleLimitTemplate. The limit calculation engine differs significantly."
+  },
+  {
+    "id": "ct-006",
+    "category": "samples-management",
+    "topic": "Dynamic Segmentation for Sample Limits",
+    "description": "Dynamic Segmentation automatically updates sample limit assignments when HCP attributes change. When an HCPs Engagement Tier changes, sample limits are automatically recalculated and reassigned. This eliminates manual limit updates when HCP segmentation criteria change. Segmentation rules can be based on any HCP field including custom fields.",
+    "objects": [
+      "DynamicSegmentation",
+      "SampleLimitTemplate"
+    ],
+    "setup_steps": [
+      "Define segmentation criteria based on HCP fields",
+      "Link segmentation rules to sample limit templates",
+      "Configure automatic limit recalculation triggers",
+      "Test with HCP attribute changes"
+    ],
+    "gotchas": [
+      "Dynamic Segmentation is the CORRECT approach for auto-updating limits on attribute change",
+      "Static limit assignment requires manual updates when HCP tier changes",
+      "Segmentation rules must be tested with representative data volume"
+    ],
+    "migration_relevance": "Veeva does not have a direct equivalent - sample limits were typically managed through batch processes or manual assignment."
+  },
+  {
+    "id": "ct-007",
+    "category": "samples-management",
+    "topic": "Advanced Sample Limit Templates",
+    "description": "Advanced Sample Limit Templates define custom, complex sample-limit rules beyond standard templates. They support multi-criteria limits, time-period-based limits, territory-level limits, and product-specific allocation rules. Standard templates handle simple per-HCP limits; advanced templates handle strategic distribution planning with complex business rules.",
+    "objects": [
+      "SampleLimitTemplate",
+      "TerritoryProductQuantityAllocation"
+    ],
+    "setup_steps": [
+      "Create advanced sample limit template with custom criteria",
+      "Define time period constraints",
+      "Configure territory-level allocation rules",
+      "Link to product-specific limits",
+      "Test with representative distribution scenarios"
+    ],
+    "gotchas": [
+      "Advanced templates are required for COMPLEX rules - standard templates handle simple cases",
+      "Time period configuration must match activity plan periods",
+      "Territory-level allocations interact with individual HCP limits"
+    ],
+    "migration_relevance": "Veeva Sample_Limit_vod with custom rules maps to Advanced Sample Limit Templates. The template model provides more configuration flexibility."
+  }
+]

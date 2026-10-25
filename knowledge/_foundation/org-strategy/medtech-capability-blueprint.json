@@ -1,0 +1,45 @@
+[
+  {
+    "id": "fnd-mt-001",
+    "category": "org-strategy",
+    "title": "MedTech Industry Capability Blueprint — L0/L1/L2 Hierarchy",
+    "products": ["LSC"],
+    "summary": "Comprehensive MedTech capability model organized as an 8-domain hierarchy (L0 domains, L1 sub-areas, L2 detailed capabilities) spanning from product development through patient support, with ISV partner indicators at each level.",
+    "findings": [
+      {
+        "area": "l0_domain_overview",
+        "detail": "The MedTech capability blueprint defines 8 L0 domains: Product Development, Clinical and Regulatory, Manufacturing and Supply Chain, Marketing, Sales, Operations, Provider Support, and Patient Support. Each domain maps to specific platform capabilities and ISV partner opportunities."
+      },
+      {
+        "area": "product_development_capabilities",
+        "detail": "L2 capabilities under Product Development include: concept screening and target product profiles, device engineering and design controls, pre-clinical research and biocompatibility testing, and software as a medical device (SaMD) lifecycle management."
+      },
+      {
+        "area": "clinical_and_regulatory_capabilities",
+        "detail": "Clinical and Regulatory L2 capabilities span: portfolio management, site selection/startup/monitoring, subject recruitment, virtual trial design, document management, and regulatory submissions (510(k), IDE). Each has distinct technology requirements for compliance and traceability."
+      },
+      {
+        "area": "manufacturing_and_supply_chain_capabilities",
+        "detail": "Manufacturing L2 capabilities include: demand forecasting, vendor and supplier management, lot control and traceability, CAPA/deviations/audit management, safety programs, signal detection, and product lifecycle management. These connect to quality management system requirements."
+      },
+      {
+        "area": "commercial_capabilities",
+        "detail": "Marketing L2 spans customer 360 data, campaign management, tools and materials, and marketing insights. Sales L2 covers field sales, field force management, order and contract management, and sales insights (including CPQ, CLM, rebate management, account-based forecasting, and B2B e-commerce)."
+      },
+      {
+        "area": "operations_capabilities",
+        "detail": "Operations L2 covers distribution management, asset management, installation and maintenance services, and field service operations. These are critical for medical device companies that must track instruments through their entire operational lifecycle."
+      },
+      {
+        "area": "provider_support_capabilities",
+        "detail": "Provider Support L2 includes: provider contact center operations, HCP engagement (medical affairs, KOL management, events, sunshine/transparency reporting), provider experience management, and provider insights analytics."
+      },
+      {
+        "area": "patient_support_capabilities",
+        "detail": "Patient Support L2 covers: consumer contact center, patient support programs (enrollment, benefits verification, co-pay assistance), patient experience management, and connected device management for remote monitoring and data collection."
+      }
+    ],
+    "source": "hls_industry_blueprint_medtech_capability_model",
+    "tags": ["medtech", "capability-model", "industry-blueprint", "l0-l1-l2", "isv-partners", "medical-devices"]
+  }
+]

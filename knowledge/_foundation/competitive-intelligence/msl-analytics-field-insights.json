@@ -1,0 +1,28 @@
+[
+  {
+    "id": "ci-msl-analytics-001",
+    "category": "competitive-intelligence",
+    "title": "Medical Science Liaison Analytics and Field Insights",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Assessment of MSL-specific analytics capabilities covering NLP-powered medical insight capture, KOL engagement measurement, and field medical intelligence requirements for life sciences platforms.",
+    "findings": {
+      "msl_role_requirements": "Medical Science Liaisons (MSLs) require specialized CRM capabilities distinct from commercial field teams: scientific exchange documentation, medical insight capture, KOL engagement tracking, publication planning support, and medical information request routing.",
+      "nlp_for_medical_insights": "NLP-powered insight extraction analyzes MSL interaction notes to identify: emerging scientific themes, unmet medical needs, competitive intelligence signals, and safety/efficacy feedback. This converts unstructured field notes into structured medical intelligence without requiring MSLs to categorize insights manually.",
+      "kol_engagement_metrics": "KOL engagement measurement tracks: interaction frequency and depth (scientific exchange quality scores), publication collaboration, advisory board participation, speaker program involvement, and investigator trial participation. Composite engagement scores help prioritize high-value relationships.",
+      "medical_intelligence_pipeline": "Medical insights flow from field capture (MSL notes, medical information requests) through NLP categorization to medical affairs review and strategic planning. The pipeline must maintain scientific rigor \u2014 insights need source attribution, confidence scoring, and medical review approval before informing strategy.",
+      "competitive_differentiation": "Platforms competing in this space differentiate on: depth of NLP medical vocabulary (therapeutic area-specific models), integration with publication databases (PubMed, clinical trial registries), and workflow support for medical affairs governance (insight review, medical strategy alignment).",
+      "crm_integration_requirements": "MSL analytics must integrate with the broader CRM platform: shared HCP profiles (commercial + medical views with appropriate access controls), coordinated engagement planning (commercial + medical call planning with compliance guardrails), and unified customer timeline."
+    },
+    "source": "Assessment of MSL analytics capabilities covering NLP insight capture, KOL engagement measurement, and medical affairs intelligence requirements",
+    "tags": [
+      "msl",
+      "medical-affairs",
+      "kol-engagement",
+      "nlp",
+      "medical-insights",
+      "field-medical"
+    ]
+  }
+]

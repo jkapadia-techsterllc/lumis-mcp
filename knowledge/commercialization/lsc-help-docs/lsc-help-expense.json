@@ -1,0 +1,53 @@
+[
+  {
+    "id": "lsc-help-expense-ind-lsc-expense-management-setup-for-concur-integration",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Expense Management for Concur Integration",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Before you integrate Salesforce with SAP Concur, verify that required data is available and that users have the necessary permissions. Ensure that expenses are accessible from a visit page and that the mobile app configuration is",
+    "findings": [
+      {
+        "name": "Set Up Expense Management for Concur Integration",
+        "detail": "Before you integrate Salesforce with SAP Concur, verify that required data is available and that users have the necessary permissions. Ensure that expenses are accessible from a visit page and that the mobile app configuration is complete."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Add Expense Tab to Visit Page Enable the Expense tab on visit records so that users can track and update their visit expenses without leaving the page. Create an Expense Type Create expense types to help your users classify their visit expenses. Permissions to Manage Expenses in the Mobile App Make sure your admins and users with the Field Sales Representative, Key Account Manager, and Field Medical profiles have the right object and field permissions to manage visit expenses from the Life Sciences Cloud mobile app. Mobile App Configuration for Expense Management Configure the object schema for supported Expense Management objects and generate a metadata cache to make sure your field users can manage visit expenses on the Life Sciences Cloud mobile app."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_expense_management_setup_for_concur_integration.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "expense"
+    ]
+  },
+  {
+    "id": "lsc-help-expense-ind-lsc-expense-management-mobile-app-configuration",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Mobile App Configuration for Expense Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure the object schema for supported Expense Management objects and generate a metadata cache to make sure your field users can manage visit expenses on the Life Sciences Cloud mobile",
+    "findings": [
+      {
+        "name": "Mobile App Configuration for Expense Management",
+        "detail": "Configure the object schema for supported Expense Management objects and generate a metadata cache to make sure your field users can manage visit expenses on the Life Sciences Cloud mobile app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. To enable offline access for the objects that support Visit Expense Management in the Life Sciences Cloud mobile app, create these object metadata cache configurations. object | type Expense | Data ExpenseType | Data ExpenseParticipant | Data ExpenseReport | Data ExpenseReportEntry | Data Note After you create these configurations, generate a metadata cache . This step is important because it makes sure that the mobile app accesses the latest metadata definitions, including any schema changes for supported objects."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_expense_management_mobile_app_configuration.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "expense",
+      "mobile"
+    ]
+  }
+]

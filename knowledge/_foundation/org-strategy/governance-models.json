@@ -1,0 +1,102 @@
+{
+  "id": "org-gov-001",
+  "name": "Org Strategy Governance Models",
+  "description": "Governance structures recommended for single-org and multi-org Salesforce deployments in pharma/life sciences. Covers CoE, review boards, tiered administration, and chargeback models.",
+  "version": "1.0",
+  "source": "Org Strategy And Design — Salesforce Life Sciences",
+
+  "governance_stack": {
+    "description": "Layered governance model. All layers are needed for single-org with multiple LOBs. Multi-org requires per-org instances of layers 2-4 plus a global CoE.",
+    "layers": [
+      {
+        "layer": 1,
+        "name": "Global Center of Excellence (CoE)",
+        "scope": "Enterprise-wide across all Salesforce instances",
+        "responsibilities": [
+          "Manage business architecture and common standards across all orgs",
+          "Design and maintain a Reference Architecture defining when additional orgs are justified",
+          "Coordinate and create awareness of the entire Salesforce community in the company",
+          "Organize workshops with enterprise data architects to prevent data duplication across orgs",
+          "Serve as the governance committee in single-org environments"
+        ]
+      },
+      {
+        "layer": 2,
+        "name": "Per-Org Governance Committee",
+        "scope": "Single org or org cluster",
+        "responsibilities": [
+          "Manage product direction and set priorities within the org",
+          "Define specific roles and responsibilities within the org",
+          "Create and maintain a RACI matrix for all types of changes",
+          "Balance competing LOB demands for shared resources"
+        ]
+      },
+      {
+        "layer": 3,
+        "name": "Architectural Review Board",
+        "scope": "Per org",
+        "responsibilities": [
+          "Actively design, review, and approve all technical changes",
+          "Review all configuration changes, data model changes, and custom code",
+          "Enforce naming standards and separation of concerns",
+          "Ensure technical architect reviews all aspects of the org"
+        ]
+      },
+      {
+        "layer": 4,
+        "name": "Tiered Administration",
+        "scope": "Per org, with enterprise coordination",
+        "tiers": [
+          {
+            "tier": 0,
+            "name": "LOB Business SME",
+            "description": "Delegated admin privileges for operational tasks",
+            "capabilities": ["Run and create reports", "Add/deactivate users", "Manage list views", "Basic page layout changes"],
+            "note": "Business SMEs work directly in production for non-technical changes"
+          },
+          {
+            "tier": 1,
+            "name": "Single Service Desk",
+            "description": "Centralized entry point across all orgs",
+            "capabilities": ["Triage and route all Salesforce support requests", "First-line troubleshooting", "User provisioning and deprovisioning"],
+            "note": "One service desk for all orgs ensures consistent SLA"
+          },
+          {
+            "tier": 2,
+            "name": "Per-Org Support Team",
+            "description": "Dedicated troubleshooting and escalation per org",
+            "capabilities": ["Complex configuration changes", "Debug data issues", "Integration troubleshooting", "Release management"]
+          },
+          {
+            "tier": 3,
+            "name": "Platform Engineering / Architects",
+            "description": "Deep technical expertise for cross-cutting concerns",
+            "capabilities": ["Custom code development", "Performance optimization", "Security configuration", "Platform limit management"]
+          }
+        ]
+      }
+    ]
+  },
+
+  "chargeback_model": {
+    "description": "Funding model for multi-LOB Salesforce deployments.",
+    "principle": "Charge back support costs to business units by establishing a license tax.",
+    "guidelines": [
+      "Larger LOBs may fund and support their own org",
+      "Smaller LOBs pool resources around the centralized CoE",
+      "Each LOB funds their own development resources proportional to usage",
+      "Shared infrastructure costs (integration platform, data warehouse) are centrally funded"
+    ]
+  },
+
+  "profile_first_principle": {
+    "description": "The single most important org strategy recommendation: always evaluate whether splitting profiles resolves the issue before splitting orgs.",
+    "rationale": "Profiles provide LOB-level autonomy within a shared org at a fraction of the cost and complexity of org splitting. Profile splitting preserves: shared data model, shared integrations, shared reporting, shared governance — while giving each LOB its own: page layouts, field-level security, record type access, app visibility, and tab access.",
+    "when_profile_split_is_insufficient": [
+      "Hard platform limits are exceeded (custom objects, permission sets, Apex code size)",
+      "Data residency laws require physical data isolation",
+      "Regulatory requirements prevent any data sharing between BUs",
+      "Maintenance window conflicts cannot be resolved by profile-based deployment"
+    ]
+  }
+}

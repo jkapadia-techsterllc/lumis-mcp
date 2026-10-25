@@ -1,0 +1,109 @@
+schema_version: "1.0"
+category_name: "Territory Alignment Configuration"
+description: |
+  Validation rules for CRM Territory Alignment configuration.
+  Covers territory models, territories, explicit assignments,
+  geo-based alignment rules, affiliation rules, territory info
+  records, and mobile cache requirements.
+
+rules:
+  - id: territory-001
+    name: Active territory model exists
+    description: |
+      Verifies that an active territory model exists. The territory model
+      is the container for the territory hierarchy. Enterprise Territory
+      Management requires an active model before territories can be created.
+      Without an active model, territory assignments and alignment will not function.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM Territory2Model
+        WHERE State = 'Active'
+      expect: "count > 0"
+    symptoms:
+      - "Territory Management not available"
+      - "Cannot create territories"
+      - "Territory model is inactive"
+    resolution:
+      steps:
+        - "Navigate to Setup > Territory Models"
+        - "Create or activate a territory model"
+        - "Build hierarchy (National > Region > District > Territory)"
+        - "Assign users to territories"
+
+  - id: territory-002
+    name: Territory records exist
+    description: |
+      Verifies that territory records exist in the active model.
+      Territory records represent individual territories in the hierarchy.
+      Without territories, account alignment and user assignments
+      cannot be configured.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM Territory2
+        WHERE Territory2Model.State = 'Active'
+      expect: "count > 0"
+    symptoms:
+      - "No territories available"
+      - "Cannot assign users to territories"
+    resolution:
+      steps:
+        - "Create territories within the active territory model"
+        - "Build hierarchical structure as needed"
+        - "Maximum 1000 territories per model"
+
+  - id: territory-003
+    name: Account-territory associations exist
+    description: |
+      Verifies that ObjectTerritory2Association records exist, linking
+      accounts to territories. These are the explicit assignments that
+      determine which accounts a rep can see on mobile.
+    category: configuration
+    severity: warning
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ObjectTerritory2Association
+      expect: "count > 0"
+    symptoms:
+      - "Accounts not showing for rep on mobile"
+      - "Rep sees no accounts after territory assignment"
+    resolution:
+      steps:
+        - "Run alignment batch jobs from Territory Management Jobs tab"
+        - "Or create explicit assignments via Data Loader"
+        - "Verify ProviderAcctTerritoryInfo records are created"
+        - "Schedule alignment jobs to run daily"
+
+  - id: territory-004
+    name: ProviderAcctTerritoryInfo records exist
+    description: |
+      Verifies that ProviderAcctTerritoryInfo records exist.
+      These junction records link accounts to territories and are
+      essential for mobile app data visibility. Created by alignment
+      batch jobs.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ProviderAcctTerritoryInfo
+      expect: "count > 0"
+    symptoms:
+      - "Accounts not visible on mobile"
+      - "Territory alignment not reflected on mobile"
+      - "Rep cannot see assigned accounts"
+    resolution:
+      steps:
+        - "Run all three alignment jobs (Account, Zip, Brick)"
+        - "Schedule jobs to run daily during off-hours"
+        - "Regenerate metadata cache after alignment"

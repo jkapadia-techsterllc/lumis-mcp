@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" fill="none">
+  <defs>
+    <linearGradient id="bannerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071E35"/>
+      <stop offset="40%" stop-color="#0A2F51"/>
+      <stop offset="100%" stop-color="#14694B"/>
+    </linearGradient>
+    <linearGradient id="s1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#29B6F6"/>
+    </linearGradient>
+    <linearGradient id="s2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66BB6A"/>
+      <stop offset="100%" stop-color="#43A047"/>
+    </linearGradient>
+    <filter id="textGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" rx="16" fill="url(#bannerBg)"/>
+
+  <!-- Subtle grid -->
+  <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+  </pattern>
+  <rect width="1200" height="400" fill="url(#grid)"/>
+
+  <!-- Ambient glow -->
+  <circle cx="200" cy="200" r="250" fill="#4FC3F7" opacity="0.03"/>
+  <circle cx="900" cy="200" r="200" fill="#66BB6A" opacity="0.03"/>
+
+  <!-- DNA helix (left decorative) -->
+  <g transform="translate(100, 30)">
+    <!-- Strand 1 -->
+    <path d="M -5 0 C 25 25, 55 25, 50 55 C 45 85, 5 85, 10 115 C 15 145, 55 145, 50 175 C 45 205, 5 205, 10 235 C 15 265, 55 265, 50 295 C 45 325, 15 330, 10 340"
+          stroke="url(#s1)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.7"/>
+    <!-- Strand 2 -->
+    <path d="M 55 0 C 25 25, -5 25, 0 55 C 5 85, 45 85, 40 115 C 35 145, -5 145, 0 175 C 5 205, 45 205, 40 235 C 35 265, -5 265, 0 295 C 5 325, 35 330, 40 340"
+          stroke="url(#s2)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.7"/>
+    <!-- Rungs -->
+    <line x1="10" y1="25" x2="40" y2="25" stroke="#ffffff" stroke-width="1.8" opacity="0.25"/>
+    <line x1="5" y1="85" x2="45" y2="85" stroke="#ffffff" stroke-width="1.8" opacity="0.25"/>
+    <line x1="10" y1="145" x2="40" y2="145" stroke="#ffffff" stroke-width="1.8" opacity="0.25"/>
+    <line x1="5" y1="205" x2="45" y2="205" stroke="#ffffff" stroke-width="1.8" opacity="0.25"/>
+    <line x1="10" y1="265" x2="40" y2="265" stroke="#ffffff" stroke-width="1.8" opacity="0.25"/>
+    <!-- Nodes -->
+    <circle cx="8" cy="25" r="3.5" fill="#4FC3F7" opacity="0.9"/>
+    <circle cx="42" cy="25" r="3.5" fill="#66BB6A" opacity="0.9"/>
+    <circle cx="5" cy="85" r="3.5" fill="#66BB6A" opacity="0.9"/>
+    <circle cx="45" cy="85" r="3.5" fill="#4FC3F7" opacity="0.9"/>
+    <circle cx="8" cy="145" r="3.5" fill="#4FC3F7" opacity="0.9"/>
+    <circle cx="42" cy="145" r="3.5" fill="#66BB6A" opacity="0.9"/>
+    <circle cx="5" cy="205" r="3.5" fill="#66BB6A" opacity="0.9"/>
+    <circle cx="45" cy="205" r="3.5" fill="#4FC3F7" opacity="0.9"/>
+    <circle cx="8" cy="265" r="3.5" fill="#4FC3F7" opacity="0.9"/>
+    <circle cx="42" cy="265" r="3.5" fill="#66BB6A" opacity="0.9"/>
+  </g>
+
+  <!-- Circuit traces (right decorative) -->
+  <g opacity="0.35">
+    <path d="M 990 70 L 1040 70 L 1040 110 L 1090 110 L 1090 150" stroke="#4FC3F7" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 1010 90 L 1060 90 L 1060 140 L 1110 140" stroke="#66BB6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 970 250 L 1030 250 L 1030 290 L 1080 290 L 1080 330" stroke="#66BB6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 990 270 L 1050 270 L 1050 310 L 1100 310" stroke="#4FC3F7" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="1090" cy="150" r="4" fill="#4FC3F7"/>
+    <circle cx="1110" cy="140" r="4" fill="#66BB6A"/>
+    <circle cx="1080" cy="330" r="4" fill="#66BB6A"/>
+    <circle cx="1100" cy="310" r="4" fill="#4FC3F7"/>
+    <!-- Additional traces -->
+    <path d="M 1020 180 L 1070 180 L 1070 210 L 1130 210" stroke="#4FC3F7" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <circle cx="1130" cy="210" r="3" fill="#4FC3F7"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="320" y="160" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="80" font-weight="700"
+        fill="#ffffff" letter-spacing="3">Lumis</text>
+
+  <!-- Subtitle -->
+  <text x="320" y="215" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="400"
+        fill="#ffffff" opacity="0.75" letter-spacing="1">Life Sciences CRM Migration Intelligence</text>
+
+  <!-- Description -->
+  <text x="320" y="260" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="15" font-weight="400"
+        fill="#ffffff" opacity="0.45">950+ curated knowledge entries for module mapping, compliance, validation, and go-live readiness</text>
+
+  <!-- Badges -->
+  <g transform="translate(320, 290)">
+    <!-- 13 Tools -->
+    <rect x="0" y="0" width="95" height="34" rx="17" fill="#4FC3F7" opacity="0.15"/>
+    <rect x="0" y="0" width="95" height="34" rx="17" fill="none" stroke="#4FC3F7" stroke-width="1" opacity="0.3"/>
+    <text x="47" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600"
+          fill="#4FC3F7" text-anchor="middle">13 Tools</text>
+
+    <!-- Free Tier -->
+    <rect x="115" y="0" width="120" height="34" rx="17" fill="#66BB6A" opacity="0.15"/>
+    <rect x="115" y="0" width="120" height="34" rx="17" fill="none" stroke="#66BB6A" stroke-width="1" opacity="0.3"/>
+    <text x="175" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600"
+          fill="#66BB6A" text-anchor="middle">Free Tier</text>
+
+    <!-- MCP Server -->
+    <rect x="255" y="0" width="115" height="34" rx="17" fill="#ffffff" opacity="0.08"/>
+    <rect x="255" y="0" width="115" height="34" rx="17" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+    <text x="312" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600"
+          fill="#ffffff" opacity="0.6" text-anchor="middle">MCP Server</text>
+
+    <!-- pip install -->
+    <rect x="390" y="0" width="165" height="34" rx="17" fill="#ffffff" opacity="0.05"/>
+    <rect x="390" y="0" width="165" height="34" rx="17" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.1"/>
+    <text x="472" y="22" font-family="monospace, 'SF Mono', Menlo" font-size="13" font-weight="400"
+          fill="#ffffff" opacity="0.45" text-anchor="middle">pip install lumis-mcp</text>
+  </g>
+
+  <!-- Copyright line -->
+  <text x="320" y="370" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="400"
+        fill="#ffffff" opacity="0.2">Copyright 2024-2026 Lumis AI. All rights reserved. Proprietary license.</text>
+</svg>

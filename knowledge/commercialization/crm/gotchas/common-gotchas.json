@@ -1,0 +1,82 @@
+[
+  {
+    "id": "gotcha-001",
+    "title": "Sample Transaction History: Call vs Visit Mapping",
+    "module": "Sample Management",
+    "severity": "High",
+    "description": "Source platform links sample transactions to Calls (Call2_vod__c). Target platform links them to Visits. During data migration, unmapped Call→Visit relationships cause orphaned sample transactions that don't appear in rep history.",
+    "symptom": "After migration, reps report missing sample history or sample counts that don't match source system.",
+    "resolution": "Create a Call-to-Visit mapping table BEFORE migrating sample transactions. Map every Call2_vod__c to a corresponding Visit record. For Calls with no Visit equivalent (e.g., phone-only interactions with samples shipped), create placeholder Visit records marked as 'Migrated — No Physical Visit'.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Sample Management"}
+  },
+  {
+    "id": "gotcha-002",
+    "title": "Metadata Cache Timing on Mobile",
+    "module": "Mobile",
+    "severity": "High",
+    "description": "Target platform mobile apps cache metadata locally. After configuration changes (new fields, layout changes, picklist updates), the metadata cache must be refreshed. Cache refresh happens on login or manual sync, NOT automatically.",
+    "symptom": "Configuration changes are visible in web but not on mobile devices. Reps see old layouts, missing fields, or stale picklist values.",
+    "resolution": "After any metadata change: (1) Publish the metadata cache from Setup, (2) Instruct users to force-sync or re-login, (3) For large deployments, schedule metadata changes during off-hours and communicate sync requirements to field force.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Mobile"}
+  },
+  {
+    "id": "gotcha-003",
+    "title": "Territory Alignment Model Differences",
+    "module": "Territory Alignment",
+    "severity": "Medium",
+    "description": "Source platform uses a flat territory-to-account assignment model. Target platform supports hierarchical territory models with cascading rules. Direct 1:1 migration of territory assignments works, but misses the opportunity to leverage hierarchy — and may break if target org already has territory rules configured.",
+    "symptom": "After migration, territory assignments appear correct but territory-based sharing rules don't propagate as expected.",
+    "resolution": "Map source territory model to target hierarchy BEFORE migrating assignments. Decide: (A) flat migration (quick, preserves source behavior) or (B) hierarchical migration (more work, leverages target platform capabilities). Document the decision — it affects Activity Plan, Lists, and Visit Planning.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Territory"}
+  },
+  {
+    "id": "gotcha-004",
+    "title": "Consent Records: Opt-In vs Opt-Out Default",
+    "module": "Consent Management",
+    "severity": "Critical",
+    "description": "Source platform defaults to opted-IN (reps can contact unless explicitly opted out). Target platform defaults vary by configuration but can default to opted-OUT in GDPR-compliant configurations. Migrating without addressing this can either block all communications (if target defaults to opt-out) or violate consent (if source opt-outs aren't migrated).",
+    "symptom": "After migration, reps cannot send emails/content to any HCP (all appear opted-out), or worse, reps can contact HCPs who previously opted out.",
+    "resolution": "BEFORE migration: (1) Export ALL consent records from source, including explicit opt-ins AND opt-outs, (2) Map source consent categories to target consent types, (3) Set target platform default to match source behavior for initial migration, (4) Validate consent counts match between systems before go-live. This is a compliance-critical step — document the mapping and get legal sign-off.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Consent Management"}
+  },
+  {
+    "id": "gotcha-005",
+    "title": "Email Template Token Syntax",
+    "module": "Field Email",
+    "severity": "Medium",
+    "description": "Source platform uses Handlebars-style tokens in email templates ({{Account.Name}}, {{User.FirstName}}). Target platform uses merge field syntax ({!Account.Name}, {!User.FirstName}). Bulk template migration requires token conversion, and some source tokens have no direct target equivalent.",
+    "symptom": "Migrated email templates display raw token text (e.g., '{{Account.Name}}' literally) instead of resolved values.",
+    "resolution": "Build a token mapping table covering all tokens used in production templates. Run a regex-based converter for standard tokens. Manually review templates with: (1) conditional tokens, (2) loop/repeat tokens, (3) custom object tokens that may have different API names on target. Budget 1-2 days per complex template.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Field Email"}
+  },
+  {
+    "id": "gotcha-006",
+    "title": "Sample Limit Calculation: Batch Framework Differences",
+    "module": "Sample Management",
+    "severity": "High",
+    "description": "Source platform calculates sample limits at the product level with simple annual/quarterly caps. Target platform uses a hierarchical batch calculation framework (Brand → Molecule → SKU) that runs as a scheduled batch job. Limits configured at the wrong hierarchy level either over-restrict or under-restrict sample distribution.",
+    "symptom": "Reps cannot drop samples despite being under their annual limit, OR reps exceed intended limits because caps are set at the wrong hierarchy level.",
+    "resolution": "Map source limit structure to target hierarchy: (1) Product-level limits → SKU level in target, (2) Therapeutic area limits → Brand level in target, (3) Verify batch job schedule matches business cadence (daily/weekly), (4) Test limit calculations with real data volumes before go-live.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Sample Management"}
+  },
+  {
+    "id": "gotcha-007",
+    "title": "CLM Content: Proprietary JavaScript API Removal",
+    "module": "Content Management",
+    "severity": "Medium",
+    "description": "Source platform CLM presentations use a proprietary JavaScript API for slide navigation, data capture, and analytics tracking (e.g., com.veeva.clm.getDataForCurrentObject). Target platform content uses standard web components. Any CLM content relying on these APIs will not function after migration.",
+    "symptom": "Migrated presentations display content but interactive elements (buttons, forms, navigation) don't work. Analytics events don't fire.",
+    "resolution": "Audit all CLM presentations for proprietary API calls. Three approaches: (A) Re-author in target format (recommended for active presentations), (B) Wrap with compatibility shim (quick fix, fragile), (C) Convert to static PDF (for rarely-used content). Budget 2-4 weeks per 50 presentations for option A.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Content Management"}
+  },
+  {
+    "id": "gotcha-008",
+    "title": "Activity Plan: Different Goal Hierarchy",
+    "module": "Activity Plan",
+    "severity": "Medium",
+    "description": "Source platform activity plans use a flat call-goal model (X calls per account per cycle). Target platform supports a richer hierarchy: Activity Plan → Activity Category → Activity Criteria, with separate plan types (Visit, Email, Content, etc.). Migrating flat goals into the hierarchical model requires design decisions.",
+    "symptom": "After migration, activity plan goals don't appear in mobile app, or appear with zero targets.",
+    "resolution": "Design the target Activity Plan structure BEFORE migration: (1) Map source call goals to Visit-type Activity Plans, (2) Create Activity Categories for each product/therapeutic area, (3) Set Criteria to match source cycle definitions (monthly/quarterly), (4) Validate mobile rendering — Activity Plans must be published to appear on device.",
+    "citation": {"source": "Lumis Knowledge Base", "section": "Gotchas / Activity Plan"}
+  }
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "id": "da-001",
+    "category": "data-architecture",
+    "topic": "External ID Strategy",
+    "description": "External IDs are the foundational requirement for data migration and integration. Every object that participates in data loads must have an External ID field configured. External IDs serve three purposes: (1) upsert operations use them to match existing records, (2) relationship fields use them to establish parent-child links without knowing internal IDs, (3) integration patterns use them as the canonical cross-system identifier. Best practice: use a composite key pattern (SourceSystem_EntityType_SourceID) for global uniqueness.",
+    "objects": [],
+    "setup_steps": [
+      "Create External ID fields on ALL objects involved in data migration",
+      "Use indexed External ID fields for upsert performance",
+      "Establish naming convention: SourceSystem_EntityType_SourceID",
+      "Configure External ID uniqueness constraints (unique vs non-unique)",
+      "Map source system IDs to External ID fields in ETL"
+    ],
+    "gotchas": [
+      "External ID fields MUST be indexed for acceptable upsert performance at scale",
+      "Maximum 25 External ID fields per object (platform limit)",
+      "Non-unique External IDs will match the FIRST record found - can cause data corruption",
+      "Relationship fields referencing External IDs require the field to be on the parent object",
+      "Bulk API upserts with External IDs have different error handling than SOAP API"
+    ],
+    "migration_relevance": "Critical for any Veeva migration. Veeva External_ID_vod__c maps to custom External ID fields. Migration ETL MUST preserve external IDs for ongoing integration."
+  },
+  {
+    "id": "da-002",
+    "category": "data-architecture",
+    "topic": "Data Ownership Matrix",
+    "description": "A Data Ownership Matrix defines which system is the master for each data domain. In life sciences deployments, typical ownership: MDM/ERP owns HCP/HCO master data, CRM owns interaction/activity data, compliance systems own consent data, marketing automation owns campaign data. The matrix must be defined BEFORE integration design. Conflicts arise when two systems claim ownership of the same field - resolve during design, not during go-live.",
+    "objects": [],
+    "setup_steps": [
+      "Identify all data domains (HCP, HCO, Product, Territory, Activity, Consent, Sample)",
+      "Map each domain to its system of record",
+      "Define field-level ownership where domain-level is insufficient",
+      "Document conflict resolution rules for each domain",
+      "Establish data stewardship roles"
+    ],
+    "gotchas": [
+      "Account/Contact master data is almost NEVER owned by CRM in life sciences - it comes from MDM or data vendors",
+      "Territory assignments typically flow FROM upstream systems, not from CRM",
+      "Sample inventory data has dual ownership: limits from compliance, transactions from CRM",
+      "Consent data ownership varies by jurisdiction - GDPR vs US requirements differ"
+    ],
+    "migration_relevance": "Veeva implementations often have unclear ownership boundaries. Migration is the opportunity to establish clean ownership. Document before migrating."
+  },
+  {
+    "id": "da-003",
+    "category": "data-architecture",
+    "topic": "Integration Pattern Selection",
+    "description": "Four integration patterns for the platform: (1) Synchronous (REST/SOAP API) - for real-time single-record operations, (2) Asynchronous (Platform Events, Change Data Capture) - for event-driven near-real-time flows, (3) Batch (Bulk API, Data Loader) - for high-volume periodic loads, (4) UI-level (Canvas, iFrame, OmniScript) - for user-facing integration. Pattern selection depends on: volume (records/hour), latency requirement, data freshness requirement, and error handling complexity.",
+    "objects": [],
+    "setup_steps": [
+      "Classify each integration by volume, latency, and freshness requirements",
+      "Select appropriate pattern based on classification",
+      "Design error handling specific to the chosen pattern",
+      "Configure API limits and governor limit monitoring",
+      "Set up integration user accounts with appropriate permissions"
+    ],
+    "gotchas": [
+      "API call limits are per-org, not per-integration - multiple integrations share the same pool",
+      "Bulk API has a 15-minute processing window limit per batch",
+      "Platform Events have a 72-hour retention window - consumers must process within that window",
+      "Change Data Capture has a 3-day retention and does NOT capture all field changes (formula, rollup excluded)",
+      "Synchronous callouts from triggers have a 120-second timeout combined limit per transaction"
+    ],
+    "migration_relevance": "Veeva integration patterns may need redesign. Veeva custom middleware should be evaluated against native platform integration capabilities."
+  },
+  {
+    "id": "da-004",
+    "category": "data-architecture",
+    "topic": "Common Data Architecture Anti-Patterns",
+    "description": "Seven anti-patterns from real implementations: (1) Flat structure - cramming all data into Account/Contact instead of using industry objects, (2) Over-customization - building custom objects that duplicate standard industry objects, (3) Picklist abuse - using picklists instead of junction objects for many-to-many relationships, (4) Missing External IDs - relying on Name matching instead of External IDs for upserts, (5) Trigger cascades - complex trigger chains that exceed governor limits, (6) Monolithic integration - one massive integration job instead of domain-specific integrations, (7) Ignoring sharing model - designing data access after the fact instead of during architecture.",
+    "objects": [],
+    "setup_steps": [
+      "Review current data model against industry standard objects",
+      "Identify custom objects that duplicate standard functionality",
+      "Audit relationships for picklist abuse",
+      "Verify External ID coverage on all integration-participating objects",
+      "Map trigger execution order and identify cascade risks",
+      "Design sharing model during architecture phase, not after"
+    ],
+    "gotchas": [
+      "Flat structure is the #1 migration anti-pattern - resist pressure to replicate legacy flat models",
+      "Over-customization creates long-term upgrade friction with platform releases",
+      "Trigger cascade failures are extremely hard to debug in production",
+      "Sharing model changes on large data volumes can take hours to recalculate",
+      "Monolithic integration jobs that fail require full restart - domain-specific jobs can be retried independently"
+    ],
+    "migration_relevance": "Most Veeva implementations have at least 2-3 of these anti-patterns. Migration is the opportunity to fix them - not replicate them."
+  },
+  {
+    "id": "da-005",
+    "category": "data-architecture",
+    "topic": "Data Handling Strategies",
+    "description": "Four strategies for handling data during migration: (1) Migrate-and-transform - move data with schema transformation to fit target model, (2) Migrate-as-is - direct field-to-field mapping for compatible schemas, (3) Archive-and-reference - move historical data to archive with reference links, (4) Rebuild - regenerate data from source systems rather than migrating from CRM. Strategy selection depends on data quality, volume, business value, and regulatory retention requirements.",
+    "objects": [],
+    "setup_steps": [
+      "Classify each data domain by migration strategy",
+      "Define data quality thresholds for each strategy",
+      "Configure archive storage for historical data",
+      "Set up data validation rules for migrated data",
+      "Plan rollback strategy for each migration phase"
+    ],
+    "gotchas": [
+      "Regulated data (samples, signatures, adverse events) may require migrate-and-transform for compliance",
+      "Archive-and-reference requires the archive to remain accessible for regulatory audits",
+      "Rebuild strategy is often underused - many data domains are better regenerated from source than migrated from CRM",
+      "Data quality issues in the source system will be amplified during transformation, not hidden"
+    ],
+    "migration_relevance": "Strategy selection is one of the highest-impact decisions in migration planning. Wrong strategy selection causes more migration failures than technical issues."
+  },
+  {
+    "id": "da-006",
+    "category": "data-architecture",
+    "topic": "Scaling Considerations",
+    "description": "Platform scaling dimensions: (1) Data volume - large objects (10M+ records) need archiving strategy, (2) API volume - concurrent API calls have org-level limits, (3) User volume - sharing recalculation time grows with user count, (4) Integration volume - multiple concurrent integrations compete for API limits, (5) Storage - file storage and data storage are separately metered. Key thresholds: 200K+ records in a single object impacts query performance; 50M+ total records requires data archiving strategy; 10K+ users impacts sharing recalculation.",
+    "objects": [],
+    "setup_steps": [
+      "Profile current data volumes and growth projections",
+      "Identify objects approaching 200K record threshold",
+      "Configure data archiving for historical records",
+      "Set up API usage monitoring and alerting",
+      "Plan sharing model for projected user count"
+    ],
+    "gotchas": [
+      "Query performance degrades noticeably at 200K+ records without proper indexing",
+      "Sharing recalculation for 10K+ users can take hours - plan maintenance windows",
+      "File storage (attachments, documents) is often the first limit hit in life sciences (due to signatures, CLM content, documents)",
+      "Big objects and external objects can extend capacity but have limited query capabilities"
+    ],
+    "migration_relevance": "Veeva data volumes should be profiled before migration. Plan archiving strategy for historical data to avoid hitting platform limits on Day 1."
+  },
+  {
+    "id": "da-007",
+    "category": "data-architecture",
+    "topic": "Security Architecture",
+    "description": "Three-layer security model: (1) Object-level security via profiles and permission sets - controls CRUD access per object, (2) Field-level security - controls visibility and editability per field per profile, (3) Record-level security via sharing rules, role hierarchy, and territory-based sharing. The platform supports User Mode for SOQL queries (enforces FLS and CRUD) and System Mode (bypasses security for internal operations). Industry-specific sharing: territory-based sharing aligns with sales territory alignment for record visibility.",
+    "objects": [],
+    "setup_steps": [
+      "Design role hierarchy aligned to organizational structure",
+      "Configure permission sets for each persona (sales, medical, compliance)",
+      "Set up territory-based sharing rules",
+      "Configure field-level security for sensitive fields (signatures, consent, samples)",
+      "Enable User Mode SOQL in all user-facing Apex code",
+      "Set up sharing rule recalculation monitoring"
+    ],
+    "gotchas": [
+      "With Sharing keyword in Apex is NOT the same as User Mode SOQL - they enforce different security layers",
+      "Territory-based sharing is separate from role hierarchy - both must be configured",
+      "Field-level security on relationship paths requires explicit FLS checks on each object in the path",
+      "Sharing rule recalculation after territory realignment can impact system performance",
+      "Permission set groups simplify assignment but still require individual permission set design"
+    ],
+    "migration_relevance": "Veeva security model must be mapped to platform security layers. Territory-based sharing is the closest equivalent to Veeva territory security."
+  }
+]

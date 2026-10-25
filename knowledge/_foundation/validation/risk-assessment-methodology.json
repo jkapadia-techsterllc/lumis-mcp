@@ -1,0 +1,247 @@
+[
+  {
+    "id": "val-risk-001",
+    "category": "validation-risk-assessment",
+    "title": "Two-Tier Risk Assessment Framework — System-Level and Requirement-Level",
+    "summary": "Validation risk assessment uses a two-tier approach: a high-level (system) assessment determines overall validation scope, followed by a detailed (requirement/sub-process) assessment that determines testing intensity for each functional area. Both feed into a risk mitigation strategy that reduces residual risk to acceptable levels.",
+    "document_structure": {
+      "signature_page": "Prepared by Validation Engineer, Approved by Site Manager and QA — same approval rigor as the OPQ protocol.",
+      "purpose": "Document the risk associated with implementing the system. Determines whether the system is Direct Impact, Indirect Impact, or No Impact to product quality, data integrity, authenticity, and confidentiality.",
+      "scope": "Defines which system/module is being assessed and the vendor/developer.",
+      "general_context": "Regulatory context for the system — for sample management, this is PDMA compliance. For clinical, it might be GCP/ICH. For manufacturing, GMP.",
+      "tables": [
+        "Table 1: High-Level (System) Risk Assessment — overall system classification",
+        "Table 2: Detailed (Sub-process/Requirement) Risk Assessment — per-function risk",
+        "Table 3: Risk Matrix — severity × probability lookup for both tiers",
+        "Table 4: Risk Mitigation Strategy — identified hazards with mitigation and residual risk"
+      ],
+      "conclusion": "States the system's risk classification (Direct/Indirect/No Impact) and overall risk level (High/Medium/Low), which determines the validation approach."
+    },
+    "system_impact_categories": {
+      "direct_impact": "System directly impacts patient safety, sample release/traceability, or quality of final product/data. Requires full validation (IQ/OQ/PQ).",
+      "indirect_impact": "System indirectly supports a quality system. May require reduced validation scope (OQ/PQ or PQ only).",
+      "no_impact": "System has no impact on product quality or data integrity. May not require formal validation — documentation only."
+    },
+    "gotcha": "The risk assessment is a PREREQUISITE for the Validation Plan, not an appendix to it. It must be completed and approved BEFORE the Validation Plan is written, because the VP references the risk assessment to justify the chosen validation approach and testing scope. Writing the VP before the risk assessment is a common audit finding.",
+    "gotcha_level": "critical",
+    "source": "risk-assessment-sop",
+    "tags": ["risk-assessment", "two-tier", "system-impact", "direct-impact", "validation-scope"]
+  },
+  {
+    "id": "val-risk-002",
+    "category": "validation-risk-assessment",
+    "title": "High-Level (System) Risk Assessment — Severity and Probability Dimensions",
+    "summary": "The high-level risk assessment evaluates the entire system across two axes: Severity of Harm and Probability of Occurrence. Each axis has multiple assessment factors rated Low/Medium/High, which roll up to an overall system risk classification.",
+    "severity_of_harm_factors": {
+      "gxp_impact": {
+        "low": "System indirectly supports or does not support a quality system. Little to no impact on sample release, traceability, or product data quality.",
+        "medium": "System directly supports a quality system and/or indirectly impacts patient safety, sample release/traceability, or product data quality.",
+        "high": "System directly impacts patient safety, sample release/traceability, or quality of final product/data.",
+        "override_rule": "High GxP impact AUTOMATICALLY results in High overall severity of harm, regardless of other factors."
+      },
+      "business_impact": {
+        "low": "System used infrequently (less than once a week). Workarounds available. Little to no financial impact.",
+        "medium": "System used regularly (daily/weekly). Workarounds available with moderate impact. Moderate business impact.",
+        "high": "High availability system (24x7). No workarounds available. Significant business impact (direct impact on sales or product delivery)."
+      },
+      "compliance_impact": {
+        "low": "System fulfills a non-regulatory company requirement only.",
+        "medium": "System fulfills the company's interpretation of a regulatory agency requirement.",
+        "high": "System fulfills a regulatory agency requirement or commitment to a regulatory agency."
+      },
+      "system_scope": {
+        "low": "Single department, single business process, 20 or fewer users.",
+        "medium": "Multiple business units, few business processes, 21-99 users.",
+        "high": "Global support (multiple sites and business units), many business processes, 100+ users."
+      }
+    },
+    "probability_of_occurrence_factors": {
+      "complexity": {
+        "low": "Off-the-shelf, no configuration required. Minimal training (under 2 hours). 0-1 external interfaces.",
+        "medium": "Off-the-shelf configurable. Some training required (2-8 hours). 2-3 external interfaces.",
+        "high": "Contains custom code. Extensive training required (over 8 hours). More than 3 external interfaces."
+      },
+      "product_maturity": {
+        "low": "Vendor has established quality systems. Extensive industry experience with the product. Considered industry standard.",
+        "medium": "Vendor has some evidence of quality systems. Some industry experience with the product.",
+        "high": "Vendor has no formalized quality systems. No to limited industry experience with the product."
+      }
+    },
+    "gotcha": "Salesforce-based systems typically score Medium on complexity (off-the-shelf configurable) but can escalate to High if Apex custom code is present — this is one of the key triggers for GAMP Category 5 classification of custom components. Always assess complexity at the COMPONENT level, not just the platform level.",
+    "gotcha_level": "critical",
+    "source": "risk-assessment-sop",
+    "tags": ["high-level-risk", "severity-of-harm", "probability-of-occurrence", "gxp-impact", "system-risk"]
+  },
+  {
+    "id": "val-risk-003",
+    "category": "validation-risk-assessment",
+    "title": "Detailed (Requirement-Level) Risk Assessment — Adding Detectability Dimension",
+    "summary": "The detailed risk assessment evaluates each functional requirement or sub-process individually. It adds a critical third dimension not present in the high-level assessment: Probability of Avoiding Detection — how likely a fault would go undetected. This creates a more nuanced, FMEA-style analysis.",
+    "severity_of_harm_factors": {
+      "gxp_impact": {
+        "low": "Requirement indirectly supports or does not support a quality system. Little to no impact on sample release, traceability, or product data.",
+        "medium": "Requirement directly supports a quality system and/or indirectly impacts patient safety, sample release/traceability, or product data.",
+        "high": "Requirement directly impacts patient safety, sample release/traceability, or product data.",
+        "override_rule": "Same as system-level: High GxP impact automatically results in High overall severity."
+      },
+      "compliance_impact": {
+        "low": "Component fulfills a non-regulatory company requirement only.",
+        "medium": "Component fulfills the company's interpretation of a regulatory requirement.",
+        "high": "Component fulfills a regulatory agency requirement or commitment."
+      },
+      "business_impact": {
+        "low": "Component used infrequently. Workarounds available with minimal impact. Little to no financial impact.",
+        "medium": "Component used regularly. Workarounds available with moderate impact. Moderate business impact.",
+        "high": "High availability required (24x7). No workarounds available. Significant business impact."
+      },
+      "probability_of_avoiding_detection": {
+        "low": "Fault condition readily apparent (error message, workflow halts). Technical control prevents the fault condition.",
+        "medium": "Business process or redundant system detects fault condition. Fault condition documented in system log.",
+        "high": "No error trapping or error recovery mechanism.",
+        "why_this_matters": "This is the FMEA 'detectability' factor. A high-severity, high-probability risk can still be Medium overall if detection is virtually guaranteed. Conversely, a moderate risk with no detection mechanism escalates to High because undetected failures compound."
+      }
+    },
+    "probability_of_occurrence_factors": {
+      "complexity": {
+        "low": "No configuration required to meet the requirement.",
+        "medium": "Configuration required to meet the requirement.",
+        "high": "Custom code is required to meet the requirement.",
+        "na_option": "Can be marked N/A if the factor does not apply to this specific requirement."
+      },
+      "component_maturity": {
+        "low": "Experience with implementation from prior version. Stable design demonstrated. Extensive testing during development.",
+        "medium": "Known issues with non-critical functionality or design element.",
+        "high": "Known issues with critical functionality or design element. Known deficiencies in testing during development.",
+        "na_option": "Can be marked N/A if new component with no prior version."
+      }
+    },
+    "gotcha": "The detailed assessment has a wider risk matrix than the high-level (4 columns vs 3 at the detailed level for severity). This is intentional — requirement-level assessment needs finer granularity because it drives the specific test scripts. A function rated Medium-High at the detailed level gets more test steps, more boundary testing, and more negative test cases than one rated Medium-Low.",
+    "gotcha_level": "warning",
+    "source": "risk-assessment-sop",
+    "tags": ["detailed-risk", "fmea", "detectability", "requirement-level", "test-intensity"]
+  },
+  {
+    "id": "val-risk-004",
+    "category": "validation-risk-assessment",
+    "title": "Risk Matrix — Severity × Probability Lookup Table",
+    "summary": "The risk matrix is a standard 3×3 lookup that combines Severity of Harm and Probability of Occurrence to determine the overall risk level. The same matrix structure is used for both high-level and detailed assessments.",
+    "risk_matrix": {
+      "low_severity_low_probability": "Low",
+      "low_severity_med_probability": "Low",
+      "low_severity_high_probability": "Medium",
+      "med_severity_low_probability": "Low",
+      "med_severity_med_probability": "Medium",
+      "med_severity_high_probability": "High",
+      "high_severity_low_probability": "Medium",
+      "high_severity_med_probability": "High",
+      "high_severity_high_probability": "High"
+    },
+    "risk_to_validation_mapping": {
+      "high_risk": {
+        "validation_approach": "Full IQ/OQ/PQ with comprehensive test coverage. All requirements traced and tested. Risk-based testing prioritizes high-risk functions for more extensive coverage (boundary testing, negative testing, stress testing).",
+        "test_intensity": "Maximum — every functional requirement has explicit test steps with prescriptive expected results.",
+        "documentation": "Full validation lifecycle documentation: VP, URS, FS, Risk Assessment, IQ, OQ, PQ, traceability matrix, VSR."
+      },
+      "medium_risk": {
+        "validation_approach": "OQ/PQ with focused test coverage. Requirements traced but testing may use representative scenarios rather than exhaustive coverage.",
+        "test_intensity": "Moderate — key functions tested with representative data sets. Negative testing for critical paths only.",
+        "documentation": "VP, URS, Risk Assessment, OQ/PQ, traceability matrix, VSR. FS may be abbreviated."
+      },
+      "low_risk": {
+        "validation_approach": "PQ or verification only. May use acceptance testing rather than formal qualification protocols.",
+        "test_intensity": "Minimal — golden path testing with spot checks on configuration.",
+        "documentation": "Abbreviated VP, Risk Assessment, verification checklist, summary report."
+      }
+    },
+    "gotcha": "The risk matrix is NOT a one-time exercise. Risk must be REASSESSED whenever there is a major configuration change, a platform upgrade that affects GxP functions, a change in regulatory requirements, or a significant deviation discovered during validation. The residual risk from Table 4 must also be re-evaluated periodically (typically biennial review).",
+    "gotcha_level": "critical",
+    "source": "risk-assessment-sop",
+    "tags": ["risk-matrix", "severity-probability", "validation-scope", "test-intensity"]
+  },
+  {
+    "id": "val-risk-005",
+    "category": "validation-risk-assessment",
+    "title": "Risk Mitigation Strategy — Hazard Identification and Residual Risk",
+    "summary": "The risk mitigation strategy table documents each identified hazard, its pre-mitigation severity, the specific controls applied (system design, procedural, and other), and the resulting residual risk after mitigation. This is the actionable output of the risk assessment.",
+    "mitigation_table_columns": {
+      "risk_number": "Sequential numbering linking to the risk factor from Tables 1-2 (e.g., 1 = GxP impact, 2 = Compliance, 3 = Business).",
+      "identified_hazard": "Specific description of what could go wrong. Must be concrete, not generic — 'Incorrect/no data from the module' not 'data issues'.",
+      "severity_of_harm": "Pre-mitigation severity (Low/Medium/High) inherited from the risk assessment tables.",
+      "system_design_controls": "Technical controls built into the system to mitigate the risk (e.g., full regression testing on changes, automated data validation, audit trail).",
+      "procedural_controls": "Manual/SOP-based controls (e.g., review by tech and project lead, admin access restrictions, training of personnel).",
+      "other_controls": "Additional mitigations — testing/verification, process changes, infrastructure improvements (e.g., verify before push, backup database, migrate to Level 1 facility).",
+      "residual_risk": "Post-mitigation severity — must demonstrate reduction from pre-mitigation level. If residual risk remains High, additional mitigation is required or the risk must be formally accepted by QA.",
+      "document_traceability": "Points to existing documentation or processes that provide evidence of mitigation (e.g., audit trail, email review process, SOPs)."
+    },
+    "typical_risk_categories_for_life_sciences_crm": {
+      "gxp_data_quality": {
+        "hazard": "Incorrect or missing data from the system",
+        "pre_mitigation_severity": "High",
+        "typical_mitigations": ["Full regression testing on changes", "Tech and project lead review", "Verify before deployment to production"],
+        "typical_residual_risk": "Low"
+      },
+      "compliance_records": {
+        "hazard": "Retained records including audit trail and metadata must be retrievable and reproducible throughout retention period",
+        "pre_mitigation_severity": "High",
+        "typical_mitigations": ["Data archival procedures", "Admin and compliance access controls", "Database backup", "Personnel training"],
+        "typical_residual_risk": "Low"
+      },
+      "business_availability": {
+        "hazard": "System must be available 24x7 except during scheduled outages — hardware failure or ETL interruption",
+        "pre_mitigation_severity": "High",
+        "typical_mitigations": ["Redundant infrastructure", "Manual fallback procedures for pending data", "Data reprocessed when ETL restarts"],
+        "typical_residual_risk": "Low"
+      }
+    },
+    "residual_risk_acceptance": {
+      "low": "Accepted — standard periodic review.",
+      "medium": "Accepted with conditions — additional monitoring, enhanced testing, or timeline for further mitigation.",
+      "high": "NOT acceptable without formal risk acceptance signed by QA and site management. Must document business justification and enhanced monitoring plan."
+    },
+    "gotcha": "Every identified hazard in Table 4 must trace back to a risk factor in Tables 1-2. Inspectors will check for orphaned mitigations (mitigations that do not link to an assessed risk) and unmitigated risks (assessed risks with no corresponding mitigation entry). Both are audit findings.",
+    "gotcha_level": "critical",
+    "source": "risk-assessment-sop",
+    "tags": ["risk-mitigation", "residual-risk", "hazard-identification", "mitigation-strategy", "traceability"]
+  },
+  {
+    "id": "val-risk-006",
+    "category": "validation-risk-assessment",
+    "title": "Sample Management System Risk Profile — Typical Assessment Outcomes",
+    "summary": "A sample management system on a SaaS platform is almost always classified as a Direct Impact system with HIGH overall risk due to PDMA regulatory requirements. This entry provides the typical risk profile to help customers understand what to expect.",
+    "typical_system_level_assessment": {
+      "gxp_impact": "HIGH — system directly impacts sample traceability and quality of product data. PDMA requires complete chain of custody for all drug samples.",
+      "business_impact": "HIGH — system required 24x7. No workarounds for sample tracking during outages (regulatory exposure). Significant business impact on sales operations.",
+      "compliance_impact": "HIGH — system fulfills a direct regulatory agency requirement (PDMA Section 353(d)).",
+      "system_scope": "HIGH — typically global support across multiple business units, many business processes, 100+ field users.",
+      "complexity": "MEDIUM — off-the-shelf configurable platform (Salesforce) but may include custom code (Apex triggers for validation rules, automated processes).",
+      "product_maturity": "LOW to MEDIUM — depends on vendor track record. Established platforms like Salesforce score Low (good). Newer niche vendors score Medium or High.",
+      "overall_severity": "HIGH (GxP override applies)",
+      "overall_probability": "MEDIUM to HIGH (depends on custom code extent)",
+      "overall_system_risk": "HIGH",
+      "conclusion": "Sample Management System is a Direct Impact system. Full validation (IQ/OQ/PQ) is required with a risk-based approach."
+    },
+    "typical_high_risk_requirements": [
+      "Sample distribution tracking and chain of custody (PDMA core requirement)",
+      "Audit trail — immutable, complete, and retrievable for retention period",
+      "Electronic signatures on sample receipts (Part 11 compliance)",
+      "Inventory reconciliation and discrepancy detection",
+      "Data loads from warehouse/ETL systems",
+      "Regulatory reporting for sample distributions"
+    ],
+    "typical_medium_risk_requirements": [
+      "User interface navigation and screen layout",
+      "Report generation and export",
+      "Transfer request workflows between reps",
+      "Dashboard and trending displays"
+    ],
+    "typical_low_risk_requirements": [
+      "User preference settings",
+      "Non-GxP notification and alert features",
+      "Administrative user management (covered by platform security)"
+    ],
+    "gotcha": "Even requirements that seem low-risk at first glance (like UI navigation) can be elevated to Medium or High if they affect access to GxP-critical functions. Screen navigation testing verifies that role-based access controls are enforced — if a field rep can see a manager-only function, that is a security and compliance failure, not just a cosmetic issue.",
+    "gotcha_level": "warning",
+    "source": "risk-assessment-sop",
+    "tags": ["sample-management", "risk-profile", "pdma", "direct-impact", "typical-assessment"]
+  }
+]

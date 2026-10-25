@@ -1,0 +1,131 @@
+Lumis AI Proprietary Software License Agreement
+Version 1.0 — Effective October 2024
+
+Copyright (c) 2024-2026 Lumis AI. All rights reserved.
+
+NOTICE: This software and its associated knowledge base content are the
+proprietary intellectual property of Lumis AI. Unauthorized copying,
+reproduction, distribution, modification, reverse engineering, or
+creation of derivative works is strictly prohibited and may result in
+civil and criminal penalties.
+
+1. DEFINITIONS
+
+"Software" means the Lumis MCP server code, including server.py, the
+lumis_mcp package wrapper, and all supporting scripts and configuration.
+
+"Knowledge Base" means all curated content in the knowledge/, agents/,
+and prompts/ directories, including but not limited to module mappings,
+regulatory rules, decision trees, validation rules, gotchas, country
+rules, terminology definitions, agent workflows, and taxonomy data.
+
+"Licensed Use" means connecting to the Lumis MCP server through a
+compatible MCP client (such as Claude Desktop, Claude Code, Claude.ai,
+or OpenAI-compatible clients) for the purpose of querying the Knowledge
+Base, subject to applicable pricing tiers and rate limits.
+
+2. GRANT OF LICENSE
+
+Subject to the terms of this Agreement, Lumis AI grants you a limited,
+non-exclusive, non-transferable, revocable license to use the Software
+solely for Licensed Use. This license does not grant you any ownership
+interest in the Software or Knowledge Base.
+
+3. RESTRICTIONS
+
+You shall NOT:
+
+(a) Copy, reproduce, distribute, publish, display, or transmit any
+    portion of the Software or Knowledge Base except as required for
+    Licensed Use;
+
+(b) Modify, adapt, translate, reverse engineer, decompile, disassemble,
+    or create derivative works based on the Software or Knowledge Base;
+
+(c) Extract, scrape, mine, harvest, or systematically download Knowledge
+    Base content for the purpose of building a competing product, training
+    a machine learning model, populating a database, or any use outside
+    Licensed Use;
+
+(d) Remove, alter, or obscure any copyright, trademark, or other
+    proprietary notices contained in the Software or Knowledge Base;
+
+(e) Sublicense, sell, rent, lease, lend, or otherwise transfer access to
+    the Software or Knowledge Base to any third party without prior
+    written consent from Lumis AI;
+
+(f) Use the Software or Knowledge Base to provide a competing service,
+    whether directly or through an intermediary;
+
+(g) Circumvent, disable, or interfere with any access controls,
+    authentication mechanisms, rate limits, or usage restrictions
+    implemented in the Software.
+
+4. INTELLECTUAL PROPERTY
+
+All right, title, and interest in and to the Software and Knowledge Base,
+including all intellectual property rights therein, are and shall remain
+the exclusive property of Lumis AI. Nothing in this Agreement transfers
+any intellectual property rights to you. The Knowledge Base represents
+substantial investment in research, curation, and domain expertise and
+constitutes trade secrets of Lumis AI.
+
+5. DATA COLLECTION AND PRIVACY
+
+Usage of the Software may be subject to data collection as described in
+the Lumis AI Privacy Policy at https://lumis-lifesciences.com/privacy.
+API key usage, query patterns, and aggregate statistics may be collected
+to improve the service.
+
+6. DISCLAIMER OF WARRANTIES
+
+THE SOFTWARE AND KNOWLEDGE BASE ARE PROVIDED "AS IS" AND "AS AVAILABLE"
+WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, ACCURACY, COMPLETENESS, AND NONINFRINGEMENT. LUMIS AI DOES NOT
+WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF
+HARMFUL COMPONENTS.
+
+THE KNOWLEDGE BASE IS FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT
+CONSTITUTE LEGAL, REGULATORY, OR PROFESSIONAL ADVICE. USERS ARE
+RESPONSIBLE FOR INDEPENDENTLY VERIFYING ALL INFORMATION AND ENSURING
+COMPLIANCE WITH APPLICABLE LAWS AND REGULATIONS.
+
+7. LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL LUMIS AI BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
+SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED
+TO LOSS OF PROFITS, DATA, BUSINESS OPPORTUNITIES, OR GOODWILL, ARISING
+OUT OF OR IN CONNECTION WITH THE USE OR INABILITY TO USE THE SOFTWARE
+OR KNOWLEDGE BASE, REGARDLESS OF THE THEORY OF LIABILITY.
+
+8. TERMINATION
+
+This license is effective until terminated. Lumis AI may terminate this
+license at any time, with or without cause, upon notice. Upon
+termination, you must cease all use of the Software and Knowledge Base
+and destroy all copies in your possession.
+
+9. GOVERNING LAW
+
+This Agreement shall be governed by and construed in accordance with the
+laws of the State of California, United States, without regard to
+conflict of law provisions. Any disputes arising under this Agreement
+shall be subject to the exclusive jurisdiction of the courts located in
+Santa Clara County, California.
+
+10. ENFORCEMENT
+
+Lumis AI reserves the right to enforce this Agreement through all
+available legal remedies, including injunctive relief, without the
+requirement of posting bond. Any breach of Sections 3 or 4 shall
+constitute irreparable harm for which monetary damages would be
+inadequate.
+
+11. ENTIRE AGREEMENT
+
+This Agreement constitutes the entire agreement between you and Lumis AI
+regarding the use of the Software and Knowledge Base and supersedes all
+prior agreements, understandings, and representations.
+
+For licensing inquiries: hello@lumis-lifesciences.com

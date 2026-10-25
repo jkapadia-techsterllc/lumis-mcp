@@ -1,0 +1,80 @@
+[
+  {
+    "id": "hcp-engagement-2022-asia-pacific-1",
+    "category": "knowledge/commercialization/regulations/hcp-engagement",
+    "title": "HCP Engagement Regulations — Asia Pacific, Middle East & Africa (2022)",
+    "products": [
+      "Life Sciences CRM",
+      "Compliance"
+    ],
+    "summary": "Regulatory requirements for HCP/HCO engagement and meeting sponsorship across Asia Pacific, Middle East, and Africa, current as of September 2022. Regulatory environments range from highly regulated markets like South Korea and Japan to markets with primarily industry self-regulation.",
+    "findings": [
+      {
+        "name": "China",
+        "detail": "Industry: Pharma. Competent authority: R&D-based Pharmaceutical Association in China (RDPAC). Code-based regulation. Engagement: Written contract with detailed requirements — legitimate need, services clearly identified and documented in advance, consultants directly related to identified need, appropriate expertise, fair market value, records maintained. Meetings: Companies may provide financial support for educational/scientific conferences including HCP sponsorship; event in appropriate venue, scientific/educational objectives, sponsorship limited to travel, meals, accommodation, registration fees; HCP does not receive the subsidy directly. Meal thresholds: 300 RMB per person per meal."
+      },
+      {
+        "name": "Hong Kong",
+        "detail": "Industry: Pharma. Competent authority: The Hong Kong Association of the Pharmaceutical Industry (HKAPI). Code-based regulation. Engagement: Standard written contract requirements with fair market value compensation. Meetings: Companies may sponsor or organize meetings in appropriate venue conducive to scientific/educational objectives. Meal thresholds: Breakfast or Lunch HK$600 excl. service charge/gratuities. Dinner HK$800 excl. service charge/gratuities."
+      },
+      {
+        "name": "India (Medical Council)",
+        "detail": "Industry: Pharma, Medical Devices, Generics. Competent authority: Medical Council of India (MCI). Code-based regulation. Engagement: Interactions must ensure patient interest is not compromised, professional integrity and freedom maintained, within the law, transparent and disclosed, not endorsing any drug or product of the industry publicly or through appropriate scientific bodies. CME program participation for at least 30 hours every five years if organized by recognized entity in any other authorized organization. Notification: Regular Notification to the MCI by HCPs. Gifts, pecuniary advantages or benefits, travel facilities (inside/outside India) and hospitalization, grants are banned for HCPs. Grants authorized only for HCOs within India. Meal thresholds: Not allowed."
+      },
+      {
+        "name": "India (OPPI/UCPMP)",
+        "detail": "Industry: Pharma. Competent authority: Organisation of Pharmaceutical Producers of India (OPPI) Code; Uniform Code of Pharmaceutical Marketing Practices (UCPMP) Code. Engagement: Comprehensive requirements including no inducement clause, fair market value compensation, records maintained. Meetings: Sponsoring an HCP in a scientific, promotional, or professional meeting is only authorized to inform HCPs about products/therapy and/or to provide scientific and/or educational information; events must be in appropriate venue conducive to scientific/educational objectives and purpose of event. Meal thresholds: Not allowed."
+      },
+      {
+        "name": "Israel",
+        "detail": "Industry: Pharma. Competent authority: Israel Medical Association (IMA); Pharma Israel. Code-based regulation. Engagement: Written contract required; HCPs working for public entity must report connection with the company. Pre-approval: Authorization could be required for HCPs that work for a public entity. Meetings: Companies may sponsor scientific conferences hosted in Israel and organized by associations; organize and sponsor scientific conferences hosted in Israel with a minimum of 30 HCPs or held outside a medical institution; sponsor conferences and continuing education programs held outside Israel. Notification: Employer of the HCP must be notified in case of Advisory Board Participation. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Japan",
+        "detail": "Industry: Pharma. Competent authority: Japan Pharmaceutical Manufacturers Association (JPMA). Code-based regulation. Engagement: Written contract with detailed requirements including clear identification and documentation of services, consultants directly related to identified need, appropriate expertise, fair market value, records maintained. Meetings: Companies may provide financial support for educational/scientific conferences; event in appropriate venue, sponsorship limited to travel, meals, accommodation, registration fees; all attendees are selected in light of purpose and the number of attendees is kept to the minimum necessary. Meal thresholds: No thresholds have been set by JPMA. Specific thresholds are provided by the JPMA in a memo to JPMA member companies (company's product set, up to 20,000 JPY)."
+      },
+      {
+        "name": "Philippines",
+        "detail": "Industry: Pharma, Medical Devices. Competent authority: Republic of the Philippine Food and Drug Administration (FDA). Engagement: Written contract required for all HCP interactions. Meetings: Companies shall inform the FDA of any event at least one (1) month prior to beginning of event if activity involves more than 100 HCP participants. Notification: Permission by the FDA is not required. Meeting submission: Digital manual on the FDA website. Meeting timelines: Information must be reported one (1) month prior to the event. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Saudi Arabia",
+        "detail": "Industry: Pharma. Competent authority: Saudi Food and Drug Authority (SFDA). Code-based regulation. Engagement: Written contract with fair market value compensation, records maintained. Pre-approval: An express approval from SFDA is needed in order to conduct a scientific lecture and/or a scientific meeting. Submission: Paper; the request and related forms should be presented directly at the SFDA's office. Meeting timelines: Request must be presented to the SFDA at least twenty (20) days prior to the date of the event. SFDA will notify via posted letter its approval or rejection within 10 working days from the receipt of the request. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Singapore",
+        "detail": "Industry: Pharma. Competent authority: Singapore Association of Pharmaceutical Industries (SAPI). Code-based regulation. Engagement: Written contract ensuring fair market value compensation. Meetings: Companies may provide sponsorship contribution through 2 different ways: Third party educational events and Company (company) events. Notification: For third party educational events, sponsorship may be provided either following a written offer by the Pharma Company or a request for support from the organiser of the event. Meal thresholds: S$120 excl. VAT. Additional: It is not allowed to organize or sponsor Company standalone events where the majority (i.e., more than 51%) of the attendees are Singaporean HCPs."
+      },
+      {
+        "name": "South Africa",
+        "detail": "Industry: Pharma, Medical Devices, Generics. Competent authority: Marketing Code Authority (MCA). Code-based regulation. Engagement: Standard written contract requirements with fair market value compensation. Meetings: Standard sponsorship rules. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "South Korea (Pharma)",
+        "detail": "Industry: Pharma. Competent authority: Ministry of Health and Welfare (MOHW); Korea Research-Based Pharma Industry Association (KRPIA); Pharmaceutical and Bio-Pharma; Korea Pharmaceutical Manufacturers Association (KPBMA). Engagement: Comprehensive written contract requirements including no inducement clause. Meetings: Companies must notify KRPIA in advance for academic conference support, sponsorship of HCPs to product presentation meetings, and product promotion meetings; companies must deposit the sponsored amount to KRPIA which will then transfer the sum to society hosting the academic conference. Pre-approval: Domestic academic conference support and sponsorship of HCPs to product presentations must be approved by KRPIA. Meeting timelines — Academic conference support: Request must be sent to KRPIA sixty (60) days before beginning of event. Sponsorship of HCPs to Academic Conference: Request including details of support must be sent to KRPIA sixty (60) days before beginning of event. Product presentation meetings: Request must be sent to KRPIA sixty (60) days before the beginning of event. Meal thresholds: Sponsorship of HCPs to academic conferences — within one (1) month of conduct, send KRPIA the details of the support provided for the event. Max 3 meals per day. Academic conference support: 50,000 KRW incl. VAT. Product presentation meetings: 100,000 KRW per meal per person VAT excluded (up to 4 times a month)."
+      },
+      {
+        "name": "South Korea (Medical Devices)",
+        "detail": "Industry: Medical Devices. Competent authority: Ministry of Health and Welfare (MOHW); Korean Medical Device Industry Association (KMDIA). Engagement: Not applicable. Meetings: Companies must notify Tinis provided in the context of a conference to the KMDIA for approval. Pre-approval: Conference-related Tinis must be approved by KMDIA. Meeting submission: On KMDIA website and email. Meeting timelines: No specific timelines defined but approval must be obtained before the event. Meal thresholds: Not applicable. Additional: Certain type of activities are not to be approved/authorized but must be notified after the event conclusion."
+      },
+      {
+        "name": "Thailand",
+        "detail": "Industry: Pharma. Competent authority: Pharmaceutical Research and Manufacturers Association (PReMA). Code-based regulation. Engagement: Standard written contract requirements with fair market value compensation. Meetings: Standard sponsorship rules. Meal thresholds: 2,500 Baht (excl. VAT and service charges)."
+      },
+      {
+        "name": "Turkey",
+        "detail": "Industry: Pharma-Generics. Competent authority: Turkish Medicines and Medical Device Agency (TMMDA); Republic of Turkey Based Pharmaceutical Companies (AIFD). Code-based regulation. Engagement: Written contract required for all HCP interactions; HCPs that work for public hospitals or universities require written approval from their supervisor/hospital administrator. Pre-approval: Authorization required for HCPs that work for public hospitals or universities. Submission: Digital manual on the Agency's website. Employer authorization: Required for HCPs that work for public hospitals or universities. Meetings: Companies are obliged to notify the Agency about scientific meetings or product promotion meetings that they organize or support. Pre-approval: Notification of the TTTCK before the event and if no answer is provided by the Agency within ten (10) working days after the submission, the event will be deemed approved. Meeting submission: Digital manual on the Agency's website. Meeting timelines — Domestic meetings: Communication must be sent at least fifteen (15) working days before beginning of event. Meal thresholds: $16 EUR, VAT (AIFD members). Additional: An HCP can receive maximum four compensations per year; maximum two (2) of these appointments may come from the same company and maximum one (1) of them can be for international congresses."
+      }
+    ],
+    "source": "Global HCP Engagement Regulations Snapshot, September 2022",
+    "tags": [
+      "regulations",
+      "hcp-engagement",
+      "compliance",
+      "asia-pacific",
+      "middle-east",
+      "africa",
+      "2022"
+    ]
+  }
+]

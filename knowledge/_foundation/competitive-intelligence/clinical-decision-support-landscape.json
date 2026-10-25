@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ci-cds-landscape-001",
+    "category": "competitive-intelligence",
+    "title": "Clinical Decision Support and Health Data Platform Landscape",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Assessment of clinical decision support platforms and claims data analytics capabilities serving life sciences, covering evidence-based medicine databases, claims datasets, and their integration with commercial CRM workflows.",
+    "findings": {
+      "cds_platform_components": "Clinical decision support platforms combine drug reference databases, evidence-based clinical content, and diagnostic decision support tools. Key databases: drug interaction databases (covering 2M+ drug-drug interaction pairs), evidence summaries, and condition-specific treatment protocols.",
+      "claims_data_assets": "Healthcare claims datasets covering 200M+ lives provide longitudinal patient journeys across pharmacy, medical, and hospital claims. These datasets are essential for: treatment pattern analysis, physician prescribing behavior, patient switching studies, and market sizing.",
+      "commercial_integration_gap": "CRM platforms and claims data platforms operate in separate ecosystems. Field teams need claims-derived insights (prescribing trends, patient volumes, treatment patterns) embedded in their CRM workflows rather than requiring separate analytics logins.",
+      "competitive_landscape": "Multiple vendors compete across clinical content (evidence databases), claims analytics (prescribing patterns), and real-world evidence (outcomes analysis). Consolidation is creating larger platforms that span content, data, and analytics.",
+      "strategic_implications": "For CRM platforms serving life sciences, the opportunity is integrating third-party clinical and claims data into field workflows \u2014 providing medical affairs teams with evidence context and commercial teams with prescribing intelligence without requiring separate platform licenses."
+    },
+    "source": "Assessment of clinical decision support platforms and health data capabilities for life sciences commercial operations",
+    "tags": [
+      "clinical-decision-support",
+      "claims-data",
+      "evidence-based-medicine",
+      "health-data",
+      "market-intelligence"
+    ]
+  }
+]

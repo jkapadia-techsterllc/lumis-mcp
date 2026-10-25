@@ -1,0 +1,43 @@
+[
+  {
+    "id": "lsc-help-email-ind-lsc-email-customize-send",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize and Send Emails",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Send emails to healthcare professionals (HCPs) and healthcare organizations (HCOs) from any point in your workflow. Easily select an email template from a preapproved list, add relevant attachments, and use fragments to personalize the email content for your audience. Track key performance metrics...",
+    "findings": [
+      {
+        "name": "Customize and Send Emails",
+        "detail": "Send emails to healthcare professionals (HCPs) and healthcare organizations (HCOs) from any point in your workflow. Easily select an email template from a preapproved list, add relevant attachments, and use fragments to personalize the email content for your audience. Track key performance metrics such as opens and clicks so you can monitor and optimize email campaigns."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Depending on where you start an email from, the Send Email window is filtered automatically based on your context. For example, start an email directly from the content library to share a specific presentation for HCPs to review at their convenience. Important To send email from Salesforce, Life Sciences Emails requires domain-level and user-level email verification. Email delivery fails if either the user's email address or the email-sending domain is unverified. See Requirements to Send Email from Salesforce ."
+      },
+      {
+        "name": "Send Emails",
+        "detail": "In the Life Sciences Cloud mobile app, you can send emails from: The home page Visit and account records The content library The presentation player The Next Best Action component The Next Best Customer component The Accounts lists and filters page Remote engagements On desktop, you can send emails from accounts and visits, and from the Accounts lists and filters page."
+      },
+      {
+        "name": "Customize Emails",
+        "detail": "The Email button opens the Send Email window. The options in the Send Email window depend on your Salesforce admin’s configuration. You can: View and filter templates: See a list of available templates, and filter them by brand, category, and language. Depending on where you are in the app, the list of templates is filtered to your context automatically. Select a template: Search through the list of available templates, or filter by product, topic, or language. Before you select a template, you can preview it to make sure it’s the one you need. Add attachments: Preview PDFs and JPG attachments, and select up to 12 attachments associated with the template to include in your email. Attachments with the required prefix are added to the email by default, you can't remove them. Send presentations as links: If you share presentations as links in email content from the content library or the presentation player, you can see the presentation names and links, reorder them, and delete them in the Send Email window. Customize email content: Select the email subject. Add fragments to customize the text from the email template. The fragments available to you depend on your Salesforce admin's configuration. Preview the email: See how the email looks to recipients. To make changes, you can return to the previous pages. Add email recipients: Select whom to send the email to, including individual HCPs and HCOs. Add your colleagues as CC recipients. Depending on your Salesforce admin's configuration, you can enter other email addresses manually. Verify consent: Verify and capture consent from recipients before sending emails. Schedule or send the email: Send the email automatically, or schedule it to send later. After you send the email, Salesforce validates that recipients have consented to receive emails about this topic. Emails to recipients who opt out are canceled automatically. To see sent emails and their details, go to the App Launcher, and then find and select Life Sciences Emails . When you send or schedule an email, Salesforce adds it to the email queue and sets the Urgency Type to Scheduled on the Life Science Email record. If you send the email immediately, it sends when the next Send Email job runs. If you schedule the email for a specific date and time, it sends when the next Send Email job runs after the scheduled time. Only Life Science Email records for remote engagement invitation emails use the Immediate urgency type, because those emails bypass the email queue."
+      },
+      {
+        "name": "Track Email History",
+        "detail": "To track communications and get insights about the emails you sent, open the account record and go to the Activity Timeline. In the Activity Timeline, you can see the status and the email attachments. By accessing previous communications, you can easily follow up or resend important information without needing to create the message again from scratch."
+      },
+      {
+        "name": "See Also",
+        "detail": "Emails and Templates"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_email_customize_send.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "email"
+    ]
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "id": "org-compare-001",
+  "name": "Single-Org vs. Multi-Org Comparison Matrix",
+  "description": "8-dimension comparison of single-org vs. multi-org Salesforce architecture for pharma/life sciences. Use during customer workshops to support the org strategy recommendation.",
+  "version": "1.0",
+
+  "dimensions": [
+    {
+      "dimension": "Data Model & Visibility",
+      "single_org": {
+        "pros": ["Shared data model with unified Customer 360", "Cross-LOB reporting without integration", "Single source of truth for HCP/Account data"],
+        "cons": ["Complex sharing rules to enforce data boundaries", "PII from different LOBs coexists — security configuration critical", "Data model becomes complex and controversial as scope grows"]
+      },
+      "multi_org": {
+        "pros": ["Clean data isolation between LOBs/regions", "Simpler sharing model within each org", "Independent data model evolution per org"],
+        "cons": ["No native cross-org reporting", "Duplicate data objects across orgs", "Requires MDM/data warehouse for consolidated view"]
+      }
+    },
+    {
+      "dimension": "Business Processes",
+      "single_org": {
+        "pros": ["Standard processes enforced across all LOBs", "Single release calendar for process changes", "Collaboration between LOBs with shared account lists"],
+        "cons": ["Hard to run different process speeds for different LOBs", "Changes affect all LOBs simultaneously", "Longer regression testing cycles"]
+      },
+      "multi_org": {
+        "pros": ["Independent process evolution per LOB/region", "Faster speed to market for individual LOBs", "LOB-specific innovation without cross-impact"],
+        "cons": ["Process divergence over time", "Duplicated configuration effort", "Limited orchestration between LOBs"]
+      }
+    },
+    {
+      "dimension": "System Limits",
+      "single_org": {
+        "pros": ["Pooled API and storage limits across all users", "Single set of limits to manage and monitor"],
+        "cons": ["All LOBs compete for shared limits", "Approaching limits affects all LOBs", "Hard limits cannot be purchased away"]
+      },
+      "multi_org": {
+        "pros": ["Fresh set of limits per org", "LOB growth doesn't impact other orgs", "Independent limit management"],
+        "cons": ["Total cost of limits higher (base allocations per org)", "Must monitor limits across all orgs", "More environments to manage"]
+      }
+    },
+    {
+      "dimension": "Governance",
+      "single_org": {
+        "pros": ["Centralized governance and standards", "Single architectural review process", "Consistent naming and coding standards"],
+        "cons": ["Governance overhead scales with LOB count", "Competing priorities create bottlenecks", "Org-wide settings become hard to govern"]
+      },
+      "multi_org": {
+        "pros": ["Independent governance per org", "LOBs control their own priorities", "Simpler decision-making per org"],
+        "cons": ["Risk of standards divergence", "No enterprise oversight without CoE", "Harder to enforce common patterns"]
+      }
+    },
+    {
+      "dimension": "Geography & Compliance",
+      "single_org": {
+        "pros": ["Cross-country collaboration by configuration", "Centralized compliance management", "Unified audit trail"],
+        "cons": ["Data residency may not be achievable", "Regional maintenance windows conflict", "Complex compliance sharing rules needed"]
+      },
+      "multi_org": {
+        "pros": ["Data residency achievable per org", "Regional maintenance windows", "Simpler compliance per jurisdiction"],
+        "cons": ["Cross-country collaboration requires interfaces", "Separate compliance configurations per org", "Audit complexity increases"]
+      }
+    },
+    {
+      "dimension": "Reporting & Analytics",
+      "single_org": {
+        "pros": ["Native cross-LOB reporting", "Consolidated dashboards", "Real-time data access across all entities"],
+        "cons": ["Performance impact of large report volumes", "Complex report sharing permissions"]
+      },
+      "multi_org": {
+        "pros": ["Simpler per-org reports", "No cross-LOB data leakage in reports"],
+        "cons": ["Cross-org reporting requires data warehouse", "Delayed/batch consolidated analytics", "Higher infrastructure cost for unified view"]
+      }
+    },
+    {
+      "dimension": "Software Lifecycle & Maintenance",
+      "single_org": {
+        "pros": ["Deploy changes once for all LOBs", "Single release calendar", "Shared support desk"],
+        "cons": ["All LOBs on same release cadence", "Regression risk affects everyone", "Environment management more complex with more profiles"]
+      },
+      "multi_org": {
+        "pros": ["Independent release calendars per org", "Isolated regression risk", "LOBs can move at their own speed"],
+        "cons": ["Deploy changes N times across N orgs", "More sandbox environments to manage", "Full sandbox refresh limited to 1/month per org"]
+      }
+    },
+    {
+      "dimension": "Cost",
+      "single_org": {
+        "pros": ["Lower total licensing cost", "Shared integration infrastructure", "Single environment management overhead"],
+        "cons": ["Higher governance and architectural complexity cost", "More expensive failure impact (all LOBs affected)"]
+      },
+      "multi_org": {
+        "pros": ["Isolated failure domains", "Simpler per-org cost attribution"],
+        "cons": ["Higher licensing (CRM + AppExchange per org)", "Integration costs per org", "SSO configuration per org", "Separate DevOps pipelines", "More admin headcount"]
+      }
+    }
+  ]
+}

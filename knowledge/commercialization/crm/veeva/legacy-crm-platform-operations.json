@@ -1,0 +1,48 @@
+[
+  {
+    "id": "platform-ops-001",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM DevOps — Three-Component Deployment Architecture",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The development operations architecture for a legacy life sciences CRM platform, covering three service components (platform, mobile, metadata), CI/CD pipeline configuration, sandbox management, and managed package installation workflows.",
+    "findings": {
+      "three_service_components": "The platform operates three independently deployable service components: (1) Platform — the Salesforce-hosted CRM with sandbox and production environments, (2) Mobile — the iOS application with configuration schemas and distribution apps, (3) Metadata — the near-core microservice hosted on cloud compute. Each component has its own environment lifecycle from development through production.",
+      "ci_cd_pipeline": "Continuous integration is managed through a GitLab CI configuration file at the repository root. The pipeline uses a template pattern where common deployment steps are defined once and reused across environment-specific jobs. Each deployment job specifies platform credentials, a server URL (sandbox versus production), and an optional metadata service endpoint. Credentials are stored as GitLab secret variables, not in the repository.",
+      "environment_strategy": "Platform environments use Salesforce developer sandboxes created from the production account. Mobile environments use configuration schemas mapped to distribution app identifiers. Metadata service environments use isolated cloud compute instances. A migration tool based on Apache Ant deploys metadata changes between platform environments.",
+      "managed_package_installation": "The CRM platform is delivered as managed packages installed through the AppExchange. Installation offers three permission modes: Admin Only (full CRUD plus Modify All on all objects, all Apex classes and Visualforce pages enabled), All Users (standard CRUD without Modify All across all custom profiles), and Specific Profiles (per-profile full access or no access granularity). Managed package permission sets cannot be modified directly — cloning is required for customization, at the cost of not receiving automatic permission updates in subsequent package upgrades."
+    },
+    "source": "internal-legacy-crm-devops-guide-jul-2024",
+    "tags": ["devops", "ci-cd", "deployment", "managed-packages", "sandbox", "environments"]
+  },
+  {
+    "id": "platform-ops-002",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Upgradeability — Feature Activation and Technical Descriptions",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The feature activation methodology for a legacy life sciences CRM release, documenting how new and changed features are enabled through admin console configuration, mobile entity activation, workflow path updates, and metadata schema changes.",
+    "findings": {
+      "activation_methodology": "Each release ships new or changed features that require explicit activation by administrators. Features are not auto-enabled — they follow a documented activation flow with step-by-step configuration changes. Each feature has both an Activation Flow (how to set it up) and a Technical Description (how it works internally). The Configuration Guide complements the Upgradeability document with detailed parameter definitions.",
+      "feature_domains_covered": "Call 2.0 (call recording and attachment management with workflow container components), Remote Engagement (video and digital detailing sessions), Field Email (Mustache-templated HTML email with dynamic data binding), Ratings (healthcare provider profiling and scoring), Search Outside Territory (cross-territory account discovery), Meetings (event and speaker program management), Account Territory Product linkage, Ratings and Profiling Questions, Generic Related List (configurable related record display), Generic Workflow (declarative business process automation), Configuration Service CI/CD (automated configuration deployment), Sales API (external system integration), iOS Metadata Processing (mobile schema synchronization).",
+      "call_2_0_activation_pattern": "Representative example of activation complexity: enabling file attachments on call records requires (1) adding Notes and Attachments related list to page layouts, (2) adding Related List Single component to flexi pages with visibility rules, (3) setting document creation entity type in admin console application settings, (4) activating content document entities for mobile synchronization, (5) updating SF Files support options on call-related entities, (6) modifying workflow paths with file permission contexts, and (7) deploying a batch job to retroactively update historical records.",
+      "technical_description_structure": "Technical descriptions document the internal architecture of each feature: data model changes, API contracts, permission requirements, mobile synchronization behavior, and cross-feature dependencies. These descriptions are paired with the activation flow to give administrators both the how and the why of each configuration step."
+    },
+    "source": "internal-legacy-crm-upgradeability-jul-2024",
+    "tags": ["upgradeability", "feature-activation", "release-management", "configuration", "admin-console"]
+  },
+  {
+    "id": "platform-ops-003",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Email Content — Template Architecture and Dynamic Data Binding",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The email template architecture for a legacy life sciences CRM, covering ZIP-based content packaging, Mustache template rendering with dynamic CRM data binding, formula field support, fragment composition, deep linking, and third-party email delivery integration.",
+    "findings": {
+      "template_packaging": "Email templates are uploaded as ZIP archives containing: (1) an HTML file named index.html (the template body — additional locale-specific variants like index_en_US.html or index_fr.html enable multi-language support), (2) a mandatory thumbnail.jpg preview image (220x280 pixels, max 3050KB), (3) an optional attachments folder (each file under 6 MB), and (4) an optional fragments folder for reusable content blocks. Attachments can be marked as required using a double-underscore prefix, preventing end-users from removing them.",
+      "mustache_template_engine": "Templates use the Mustache logic-less templating engine (GRMustache library on iOS) with custom extensions. The mobile SDK queries all data relevant to template execution, passes it as a JSON context to the Mustache processor, and renders the compiled HTML in a WebKit component. JSON lists are iterated using Mustache loops ({{#collection}}...{{/collection}}) and conditions.",
+      "dynamic_data_binding": "Five primary data objects are available as template variables: sender (User object fields), recipient (Account object fields), meeting (Meeting object fields), meetingSpeakers (array of Speaker objects), and organizer (User fields from the Meeting Member Organizer record). Additional context variables: meetingLocation (from Venue or HCO record types), meetingTopics (comma-separated topic names), call (Call object fields), remotesession.url (remote call URL), surveyDeveloperName, and surveyInvitationLink. All non-empty fields of these objects are available in lowercase in the mobile JSON context.",
+      "formula_field_support": "Formula fields are supported for sender, recipient, meeting, meetingSpeaker, and organizer objects. Most Salesforce formula functions work in the mobile context, with specific exclusions: CURRENCYRATE, DISTANCE, GETRECORDIDS, GETSESSIONID, HTMLENCODE, HYPERLINK, IMAGEPROXYURL, INCLUDE, ISCLONE, JSENCODE, JSINHTMLENCODE, JUNCTIONIDLIST, LINKTO, REQUIRESCRIPT, URLENCODE, URLFOR, and VLOOKUP.",
+      "email_delivery_integration": "Email delivery uses a third-party transactional email service for production sending. Configuration requires service account credentials, API keys, and domain verification. The integration handles send tracking, bounce management, and delivery analytics outside the CRM platform."
+    },
+    "source": "internal-legacy-crm-email-content-guide-jul-2024",
+    "tags": ["email", "templates", "mustache", "dynamic-content", "personalization", "content-packaging"]
+  }
+]

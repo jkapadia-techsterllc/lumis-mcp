@@ -1,0 +1,111 @@
+[
+  {
+    "id": "comp-adopt-001",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Component Adoption Analysis - Universal Tier (100% Adoption)",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Components adopted by all 410 client organizations, representing the non-negotiable functional baseline that any migration target must fully replicate on day one.",
+    "findings": {
+      "universal_components": [
+        "Account Management (410 orgs, 100%) - Core HCP and HCO account records, the foundation of all field activity",
+        "Account Search (410 orgs, 100%) - Finding and filtering accounts across territory and organization hierarchy",
+        "Activity History (410 orgs, 100%) - Historical record of all field interactions, calls, meetings, and engagements",
+        "Planner (410 orgs, 100%) - Daily and weekly visit planning, route optimization, and calendar management",
+        "Platform (410 orgs, 100%) - Underlying infrastructure including sync, offline capability, and data management",
+        "Ratings and Profiling Questions (410 orgs, 100%) - HCP segmentation, targeting, and profiling data collection",
+        "System Business Configuration (410 orgs, 100%) - Administrative configuration of business rules and system behavior",
+        "UI and UX (410 orgs, 100%) - User interface framework, navigation, and interaction patterns"
+      ],
+      "migration_implications": "These eight components must have feature-complete equivalents in any migration target before a single customer can move. Gaps in any of these areas create absolute blockers to migration adoption. Particular attention needed for offline-first sync (Platform) and flexible segmentation (Ratings) which are deeply embedded in daily field workflows."
+    },
+    "source": "internal-component-review-2023",
+    "tags": ["adoption", "components", "migration-planning", "baseline-requirements"]
+  },
+  {
+    "id": "comp-adopt-002",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Component Adoption Analysis - High Tier (90%+ Adoption)",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Components used by 90% or more of client organizations. These represent near-universal capabilities that will be expected by the vast majority of migrating customers.",
+    "findings": {
+      "high_adoption_components": [
+        "Filters (404 orgs, 98.5%) - List filtering and saved view management across all record types",
+        "Closed Loop Marketing / CLM (403 orgs, 98.3%) - Digital content presentation during HCP engagements, content lifecycle tracking",
+        "Data Change Request / DCR (403 orgs, 98.3%) - Workflow for field users to request updates to master reference data",
+        "Affiliations (392 orgs, 95.6%) - Relationships between HCPs, HCOs, and organizational hierarchies",
+        "Time Off Territory (387 orgs, 94.4%) - Recording and managing time away from field activity (vacation, training, meetings)",
+        "Call 1.0 (368 orgs, 89.8%) - Legacy call recording format, flagged for retirement with migration to Call 2.0"
+      ],
+      "migration_implications": "CLM at 98.3% adoption is notable - content delivery during customer engagements is a defining workflow. DCR at 98.3% confirms that master data governance through field feedback loops is a critical workflow, not an optional add-on. Call 1.0 being marked for retirement while still at 89.8% adoption creates a migration catalyst - customers already face disruption on the incumbent platform.",
+      "retirement_signal": "Call 1.0 retirement combined with its 89.8% adoption rate means nearly 370 organizations will need to transition their call recording workflows regardless of whether they migrate platforms. This creates an opportunity window for competitive displacement."
+    },
+    "source": "internal-component-review-2023",
+    "tags": ["adoption", "components", "migration-planning", "competitive-opportunity"]
+  },
+  {
+    "id": "comp-adopt-003",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Component Adoption Analysis - Medium Tier (40-90% Adoption)",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Components with moderate adoption representing differentiated capabilities. These modules separate basic CRM usage from advanced commercial operations and are often the source of complex migration requirements.",
+    "findings": {
+      "medium_adoption_components": [
+        "Search Outside Territory (334 orgs, 81.5%) - Cross-territory account discovery, important for multi-rep account coordination",
+        "Document Management (280 orgs, 68.3%) - File storage, versioning, and offline document access",
+        "Master Data Connector (266 orgs, 64.9%) - Integration with external reference data providers for HCP and HCO records",
+        "iPhone Support (246 orgs, 60%) - Mobile phone form factor in addition to tablet, supporting on-the-go field activity",
+        "Activity Plan (176 orgs, 47%) - Goal-based visit planning with target frequencies and customer segmentation",
+        "Samples Management (171 orgs, 41.7%) - Pharmaceutical sample tracking, signature capture, reconciliation, and lot management",
+        "Meetings (170 orgs, 41.5%) - Meeting scheduling, invitation management, and virtual meeting support",
+        "Consent and Opt Management (168 orgs, 41%) - Multi-channel communication consent tracking and GDPR compliance",
+        "Notifications (150 orgs, 36.6%) - Push notifications, alerts, and in-app notification management"
+      ],
+      "migration_implications": "Samples Management at 41.7% drives disproportionate complexity due to regulatory requirements (signature capture, lot tracking, reconciliation). Despite being used by fewer than half of organizations, it is among the most compliance-sensitive modules and often the longest lead-time item in migration projects. Activity Plan at 47% represents the bridge between basic CRM and strategic commercial operations - customers using it have more sophisticated planning requirements.",
+      "iphone_gap_signal": "iPhone at 60% adoption indicates that 40% of organizations operate tablet-only. Migration targets should not over-invest in phone-specific features at the expense of tablet experience quality."
+    },
+    "source": "internal-component-review-2023",
+    "tags": ["adoption", "components", "migration-complexity", "compliance"]
+  },
+  {
+    "id": "comp-adopt-004",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Component Adoption Analysis - Emerging and Niche Tier (Under 40% Adoption)",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Components with lower adoption rates representing newer capabilities, specialized use cases, or modules still gaining market traction. These inform prioritization of migration feature development.",
+    "findings": {
+      "emerging_components": [
+        "Field Email (138 orgs, 33.7%) - Approved email sending from the field with template management and tracking",
+        "Field Coaching (approx 32%) - Manager-led coaching workflows with scoring and feedback mechanisms",
+        "Surveys (115 orgs, 28%) - Customer feedback collection with branching logic and offline completion",
+        "Call 2.0 (107 orgs, 26.1%) - Next-generation call recording with enhanced attendee and product detailing",
+        "Insights (68 orgs, 16.6%) - AI-powered suggestions and analytics for field representatives"
+      ],
+      "niche_components": [
+        "Account Plans (63 orgs, 15.4%) - Strategic account planning for key accounts",
+        "Generic Related List (61 orgs, 14.9%) - Configurable related list framework for custom data display",
+        "Orders (53 orgs, 12.9%) - Order capture and management in the field",
+        "App Store (40 orgs, 9.8%) - Extension marketplace for third-party integrations",
+        "EPPV - Events and Programs (31 orgs, 7.6%) - Event planning, speaker programs, and promotional activities",
+        "Omnichannel (14 orgs, 3.4%) - Multi-channel engagement orchestration",
+        "Regional Messaging Integration (1 org, 0.24%) - Minimal adoption, effectively stand-by"
+      ],
+      "no_usage_data_components": [
+        "AI and Machine Learning Models",
+        "Wearable Device Integration",
+        "Expense Connector",
+        "In-Context Scheduling",
+        "Journey Orchestration",
+        "Sales API",
+        "Product Administration",
+        "Product Restrictions",
+        "Remote Engagement",
+        "Sales Data Management",
+        "Territory Administration"
+      ],
+      "migration_implications": "Call 2.0 at 26.1% vs Call 1.0 at 89.8% shows the incumbent platform is mid-migration on its own call recording modernization. This internal transition creates customer disruption regardless of external migration decisions. Insights at 16.6% and Omnichannel at 3.4% suggest AI-powered features and multi-channel orchestration have not yet achieved broad adoption on the incumbent platform - this represents a potential differentiation opportunity for a migration target that can deliver these capabilities more effectively.",
+      "backlog_health_signal": "Components with high backlog percentages (above 70%) suggest accumulated technical debt or unmet customer demand. Modules like AI and ML Models (89.9% backlog) indicate significant unfinished work, while lower-backlog modules like basic account management reflect mature, stable capabilities."
+    },
+    "source": "internal-component-review-2023",
+    "tags": ["adoption", "components", "prioritization", "competitive-opportunity", "ai-features"]
+  }
+]

@@ -1,0 +1,236 @@
+[
+  {
+    "id": "val-plan-001",
+    "category": "validation-planning",
+    "title": "Validation Master Plan (VMP) — What It Is and What Goes In It",
+    "summary": "The VMP is the top-level document that defines the organization's overall approach to computer system validation. It is typically a corporate-level document that applies across all validated systems, not written per-project.",
+    "contents": {
+      "1. Purpose and Scope": "Define which systems, regulations, and organizational units are covered",
+      "2. Organizational Structure": "Validation team roles and responsibilities — System Owner, Process Owner, Quality Assurance, IT, Validation Lead",
+      "3. Regulatory Requirements": "List all applicable regulations (21 CFR Part 11, Annex 11, cGMP, GCP, GLP, etc.)",
+      "4. Validation Approach": "CSV, CSA, or hybrid methodology. Reference GAMP 5 and any company-specific standards.",
+      "5. System Inventory and Classification": "List of validated systems, their GAMP categories, and GxP classification",
+      "6. Documentation Requirements": "Standard documents required per system category (Validation Plan, URS, FS, IQ/OQ/PQ, Traceability Matrix, Summary Report)",
+      "7. Risk Management": "Risk assessment methodology (FMEA or equivalent), risk classification scheme",
+      "8. Change Control": "How changes to validated systems are assessed, approved, and re-validated",
+      "9. Periodic Review": "Frequency and scope of periodic reviews for each validated system (typically annual)",
+      "10. Training Requirements": "Training requirements for system users, administrators, and validation team members",
+      "11. Vendor Management": "Vendor assessment and qualification requirements, supplier agreements",
+      "12. Incident Management": "Process for reporting, investigating, and resolving deviations in validated systems",
+      "13. System Retirement": "Process for decommissioning validated systems, including data migration and archival",
+      "14. Definitions and Acronyms": "Standardized terminology"
+    },
+    "gotcha": "The VMP is NOT a project plan — it is a quality system document. Many organizations confuse VMP with Validation Plan (VP). The VMP defines HOW the organization validates; the VP defines the validation approach for a SPECIFIC system.",
+    "gotcha_level": "critical",
+    "source": "validation-planning-guidance",
+    "tags": ["vmp", "validation-master-plan", "quality-system", "corporate-policy"]
+  },
+  {
+    "id": "val-plan-002",
+    "category": "validation-planning",
+    "title": "Validation Plan (VP) — Per-System Validation Strategy",
+    "summary": "The Validation Plan is written for each specific system or implementation project. It defines the scope, approach, roles, timeline, and deliverables for that system's validation.",
+    "contents": {
+      "1. System Description": "What the system does, vendor, version, deployment model (cloud/on-premise), integration points",
+      "2. Intended Use": "How the system will be used in the GxP context — which business processes it supports",
+      "3. Regulatory Scope": "Which specific regulations apply to THIS system (may be a subset of the VMP scope)",
+      "4. GAMP Classification": "Software category for each component (e.g., Category 4 for configured platform, Category 5 for custom code)",
+      "5. Validation Approach": "CSV or CSA (per VMP), plus any system-specific adaptations. Justify deviations from VMP approach.",
+      "6. Scope — Inclusions and Exclusions": "Which functions/modules are in validation scope and which are explicitly excluded (with rationale)",
+      "7. Risk Assessment Plan": "How FRA will be conducted, who participates, and how results drive testing",
+      "8. Validation Deliverables": "List of documents to be produced (protocols, scripts, reports)",
+      "9. Roles and Responsibilities": "Named individuals for System Owner, Process Owner, QA, Validation Lead, Test Leads",
+      "10. Acceptance Criteria": "How pass/fail will be determined, deviation classification, and sign-off authority",
+      "11. Traceability": "How requirements will be traced through design, testing, and acceptance (traceability matrix approach)",
+      "12. Vendor Assessment Strategy": "How the vendor will be assessed/leveraged, what vendor documentation will be used",
+      "13. Timeline and Milestones": "Validation schedule aligned with project delivery timeline",
+      "14. Change Control During Validation": "How changes during the validation project will be managed"
+    },
+    "gotcha_level": "critical",
+    "source": "validation-planning-guidance",
+    "tags": ["validation-plan", "per-system", "scope", "deliverables", "timeline"]
+  },
+  {
+    "id": "val-plan-003",
+    "category": "validation-planning",
+    "title": "User Requirements Specification (URS) — Defining What the System Must Do",
+    "summary": "The URS documents the business and regulatory requirements that the system must satisfy. It is the foundation of the traceability matrix — every requirement in the URS must be traced to a test case.",
+    "structure": {
+      "requirement_format": "Each requirement should be: uniquely numbered, testable, unambiguous, and traceable. Use 'shall' for mandatory requirements and 'should' for desired requirements.",
+      "categories": [
+        "Functional Requirements — what the system must do (workflows, calculations, rules)",
+        "Data Requirements — data types, formats, relationships, validation rules, mandatory fields",
+        "Interface Requirements — integrations with other systems, data exchange formats, API contracts",
+        "Regulatory Requirements — specific 21 CFR Part 11, Annex 11, or GxP requirements the system must satisfy",
+        "Security Requirements — authentication, authorization, encryption, session management",
+        "Audit Trail Requirements — which records require audit trails, what must be captured (who, what, when, old value, new value)",
+        "Electronic Signature Requirements — which actions require electronic signatures, signature manifestation requirements",
+        "Performance Requirements — response times, concurrent users, data volumes, availability",
+        "Archival and Retention Requirements — how long records must be retained, archive format, accessibility"
+      ]
+    },
+    "numbering_convention": "URS-[MODULE]-[SEQ] e.g., URS-SAMPLE-001, URS-AUDIT-001, URS-ESIG-001",
+    "gotcha": "URS requirements should describe WHAT the system must do, not HOW it should do it. 'The system shall capture HCP signature on sample receipt' is good. 'The system shall use a canvas element with touch capture and PNG export at 300 DPI' is too prescriptive and belongs in the design/configuration specification.",
+    "gotcha_level": "warning",
+    "source": "validation-planning-guidance",
+    "tags": ["urs", "requirements", "traceability", "testable-requirements"]
+  },
+  {
+    "id": "val-plan-004",
+    "category": "validation-planning",
+    "title": "Traceability Matrix (RTM) — The Golden Thread",
+    "summary": "The Requirements Traceability Matrix links every user requirement to its specification, test case, and test result. It is the single most important validation document because it proves that every requirement has been tested and met.",
+    "structure": {
+      "columns": [
+        "Requirement ID (from URS)",
+        "Requirement Description",
+        "GxP Risk Classification (High/Medium/Low)",
+        "Specification Reference (FS/CS section)",
+        "Test Case ID(s)",
+        "Test Type (scripted/unscripted/verification)",
+        "Test Result (pass/fail/NA)",
+        "Deviation ID (if any)",
+        "Final Status"
+      ]
+    },
+    "key_rules": [
+      "Every URS requirement MUST have at least one test case — gaps indicate untested requirements",
+      "Every test case MUST trace back to at least one requirement — orphan tests indicate scope creep",
+      "High-risk requirements should have multiple test cases covering normal, boundary, and error scenarios",
+      "If a requirement cannot be tested in the system (e.g., procedural SOP requirement), document it as 'verified by SOP review' with the SOP reference",
+      "The RTM must be updated when requirements change — version-control it alongside the URS"
+    ],
+    "gotcha": "The RTM is a LIVING document, not a one-time deliverable. If a requirement changes after initial validation, the RTM must be updated and affected tests re-executed. Many organizations treat it as a static checklist and find it stale by go-live.",
+    "gotcha_level": "critical",
+    "source": "validation-planning-guidance",
+    "tags": ["traceability-matrix", "rtm", "requirements-tracing", "test-coverage"]
+  },
+  {
+    "id": "val-plan-005",
+    "category": "validation-planning",
+    "title": "Validation Summary Report (VSR) — The Executive Validation Document",
+    "summary": "The VSR is the final validation document that summarizes all validation activities, results, deviations, and the overall compliance conclusion. It is the primary document regulators will request during an inspection.",
+    "contents": {
+      "1. System Overview": "Brief description of the system, intended use, and GAMP classification",
+      "2. Validation Scope": "What was validated (and what was explicitly out of scope)",
+      "3. Validation Approach": "Summary of the methodology used (CSV/CSA/hybrid)",
+      "4. Risk Assessment Summary": "Key risk findings and how they drove the testing strategy",
+      "5. Qualification Results": "Summary of IQ, OQ, PQ results — total tests, pass/fail/NA counts",
+      "6. Traceability Summary": "Confirmation that all URS requirements were tested, with coverage statistics",
+      "7. Deviation Summary": "List of all deviations encountered, their classification (critical/major/minor), root cause, and resolution. Critical deviations must be resolved before go-live.",
+      "8. Open Items": "Any items deferred to post-go-live with justification and timeline",
+      "9. Compliance Statement": "Formal statement that the system is validated for its intended use and complies with applicable regulations",
+      "10. Approval Signatures": "System Owner, Process Owner, QA, and Validation Lead sign-off"
+    },
+    "deviation_classification": {
+      "Critical": "System cannot perform a GxP-critical function as specified. GO-LIVE BLOCKED until resolved.",
+      "Major": "System can perform the function but with a significant workaround or limitation. Must be resolved within a defined timeline post-go-live.",
+      "Minor": "Cosmetic or minor functional issue that does not impact GxP compliance. Can be resolved in a future release."
+    },
+    "gotcha_level": "critical",
+    "source": "validation-planning-guidance",
+    "tags": ["validation-summary-report", "vsr", "deviations", "go-live-approval"]
+  },
+  {
+    "id": "val-plan-006",
+    "category": "validation-planning",
+    "title": "Periodic Review — Maintaining Validated State",
+    "summary": "A validated system does not stay validated forever. Periodic reviews confirm that the system remains in a validated state, that changes have been properly controlled, and that no degradation has occurred.",
+    "frequency": "Typically annual, but risk-based — high-risk systems may require semi-annual review; low-risk systems may extend to 18 months",
+    "review_scope": [
+      "Change control review — have all changes since last review been properly assessed and validated?",
+      "Incident and deviation review — were all incidents properly resolved with CAPA?",
+      "Access control review — are user access rights still appropriate? Remove departed users, review privilege escalation",
+      "Audit trail integrity — spot-check audit trail entries for completeness and accuracy",
+      "Vendor release assessment — were all vendor releases properly assessed for GxP impact?",
+      "Training currency — are all users trained on the current system version?",
+      "Data integrity review — are backup/restore procedures being followed? Test a restore.",
+      "Regulatory update review — have any regulatory requirements changed that affect the system?",
+      "Open CAPA review — are there outstanding corrective actions from previous reviews?",
+      "System performance review — is the system performing within validated parameters?"
+    ],
+    "deliverable": "Periodic Review Report — summarizes findings, classifies any gaps, and recommends corrective actions",
+    "gotcha": "Periodic review is NOT optional and NOT just a checkbox exercise. EU Annex 11 Section 11 explicitly requires it. FDA inspectors frequently ask to see periodic review reports. Many Warning Letters cite failure to maintain validated state.",
+    "gotcha_level": "critical",
+    "source": "validation-planning-guidance",
+    "tags": ["periodic-review", "maintained-state", "annual-review", "compliance-monitoring"]
+  },
+  {
+    "id": "val-plan-007",
+    "category": "validation-planning",
+    "title": "Validation Team — Roles and Responsibilities",
+    "summary": "A clear RACI for validation is essential. These roles may be combined in smaller organizations but the responsibilities must be assigned.",
+    "roles": {
+      "System Owner": {
+        "typical_title": "IT Director, IT Manager, or Solution Architect",
+        "responsibilities": "Owns the technical aspects of the system. Responsible for system availability, performance, security, and technical change management. Ensures the system infrastructure remains qualified."
+      },
+      "Process Owner": {
+        "typical_title": "Business Process Owner, Department Head, or Operations Director",
+        "responsibilities": "Owns the business processes the system supports. Responsible for defining user requirements, approving functional specifications, approving validation scope, and signing off on validation completion. The Process Owner is ultimately accountable for the system's fitness for intended use."
+      },
+      "Quality Assurance (QA)": {
+        "typical_title": "QA Manager, Compliance Manager, or CSV Manager",
+        "responsibilities": "Independent oversight of validation activities. Reviews and approves validation deliverables. Classifies deviations. Provides final QA sign-off on the Validation Summary Report. QA must be independent from the project delivery team."
+      },
+      "Validation Lead": {
+        "typical_title": "CSV/CSA Lead, Validation Manager, or Quality Engineer",
+        "responsibilities": "Manages day-to-day validation activities. Writes or reviews validation deliverables. Coordinates testing activities. Manages deviation resolution. Reports validation status to stakeholders."
+      },
+      "Test Lead / Test Analysts": {
+        "typical_title": "QA Analyst, Test Lead, or Business Analyst",
+        "responsibilities": "Write and execute test protocols. Document test results and deviations. Perform risk assessments with business SMEs."
+      },
+      "Subject Matter Experts (SMEs)": {
+        "typical_title": "Business Users, Regulatory Affairs, Medical Affairs",
+        "responsibilities": "Provide domain expertise for requirements definition, risk assessment, and user acceptance testing. SMEs are essential for FRA — they know which functions are GxP-critical."
+      }
+    },
+    "gotcha": "QA must be INDEPENDENT of the project team. Having the project manager also serve as QA is a regulatory red flag. QA's role is to provide independent assurance that validation was done properly, not to help the project pass validation.",
+    "gotcha_level": "critical",
+    "source": "validation-planning-guidance",
+    "tags": ["roles", "responsibilities", "raci", "system-owner", "process-owner", "qa-independence"]
+  },
+  {
+    "id": "val-plan-008",
+    "category": "validation-planning",
+    "title": "Validation Effort Estimator — Typical Effort by System Type",
+    "summary": "Validation effort varies widely based on system complexity, regulatory scope, and methodology (CSV vs CSA). These estimates help with project planning.",
+    "estimates": {
+      "Simple COTS (GAMP 3)": {
+        "example": "Document management tool, email system",
+        "typical_effort": "2-4 weeks",
+        "deliverables": "Validation Plan, Vendor Assessment, IQ, abbreviated OQ, VSR",
+        "team_size": "1-2 people"
+      },
+      "Configured SaaS — Small (GAMP 4)": {
+        "example": "Salesforce with 5-10 custom objects, basic workflows",
+        "typical_effort": "2-3 months",
+        "deliverables": "Full validation package (VP, URS, FS, FRA, IQ/OQ/PQ, RTM, VSR)",
+        "team_size": "2-3 people"
+      },
+      "Configured SaaS — Medium (GAMP 4)": {
+        "example": "Life sciences CRM with 15-25 modules, multiple integrations, mobile",
+        "typical_effort": "4-6 months",
+        "deliverables": "Full validation package, plus integration validation, mobile validation",
+        "team_size": "3-5 people"
+      },
+      "Configured SaaS — Large (GAMP 4+5)": {
+        "example": "Enterprise CRM + Safety/PV + Regulatory, multi-country, custom Apex",
+        "typical_effort": "6-12 months",
+        "deliverables": "Full validation package per module, integration validation, mobile validation, data migration validation",
+        "team_size": "5-8 people"
+      },
+      "Custom Application (GAMP 5)": {
+        "example": "Custom-built mobile app, bespoke integration middleware",
+        "typical_effort": "3-6 months (on top of development)",
+        "deliverables": "Full SDLC validation package including design specification, code review, unit test documentation",
+        "team_size": "3-5 people (including developers)"
+      }
+    },
+    "csa_discount": "CSA methodology can reduce validation effort by 30-50% for medium/low-risk functions through unscripted testing and reduced documentation. The savings are primarily in OQ (test script writing and execution), not in planning or risk assessment.",
+    "gotcha_level": "info",
+    "source": "validation-planning-guidance",
+    "tags": ["effort-estimation", "timeline", "team-size", "csv-vs-csa"]
+  }
+]

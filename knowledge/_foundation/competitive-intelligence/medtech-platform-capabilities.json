@@ -1,0 +1,27 @@
+[
+  {
+    "id": "ci-medtech-platform-001",
+    "category": "competitive-intelligence",
+    "title": "MedTech Platform Capabilities and Customer 360 Architecture",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Assessment of platform architecture for medical technology (MedTech) commercial operations, covering the five-system model for customer 360, Health Cloud integration patterns, and MedTech-specific workflow requirements.",
+    "findings": {
+      "five_system_model": "MedTech commercial operations require integration across five core systems: (1) CRM for field sales and service, (2) ERP for order management and inventory, (3) Marketing automation for campaign execution, (4) Service/case management for technical support, and (5) Analytics for territory and account intelligence.",
+      "medtech_vs_pharma": "MedTech commercial workflows differ from pharma in several critical ways: physical product logistics (device shipping, returns, loaners), technical service requirements (installation, calibration, training), capital equipment sales cycles (12-18 months), and regulatory traceability (UDI, device history records).",
+      "customer_360_for_medtech": "A MedTech customer 360 must unify: installed base (which devices at which accounts), service history (cases, work orders, field service), commercial interactions (sales calls, demos, proposals), contract terms (pricing agreements, service level agreements), and training records (certifications, in-service dates).",
+      "health_cloud_mapping": "Platform capabilities map to MedTech needs: Account/Contact for HCPs and accounts, Assets for installed base, Cases and Work Orders for service, Opportunities for capital sales pipeline, and custom objects for device-specific data (UDI, configuration, calibration records).",
+      "integration_architecture": "MedTech Customer 360 requires real-time bidirectional integration with ERP (order status, inventory), field service (dispatch, work orders), and regulatory systems (complaint handling, MDR reporting). Event-driven architecture is preferred over batch for service-critical workflows."
+    },
+    "source": "Assessment of MedTech platform architecture covering five-system model, Health Cloud integration, and medical device commercial workflow requirements",
+    "tags": [
+      "medtech",
+      "medical-devices",
+      "customer-360",
+      "health-cloud",
+      "installed-base",
+      "field-service"
+    ]
+  }
+]

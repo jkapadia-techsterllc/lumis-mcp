@@ -1,0 +1,19 @@
+[
+  {
+    "id": "test-strategy-001",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Release Test Strategy — Seven-Phase Methodology",
+    "products": ["Legacy CRM Personal"],
+    "summary": "A seven-phase release testing methodology for a legacy life sciences CRM platform, covering packaging through go-live with backward compatibility validation, regression testing tiers, and multi-team coordination across six global locations.",
+    "findings": {
+      "seven_phases": "Phase 1: Packaging (build assembly and initial verification). Phase 2: Transparency Testing (automated quality assurance followed by manual quality assurance, validating backward compatibility). Phase 3: Regression (structured test execution across priority tiers). Phase 4a: UAT Production Smoke (quick validation of production readiness). Phase 4b: UAT (full user acceptance testing). Phase 5: Localization and Pre-Production (language validation and production environment preparation). Phase 6: Client Sandbox (customer-specific sandbox testing with production data). Phase 7: Go-Live (production deployment and verification).",
+      "backward_compatibility_matrix": "Five test cases covering upgrade permutations: Case 0 (clean install with current versions of all components), Case 1 (previous platform version, previous metadata service, current app), Case 2 (current platform, previous metadata service, current app), Case 3 (previous platform, current metadata service, current app), Case 4 (current platform, current metadata service, previous app). Additional packages for region-specific deployments are tested in combination with each case.",
+      "test_priority_methodology": "Critical and High priority test cases: all MAT (Minimum Acceptance Testing), CORE (core functionality), and AUX (auxiliary) scenarios executed across all backward compatibility cases. Medium priority: MAT scenarios executed through the last six major releases plus all scenarios for the current release. Low priority: MAT scenarios only. This risk-based approach concentrates testing effort on the highest-impact areas.",
+      "test_types": "Functional tests (feature behavior validation), Compliance tests (tagged for quality score tracking and GxP relevance), Orchestration tests (cross-product integration covering four product combinations), and Security tests (applied when security-relevant changes are present).",
+      "team_distribution": "Eight testing teams across six global locations providing time-zone coverage for continuous testing execution. Teams are organized by functional area and backward compatibility case assignment.",
+      "timeline_pattern": "Approximately 12 weeks from packaging start to production go-live. Transparency testing overlaps with early regression. UAT runs in parallel with localization and pre-production validation. Client sandbox testing provides the final pre-production gate."
+    },
+    "source": "internal-legacy-crm-test-strategy-2025",
+    "tags": ["testing", "backward-compatibility", "regression", "release-process", "qa-methodology"]
+  }
+]

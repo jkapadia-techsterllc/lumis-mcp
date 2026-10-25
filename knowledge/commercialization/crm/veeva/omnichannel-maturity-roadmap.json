@@ -1,0 +1,123 @@
+[
+  {
+    "id": "ft-omni-001",
+    "category": "field-trends-omnichannel",
+    "title": "Omnichannel Maturity Model — Seven-Stage Progression",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Seven-stage maturity model from basic CRM call recording through fully orchestrated customer experience. Most organizations operate in stages 2-4. Maturity depends equally on technology, organizational readiness, and content operations.",
+    "stages": [
+      {
+        "stage": 1,
+        "name": "Basic Call Recording",
+        "description": "CRM for call reports and visit frequency. Single-channel."
+      },
+      {
+        "stage": 2,
+        "name": "Email Integration",
+        "description": "Approved email added with compliance workflows and delivery tracking."
+      },
+      {
+        "stage": 3,
+        "name": "Remote and Video",
+        "description": "Video meetings and content delivery during remote sessions."
+      },
+      {
+        "stage": 4,
+        "name": "Approved Content (CLM)",
+        "description": "Closed-Loop Marketing with slide-level tracking and engagement analytics."
+      },
+      {
+        "stage": 5,
+        "name": "Triggered Journeys",
+        "description": "Automated communications triggered by behavior, events, or patterns."
+      },
+      {
+        "stage": 6,
+        "name": "AI-Guided Next-Best-Action",
+        "description": "AI guides timing, channel, and content selection per HCP."
+      },
+      {
+        "stage": 7,
+        "name": "Fully Orchestrated CX",
+        "description": "All channels orchestrated through unified platform with cross-functional data sharing."
+      }
+    ],
+    "current_state": "Most organizations at stages 2-4. Stage 6-7 remains aspirational — barriers are more organizational than technological.",
+    "migration_relevance": "A stage 2-3 organization should not attempt jumping to stage 5-6 during migration. Target maintaining current maturity with a roadmap for advancement.",
+    "source": "veeva-multichannel-crm-eu-whitepaper",
+    "tags": [
+      "omnichannel",
+      "maturity-model",
+      "engagement-strategy",
+      "digital-transformation"
+    ]
+  },
+  {
+    "id": "ft-omni-002",
+    "category": "field-trends-omnichannel",
+    "title": "Sales and Marketing Collaboration in Multichannel CRM",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Sales-marketing alignment is the primary success factor for multichannel CRM. The CRM must be the shared system of record for both functions. Organizations failing at multichannel are usually failing at process alignment, not technology.",
+    "findings": [
+      {
+        "area": "Primary Success Factor",
+        "detail": "Strong cross-functional alignment beats the most capable platform with poor alignment."
+      },
+      {
+        "area": "Shared System of Record",
+        "detail": "CRM must be single source of truth for both sales execution and marketing engagement data."
+      },
+      {
+        "area": "Content Approval to Delivery",
+        "detail": "Workflows must connect medical-legal review to field delivery without friction."
+      },
+      {
+        "area": "Consent Management",
+        "detail": "In EU markets (GDPR), consent management must be in the CRM data model, checked at every engagement point."
+      },
+      {
+        "area": "Root Cause of Failure",
+        "detail": "Process alignment failures — unclear ownership, conflicting KPIs, no shared governance — not technology."
+      }
+    ],
+    "migration_relevance": "Migration is an opportunity to address organizational alignment alongside technology changes. New platform should reflect cross-functional workflows, not replicate siloed processes.",
+    "source": "veeva-multichannel-crm-eu-whitepaper",
+    "tags": [
+      "sales-marketing-alignment",
+      "multichannel",
+      "consent-management",
+      "gdpr"
+    ]
+  },
+  {
+    "id": "ft-omni-003",
+    "category": "field-trends-omnichannel",
+    "title": "Omnichannel Success — Evidence-Based Implementation Checklist",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Data-driven omnichannel success requires a structured 7-step implementation approach. A German medtech case study demonstrates that combining multichannel marketing with rep engagement (MCM+REP) achieves 30% referral uptake — significantly higher than either channel alone. Only 10% of pharma organizations have a true 360-degree HCP database, which is a prerequisite for advanced orchestration.",
+    "findings": {
+      "german_medtech_case": "MCM+REP combined approach achieved 30% referral uptake in a German medtech division. Neither multichannel marketing alone nor rep engagement alone reached this level. The combined approach required shared data and coordinated timing.",
+      "hcp_database_gap": "Only 10% of pharma organizations have a 360-degree HCP database with consolidated engagement data across all channels. This is the primary technical barrier to stage 5+ omnichannel maturity.",
+      "oncology_rep_timing": "55% of oncologists want rep engagement only within the first 2 years from product launch. After that, they prefer self-service digital channels. This has implications for engagement model lifecycle planning.",
+      "seven_step_checklist": "1) Define strategic objectives tied to business outcomes; 2) Build 360-degree customer database consolidating all touchpoints; 3) Implement trigger-based campaign workflows; 4) Configure channel-preference orchestration per HCP; 5) Deploy closed-loop measurement across all channels; 6) Enable content personalization based on HCP behavior signals; 7) Establish continuous optimization cycle with cross-functional governance.",
+      "success_prerequisite": "Steps 1-2 are prerequisites — organizations attempting step 3+ without strategic alignment and consolidated data consistently fail regardless of platform capability."
+    },
+    "source": "Veeva Multichannel CRM Power of Sales and Marketing Whitepaper EU v2",
+    "tags": [
+      "omnichannel",
+      "implementation-checklist",
+      "medtech-case-study",
+      "360-database",
+      "mcm-rep-combined"
+    ]
+  }
+]

@@ -1,0 +1,488 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Lumis — Life Sciences Migration Intelligence",
+    "version": "1.0.0",
+    "description": "Expert-level intelligence for life sciences CRM implementations — module selection, data migration, validation planning, regulatory compliance, multi-country rollout, and computer system validation (CSV)."
+  },
+  "servers": [
+    {
+      "url": "https://api.lumis-lifesciences.com",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/v1/pilot/join": {
+      "post": {
+        "operationId": "joinPilotWaitlist",
+        "summary": "Join the Lumis pilot waitlist",
+        "description": "Submit your email to join the pilot invite list. If you already have access, you'll be told. If you're already on the waitlist, you'll be reminded.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email"],
+                "properties": {
+                  "email": { "type": "string", "format": "email", "description": "Your email address" },
+                  "name": { "type": "string", "description": "Your name" },
+                  "company": { "type": "string", "description": "Your company" },
+                  "role": { "type": "string", "description": "Your role" },
+                  "use_case": { "type": "string", "description": "How you plan to use Lumis" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Waitlist result — joined, already approved, or already on waitlist", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "400": { "description": "Invalid email", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/pilot/status": {
+      "get": {
+        "operationId": "getPilotStatus",
+        "summary": "Check pilot access status",
+        "description": "Returns whether Lumis is in pilot mode and whether the caller has access. Pass your email in the X-Pilot-Email header to check your status.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "responses": {
+          "200": { "description": "Pilot status", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } }
+        }
+      }
+    },
+    "/v1/tools/assess_migration_readiness": {
+      "post": {
+        "operationId": "assessMigrationReadiness",
+        "summary": "Run a free migration readiness assessment",
+        "description": "Returns complexity score, module mappings, gaps, risks, and estimated timeline. No API key required.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["source_platform"],
+                "properties": {
+                  "source_platform": { "type": "string", "description": "Current platform (e.g. 'legacy CRM', 'hybrid')" },
+                  "modules_in_use": { "type": "string", "description": "Comma-separated list of modules currently in use" },
+                  "country_count": { "type": "integer", "default": 1, "description": "Number of countries in scope" },
+                  "user_count": { "type": "integer", "default": 100, "description": "Approximate number of CRM users" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Migration readiness assessment result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "400": { "description": "Invalid parameters", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/get_terminology": {
+      "post": {
+        "operationId": "getTerminology",
+        "summary": "Look up correct life sciences CRM terminology",
+        "description": "Maps incorrect legacy terms to correct modern platform terms. Prevents hallucinations. No API key required.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["term"],
+                "properties": {
+                  "term": { "type": "string", "description": "Term to look up (e.g. 'CLM', 'Approved Email', 'Call')" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Terminology result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "400": { "description": "Invalid parameters", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/get_taxonomy": {
+      "post": {
+        "operationId": "getTaxonomy",
+        "summary": "Browse the Lumis value chain taxonomy",
+        "description": "Returns the taxonomy of phases, areas, and categories in the Lumis knowledge base. No API key required.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phase": { "type": "string", "default": "all", "description": "Phase to browse (e.g. 'commercialization', 'all')" },
+                  "area": { "type": "string", "default": "all", "description": "Area within the phase" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Taxonomy result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } }
+        }
+      }
+    },
+    "/v1/tools/search_knowledge": {
+      "post": {
+        "operationId": "searchKnowledge",
+        "summary": "Search the Lumis knowledge base",
+        "description": "Full-text search across modules, decision trees, gotchas, country rules, validation rules, and terminology.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["query"],
+                "properties": {
+                  "query": { "type": "string", "description": "Natural language search query" },
+                  "category": { "type": "string", "default": "all", "description": "Filter by category" },
+                  "phase": { "type": "string", "default": "all", "description": "Filter by value chain phase" },
+                  "area": { "type": "string", "default": "all", "description": "Filter by area within phase" },
+                  "limit": { "type": "integer", "default": 5, "description": "Maximum results to return" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Search results", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/get_module_mapping": {
+      "post": {
+        "operationId": "getModuleMapping",
+        "summary": "Get target platform equivalent for a legacy module",
+        "description": "Returns coverage level, known gaps, and migration considerations for a source module.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["source_module"],
+                "properties": {
+                  "source_module": { "type": "string", "description": "Source module name (e.g. 'CLM', 'Events', 'Approved Email')" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Module mapping", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/get_gotchas": {
+      "post": {
+        "operationId": "getGotchas",
+        "summary": "Retrieve non-obvious pitfalls and edge cases",
+        "description": "Returns gotchas for a specific module or country — the things that catch people off-guard during implementation.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "module": { "type": "string", "description": "Filter by module name" },
+                  "country": { "type": "string", "description": "Filter by country" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Gotchas list", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/traverse_decision_tree": {
+      "post": {
+        "operationId": "traverseDecisionTree",
+        "summary": "Walk a decision tree for structured recommendations",
+        "description": "Traverse module selection, migration path, or other decision trees with user inputs.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["tree_name"],
+                "properties": {
+                  "tree_name": { "type": "string", "description": "Decision tree name (e.g. 'module-selection', 'migration-path')" },
+                  "inputs": { "type": "string", "description": "JSON string of input parameters for the tree" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Decision tree result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/get_country_rules": {
+      "post": {
+        "operationId": "getCountryRules",
+        "summary": "Get regulatory and configuration rules for a country",
+        "description": "Returns GDPR, APPI, FDA, and module-specific constraints for a given country.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["country"],
+                "properties": {
+                  "country": { "type": "string", "description": "Country name or code (e.g. 'Germany', 'DE', 'Japan')" },
+                  "module": { "type": "string", "description": "Optional module filter" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Country rules", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/run_validation": {
+      "post": {
+        "operationId": "runValidation",
+        "summary": "Run a validation rule or match symptoms",
+        "description": "Run a specific validation rule by ID or match rules against a reported symptom to diagnose configuration issues.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rule_id": { "type": "string", "description": "Specific validation rule ID" },
+                  "symptom": { "type": "string", "description": "User-reported problem description" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Validation result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/get_agent_workflow": {
+      "post": {
+        "operationId": "getAgentWorkflow",
+        "summary": "Get a specialized Lumis agent workflow",
+        "description": "Returns the full workflow, phases, and checklists for migration, implementation, audit, or operations agents.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["agent"],
+                "properties": {
+                  "agent": { "type": "string", "enum": ["migration", "implementation", "audit", "operations"], "description": "Agent name" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Agent workflow", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/plan_multi_country_rollout": {
+      "post": {
+        "operationId": "planMultiCountryRollout",
+        "summary": "Generate a wave-based multi-country rollout plan",
+        "description": "Country clustering, wave sequencing, execution timelines, and risk warnings for global pharma CRM deployments.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["country_count", "modules", "regions"],
+                "properties": {
+                  "country_count": { "type": "integer", "description": "Total countries in scope" },
+                  "modules": { "type": "string", "description": "Comma-separated list of modules to deploy" },
+                  "regions": { "type": "string", "description": "Comma-separated regions (e.g. 'EU, Americas, APAC')" },
+                  "includes_us": { "type": "boolean", "default": false, "description": "Whether the US is in scope" },
+                  "includes_japan": { "type": "boolean", "default": false, "description": "Whether Japan is in scope" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Rollout plan", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/compare_entities": {
+      "post": {
+        "operationId": "compareEntities",
+        "summary": "Compare two entities side-by-side",
+        "description": "Compare countries, modules, regulatory frameworks, or any knowledge base entries along a chosen dimension.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["entity_a", "entity_b"],
+                "properties": {
+                  "entity_a": { "type": "string", "description": "First entity (e.g. 'Germany', 'CLM')" },
+                  "entity_b": { "type": "string", "description": "Second entity (e.g. 'France', 'Events')" },
+                  "dimension": { "type": "string", "description": "Focus dimension (e.g. 'sample rules', 'regulatory')" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Comparison result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/v1/tools/plan_system_validation": {
+      "post": {
+        "operationId": "planSystemValidation",
+        "summary": "Plan a computer system validation (CSV/CSA)",
+        "description": "Returns applicable regulations, GAMP classification, deliverables, effort estimates, and gap areas for a life sciences system validation.",
+        "parameters": [
+          { "$ref": "#/components/parameters/PilotEmail" }
+        ],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["system_name", "system_type"],
+                "properties": {
+                  "system_name": { "type": "string", "description": "Name of the system (e.g. 'Salesforce CRM', 'Veeva Vault')" },
+                  "system_type": { "type": "string", "enum": ["saas", "cots", "configured", "custom", "hybrid"], "description": "Type of system" },
+                  "platform": { "type": "string", "description": "Platform name" },
+                  "regulatory_geography": { "type": "string", "default": "US", "description": "Regulatory geography (US, EU, Japan, etc.)" },
+                  "gxp_context": { "type": "string", "description": "GxP context (e.g. 'GMP', 'GCP', 'GLP')" },
+                  "modules_in_use": { "type": "string", "description": "Comma-separated modules" },
+                  "has_mobile": { "type": "boolean", "default": false, "description": "System has mobile component" },
+                  "has_integrations": { "type": "boolean", "default": false, "description": "System has integrations" },
+                  "has_custom_code": { "type": "boolean", "default": false, "description": "System has custom code" },
+                  "user_count": { "type": "integer", "default": 0, "description": "Number of users" },
+                  "country_count": { "type": "integer", "default": 1, "description": "Countries in scope" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Validation plan", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ToolResult" } } } },
+          "401": { "description": "API key required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "PilotEmail": {
+        "name": "X-Pilot-Email",
+        "in": "header",
+        "required": false,
+        "schema": { "type": "string", "format": "email" },
+        "description": "Pilot user email. During the private pilot, pass your approved email here to access all tools without an API key."
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Api-Key",
+        "description": "Lumis API key — free tools (assess_migration_readiness, get_terminology, get_taxonomy) do not require a key. During the private pilot, pass X-Pilot-Email instead to access all tools without a key."
+      }
+    },
+    "schemas": {
+      "ToolResult": {
+        "type": "object",
+        "description": "Tool execution result — structure varies by tool."
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string", "description": "Error message" }
+        },
+        "required": ["error"]
+      }
+    }
+  }
+}

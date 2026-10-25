@@ -1,0 +1,596 @@
+[
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-store-check-configure-visit-record-type-routing",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Visit Record Type Routing",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Turn on Visit Record Type Routing and map a Visit record type to the experience your reps use for that activity, such as a store check or an",
+    "findings": [
+      {
+        "name": "Configure Visit Record Type Routing",
+        "detail": "Turn on Visit Record Type Routing and map a Visit record type to the experience your reps use for that activity, such as a store check or an order."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure Visit Record Type Routing: | Life Sciences Commercial Admin Before you map a Visit record type to an experience, create the Visit record type and build or confirm the target experience. Turn on Visit Record Type Routing. From Setup, in the Quick Find box, find and select Life Sciences Customer Engagement Setup . From Enable Life Sciences Cloud for Customer Engagement Features, turn on Record Type-Based Routing . This is an org-wide master switch. Individual routing configurations created in the next procedure have no effect until this setting is on. Create a Visit record type-to-experience mapping. From the App Launcher, find and select Admin Console . Select Record Type-Based Routing Configuration . Click New . Enter a master label and developer name. Select an object. Select a record type. Select an action. You can choose New or Edit . New routes the record-creation flow. Edit routes the record-editing flow. Note Create both New and Edit mappings for every Provider Visit record type that should continue to use the existing HCP visit experience. Without these mappings, enabling Record Type Routing prevents those record types from launching the existing LogAVisit experience. Select the Life Sciences Standard component. This determines which component field users see for the selected object, record type, and action. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_store_check_configure_visit_record_type_routing.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-quote-document-pdfs",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Quote Order PDFs",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure a PDF template to generate PDFs after creating a quoted order. You can generate, view, and edit PDFs only from the web. When a field rep completes a sale, they can capture customer's signature on the quoted order. Capturing the customer's signature gives a documented, formal record of who...",
+    "findings": [
+      {
+        "name": "Quote Order PDFs",
+        "detail": "Configure a PDF template to generate PDFs after creating a quoted order. You can generate, view, and edit PDFs only from the web. When a field rep completes a sale, they can capture customer's signature on the quoted order. Capturing the customer's signature gives a documented, formal record of who confirmed the order—for example, a pharmacy store manager confirming a purchase. Field reps can capture this signature directly from their iPad, whether they're online or offline. When a field rep is offline, the device encrypts and stores the signature locally, then syncs it to Salesforce after connectivity restores. The signing experience is identical online and offline, so field reps don't need to change how they capture a signature based on connectivity. Note The Quote Line Items component supports up to 700 line items for PDF generation. For handling upto 2,000 products, use the Related Record Table component to configure quote line items in the Quotes page. Create a Quote Document Template Add a digital signature component to your quote document template so field reps can capture a customer's signature at the point of sale."
+      },
+      {
+        "name": "See Also",
+        "detail": "Considerations for Creating Quote PDFs"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_quote_document_pdfs.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-create-quote-document-template",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create a Quote Document Template",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add a digital signature component to your quote document template so field reps can capture a customer's signature at the point of",
+    "findings": [
+      {
+        "name": "Create a Quote Document Template",
+        "detail": "Add a digital signature component to your quote document template so field reps can capture a customer's signature at the point of sale."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a quote document template: | Life Sciences Commercial Admin Document Builder User Create Default as a picklist value for the Digital Signature object for the Signature Type field See Add or Edit Picklist Values . From Setup, in the Quick Find box, find and select Document Builder . Click + New Template . Enter a name. Select Quote for Object, and click Next . Select Default Quote Template , and click Done . Delete the existing signature component, and drag the Life Sciences Flexi Signature component on the page. Note Drop the component before the footer so it doesn't appear on every page. To show it on every page instead, drop it in the footer. In the Signature Type field, select a signature type as Default . Save and activate your changes. Create a quick action on the Quote page to generate PDFs using this template. See Add a Custom Action to a Page Layout . Note The quick action available for Revenue Cloud users to create PDFs don't generate PDFs for Agentforce Life Sciences quoted orders."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_create_quote_document_template.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-turn-on-header-adjustments",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Turn On Header Adjustments for Quotes",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Field reps can apply discounts or total overrides across an entire quote and automatically distribute the amounts across line",
+    "findings": [
+      {
+        "name": "Turn On Header Adjustments for Quotes",
+        "detail": "Field reps can apply discounts or total overrides across an entire quote and automatically distribute the amounts across line items."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Important Before you turn on header adjustments, make sure you've added Discount Distribution Service (DDS) as the final element in the associated pricing procedure. The header discount type, value, and distribution logic for the DDS must resolve to a real value through a mapped Quote field, a List Group and Assignment, or a constant. An unresolved input doesn't cause an error; the discount just isn't distributed. Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To turn on header adjustments for quotes: | Life Sciences Commercial Admin From Setup, in the Quick Find box, find and select Revenue Settings . Turn on Header Adjustments . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_turn_on_header_adjustments.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-price-waterfall-considerations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Price Waterfall Considerations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Review these considerations before you configure Price Waterfall and Price Waterfall",
+    "findings": [
+      {
+        "name": "Price Waterfall Considerations",
+        "detail": "Review these considerations before you configure Price Waterfall and Price Waterfall Persistence."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Configure Open and Closed Quote Statuses first. If both the Open Quote Statuses and Closed Quote Statuses fields are empty, no waterfall data syncs to an iPad, even with Price Waterfall turned on. Include every active quote status that your org uses—including custom statuses—in either list. Enter status values that exactly match the picklist values on your Quote object, including capitalization. If the popover opens but appears empty, see Order Management Troubleshooting . Balance retention against storage. Caching waterfall data consumes on-device storage. Select longer retention so field reps can review historical quotes offline, at the cost of more storage. Select shorter retention to conserve storage, knowing reps lose access to older data offline sooner. Understand what gets cleaned up automatically. On each sync, the iPad removes waterfall data older than the configured retention period, data for quotes that aren't in a configured open or closed status, and draft waterfall data beyond the single most-recent entry per quote line item."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_price_waterfall_considerations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-turn-on-price-waterfall-persistence",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Turn on Price Waterfall Persistence",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Turn on Price Waterfall Persistence so iPads cache waterfall data locally, letting field reps view pricing calculations offline, after closing the popover, and whenever the app relaunches. Price Waterfall Persistence works only if you've turned on Price",
+    "findings": [
+      {
+        "name": "Turn on Price Waterfall Persistence",
+        "detail": "Turn on Price Waterfall Persistence so iPads cache waterfall data locally, letting field reps view pricing calculations offline, after closing the popover, and whenever the app relaunches. Price Waterfall Persistence works only if you've turned on Price Waterfall."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Before you start: Turn on Price Waterfall. See Turn On Order Management . Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To turn on Price Waterfall Persistence: | Life Sciences Commercial Admin From Setup, in the Quick Find box, find and select Salesforce Pricing Setup . Select Turn On Price Waterfall Persistence . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_turn_on_price_waterfall_persistence.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-quote-sharing-territory",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Quoted Order Sharing by Territory",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure territory-based quote sharing for field reps to automatically gain visibility into all previous quoted orders for accounts in their territory. The Manage Quote Sharing batch job runs on a set schedule, evaluating territory assignments and sharing quoted orders and their related records...",
+    "findings": [
+      {
+        "name": "Quoted Order Sharing by Territory",
+        "detail": "Configure territory-based quote sharing for field reps to automatically gain visibility into all previous quoted orders for accounts in their territory. The Manage Quote Sharing batch job runs on a set schedule, evaluating territory assignments and sharing quoted orders and their related records with the correct users. Field reps can use this quote history to prepare for negotiations, compare historical pricing, and build new quoted orders faster. Because quote records in Salesforce have no relationship to territory, Salesforce derives the territory connection through the account. An account's territory assignment is the basis for determining which users receive access to an account's quotes. Users assigned to an account's territory receive visibility into that account's quotes and related records. When a quoted order is shared based on territory, these records are shared with the territory-assigned field rep. Quotes: Primary shared record linked to an account via territory assignment. Drives sharing of all child records. Quote Line Items: Line-level detail from a shared quoted order. Helps field reps to see line-level detail from previous quoted orders. Quote Line Price Adjustments: Historical pricing discounts applied to a quoted order. Helps field reps compare historical pricing discounts. Territory-based quoted orders sharing is available on both web and iPads. Add Account to Quotes Record Page When creating a quoted order, field reps select an account, and can then see quoted orders for other accounts in their territory."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_quote_sharing_territory.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-quote-sharing-territory",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add Account to Quotes Record Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "When creating a quoted order, field reps select an account, and can then see quoted orders for other accounts in their",
+    "findings": [
+      {
+        "name": "Add Account to Quotes Record Page",
+        "detail": "When creating a quoted order, field reps select an account, and can then see quoted orders for other accounts in their territory."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure Quoted Order Sharing by Territory: | Life Sciences Commercial Admin From Setup, click Object Manager , then find and select Quote . Click Page Layout . Drag the Account for Quote field to the page header. Save your changes. The account for a quote appears when field reps create quotes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_quote_sharing_territory.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-setup-generic-workflow",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up a Workflow for Locking and Unlocking Quotes",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure a workflow on the Quote object to control when quotes and their child records—Quote Line Items and Quote Line Groups—lock, based on the quote's status. The workflow also defines the actions that users can take at each stage. Locking a quote prevents unauthorized changes during critical...",
+    "findings": [
+      {
+        "name": "Set Up a Workflow for Locking and Unlocking Quotes",
+        "detail": "Configure a workflow on the Quote object to control when quotes and their child records—Quote Line Items and Quote Line Groups—lock, based on the quote's status. The workflow also defines the actions that users can take at each stage. Locking a quote prevents unauthorized changes during critical workflow stages."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "User Permissions Needed To set up the workflow: | Life Sciences Commercial Admin permission set Create the Submit and Request for Unlock actions that appear as buttons on the Quote record page. See Create Workflow Actions . Define the stages that a quote passes through and which actions are available at each stage. See Create a Workflow Path . Show reps and managers the quote's current stage. See Add the Workflow Path Component to the Quote Record Page . Make sure reps change a quote's status only through the workflow action buttons. See Restrict the Quote Status Field for Field Reps . Turn on the trigger that runs the workflow. See Enable the Workflow Trigger . Grant the sharing access reps must use stage actions. See Get Your Org Ready for Quote and Pricing Users . Create Workflow Actions Before configuring stages, create the two workflow actions that appear as buttons on the Quote record page. Create a Workflow Path Create a workflow path on the Quote object and configure the Draft, Submitted, and Request for Unlock stages to control when quotes are locked and unlocked. Add the Workflow Path Component to the Quote Record Page Add the LifeSciStagePathContainer lightning component to see the workflow path details on the Quote record page. This component shows all stages and stage operation actions configured in a workflow path. Restrict the Quote Status Field for Field Reps To restrict field reps from manually changing a quote's status, set the Status field on a quote as read-only. This makes sure a quote's status changes only through the workflow action buttons. Turn on the Workflow Trigger For triggering the workflow, turn on the StagePathPermissionsHandler trigger."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_setup_generic_workflow.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-create-workflow-path",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create a Workflow Path",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create a workflow path on the Quote object and configure the Draft, Submitted, and Request for Unlock stages to control when quotes are locked and",
+    "findings": [
+      {
+        "name": "Create a Workflow Path",
+        "detail": "Create a workflow path on the Quote object and configure the Draft, Submitted, and Request for Unlock stages to control when quotes are locked and unlocked."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a workflow path: | Life Sciences Commercial Admin From the App Launcher, find and select Admin Console . Select Workflow Configuration, and then select Workflow Paths . Click New . Enter a name. For Object, select Quote . For Field API Name, select Status . To apply the workflow to a specific quote type, select a record type. Click Continue . Click the workflow path. Configure the Draft stage. Click Draft , and then click + under Stage Operations. Enter a name for the operation. Select Create , Edit , and Delete . For Priority, enter 1 . To add a Stage Operation Action, select action as Submit . Configure the Submitted stage. Click Submitted , and then click + under Stage Operations. Enter a name for the operation. Deselect Create , Edit , and Delete . For Priority, enter 1 . To add a Stage Operation Action, select action as Request for Unlock . Configure the Request for Unlock stage. The Request for Unlock stage keeps the quote locked while an approval is pending. Click Request for Unlock , and then click + under Stage Operations. Enter a name for the operation. Deselect Create , Edit , and Delete . For Priority, enter 1 . Save and activate the workflow path."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_create_workflow_path.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-add-workflow-path-component",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add the Workflow Path Component to the Quote Record Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add the LifeSciStagePathContainer lightning component to see the workflow path details on the Quote record page. This component shows all stages and stage operation actions configured in a workflow",
+    "findings": [
+      {
+        "name": "Add the Workflow Path Component to the Quote Record Page",
+        "detail": "Add the LifeSciStagePathContainer lightning component to see the workflow path details on the Quote record page. This component shows all stages and stage operation actions configured in a workflow path."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To add the Workflow Path component to the Quote record page: | Life Sciences Commercial Admin From the App Launcher, find and select Quote . Select a quote. Click Setup, and then select Edit Page . Drag LifeSciStagePathContainer from the component panel onto the Quote record page. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_add_workflow_path_component.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-enable-generic-workflow-trigger",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Turn on the Workflow Trigger",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "For triggering the workflow, turn on the StagePathPermissionsHandler",
+    "findings": [
+      {
+        "name": "Turn on the Workflow Trigger",
+        "detail": "For triggering the workflow, turn on the StagePathPermissionsHandler trigger."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To turn on the workflow trigger: | Life Sciences Commercial Admin From the App Launcher, find and select Admin Console . Select Trigger Handler Administration . Search for StagePathPermissionsHandler , and turn it on."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_enable_generic_workflow_trigger.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-quote-status-check",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Quote Status Check Decision Outcome",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "For each outcome in the quote status decision, configure the stage, steps, and actions that determine how the approval flow routes an unlock request or notifies stakeholders when a quote is",
+    "findings": [
+      {
+        "name": "Configure Quote Status Check Decision Outcome",
+        "detail": "For each outcome in the quote status decision, configure the stage, steps, and actions that determine how the approval flow routes an unlock request or notifies stakeholders when a quote is locked."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure the quote status check decision outcome: | Life Sciences Commercial Admin Define what happens along each path of the quote status decision you created in Configure an Approval Flow . Configure the actions for each outcome. For example, routing the quote to the approver when the status is Request for Unlock, or notifying stakeholders when the status is Submitted. These outcome-specific actions determine how the flow responds to each quote status before updating stakeholders and finalizing the approval routing. Before you start: Complete steps 1–5 of Configure an Approval Flow . For Outcome 1, configure a stage to send the quote for manager approval. Add Step 1 as the approval step with these settings. Label: Pending for Manager Approval for Unlock When to Start: When the stage starts When to Complete: When the assigned user has completed the action Action Type: Approvals Workflow: Evaluate Approval Requests Approver Type: Resource Resource: {!approver} Record ID: Triggering Quote > Quote ID {!$Record.Id} Lock Record: No Allow Approver Edit: No Add Step 2 as a background step for sending notifications with these settings. Note Before you start configuring this step, make sure you create an auto-launched flow for sending notifications. See Configure Lock Notification Flow . Label: Send Notifications When to Start: When the stage starts Action: Select the flow created for sending quote notifications QuoteId: Triggering Quote > Quote ID {!$Record.Id} Run As: Automated Process User Add a decision to check whether submitted approval requests are approved or rejected. Label: Quote Approved or Rejected for Unlock? Configure the outcomes. See Configure Quote Approval Decision Outcomes . For Outcome 2, configure a stage for sending notifications when a quote is locked with these settings. Label: Send Notifications When Quote is Locked When to Start: When the stage starts When to Complete: When the assigned user has completed the action Action: Select the flow that you created for sending quote notifications. See Configure Lock Notification Flow . QuoteId: Triggering Quote > Quote ID {!$Record.Id} Run As: Automated Process User"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_quote_status_check.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-quote-approval-decision",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Quote Approval Decision Outcomes",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Define what happens after a manager approves or rejects an unlock request. Approving the request unlocks the quote and returns its status to Draft, so your field reps can edit and resubmit. Rejecting the request changes the status to Rejected and keeps the quote locked. Either way, the flow...",
+    "findings": [
+      {
+        "name": "Configure Quote Approval Decision Outcomes",
+        "detail": "Define what happens after a manager approves or rejects an unlock request. Approving the request unlocks the quote and returns its status to Draft, so your field reps can edit and resubmit. Rejecting the request changes the status to Rejected and keeps the quote locked. Either way, the flow notifies the field rep of the outcome."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure quote approval decision outcomes: | Life Sciences Commercial Admin Before you start: Complete Configure Quote Status Check Decision Outcome up to the point where it links to this task. When an approver approves a quote, configure outcome 1 with these settings. Status: {!Pending_for_Manager_Approval_for_Unlock.Outputs.approvalDecision} = Approve Condition Requirements: All Conditions Are Met (AND) Add a stage Send Approval Notifications with a background step configured with these settings. Select When to Start the Step: When the stage starts, the step starts Action: Select the flow for sending quote notifications. See Configure Lock Notification Flow . ApprovalDecision input: { !Pending_for_Manager_Approval_for_Unlock.Outputs.approvalDecision} QuoteApprovedorRejectedReason input: {!Pending_for_Manager_Approval_for_Unlock.Outputs.approvalComments} QuoteId: Triggering Quote > Quote ID {!$Record.Id} User type: Select a user who has full access to update a quote. For example, an admin. When an approver rejects a quote, configure outcome 2 with these settings. Status: {!Pending_for_Manager_Approval_for_Unlock.Outputs.approvalDecision} = Reject Condition Requirements: All Conditions Are Met (AND) Add a stage Send Rejection Notification with a background step configured with these settings. When to Start: When the stage starts Action: Select the flow that you created for sending quote notifications. See Configure Lock Notification Flow . ApprovalDecision input: {!Pending_for_Manager_Approval_for_Unlock.Outputs.approvalDecision} QuoteApprovedorRejectedReason input: {!Pending_for_Manager_Approval_for_Unlock.Outputs.approvalComments} QuoteId: Triggering Quote > Quote ID {!$Record.Id} Run As: Select a user who has full access to update a quote. For example, an admin. Save and activate the flow."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_quote_approval_decision.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-approval-tracking",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Approval Tracking Components",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Approval tracking components give reps and managers visibility into the quote lock and unlock approval workflow. Add two components to the Quote record page so reps and managers can monitor unlock request status directly from a quote. Together, the components show the complete approval history,...",
+    "findings": [
+      {
+        "name": "Configure Approval Tracking Components",
+        "detail": "Approval tracking components give reps and managers visibility into the quote lock and unlock approval workflow. Add two components to the Quote record page so reps and managers can monitor unlock request status directly from a quote. Together, the components show the complete approval history, pending reviews, approver identity, and review comments for a quote."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure approval tracking: | Life Sciences Commercial Admin From the App Launcher, find and select Quotes . Select a quote. Click Setup, and then click Edit Page . Create a tab on the record page, and enter a name for the tab. For example, Approvals. Drag Approval Trace to the Approvals tab. Approval Trace is visible to both reps and approvers. It shows the approval history, approver identity, submission dates, and decision comments. Drag Orchestration Work Guide to the Approvals tab. Orchestration Work Guide is visible to approvers only. Approvers use it to view pending requests, approve or reject them, and add comments—all from the Quote record page. Save your changes. Grant read access to the approval objects so reps and managers can view the approval tracking components. From Setup, in the Quick Find box, enter Profiles , and then select Profiles . Select a profile, and then click Edit . Fom the Standard Object Permissions section, select Read for these objects. Approval Submission Approval Work Item From the Field-Level Security section, click View for these objects, and then select Read Access for the required fields. Approval Submission: Give read access to the Related Record field. Approval Work Item: Give read access to these fields. Approval Chain Name Approval Submission Assigned To Comments Reviewed By Reviewed Date Status Repeat substeps a—d for all relevant profiles."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_approval_tracking.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-admin-console-configurations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Quotes and Pricing Admin Console Configurations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Help your field reps quickly find recommended products when creating quoted orders, and make sure that the appropriate pricing logic gets applied when field reps create quoted orders. Configure Product Views Help field reps select products from product catalogs. This option is available only on...",
+    "findings": [
+      {
+        "name": "Quotes and Pricing Admin Console Configurations",
+        "detail": "Help your field reps quickly find recommended products when creating quoted orders, and make sure that the appropriate pricing logic gets applied when field reps create quoted orders. Configure Product Views Help field reps select products from product catalogs. This option is available only on iPad. Configure Default Pricing Procedure Set the default pricing procedure that determines how products are priced when your field reps build a quote, either org-wide or for a specific profile. Configure Priority Product Tab When field reps add products to a quote, they see a Priority Products tab alongside the standard product search. This tab shows products filtered by the rep's territory, the account's classification, or other criteria you've configured. Configure Disclaimer Filters Make sure that field reps see the applicable disclaimer based on their account and territory when they create quotes. Configure Price Waterfall Settings For field reps to see the price waterfall for a quote, the quote must match the configured statuses. Configure the quote statuses in the Admin Console, and control which quotes are retained in waterfall data on a field rep's mobile device and for how long. Define Default Quote Document Set the default document template that generates when your field reps create a PDF for a quote. Configure this template one time in the Admin Console, and it applies across your org's quotes. This keeps every generated quote document consistent without reps needing to select a template each time. Configure Quote Fields and Mobile Layout Give field reps access to only the fields they require, including the fields that appear as the quote header and line items on iPads."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_admin_console_configurations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-default-pricing-procedure",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Default Pricing Procedure",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set the default pricing procedure that determines how products are priced when your field reps build a quote, either org-wide or for a specific",
+    "findings": [
+      {
+        "name": "Configure Default Pricing Procedure",
+        "detail": "Set the default pricing procedure that determines how products are priced when your field reps build a quote, either org-wide or for a specific profile."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure the default pricing procedure: | Life Sciences Commercial Admin From the App Launcher, select Admin Console . Select Orders Management . Select the Quotes and Pricing settings tab. Select whether you want the settings to be applicable to the entire org or to a specific profile. From the Transaction Configuration section, select the default pricing procedure. To skip tax calculation, from the Quote Settings tab, select TPT for LSC4CE Mobile as the transaction processing type. Use the Transaction Processing Type shipped with the solution or create one. To create a Transaction Processing Type, see TransactionProcessingType . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_default_pricing_procedure.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-priority-product-tab",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Priority Product Tab",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "When field reps add products to a quote, they see a Priority Products tab alongside the standard product search. This tab shows products filtered by the rep's territory, the account's classification, or other criteria you've",
+    "findings": [
+      {
+        "name": "Configure Priority Product Tab",
+        "detail": "When field reps add products to a quote, they see a Priority Products tab alongside the standard product search. This tab shows products filtered by the rep's territory, the account's classification, or other criteria you've configured."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure the Priority Products tab: | Life Sciences Commercial Admin Note For the priority product list to show up in the product catalog of an account, set up store assortment for the account. See Manage Product Assortments . From the App Launcher, select Admin Console . Select Orders Management . Select the Quotes and Pricing settings tab. Select whether you want the settings to be applicable to the entire org or to a specific profile. From the Product Views section, select Enable Priority Products Tab . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_priority_product_tab.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-disclaimer-filters",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Disclaimer Filters",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Make sure that field reps see the applicable disclaimer based on their account and territory when they create",
+    "findings": [
+      {
+        "name": "Configure Disclaimer Filters",
+        "detail": "Make sure that field reps see the applicable disclaimer based on their account and territory when they create quotes."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure disclaimer filters: | Life Sciences Commercial Admin From the App Launcher, select Admin Console . Select Orders Management . From the Quotes Document Settings tab, configure the disclaimer filter fields. In the Territory Info field, select a field based on which disclaimers are filtered for a territory. In the Account field, select a field based on which disclaimers are filtered for an account. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_disclaimer_filters.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-price-waterfall-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Price Waterfall Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "For field reps to see the price waterfall for a quote, the quote must match the configured statuses. Configure the quote statuses in the Admin Console, and control which quotes are retained in waterfall data on a field rep's mobile device and for how",
+    "findings": [
+      {
+        "name": "Configure Price Waterfall Settings",
+        "detail": "For field reps to see the price waterfall for a quote, the quote must match the configured statuses. Configure the quote statuses in the Admin Console, and control which quotes are retained in waterfall data on a field rep's mobile device and for how long."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure Price Waterfall settings: | Life Sciences Commercial Admin From the App Launcher, select Admin Console . Select Orders Management . Select Orders and Pricing Settings . Configure the following settings under the Price Waterfall section. Waterfall Open Quote Statuses: Select the quote status that represents an open (in-progress) quote. Waterfall data is retained on the rep's iPad for quotes in this status. The field uses a multipicklist but only one selection is valid. Waterfall Closed Quote Statuses: Select the quote status that represents a closed (submitted or fulfilled) quote. Waterfall data is also retained for quotes in this status. Waterfall Open Quotes Retention Days: Enter the number of days for keeping the offline-generated price waterfall data on a rep's iPad before it's purged. You can enter a value between 1–15, and the default is 7. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_price_waterfall_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-define-default-quote-document",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Define Default Quote Document",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set the default document template that generates when your field reps create a PDF for a quote. Configure this template one time in the Admin Console, and it applies across your org's quotes. This keeps every generated quote document consistent without reps needing to select a template each",
+    "findings": [
+      {
+        "name": "Define Default Quote Document",
+        "detail": "Set the default document template that generates when your field reps create a PDF for a quote. Configure this template one time in the Admin Console, and it applies across your org's quotes. This keeps every generated quote document consistent without reps needing to select a template each time."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To define the default quote document: | Life Sciences Commercial Admin Note Field reps can generate, view, and edit PDF only from the web. From the App Launcher, select Admin Console . Select Orders Management . From the Quote Document Settings tab, select the default quote document template. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_define_default_quote_document.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-configure-quote-fields-mobile",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Quote Fields and Mobile Layout",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Give field reps access to only the fields they require, including the fields that appear as the quote header and line items on",
+    "findings": [
+      {
+        "name": "Configure Quote Fields and Mobile Layout",
+        "detail": "Give field reps access to only the fields they require, including the fields that appear as the quote header and line items on iPads."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure quote fields for mobile: | Life Sciences Commercial Admin Configure a quote record page to include the fields that appear as header and as quote line items. From Admin Console, select Order Management . Select Quote Settings . Select the record type you configured for field reps. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_configure_quote_fields_mobile.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-create-quote",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create a Quoted Order from Web",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Field reps build quoted orders directly from the web by selecting an account, browsing a price book, and adding products from the catalog. Set quantities and discounts at the line level, or apply a header-level adjustment across the entire quote using a percentage or fixed amount. Generate a PDF to...",
+    "findings": [
+      {
+        "name": "Create a Quoted Order from Web",
+        "detail": "Field reps build quoted orders directly from the web by selecting an account, browsing a price book, and adding products from the catalog. Set quantities and discounts at the line level, or apply a header-level adjustment across the entire quote using a percentage or fixed amount. Generate a PDF to review, edit, or email before submitting the quote for approval, keeping the sales cycle moving without leaving the browser."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a quoted order from web: | Life Sciences Commercial User permission set From the App Launcher, find and select Quote . Click New Quote . Enter a name. Select an account. Select a billing contact type and then select a shipping contact type. Save your changes. Select Browse Catalog , and then select a price book. Click Next . Select a catalog, and then click Next . Search for and add products. To add products manually, perform the following. Select Related . Select Add Product . Select the products, and click Next . Enter quantities and discount percentage for all the selected products. Save your changes. When you edit line items, save your quote to see the updated prices, discounts, and totals. To apply a header-level discount, select Manage Header Adjustment . Select the adjustment type as either Percentage or Amount . If you select Percentage, enter a value. If you select Amount, select a distribution logic, and then a value. Click Apply . To apply a manual discount at the line level, for the line item you want to add a discount, perform the following. Select the adjustment type as either Percentage or Amount . If you select Percentage, enter a value. If you select Amount, select a distribution logic, and then a value. Save your changes and submit the quoted order. Click Generate PDF . You can view, edit, and email the PDF. Click Submit . Quoted orders created on the web syncs to its territory. So, field reps can see orders, even the ones created on the web, for their territories on their iPads."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_create_quote.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  },
+  {
+    "id": "lsc-help-orders-ind-lsc-order-management-create-quote-ipad",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create a Quoted Order from iPad",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "From an iPad, create quoted orders from multiple pages. Field reps typically create quoted orders after they complete a store",
+    "findings": [
+      {
+        "name": "Create a Quoted Order from iPad",
+        "detail": "From an iPad, create quoted orders from multiple pages. Field reps typically create quoted orders after they complete a store check."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. You can create quotes from a mobile device from these pages. Account related list Visit record The Quoted Orders tab in Visits Visit related list Quoted Order You can start a quoted order from any of these pages. These steps show the most common path from a visit. User Permissions Needed To create a quoted order from iPad: | Life Sciences Commercial User permission set From the iPad's homepage, go to the Visits tab. Select Quoted Orders . Enter the quote details, such as the account and billing information. The fields appear based on the page layout configured by your admin. Save your changes. Select Add line items . Select a price book, and then click Continue to select products . Select products. You can select one of these options. Products from Last Order Store Assortments Add products manually Click Continue . To see all products, select All Products . The list shows only the products with a list price currency that matches the currency you selected as quote currency. If you don't select a quote currency, products matching the currency specified for your profile are shown instead. If no product matches either currency, no products are shown. To see priority products, select Priority Products . The product list shows up only if your Salesforce admin has set up a store assortment for the account. Select the products you want to add in the quoted order, and click Add to quote . Products aren't grouped by either category or brand in the browse catalog products. Enter quantities for each product. Pricing gets calculated automatically. To add a manual discount to a quote line item, perform these steps. Select the discount type. You can select either Amount or Percentage . Enter the value, and click Apply . When you edit line items, save your quote to see the updated prices, discounts, and totals. To apply a header-level discount, perform these steps. For Order Discount at the bottom of the page, click Add . Select the discount type. These are the available options. Amount Percentage Override Total Enter the value. If you select Amount, select a distribution type. Click Apply . Hover over a quote line item to view its detailed, step-by-step price breakdown. Depending on how pricing is configured, you can access this breakdown in both online and offline modes, or exclusively while online. To verify the added details, click Review . If a disclaimer is configured, it appears on the screen. If configured, add your signature."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_order_management_create_quote_ipad.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "orders"
+    ]
+  }
+]

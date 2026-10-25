@@ -1,0 +1,200 @@
+[
+  {
+    "id": "val-cloud-001",
+    "category": "validation-cloud",
+    "title": "Cloud/SaaS IQ/OQ/PQ — How Qualification Differs from On-Premise",
+    "summary": "Cloud and SaaS platforms fundamentally change how IQ, OQ, and PQ are executed. The customer does not control infrastructure, cannot perform traditional installation verification, and must adapt qualification protocols to the shared-responsibility model.",
+    "iq_differences": {
+      "traditional_on_premise": "Verify hardware specs, OS version, database version, network config, disk space, software installation checksums, and environment configuration match the Design Specification.",
+      "cloud_saas_approach": {
+        "what_changes": "You do NOT install anything. The vendor manages infrastructure. Traditional IQ (verify server, verify OS, verify database) is replaced by VENDOR QUALIFICATION.",
+        "what_to_do": [
+          "Obtain and review vendor's SOC 2 Type II report — covers infrastructure controls, availability, security",
+          "Obtain vendor's ISO 27001 certification — covers information security management",
+          "Review vendor's system status history — uptime, incident frequency, resolution times",
+          "Verify vendor's data center certifications (if applicable)",
+          "Document the vendor's SLA commitments: uptime guarantee, RTO, RPO, data sovereignty",
+          "Verify your org/tenant configuration matches your Configuration Specification — this is your 'installation'",
+          "Verify integrations are connected and authenticated",
+          "Verify data migration completed successfully (if applicable)"
+        ],
+        "deliverable": "Installation Qualification Report that documents vendor qualification evidence and tenant configuration verification"
+      }
+    },
+    "oq_differences": {
+      "traditional_on_premise": "Execute scripted test protocols for each function in the Functional Specification. Test in your controlled environment.",
+      "cloud_saas_approach": {
+        "what_changes": "The test environment is a sandbox/copy of the vendor's cloud platform. You do not control the underlying infrastructure. Test execution is the same (scripted OQ protocols), but you must account for vendor-managed components.",
+        "key_considerations": [
+          "Test in a FULL-COPY sandbox that mirrors production configuration — developer sandboxes may not have sufficient parity",
+          "OQ scripts are REUSABLE across vendor releases — build a regression test suite from OQ scripts that can be re-executed quickly",
+          "Include integration testing — verify that data flows correctly between the cloud platform and connected systems",
+          "Test under both normal and stress conditions (see FDA guidance on dynamic testing)",
+          "Document any vendor-managed functions that you CANNOT test directly (e.g., encryption at rest, backup processes) — reference vendor certifications instead"
+        ],
+        "deliverable": "Operational Qualification Report with scripted test results, including any vendor-managed functions documented by reference"
+      }
+    },
+    "pq_differences": {
+      "traditional_on_premise": "Run the system under production conditions with real users and production-representative data to verify consistent performance.",
+      "cloud_saas_approach": {
+        "what_changes": "Performance and scalability are largely the vendor's responsibility. Your PQ focuses on YOUR data volumes, YOUR workflows, and YOUR user population.",
+        "key_considerations": [
+          "Scalability is the vendor's problem — but YOUR data volumes and query complexity can still cause performance issues",
+          "Test with production-representative data volumes (not just 10 test records)",
+          "Test concurrent user scenarios relevant to your deployment (e.g., 50 field reps syncing at 8 AM)",
+          "Test mobile/offline scenarios if applicable (see val-faq-006)",
+          "Monitor performance during initial production use — first 30 days should include enhanced monitoring",
+          "Vendor SLA provides the performance baseline — your PQ verifies your specific workload performs within acceptable bounds"
+        ],
+        "deliverable": "Performance Qualification Report documenting production readiness with your specific data, users, and workflows"
+      }
+    },
+    "shared_responsibility_matrix": {
+      "vendor_responsible": ["Infrastructure availability and uptime", "Platform security patches", "Data center physical security", "Encryption at rest and in transit", "Disaster recovery and backup", "Platform performance and scalability", "SOC 2 / ISO 27001 compliance"],
+      "customer_responsible": ["Application configuration and validation", "Custom code (Apex, triggers, flows) validation", "User access management and periodic review", "Audit trail monitoring and review", "Data integrity within the application", "Integration validation", "Release assessment for vendor updates", "Periodic review and ongoing compliance"]
+    },
+    "gotcha": "Do NOT skip IQ just because 'it is cloud.' Replace traditional IQ with vendor qualification + tenant configuration verification. An inspector will ask how you verified the platform is suitable for GxP use — 'it is Salesforce' is not an acceptable answer.",
+    "gotcha_level": "critical",
+    "source": "fda-21-cfr-part-11-salesforce-whitepaper",
+    "tags": ["cloud", "saas", "iq-oq-pq", "shared-responsibility", "vendor-qualification"]
+  },
+  {
+    "id": "val-cloud-002",
+    "category": "validation-cloud",
+    "title": "Maintaining Validated State — Change Control for Cloud/SaaS Platforms",
+    "summary": "Once a cloud system is validated, maintaining that validated state requires a structured change control process. Unlike on-premise systems where you control when updates are applied, cloud platforms push updates on the vendor's schedule.",
+    "four_step_change_control": {
+      "description": "Adapted from the Salesforce Part 11 whitepaper's recommended approach for maintaining a validated cloud system.",
+      "Step 1 — Release Assessment": {
+        "when": "When vendor announces an upcoming release (e.g., Salesforce Spring/Summer/Winter releases)",
+        "activities": [
+          "Review release notes for changes to GxP-critical functionality",
+          "Classify each change: No Impact / Minor Impact / Major Impact on validated functions",
+          "Document the assessment in a Release Assessment Record",
+          "Determine testing scope: None / Regression / Partial Revalidation / Full Revalidation"
+        ],
+        "timeline": "Complete assessment 2-4 weeks before release date. For Salesforce, use the sandbox preview period."
+      },
+      "Step 2 — Sandbox Testing": {
+        "when": "When release preview is available in sandbox",
+        "activities": [
+          "Execute regression test suite (built from OQ scripts) in sandbox",
+          "Test any functions flagged as impacted in Step 1",
+          "Document test results — quantified where possible (see FDA guidance)",
+          "Identify and document any deviations or unexpected behavior"
+        ],
+        "timeline": "Complete testing before release hits production"
+      },
+      "Step 3 — Production Verification": {
+        "when": "Immediately after release is applied to production",
+        "activities": [
+          "Execute a targeted smoke test of critical GxP functions in production",
+          "Verify audit trail functionality is intact",
+          "Verify electronic signature functionality (if applicable)",
+          "Verify integrations are functioning",
+          "Confirm user access and security controls are unchanged"
+        ],
+        "timeline": "Within 24-48 hours of production release"
+      },
+      "Step 4 — Documentation": {
+        "when": "After production verification",
+        "activities": [
+          "Update Validation Summary Report addendum documenting the release assessment and testing",
+          "Update RTM if new functions were validated or existing coverage changed",
+          "File the Release Assessment Record in the validation documentation set",
+          "Close out any deviations with corrective actions"
+        ]
+      }
+    },
+    "internal_change_control": {
+      "description": "Changes initiated by YOUR organization (not vendor releases) to the validated system",
+      "examples": ["New custom objects or fields", "New Apex triggers or classes", "New workflow rules or flows", "New integrations", "Changes to user profiles or permission sets", "New reports or dashboards used for GxP decisions", "New mobile configurations"],
+      "process": [
+        "1. Change Request — Document what is changing and why",
+        "2. Impact Assessment — Assess impact on validated functionality using RTM",
+        "3. Testing — Execute targeted testing of new/changed functionality plus regression of adjacent functions",
+        "4. Approval — QA review and approval before production deployment",
+        "5. Deployment — Deploy change to production following approved plan",
+        "6. Verification — Post-deployment verification in production",
+        "7. Documentation — Update validation deliverables (URS, FS, RTM, VSR addendum)"
+      ]
+    },
+    "gotcha": "Salesforce releases are AUTO-DEPLOYED to production — you cannot prevent them. Your release assessment process must be PROACTIVE. If you learn about a breaking change after it hits production, you are in a deviation state and must execute corrective action.",
+    "gotcha_level": "critical",
+    "source": "fda-21-cfr-part-11-salesforce-whitepaper",
+    "tags": ["change-control", "release-management", "validated-state", "regression-testing", "cloud"]
+  },
+  {
+    "id": "val-cloud-003",
+    "category": "validation-cloud",
+    "title": "Salesforce Part 11 Compliance — Cross-Reference",
+    "summary": "For the detailed §11.10(a-k) compliance mapping between Part 11 requirements and Salesforce platform capabilities, see the dedicated file: salesforce-part11-mapping.json (entries val-sfdc-001 through val-sfdc-008+). That file covers every sub-section with platform capabilities, customer responsibilities, known gaps, and electronic signature controls (§11.50, §11.70, §11.100, §11.200, §11.300).",
+    "cross_reference": "salesforce-part11-mapping.json",
+    "key_takeaway": "Salesforce is NOT 'Part 11 compliant' out of the box. The platform provides capabilities that ENABLE compliance, but the customer must configure, validate, and maintain those capabilities.",
+    "source": "cross-reference",
+    "tags": ["part-11", "salesforce", "cross-reference"]
+  },
+  {
+    "id": "val-cloud-004",
+    "category": "validation-cloud",
+    "title": "SaaS Validation Lifecycle — Continuous Compliance Model",
+    "summary": "Traditional validation follows a project-based model: validate once, then maintain. SaaS platforms require a CONTINUOUS compliance model because the vendor continuously updates the platform. This entry expands on val-meth-006 with operational details for sustaining validation in a SaaS environment.",
+    "continuous_compliance_phases": {
+      "Phase 1 — Initial Validation": {
+        "description": "Standard CSV/CSA validation of the initial implementation",
+        "activities": "URS, FS, FRA, IQ (vendor qualification), OQ, PQ, RTM, VSR",
+        "outcome": "System enters validated state. Baseline established."
+      },
+      "Phase 2 — Vendor Release Management": {
+        "description": "Ongoing assessment of vendor-initiated changes (typically 3 releases per year for Salesforce)",
+        "activities": ["Release assessment per four-step process (see val-cloud-002)", "Regression testing in sandbox", "Production smoke testing", "Documentation updates"],
+        "frequency": "Per vendor release cycle (every ~4 months for Salesforce)",
+        "key_metric": "Time from release announcement to completed assessment — target < 2 weeks"
+      },
+      "Phase 3 — Internal Change Management": {
+        "description": "Managing changes initiated by your organization",
+        "activities": ["Change request and impact assessment", "Testing of new/changed functionality", "Regression testing of adjacent functions", "QA approval and documentation"],
+        "frequency": "As changes occur — can be sprint-aligned"
+      },
+      "Phase 4 — Periodic Review": {
+        "description": "Systematic review of the validated system to confirm ongoing compliance",
+        "activities": [
+          "Review all changes since last periodic review (vendor + internal)",
+          "Review audit trail for anomalies",
+          "Review access control — deactivated accounts, role changes, periodic access recertification",
+          "Review incidents/deviations and their resolutions",
+          "Review vendor's latest SOC 2 / certification reports",
+          "Review training records — are all users current?",
+          "Verify backup/restore capability",
+          "Update risk assessment if system scope has changed"
+        ],
+        "frequency": "Annually (minimum). High-risk systems may warrant semi-annual review.",
+        "deliverable": "Periodic Review Report documenting findings and corrective actions"
+      },
+      "Phase 5 — Ongoing Monitoring": {
+        "description": "Continuous monitoring between formal reviews",
+        "activities": [
+          "Monitor vendor's Trust/Status site for incidents affecting your instance",
+          "Monitor audit trail for unauthorized changes or unusual activity",
+          "Track and investigate user-reported issues",
+          "Monitor integration health",
+          "Track vendor security advisories"
+        ],
+        "frequency": "Daily/weekly depending on system criticality"
+      }
+    },
+    "operational_kpis": {
+      "Release Assessment Completion": "100% of vendor releases assessed before production deployment",
+      "Regression Test Pass Rate": "> 95% of regression tests pass on each release (failures require deviation)",
+      "Change Control Compliance": "100% of changes go through formal change control",
+      "Periodic Review On-Time": "Periodic reviews completed within 30 days of scheduled date",
+      "Training Currency": "> 95% of users have current training records",
+      "Deviation Closure": "All deviations closed within 90 days"
+    },
+    "gotcha": "The biggest failure mode in SaaS validation is NOT the initial validation — it is the ongoing compliance. Organizations validate once, then fail to maintain the vendor release assessment process. After 2-3 missed release assessments, the system is effectively in an unvalidated state.",
+    "gotcha_level": "critical",
+    "source": "fda-21-cfr-part-11-salesforce-whitepaper",
+    "tags": ["continuous-compliance", "periodic-review", "release-management", "saas-lifecycle", "monitoring"]
+  }
+]

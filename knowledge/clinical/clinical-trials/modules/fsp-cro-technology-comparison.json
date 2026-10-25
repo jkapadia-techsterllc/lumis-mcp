@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ci-fsp-cro-tech-001",
+    "category": "competitive-intelligence",
+    "title": "Functional Service Provider and CRO Technology Comparison",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Comparison of major CROs and their FSP technology approaches, EDC environments, and regulatory information management systems.",
+    "findings": {
+      "fsp_model_overview": "FSP models provide sponsors with dedicated functional resources using either the sponsor's or CRO's technology. Technology flexibility is a key competitive differentiator.",
+      "technology_patterns": "CROs take different approaches: proprietary stack as part of FSP, technology-agnostic deployment into client systems, or hybrid. Most competitive offerings support both.",
+      "data_management": "FSP clinical data management spans multiple EDC environments. Leading CROs support 5+ EDC platforms, deploying data managers into any client environment.",
+      "automation_investment": "CROs investing in ML for data review, automated protocol deviation detection, and NLP for medical coding to improve FSP margins and create lock-in.",
+      "crm_implications": "CRO technology choices influence CRM requirements. Sponsor CRM may need integration for visit data, site communication logs, and issue tracking."
+    },
+    "source": "CRO and FSP technology comparison of clinical technology platform approaches",
+    "tags": [
+      "competitive-intelligence",
+      "cro",
+      "fsp",
+      "edc",
+      "clinical-technology"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "samples-ops-001",
+    "category": "commercialization/crm",
+    "title": "Pharmaceutical Sample Management — Operational Lifecycle",
+    "products": ["Life Sciences Cloud"],
+    "summary": "The nine-step operational lifecycle for pharmaceutical sample management in a commercial CRM, covering the end-to-end flow from lot creation through field distribution to reconciliation and auditing.",
+    "findings": {
+      "nine_step_lifecycle": "Step 1: Lot Creation — sample lots are registered with product, quantity, expiration date, and regulatory classification. Step 2: Shipment — lots are allocated and shipped to field representatives with chain-of-custody documentation. Step 3: Receipt and Acknowledgement — field representatives confirm receipt, triggering inventory initialization in their local stock. Step 4: Inventory Counting — periodic physical counts reconcile system records against actual stock. Step 5: Distribution — samples are disbursed to healthcare providers with electronic signature capture at the point of delivery. Step 6: Transfer — samples move between representatives through documented transfer-in and transfer-out transactions. Step 7: Return — unused or expired samples are returned through a documented return process. Step 8: Adjustment — discrepancies are resolved through adjustment transactions with mandatory reason codes. Step 9: Reconciliation and Audit — comprehensive reconciliation of all transactions to ensure a complete chain of custody from receipt through final disposition.",
+      "regulatory_drivers": "The lifecycle is designed to satisfy PDMA (Prescription Drug Marketing Act, 21 CFR Part 203) requirements for sample distribution record-keeping, signature capture, and reconciliation. Controlled substances add 21 CFR 1300-1316 requirements for additional tracking and reporting.",
+      "signature_capture": "Electronic signatures are captured at the point of sample delivery on mobile devices. Signatures become read-only after acceptance, are cryptographically bound to the transaction record, and satisfy 21 CFR Part 11 requirements for electronic signatures. Signature data includes the signer identity, timestamp, and the specific products and quantities distributed.",
+      "inventory_integrity": "The system maintains a running inventory balance for each representative, updated in real-time as distribution, transfer, return, and adjustment transactions occur. Physical count workflows detect discrepancies and require documented resolution before the reconciliation cycle closes."
+    },
+    "source": "internal-samples-management-diagram-2026",
+    "tags": ["samples", "pdma", "chain-of-custody", "inventory", "signatures", "reconciliation"]
+  }
+]

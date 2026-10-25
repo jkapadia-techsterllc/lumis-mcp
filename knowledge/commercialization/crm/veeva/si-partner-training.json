@@ -1,0 +1,26 @@
+[
+  {
+    "id": "si-train-001",
+    "category": "modules",
+    "title": "System Integrator Bootcamp — CRM Implementation and Migration Readiness",
+    "products": [
+      "oce"
+    ],
+    "summary": "Five-day SI partner bootcamp covering CRM Personal (field rep) and CRM Digital (remote/digital engagement) modules. Training led by Ravindra Pateria and Tyler Curd. Covers platform configuration, data migration planning, and implementation readiness assessment. Provides baseline for understanding the depth of SI enablement required for CRM platform migrations.",
+    "findings": {
+      "training_duration": "5-day intensive bootcamp format. Covers both CRM Personal (in-person field rep workflows) and CRM Digital (digital engagement, approved email, remote detailing).",
+      "training_leads": "Ravindra Pateria and Tyler Curd — partner enablement team.",
+      "content_coverage": "Platform configuration, data model orientation, customization patterns, data migration planning, integration architecture, and implementation readiness assessment.",
+      "migration_relevance": "The SI bootcamp structure reveals the implementation complexity customers face. A 5-day intensive for experienced SIs indicates non-trivial platform depth. Migration planning must account for SI ramp-up time on the target platform.",
+      "partner_ecosystem_insight": "SI partner training investment is a leading indicator of ecosystem maturity. Platforms with robust SI training programs (like this one) have lower implementation risk but higher dependency on partner availability."
+    },
+    "source": "Day 1 - SI Training OCE P and OCE D (5-day bootcamp materials)",
+    "tags": [
+      "si-training",
+      "implementation",
+      "partner-enablement",
+      "migration-readiness",
+      "bootcamp"
+    ]
+  }
+]

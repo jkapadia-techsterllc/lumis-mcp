@@ -1,0 +1,18 @@
+[
+  {
+    "id": "mobile-deploy-001",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM iOS Enterprise Deployment — Certificate and Provisioning Workflow",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The enterprise iOS deployment workflow for a legacy life sciences CRM, documenting the Apple Enterprise Account setup, certificate chain, and provisioning profile process required to distribute the application outside the App Store.",
+    "findings": {
+      "enterprise_distribution_model": "The legacy CRM iOS application is distributed through Apple's Enterprise Developer Program rather than the public App Store. This requires each customer to maintain their own Apple Enterprise Account, distribution certificate, and provisioning profiles. The model was chosen to support pre-App Store-era compliance requirements and to enable direct enterprise control over app deployment.",
+      "certificate_chain": "The deployment requires: (1) an Apple Enterprise Account with the Enterprise Developer Program enrollment, (2) an App ID registered with a reverse-domain Bundle ID, (3) a Certificate Signing Request generated from the local keychain, (4) an iOS Distribution Certificate issued by Apple based on the CSR, and (5) a .p12 export file containing both the certificate and its private key for use in automated build systems.",
+      "provisioning_profile": "Distribution provisioning profiles bind the App ID to the distribution certificate and authorize the application to run on enterprise-enrolled devices. Profiles must be regenerated when the underlying certificate is renewed (annually) or when the App ID configuration changes.",
+      "deployment_pipeline": "The .p12 certificate file and provisioning profile are uploaded to a cloud build service that handles compilation, signing, and IPA generation. The signed IPA is then distributed to devices through a mobile device management platform or an enterprise app catalog.",
+      "operational_considerations": "Certificate expiration is the most common deployment failure — enterprise certificates expire annually and require proactive renewal. Lost private keys require complete certificate regeneration. Multiple applications can share a single enterprise certificate if they use wildcard App IDs, but most regulated deployments use explicit App IDs for traceability."
+    },
+    "source": "internal-legacy-crm-mobile-installation-guide-2018",
+    "tags": ["ios", "enterprise-deployment", "certificates", "provisioning", "mobile", "app-distribution"]
+  }
+]

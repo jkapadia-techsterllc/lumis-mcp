@@ -1,0 +1,122 @@
+[
+  {
+    "id": "oce-terr-001",
+    "category": "modules",
+    "title": "CRM Territory and Product Administration",
+    "products": [
+      "oce"
+    ],
+    "summary": "Territory management controls account and product alignment through rule-based assignment. Accounts are aligned to territories via configurable rules that run as batch jobs. Products follow a hierarchical structure and are aligned to territories with inclusion and exclusion overrides at child territory levels. Product messages are aligned independently for CLM content targeting.",
+    "findings": {
+      "territory_user_assignment": "Users are assigned to one or more territories. Each user works in a single territory at a time and can switch between assigned territories. Territory selection controls which accounts, products, and data are visible.",
+      "account_alignment_rules": "Rule-based account-to-territory alignment uses field criteria (geography, specialty, segment) to automatically assign accounts. Rules are executed via a scheduled batch job. Manual overrides allow excluding specific accounts from rule-based alignment.",
+      "account_assignment_rules": "Separate from alignment, assignment rules control account visibility within territory hierarchies. These rules propagate through parent-child territory relationships.",
+      "custom_visibility_rules": "Beyond standard alignment, custom visibility rules provide fine-grained control over which accounts appear in a territory based on complex business logic.",
+      "product_hierarchy": "Products are organized in a hierarchical tree structure (brand -> SKU -> presentation). Products can be searched, created at any hierarchy level, edited, and deleted. Product data includes therapeutic area, dosage, and regulatory status.",
+      "product_territory_alignment": "Products are aligned to territories at the parent level and automatically inherited by child territories. Exclusions remove specific products from child territories. Inclusions add products only to specific child territories.",
+      "product_message_administration": "Product messages (CLM content labels) are created per product and aligned to territories independently. Messages can be excluded from specific territories to control field team messaging."
+    },
+    "source": "OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "territory-management",
+      "product-administration",
+      "alignment",
+      "hierarchy",
+      "product-messages"
+    ]
+  },
+  {
+    "id": "oce-mod-004",
+    "category": "modules",
+    "title": "CRM Medical Inquiry and Account Plan Modules",
+    "products": [
+      "oce"
+    ],
+    "summary": "Medical Inquiry Request Forms (MIRF) capture HCP medical questions with a structured workflow from creation through fulfillment. Account Plans provide strategic planning capabilities with account-level objectives, business objectives, tactics, and to-do items for key account management.",
+    "findings": {
+      "mirf_workflow": "MIRFs flow through statuses enabling routing from field reps to medical affairs. Reps create MIRFs during or after calls, capturing the medical question, product context, and urgency. Medical affairs personnel are assigned to respond. The web application supports additional workflow steps for assigning and responding to MIRFs.",
+      "mirf_compliance": "MIRF submission includes a review and sign page on mobile, ensuring the rep confirms the accuracy of the inquiry before submission. This supports compliance requirements for medical information requests.",
+      "account_plan_structure": "Account Plans contain a hierarchy: Plan (overall strategy per account) -> Objectives (measurable goals) -> To-Dos (action items with due dates and completion tracking). Web application adds Business Objectives and Tactics as additional planning levels.",
+      "account_plan_management": "Plans can be created, edited, and tracked from the account profile. To-dos support status tracking and can be associated with accounts, calls, or standalone activities."
+    },
+    "source": "OCE CRM iPad User Guide v1.0, OCE CRM Salesforce User Guide v1.0 (2017)",
+    "tags": [
+      "medical-inquiry",
+      "mirf",
+      "account-plan",
+      "kam",
+      "compliance"
+    ]
+  },
+  {
+    "id": "oce-clm-001",
+    "category": "modules",
+    "title": "CRM CLM Content Management and JS SDK",
+    "products": [
+      "oce"
+    ],
+    "summary": "CLM (Closed Loop Marketing) content management handles the lifecycle of interactive presentation assets from packaging through deployment to field devices. Content is packaged as HTML/JS bundles stored in Amazon S3, organized into sequences with product-message linkages, and delivered through a JavaScript SDK that enables bidirectional communication between presentation content and the native mobile application.",
+    "findings": {
+      "content_packaging": "Presentations are built as HTML/JavaScript/CSS packages. Each package is a self-contained web app that runs inside the native CRM application webview. Packages must follow specific structure requirements for the platform to load and track them.",
+      "js_sdk": "The JavaScript SDK provides: Moustache JSON templates for dynamic data binding (account info, product data, rep details), JS-to-iOS bridge functions for calling native CRM actions from content, iOS-to-JS callback events for responding to platform events (slide change, call end), and event tracking APIs for capturing interaction metrics.",
+      "amazon_s3_storage": "CLM content packages are stored in Amazon S3. Configuration specifies the S3 bucket, access credentials, and download settings. Content is synced to mobile devices during the sync process.",
+      "sequence_management": "Sequences define the ordered collection of slides/pages in a presentation. Sequences have product and message linkages for analytics attribution. Sequences support versioning (new versions replace prior versions on devices), activation/deactivation lifecycle, and territory-level filtering.",
+      "presentation_creation": "Presentations are created from sequences and assigned to products and territories. Multiple presentations can exist for the same sequence with different territory or product scope. Presentations can be edited, deactivated, and filtered by various criteria.",
+      "interaction_tracking": "The platform tracks time spent on each slide, navigation path through the presentation, and custom interaction events fired by the JS SDK. This data feeds CLM analytics for message effectiveness measurement."
+    },
+    "source": "OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "clm",
+      "presentations",
+      "js-sdk",
+      "content-management",
+      "amazon-s3",
+      "sequences"
+    ]
+  },
+  {
+    "id": "oce-mod-005",
+    "category": "modules",
+    "title": "CRM Translation and Localization Framework",
+    "products": [
+      "oce"
+    ],
+    "summary": "The CRM supports multi-language deployment with translation management for standard Salesforce objects, custom components, custom labels, and navigation tabs. Language preferences are set per user in Salesforce settings and applied across both web and mobile applications after synchronization.",
+    "findings": {
+      "standard_object_translations": "A translation document generator produces export files for all standard object field labels used by the mobile app. Translations are imported back and applied during the next metadata cache generation.",
+      "custom_component_translations": "Custom component translations (button labels, section headers, error messages) can be overridden from defaults and reset to original values. This allows customer-specific terminology without modifying the managed package.",
+      "custom_label_translations": "Salesforce Custom Labels are used for UI text that needs translation. These labels support the standard Salesforce translation workbench workflow.",
+      "tab_translations": "Navigation tabs and flexi-page tabs support per-language labels. Tab naming follows the standard Salesforce Translation Settings process."
+    },
+    "source": "OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "translation",
+      "localization",
+      "multi-language",
+      "i18n"
+    ]
+  },
+  {
+    "id": "oce-mod-006",
+    "category": "modules",
+    "title": "CRM Data Change Request and HCP Licensing Modules",
+    "products": [
+      "oce"
+    ],
+    "summary": "Data Change Requests provide a governance workflow for field-initiated master data changes, routing proposed edits through an approval process before applying to the system of record. HCP Licensing tracks professional license status, DEA numbers, and state-level prescribing authority for compliance-sensitive operations like sample distribution.",
+    "findings": {
+      "dcr_workflow": "Data Change Requests can be enabled or disabled per configuration. When enabled, field rep edits to controlled fields (account name, address, specialty) are captured as change requests instead of direct updates. Requests are routed to data stewards for approval or rejection.",
+      "dcr_processing": "Change requests flow through a general workflow: submitted by field rep, queued for review, approved (changes applied to master record) or rejected (with reason communicated back to the rep). This maintains data quality while allowing field-sourced corrections.",
+      "hcp_licensing": "License records track professional credentials per HCP including license type, number, state, expiration date, and active/inactive status. License status affects sample eligibility - expired or inactive licenses block sample distribution.",
+      "license_compliance": "License validation is enforced during call signature capture. If an HCP license is expired or missing for the relevant jurisdiction, sample distribution is blocked. This enforces PDMA (Prescription Drug Marketing Act) compliance requirements."
+    },
+    "source": "OCE CRM iPad User Guide v1.0, OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "data-change-request",
+      "dcr",
+      "hcp-licensing",
+      "compliance",
+      "data-governance"
+    ]
+  }
+]

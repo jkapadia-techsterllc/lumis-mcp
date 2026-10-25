@@ -1,0 +1,53 @@
+[
+  {
+    "id": "lsc-help-next-best-action-ind-lsc-next-best-action-setup",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Next Best Actions",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Provide sales reps with scheduled action recommendations. Improve time management and strategic engagement by recommending actions, such as account visits and sending emails, in an optimal sequence. By adding the Life Sciences Next Best Actions component to an account record page, sales reps can...",
+    "findings": [
+      {
+        "name": "Next Best Actions",
+        "detail": "Provide sales reps with scheduled action recommendations. Improve time management and strategic engagement by recommending actions, such as account visits and sending emails, in an optimal sequence. By adding the Life Sciences Next Best Actions component to an account record page, sales reps can view these recommended actions and use them to create visits or send emails directly from the account record page. Set Up Life Sciences Next Best Actions Configure the required trigger handlers, user permissions, and actions. Users can create visits or send emails directly from the Next Best Action component. The app shares recommendations by territory and tracks completed actions. Users can create visits or send emails directly from the component. Add the Life Sciences Next Best Action Component to an Account Record Page Schedule a visit or send an email directly from the Next Best Action component on the Account record page. If a recommendation isn’t relevant, users can skip it and provide a reason. When a user completes the recommended activity, the component updates the recommendation record. Configure Skip Reasons for a Next Best Action Configure skip reasons so that users can dismiss a recommendation and provide feedback explaining why they skipped it. A user can skip a recommendation that’s current, actionable, or past due. Upcoming and completed recommendations don't show skip options. Use skip reasons to track adoption and improve future recommendations. Mobile App Configuration for Life Sciences Next Best Action Configure the required mobile metadata cache settings to support the Life Sciences Next Best Action experience in the Life Sciences Cloud Mobile app."
+      },
+      {
+        "name": "See Also",
+        "detail": "Trigger Handler Administration"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_next_best_action_setup.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "next-best-action"
+    ]
+  },
+  {
+    "id": "lsc-help-next-best-action-ind-lsc-next-best-actions-add-account-record-page",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add the Life Sciences Next Best Action Component to an Account Record Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Schedule a visit or send an email directly from the Next Best Action component on the Account record page. If a recommendation isn’t relevant, users can skip it and provide a reason. When a user completes the recommended activity, the component updates the recommendation",
+    "findings": [
+      {
+        "name": "Add the Life Sciences Next Best Action Component to an Account Record Page",
+        "detail": "Schedule a visit or send an email directly from the Next Best Action component on the Account record page. If a recommendation isn’t relevant, users can skip it and provide a reason. When a user completes the recommended activity, the component updates the recommendation record."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud and the Life Sciences Cloud for Customer Engagement Add-On license User Permissions Needed To add components to a record page: | Customize Application On an account record page, click the Setup icon and select Edit Page . From the Components pane, in the Search field, enter Next Best Actions . From the left pane, drag the Life Sciences Next Best Action component to the Dashboard tab on the record page. Attention Make sure that you select the Next Best Action component, not the Einstein Next Best Action component. Save your changes. Activate the page."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_next_best_actions_add_account_record_page.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "next-best-action",
+      "accounts"
+    ]
+  }
+]

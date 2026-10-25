@@ -1,0 +1,71 @@
+{
+  "id": "country-eu-gdpr",
+  "region": "European Union",
+  "countries": ["Germany", "France", "Italy", "Spain", "Netherlands", "Belgium", "Austria", "Portugal", "Greece", "Ireland", "Poland", "Czech Republic", "Sweden", "Denmark", "Finland", "Romania", "Hungary", "Bulgaria", "Croatia", "Slovakia", "Slovenia", "Estonia", "Latvia", "Lithuania", "Luxembourg", "Malta", "Cyprus"],
+  "regulation": "GDPR (General Data Protection Regulation)",
+  "effective_date": "2018-05-25",
+  "modules_affected": ["Consent Management", "Field Email", "Content Management", "Visit Management", "Sample Management"],
+  "rules": [
+    {
+      "rule": "Explicit Opt-In Required",
+      "description": "HCPs must provide explicit, informed consent before any marketing communication. Silence or pre-ticked boxes do not constitute consent.",
+      "implementation": "Consent Management must be configured as opt-in by default. No communication channels enabled without explicit consent record.",
+      "penalty": "Up to 4% of annual global turnover or €20 million, whichever is higher"
+    },
+    {
+      "rule": "Right to Erasure",
+      "description": "HCPs can request deletion of all personal data. Must be actioned within 30 days.",
+      "implementation": "Data deletion workflow must cascade across all modules: Account, Visit History, Sample Transaction History, Email History, Consent Records. Anonymization is acceptable alternative for regulatory-required records (e.g., sample audit trails).",
+      "penalty": "Same as above"
+    },
+    {
+      "rule": "Data Portability",
+      "description": "HCPs can request their data in a machine-readable format.",
+      "implementation": "Export capability must cover: personal data, consent history, interaction history. Format: CSV or JSON. Response time: 30 days.",
+      "penalty": "Same as above"
+    },
+    {
+      "rule": "Lawful Basis Documentation",
+      "description": "Each data processing activity must have a documented lawful basis (consent, legitimate interest, legal obligation, etc.).",
+      "implementation": "Custom field or metadata on each module to record lawful basis. Consent module tracks consent-based processing; separate documentation for legitimate interest processing.",
+      "penalty": "Same as above"
+    },
+    {
+      "rule": "Data Processing Records",
+      "description": "Maintain records of all processing activities (Article 30).",
+      "implementation": "Enable Field Audit Trail for all modules processing personal data. Retain audit logs for minimum 5 years.",
+      "penalty": "Same as above"
+    }
+  ],
+  "country_specific": [
+    {
+      "country": "Germany",
+      "additional_rules": [
+        "Bundesdatenschutzgesetz (BDSG) adds restrictions on employee data processing",
+        "Works council (Betriebsrat) may need to approve CRM data processing",
+        "Stricter interpretation of legitimate interest — lean toward explicit consent"
+      ]
+    },
+    {
+      "country": "France",
+      "additional_rules": [
+        "CNIL requires specific cookie consent mechanisms",
+        "Transparency Code (Loi Bertrand) requires disclosure of HCP payments/transfers of value",
+        "Anti-gift law restricts certain types of HCP engagement tracking"
+      ]
+    },
+    {
+      "country": "Italy",
+      "additional_rules": [
+        "Garante per la protezione dei dati personali has additional marketing consent requirements",
+        "AIFA regulations on pharmaceutical rep interactions require specific visit logging"
+      ]
+    }
+  ],
+  "migration_notes": "When migrating from any source platform to target: (1) Consent records MUST be migrated with original consent dates, (2) Opt-out records are as important as opt-in records, (3) Consent granularity must match or exceed source platform (cannot consolidate separate channel consents into a single record), (4) Document the migration as a data processing activity in your Article 30 records.",
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Country Rules / EU GDPR",
+    "confidence": "High"
+  }
+}

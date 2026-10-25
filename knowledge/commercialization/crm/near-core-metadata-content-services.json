@@ -1,0 +1,36 @@
+[
+  {
+    "id": "near-core-001",
+    "category": "commercialization/crm",
+    "title": "Near Core Metadata Service — Architecture and Mobile Download Pattern",
+    "products": ["Life Sciences Cloud"],
+    "summary": "A microservice architecture for generating and distributing mobile metadata packages. The service queries platform metadata, assembles profile-specific ZIP bundles, stores them in cloud object storage, and serves them to mobile clients on launch.",
+    "findings": {
+      "service_purpose": "Generates downloadable metadata packages containing approximately 15 types of configuration data that mobile applications need to render their UI and enforce business rules offline. The mobile client downloads the package on launch and checks for version changes on subsequent launches.",
+      "metadata_types_generated": "Profiles, permission sets, tabs, custom labels, subject matter reference data, value sets (picklist definitions), flexible key page configurations, page layouts, page action definitions, reporting metadata, and translation bundles. Each type is queried from the platform and serialized into the ZIP package.",
+      "profile_based_generation": "Metadata packages are generated per user profile. Different profiles receive different subsets of metadata based on their permission configuration. This ensures mobile users only download metadata relevant to their role and access level.",
+      "storage_and_delivery": "Generated ZIP packages are stored in cloud object storage with version identifiers. Mobile clients request packages by profile and version. If the client's cached version matches the server version, no download occurs. Storage limits: 750 MB total per organization, 28 MB maximum per individual file within a package.",
+      "architecture_hosting": "The service operates as a near-core microservice rather than running within the core platform. This architectural choice was driven by the file processing requirements — assembling and compressing ZIP packages with potentially large metadata sets is better suited to a dedicated compute environment than the shared application server.",
+      "mobile_client_interaction": "Three-phase interaction: (1) client sends version check request on app launch, (2) if newer version exists, client downloads the full ZIP package, (3) client extracts and caches metadata locally for offline use. No streaming — the full package is downloaded for offline reliability."
+    },
+    "source": "internal-near-core-service-architecture-transcript-2024",
+    "tags": ["near-core", "metadata-service", "mobile", "offline", "zip-generation", "microservice"]
+  },
+  {
+    "id": "near-core-002",
+    "category": "commercialization/crm",
+    "title": "Near Core Content Presentation Service — CLM Player Architecture",
+    "products": ["Life Sciences Cloud"],
+    "summary": "A microservice for processing, storing, and delivering interactive content presentations (closed-loop marketing) to mobile field applications, with slide-level analytics and offline playback support.",
+    "findings": {
+      "service_purpose": "Processes uploaded presentation files (PDF and ZIP formats containing interactive slides), extracts per-slide metadata, stores content in cloud object storage, and tracks granular viewing analytics. This is the backend for the closed-loop marketing content delivery experience on mobile devices.",
+      "three_step_ingestion": "Step 1: File upload — content administrators upload presentation packages through the platform. Step 2: Metadata extraction — the service processes the uploaded file, identifying individual slides, extracting thumbnails, and cataloging content structure. Step 3: Territory and product association — content is linked to sales territories, products, and product messages to control which field users can access which presentations.",
+      "viewing_analytics": "The service tracks detailed engagement data per content viewing session: time spent on each slide, slide navigation sequence, total presentation duration, and completion status. This data feeds into commercial analytics for understanding which content resonates with healthcare providers.",
+      "offline_playback": "Mobile clients download full presentation packages for offline playback. No streaming is used — complete content files are cached locally on the device. This design choice ensures presentations work reliably in settings with limited connectivity such as clinic exam rooms and hospital environments.",
+      "state_management": "A relational database stores content metadata, territory associations, product linkages, and viewing analytics. The object storage holds the actual content files. This separation allows metadata queries without touching the content storage layer.",
+      "core_vs_near_core_rationale": "Content processing (file parsing, thumbnail generation, format conversion) requires compute resources that are better isolated from the shared platform application server. The near-core architecture provides dedicated processing capacity while maintaining secure access to platform data through authenticated API calls."
+    },
+    "source": "internal-near-core-service-architecture-transcript-2024",
+    "tags": ["near-core", "clm", "content-presentation", "analytics", "offline", "microservice"]
+  }
+]

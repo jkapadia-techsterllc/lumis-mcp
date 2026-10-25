@@ -1,0 +1,29 @@
+[
+  {
+    "id": "fnd-crm-arch-002",
+    "category": "org-strategy",
+    "title": "Life Sciences CRM Platform Architecture Patterns and Packaging Strategy",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Architectural patterns for building life sciences CRM on managed package platforms, including packaging structure, API design, trigger architecture, and admin console decisions drawn from production implementations with 550+ custom objects and multi-package deployments.",
+    "findings": {
+      "packaging_structure": "Mature life sciences CRM implementations partition functionality across multiple second-generation managed packages (8-12 packages in enterprise deployments). Each package owns a bounded domain (e.g., consent, samples, events, CLM) with explicit cross-package dependencies declared in sfdx-project.json.",
+      "composite_api_pattern": "Cross-package data operations use composite API patterns to maintain transactional integrity. A single user action (e.g., completing a visit with sample drops, call notes, and signature capture) may touch objects across 3-4 packages and must be orchestrated through a shared API layer.",
+      "trigger_vs_platform_events": "Two architectural approaches for cross-package communication: (1) trigger-based with shared utility classes \u2014 simpler but creates tight coupling; (2) platform event-based \u2014 decoupled but adds latency and eventual consistency complexity. Production implementations often use a hybrid: triggers for synchronous operations, platform events for asynchronous workflows.",
+      "admin_console_design": "A centralized admin console (custom setup application) consolidates configuration across packages. This avoids requiring administrators to navigate individual package setup screens. The console reads/writes custom settings and custom metadata types that each package consumes.",
+      "key_strategic_decisions": "Critical architecture decisions that cascade through the implementation: (a) managed vs. unlocked packages \u2014 managed for ISV distribution, unlocked for internal apps; (b) namespace strategy \u2014 consistent prefixes enable cross-package references; (c) custom metadata vs. custom settings \u2014 metadata for deployable config, settings for org-specific runtime config.",
+      "scale_considerations": "At scale (50K+ users, 100M+ records), the architecture must account for: bulk API governor limits, sharing rule performance, platform cache usage for frequently accessed reference data, and async processing for heavy compute operations."
+    },
+    "source": "Consolidated from CRM platform architecture presentations covering managed package design, composite APIs, and large-scale deployment patterns",
+    "tags": [
+      "architecture",
+      "managed-packages",
+      "platform-design",
+      "2gp",
+      "api-patterns",
+      "admin-console"
+    ]
+  }
+]

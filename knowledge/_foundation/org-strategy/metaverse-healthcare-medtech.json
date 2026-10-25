@@ -1,0 +1,28 @@
+[
+  {
+    "id": "fnd-metaverse-medtech-001",
+    "category": "org-strategy",
+    "title": "Metaverse and Emerging Technology Continuum for Healthcare and MedTech",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Analysis of metaverse and emerging technology impact on healthcare and medical technology industries, covering digital twins, AR/VR, connected devices, and the technology-experience continuum concept.",
+    "findings": {
+      "metaverse_continuum_concept": "The metaverse continuum spans digitally enhanced worlds, realities, and business models. For healthcare, two primary functions: Internet of Place (virtual clinical interactions at distance) and Internet of Ownership (data that can be validated and authenticated by both clinicians and patients).",
+      "medtech_executive_sentiment": "91% of medical technology executives believe the metaverse will have a positive impact on their organizations, significantly higher than the 72% average across other industries. 96% believe Web3 will fundamentally change business-user engagement.",
+      "practical_applications": "Near-term applications: digital twins for device testing and simulation, AR-guided surgical procedures, VR for medical education and patient education, connected devices for continuous post-procedure monitoring, and virtual collaboration for cross-geography clinical teams.",
+      "biopharma_perspective": "For biopharma, metaverse technologies enable: product testing on digital twins rather than physical models, immersive patient journey simulation for drug development, virtual clinical trial site selection, and AI-powered drug interaction modeling.",
+      "implementation_reality": "Most organizations are in early exploration. Practical barriers include: healthcare data privacy requirements, device interoperability challenges, broadband access disparities, regulatory frameworks not yet adapted to virtual care modalities, and ROI measurement difficulty.",
+      "implications_for_crm": "Engagement platforms should prepare for: 3D content delivery for medical education, virtual event management capabilities, AR/VR session tracking as engagement touchpoints, and digital twin data integration for connected device monitoring."
+    },
+    "source": "Technology vision reports analyzing metaverse continuum impact on healthcare, biopharma, and medical technology industries",
+    "tags": [
+      "metaverse",
+      "medtech",
+      "digital-twins",
+      "ar-vr",
+      "connected-devices",
+      "emerging-technology"
+    ]
+  }
+]

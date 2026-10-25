@@ -1,0 +1,26 @@
+[
+  {
+    "id": "crm-bp-001",
+    "category": "gotchas",
+    "title": "Data Loader and Data Migration Practices for CRM Implementations",
+    "products": [
+      "oce"
+    ],
+    "summary": "Covers external ID strategies, multi-sandbox migration validation, and production data backup requirements when migrating CRM data between Salesforce environments. Addresses the fact that Salesforce record IDs are environment-specific and not portable.",
+    "findings": {
+      "external_id_strategy": "Salesforce 18-character record IDs are system-generated per environment and not portable across orgs. Always create external ID fields on objects that will be migrated between environments. External IDs allow upsert operations that match existing records rather than creating duplicates.",
+      "two_sandbox_approach": "Use a two-sandbox strategy: one sandbox for user acceptance testing and a second sandbox to validate the migration process itself before running against production. This separation prevents UAT-related data changes from contaminating migration testing.",
+      "production_backup_requirement": "Salesforce has no database rollback capability. Before any production migration, back up all affected tables. If migration fails or produces incorrect results, the backup is the only recovery path. Use external IDs when re-importing backup data.",
+      "migration_sequence": "Export records from source environment, import to validation sandbox using external IDs, validate results, back up production tables, then execute production migration using external IDs. Each step must be verified before proceeding."
+    },
+    "source": "Apex Data Loader Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "data-migration",
+      "external-id",
+      "sandbox",
+      "backup",
+      "etl",
+      "salesforce"
+    ]
+  }
+]

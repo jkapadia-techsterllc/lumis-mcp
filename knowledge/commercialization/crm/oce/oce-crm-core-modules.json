@@ -1,0 +1,82 @@
+[
+  {
+    "id": "oce-mod-001",
+    "category": "modules",
+    "title": "CRM Account Management Module",
+    "products": [
+      "oce"
+    ],
+    "summary": "Comprehensive account management for HCP and HCO entities supporting territory-scoped views, KOL identification, custom lists, profile dashboards with sales data, affiliations with diagram and list views, activity history with journey tracking, and configurable ratings. Available on both mobile (iPad) and web (Salesforce Lightning) platforms with feature parity across most capabilities.",
+    "findings": {
+      "account_types": "Supports HCP (Health Care Professional) and HCO (Health Care Organization) record types. Each territory sees only aligned accounts. Users work with one territory at a time and can switch between assigned territories.",
+      "kol_management": "Key Opinion Leaders are flagged accounts with special handling. KOL designation appears in account lists and profiles, enabling field teams to prioritize engagement with influential prescribers.",
+      "list_management": "Users can create, rename, and delete custom account lists for targeted engagement. Accounts can be added to or removed from lists. Lists are territory-scoped.",
+      "account_profile_sections": "Profile contains tabs for: Customer Info (highlight panel), Account Territory Fields (POA goals, preferred address), Sales Data (prescription and market share data), Details (standard and custom fields), Related Info (calls, addresses, to-dos), Affiliations (HCP-HCO relationships as diagram or list), Activity History (filtered by date range and type), Journey Activity (engagement timeline), and Charts (configurable analytics).",
+      "affiliation_views": "Affiliations between HCPs and HCOs can be displayed in three views: Diagram (visual org chart), List (tabular), and Nested (hierarchical tree). Affiliations can be created, edited, and deleted from the account profile.",
+      "account_search_and_create": "Search Before Create feature prevents duplicate accounts by searching existing records before allowing creation. Field set mappings control which fields appear on the create form. Duplicate rules provide automated matching.",
+      "account_merge": "Eight merge scenarios supported with merge history tracking. REST API exposure enables programmatic merges. Configurable behavior for invalid addresses on losing records. Validation rules prevent invalid merge operations."
+    },
+    "source": "OCE CRM iPad User Guide v1.0, OCE CRM Salesforce User Guide v1.0, OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "account-management",
+      "hcp",
+      "hco",
+      "kol",
+      "affiliations",
+      "territory"
+    ]
+  },
+  {
+    "id": "oce-mod-002",
+    "category": "modules",
+    "title": "CRM Call and Visit Management Module",
+    "products": [
+      "oce"
+    ],
+    "summary": "End-to-end call (visit) management with a structured lifecycle from creation through submission, supporting group calls, product discussions, sample distribution, DTP items, expense tracking, electronic signature capture, and CLM presentation integration. The call is the central transaction object in the CRM with compliance controls for pharmaceutical field operations.",
+    "findings": {
+      "call_lifecycle": "Calls progress through defined statuses: Created (draft, editable) -> Saved (persisted locally) -> Submitted (locked, synced to server) or Withdrawn (reverted from Saved). Deleted calls are removed entirely. Only Saved calls can be submitted or withdrawn.",
+      "call_form_structure": "The call form includes: Header (account, date, time, address, attendees), Actions (save, submit, withdraw, delete), Pre/Next Call Objectives (carry-over goals between visits), and configurable detail sections.",
+      "group_calls": "Multiple attendees can be added to a single call. Each attendee can have individual product discussions, samples, and items while sharing the call context. Group calls enable efficient documentation of multi-stakeholder meetings.",
+      "product_discussions": "Representatives record which products were discussed during the call, the reaction or sentiment of the HCP, and the priority messages delivered. This feeds CLM analytics and call plan compliance tracking.",
+      "sample_management": "Sample distribution is tracked per call with lot number, quantity, and recipient verification. Sample limits enforce regulatory caps on distribution per HCP per period. Samples require signature confirmation for compliance.",
+      "dtp_and_items": "Direct-to-Patient (DTP) items and promotional items are tracked separately from samples. Each has quantity controls and can be configured per product or territory.",
+      "expense_tracking": "Call-level expense recording captures costs associated with the visit (meals, travel, venue). Expense types and limits are configurable per territory or business rules.",
+      "signature_capture": "Electronic signature is captured on a dedicated page with configurable logo, summary of call attributes (products discussed, samples distributed), and Document ID generation. Signature confirms regulatory compliance for sample handoff and call attestation.",
+      "call_presentations": "CLM presentations can be attached to calls, launched during the visit, and track slide-level interaction metrics (time per slide, navigation path). Products and messages are linked to presentation sequences."
+    },
+    "source": "OCE CRM iPad User Guide v1.0, OCE CRM Salesforce User Guide v1.0, OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "call-management",
+      "visit",
+      "samples",
+      "signature",
+      "clm",
+      "product-discussion",
+      "compliance"
+    ]
+  },
+  {
+    "id": "oce-mod-003",
+    "category": "modules",
+    "title": "CRM Planner and Calendar Module",
+    "products": [
+      "oce"
+    ],
+    "summary": "Planning and scheduling module for field representatives that combines call scheduling, general events, all-day events, and Time Off Territory (TOT) management in a unified calendar interface. Supports day and week views with drag-and-drop scheduling on the web platform.",
+    "findings": {
+      "planner_views": "Calendar supports day view and multi-day (5-day week) view. Events, calls, and TOT entries are color-coded with configurable legend labels. The home dashboard shows a snapshot of the current day plan.",
+      "event_types": "Three event types: General events (meetings, conferences with start/end times), All-day events (spanning full days), and Calls (scheduled HCP visits linked to account records).",
+      "time_off_territory": "TOT entries block calendar time for vacations, training, administrative work, or other non-field activities. TOT is tracked for compliance and territory coverage reporting.",
+      "call_scheduling": "Calls can be scheduled from the planner by selecting a time slot and an account. Pre-call objectives can be set during scheduling. Planned calls appear in the POA (Plan of Action) progress tracking."
+    },
+    "source": "OCE CRM iPad User Guide v1.0, OCE CRM Salesforce User Guide v1.0, OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "planner",
+      "calendar",
+      "scheduling",
+      "time-off-territory",
+      "poa"
+    ]
+  }
+]

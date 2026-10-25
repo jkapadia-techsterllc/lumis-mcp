@@ -1,0 +1,243 @@
+[
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Consent Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Capture, synchronize, and honor the communication preferences of healthcare professionals across different subscription topics and channels. Use Consent Management to limit outreach to healthcare professionals who have provided consent and stay compliant with data privacy regulations. Consent...",
+    "findings": [
+      {
+        "name": "Consent Management",
+        "detail": "Capture, synchronize, and honor the communication preferences of healthcare professionals across different subscription topics and channels. Use Consent Management to limit outreach to healthcare professionals who have provided consent and stay compliant with data privacy regulations. Consent Management Workflow Consent Management records a healthcare professional's communication preferences through a defined save workflow that creates a compliance snapshot, resolves the consent record, and links any proof of consent. Understand this workflow to see what happens each time consent is saved and why a consent record does or doesn't appear on an account. Consent Management Data Model Consent Management uses these objects to capture and store a healthcare professional's communication preferences and the proof behind each consent. Add a Consent Management Tab to a Record Page Create a central location to view a healthcare professional’s consent status, subscriptions, and communication preferences. Manage Subscriptions and Channels Quickly create a record from an object's homepage that is necessary to use the features within Consent Management. Set Up Consent Management Configure how field users capture consent from healthcare professionals (HCPs) for each subscription and its channels. Choose which consent statuses are available, set proof requirements for the desktop site and the mobile app, and filter which subscriptions, disclaimers, and terms appear on the Consent page. Share Accounts With Field Users Give users access to accounts so they can work with consent and related account data in Life Sciences Consent Management. Add a Logo to the Consent Page Use static resources to upload a logo or image that you can reference in the Life Sciences Cloud for Customer Engagement app. This logo appears in the signature section when sales reps collect consent from healthcare professionals, helping your organization maintain brand consistency. Mobile App Configuration for Consent Management Create object metadata cache configuration for supported Consent Management objects and generate a metadata cache to make sure your sales reps can view and update consents on the Life Sciences Cloud Mobile app. Send a Confirmation Email Send a personalized follow-up email to a healthcare professional (HCP) after you capture their consent or signature. Batch Jobs for Consent Management When account and territory mapping is changed, Consent Management batch jobs help in aligning the sharing records for Communication Subscription Consent and Communication Subscription Compliance Snapshot objects."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-manage-subscriptions-channels",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Manage Subscriptions and Channels",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Quickly create a record from an object's homepage that is necessary to use the features within Consent",
+    "findings": [
+      {
+        "name": "Manage Subscriptions and Channels",
+        "detail": "Quickly create a record from an object's homepage that is necessary to use the features within Consent Management."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Add a Subscription to the Consent Page Create a Communication Subscription record to give healthcare professionals add new subscription topics to choose from on the Consent page on the Life Sciences Cloud for Customer Engagement app. Create a Data Use Purpose Record Associate a Life Sciences Marketable Product to a Communication Subscription by creating a Data Use Purpose record to manage and organize consents for specific products. Add a Channel to a Subscription Define the channel types, such as email, SMS, or direct mail, that a healthcare professional can select as their primary mode of communication. Create an Engagement Channel Type Create an engagement channel type record to define the different communication methods. Adding new channel types makes these options available on the Consent page."
+      },
+      {
+        "name": "See Also",
+        "detail": "Set Up Consent Management"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_manage_subscriptions_channels.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-add-new-subscriptions",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add a Subscription to the Consent Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create a Communication Subscription record to give healthcare professionals add new subscription topics to choose from on the Consent page on the Life Sciences Cloud for Customer Engagement",
+    "findings": [
+      {
+        "name": "Add a Subscription to the Consent Page",
+        "detail": "Create a Communication Subscription record to give healthcare professionals add new subscription topics to choose from on the Consent page on the Life Sciences Cloud for Customer Engagement app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure Consent Management features and objects: | Life Sciences Commercial Admin To create or update a communication subscription: | Life Sciences Field Sales Representative Note A subscription is listed on the Consent page only if it’s associated with an active engagement channel. See Add a Channel to a Subscription . From the App Launcher, find and select Communication Subscriptions . Click New . Enter the name for the subscription. Select a data use purpose. If no records exist, create a data use purpose record to link a Life Sciences marketable product to a communication subscription. This link helps you manage and organize consents for specific products In the Filter Attribute List field, enter comma-separated attributes to limit the subscription to a particular audience. Match these attributes to a value in Setup. For example, if Country is a filtering value in Setup, enter country names as attributes. Subscriptions then appear only for those countries. If the field is empty, subscriptions appear for all accounts. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create a Data Use Purpose Record"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_add_new_subscriptions.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-add-channels",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add a Channel to a Subscription",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Define the channel types, such as email, SMS, or direct mail, that a healthcare professional can select as their primary mode of",
+    "findings": [
+      {
+        "name": "Add a Channel to a Subscription",
+        "detail": "Define the channel types, such as email, SMS, or direct mail, that a healthcare professional can select as their primary mode of communication."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To add a channel to a subscription: | Life Sciences Commercial Admin From the App Launcher, find and select Communication Subscription Channel Types . Click New , and enter a name. Select the subscription that you want to associate a channel to. Select the engagement channel type. If channel isn’t listed, see Create an Engagement Channel Type . Save your changes. For the Contact Point Social object, configure the Social Platform Provider field picklist values for every social media platform you plan to support. Required. Used to create a contact point social (CPS) value for consent. If the subscription has no Active Engagement Channels , the subscription doesn't appear on the consent page."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_add_channels.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-add-new-channel-type",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create an Engagement Channel Type",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create an engagement channel type record to define the different communication methods. Adding new channel types makes these options available on the Consent",
+    "findings": [
+      {
+        "name": "Create an Engagement Channel Type",
+        "detail": "Create an engagement channel type record to define the different communication methods. Adding new channel types makes these options available on the Consent page."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create an engagement channel type: | Life Sciences Commercial Admin From the App Launcher, find and select Engagement Channel Types . Click New . Enter the name that you want to show on the Consent page. Select the contact point type that the channel applies to. Select the engagement channel type. The engagement channel type determines which contact point object populates the values on the Consent page. To add the channel to the Consent page, select Active . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_add_new_channel_type.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-capture-consent-quick-action",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure the Capture Consent Quick Action",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Streamline the Consent Management workflow and reduce the navigation time by creating a quick action and adding it to the Account or Visit record",
+    "findings": [
+      {
+        "name": "Configure the Capture Consent Quick Action",
+        "detail": "Streamline the Consent Management workflow and reduce the navigation time by creating a quick action and adding it to the Account or Visit record page."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To add a quick action: | Life Sciences Commercial Admin permission set As a prerequisite, make sure that your users have Read and Write access to the CommSubscriptionConsent, CommSubConsentCmplSnpsht, and DigitalSignature objects. Create a quick action for capturing consent. Note For Action Name, select Capture Consent . Add the quick action to the Salesforce object’s page layout. From the object management settings of the Salesforce object for which you created the quick action, select Page Layouts . Select the page layout you want to add the quick action to. Drag the Capture Consent quick action from the palette into the Salesforce Mobile and Lightning Experience Actions section. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Capture a Customer's Consent and Communication Preferences"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_capture_consent_quick_action.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-add-logo-consent-capture-screen",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add a Logo to the Consent Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use static resources to upload a logo or image that you can reference in the Life Sciences Cloud for Customer Engagement app. This logo appears in the signature section when sales reps collect consent from healthcare professionals, helping your organization maintain brand",
+    "findings": [
+      {
+        "name": "Add a Logo to the Consent Page",
+        "detail": "Use static resources to upload a logo or image that you can reference in the Life Sciences Cloud for Customer Engagement app. This logo appears in the signature section when sales reps collect consent from healthcare professionals, helping your organization maintain brand consistency."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up and configure Consent Management features and objects: | Life Sciences Commercial Admin To create static resources: | Customize Application From Setup, create a static resource, and enter the name as SignatureAreaLogo . See Create a Static Resource . Configure the logo in the Life Sciences Cloud Mobile app's UI. From the App Launcher, find and select Life Sciences Commercial . Click Admin Console . In the Life Sciences Customer Engagement Setup page, click Mobile . In the navigation pane, click UI Settings . For the Filter field, select Static Resource . Click New , and enter a label for the UI. Enter a unique name for this configuration. Enter a label that describes the purpose. For example, Consent Logo for Users. Select Static Resource as the Mobile Type, and in the Resource Name, select the static resource that you created earlier. For example, SignatureAreaLogo . Select the profile this configuration applies to. For example, System Administrator . To activate the configuration, select IsActive . Save your changes. To see the logo on the Life Sciences Cloud Mobile app, generate a metadata cache."
+      },
+      {
+        "name": "See Also",
+        "detail": "Generate Metadata Cache"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_add_logo_consent_capture_screen.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-send-confirmation-email",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Send a Confirmation Email",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Send a personalized follow-up email to a healthcare professional (HCP) after you capture their consent or",
+    "findings": [
+      {
+        "name": "Send a Confirmation Email",
+        "detail": "Send a personalized follow-up email to a healthcare professional (HCP) after you capture their consent or signature."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up and configure Consent Management features and objects: | Life Sciences Commercial Admin Consent confirmation emails are sent automatically when an HCP’s consent or signature is captured. To send the email to the correct recipient, Life Sciences Cloud for Customer Engagement automatically selects the primary Contact Point Email associated with the account that has the highest preference rank. Sent emails appear in the account’s Activity History. Note To send emails from Salesforce, Life Sciences Consent Management requires domain-level and user-level email verification. Email delivery fails if either the user's email address or the email-sending domain is unverified. See Requirements to Send Email from Salesforce . Create an email template . Note When creating a new email template, select the Template for consent acknowledgement checkbox to ensure the template is available for consent confirmation emails. After you create an email template, copy its record ID from the Life Sciences Email Templates object. You’ll need this ID when you set up the Apex trigger in Step 4. To use the email template for consent confirmation, select Template for consent acknowledgment . Create a metadata cache configuration for the LifeSciEmailTemplate object. For consent confirmation emails, when creating the configuration set, add this condition in the Where Clause. AND HasSendConsentAcknowledgement = FALSE Generate a metadata cache . To send a consent confirmation email, create an Apex Trigger on the Communication Subscription Consent object. The Apex trigger runs when a consent record is created or updated, queries the required email template and recipient details, and calls the Salesforce-provided Apex email send service to deliver the confirmation email. Click the Quick Action Menu , then click Developer Console . Click File , then New , and then Apex Trigger . Paste this sample Apex trigger code. trigger ConsentReceiptTrigger on CommSubscriptionConsent (after insert, after update) { for (CommSubscriptionConsent consent : Trigger.new) { String accountId; // Try to get the Account Id from the Consent Giver field String consentGiverId = consent.ConsentGiverId; if (consentGiverId != null && consentGiverId.startsWith('001')) { accountId = consentGiverId; } else { // If we can't get it from the Consent Giver field, try to get it from the Contact Point field String parentId; String contactPointId = consent.ContactPointId; if (contactPointId != null && contactPointId.startsWith('9Vl')) { // ContactPointEmail List<ContactPointEmail> cpeList = [SELECT ParentId FROM ContactPointEmail WHERE Id = :contactPointId]; if (cpeList.size() > 0) { parentId = cpeList.get(0).ParentId; } } else if (contactPointId.startsWith('8lW')) { // ContactPointAddress List<ContactPointAddress> cpaList = [SELECT ParentId FROM ContactPointAddress WHERE Id = :contactPointId]; if (cpaList.size() > 0) { parentId = cpaList.get(0).ParentId; } } else if (contactPointId.startsWith('0Ow')) { // ContactPointPhone List<ContactPointPhone> cppList = [SELECT ParentId FROM ContactPointPhone WHERE Id = :contactPointId]; if (cppList.size() > 0) { parentId = cppList.get(0).ParentId; } } else if (contactPointId.startsWith('1Lf')) { // ContactPointSocial List<ContactPointSocial> cpsList = [SELECT ParentReferenceRecordId FROM ContactPointSocial WHERE Id = :contactPointId]; if (cpsList.size() > 0) { parentId = cpsList.get(0).ParentReferenceRecordId; } } // If the Parent of the ContactPoint was an Account, set the Account Id if (parentId.startsWith('001')) { accountId = parentId; } } // Only continue if we have a valid Account ID (if not, then it wasn't an account that had consent updated) if (!String.isEmpty(accountId)) { String emailTemplateId; // Must be a Life Science Email Template ID with 'Send Consent Acknowledgment' = true // Handle Insert vs Update if (Trigger.isInsert) { // Handle Different Consent Statuses String status = consent.PrivacyConsentStatus; if (status != null && status.equals('OptIn')) { emailTemplateId = '1LLWs000000YtbZOAS'; } else if (status != null && status.equals('OptOut')) { emailTemplateId = '1LLWs000000dB8TOAU'; } } else if (Trigger.isUpdate) { // Handle Different Consent Statuses. Can handle any/all Statuses. Can also compare the old value to the new value CommSubscriptionConsent oldConsent = Trigger.oldMap.get(consent.Id); String oldStatus = oldConsent.PrivacyConsentStatus; String status = consent.PrivacyConsentStatus; if (oldStatus!= null && oldStatus.equals('OptOut') && status!= null && status.equals('OptIn')) { emailTemplateId = '1LLWs000000ay2TOAQ'; } else if (oldStatus!= null && oldStatus.equals('OptIn') && status!= null && status.equals('OptOut')) { emailTemplateId = '1LLWs000000cmrdOAA'; } } // Ony proceed if we hit a case that resulted in a template being set/selected if (!String.isEmpty(emailTemplateId)) { // Build the Parameter Map Map<String, Object> paramMap = new Map<String, Object> { 'emailTemplateId' => emailTemplateId, 'accountId' => accountId, 'relatedId' => String.valueOf(consent.Id), 'relatedLookupApiName' => 'CommSubscriptionConsentId' }; // Send the Email Boolean result = (Boolean)(lsc4ce.LifeScienceApi.getInstance(lsc4ce.LifeScienceApi.Command.EmailSendService).execute(paramMap)); } } } } Find the email template ID for opt-in and opt-out confirmation emails. The same template can be used for both. To find the ID, navigate to the Life Sciences Email Templates object and open the template record. In the Apex trigger sample code, replace the placeholder values assigned to emailTemplateId = with the email template ID from your org. Execute the code."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_send_confirmation_email.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  },
+  {
+    "id": "lsc-help-consent-ind-lsc-consent-management-update-consents",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Capture a Customer's Consent and Communication Preferences",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Update the communication subscriptions and channel preferences of healthcare professionals (HCPs) directly from an account’s record page. Plan and execute your outreach strategies better by seeing an HCP’s consent status and communication preferences, all in one place. Capture consent directly from...",
+    "findings": [
+      {
+        "name": "Capture a Customer's Consent and Communication Preferences",
+        "detail": "Update the communication subscriptions and channel preferences of healthcare professionals (HCPs) directly from an account’s record page. Plan and execute your outreach strategies better by seeing an HCP’s consent status and communication preferences, all in one place. Capture consent directly from an Account or a Visit record page using the Capture Consent quick action."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To view and edit consents on the web and mobile app: | Life Sciences Field Sales Representative OR Life Sciences Field Medical OR Life Sciences Key Account Management From the App Launcher, find and select Life Sciences Commercial . Click Accounts . From the list of accounts, select the one you want to update consent for. In the Account Record page, select the Capture Consent quick action. Alternatively, you can click the Consent tab, and then click Edit . Select the radio buttons to update channels and subscriptions as needed. Add proof of consent. Note The proofs that you must add depend on how your Salesforce admin configured the consent proof settings. If your admin requires at least one proof, add any one of the available proofs. Otherwise, add every required proof. To attach a file, go to the Attachments tab, and then select Upload Files . To record a reference to a paper consent form, go to the Document Reference tab, and then enter the reference. To record that the HCP gave verbal consent, go to the Verbal Consent tab, and then select I received verbal consent for the chosen communication preferences . To capture the HCP's signature in the mobile app, go to the Signature tab. Add a channel value. Click Manage Channels , and then click +New . In the New Channel window, select the channel type and the channel value. To add a new channel value, click +New Value and enter the contact point value details. You can create values for contact point email, contact point social, and contact point phone. Edit an existing channel value. In the Manage Channels window, click to edit the channel. Select a channel value. To add a new channel value, click +New Value . Save your changes. Acknowledge the terms and conditions and select I Agree . To send a confirmation email to your users, select Send email consent confirmation . Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Configure the Capture Consent Quick Action Consent Management"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_consent_management_update_consents.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "consent"
+    ]
+  }
+]

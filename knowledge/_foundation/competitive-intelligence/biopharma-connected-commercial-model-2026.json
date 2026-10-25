@@ -1,0 +1,94 @@
+[
+  {
+    "id": "ci-connected-commercial-001",
+    "category": "competitive-intelligence",
+    "title": "Biopharma Commercial Investment Priority Gap — Survey of 60 Leaders (2026)",
+    "products": ["lsc", "oce"],
+    "summary": "Research across 60 commercial leaders and performance analysis of 14 leading biopharma companies (2018-2025) reveals a persistent disconnect between what leaders say drives value and where investment actually lands. Upstream capabilities — data and analytics, market access and pricing, product launch — are ranked most critical but remain underfunded relative to marketing and field engagement.",
+    "findings": {
+      "investment_priority_disconnect": "When asked what will drive future commercial success, three capabilities dominate: data and analytics (72%), market access and pricing (60%), and product launch (48%). But actual investment tells a different story. Market access and pricing is cited as critical by 60% of leaders yet only 27% identify it as a current investment priority. Marketing shows the inverse: only 22% rank it among the most critical capabilities, yet 50% identify it as an investment priority.",
+      "ai_widening_the_gap": "As AI budgets take shape, market access and pricing falls further from 27% of current investment priorities to 23% of AI investment priorities. Marketing remains well ahead at 42%. The pattern points to a familiar organizational bias: investment gravitates toward areas where results are easier to measure and defend, while upstream capabilities that create durable differentiation remain underfunded.",
+      "upstream_vs_downstream_dynamics": "Marketing and field engagement are easy to measure and quick to pay back, and that investment is appropriate. Yet differentiation is built elsewhere. The next wave of advantage comes from connecting marketing and field engagement to the upstream capabilities that shape outcomes earlier: access strategy, pricing, launch sequencing, evidence planning, resource allocation, and enterprise decision-making.",
+      "connected_model_thesis": "The greater advantage comes when upstream capabilities reinforce one another. Better data improves access decisions, stronger access planning improves launch execution, and each launch generates evidence that sharpens the next one. The result is a cumulative advantage that becomes difficult for competitors to close."
+    },
+    "source": "Industry consulting firm perspective, October 2026. Survey of 60 commercial leaders benchmarked against 2022, plus performance analysis of top 14 biopharma companies 2018-2025.",
+    "tags": [
+      "commercial-strategy",
+      "investment-priorities",
+      "market-access",
+      "data-analytics",
+      "product-launch",
+      "ai-investment",
+      "upstream-capabilities",
+      "migration-considerations"
+    ]
+  },
+  {
+    "id": "ci-connected-commercial-002",
+    "category": "competitive-intelligence",
+    "title": "Why Biopharma Performance Leaders Keep Pulling Away — Compounding Advantage (2026)",
+    "products": ["lsc", "oce"],
+    "summary": "Longitudinal analysis of 14 leading biopharma companies shows that top performers started investing in connected commercial capabilities years earlier and created a reinforcing cycle where data strengthens decisions, decisions improve execution, and each cycle generates new evidence that strengthens the next. The performance gap is widening and becoming harder to close.",
+    "findings": {
+      "timing_as_differentiator": "The companies pulling ahead began building the capabilities that matter most years earlier and kept investing as their importance grew. In 2022, 53% rated data and analytics as critical; by 2026 the figure rose to 89%. That early investment created a reinforcing cycle. Stronger data sharpens decisions, better decisions improve execution, and each cycle generates new evidence that strengthens the foundations for the next.",
+      "portfolio_performance_patterns": "Across the two study periods (2018-2022 and 2023-2025), three patterns emerged: two companies held their position among the top performers, both already focused on strengthening their data and analytics foundation in 2022. One company moved from the bottom group to the top by investing more heavily than even the leaders across data, launch, access, and customer experience. Three remained in the bottom tier, focused on narrower, more siloed commercial properties.",
+      "compounding_effect": "The analysis is directional rather than causal — portfolio mix, marketing timing, and forecast accuracy also shape performance. Yet the pattern is consistent: stronger performers started connecting these capabilities earlier. As those investments build on one another, the distance between leaders and the rest becomes harder to close.",
+      "sequencing_guidance": "Where to start depends on where you are today. Organizations still building the foundation should strengthen data foundations, integration, and a focused set of decision-linked use cases — do not scale disconnected pilots before the foundation can support them. Organizations connecting capabilities should integrate data across medical, market access, marketing, and field into shared decision routines — do not try to modernize in parallel without changing how decisions are made. Organizations scaling reinvention should redesign decision rights, funding, incentives, and cross-functional accountability — do not mistake more tools for operating model change or genuinely new capabilities."
+    },
+    "source": "Industry consulting firm perspective, October 2026. Performance analysis using industry data, April 2022 and June 2026.",
+    "tags": [
+      "commercial-performance",
+      "data-analytics-maturity",
+      "compounding-advantage",
+      "capability-sequencing",
+      "migration-readiness",
+      "digital-maturity"
+    ]
+  },
+  {
+    "id": "ci-connected-commercial-003",
+    "category": "competitive-intelligence",
+    "title": "Three Moves to Close the Commercial Advantage Gap in Biopharma (2026)",
+    "products": ["lsc", "oce"],
+    "summary": "Research identifies three strategic moves that close the gap between current investment patterns and where commercial advantage is actually created: rebalance investments toward upstream capabilities, shift AI from silo automation to enterprise decision-making, and build talent and operating models as one agenda.",
+    "findings": {
+      "move_1_rebalance_investments": "The mandate is to rebalance and reinvest, sustaining improvement in engagement and marketing execution while directing a greater share of transformation attention toward the capabilities that create structural advantage over time. Drift is the real risk — transformation built as one long program assumes the destination stays still. The leaders separating to the right in the performance data are not the ones with the biggest plan; they are the ones who planned in increments, deployed, learned, and re-aimed so their foundation kept pace instead of aging. For those starting later, the sequence matters more than the speed.",
+      "move_2_shift_ai_to_enterprise_decisions": "Leaders say integration matters, but most are still using AI to automate within existing silos. The real advantage comes from redesigning the decisions and flows that cross those silos. Decision-grade AI requires shared data definitions, integrated workflows, and cross-functional agreement on what a good call looks like. Most commercial organizations have none of these at enterprise scale. Unlike automation, enterprise decision-making depends on coordination across functions. Only 25% of leaders run field and digital engagement as one integrated system enterprise-wide; a majority (58%) have integrated the two only in pockets.",
+      "move_3_talent_and_operating_model_as_one": "The three capabilities leaders prize most in their workforce: adaptability (72%), AI fluency (68%), and cross-functional collaboration (62%). People can learn new skills, but their behavior will still be shaped by how the company is run. If incentives and decision rights continue to reward work within functions, cross-functional collaboration will remain an aspiration. Companies are unlikely to hire all the commercial, digital, and data skills they need. Most expertise will need to be developed internally. Companies that tightly aligned talent strategy with technology and AI plans achieved revenue growth 1.8 percentage points higher and profit growth 1.4 points greater than their peers.",
+      "compounding_conclusion": "The next commercial advantage in biopharma will come from how well companies connect the capabilities they already know matter. Rebalancing investment toward access, launch, and data lays the foundation. Shifting AI toward enterprise decision-making makes each new investment more valuable. Building talent and the operating model together allows the system to learn and improve with every cycle. That is what makes the advantage difficult to replicate — it is much harder to recreate a commercial system in which each investment strengthens the next decision, each decision improves execution, and each cycle leaves the organization better prepared for the one that follows."
+    },
+    "source": "Industry consulting firm perspective, October 2026. Based on 60-leader survey and longitudinal performance analysis.",
+    "tags": [
+      "commercial-transformation",
+      "ai-strategy",
+      "enterprise-decision-making",
+      "talent-strategy",
+      "operating-model",
+      "investment-rebalancing",
+      "migration-strategy"
+    ]
+  },
+  {
+    "id": "ci-connected-commercial-004",
+    "category": "competitive-intelligence",
+    "title": "Biopharma AI Adoption Patterns — Field Team and Commercial AI Vision (2026)",
+    "products": ["lsc", "oce"],
+    "summary": "Industry leaders describe an imminent shift where AI agents handle routine forecasting and customer engagement planning, freeing field teams to spend 70% of their time on relationship building and strategic selling. Genuine integration remains the exception, with only 25% running field and digital engagement as one enterprise-wide system.",
+    "findings": {
+      "ai_agent_vision_for_field_teams": "Commercial AI innovation leaders describe a near-term future where AI agents handle the majority of routine forecasting and customer engagement planning. Field team members would spend approximately 70% of their time on relationship building and strategic selling rather than data and analysis work.",
+      "integration_gap": "Genuine integration of field and digital engagement remains the exception. Only 25% of commercial leaders run the two as one integrated system enterprise-wide. In contrast, a majority (58%) have integrated them only in pockets. This fragmentation limits the value of AI investments because decision-grade AI requires shared data definitions, integrated workflows, and cross-functional agreement on what constitutes a good outcome.",
+      "workforce_capability_priorities": "Leaders identify three essential workforce capabilities for the connected commercial model: adaptability (72%), AI fluency (68%), and cross-functional collaboration (62%). This represents a fundamentally people-and-organizational-design agenda, not just a technology deployment. The strongest organizations combine both generalists who can connect across commercial, digital, and data domains, and genuine specialists with deep knowledge of each domain — from market access experts to data scientists.",
+      "migration_relevance": "These findings reinforce that CRM migration is not a technology swap but a commercial model transformation. Organizations migrating CRM platforms should use the transition as an opportunity to: (1) integrate previously siloed field and digital engagement data, (2) establish shared data definitions that enable cross-functional AI, (3) redesign workflows around upstream decision-making rather than replicating existing siloed processes, (4) plan for AI-augmented field workflows that shift rep time from data work to relationship building."
+    },
+    "source": "Industry consulting firm perspective, October 2026. Survey of 60 commercial leaders.",
+    "tags": [
+      "ai-agents",
+      "field-force",
+      "digital-engagement",
+      "workforce-transformation",
+      "crm-migration",
+      "commercial-model",
+      "integration-strategy"
+    ]
+  }
+]

@@ -1,0 +1,164 @@
+[
+  {
+    "id": "cfr-001",
+    "category": "regulatory-compliance",
+    "question": "What are the closed system controls required under 21 CFR Part 11.10?",
+    "answer": "Section 11.10 requires closed systems to maintain electronic records with these controls: (1) System validation to ensure accuracy, reliability, consistent intended performance, and the ability to discern invalid or altered records; (2) The ability to generate accurate and complete copies of records in both human-readable and electronic form; (3) Protection of records to enable their accurate and ready retrieval throughout the records retention period; (4) Limiting system access to authorized individuals; (5) Use of secure, computer-generated, time-stamped audit trails to independently record the date and time of operator entries and actions that create, modify, or delete electronic records; (6) Use of operational system checks to enforce permitted sequencing of steps and events; (7) Use of authority checks to ensure that only authorized individuals can use the system, electronically sign a record, access the operation or computer system input or output device, alter a record, or perform the operation at hand; (8) Use of device checks to determine the validity of the source of data input or operational instruction; (9) Determination that persons who develop, maintain, or use electronic record/electronic signature systems have the education, training, and experience to perform their assigned tasks; (10) Establishment of and adherence to written policies that hold individuals accountable for actions initiated under their electronic signatures; (11) Use of appropriate controls over systems documentation including adequate controls over the distribution of, access to, and use of documentation for system operation and maintenance; (12) Revision and change control procedures to maintain an audit trail that documents time-sequenced development and modification of systems documentation.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "closed-system", "system-controls", "validation", "access-control", "change-control"]
+  },
+  {
+    "id": "cfr-002",
+    "category": "regulatory-compliance",
+    "question": "What are the open system controls required under 21 CFR Part 11.30?",
+    "answer": "Section 11.30 requires that persons who use open systems to create, modify, maintain, or transmit electronic records must employ procedures and controls designed to ensure the authenticity, integrity, and confidentiality of electronic records from the point of their creation to the point of their receipt. These include all the controls required for closed systems under 11.10, PLUS additional measures such as document encryption and use of appropriate digital signature standards to ensure record authenticity, integrity, and confidentiality as needed. In practice for life sciences CRM systems, open system controls apply when data is transmitted over the internet (e.g., mobile CRM syncing data to cloud servers, email transmissions of regulated records, or API integrations with external systems). TLS/SSL encryption for data in transit and AES-256 encryption for data at rest are standard implementations. Any CRM system that transmits regulated records over public networks is considered an open system for those transmissions.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "open-system", "encryption", "digital-signatures", "data-integrity", "data-transmission"]
+  },
+  {
+    "id": "cfr-003",
+    "category": "regulatory-compliance",
+    "question": "What are the specific audit trail requirements under 21 CFR Part 11.10(e)?",
+    "answer": "Section 11.10(e) requires the use of secure, computer-generated, time-stamped audit trails to independently record the date and time of operator entries and actions that create, modify, or delete electronic records. Key requirements: (1) Audit trail entries must be computer-generated — not manually entered by users; (2) Each entry must include a time stamp with date and time; (3) The audit trail must record WHO made the change (operator identification), WHAT was changed (the previous value and new value), and WHEN the change occurred; (4) Record changes must not obscure previously recorded information — you must be able to see both the before and after states; (5) The audit trail documentation must be retained for a period at least as long as required for the subject electronic records and must be available for agency review and copying; (6) The audit trail must be created by the computer system independently of the operator — users cannot modify their own audit trail entries. For CRM systems, this means every change to regulated records (visit records, sample transactions, signature captures, consent changes, email sends, inventory adjustments, call reports) must generate an immutable, timestamped audit trail entry that cannot be altered or deleted by end users or administrators.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "audit-trail", "immutable-records", "timestamps", "record-retention", "who-what-when"]
+  },
+  {
+    "id": "cfr-004",
+    "category": "regulatory-compliance",
+    "question": "How do audit trail requirements apply specifically to life sciences CRM record types?",
+    "answer": "In a life sciences CRM context, the following record types require 21 CFR Part 11 compliant audit trails: (1) Visit/Call Records — every creation, modification, or deletion of a visit record including changes to HCP attendees, products detailed, discussion topics, and outcomes; (2) Sample Transactions — sample drops to HCPs, sample receipts, sample transfers, inventory reconciliations, and sample adjustments including quantity changes and lot number modifications; (3) Signature Captures — both rep and HCP signatures on sample receipts, including any re-signing events, voided signatures, or signature corrections; (4) Email Sends — approved email template selections, recipient lists, send timestamps, and any content modifications; (5) Consent Records — opt-in/opt-out changes, consent type modifications, channel preferences, and consent withdrawal events; (6) Order Records — order creation, line item changes, pricing modifications, order status changes, and order cancellations; (7) Medical Inquiry Records — adverse event reports, medical information requests, and product complaint captures. Each of these must track the previous value, new value, user who made the change, and timestamp. The audit trail must be retained as long as the underlying record and cannot be modified by ordinary means.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "audit-trail", "crm-records", "visit-records", "sample-transactions", "signatures", "consent"]
+  },
+  {
+    "id": "cfr-005",
+    "category": "regulatory-compliance",
+    "question": "What are the record retention requirements under 21 CFR Part 11?",
+    "answer": "21 CFR Part 11 requires that electronic records must be protected to enable their accurate and ready retrieval throughout their required retention period. Key requirements: (1) Records must be available in both human-readable and electronic form suitable for FDA inspection, review, and copying; (2) The retention period for audit trails must be at least as long as the retention period for the underlying electronic records they document; (3) The specific retention period depends on the predicate rule governing the record type — for pharmaceutical sample records under the PDMA, retention is typically 3 years; for adverse event records, retention can extend to the life of the product plus additional years; (4) During the retention period, the records must be retrievable in a timely manner — they cannot be archived in a format that prevents ready access; (5) System migrations do not eliminate retention obligations — when migrating CRM platforms, all historical records and their audit trails must either be migrated to the new system or maintained in an accessible archive with the original system's audit trail integrity preserved. This is particularly critical during CRM migrations: organizations cannot simply abandon historical data in a decommissioned system without ensuring continued accessibility.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "record-retention", "data-retrieval", "archive", "migration", "fda-inspection"]
+  },
+  {
+    "id": "cfr-006",
+    "category": "regulatory-compliance",
+    "question": "What are the electronic signature manifestation requirements under 21 CFR Part 11.50?",
+    "answer": "Section 11.50 requires that signed electronic records must contain information associated with the signing that clearly indicates all of the following: (1) The printed name of the signer; (2) The date and time when the signature was executed; (3) The meaning (such as review, approval, responsibility, or authorship) associated with the signature. These three elements must be subject to the same controls as the electronic records themselves and must be included as part of any human-readable form of the electronic record (such as printouts or electronic display). In a CRM context, when a rep signs a sample receipt, the system must capture and display the rep's full name, the exact date and time of signing, and the meaning — e.g., 'I acknowledge delivery of the samples listed above.' Similarly, when an HCP signs to acknowledge receipt, their printed name, signing timestamp, and meaning must be captured. These signature manifestation elements must be stored immutably alongside the signed record.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "electronic-signature", "signature-manifestation", "printed-name", "date-time", "meaning"]
+  },
+  {
+    "id": "cfr-007",
+    "category": "regulatory-compliance",
+    "question": "What are the signature-to-record linking requirements under 21 CFR Part 11.70?",
+    "answer": "Section 11.70 requires that electronic signatures and handwritten signatures executed to electronic records must be linked to their respective electronic records to ensure that the signatures cannot be excised, copied, or otherwise transferred to falsify an electronic record by ordinary means. This means: (1) The signature must be cryptographically or structurally bound to the record it signs — it cannot exist as a standalone image file that could be copied to another record; (2) The system must prevent a signature captured for one sample receipt from being reused on a different sample receipt; (3) Any attempt to separate the signature from its record must be detectable; (4) The linking must survive data export, backup, restore, and migration operations. For CRM sample signature capture on mobile devices, this requires that the signature image/data is stored with a cryptographic hash or unique identifier that ties it to the specific transaction record. Simply storing a signature image in a generic attachment field without binding metadata is non-compliant. Veeva CRM implements this through its signature object model with parent-child relationships and hash validation — any target platform migration must preserve or replicate this binding.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "signature-linking", "record-binding", "anti-falsification", "cryptographic-hash", "sample-receipt"]
+  },
+  {
+    "id": "cfr-008",
+    "category": "regulatory-compliance",
+    "question": "What are the general requirements for electronic signatures under 21 CFR Part 11.100?",
+    "answer": "Section 11.100 establishes these general requirements: (1) Each electronic signature must be unique to one individual and must not be reused by, or reassigned to, anyone else; (2) Before an organization establishes, assigns, certifies, or otherwise sanctions an individual's electronic signature, or any element of such electronic signature, the organization must verify the identity of the individual; (3) Persons using electronic signatures must, prior to or at the time of such use, certify to the agency that the electronic signatures in their system, used on or after August 20, 1997, are intended to be the legally binding equivalent of traditional handwritten signatures; (4) The certification must be submitted in paper form, signed with a traditional handwritten signature, to the FDA Office of Regional Operations. For CRM implementations, this means: user accounts cannot be shared (no generic 'admin' or 'rep' accounts for signing); each signing user must have their identity verified before first use; and the organization must have the FDA certification on file. During migration, user identity mappings must be carefully maintained — the same user ID in the new system must map to the same verified individual.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "electronic-signature", "unique-identity", "identity-verification", "fda-certification", "user-accounts"]
+  },
+  {
+    "id": "cfr-009",
+    "category": "regulatory-compliance",
+    "question": "What are the biometric vs non-biometric signature requirements under 21 CFR Part 11.200?",
+    "answer": "Section 11.200 distinguishes between biometric and non-biometric electronic signatures: NON-BIOMETRIC signatures (e.g., user ID + password) must: (1) Employ at least two distinct identification components such as an identification code (user ID) and a password; (2) When used for the first time (initial signing within a session), require both identification components; (3) When used for subsequent signings during the same continuous session, require at least one component (e.g., password only); (4) When used by someone other than the original executor, require all components; (5) Be used only by their genuine owners; (6) Be administered and controlled to ensure attempted use by anyone other than their genuine owner requires collaboration of two or more individuals. BIOMETRIC signatures must be designed to ensure they cannot practicably be used by anyone other than their genuine owner. For CRM mobile applications: (1) The first sample signature in a session should require full login (user ID + password or SSO equivalent); (2) Subsequent signatures within the same continuous session can use a single component (e.g., re-enter password, or biometric like Touch ID/Face ID); (3) If the session times out or the user logs out, full authentication is required again. Note: capturing a stylus signature on a tablet screen is NOT an electronic signature under Part 11 — it is a handwritten signature executed to an electronic record and must comply with 11.70 linking requirements.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "electronic-signature", "biometric", "non-biometric", "two-factor", "session-management", "mobile"]
+  },
+  {
+    "id": "cfr-010",
+    "category": "regulatory-compliance",
+    "question": "How do electronic signature requirements apply to CRM sample receipt and visit submission workflows?",
+    "answer": "In a life sciences CRM, electronic signatures appear in several key workflows: (1) SAMPLE RECEIPT — The rep signs to confirm they delivered the samples, and the HCP signs to acknowledge receipt. Both signatures must meet 11.50 (printed name, date/time, meaning). The HCP's stylus signature on a tablet is a handwritten signature executed to an electronic record per 11.70 — it must be linked to the specific sample transaction and cannot be copied. The rep's electronic submission (confirming the drop) uses their authenticated session and must meet 11.200 requirements. (2) VISIT SUBMISSION — When a rep submits a completed visit/call report, this constitutes an electronic signature meaning 'I attest that this visit occurred as documented.' The system must capture the rep's identity and timestamp. (3) INVENTORY RECONCILIATION — Periodic sample inventory counts require a sign-off that the physical count matches the system count. This signature means 'I verify this reconciliation is accurate.' (4) ORDER SIGN-OFF — In markets where reps place orders, the order submission signature means 'I authorize this order.' Each of these requires the system to enforce that the signer is authenticated, the signature is linked to the specific record, and the three manifestation elements (name, date/time, meaning) are captured and displayed.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "sample-receipt", "visit-submission", "inventory-reconciliation", "signature-workflow", "hcp-signature"]
+  },
+  {
+    "id": "cfr-011",
+    "category": "regulatory-compliance",
+    "question": "How does the target platform support 21 CFR Part 11 requirements for audit trails and access controls?",
+    "answer": "The target platform provides several built-in capabilities that support Part 11 compliance, but none are automatically Part 11 compliant without proper configuration: (1) FIELD HISTORY TRACKING — The platform can track changes to individual fields on records, capturing old value, new value, who changed it, and when. However, field history tracking is limited to a maximum number of fields per object (typically 20) and has a retention limit (typically 18-24 months unless archived). Organizations must carefully select which fields to track and implement archival strategies. (2) LOGIN AND AUTHENTICATION — The platform supports SSO, MFA, session management, password policies, and IP restrictions. These support 11.10 access controls and 11.200 signature requirements. (3) PERMISSION-BASED ACCESS — Profiles, permission sets, sharing rules, and record-level security support 11.10 authority checks. (4) PLATFORM ENCRYPTION — Shield Platform Encryption provides encryption at rest for specified fields. (5) SETUP AUDIT TRAIL — Tracks administrative configuration changes for 180 days. GAPS: Field history tracking alone is NOT sufficient for full Part 11 audit trail compliance due to field count limits and retention constraints. Organizations typically need custom audit trail objects or third-party audit trail solutions. The platform does not natively capture the 'meaning' of a signature per 11.50 — this must be custom-built.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "platform-capabilities", "field-history-tracking", "access-control", "encryption", "gaps"]
+  },
+  {
+    "id": "cfr-012",
+    "category": "regulatory-compliance",
+    "question": "How should sample signature capture on mobile devices meet Part 11 requirements?",
+    "answer": "Mobile signature capture for sample receipts must satisfy multiple Part 11 sections simultaneously: (1) 11.50 MANIFESTATION — The mobile UI must display and store the signer's printed name, the date and time of signing, and the meaning of the signature. For HCP signatures, the meaning is typically 'I acknowledge receipt of the pharmaceutical samples listed above.' The printed name should be pre-populated from the HCP record but editable (the signer must confirm it is correct). (2) 11.70 LINKING — The captured signature (image or biometric data) must be cryptographically bound to the specific sample transaction record. The system must prevent the signature from being detached and reattached to a different transaction. Implementation approaches include storing a hash of the transaction details alongside the signature, or using a parent-child record relationship where the signature record is immutably linked to the transaction. (3) 11.200 AUTHENTICATION — The rep must be authenticated before submitting. If using biometric device features (Touch ID, Face ID) as one factor, the implementation must be validated to ensure it meets the 'cannot practicably be used by anyone other than their genuine owner' standard. (4) OFFLINE CONSIDERATIONS — When the mobile device is offline, signatures captured locally must maintain their integrity and linking until synced. The system must validate that no tampering occurred between capture and sync. Timestamps must reflect actual signing time, not sync time.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "mobile-signature", "sample-receipt", "offline", "hcp-signature", "biometric", "ipad"]
+  },
+  {
+    "id": "cfr-013",
+    "category": "regulatory-compliance",
+    "question": "What Part 11 requirements need custom configuration vs built-in platform features, and where must SIs add custom solutions?",
+    "answer": "BUILT-IN (requires configuration, not custom code): (1) User authentication — SSO, MFA, password policies; (2) Role-based access control — profiles, permission sets, sharing rules; (3) Basic field history tracking — limited fields, limited retention; (4) Session management — timeout policies, concurrent session limits; (5) IP restriction and login hours; (6) Platform encryption at rest. REQUIRES CUSTOM CONFIGURATION: (1) Extending audit trails beyond field history limits — custom audit trail objects to capture all required fields for regulated records; (2) Signature manifestation — custom fields or objects to store printed name, date/time, and meaning alongside each signature; (3) Signature linking — custom logic to generate and validate cryptographic hashes binding signatures to records; (4) Audit trail archival — custom or third-party solutions to retain audit trails beyond platform retention limits; (5) The 'meaning' of signature — picklist or text field capturing why the user signed (review, approval, authorship); (6) Offline audit trail integrity for mobile — custom validation logic during sync. SI-DEPENDENT SOLUTIONS: (1) Computer System Validation (CSV) documentation and execution; (2) Audit trail reporting tools for FDA inspection readiness; (3) Part 11 assessment and gap analysis; (4) Standard Operating Procedures (SOPs) for electronic record and signature use; (5) User training documentation and records; (6) Integration validation for external system data exchanges.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "custom-configuration", "system-integrator", "gaps", "audit-trail-extension", "csv"]
+  },
+  {
+    "id": "cfr-014",
+    "category": "regulatory-compliance",
+    "question": "What are the validation requirements for a CRM system under 21 CFR Part 11 and how does it fit into GxP validation?",
+    "answer": "21 CFR Part 11.10(a) requires system validation to ensure accuracy, reliability, consistent intended performance, and the ability to discern invalid or altered records. For a CRM system used in pharmaceutical commercial operations, validation follows the GAMP 5 (Good Automated Manufacturing Practice) framework: (1) IQ (Installation Qualification) — Verifies that the system is installed correctly per specifications. For cloud CRM, this includes verifying tenant configuration, integrations, and network connectivity. (2) OQ (Operational Qualification) — Verifies that the system operates as intended within specified operating ranges. This includes testing all configured workflows, validation rules, approval processes, and custom code. (3) PQ (Performance Qualification) — Verifies that the system consistently performs as intended under real-world conditions, including stress testing, concurrent user testing, and offline/online sync validation for mobile. RISK-BASED APPROACH: Per FDA guidance 'General Principles of Software Validation' (2002) and the GAMP 5 risk-based approach, not every CRM feature requires the same level of validation. GxP-critical features (sample management, signature capture, adverse event reporting) require full IQ/OQ/PQ, while non-GxP features (basic calendar, notes) may require only configuration verification. A CRM used for sample tracking is typically classified as GAMP Category 4 (Configured Product) — the platform is Category 3 (COTS) but customization elevates it. Validation deliverables include: Validation Plan, User Requirements Specification (URS), Functional Requirements Specification (FRS), Design Specification, test scripts, traceability matrix, validation summary report, and ongoing periodic review schedule.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "validation", "gamp-5", "iq-oq-pq", "csv", "risk-based", "gxp"]
+  },
+  {
+    "id": "cfr-015",
+    "category": "regulatory-compliance",
+    "question": "What training requirements does 21 CFR Part 11 impose on CRM users?",
+    "answer": "Section 11.10(i) requires that persons who develop, maintain, or use electronic record/electronic signature systems have the education, training, and experience to perform their assigned tasks. Specific training requirements for CRM users include: (1) SIGNATURE TRAINING — Users must be trained on the meaning and significance of their electronic signatures. They must understand that their electronic signature is legally equivalent to a handwritten signature and carries the same accountability. (2) SYSTEM USE TRAINING — Users must be trained on how to properly use the CRM system's electronic record and signature features, including how to create, modify, and sign records correctly. (3) POLICY TRAINING — Users must be trained on organizational policies regarding electronic records and signatures, including their accountability for actions taken under their credentials. (4) DOCUMENTATION — All training must be documented with records showing who was trained, when, by whom, and on what topics. Training records themselves must be retained per organizational policy. (5) ONGOING TRAINING — When the system is updated (e.g., during CRM releases or migrations), users must receive updated training on any changes that affect their interaction with electronic records or signatures. For CRM migrations specifically: all users must be retrained on the new system's record and signature workflows before go-live, and these training records must be maintained as part of the validation documentation.",
+    "gotcha_level": "warning",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "training", "user-training", "documentation", "accountability", "migration"]
+  },
+  {
+    "id": "cfr-016",
+    "category": "regulatory-compliance",
+    "question": "What Part 11 considerations apply when migrating from Veeva CRM to a new platform?",
+    "answer": "Migrating from Veeva CRM — which has purpose-built Part 11 features — to a new platform requires careful planning: (1) AUDIT TRAIL MIGRATION — Veeva's audit trail data (stored in custom audit objects and field history) must either be migrated to equivalent structures in the target platform or maintained in an accessible archive. Simply decommissioning Veeva without migrating or archiving audit trails violates retention requirements. (2) SIGNATURE RECORD MIGRATION — All historical signature records (sample receipt signatures, visit attestations) must migrate with their linking integrity intact. The signature-to-record binding (11.70) must be preserved in the target system. Signature images, metadata (signer name, date/time, meaning), and their parent transaction records must migrate together. (3) CHAIN OF CUSTODY — The migration process itself must be validated and documented. You must demonstrate that records were not altered during migration — this typically requires record counts, hash comparisons, and spot-check verification of migrated records against source records. (4) VEEVA-SPECIFIC FEATURES — Veeva's Approved Email audit trail, CLM content tracking, sample management audit objects, and Medical Inquiry tracking all have Part 11 implications. Each must have an equivalent in the target platform or an explicit gap remediation plan. (5) USER MAPPING — Veeva user records must map to target platform user records while maintaining the unique-user-to-signature association required by 11.100. Historical records must still show the correct user who performed each action.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "veeva-migration", "audit-trail-migration", "signature-migration", "chain-of-custody", "data-integrity"]
+  },
+  {
+    "id": "cfr-017",
+    "category": "regulatory-compliance",
+    "question": "What revalidation is required when switching CRM platforms, and what is the risk-based approach?",
+    "answer": "Switching CRM platforms requires full revalidation of the new system, as it constitutes a major system change: (1) NEW VALIDATION LIFECYCLE — The target CRM requires a complete validation lifecycle: Validation Plan, URS, FRS, IQ/OQ/PQ, traceability matrix, and Validation Summary Report. You cannot rely on the Veeva validation package for the new system. (2) RISK-BASED APPROACH — Per GAMP 5 and FDA guidance, apply risk assessment to prioritize validation effort: HIGH RISK (full validation) — Sample management, signature capture, adverse event reporting, controlled substance tracking; MEDIUM RISK (functional testing) — Visit/call reporting, email compliance, order management; LOWER RISK (configuration verification) — Territory management, basic reporting, calendar. (3) DATA MIGRATION VALIDATION — The migration itself is a separate validation activity. A Data Migration Validation Protocol must document: source-to-target field mapping, transformation rules, acceptance criteria (record counts, data integrity checks, referential integrity verification), and rollback procedures. (4) PARALLEL OPERATION — Many organizations run both systems in parallel during transition to verify the new system produces equivalent results. This period must be documented. (5) RETROSPECTIVE VALIDATION — If the target platform was already in use for non-GxP purposes and is now being extended for GxP use, retrospective validation of existing functionality may be required. (6) TIMELINE — Full CRM revalidation typically requires 3-6 months depending on complexity, and must be completed before go-live for regulated functions.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "revalidation", "risk-based", "gamp-5", "data-migration-validation", "parallel-operation"]
+  },
+  {
+    "id": "cfr-018",
+    "category": "regulatory-compliance",
+    "question": "How do you maintain Part 11 compliance during ongoing operations with monthly CRM releases?",
+    "answer": "Maintaining validated state during ongoing platform releases requires a continuous compliance program: (1) CHANGE CONTROL — Every release (monthly, patch, or hotfix) must go through a formal change control process that assesses the impact on validated functionality. Changes are classified as: NO IMPACT (cosmetic, non-GxP features), MINOR IMPACT (configuration changes to validated features, requiring targeted regression testing), or MAJOR IMPACT (changes to sample management, signature workflows, audit trail mechanisms, requiring partial or full revalidation). (2) RELEASE ASSESSMENT — Before each release, a qualified person must review the release notes and assess whether any changes affect GxP-critical functions. This assessment must be documented. (3) REGRESSION TESTING — Validated test scripts must be re-executed for any impacted functionality. Maintain a library of Part 11 regression test scripts covering: audit trail generation and immutability, signature capture and linking, access control enforcement, record retention and retrieval, and data integrity after sync operations. (4) PERIODIC REVIEWS — FDA expects periodic reviews of the validated system, typically annually, to confirm it remains in a validated state. Review items include: system configuration changes since last review, user access reviews, audit trail integrity verification, incident and deviation log review, and training record currency. (5) DEVIATION MANAGEMENT — Any deviations from expected validated behavior discovered during operation must be documented, investigated, and resolved with corrective and preventive actions (CAPA). (6) SUPPLIER MANAGEMENT — The CRM platform vendor is a supplier of a GxP system. Maintain supplier qualification documentation, review vendor audit reports (SOC 2, ISO 27001), and monitor vendor communications for changes that could impact validated state.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["cfr-part-11", "ongoing-compliance", "change-control", "regression-testing", "periodic-review", "capa", "supplier-management"]
+  }
+]

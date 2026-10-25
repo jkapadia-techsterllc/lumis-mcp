@@ -1,0 +1,30 @@
+[
+  {
+    "id": "crm-bp-004",
+    "category": "gotchas",
+    "title": "Salesforce Platform Performance and SOQL Optimization Practices",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Covers index thresholds, SOQL anti-patterns, API optimization, skinny tables, and data load strategies for Salesforce CRM implementations. Applicable to any large-scale Salesforce deployment.",
+    "findings": {
+      "index_thresholds": "Custom index selectivity threshold: less than 10% of first million records plus 5% of records above one million (or 333,333 total, whichever is less). Standard index selectivity threshold: less than 30% of first million plus 15% above one million. Predicates using not-equal or NOT IN operators never use indexes regardless of selectivity.",
+      "soql_anti_patterns": "Avoid leading wildcard LIKE queries (e.g., searching for records containing a substring). Avoid NOT and not-equal predicates which bypass indexes. Avoid complex multi-join queries. Be aware that records in the recycle bin can affect query performance and filter selectivity.",
+      "skinny_tables": "Salesforce can create skinny tables (request through support) to reduce I/O, cache utilization, and joins for frequently queried objects. Skinny tables are invisible to end users but are honored in reports and SOQL queries. Useful for high-volume objects with many fields where queries only need a subset.",
+      "api_optimization": "Avoid Apex triggers and workflow rules on API-driven read and insert operations where performance is critical. Operation speed ranking from fastest to slowest: insert, update, upsert. Record size limit is 3 MB. Less sharing configuration results in faster operations.",
+      "data_load_strategies": "Use delta-only loads rather than full loads. Be aware that updating child records locks parent records, which can cause contention during large parallel loads. Large volume calculations should be performed outside Salesforce to avoid governor limits. Triggers and rollup summary fields on data load target objects add significant processing time.",
+      "report_optimization": "Use filters aggressively on reports. Pre-aggregate data where possible. Consider denormalization for reporting objects. For complex analytical needs, consider a dedicated data warehouse rather than relying on Salesforce reports."
+    },
+    "source": "Force.com Platform Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "soql",
+      "performance",
+      "indexing",
+      "skinny-tables",
+      "api",
+      "data-load",
+      "governor-limits"
+    ]
+  }
+]

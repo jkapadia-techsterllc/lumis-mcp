@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gap-001",
+    "module": "Sample Management",
+    "gap_title": "Sample Limit Calculation Engine Differences",
+    "description": "Legacy CRM calculates sample limits using a rolling calendar window with real-time enforcement. The target platform uses a batch-based calculation framework that runs on a schedule. This means sample limit violations can occur between batch runs.",
+    "severity": "high",
+    "workaround": "Configure the batch job to run more frequently (e.g., every 4 hours instead of daily). Implement a trigger-based soft limit check that warns reps when approaching limits, even if the batch hasn't run yet.",
+    "target_resolution": "Future platform release planned to support near-real-time limit enforcement",
+    "migration_impact": "Reps accustomed to real-time enforcement may over-sample between batch runs. Training required."
+  },
+  {
+    "id": "gap-002",
+    "module": "Content Management",
+    "gap_title": "Proprietary Interactive Content APIs Not Supported",
+    "description": "Legacy CRM CLM presentations use proprietary JavaScript APIs for slide navigation, embedded surveys, form submissions, and branching logic. These APIs do not exist in the target platform. All interactive content must be rebuilt.",
+    "severity": "critical",
+    "workaround": "Convert interactive presentations to static PDF or simple HTML. For truly interactive needs, use a third-party content platform integrated via iframe or API.",
+    "target_resolution": "No planned equivalent — by design, the target platform uses standard web technologies",
+    "migration_impact": "40-60% of CLM content may require rebuild. Budget significant content development time. Engage medical/legal/regulatory review for rebuilt content."
+  },
+  {
+    "id": "gap-003",
+    "module": "Consent Management",
+    "gap_title": "Opt-In vs Opt-Out Default Mismatch",
+    "description": "Legacy CRM defaults to opt-out (assumed consent) for most channels. In EU markets, GDPR requires explicit opt-in. The target platform supports both models but doesn't auto-apply country-specific defaults during migration.",
+    "severity": "critical",
+    "workaround": "Build a migration transformation rule that applies country-specific consent defaults. For EU: if no explicit consent record exists, set status to 'Not Captured' (not 'Opted In'). For US: follow state-specific rules (California CCPA, Vermont prescriber confidentiality).",
+    "target_resolution": "Platform supports configurable defaults per country — but configuration must be done before data load",
+    "migration_impact": "If consent defaults are wrong, every HCP communication could violate regulations. This is the highest-risk migration item. Involve Legal from Day 1."
+  },
+  {
+    "id": "gap-004",
+    "module": "Visit Management",
+    "gap_title": "Key Message Recall Tracking Methodology Differs",
+    "description": "Legacy CRM tracks key message recall as a percentage score based on HCP reactions during a visit. The target platform tracks key messages as individual feedback records with categorical ratings (Positive/Neutral/Negative). Historical percentage scores cannot be directly converted.",
+    "severity": "medium",
+    "workaround": "Migrate historical key message data as text notes on the visit record. Going forward, train reps on the new categorical feedback model. Build a report that approximates the legacy percentage view from the new categorical data.",
+    "target_resolution": "Consider a custom field to store legacy recall scores for historical reference",
+    "migration_impact": "Marketing teams that relied on key message recall percentages will lose trend continuity. Set expectations early."
+  },
+  {
+    "id": "gap-005",
+    "module": "Territory Management",
+    "gap_title": "Flat vs Hierarchical Territory Model",
+    "description": "Legacy CRM uses a flat territory assignment model (rep → territory → accounts). The target platform supports Enterprise Territory Management with multi-level hierarchies, territory types, and rule-based assignment. Migration requires designing the hierarchy before loading assignments.",
+    "severity": "high",
+    "workaround": "Start with a flat territory structure that mirrors legacy, then evolve to hierarchical in Phase 2. This reduces Day 1 complexity while preserving account assignments.",
+    "target_resolution": "Design the target territory hierarchy during Discovery phase, but implement in waves",
+    "migration_impact": "Territory misalignment causes account access issues on Day 1. Validate every rep can see their accounts after migration."
+  },
+  {
+    "id": "gap-006",
+    "module": "Email and Digital Engagement",
+    "gap_title": "Email Template Token Syntax Incompatibility",
+    "description": "Legacy CRM uses Handlebars-style tokens ({{FirstName}}) in email templates. The target platform uses merge field syntax ({!Contact.FirstName}). All email templates must be converted.",
+    "severity": "medium",
+    "workaround": "Build an automated conversion script that maps legacy tokens to target merge fields. Test every template after conversion — edge cases like conditional blocks and loops need manual review.",
+    "target_resolution": "Template conversion can be automated for 80% of cases; 20% need manual adjustment",
+    "migration_impact": "If templates aren't converted before go-live, all automated emails will show raw merge field syntax to HCPs."
+  },
+  {
+    "id": "gap-007",
+    "module": "Event Management",
+    "gap_title": "Virtual and Hybrid Event Support Gaps",
+    "description": "Legacy CRM has built-in virtual event management (video conferencing integration, virtual attendee tracking, digital engagement metrics). The target platform's event management is primarily designed for in-person events with virtual support through integrations.",
+    "severity": "medium",
+    "workaround": "Integrate a dedicated virtual event platform (e.g., Zoom, Teams) and use the platform's integration capabilities to sync attendance and engagement data back to event records.",
+    "target_resolution": "Platform roadmap includes enhanced virtual event capabilities",
+    "migration_impact": "Organizations with heavy virtual event programs need integration architecture designed early in the project."
+  },
+  {
+    "id": "gap-008",
+    "module": "Mobile and Offline",
+    "gap_title": "Offline Data Caching Capacity and Sync Behavior",
+    "description": "Legacy CRM's mobile app caches all assigned data locally with bi-directional sync. The target platform's mobile experience has selective sync with configurable data sets, but total offline capacity is smaller and sync conflict resolution follows different rules.",
+    "severity": "high",
+    "workaround": "Configure mobile sync to prioritize the most-used data: accounts, recent visits, active sample inventory. Train reps on the sync indicator and manual sync trigger. Design conflict resolution rules before go-live.",
+    "target_resolution": "Platform continuously improving mobile offline capabilities",
+    "migration_impact": "Field reps in low-connectivity areas (rural, hospital basements) will notice behavior differences. Dedicate UAT time to offline scenarios."
+  },
+  {
+    "id": "gap-009",
+    "module": "Analytics and Reporting",
+    "gap_title": "Custom Analytics and Dashboard Migration",
+    "description": "Legacy CRM's reporting engine uses a proprietary query language and visualization library. No reports or dashboards migrate automatically. All analytics must be rebuilt in the target platform's reporting framework.",
+    "severity": "high",
+    "workaround": "Document all critical reports from legacy CRM (top 20-30 most used). Rebuild them in the target platform during the Implementation phase. Consider a BI tool (Tableau, Power BI) for complex analytics that exceed the platform's native capabilities.",
+    "target_resolution": "Rebuild in target platform reporting; complex analytics via BI integration",
+    "migration_impact": "Users lose all saved reports and dashboards on Day 1 unless rebuilt. This is one of the most-cited user complaints post-migration. Start report rebuilding early."
+  },
+  {
+    "id": "gap-010",
+    "module": "Activity Plan",
+    "gap_title": "Goal Hierarchy and Plan Structure Differences",
+    "description": "Legacy CRM activity plans use a flat goal structure with numeric targets. The target platform uses a hierarchical goal model with categories, criteria, and nested sub-goals. The plan execution engine also works differently — legacy enforces strict sequencing while target allows flexible goal completion.",
+    "severity": "medium",
+    "workaround": "Map legacy flat goals to the target's Category → Criteria → Goal hierarchy. Start with simple 1:1 mapping, then leverage the hierarchy in Phase 2 for more sophisticated planning.",
+    "target_resolution": "The target's hierarchical model is actually more powerful — this is an upgrade opportunity, not just a gap to fill",
+    "migration_impact": "Activity plans in progress at cutover need special handling. Either close out legacy plans before cutover or manually recreate open plans in target."
+  },
+  {
+    "id": "gap-011",
+    "module": "Integration",
+    "gap_title": "ERP and Master Data Integration Replatforming",
+    "description": "Legacy CRM's integration middleware and API contracts are not compatible with the target platform. All ERP integrations (SAP, Oracle), master data feeds (MDM), and downstream analytics pipelines must be repointed.",
+    "severity": "critical",
+    "workaround": "Build an integration architecture document during Discovery. Use the target platform's standard APIs (REST/SOAP/Bulk) and an integration platform (MuleSoft, Informatica, Dell Boomi) to rebuild connections. Prioritize: MDM feed → ERP order sync → compliance reporting → analytics.",
+    "target_resolution": "Integration replatforming is a parallel workstream — do not leave it for the end",
+    "migration_impact": "If integrations aren't ready at go-live, downstream systems won't receive data. This blocks order fulfillment, compliance reporting, and analytics."
+  },
+  {
+    "id": "gap-012",
+    "module": "User Management",
+    "gap_title": "Permission Model Translation",
+    "description": "Legacy CRM uses a role-based access model with custom permission sets. The target platform uses a combination of Profiles, Permission Sets, Permission Set Groups, and sharing rules. The translation is not 1:1.",
+    "severity": "high",
+    "workaround": "Map legacy roles to target platform Permission Set Groups. Use the principle of least privilege — start with minimal permissions and add as needed. Document the mapping in a RACI matrix showing legacy role → target permission set group → what they can see/do.",
+    "target_resolution": "Build the permission model during the Design phase; iterate during UAT based on user feedback",
+    "migration_impact": "Permission errors cause two problems: users can't do their job (too restrictive) or users see data they shouldn't (too permissive). Both are Day 1 blockers."
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "fnd-agile-001",
+    "category": "org-strategy",
+    "title": "Agile Methodology Selection for Life Sciences Engineering Organizations",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Comparative analysis of agile frameworks (Spotify model vs. SAFe) with rationale for methodology selection in life sciences product engineering contexts where autonomy, speed, and culture alignment are prioritized.",
+    "findings": {
+      "spotify_model_elements": "The model organizes around four structural units: Squads (autonomous feature teams of 6-12 people), Tribes (collections of related squads sharing a mission area), Chapters (functional communities across squads for skill development, e.g., all iOS engineers), and Guilds (cross-tribe interest groups for knowledge sharing, e.g., accessibility practitioners).",
+      "additional_construct_alliances": "Some organizations extend the model with Alliances \u2014 groupings of tribes that share strategic objectives or customer segments, providing coordination at the portfolio level without adding process overhead.",
+      "why_spotify_over_safe": "Organizations choosing the Spotify model over SAFe cite: (a) lighter process weight \u2014 fewer ceremonies and artifacts; (b) autonomy-focused \u2014 squads choose their own processes; (c) culture-driven \u2014 emphasizes trust and psychological safety over compliance; (d) better fit for product-mode organizations vs. project-mode.",
+      "safe_strengths_acknowledged": "SAFe offers advantages for: organizations with heavy regulatory compliance needs, large-scale programs requiring cross-team synchronization (Program Increments), and contexts where leadership prefers standardized metrics and cadences.",
+      "hybrid_approach": "Most organizations adopt a hybrid: Spotify-style squad autonomy for day-to-day execution combined with lightweight planning increments (quarterly or tri-weekly) for cross-team coordination and dependency management.",
+      "life_sciences_considerations": "Life sciences engineering organizations should consider: validation requirements may need ceremony documentation that pure Spotify avoids; regulated change management processes may conflict with squad autonomy on deployment cadence; quality gates and traceability requirements may necessitate some SAFe-like artifacts."
+    },
+    "source": "Consolidated from agile methodology comparison presentations evaluating SAFe and Spotify model frameworks for engineering organizations",
+    "tags": [
+      "agile",
+      "spotify-model",
+      "safe",
+      "squads",
+      "tribes",
+      "engineering-organization"
+    ]
+  }
+]

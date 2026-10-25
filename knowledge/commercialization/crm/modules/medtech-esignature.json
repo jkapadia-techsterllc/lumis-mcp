@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ag-cp-007",
+    "area": "MedTech Commercial",
+    "topic": "MedTech Commercial Engagement Overview",
+    "content": "Streamlines end-to-end MedTech commercial processes from lead generation to order fulfillment. Key capabilities: (1) Sales Agreements for managing run-rate business. (2) Account-based and Advanced Forecasting for accurate predictions. (3) Account Manager Targets for strategic growth. (4) Intelligent Sales for field inventories, surgical cases, and cycle counts. (5) Rebate Management for commercial edge. (6) Intelligent Document Automation for document management. OmniStudio and Business Rules Engine available for process automation and complex decision-making.",
+    "key_modules": [
+      "Sales Agreements",
+      "Advanced Forecasting",
+      "Account Manager Targets",
+      "Intelligent Sales",
+      "Rebate Management",
+      "Intelligent Document Automation"
+    ],
+    "gotchas": [
+      "MedTech commercial is a separate setup track from Customer Engagement \u2014 different permission sets",
+      "Intelligent Sales covers field inventory, surgical case management, and cycle counts",
+      "Sample Flows extend field inventory processes \u2014 separate from core sample management"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / MedTech Commercial"
+    }
+  },
+  {
+    "id": "ag-cp-008",
+    "area": "Electronic Signatures",
+    "topic": "Electronic Signature Configuration",
+    "content": "Manage electronic signatures natively using Digital Verifications rather than third-party applications. Provides 21 CFR Part 11-ready electronic signature functionality for regulatory compliance. Setup: (1) Enable Digital Verifications feature. (2) Create signature trails with required signature count and signing order. (3) Define signatures \u2014 specify designated verifiers, user groups or participant roles, and pre/post-signing reason text. (4) Add Pending Signature component to pages (Home, record detail, tab, or LWC). (5) Users approve or reject updates, add comments, enter location, and verify with CRM credentials.",
+    "use_cases": [
+      "Chain of custody for advanced therapies",
+      "Document verification (NDAs)",
+      "Care program enrollment consent",
+      "Record update verification"
+    ],
+    "signature_trail": "Complete when all signatures have status Completed or Rejected. Custom status values can be added.",
+    "prerequisites": [
+      "Digital Verifications feature enabled"
+    ],
+    "gotchas": [
+      "21 CFR Part 11 readiness means the feature supports compliance \u2014 customer must configure to meet their specific requirements",
+      "Users can sign on same device or different devices",
+      "Signature records link to reference records \u2014 the parent record being verified"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Electronic Signatures"
+    }
+  }
+]

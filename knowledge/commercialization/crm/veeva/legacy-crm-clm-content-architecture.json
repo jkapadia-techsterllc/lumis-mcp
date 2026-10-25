@@ -1,0 +1,64 @@
+[
+  {
+    "id": "clm-content-001",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM CLM Content Delivery — ZIP Packaging, Sequencing, and Distribution Pipeline",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The closed-loop marketing content delivery pipeline for a legacy life sciences CRM, covering ZIP-based presentation packaging, multi-slide sequencing, content versioning, and the six-stage promotion workflow from agency creation through production deployment.",
+    "findings": {
+      "content_packaging_model": "CLM content is delivered as ZIP archives uploaded to the CRM platform. Each ZIP contains an HTML5 presentation with an index.html entry point, supporting assets (CSS, JavaScript, images, video), and an optional manifest for metadata. Presentations can be standalone single-slide experiences or assembled into multi-slide sequences. PDF documents are also supported as a simpler alternative to HTML5 content, with automatic page-to-slide conversion.",
+      "sequencing_architecture": "Multiple individual presentations are assembled into sequences that define the recommended flow of a sales interaction. Sequences support branching — representatives can navigate between slides in the prescribed order or jump to specific content based on the conversation direction. Each slide in a sequence tracks engagement independently, enabling slide-level analytics on which content resonates with specific provider segments.",
+      "six_stage_delivery_pipeline": "Content moves through six promotion stages: (1) Agency Testing — the content agency validates HTML5 rendering, interactions, and responsive behavior in a sandbox environment. (2) Sandbox Upload — content is uploaded to the CRM sandbox for internal review. (3) ZIP Delivery — approved content packages are prepared for distribution. (4) User Acceptance Testing — business stakeholders validate content accuracy, compliance messaging, and brand guidelines. (5) Marketing Validation — marketing and medical-legal-regulatory teams perform final sign-off. (6) Production Deployment — content is published to the production environment and synchronized to field devices.",
+      "content_versioning": "Content supports versioned updates where new ZIP packages replace existing presentations while maintaining historical engagement data. Version metadata tracks which content version was active during each field interaction, enabling longitudinal analysis of content effectiveness across versions. Expired content is automatically removed from field devices during synchronization cycles."
+    },
+    "source": "internal-legacy-crm-clm-content-guide-jul-2024",
+    "tags": ["clm", "content-delivery", "zip-packaging", "sequencing", "content-pipeline", "versioning"]
+  },
+  {
+    "id": "clm-content-002",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Content Specification — PowerPoint to HTML5 Conversion Pipeline",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The technical specification for converting PowerPoint presentations to HTML5 CLM content in a legacy life sciences CRM, covering supported features, conversion constraints, animation handling, video encoding requirements, and cross-platform rendering rules.",
+    "findings": {
+      "conversion_pipeline": "A specialized conversion service transforms PowerPoint (PPT/PPTX) files into HTML5 presentations suitable for CLM delivery. The service handles slide layouts, text formatting, shape rendering, image assets, and animations. Output is a self-contained HTML5 package that renders in the mobile CRM's embedded WebKit browser. The conversion targets a 1024x768 base resolution with responsive scaling.",
+      "supported_features": "Text: all standard fonts with web-safe fallbacks, bold/italic/underline/strikethrough, custom font sizes, text alignment, line spacing, and bullet/numbering styles. Shapes: rectangles, ellipses, triangles, lines, arrows, and freeform paths with fill colors, gradients, and border styles. Images: JPEG, PNG, GIF, and SVG with automatic optimization for mobile delivery. Tables: full cell formatting, merged cells, and alternating row styles.",
+      "animation_and_transition_support": "CSS3 transitions replace PowerPoint animations. Supported entrance effects include fade, fly-in, and wipe. Supported emphasis effects include pulse, spin, and grow/shrink. Exit effects mirror entrance effects in reverse. Slide transitions support fade, push, wipe, and cover effects. Complex animation paths and motion paths are simplified to linear interpolations. Trigger-based animations (on-click sequencing) are preserved.",
+      "video_and_media_requirements": "Video must be H.264 encoded in MP4 container format. Maximum recommended file size is 100MB per presentation ZIP including all assets. Audio is supported in MP3 format. The minimum legible font size is 9 pixels after conversion. Right-to-left language support is available for Arabic and Hebrew content with automatic text direction handling.",
+      "conversion_constraints": "SmartArt is converted to static images, losing editability. Embedded OLE objects (Excel charts, Word documents) are rasterized. 3D effects and custom XML-based features are stripped. Presenter notes are excluded from the HTML5 output. Master slide elements are flattened into individual slides. Group animations are decomposed into individual element animations."
+    },
+    "source": "internal-legacy-crm-content-specification-jul-2024",
+    "tags": ["clm", "pptx-conversion", "html5", "content-specification", "animations", "video"]
+  },
+  {
+    "id": "clm-content-003",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM CLM Dynamic Capabilities — JavaScript-to-Native Bridge Architecture",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The bidirectional JavaScript-to-native bridge architecture for CLM dynamic content in a legacy life sciences CRM, enabling HTML5 presentations to access CRM data, navigate between slides, capture signatures, and trigger native actions through a structured API with Mustache template rendering.",
+    "findings": {
+      "bridge_architecture": "CLM content runs inside a WebKit WebView with a bidirectional communication bridge between JavaScript and the native iOS application. JavaScript-to-native calls are made through a custom URL scheme intercepted by the native layer. Native-to-JavaScript callbacks are injected through WebKit's JavaScript evaluation interface. This architecture enables HTML5 content to access CRM data and trigger native device capabilities without requiring native code in the content packages.",
+      "mustache_template_engine": "The platform uses the Mustache logic-less templating engine (GRMustache library on iOS) for dynamic content rendering. Before displaying a CLM presentation, the mobile SDK queries all relevant CRM data, constructs a JSON context object, and passes it to the Mustache processor. Templates use standard Mustache syntax: variable interpolation with double braces, section blocks for conditionals and iteration, and inverted sections for empty-state handling. Custom Mustache extensions support date formatting, string manipulation, and conditional logic beyond standard Mustache capabilities.",
+      "javascript_to_native_api": "Approximately 20 JavaScript functions are exposed for native interaction: navigation (gotoSlide — navigate to a specific slide by index or key message identifier, with optional fragment targeting), data access (fetch — query CRM records with SOQL-like syntax returning JSON arrays, getDataForCurrentObject — retrieve the account or contact context for the current call), data mutation (upsert — create or update CRM records with field-value maps, supporting both parent and child object creation in a single call), state management (saveState and getState — persist and retrieve key-value pairs scoped to the current presentation session), UI integration (launchApprovedEmail — open the compliant email composer pre-populated with template data, launchSurvey — display a survey form defined by its developer name), and signature capture (captureSignature — invoke the native signature pad and return the captured image as base64).",
+      "native_to_javascript_callbacks": "The native application fires JavaScript callbacks for lifecycle events: viewappearing (slide is about to become visible — use for data refresh), viewdisappearing (slide is being navigated away — use for state save), cancelbuttonpress (user tapped the close button — use for cleanup or confirmation dialogs), and orientationchange (device rotation — use for layout adjustment). Content registers callback handlers through a global registration function that maps event names to JavaScript functions.",
+      "data_context_and_security": "The JSON data context provided to templates includes all non-empty fields from the current account, call, user, and related objects. Field names are lowercased in the JSON context. Sensitive fields can be excluded through admin configuration. Content scripts operate in a sandboxed WebKit context with no access to the native filesystem, device contacts, or other application data beyond what the bridge API explicitly exposes. Content Security Policy headers restrict external network requests to approved domains configured in the CSP trusted site list."
+    },
+    "source": "internal-legacy-crm-clm-dynamic-capabilities-jul-2024",
+    "tags": ["clm", "javascript-bridge", "mustache", "native-interop", "dynamic-content", "webview", "api"]
+  },
+  {
+    "id": "clm-content-004",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Survey and Clickstream Analytics — Data Capture and Engagement Measurement",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The survey execution engine and clickstream analytics system for CLM content in a legacy life sciences CRM, covering Flow Builder survey construction, field types, scoring capabilities, slide-level engagement tracking with dwell time measurement, and Content Security Policy configuration.",
+    "findings": {
+      "survey_architecture": "Surveys are built using a visual flow designer and exported as JSON definitions containing screens, fields, choices, and variables. Each survey is identified by a developer name and can be launched from within CLM presentations through the JavaScript bridge API. Survey responses are stored as CRM records linked to the originating call or meeting, enabling analysis of provider feedback alongside engagement data.",
+      "survey_field_types": "Supported field types include: MultiSelectCheckboxes (multiple selection from a defined list), RadioButtons (single selection with mutual exclusivity), InputField (free text, number, date, or email input with validation), Slider (numeric range selection with configurable min, max, and step values), and Score/CSAT (customer satisfaction rating scales with configurable point ranges). Conditional branching within surveys is supported through decision elements that route respondents to different screens based on prior answers.",
+      "clickstream_analytics": "The platform captures slide-level engagement data during every CLM presentation session. A three-second minimum dwell time threshold distinguishes intentional viewing from accidental swipes or rapid navigation. Each engagement record captures: the source slide identifier, the duration of time spent on the slide, the sequence position within the presentation, and the timestamp. Clickstream data is attributed to the originating content asset (presentation or sequence), enabling publishers to compare engagement patterns across different content versions and provider segments.",
+      "content_security_policy_configuration": "CLM content that requires external network access (API calls, embedded media from CDNs, analytics beacons) must have its domains registered in the CRM's CSP trusted site list. Administrators configure trusted domains through the admin console, specifying the URL pattern and whether the trust applies to scripts, frames, images, or all resource types. Unregistered domains are blocked by the WebKit CSP enforcement, and violations are logged for security audit. This mechanism prevents content from exfiltrating CRM data to unauthorized external services."
+    },
+    "source": "internal-legacy-crm-survey-clickstream-guide-jul-2024",
+    "tags": ["clm", "surveys", "clickstream", "analytics", "engagement-tracking", "csp", "dwell-time"]
+  }
+]

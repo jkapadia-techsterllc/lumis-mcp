@@ -1,0 +1,325 @@
+schema_version: "1.0"
+category_name: "Account Management Configuration"
+description: |
+  Validation rules for CRM Account Management configuration.
+  Covers accounts, healthcare providers, contact point addresses,
+  business licenses, provider affiliations, territory info,
+  DCR managed fields, and mobile metadata cache.
+
+rules:
+  - id: acct-001
+    name: Account records exist in org
+    description: |
+      Verifies that Account records exist. Account Management is foundational
+      to the platform — nearly every other module depends on having accounts
+      configured. Without accounts, users will see empty lists, visits cannot
+      be created, and territory alignment has nothing to align.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM Account
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, Name, RecordTypeId, IsPersonAccount
+        FROM Account
+        LIMIT 10
+    symptoms:
+      - "No accounts visible in mobile app"
+      - "Account lists are empty"
+      - "Cannot create visits — no accounts available"
+    resolution:
+      steps:
+        - "Import account data using Data Import Wizard or Data Loader"
+        - "Ensure PersonAccount is enabled if using individual provider records"
+        - "Verify record types are created and assigned to profiles"
+        - "Run territory alignment after importing accounts"
+      ui_path: "Setup > Data Import Wizard or Setup > Data Loader"
+    tags: [accounts, configuration]
+
+  - id: acct-002
+    name: HealthcareProvider records exist
+    description: |
+      Checks whether HealthcareProvider records exist. HealthcareProvider is
+      the Industry Cloud object representing individual healthcare practitioners.
+      It extends Account with provider-specific fields like NPI, speciality,
+      and credentials. Without HealthcareProvider records, provider-specific
+      features (speciality filters, NPI search, provider cards) will not work.
+    category: configuration
+    severity: warning
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM HealthcareProvider
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, Name, AccountId, Account.Name
+        FROM HealthcareProvider
+        LIMIT 10
+    symptoms:
+      - "Provider-specific fields not showing"
+      - "NPI search returns no results"
+      - "Provider cards are empty"
+    resolution:
+      steps:
+        - "Create HealthcareProvider records linked to Account records"
+        - "Populate provider-specific fields (NPI, speciality, etc.)"
+        - "Verify HealthcareProvider is included in mobile DB schema"
+      ui_path: "Setup > Object Manager > HealthcareProvider"
+    tags: [accounts, healthcare-provider, configuration]
+
+  - id: acct-003
+    name: ContactPointAddress records exist for accounts
+    description: |
+      Checks whether ContactPointAddress records exist. ContactPointAddress
+      stores physical addresses for accounts and is used for map view,
+      account address display, and geolocation features. Without addresses,
+      map view will not function and address fields will be empty on
+      account pages.
+    category: configuration
+    severity: warning
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ContactPointAddress
+        WHERE ParentId != null
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, ParentId, Name, Street, City, State, PostalCode
+        FROM ContactPointAddress
+        WHERE ParentId != null
+        ORDER BY LastModifiedDate DESC
+        LIMIT 10
+    symptoms:
+      - "Map view not showing accounts"
+      - "Address fields empty on account pages"
+      - "Cannot visualize accounts by location"
+    resolution:
+      steps:
+        - "Import address data using Data Import Wizard or Data Loader"
+        - "Ensure ContactPointAddress records are linked to Account via ParentId"
+        - "Populate Latitude and Longitude fields for map view functionality"
+        - "Verify ContactPointAddress is included in mobile DB schema"
+      ui_path: "Setup > Data Import Wizard"
+    tags: [accounts, address, map-view]
+
+  - id: acct-004
+    name: BusinessLicense records exist for credentialing
+    description: |
+      Checks whether BusinessLicense records exist. BusinessLicense stores
+      state medical licenses, DEA numbers, and other credentials for healthcare
+      providers. These are critical for compliance — sample management requires
+      valid licenses, and some visit types require credential verification.
+      Without BusinessLicense records, compliance checks cannot verify provider
+      credentials.
+    category: configuration
+    severity: info
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM BusinessLicense
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, Name, LicenseNumber, LicenseType, Status, AccountId
+        FROM BusinessLicense
+        LIMIT 10
+    symptoms:
+      - "Cannot verify provider credentials"
+      - "Sample management license checks failing"
+      - "Credential fields empty on provider pages"
+    resolution:
+      steps:
+        - "Import BusinessLicense records for healthcare providers"
+        - "Populate LicenseNumber, LicenseType, and Status fields"
+        - "Link to Account records via AccountId"
+        - "Verify BusinessLicense is included in mobile DB schema"
+      ui_path: "Setup > Object Manager > BusinessLicense"
+    tags: [accounts, credentials, compliance]
+
+  - id: acct-005
+    name: ProviderAffiliation records exist
+    description: |
+      Checks whether ProviderAffiliation records exist. ProviderAffiliation
+      links individual providers (HCPs) to organizations (HCOs) and captures
+      the relationship type (e.g., staff, attending, admitting). These records
+      are critical for understanding provider-organization relationships and
+      are used in account hierarchy views and affiliation-based territory rules.
+    category: configuration
+    severity: info
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ProviderAffiliation
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, AccountId, Account.Name, RelatedAccountId, RelatedAccount.Name
+        FROM ProviderAffiliation
+        LIMIT 10
+    symptoms:
+      - "Provider-organization relationships not showing"
+      - "Affiliation cards empty on account pages"
+      - "Affiliation-based territory rules not working"
+    resolution:
+      steps:
+        - "Import ProviderAffiliation records"
+        - "Link HCP accounts to HCO accounts"
+        - "Set relationship types appropriately"
+        - "Verify ProviderAffiliation is included in mobile DB schema"
+      ui_path: "Setup > Object Manager > ProviderAffiliation"
+    tags: [accounts, affiliations, configuration]
+
+  - id: acct-006
+    name: ProviderAcctTerritoryInfo records exist
+    description: |
+      Verifies that ProviderAcctTerritoryInfo records exist. This is the
+      primary junction object linking accounts to territories. It contains
+      territory-level account tracking including visit counts, last visit
+      dates, and next visit dates. Without these records, accounts will not
+      appear in territory-scoped lists, and territory-based features
+      (activity plans, visit tracking) will not function.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ProviderAcctTerritoryInfo
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, AccountId, Account.Name, Territory2Id, Territory2.Name,
+               LastProviderVisitDate, NextProviderVisitDate
+        FROM ProviderAcctTerritoryInfo
+        ORDER BY LastModifiedDate DESC
+        LIMIT 10
+    symptoms:
+      - "All Aligned Accounts list is empty"
+      - "Account list not showing territory-aligned accounts"
+      - "Visit counts not displaying on accounts"
+      - "Territory filters not working"
+    resolution:
+      steps:
+        - "Verify accounts are assigned to territories"
+        - "Run territory alignment batch jobs"
+        - "Verify ProviderAcctTerritoryInfo records are created"
+        - "Regenerate metadata cache after alignment"
+      ui_path: "Admin Console > Territory Alignment"
+    tags: [accounts, territory, configuration]
+
+  - id: acct-007
+    name: DCR managed fields are configured
+    description: |
+      Checks whether Data Change Request (DCR) managed fields are configured
+      on Account. DCR fields allow administrators to mark certain fields as
+      managed by the master data system, preventing local edits. When
+      configured, these fields show a lock icon and edits create DCR records
+      instead of direct updates. This is informational — DCR is optional
+      but recommended for organizations with master data management.
+    category: configuration
+    severity: info
+    check:
+      type: soql
+      query: >
+        SELECT Id, DeveloperName, IsActive
+        FROM FieldDefinition
+        WHERE EntityDefinition.QualifiedApiName = 'Account'
+        AND IsFieldHistoryTracked = true
+      expect: "records.length >= 0"
+    symptoms:
+      - "Users can edit fields that should be read-only"
+      - "No lock icon on managed fields"
+      - "DCR records not being created"
+    resolution:
+      steps:
+        - "Navigate to Admin Console > Data Change Request"
+        - "Select Account object and configure managed fields"
+        - "Enable DCR for appropriate fields"
+        - "Set up DCR approval workflow"
+      ui_path: "Admin Console > Data Change Request"
+    tags: [accounts, dcr, data-management]
+
+  - id: acct-008
+    name: Mobile metadata cache active for account objects
+    description: |
+      Verifies that mobile metadata cache is active. Account Management on
+      mobile requires an active metadata cache that includes Account,
+      HealthcareProvider, ContactPointAddress, BusinessLicense,
+      ProviderAffiliation, and ProviderAcctTerritoryInfo objects. Without
+      active cache, account data will not sync to mobile devices.
+    category: metadata-cache
+    severity: warning
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM LifeSciMobileMetadataRecord
+        WHERE Status IN ('Active', 'Published')
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, Name, Status, IntegrationStatus, LastModifiedDate
+        FROM LifeSciMobileMetadataRecord
+        ORDER BY LastModifiedDate DESC
+        LIMIT 10
+    symptoms:
+      - "Account data not syncing to mobile"
+      - "Empty account list on mobile"
+      - "Device sync transaction record was not found"
+    resolution:
+      steps:
+        - "Navigate to Admin Console > Mobile > Object Metadata Cache Configuration"
+        - "Verify Account, HealthcareProvider, ContactPointAddress, BusinessLicense, ProviderAffiliation, and ProviderAcctTerritoryInfo are included in DB Schema"
+        - "Regenerate metadata cache for affected profiles"
+        - "Have users sync their mobile devices"
+      ui_path: "Admin Console > Mobile > Object Metadata Cache Configuration"
+    tags: [accounts, mobile, cache]
+
+groups:
+  account-config-check:
+    name: "Account Configuration Check"
+    description: "Full account management configuration check"
+    rules:
+      - acct-001
+      - acct-002
+      - acct-003
+      - acct-004
+      - acct-005
+      - acct-006
+      - acct-007
+      - acct-008
+
+  account-core-check:
+    name: "Account Core Check"
+    description: "Core account checks - accounts, providers, and territory info"
+    rules:
+      - acct-001
+      - acct-002
+      - acct-006
+
+  account-features-check:
+    name: "Account Features Check"
+    description: "Account feature checks - addresses, licenses, affiliations, DCR"
+    rules:
+      - acct-003
+      - acct-004
+      - acct-005
+      - acct-007
+
+  account-mobile:
+    name: "Account Mobile Check"
+    description: "Mobile-specific account checks"
+    rules:
+      - acct-008
+
+  pre-deployment-account:
+    name: "Pre-Deployment Account Check"
+    description: "Run before deploying account management to users"
+    rules:
+      - acct-001
+      - acct-002
+      - acct-006
+      - acct-008

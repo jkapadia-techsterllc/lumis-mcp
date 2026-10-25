@@ -1,0 +1,388 @@
+[
+  {
+    "id": "coverage-001",
+    "module": "Visit Management (Call Reporting)",
+    "feature": "Face-to-Face Visit Recording",
+    "description": "Capture structured data from in-person HCP visits including discussion topics, products discussed, attendees, next steps, and call objectives.",
+    "coverage_pct": 95,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Video call integration for hybrid visits requires third-party connector",
+      "Real-time sentiment analysis from call notes not natively supported"
+    ],
+    "notes": "Core differentiator. Offline-first architecture ensures field usability in low-connectivity clinical settings."
+  },
+  {
+    "id": "coverage-002",
+    "module": "Visit Management (Call Reporting)",
+    "feature": "Geolocation Check-In",
+    "description": "GPS-based visit verification confirming the rep was physically at the account location when logging a visit.",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Indoor positioning (e.g., hospital floor/wing level) not supported — GPS accuracy only",
+      "Geofencing radius is globally configured, not per-account customizable"
+    ],
+    "notes": "Requires device location permissions. Works offline with sync on reconnect."
+  },
+  {
+    "id": "coverage-003",
+    "module": "Visit Management (Call Reporting)",
+    "feature": "Group Visit / Multi-Attendee Calls",
+    "description": "Support for logging visits with multiple HCPs present (e.g., lunch-and-learn, group detailing).",
+    "coverage_pct": 80,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Per-attendee product messaging differentiation is limited — all attendees receive the same content record",
+      "Attendee-level consent verification at time of group visit is manual"
+    ],
+    "notes": "Important for institutional selling and speaker programs."
+  },
+  {
+    "id": "coverage-004",
+    "module": "Sample Management",
+    "feature": "Sample Drop with Signature Capture",
+    "description": "Record sample distribution to HCPs with digital signature capture on mobile device, linked to lot numbers and allocation tracking.",
+    "coverage_pct": 95,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Biometric signature verification (comparing current signature to historical patterns) not natively available",
+      "Signature image export is gated by a minimum file size threshold for compliance archival"
+    ],
+    "notes": "Regulatory requirement in most markets. Supports PDMA compliance and 21 CFR Part 11 electronic signature standards."
+  },
+  {
+    "id": "coverage-005",
+    "module": "Sample Management",
+    "feature": "Sample Allocation and Limit Enforcement",
+    "description": "Configure maximum sample quantities per rep per product per time period, with real-time or batch enforcement during drops.",
+    "coverage_pct": 90,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Real-time limit calculation requires batch job to be current — stale batch data can show incorrect remaining allocations",
+      "Cross-territory allocation pooling (shared limits across reps in a region) not supported out-of-box"
+    ],
+    "notes": "Batch calculation job runs on configurable schedule. Connect API endpoint available for custom integrations."
+  },
+  {
+    "id": "coverage-006",
+    "module": "Sample Management",
+    "feature": "Inventory Reconciliation",
+    "description": "Periodic reconciliation of sample inventory on hand vs. expected quantities based on transactions (drops, transfers, returns, adjustments).",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Automated discrepancy detection with threshold alerting requires custom reporting",
+      "Integration with external warehouse management systems requires middleware"
+    ],
+    "notes": "Typically run monthly. Critical for PDMA audit compliance."
+  },
+  {
+    "id": "coverage-007",
+    "module": "Content Management (CLM)",
+    "feature": "Interactive Presentation Delivery",
+    "description": "Deliver HTML5-based interactive presentations on tablet during customer visits with slide-level engagement tracking.",
+    "coverage_pct": 90,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Complex animations and embedded video may not render consistently across all device types",
+      "Presentation analytics are session-level — sub-slide interaction heatmaps not natively available"
+    ],
+    "notes": "Primary content delivery mechanism for field reps during face-to-face visits."
+  },
+  {
+    "id": "coverage-008",
+    "module": "Content Management (CLM)",
+    "feature": "Approved Email with Templates and Fragments",
+    "description": "Send pre-approved email communications to HCPs using configurable templates with merge fields and approved content fragments.",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Custom field merge in email fragments requires API-level configuration — not fully declarative",
+      "Email template previews on mobile do not always match final rendered output in recipient's email client"
+    ],
+    "notes": "Compliance-controlled. All emails must use approved templates."
+  },
+  {
+    "id": "coverage-009",
+    "module": "Content Management (CLM)",
+    "feature": "Content Versioning and Retirement",
+    "description": "Manage content lifecycle — publish new versions, link to parent documents, and retire outdated content so field users only access current materials.",
+    "coverage_pct": 80,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Automated retirement based on expiration date requires custom automation",
+      "Version comparison (diff between old and new content) not available — only version numbering"
+    ],
+    "notes": "Critical for compliance. Retired content must be removed from all mobile devices during next sync."
+  },
+  {
+    "id": "coverage-010",
+    "module": "Territory Management",
+    "feature": "Enterprise Territory Model",
+    "description": "Multi-level territory hierarchy (nation > region > district > territory) with rules-based and manual account-to-territory assignment.",
+    "coverage_pct": 90,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Mid-cycle territory realignment does not automatically migrate historical visit data",
+      "Forecast integration with territory model requires separate configuration"
+    ],
+    "notes": "Supports multiple concurrent territory models for different business units."
+  },
+  {
+    "id": "coverage-011",
+    "module": "Territory Management",
+    "feature": "Account-Territory Assignment Rules",
+    "description": "Automated rules to assign accounts to territories based on geography (zip code, state, country) and account attributes.",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Complex assignment rules (e.g., account specialty + geography + volume) require custom logic",
+      "Rule evaluation performance degrades with very large account volumes (100K+)"
+    ],
+    "notes": "Rules run as batch jobs. Manual overrides are supported for exceptions."
+  },
+  {
+    "id": "coverage-012",
+    "module": "Consent Management",
+    "feature": "Multi-Channel Consent Capture and Enforcement",
+    "description": "Capture opt-in/opt-out preferences per communication channel (email, phone, visit, digital) and enforce them when communication is attempted.",
+    "coverage_pct": 90,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "No global unsubscribe-all capability by design — per-channel consent required for compliance",
+      "Consent capture on mobile does not support all custom consent types without configuration"
+    ],
+    "notes": "Intentional design decision: no bulk opt-out to prevent accidental compliance violations."
+  },
+  {
+    "id": "coverage-013",
+    "module": "Consent Management",
+    "feature": "Country-Specific Consent Rules",
+    "description": "Configure jurisdiction-specific consent behavior including GDPR double opt-in (EU), PDMA consent requirements (US), and APPI rules (Japan).",
+    "coverage_pct": 80,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "New jurisdiction rules require manual configuration — no auto-update from regulatory feed",
+      "Cross-jurisdiction HCPs (practicing in multiple countries) require manual consent resolution"
+    ],
+    "notes": "Consent rules are metadata-driven and can be configured per country without code changes."
+  },
+  {
+    "id": "coverage-014",
+    "module": "Activity Plans (Call Plans)",
+    "feature": "Cycle-Based Call Frequency Planning",
+    "description": "Define target visit frequencies by account segment per cycle period (monthly, quarterly) and track actual vs. planned reach and frequency.",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Dynamic frequency adjustment based on real-time field conditions requires manual template updates",
+      "Activity plan categories and criteria are distinct configuration paths that can confuse administrators"
+    ],
+    "notes": "Reach and frequency metrics are the primary KPIs for commercial operations."
+  },
+  {
+    "id": "coverage-015",
+    "module": "Activity Plans (Call Plans)",
+    "feature": "Activity Plan Criteria and Category Filtering",
+    "description": "Configure which accounts are included in activity plans using criteria filters and categorize activities by type.",
+    "coverage_pct": 75,
+    "maturity": "GA — Growing",
+    "gaps": [
+      "Custom criteria JSON is separate from the standard activity plan batch job",
+      "Complex multi-criteria rules require careful JSON construction with limited declarative tooling"
+    ],
+    "notes": "Category and criteria are independent configuration axes."
+  },
+  {
+    "id": "coverage-016",
+    "module": "Event Management",
+    "feature": "Speaker Program and Advisory Board Management",
+    "description": "Plan, execute, and track speaker programs and advisory boards with attendee management, speaker contracts, and expense tracking.",
+    "coverage_pct": 80,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Virtual event platform integration requires third-party connectors",
+      "Speaker fair market value rate management is basic — no automated FMV benchmarking"
+    ],
+    "notes": "Compliance-critical module. All events require approval workflow before execution."
+  },
+  {
+    "id": "coverage-017",
+    "module": "Event Management",
+    "feature": "Transparency Reporting (Sunshine Act / EFPIA)",
+    "description": "Automatically capture and aggregate HCP spend data from events for regulatory transparency disclosure requirements.",
+    "coverage_pct": 75,
+    "maturity": "GA — Growing",
+    "gaps": [
+      "Multi-currency aggregation for global reporting requires custom configuration",
+      "Direct submission to regulatory databases requires integration middleware"
+    ],
+    "notes": "Data capture is automated. Submission to regulatory bodies requires export and external integration."
+  },
+  {
+    "id": "coverage-018",
+    "module": "Field Coaching",
+    "feature": "Configurable Coaching Assessment Forms",
+    "description": "Manager-facing assessment forms with configurable competency categories, scoring rubrics, and development action plans linked to visit records.",
+    "coverage_pct": 80,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "AI-assisted coaching suggestions not natively available",
+      "Coaching score trending over time requires custom reporting"
+    ],
+    "notes": "Assessment forms are configurable per business unit. Coaching data is HR-sensitive and follows separate sharing rules."
+  },
+  {
+    "id": "coverage-019",
+    "module": "Field Coaching",
+    "feature": "Offline Coaching During Ride-Alongs",
+    "description": "Complete coaching assessments on mobile during field ride-alongs in low-connectivity clinical environments.",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Rich media attachments to coaching sessions are limited by offline sync bandwidth",
+      "Real-time coaching collaboration between co-managers is not supported offline"
+    ],
+    "notes": "Critical requirement — most ride-alongs occur in hospitals with limited connectivity."
+  },
+  {
+    "id": "coverage-020",
+    "module": "Mobile Platform",
+    "feature": "Offline-First Data Sync",
+    "description": "Full CRM functionality available offline with bi-directional sync when connectivity resumes, including conflict resolution for concurrent edits.",
+    "coverage_pct": 90,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Sync conflict resolution defaults to server-wins — custom merge strategies require platform configuration",
+      "Initial full sync for new users with large territories can exceed 15 minutes",
+      "Sync error diagnostics are limited — silent failures require log analysis"
+    ],
+    "notes": "Core platform differentiator. Local storage with encrypted data at rest."
+  },
+  {
+    "id": "coverage-021",
+    "module": "Mobile Platform",
+    "feature": "Cross-Platform Support (iOS and Android)",
+    "description": "Native mobile applications for iOS (iPad and iPhone) and Android tablets and phones with feature parity.",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "iPad is the primary target device — Android tablet layouts may have minor rendering differences",
+      "Platform-specific features are not uniformly available across OS",
+      "Device-specific testing required — emulator-only validation is insufficient"
+    ],
+    "notes": "iOS/iPad is the dominant field device. Android support is growing in cost-sensitive markets."
+  },
+  {
+    "id": "coverage-022",
+    "module": "Admin Console",
+    "feature": "Centralized Module Configuration",
+    "description": "Administrative interface for configuring all modules including user management, permission sets, feature flags, and business rules without code deployment.",
+    "coverage_pct": 85,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Some advanced configurations still require platform setup navigation outside the admin console",
+      "Bulk configuration operations have governor limit constraints"
+    ],
+    "notes": "Primary administrative interface."
+  },
+  {
+    "id": "coverage-023",
+    "module": "Admin Console",
+    "feature": "Mobile Metadata Generation",
+    "description": "Generate and deploy metadata bundles that configure the mobile app experience without app store updates.",
+    "coverage_pct": 80,
+    "maturity": "GA — Stable",
+    "gaps": [
+      "Metadata generation for large orgs can timeout — requires batch processing",
+      "Translation metadata syncs from server — compiled translations are overridden at runtime"
+    ],
+    "notes": "Server-driven mobile configuration. Changes propagate on next sync without app updates."
+  },
+  {
+    "id": "coverage-024",
+    "module": "Order Management",
+    "feature": "Order Creation and Fulfillment Tracking",
+    "description": "Create product orders during or after visits, track order status through fulfillment, and manage pricing and approval workflows.",
+    "coverage_pct": 75,
+    "maturity": "GA — Growing",
+    "gaps": [
+      "Real-time pricing engine requires custom configuration",
+      "Backorder management needs custom development",
+      "Order splitting for partial fulfillment varies by implementation",
+      "Free goods and promotional order handling requires custom rules"
+    ],
+    "notes": "Highly customer-specific. Most implementations customize order management for their ERP integration."
+  },
+  {
+    "id": "coverage-025",
+    "module": "Account and Contact Management",
+    "feature": "HCP/HCO Record Management",
+    "description": "Manage healthcare professional and healthcare organization records with affiliations, credentials, specialties, and hierarchical account relationships.",
+    "coverage_pct": 95,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Unlimited address support requires custom address objects beyond standard",
+      "Data stewardship workflows for master data governance are implementation-specific"
+    ],
+    "notes": "Foundation for all other modules. NPI tracking, license validation, and affiliation management included."
+  },
+  {
+    "id": "coverage-026",
+    "module": "Analytics and Reporting",
+    "feature": "Field Force Effectiveness Dashboards",
+    "description": "Dashboards tracking call compliance, reach and frequency, sample utilization, territory coverage, and content engagement.",
+    "coverage_pct": 75,
+    "maturity": "GA — Growing",
+    "gaps": [
+      "Real-time dashboards reflect data as of last sync — current-day field activity may lag",
+      "Cross-module analytics require custom report building",
+      "Predictive analytics and AI-driven insights not natively integrated",
+      "Embedded mobile analytics have limited capability compared to desktop"
+    ],
+    "notes": "Built on native reporting infrastructure. Custom dashboards can be built by administrators."
+  },
+  {
+    "id": "coverage-027",
+    "module": "Data Integration",
+    "feature": "Master Data and ERP Integration",
+    "description": "Connect with external systems for HCP/HCO master data enrichment, ERP order fulfillment, pricing, and inventory synchronization.",
+    "coverage_pct": 65,
+    "maturity": "GA — Emerging",
+    "gaps": [
+      "Native master data connectors are limited — most implementations require middleware",
+      "Real-time data enrichment requires custom integration",
+      "Order management ERP integration is highly customer-specific",
+      "Pricing engine integration requires custom development"
+    ],
+    "notes": "Most complex integration area. Highly variable based on customer's ERP and data landscape."
+  },
+  {
+    "id": "coverage-028",
+    "module": "MedTech (Care Programs)",
+    "feature": "Care Program Enrollment and Device Management",
+    "description": "Manage patient and provider enrollment in medical device care programs with milestones, device training, and support coordination.",
+    "coverage_pct": 70,
+    "maturity": "GA — Growing",
+    "gaps": [
+      "Complex multi-device care program workflows require significant customization",
+      "Patient data handling requires additional privacy controls",
+      "Device training tracking and certification management is basic"
+    ],
+    "notes": "Newer module targeting medical device and diagnostics verticals."
+  },
+  {
+    "id": "coverage-029",
+    "module": "Compliance and Audit",
+    "feature": "Regulatory Audit Trail",
+    "description": "Complete audit trail of all field activities, data changes, consent modifications, and sample transactions for regulatory inspection readiness.",
+    "coverage_pct": 90,
+    "maturity": "GA — Mature",
+    "gaps": [
+      "Long-term audit trail retention requires external archival storage",
+      "Audit trail search and export for large time ranges can be slow"
+    ],
+    "notes": "Non-negotiable compliance requirement. Every customer interaction must be traceable."
+  }
+]

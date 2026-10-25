@@ -1,0 +1,137 @@
+[
+  {
+    "id": "vev-001",
+    "category": "Object Mapping",
+    "question": "How does Veeva EM_Event_vod__c map to the target platform?",
+    "answer": "Veeva EM_Event_vod__c maps to the target platform's Event object (the event management record, not the standard calendar Event). Key field mappings: Event_Id_vod__c → ExternalId; Name → EventName; Event_Type_vod__c → EventType picklist (Speaker Program, Advisory Board, Congress, Webinar, etc.); Status_vod__c → Status (Planning_vod, Approved_vod, Closed_vod, Canceled_vod); Start_Date_vod__c → StartDate; End_Date_vod__c → EndDate; Venue_vod__c → VenueName; City_vod__c / State_vod__c / Country_vod__c → Location fields; Budget_vod__c → PlannedBudget; Actual_Expense_vod__c → ActualCost; Owner_vod__c → OwnerId. Veeva's event record contains both planning metadata and financial rollup fields in a single object, while the target platform separates event planning from budget/expense tracking.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM EM_Event_vod documentation",
+    "tags": ["events", "object-mapping", "em-event", "migration"]
+  },
+  {
+    "id": "vev-002",
+    "category": "Object Mapping",
+    "question": "How does Veeva EM_Attendee_vod__c map to the target platform?",
+    "answer": "Veeva EM_Attendee_vod__c maps to the target platform's EventAttendee object. Key field mappings: Attendee_vod__c (lookup to Account) → ContactId or AccountId; Status_vod__c (Invited_vod, Accepted_vod, Attended_vod, No_Show_vod) → AttendeeStatus; Walk_In_vod__c → IsWalkIn boolean; Signature_vod__c → SignatureImage (blob or URL); Signature_Date_vod__c → SignatureTimestamp; Meal_Opt_In_vod__c → custom MealOptIn field; Expense_vod__c → custom AttendeeExpense currency field. Key difference: Veeva links attendees to Account records (HCPs), while the target platform may link to Contact or PersonAccount depending on data model. The Walk_In_vod__c flag is important for compliance — walk-in attendees bypass the invitation flow and require special handling for spend reporting. Veeva's attendee signature capture (for meal acknowledgment) must map to the target platform's signature capture mechanism.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM EM_Attendee_vod documentation",
+    "tags": ["events", "object-mapping", "attendee", "signature", "walk-in"]
+  },
+  {
+    "id": "vev-003",
+    "category": "Object Mapping",
+    "question": "How does Veeva EM_Speaker_vod__c map to the target platform?",
+    "answer": "Veeva EM_Speaker_vod__c maps to the target platform's Speaker object or a custom SpeakerEngagement object. Key field mappings: Speaker_vod__c (lookup to Account/HCP) → SpeakerId; Event_vod__c → EventId; Status_vod__c (Nominated_vod, Contracted_vod, Trained_vod) → SpeakerStatus; Fee_vod__c → SpeakerFee currency; Cap_vod__c → AnnualFeeCap; Training_Completion_Date_vod__c → TrainingDate; Contract_vod__c → custom ContractReference. Major gap: Veeva has a sophisticated speaker lifecycle (nomination → qualification → contracting → training → utilization tracking → cap enforcement), and the target platform's speaker management may not natively support the full lifecycle. The annual fee cap (Cap_vod__c) enforcement, where a speaker's total compensation across all events cannot exceed a fair-market-value threshold, requires custom rollup logic on the target platform.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM EM_Speaker_vod documentation",
+    "tags": ["events", "object-mapping", "speaker", "fee-cap", "compliance"]
+  },
+  {
+    "id": "vev-004",
+    "category": "Object Mapping",
+    "question": "How does Veeva EM_Event_Budget_vod__c map to the target platform?",
+    "answer": "Veeva EM_Event_Budget_vod__c maps to the target platform's EventBudget or a custom BudgetLineItem object. Key field mappings: Event_vod__c → EventId; Budget_Line_vod__c → LineItemCategory (Venue, Catering, AV Equipment, Speaker Fees, Travel); Estimate_vod__c → EstimatedAmount; Actual_vod__c → ActualAmount; Status_vod__c → ApprovalStatus. Veeva rolls up budget line items to EM_Event_vod__c.Budget_vod__c and Actual_Expense_vod__c via native rollup summaries. The target platform requires explicit rollup configuration — either rollup summary fields (if master-detail), flow-based rollups, or batch-calculated aggregations. Veeva's pre-event budget approval workflow (where events cannot proceed until budget is approved) must be re-implemented as a custom approval process on the target platform.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM EM_Event_Budget_vod documentation",
+    "tags": ["events", "object-mapping", "budget", "expense-tracking", "approval"]
+  },
+  {
+    "id": "vev-005",
+    "category": "Event Types",
+    "question": "How do Veeva event types map to the target platform's event model?",
+    "answer": "Veeva supports distinct event types via EM_Event_vod__c.Event_Type_vod__c: Speaker_Program_vod (speaker-led educational events), Advisory_Board_vod (HCP advisory boards), Congress_vod (medical congresses/conferences), Webinar_vod (virtual educational events), Exhibit_vod (trade show booths), and custom types. Each event type has different compliance requirements, budget thresholds, and attendee limits. The target platform uses a picklist or record type to distinguish event types, but the type-specific business logic differs: (1) Speaker Programs require speaker fee tracking and cap enforcement — not natively available, (2) Advisory Boards have stricter attendee limits and higher per-attendee spend thresholds, (3) Congresses involve booth reservations and pre-congress planning workflows. Migration must configure record types with type-specific page layouts, validation rules, and approval processes matching Veeva's per-type behavior.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Events Management event type documentation",
+    "tags": ["events", "event-types", "speaker-program", "advisory-board", "congress"]
+  },
+  {
+    "id": "vev-006",
+    "category": "Speaker Management",
+    "question": "How does Veeva's speaker cap and nomination process work and what is the target platform gap?",
+    "answer": "Veeva enforces speaker compensation caps through EM_Speaker_vod__c.Cap_vod__c and related rollup fields that track year-to-date speaker payments. When a speaker's YTD compensation approaches the cap (defined per speaker tier based on fair market value assessment), Veeva blocks further speaker engagements. The nomination workflow: (1) rep nominates an HCP as speaker, (2) medical affairs reviews qualifications, (3) compliance reviews for conflicts of interest, (4) contracting assigns fee tier and cap, (5) training is completed and documented, (6) speaker becomes available for events. The target platform has no native speaker cap enforcement or nomination workflow. Building the equivalent requires: custom objects for SpeakerProfile and SpeakerContract, a multi-step approval process for nomination, batch or trigger-based YTD compensation rollup, and validation rules that block event creation when the speaker's cap is reached.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM speaker nomination and cap documentation",
+    "tags": ["events", "speaker-cap", "nomination", "compliance", "fair-market-value"]
+  },
+  {
+    "id": "vev-007",
+    "category": "Expense Management",
+    "question": "How does Veeva event expense tracking compare to the target platform?",
+    "answer": "Veeva tracks expenses at multiple levels: EM_Event_Budget_vod__c for planned line items, EM_Expense_vod__c for actual expenses (linked to receipts), and EM_Attendee_vod__c.Expense_vod__c for per-attendee costs. Veeva calculates per-attendee spend by dividing shared costs (venue, catering) proportionally across attendees and adding direct costs (meal opt-in). This per-attendee spend feeds into aggregate transparency reporting (Sunshine Act / EFPIA). The target platform does not natively calculate per-attendee spend or aggregate expenses for transparency reporting. Migration requires: (1) custom expense tracking objects or fields, (2) proration logic to allocate shared costs per attendee, (3) rollup to aggregate spend per HCP across all events in a reporting period, (4) integration with aggregate spend reporting systems. This is one of the most complex functional areas to replicate.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM expense tracking and transparency reporting documentation",
+    "tags": ["events", "expense", "sunshine-act", "EFPIA", "aggregate-spend", "transparency"]
+  },
+  {
+    "id": "vev-008",
+    "category": "Virtual Events",
+    "question": "How does Veeva's virtual event integration compare to the target platform?",
+    "answer": "Veeva integrates virtual events through Engage Meeting (Veeva's proprietary virtual meeting platform) and, in newer versions, Zoom integration via EM_Event_vod__c.Online_Meeting_Link_vod__c. Veeva Engage Meeting tracks: attendee join/leave times, content viewed during the meeting, and captures attendee signatures digitally. The target platform supports virtual event integration through different mechanisms: (1) custom URL fields for meeting links (Zoom, Teams, Webex), (2) flow-based or API-driven meeting creation, (3) webhook-based or API polling for attendance tracking. Key gaps: Veeva Engage Meeting's native CRM-embedded video conferencing has no equivalent — the target platform relies on third-party meeting providers. Attendance verification for compliance purposes (proving an HCP actually attended) requires integration with the meeting provider's attendance API.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Engage Meeting and virtual event documentation",
+    "tags": ["events", "virtual-events", "engage-meeting", "zoom", "teams", "attendance"]
+  },
+  {
+    "id": "vev-009",
+    "category": "Compliance Rules",
+    "question": "What Veeva event compliance rules must be replicated on the target platform?",
+    "answer": "Veeva enforces numerous event compliance rules configured via Event_Rule_vod__c: (1) Maximum attendees per event type, (2) maximum events per HCP per time period (to prevent over-engagement), (3) meal cost limits per attendee per event type, (4) geographic restrictions (events only in appropriate venues, no resort/entertainment venues), (5) speaker-to-attendee ratio requirements, (6) cross-event attendee overlap detection (same HCP attending suspiciously many events), (7) mandatory fields by event status (e.g., venue required before approval, final attendance required before close). The target platform has no native event rule engine. Each rule must be implemented as validation rules, Apex triggers, or flow-based checks. Organizations should inventory their Event_Rule_vod__c records and prioritize rules by regulatory risk during migration.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM Event_Rule_vod documentation, compliance requirements",
+    "tags": ["events", "compliance", "event-rules", "validation", "regulatory"]
+  },
+  {
+    "id": "vev-010",
+    "category": "Field Mapping",
+    "question": "What is the complete field-level mapping for Veeva EM_Event_vod__c?",
+    "answer": "Complete field mapping for EM_Event_vod__c: Event_Id_vod__c → ExternalId; Name → EventName; Event_Type_vod__c → EventType (record type or picklist); Status_vod__c → Status; Start_Date_vod__c → StartDateTime; End_Date_vod__c → EndDateTime; Venue_vod__c → VenueName; Address_Line_1_vod__c → Street; City_vod__c → City; State_vod__c → State; Country_vod__c → Country; Zip_vod__c → PostalCode; Budget_vod__c → PlannedBudget (rollup); Actual_Expense_vod__c → ActualCost (rollup); Number_of_Attendees_vod__c → AttendeesCount (rollup); Number_of_Speakers_vod__c → SpeakersCount (rollup); Product_vod__c → ProductId; Topic_vod__c → custom Topic field; Online_Meeting_Link_vod__c → MeetingUrl; Approval_Status_vod__c → custom ApprovalStatus; Approved_By_vod__c → custom ApprovedBy lookup; Close_Date_vod__c → custom EventCloseDate; Reconciliation_Status_vod__c → custom ReconciliationStatus.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM EM_Event_vod field reference",
+    "tags": ["events", "field-mapping", "em-event", "complete-reference"]
+  },
+  {
+    "id": "vev-011",
+    "category": "Attendee Tracking",
+    "question": "How does Veeva event attendee status tracking work and how does it map?",
+    "answer": "Veeva tracks attendee lifecycle through EM_Attendee_vod__c.Status_vod__c with values: Invited_vod → Accepted_vod → Attended_vod (or No_Show_vod or Canceled_vod). Veeva also supports: Walk_In_Status_vod__c for uninvited attendees who show up, Waitlist_vod__c for capacity-limited events, and Meal_Opt_In_vod__c for catering headcount. Signature capture via Signature_vod__c (base64 image) and Signature_Date_vod__c proves physical attendance for compliance. The target platform's EventAttendee supports basic status tracking but may need custom fields for: walk-in flag, meal opt-in, waitlist position, and signature capture. Signature capture is particularly important for regulated events — it must meet audit trail requirements (timestamped, linked to specific attendee, tamper-evident). Organizations should verify the target platform's signature capture meets their compliance team's requirements.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM EM_Attendee_vod lifecycle documentation",
+    "tags": ["events", "attendee-tracking", "status", "signature", "compliance"]
+  },
+  {
+    "id": "vev-012",
+    "category": "Event Lifecycle",
+    "question": "What is Veeva's event lifecycle and what approval gates must be replicated?",
+    "answer": "Veeva's event lifecycle follows a strict status progression: Draft → Pending_Approval_vod → Approved_vod → In_Progress_vod → Pending_Close_vod → Closed_vod (or Canceled_vod at any stage). Each status transition has gates: (1) Draft→Pending Approval: all required fields populated, budget line items entered, speaker contracts in place, (2) Pending Approval→Approved: manager and compliance approval obtained, (3) Approved→In Progress: event date reached, (4) In Progress→Pending Close: attendance recorded, all walk-ins processed, (5) Pending Close→Closed: expenses reconciled, all receipts uploaded, per-attendee spend calculated. The target platform requires custom approval processes for each gate, with record-triggered flows enforcing field completion rules. The reconciliation gate (Pending Close→Closed) is the most complex because it requires all expense records to be finalized and aggregate spend calculations to complete before the event can close.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM event lifecycle documentation",
+    "tags": ["events", "lifecycle", "approval-gates", "status-progression", "reconciliation"]
+  },
+  {
+    "id": "vev-013",
+    "category": "Field Mapping",
+    "question": "What is the complete field-level mapping for Veeva EM_Attendee_vod__c?",
+    "answer": "Complete field mapping for EM_Attendee_vod__c: Attendee_vod__c (Account lookup) → ContactId or AccountId; Event_vod__c → EventId (parent); Status_vod__c → AttendeeStatus; Walk_In_vod__c → IsWalkIn boolean; Meal_Opt_In_vod__c → MealOptIn boolean; Signature_vod__c → SignatureData (base64 blob or file reference); Signature_Date_vod__c → SignatureTimestamp; Expense_vod__c → AttendeeExpense currency; Invite_Date_vod__c → InvitedDate; Response_Date_vod__c → ResponseDate; Attendance_Date_vod__c → AttendedDate; Waitlist_vod__c → WaitlistPosition number; Attendee_Type_vod__c → AttendeeRole (HCP, Internal, Staff, etc.); Travel_Reimbursement_vod__c → TravelReimbursement currency; Overnight_vod__c → IsOvernight boolean; Remote_Attendee_vod__c → IsRemote boolean (for hybrid events).",
+    "gotcha_level": "info",
+    "source": "Veeva CRM EM_Attendee_vod field reference",
+    "tags": ["events", "field-mapping", "attendee", "complete-reference"]
+  },
+  {
+    "id": "vev-014",
+    "category": "Gotcha",
+    "question": "What are the risks with aggregate spend reporting during events migration?",
+    "answer": "Veeva's Events Management feeds into aggregate spend reporting for transparency regulations (US Sunshine Act, EFPIA Disclosure Code, local equivalents). Veeva automatically calculates per-HCP aggregate spend by rolling up: event attendance costs (proportional share of venue, catering, AV), direct costs (meals, travel reimbursement), speaker fees, and gifts. This data feeds into Veeva's transparency reporting module or third-party aggregate spend systems. During migration: (1) historical spend data must be preserved for multi-year reporting lookback requirements, (2) the target platform's spend calculation logic must produce identical results to Veeva's for the migration year (auditors compare year-over-year), (3) the proration algorithm for shared costs must be documented and replicated exactly, (4) mid-year migration creates a split-year reporting problem — spend from Veeva (Jan-Jun) + spend from target (Jul-Dec) must be combined. This is the single highest-risk compliance area in events migration.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM transparency reporting, Sunshine Act compliance",
+    "tags": ["events", "aggregate-spend", "sunshine-act", "transparency", "compliance-risk"]
+  },
+  {
+    "id": "vev-015",
+    "category": "Gotcha",
+    "question": "How do Veeva event team member roles and permissions differ from the target platform?",
+    "answer": "Veeva EM_Event_Team_vod__c assigns users to event-specific roles: Event_Coordinator_vod, Regional_Manager_vod, Compliance_Reviewer_vod, Finance_Approver_vod, and custom roles. Each role has specific permissions within the event (e.g., only Finance_Approver can approve expense reconciliation, only Compliance_Reviewer can waive certain event rules). Veeva's event team model is event-scoped — a user can be a coordinator on one event and a reviewer on another. The target platform does not have a native event team role model. Equivalent functionality requires: (1) a custom EventTeamMember junction object, (2) role-based permission enforcement via Apex sharing rules or manual sharing, (3) approval step routing based on team role rather than reporting hierarchy. Organizations with strict segregation of duties for event approvals should carefully design the target platform's role-based access model.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM EM_Event_Team_vod documentation",
+    "tags": ["events", "team-roles", "permissions", "segregation-of-duties", "event-team"]
+  }
+]

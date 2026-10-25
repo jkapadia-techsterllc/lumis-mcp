@@ -1,0 +1,41 @@
+[
+  {
+    "id": "fnd-ci-001",
+    "category": "org-strategy",
+    "title": "Connected Intelligence Strategy for Life Sciences",
+    "products": ["LSC"],
+    "summary": "Strategic framework for applying connected intelligence across life sciences, addressing the data science dilemma, five key digital imperatives, and the molecule-to-market partnership model between technology platforms and domain expertise providers.",
+    "findings": [
+      {
+        "area": "healthcare_innovation_landscape",
+        "detail": "The healthcare ecosystem faces rapid innovation across digital therapeutics, clinical workflow, medical devices, remote monitoring, digital patient engagement, novel therapeutics, decision support, telehealth, and AI. This drives real-world evidence, health data proliferation, scientific innovation, personalized medicine, and empowered patient engagement."
+      },
+      {
+        "area": "industry_challenges",
+        "detail": "Life sciences organizations struggle with five interconnected challenges: complexity of managing data proliferation, designing and localizing global strategies, disconnected strategy and execution partners, industry-agnostic solutions that fall short, and new customer and partner engagement models requiring different approaches."
+      },
+      {
+        "area": "data_science_dilemma",
+        "detail": "Current effort and spend in data science is inverted: most resources go into creating insights while adoption and action remain low. Low adoption minimizes business impact, and lack of feedback loops limits the ability to adjust. Insights must drive action, measurement, and adjustment to deliver value."
+      },
+      {
+        "area": "five_digital_imperatives",
+        "detail": "Navigating healthcare transformation requires focus on five imperatives: (1) Drive customer-centricity to increase value, (2) Harness data for actionable insights, (3) Maximize operational efficiency, agility, and productivity, (4) Proactively ensure security, privacy, and compliance, (5) Digitally enable the workforce of the future."
+      },
+      {
+        "area": "connected_intelligence_capabilities",
+        "detail": "Connected intelligence delivers three levels of value: Automation (operational efficiency), Prediction (anticipating outcomes and risks), and Recommendation (guiding decisions). These capabilities should be embedded across clinical development, disease detection, healthcare sustainability, evidence generation, and patient access."
+      },
+      {
+        "area": "embedded_intelligence_benefits",
+        "detail": "Embedded intelligence in life sciences operations has demonstrated measurable improvements: up to 31% improvement in clinical trial recruitment, reduction in engagement costs, and increase in prescription volume. These benefits come from ML-driven sequence optimization and multi-channel engagement planning."
+      },
+      {
+        "area": "molecule_to_market_partnership",
+        "detail": "The molecule-to-market technology strategy requires partnership between a CRM platform (providing infrastructure, scale, and development velocity) and life sciences domain expertise (providing data, services, and industry-specific solutions). This partnership model can accelerate development time to market by approximately 4x for clinical, safety, regulatory, quality, and commercial operations."
+      }
+    ],
+    "source": "connected_intelligence_healthcare_strategy",
+    "tags": ["connected-intelligence", "digital-strategy", "data-science", "ai-ml", "molecule-to-market", "partnership-model"]
+  }
+]

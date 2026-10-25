@@ -1,0 +1,20 @@
+[
+  {
+    "id": "intelligent-os-001",
+    "category": "commercialization/crm",
+    "title": "Intelligent OS for Life Sciences Field Teams — Voice-Driven Agentic Vision",
+    "products": ["Life Sciences Cloud"],
+    "summary": "A vision for transforming the life sciences field CRM from a manual data entry tool into a voice-driven, agentic operating system where on-device AI orchestrates existing business logic through declared tool interfaces. Targets 30-45 minutes saved daily per field representative.",
+    "findings": {
+      "core_concept": "The mobile operating system (iOS Siri/Apple Intelligence, Android Gemini) becomes the primary interaction layer. The CRM application declares its capabilities as tools that the OS-level AI agent can invoke through structured function calls. Field representatives interact through voice commands rather than touch-based forms, with the AI translating natural language into CRM operations.",
+      "on_device_ai_principle": "All AI processing runs locally on the device using on-device models. No patient data, provider data, or field activity data leaves the device for AI processing. This is critical for HIPAA compliance, GxP data integrity, and operation in environments with no network connectivity. The approach treats privacy as an architectural constraint, not a policy.",
+      "pharma_use_cases": "Ten pharmaceutical field rep scenarios: brief me on my next call (pre-call intelligence), log my call (voice-to-structured-record), start my visit (check-in and sample verification), show my schedule (daily planning with route context), add a note (free-text capture against any record), drop samples (sample distribution with signature), submit my call (validation and sync), schedule a follow-up (calendar and CRM coordination), check sample limits (regulatory compliance query), and surface unsubmitted calls (compliance reminder).",
+      "med_device_use_cases": "Five medical device field scenarios: case brief and equipment lookup (surgical case preparation), log a product complaint (adverse event capture with regulatory routing), log a service activity (field service record creation), check trunk stock inventory (mobile inventory query), and get directions to next appointment (location-aware navigation).",
+      "voice_to_visit_flow": "A 30-second dictation after leaving a healthcare provider's office generates a complete structured call record: attendees detected from context, products discussed extracted from speech, key messages mapped to call objectives, follow-up actions identified, and samples distributed recorded. The AI transforms unstructured voice into the exact data structure the CRM requires.",
+      "time_savings_model": "Estimated 30-45 minutes saved daily per representative across 6-8 customer visits per day. The savings come from eliminating manual form navigation (2-3 minutes per call record), reducing context switching between screens, enabling capture during transit rather than after hours, and surfacing pre-call intelligence without manual search.",
+      "architectural_principle": "Not a chatbot, not cloud AI, not a rewrite. The CRM application exposes its existing business logic as declared tool functions. The on-device AI agent selects and invokes the appropriate tools based on the user's intent. All validation rules, business logic, and data integrity constraints continue to execute in the application layer. The AI is a new entry point, not a replacement for existing functionality."
+    },
+    "source": "internal-intelligent-os-vision-document-2026",
+    "tags": ["voice-ai", "agentic", "on-device-ai", "field-teams", "mobile", "vision", "hipaa"]
+  }
+]

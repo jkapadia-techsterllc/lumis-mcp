@@ -1,0 +1,29 @@
+[
+  {
+    "id": "clin-econsent-001",
+    "category": "modules",
+    "title": "Electronic Consent Platform Landscape",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Analysis of the electronic consent (eConsent) technology landscape for clinical trials, covering decentralized and hybrid trial solutions across the market.",
+    "findings": {
+      "market_overview": "The eConsent market has grown as regulatory agencies endorse patient-centric consent processes. Electronic consent platforms replace paper-based informed consent with interactive digital workflows that improve comprehension and reduce protocol deviations.",
+      "leading_platform_profiles": "One Amsterdam-based platform vendor generates an estimated $25-35M in annual revenue and serves 300+ clients. Their solution specializes in decentralized and hybrid clinical trial capabilities, enabling remote consent capture, multilingual consent forms, and real-time version control for consent documents across global trial sites.",
+      "core_capabilities": "eConsent platforms provide: interactive multimedia consent experiences (video, quizzes, animations), electronic signature capture compliant with 21 CFR Part 11 and EU GCP regulations, version management with automatic re-consent workflows when protocols change, remote consent capabilities for decentralized trials, audit trails showing exactly which version each participant signed and when.",
+      "decentralized_trial_integration": "eConsent is a foundational component of decentralized clinical trials (DCTs). Platforms integrate with ePRO/eCOA systems, telemedicine platforms, and CTMS solutions. The shift toward hybrid trials (mixing in-person and remote visits) has increased demand for flexible consent solutions that work across channels.",
+      "regulatory_landscape": "FDA guidance on electronic consent (2016), EU CTR requirements, and ICH E6 R2 GCP guidelines support electronic consent. However, country-specific requirements vary \u2014 some jurisdictions require witness signatures, physical presence, or specific data localization rules.",
+      "competitive_differentiation": "Differentiation occurs along three axes: breadth of language support for global trials, depth of integration with trial management systems, and sophistication of participant comprehension verification tools (knowledge checks, comprehension scores).",
+      "lsc_relevance": "eConsent platforms represent integration targets for life sciences CRM and participant management systems. Field teams, clinical operations staff, and patient engagement solutions need visibility into consent status and the ability to coordinate re-consent workflows across distributed trial sites."
+    },
+    "source": "Industry landscape analysis, 2022",
+    "tags": [
+      "econsent",
+      "clinical-trials",
+      "decentralized-trials",
+      "informed-consent",
+      "regulatory-compliance",
+      "21-cfr-part-11"
+    ]
+  }
+]

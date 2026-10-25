@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ci-rwe-japan-001",
+    "category": "competitive-intelligence",
+    "title": "Real-World Evidence Competitive Landscape in Japan",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Assessment of RWE service providers in Japan focused on secondary data analysis, covering local and global players and their positioning.",
+    "findings": {
+      "market_structure": "Japanese RWE market dominated by local specialists with deep expertise in Japanese healthcare databases, supplemented by global firms. Key differentiator: access to Japan-specific data sources.",
+      "leading_providers": "Local leaders include a provider with 150+ publications and 100% expert support acceptance, a health data company with 482 publications and largest claims database, and specialist HEOR consultancies.",
+      "capability_gaps": "KOL engagement offered by only 2 assessed providers. English-language information limited for Japanese firms. Few offer integrated technology platforms \u2014 most are consulting-led.",
+      "crm_integration_relevance": "RWE insights increasingly feed CRM workflows (treatment pattern data informing field medical guides). Implementation teams should understand local data landscape for Japan affiliate configurations."
+    },
+    "source": "Competitive landscape of RWE providers in Japan focused on secondary data analysis",
+    "tags": [
+      "competitive-intelligence",
+      "real-world-evidence",
+      "japan",
+      "heor"
+    ]
+  }
+]

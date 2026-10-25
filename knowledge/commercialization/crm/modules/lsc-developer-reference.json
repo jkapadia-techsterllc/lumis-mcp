@@ -1,0 +1,19 @@
+[
+  {
+    "id": "crm-mod-043",
+    "category": "modules",
+    "title": "Customer Engagement for Life Sciences Cloud Developer Reference",
+    "products": ["lsc"],
+    "summary": "Developer API reference for the Salesforce-native life sciences CRM platform (Spring 2025, API v63.0), documenting the standard object model across account management, activity plans, compliance, consent, data change requests, document management, and field email domains.",
+    "findings": {
+      "account_management_objects": "Core account management uses standard platform objects: BusinessLicense and BusinessLicenseProduct for HCP licensing, ContactPointAddress and ContactPointBestContactTime for multi-address and scheduling data, ContactPointSocial for social presence, Formulary and FormularyItem for drug formulary tracking, HealthcareProvider for HCP profiles, PartyPublication for publication tracking, ProviderAcctProductInfo and ProviderAcctTerritoryInfo for provider-product and territory assignments, ProviderAffiliation and ProviderAffiliationProduct for institutional affiliations, PrvdAccountUserGroupInfo for user group assignments.",
+      "activity_plan_objects": "Activity planning domain: ActivityPlan (plan definition with territory scope), ActivityPlanTerritory (territory associations), ProviderActivityGoal (provider-level activity targets), ProviderActivityGoalMeasure (quantitative measures against goals), ProviderActivityMeasureType (measure type definitions), ProviderActvtyPlanAdjusment (plan modification records), PrvdActvtyGoalMeasureProdt (product-level goal measures), TimePeriod (planning period definitions). This object model supports the full cycle of planning, execution tracking, and adjustment.",
+      "compliance_and_consent": "Compliance: ComplianceStatementDef for defining regulatory statements. Consent management: CommSubscription (communication subscription definitions), CommSubscriptionConsent (subscriber consent records), CommSubConsentCmplSnpsht (consent compliance snapshots), ContactPointConsent (consent at contact point level), DataUsePurpose (purpose definitions for data processing). This structure supports GDPR-style consent management with snapshot-based compliance auditing.",
+      "data_change_requests": "Data stewardship: LifeSciDataChangeDef (change request type definitions), LifeSciDataChangeRequest (individual change requests), LifeSciDataChgDefMngFld (managed field specifications per change type), LifeSciDataChgDefRecType (record type associations), LifeSciDataChgPersonaDef (persona-based access definitions). Enables controlled data modification workflows with approval gates and field-level control.",
+      "document_and_email": "Document management: DocumentTemplate, LifeSciDocTemplateVersion (versioned templates), LifeScienceDocument (document records), LifeScienceDocumentTemplate (template definitions). Field email: LifeScienceEmail (email records with tracking), LifeSciEmailTemplate (email template definitions), LifeSciEmailTmplFragment (reusable email content fragments). Additional domains include app alerts (AppAlert, AppAlertTerritory, AppAlertUserResponse, RecordAlert) for in-app notification management.",
+      "api_characteristics": "All objects follow standard platform API conventions: SOQL queryable, available via REST and SOAP APIs, support bulk operations. Objects use relationship fields (lookup and master-detail) following the platform's referential integrity model. Field-level security and sharing rules apply per the standard security model. No custom namespace prefix on standard objects."
+    },
+    "source": "Customer Engagement for Life Sciences Cloud Developer Guide (Pilot), Version 63.0, Spring 2025",
+    "tags": ["developer-guide", "api-reference", "data-model", "standard-objects", "account-management", "activity-plans", "consent", "compliance", "documents", "email", "lsc"]
+  }
+]

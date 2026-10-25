@@ -1,0 +1,224 @@
+[
+  {
+    "id": "eq-001",
+    "category": "exam-config-qa",
+    "topic": "Territory Alignment Rule Configuration",
+    "question": "How do you configure affiliation-based alignment rules to restrict which providers are visible to a sales rep?",
+    "answer": "Use Affiliation Alignment Rules with filtering criteria based on provider specialty. The rule filters affiliated accounts by specialty field and assigns them to territories. Steps: (1) Navigate to Territory Management setup, (2) Create an Affiliation Alignment Rule, (3) Set filter criteria (e.g., Specialty = Oncology), (4) Assign to the target territory model. The rule runs during alignment operations and filters HCPs by their affiliation specialty attributes.",
+    "objects": [
+      "Territory2",
+      "AffiliationAlignmentRule",
+      "AccountAffiliation"
+    ],
+    "gotchas": [
+      "Affiliation rules filter by attributes on the affiliation record, not the account record directly",
+      "Rules must be activated after creation",
+      "Alignment runs are resource-intensive for large territory models"
+    ]
+  },
+  {
+    "id": "eq-002",
+    "category": "exam-config-qa",
+    "topic": "Sample Limit Configuration",
+    "question": "What is the correct setup to configure sample limits that reset quarterly?",
+    "answer": "Use SampleLimitTemplate with Time Period set to Quarterly. Steps: (1) Create a Sample Limit Template, (2) Set limit type (standard or advanced), (3) Configure time period as Quarterly, (4) Set maximum quantities per product, (5) Assign to territories. For advanced limits with dynamic segmentation, configure Dynamic Sample Limit Segments that auto-update based on account attributes. Territory Product Quantity Allocations control the quantity available per territory.",
+    "objects": [
+      "SampleLimitTemplate",
+      "SampleLimit",
+      "DynamicSampleLimitSegment",
+      "TerritoryProductQuantityAllocation"
+    ],
+    "gotchas": [
+      "Standard limits use fixed quantities; advanced limits use Dynamic Segmentation for auto-updating",
+      "Quarterly reset means limits reset at calendar quarter boundaries, not rolling 90 days",
+      "Territory Product Quantity Allocations must be configured for each territory-product combination"
+    ]
+  },
+  {
+    "id": "eq-003",
+    "category": "exam-config-qa",
+    "topic": "Activity Plan Usage Type",
+    "question": "What Usage Type must be set on an Activity Plan for it to track provider visit attainment?",
+    "answer": "Usage Type must be set to \"Provider Plan Cycle\". This is the most common source of Activity Plan dashboard issues. When the dashboard shows empty activities despite active plans, the first check should be Usage Type. Other valid usage types exist for different plan contexts, but provider visit tracking specifically requires Provider Plan Cycle.",
+    "objects": [
+      "ActivityPlan",
+      "ActivityPlanCategory"
+    ],
+    "gotchas": [
+      "Provider Plan Cycle is the ONLY usage type that tracks provider visit attainment",
+      "Other usage types exist but serve different purposes",
+      "This is the #1 cause of empty Activity Plan dashboards"
+    ]
+  },
+  {
+    "id": "eq-004",
+    "category": "exam-config-qa",
+    "topic": "Consent Capture Prerequisites",
+    "question": "What objects must be configured before consent can be captured from an HCP?",
+    "answer": "Three objects in this order: (1) CommunicationSubscription - the consent topic (e.g., Marketing Emails for Product X), (2) CommunicationSubscriptionChannelType - links the subscription to a delivery channel (e.g., Email, Phone), (3) CommunicationSubscriptionConsent - the actual consent record capturing the HCP response. The subscription-channel link MUST exist before consent can be captured. Without CommunicationSubscriptionChannelType records, the consent capture form will have no channel options.",
+    "objects": [
+      "CommunicationSubscription",
+      "CommunicationSubscriptionChannelType",
+      "CommunicationSubscriptionConsent"
+    ],
+    "gotchas": [
+      "Subscription-Channel link must exist BEFORE consent capture",
+      "There is NO native unsubscribe-all API - each subscription must be individually updated",
+      "Consent records are immutable audit entries - updates create new records, not modify existing ones"
+    ]
+  },
+  {
+    "id": "eq-005",
+    "category": "exam-config-qa",
+    "topic": "Visit Record Type Configuration",
+    "question": "How should visit record types be configured to show different form layouts for in-person vs phone visits?",
+    "answer": "Create separate record types on the Visit object (e.g., In_Person_Visit, Phone_Visit, Group_Visit). Each record type gets its own page layout with appropriate fields. Record type assignment is driven by the visit creation context (channel selection). In-person visits should include signature fields; phone visits should not require signature. Record type also controls which validation rules fire on submission.",
+    "objects": [
+      "Visit"
+    ],
+    "gotchas": [
+      "Signature fields should NOT be required on phone/remote visit record types",
+      "Record type determines both layout AND validation rules",
+      "Incorrect record type mapping is the most common cause of missing/extra fields on visit forms"
+    ]
+  },
+  {
+    "id": "eq-006",
+    "category": "exam-config-qa",
+    "topic": "Medical Inquiry Share Management",
+    "question": "How do medical inquiries get shared with the correct territory-based medical team?",
+    "answer": "The MIRF (Medical Information Request Form) Share Management batch job handles territory-based sharing. The MedicalInsightSharingHandler processes sharing rules. Steps: (1) Configure the MIRF Share Management scheduled batch, (2) Set up territory-based sharing rules for medical inquiries, (3) Configure the MedicalInsightSharingHandler for real-time sharing updates. The batch job runs on a schedule to ensure inquiries are shared with the correct medical affairs team based on territory alignment.",
+    "objects": [
+      "MedicalInquiry",
+      "MedicalInsight"
+    ],
+    "gotchas": [
+      "Batch job must be scheduled - sharing is NOT automatic without it",
+      "Territory realignment requires the batch to re-run for updated sharing",
+      "MedicalInsightSharingHandler handles real-time updates between batch runs"
+    ]
+  },
+  {
+    "id": "eq-007",
+    "category": "exam-config-qa",
+    "topic": "KAM Sprint Configuration",
+    "question": "How do you configure a Key Account Management sprint execution cycle?",
+    "answer": "KAM uses AccountPlan with StrategicGoal objects. Sprint cycles are configured through Action Plan Template Assignment. Steps: (1) Create AccountPlan for the key account, (2) Define StrategicGoals for the plan period, (3) Assign Action Plan Templates to goals, (4) Configure sprint duration and milestone tracking, (5) Set up the review cadence. Sprint execution tracks progress against strategic goals with defined milestones and review gates.",
+    "objects": [
+      "AccountPlan",
+      "StrategicGoal",
+      "ActionPlanTemplateAssignment"
+    ],
+    "gotchas": [
+      "Sprint durations must be configured - there is no default sprint length",
+      "Strategic goals should have measurable outcomes defined at creation",
+      "Action Plan Templates are reusable across multiple account plans"
+    ]
+  },
+  {
+    "id": "eq-008",
+    "category": "exam-config-qa",
+    "topic": "Remote Engagement Twilio Setup",
+    "question": "What is required to enable remote video engagement through the platform?",
+    "answer": "Remote engagement requires Twilio integration. Steps: (1) Configure Twilio trusted sites in Setup > Remote Site Settings, (2) Set up email templates for video call invitations, (3) Configure the remote visit record type, (4) Enable the remote engagement component on the visit page layout, (5) Configure GDPR-compliant recording settings if applicable. The platform uses Twilio for the video infrastructure.",
+    "objects": [
+      "Visit",
+      "RemoteEngagement"
+    ],
+    "gotchas": [
+      "Twilio trusted sites MUST be configured - video calls fail silently without them",
+      "Email templates for invitations must include the video link placeholder",
+      "GDPR compliance requires explicit recording consent configuration",
+      "Remote visits should NOT require physical signature capture"
+    ]
+  },
+  {
+    "id": "eq-009",
+    "category": "exam-config-qa",
+    "topic": "Next Best Customer/Message Prerequisites",
+    "question": "What data must be available before Next Best Customer or Next Best Message recommendations work?",
+    "answer": "NBC/NBM requires: (1) Geolocation data on account records (latitude/longitude), (2) Territory alignment configured, (3) External model data loaded at territory-account-product-message granularity, (4) The platform-specific NBC/NBM components (NOT standard platform Next Best Action). The AI model data must be pre-computed externally and loaded into the platform. NBC recommendations combine geolocation proximity with model scores.",
+    "objects": [
+      "NextBestCustomer",
+      "NextBestMessage"
+    ],
+    "gotchas": [
+      "MUST use platform-specific NBC/NBM components, NOT standard platform Next Best Action (NBA)",
+      "Geolocation data must be populated on accounts for proximity-based recommendations",
+      "Model data is externally computed and loaded - the platform does not train the model",
+      "Territory-account-product-message granularity means a recommendation record for every combination"
+    ]
+  },
+  {
+    "id": "eq-010",
+    "category": "exam-config-qa",
+    "topic": "Product Alignment to Territories",
+    "question": "How do you configure which products a territory can detail and sample?",
+    "answer": "Use Territory-Product Alignment. Steps: (1) Navigate to Territory Management, (2) Select the territory, (3) Configure product alignment by adding products to the territory, (4) Set alignment type (Detail, Sample, or Both), (5) Optionally configure the Allow Un-Aligned Selection setting. Product alignment controls what appears in the detailing picker and sample picker during visits. The alignment is separate from the security/sharing model.",
+    "objects": [
+      "Territory2",
+      "TerritoryProductAlignment"
+    ],
+    "gotchas": [
+      "Product alignment is SEPARATE from security/sharing - it controls the picker, not access",
+      "Allow Un-Aligned Selection controls whether reps can see non-aligned products in pickers",
+      "Product alignment must be refreshed when territory realignment occurs"
+    ]
+  },
+  {
+    "id": "eq-011",
+    "category": "exam-config-qa",
+    "topic": "Inventory Count Assessment",
+    "question": "How do reps perform sample inventory self-audits?",
+    "answer": "Use Inventory Count Assessment. Steps: (1) Configure Inventory Count Assessment record types, (2) Set up the assessment schedule (typically quarterly), (3) Configure product list for counting, (4) Enable mobile inventory count UI, (5) Set up discrepancy thresholds and alerts. Reps count their physical inventory and the system compares against expected inventory (based on receipts, disbursements, transfers, and adjustments). Discrepancies beyond the threshold trigger compliance alerts.",
+    "objects": [
+      "InventoryCountAssessment",
+      "InventoryCountItem"
+    ],
+    "gotchas": [
+      "Expected inventory calculation depends on complete transaction history",
+      "Discrepancy thresholds should be configured per product category",
+      "Assessment completion should trigger a reconciliation workflow",
+      "Quarterly assessments are typical but DEA requirements may dictate more frequent counts for controlled substances"
+    ]
+  },
+  {
+    "id": "eq-012",
+    "category": "exam-config-qa",
+    "topic": "Person Account Configuration",
+    "question": "What happens when Person Accounts are enabled and what are the implications?",
+    "answer": "Person Accounts merge Account and Contact into a single record for individual people (HCPs, patients). Enabling is IRREVERSIBLE. After enablement: (1) Person Account record types become available, (2) Contact fields appear on Account, (3) Some Contact-based automations may need updating, (4) Data migration must map HCPs as Person Accounts. Person Accounts are required for Patient Engagement features. The HealthcareProvider object adds provider-specific attributes to Person Accounts.",
+    "objects": [
+      "Account",
+      "Contact",
+      "HealthcareProvider"
+    ],
+    "gotchas": [
+      "Person Account enablement is IRREVERSIBLE - cannot be undone",
+      "After enablement, some SOQL queries on Contact may need adjustment",
+      "Data loader operations must specify the correct record type for Person vs Business accounts",
+      "Testing should be done in a sandbox BEFORE enabling in production"
+    ]
+  },
+  {
+    "id": "eq-013",
+    "category": "exam-config-qa",
+    "topic": "MedTech WorkType-Driven Visits",
+    "question": "How are MedTech visits different from pharmaceutical visits?",
+    "answer": "MedTech visits are WorkType-driven. WorkType defines the nature of the visit (installation, maintenance, calibration, training). Each WorkType has associated Action Plans with Assessment Tasks executed in sequence. The visit workflow: (1) Create visit with WorkType, (2) System generates Action Plan from WorkType template, (3) Assessment Tasks are presented in sequence, (4) Each task captures structured data (product serial numbers, measurements, compliance checks), (5) Visit completion requires all required tasks to be finished.",
+    "objects": [
+      "WorkType",
+      "ActionPlan",
+      "AssessmentTask",
+      "Product2",
+      "SerializedProduct",
+      "ProductItem"
+    ],
+    "gotchas": [
+      "Action Plan tasks must be completed in sequence - cannot skip ahead",
+      "Product hierarchy: Product > Serialized Product > Product Item (installed instance)",
+      "Product Availability Projections predict when equipment will need service",
+      "MedTech visits track different metrics than pharma visits - time on site, parts used, compliance status"
+    ]
+  }
+]

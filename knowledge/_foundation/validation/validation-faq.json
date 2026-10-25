@@ -1,0 +1,149 @@
+[
+  {
+    "id": "val-faq-001",
+    "category": "validation-faq",
+    "question": "We are implementing Salesforce for life sciences CRM. Is the platform already validated, or do we need to validate it ourselves?",
+    "answer": "Salesforce is NOT validated for your specific GxP use. The platform vendor (Salesforce) maintains their own internal quality processes (SOC 2, ISO 27001), but GxP validation is the CUSTOMER's responsibility. You must validate your specific configuration, custom code, integrations, and business processes on the platform. Think of it like a building: the landlord maintains the building (Salesforce maintains the platform), but you must validate the specific laboratory you build inside it for your GxP operations.",
+    "key_actions": [
+      "Perform vendor assessment of Salesforce (SOC 2 Type II report, security documentation)",
+      "Classify the implementation as GAMP Category 4 (configured product) with Category 5 components for any custom Apex code",
+      "Write a Validation Plan for YOUR implementation, not for the Salesforce platform itself",
+      "Focus validation on configured workflows, validation rules, approval processes, custom objects, Apex triggers/classes, integrations, and mobile functionality",
+      "Identify and remediate Part 11 gaps (field history tracking limits, setup audit trail retention, absence of native 'reason for change')"
+    ],
+    "gotcha_level": "critical",
+    "source": "validation-faq",
+    "tags": ["salesforce", "platform-validation", "customer-responsibility", "gamp-category-4"]
+  },
+  {
+    "id": "val-faq-002",
+    "category": "validation-faq",
+    "question": "Salesforce releases updates 3 times a year. Do we need to revalidate the entire system each time?",
+    "answer": "No — you do NOT need to revalidate the entire system with each release. You need a RELEASE ASSESSMENT PROCESS that evaluates each vendor release for impact on your validated functionality. This is an abbreviated review, not a full revalidation.",
+    "process": [
+      "1. REVIEW release notes when they are published (typically 4-6 weeks before release)",
+      "2. ASSESS each change for impact on your GxP-critical functions using a documented checklist",
+      "3. CLASSIFY the release impact: No Impact / Minor Impact (regression testing) / Major Impact (partial revalidation)",
+      "4. TEST any impacted GxP functions in a sandbox environment before the release hits production",
+      "5. DOCUMENT the assessment, testing results, and approval in a Release Assessment Report",
+      "6. SIGN OFF before the release goes live (or document acceptance if auto-deployed)"
+    ],
+    "typical_outcome": "Most Salesforce releases have No Impact or Minor Impact on GxP functions. Major impacts (changes to audit trail behavior, security model, or field history tracking) are rare but must be caught.",
+    "gotcha": "You CANNOT prevent Salesforce releases from being deployed to your org (except brief sandbox holds). Your release assessment process must be proactive, not reactive. Start testing in sandbox as soon as the release preview is available.",
+    "gotcha_level": "critical",
+    "source": "validation-faq",
+    "tags": ["release-management", "regression-testing", "salesforce-releases", "continuous-validation"]
+  },
+  {
+    "id": "val-faq-003",
+    "category": "validation-faq",
+    "question": "What is the difference between validation and qualification? We keep hearing both terms.",
+    "answer": "VALIDATION is the overall process of establishing documented evidence that a system consistently fulfills its intended purpose. QUALIFICATION is the execution phase within validation where you test that the system meets specifications. Think of it hierarchically: Validation = Planning + Risk Assessment + Qualification (IQ/OQ/PQ) + Ongoing Compliance. Qualification = The actual testing (IQ verifies installation, OQ verifies operation, PQ verifies performance). In casual usage, people often say 'validation' when they mean 'qualification' — the distinction matters in regulatory conversations because a validated system includes not just testing but the entire lifecycle (plan, risk assessment, testing, deviation management, periodic review, retirement).",
+    "gotcha_level": "info",
+    "source": "validation-faq",
+    "tags": ["terminology", "validation-vs-qualification", "lifecycle"]
+  },
+  {
+    "id": "val-faq-004",
+    "category": "validation-faq",
+    "question": "We are migrating from one CRM platform to another. What validation is required for the migration itself?",
+    "answer": "Data migration is a SEPARATE validation activity from the target system validation. You need a Data Migration Validation Protocol that covers the migration as its own qualified process.",
+    "migration_validation_requirements": [
+      "DATA MAPPING — Document source-to-target field mapping for every migrated object/field. Include data type transformations, default values for unmapped fields, and handling of null/blank values.",
+      "ACCEPTANCE CRITERIA — Define quantitative criteria: record counts must match, specific field values must match (sample spot checks), referential integrity must be preserved, audit trail data must migrate intact.",
+      "DRY RUNS — Execute at least 2-3 dry runs in sandbox environments before production migration. Each dry run should identify and resolve data quality issues.",
+      "VERIFICATION — After migration, run automated comparison scripts to verify: (1) record counts per object match within tolerance, (2) spot-check verification of sampled records (typically 1-5% random sample of each object), (3) referential integrity verification (parent-child relationships intact), (4) audit trail continuity (historical audit data accessible in target or archive).",
+      "CHAIN OF CUSTODY — Document that data was not altered during migration. Use hash comparisons for critical data sets.",
+      "HISTORICAL DATA — Determine whether historical data migrates to the new system or remains in an accessible archive. Both approaches are acceptable IF the data remains accessible for the required retention period.",
+      "PARALLEL OPERATION — Consider running both systems in parallel for a defined period (typically 2-4 weeks) to verify the target system produces equivalent results."
+    ],
+    "gotcha": "Audit trail data from the source system must be preserved. You cannot simply say 'we migrated the data' if the audit trail showing how that data was created and modified in the source system is lost. Either migrate audit trail data or maintain the source system's audit trail in an accessible archive.",
+    "gotcha_level": "critical",
+    "source": "validation-faq",
+    "tags": ["data-migration", "migration-validation", "chain-of-custody", "parallel-operation"]
+  },
+  {
+    "id": "val-faq-005",
+    "category": "validation-faq",
+    "question": "Do we need to validate our test environments (sandboxes) or only production?",
+    "answer": "You validate the PRODUCTION system. Test environments (sandboxes) are used AS TOOLS for executing qualification protocols — they do not need to be independently validated as GxP systems. HOWEVER, you must document that your test environment is REPRESENTATIVE of production: same configuration, same custom code, same integrations. If the sandbox differs from production in ways that affect GxP functionality, your test results may not be valid.",
+    "sandbox_requirements": [
+      "Configuration parity with production for GxP-critical features",
+      "Representative test data (volume and variety, not necessarily production data)",
+      "Same integrations connected (or documented stubs that simulate integration behavior)",
+      "Same custom code deployed (match the code version being validated)",
+      "Document any known differences between sandbox and production and assess their impact on test validity"
+    ],
+    "gotcha": "Full-copy sandboxes are preferred for validation testing because they mirror production most closely. Developer sandboxes or scratch orgs may not have sufficient configuration parity for OQ/PQ testing.",
+    "gotcha_level": "warning",
+    "source": "validation-faq",
+    "tags": ["test-environment", "sandbox", "environment-parity", "qualification-testing"]
+  },
+  {
+    "id": "val-faq-006",
+    "category": "validation-faq",
+    "question": "Our system uses a mobile app with offline capability. What additional validation is required?",
+    "answer": "Mobile offline functionality adds significant validation complexity because data is created and modified on the device before being synchronized to the server. This introduces data integrity risks that must be specifically validated.",
+    "mobile_validation_requirements": [
+      "OFFLINE DATA INTEGRITY — Verify that records created/modified offline maintain ALCOA+ compliance. Timestamps must reflect actual activity time, not sync time.",
+      "SYNC VALIDATION — Test that data synchronization is complete and accurate. Verify conflict resolution logic when the same record is modified both on-device and on-server.",
+      "SIGNATURE CAPTURE OFFLINE — If signatures are captured offline, verify that signature-to-record linking (Part 11.70) is maintained through sync. The signature must remain bound to its specific record.",
+      "AUDIT TRAIL CONTINUITY — Verify that offline actions generate audit trail entries with correct timestamps and that these entries sync without gaps or duplicates.",
+      "DEVICE MANAGEMENT — Validate device enrollment, remote wipe capability, and what happens when a device is lost/stolen with unsynced GxP data.",
+      "MULTI-DEVICE — If users can access the system from multiple devices, verify that data consistency is maintained across all devices after sync.",
+      "NETWORK INTERRUPTION — Test system behavior during intermittent connectivity (mid-sync network loss, timeout handling).",
+      "REAL DEVICE TESTING — Emulator/simulator testing is NOT sufficient for PQ. Validate on actual devices with real network conditions."
+    ],
+    "gotcha": "The biggest mobile validation risk is TIMESTAMP INTEGRITY. If the mobile device's clock is wrong (user manually changed it, timezone drift, daylight saving), all offline records will have incorrect timestamps. Validate that the system uses server-synchronized time, not device time, for GxP-critical timestamps.",
+    "gotcha_level": "critical",
+    "source": "validation-faq",
+    "tags": ["mobile", "offline", "sync-validation", "timestamp-integrity", "signature-capture"]
+  },
+  {
+    "id": "val-faq-007",
+    "category": "validation-faq",
+    "question": "How long does validation take and what does it cost? Our project manager needs estimates.",
+    "answer": "Validation typically adds 20-30% to the overall implementation timeline and 15-25% to the total project cost. The exact figures depend on system complexity, regulatory geography, methodology (CSV vs CSA), and organizational maturity.",
+    "timeline_guidance": {
+      "small_implementation": "5-10 modules, single country, US or EU only → 2-3 months of validation effort, can run in parallel with implementation sprints",
+      "medium_implementation": "10-20 modules, 5-15 countries, multiple regions → 4-6 months, overlapping with but extending beyond implementation",
+      "large_implementation": "20+ modules, 15+ countries, global regulatory scope, mobile + integrations → 6-12 months, often the longest workstream on the project",
+      "migration_addendum": "Add 1-2 months for data migration validation on top of target system validation"
+    },
+    "cost_drivers": [
+      "Regulatory geography — global scope costs 2-3x more than single-jurisdiction",
+      "Custom code — Category 5 components require full SDLC validation (adds 30-50% effort per custom component)",
+      "Integration count — each validated integration point adds 1-2 weeks of testing",
+      "Organizational maturity — first-time validation programs take longer to establish SOPs and templates",
+      "Methodology — CSA reduces effort by 30-50% for medium/low-risk functions vs traditional CSV"
+    ],
+    "gotcha": "Do NOT treat validation as a post-implementation activity. Validation planning and URS should start at the BEGINNING of the implementation project. Bolting on validation at the end leads to rework, delays, and gaps. The validation team should be embedded in the project from Day 1.",
+    "gotcha_level": "critical",
+    "source": "validation-faq",
+    "tags": ["timeline", "cost", "project-planning", "effort-estimation"]
+  },
+  {
+    "id": "val-faq-008",
+    "category": "validation-faq",
+    "question": "What happens during an FDA or EMA inspection of our validated CRM system?",
+    "answer": "Regulatory inspectors can request to review any validated computerized system during a GxP inspection. They will NOT inspect the system in isolation — it will be part of a broader GMP, GCP, or GLP inspection.",
+    "what_inspectors_will_ask_for": [
+      "Validation Summary Report — the first document they will request",
+      "Validation Plan and Risk Assessment — to understand your approach",
+      "Traceability Matrix — to verify test coverage of all requirements",
+      "Audit trail demonstration — they may ask you to show the audit trail for a specific record",
+      "Access control demonstration — show user accounts, role assignments, and the process for granting/revoking access",
+      "Electronic signature demonstration — if applicable, show how signatures are captured, manifested, and linked",
+      "Change control records — show how recent changes were assessed and tested",
+      "Periodic review report — the most recent periodic review of the system",
+      "Training records — for specific users who interact with the system",
+      "Deviation/CAPA records — any deviations found during validation and how they were resolved",
+      "SOPs — for system operation, administration, and backup/recovery"
+    ],
+    "typical_inspection_duration": "1-3 hours for computer system review within a multi-day inspection",
+    "gotcha": "Inspectors are increasingly knowledgeable about cloud/SaaS platforms. They will ask specific questions about data sovereignty, vendor SLAs, audit trail retention beyond platform limits, and what happens to your data if the vendor goes out of business. Have answers ready.",
+    "gotcha_level": "critical",
+    "source": "validation-faq",
+    "tags": ["fda-inspection", "ema-inspection", "inspection-readiness", "audit-preparation"]
+  }
+]

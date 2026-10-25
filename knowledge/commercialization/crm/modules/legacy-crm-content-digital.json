@@ -1,0 +1,33 @@
+[
+  {
+    "id": "crm-mod-042",
+    "category": "modules",
+    "title": "Legacy CRM Content Management and Digital Engagement Capabilities",
+    "products": [
+      "oce"
+    ],
+    "summary": "Reference for the legacy CRM platform's content management, digital engagement, and multi-channel capabilities including closed-loop marketing, email templates, and mobile/web user experiences as documented in July 2024.",
+    "findings": {
+      "closed_loop_marketing": "CLM (Closed-Loop Marketing) philosophy centers on delivering the right message, to the right customer, at the right time. Three organizational roles participate: Marketing headquarters (content creation and strategy), Field Force (content delivery and interaction capture), and Agency (content production). The approach generates clickstream data that feeds back into content strategy, creating a closed feedback loop between content delivery and content optimization.",
+      "content_packaging": "Two content formats supported: ZIP presentations (interactive HTML5) and PDF presentations. ZIP structure uses numbered naming convention (XX_name.html paired with XX_thumbnail.jpg) organized as sequences within presentations. Recommendations: 30-35 sequences per presentation, up to 300 presentations per device. Maximum 1GB per sequence. File extensions are case-sensitive. Supports iframe embedding, video (MP4/MOV/M4V), and PPT/PPTX conversion to HTML5.",
+      "dynamic_content": "Interactive content capabilities via Mustache templates with JSON data binding. JavaScript/HTML/iOS bridge functions enable device-to-content communication. Survey functionality captures structured feedback during presentations. Content Security Policy (CSP) trusted sites configuration for external resource loading. Deep link tokens for cross-application navigation.",
+      "email_engagement": "Email template packaging uses ZIP format containing: index.html (template body), thumbnail.jpg (preview), attachments/ folder, and fragments/ folder for reusable content blocks. Multi-language support via locale-suffixed index files (e.g., index_fr_FR.html). Dynamic capabilities include Mustache template rendering, user picture insertion, rich text sections, dropdown tags, DateTime pickers, and SOQL data querying within templates. Deep link tokens enable navigation from email to CRM records. Mandatory attachment marking via 'required__' filename prefix.",
+      "email_infrastructure": "Email delivery infrastructure supports cloud-based sending services with tracking capabilities. Configuration includes sender authentication, bounce handling, and engagement analytics (open rates, click tracking). Template fragments enable consistent branding across email communications while allowing content teams to manage individual sections independently.",
+      "mobile_capabilities": "Dedicated mobile experiences for phone and tablet form factors. Phone interface optimized for one-handed operation during field visits with emphasis on quick data capture and offline functionality. Tablet interface provides expanded workspace for in-call content presentation and data review. Both platforms support offline data access with background synchronization when connectivity is restored.",
+      "web_application": "Browser-based interface providing full CRM functionality without native app installation. Supports same feature set as mobile with adaptations for desktop workflows including bulk operations, advanced reporting, and administrative functions. Responsive design adapts to various screen sizes.",
+      "content_recommendations": "Implementation guidance: keep individual HTML slides under 10MB for optimal rendering performance, test content across target devices before deployment, use thumbnail images that accurately represent slide content for navigation, implement progressive loading for media-heavy presentations, validate all external resource URLs against CSP configuration before deployment."
+    },
+    "source": "Consolidated from legacy CRM platform documentation suite (July 2024): CLM Content Guide, Email Content Guide, iPhone User Guide, Web User Guide",
+    "tags": [
+      "clm",
+      "closed-loop-marketing",
+      "email-templates",
+      "content-management",
+      "digital-engagement",
+      "mobile",
+      "web",
+      "mustache-templates",
+      "legacy-crm"
+    ]
+  }
+]

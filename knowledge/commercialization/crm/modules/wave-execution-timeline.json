@@ -1,0 +1,616 @@
+{
+  "id": "WET-001",
+  "name": "Wave Execution Timeline Template",
+  "description": "Sprint-level execution timeline template for a single wave of a multi-country CRM migration rollout. Includes parallel workstreams, governance milestones, and three size variants (standard, compact, complex). Based on enterprise pharma best practices for large-scale platform migrations.",
+  "category": "implementation-planning",
+  "phases": [
+    {
+      "id": "REQ",
+      "name": "Requirements & Scope",
+      "description": "Finalize requirements from discovery phase, lock scope, and establish Change Control Board governance for all downstream changes.",
+      "activities": [
+        "Requirements finalization and sign-off with business stakeholders",
+        "Scope alignment for post-discovery build items",
+        "Scope Lock milestone — no new requirements accepted after this point",
+        "Establish Change Control Board (CCB) — only CCB-approved swaps permitted post-lock",
+        "Story cleanup and backlog grooming for build sprints"
+      ],
+      "key_artifacts": [
+        "Signed-off requirements document",
+        "Scope Lock approval record",
+        "CCB charter and swap request template",
+        "Finalized user story backlog"
+      ]
+    },
+    {
+      "id": "BUILD",
+      "name": "Build & Configuration",
+      "description": "Parallel build tracks covering standard platform configuration, exception handling, custom solutions, and data migration preparation.",
+      "sub_tracks": [
+        {
+          "id": "BUILD-DOE",
+          "name": "Design of Exceptions (DOE) Build & Test",
+          "description": "Build and unit-test exception scenarios identified during discovery — deviations from standard platform behavior that require custom logic.",
+          "typical_duration_weeks": 6
+        },
+        {
+          "id": "BUILD-MEM",
+          "name": "Module Enhancement / Fast Follow Build & Test",
+          "description": "Platform module configuration and enhancement work. Includes standard module setup plus any fast-follow items from prior waves.",
+          "typical_duration_weeks": 8
+        },
+        {
+          "id": "BUILD-EXC",
+          "name": "Exceptions Build & Test",
+          "description": "Build and test exception scenarios that were identified but deferred from DOE. May run later in the build cycle.",
+          "typical_duration_weeks": 4
+        },
+        {
+          "id": "BUILD-CUSTOM",
+          "name": "Custom Solution Build & Test",
+          "description": "Custom development for requirements that cannot be met with standard platform configuration. Includes custom Apex, LWC, integrations, or middleware.",
+          "typical_duration_weeks": 8
+        },
+        {
+          "id": "BUILD-DATA",
+          "name": "Additional Data & ADTT Build & Test",
+          "description": "Data migration development, ETL job configuration, data transformation testing (ADTT), and validation rule setup for migrated data.",
+          "typical_duration_weeks": 6
+        },
+        {
+          "id": "BUILD-HARDEN",
+          "name": "Hardening Sprint",
+          "description": "Final stabilization sprint before BAT entry. Fix outstanding defects from build-phase testing, optimize performance, address technical debt.",
+          "typical_duration_weeks": 2
+        }
+      ]
+    },
+    {
+      "id": "E2E",
+      "name": "End-to-End Testing",
+      "description": "Full system integration testing in two cycles. E2E validates all modules, integrations, data flows, and cross-functional scenarios together.",
+      "sub_phases": [
+        {
+          "id": "E2E-PRE",
+          "name": "Pre-E2E Readiness Check",
+          "description": "Verify environment readiness, test data availability, integration endpoint connectivity, and user provisioning before E2E begins.",
+          "typical_duration_weeks": 1
+        },
+        {
+          "id": "E2E-C1",
+          "name": "E2E Cycle 1",
+          "description": "First full end-to-end testing cycle. Execute all test scenarios across modules. Defects logged and triaged daily. Critical defects block Cycle 2 entry.",
+          "typical_duration_weeks": 5,
+          "exit_criteria": [
+            "All P1 defects resolved or mitigated",
+            "Core business flows pass without critical errors",
+            "Integration touchpoints validated",
+            "E2E Cycle 1 Cutoff milestone achieved"
+          ]
+        },
+        {
+          "id": "E2E-PREVIEW",
+          "name": "Preview Sandbox Checkpoint",
+          "description": "Validate build in preview sandbox environment to catch environment-specific issues before Cycle 2.",
+          "typical_duration_weeks": 1
+        },
+        {
+          "id": "E2E-C2",
+          "name": "E2E Cycle 2",
+          "description": "Second full end-to-end testing cycle. Focus on regression testing, defect verification, and edge cases. Typically shorter as major issues resolved in Cycle 1.",
+          "typical_duration_weeks": 4,
+          "exit_criteria": [
+            "All P1 and P2 defects resolved",
+            "Regression suite passes at 95%+ rate",
+            "Performance benchmarks met",
+            "E2E Cycle 2 Cutoff milestone achieved"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RELEASE",
+      "name": "Platform Release Integration",
+      "description": "Align custom code and configurations with the platform vendor's release cycle. Validate that new platform releases do not break custom code or configured workflows.",
+      "activities": [
+        "PO Validation — validate upcoming platform release in sandbox environment",
+        "Platform sprint alignment — adapt custom code to new release APIs and behaviors",
+        "E2E cycle on release build — re-run critical paths on the new platform version",
+        "BAT/Preview on release build — verify business acceptance on the release candidate",
+        "Release deploy to production"
+      ],
+      "gotcha": "Platform releases can break custom code. Always allocate 2-3 sprints for release validation. Never assume backward compatibility for custom Apex, LWC, or integration code."
+    },
+    {
+      "id": "BAT",
+      "name": "Business Acceptance Testing",
+      "description": "Business stakeholder validation of the solution. BAT is the final quality gate before production deployment. Business users execute real-world scenarios to confirm the system meets their requirements.",
+      "sub_phases": [
+        {
+          "id": "BAT-PREP",
+          "name": "BAT Preparation",
+          "description": "Prepare BAT environment, test scripts, test data, and user accounts. Train BAT testers on the system and test execution process.",
+          "typical_duration_weeks": 2
+        },
+        {
+          "id": "BAT-KO",
+          "name": "BAT Kickoff",
+          "description": "Formal kickoff meeting with business stakeholders. Review scope, test plan, defect process, and go/no-go criteria.",
+          "typical_duration_weeks": 0.5
+        },
+        {
+          "id": "BAT-C1",
+          "name": "BAT Cycle 1",
+          "description": "First BAT cycle. Business users execute test scripts across all in-scope scenarios. Daily defect triage with SI team.",
+          "typical_duration_weeks": 2
+        },
+        {
+          "id": "BAT-C2",
+          "name": "BAT Cycle 2",
+          "description": "Second BAT cycle. Focus on defect verification, regression, and any scenarios blocked in Cycle 1. Often includes edge cases and negative testing.",
+          "typical_duration_weeks": 2
+        },
+        {
+          "id": "BAT-CLOSE",
+          "name": "BAT Close",
+          "description": "Formal BAT closure. Review defect statistics, confirm go/no-go criteria met, obtain business sign-off.",
+          "typical_duration_weeks": 0.5
+        },
+        {
+          "id": "BAT-DEFECT",
+          "name": "Defect Resolution",
+          "description": "Fix remaining defects from BAT. Verify fixes in BAT environment. Final regression pass.",
+          "typical_duration_weeks": 2
+        }
+      ]
+    },
+    {
+      "id": "TRAIN",
+      "name": "Training",
+      "description": "Two-tier training model: Train the Trainer (TTT) first, then end user training delivered by trained trainers.",
+      "sub_phases": [
+        {
+          "id": "TRAIN-TTT",
+          "name": "Train the Trainer",
+          "description": "Train designated super-users and local champions who will deliver end user training. Covers system functionality, common workflows, troubleshooting, and training delivery techniques.",
+          "typical_duration_weeks": 2
+        },
+        {
+          "id": "TRAIN-EU",
+          "name": "End User Training",
+          "description": "Role-based training delivered by trained trainers. Typically runs in parallel with deploy preparation. Includes hands-on exercises in training sandbox.",
+          "typical_duration_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "DEPLOY",
+      "name": "Deploy & Go-Live",
+      "description": "Production deployment and staged go-live. Technical go-live (system available) precedes end user go-live (users enabled) to allow internal validation.",
+      "sub_phases": [
+        {
+          "id": "DEPLOY-PROD",
+          "name": "Deploy to Production",
+          "description": "Execute production deployment runbook. Validate data migration, integrations, and system health in production.",
+          "typical_duration_weeks": 1
+        },
+        {
+          "id": "DEPLOY-TECH",
+          "name": "Technical Go-Live",
+          "description": "System is live in production. Internal validation by SI team and IT administrators. Users are not yet enabled.",
+          "typical_duration_weeks": 0.5
+        },
+        {
+          "id": "DEPLOY-EU",
+          "name": "End User Go-Live",
+          "description": "Users are enabled in production. Hypercare support activated. Escalation paths communicated to all users.",
+          "typical_duration_weeks": 0.5
+        }
+      ]
+    },
+    {
+      "id": "HYPERCARE",
+      "name": "Hypercare & Stabilization",
+      "description": "Elevated support period immediately following go-live. Dedicated support team monitors system health, triages issues, and provides rapid resolution.",
+      "activities": [
+        "Daily system health monitoring and performance checks",
+        "Dedicated L2/L3 support desk with rapid SLAs",
+        "Daily defect triage calls with SI team",
+        "Sync monitoring and mobile performance tracking",
+        "Transition plan from hypercare to steady-state support"
+      ],
+      "typical_duration_weeks": 4
+    },
+    {
+      "id": "NEXT-WAVE",
+      "name": "Next Wave Discovery (Parallel)",
+      "description": "Discovery and requirements gathering for the next wave runs concurrently with current wave execution to maintain program momentum.",
+      "activities": [
+        "Stakeholder workshops for next-wave countries",
+        "Regulatory and compliance requirements gathering",
+        "Gap analysis for country-specific requirements",
+        "Lessons learned integration from current wave",
+        "Sprint cadence for next-wave requirements elaboration"
+      ],
+      "parallel_start": "Starts approximately 8 weeks into current wave execution"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "M1",
+      "name": "Requirements Finalized",
+      "gate_type": "approval",
+      "description": "All business requirements documented, reviewed, and signed off by business stakeholders.",
+      "approvers": ["Business Lead", "Program Manager", "SI Lead"]
+    },
+    {
+      "id": "M2",
+      "name": "Scope Lock",
+      "gate_type": "hard_gate",
+      "description": "No new requirements accepted. Only CCB-approved swaps permitted. Critical governance milestone — late scope changes are the #1 cause of wave delays.",
+      "approvers": ["Program Manager", "Business Lead"]
+    },
+    {
+      "id": "M3",
+      "name": "E2E Cycle 1 Cutoff",
+      "gate_type": "quality_gate",
+      "description": "All P1 defects resolved. Core business flows pass. Integration touchpoints validated.",
+      "criteria": ["Zero P1 defects open", "Core flows: 100% pass", "Integrations: validated"]
+    },
+    {
+      "id": "M4",
+      "name": "E2E Cycle 2 Cutoff",
+      "gate_type": "quality_gate",
+      "description": "All P1/P2 defects resolved. Regression suite at 95%+. Performance benchmarks met.",
+      "criteria": ["Zero P1/P2 defects open", "Regression: 95%+ pass", "Performance: benchmarks met"]
+    },
+    {
+      "id": "M5",
+      "name": "BAT Kickoff",
+      "gate_type": "readiness_check",
+      "description": "BAT environment ready. Test scripts prepared. BAT testers trained. Entry criteria met.",
+      "criteria": ["BAT environment provisioned and validated", "Test scripts reviewed by business", "BAT testers onboarded"]
+    },
+    {
+      "id": "M6",
+      "name": "BAT Close / Business Sign-Off",
+      "gate_type": "approval",
+      "description": "Business stakeholders confirm the system meets their requirements and approve go-live.",
+      "approvers": ["Business Lead", "Country Lead", "Compliance Lead"]
+    },
+    {
+      "id": "M7",
+      "name": "Go/No-Go Decision",
+      "gate_type": "hard_gate",
+      "description": "Final go/no-go decision based on BAT results, defect status, training completion, and deployment readiness.",
+      "approvers": ["Program Sponsor", "Business Lead", "IT Lead", "SI Lead"]
+    },
+    {
+      "id": "M8",
+      "name": "Technical Go-Live",
+      "gate_type": "checkpoint",
+      "description": "System deployed to production and validated by technical team before user enablement."
+    },
+    {
+      "id": "M9",
+      "name": "End User Go-Live",
+      "gate_type": "checkpoint",
+      "description": "Users enabled in production. Hypercare support activated."
+    }
+  ],
+  "sprint_model": {
+    "cadence": "2-week sprints",
+    "numbering": "Sequential within wave (Sprint 1, Sprint 2, ... Sprint N)",
+    "ceremonies": [
+      "Sprint Planning (Day 1, 2 hours)",
+      "Daily Standup (15 minutes)",
+      "Sprint Review / Demo (last day, 1 hour)",
+      "Sprint Retrospective (last day, 1 hour)"
+    ],
+    "defect_management": {
+      "triage_cadence": "Daily during E2E and BAT phases",
+      "priority_levels": [
+        {"level": "P1", "description": "Blocker — prevents core business process", "sla": "Fix within current sprint"},
+        {"level": "P2", "description": "Critical — workaround exists but impractical", "sla": "Fix within next sprint"},
+        {"level": "P3", "description": "Major — workaround exists and is acceptable", "sla": "Fix before go-live"},
+        {"level": "P4", "description": "Minor — cosmetic or enhancement", "sla": "Post-go-live backlog"}
+      ]
+    }
+  },
+  "variants": [
+    {
+      "id": "STANDARD",
+      "name": "Standard Wave",
+      "scope": "10-15 countries in a single region",
+      "total_duration_weeks": 28,
+      "total_duration_months": 7,
+      "week_mapping": {
+        "REQ": {"start": 1, "end": 6, "notes": "Requirements finalization and scope lock"},
+        "BUILD-DOE": {"start": 2, "end": 8, "notes": "DOE build and test"},
+        "BUILD-MEM": {"start": 3, "end": 12, "notes": "Module enhancement / fast follow"},
+        "BUILD-EXC": {"start": 8, "end": 12, "notes": "Exceptions build and test"},
+        "BUILD-CUSTOM": {"start": 4, "end": 14, "notes": "Custom solution development"},
+        "BUILD-DATA": {"start": 6, "end": 14, "notes": "Data migration and ADTT"},
+        "BUILD-HARDEN": {"start": 14, "end": 16, "notes": "Hardening sprint"},
+        "E2E-PRE": {"start": 7, "end": 8, "notes": "Pre-E2E readiness check"},
+        "E2E-C1": {"start": 8, "end": 13, "notes": "E2E Cycle 1"},
+        "E2E-PREVIEW": {"start": 13, "end": 14, "notes": "Preview sandbox checkpoint"},
+        "E2E-C2": {"start": 14, "end": 18, "notes": "E2E Cycle 2"},
+        "RELEASE": {"start": 16, "end": 24, "notes": "Platform release integration"},
+        "BAT-PREP": {"start": 18, "end": 20, "notes": "BAT preparation"},
+        "BAT-KO": {"start": 20, "end": 20, "notes": "BAT kickoff"},
+        "BAT-C1": {"start": 20, "end": 22, "notes": "BAT Cycle 1"},
+        "BAT-C2": {"start": 22, "end": 24, "notes": "BAT Cycle 2"},
+        "BAT-CLOSE": {"start": 24, "end": 24, "notes": "BAT close and sign-off"},
+        "BAT-DEFECT": {"start": 24, "end": 26, "notes": "Defect resolution"},
+        "TRAIN-TTT": {"start": 22, "end": 24, "notes": "Train the Trainer"},
+        "TRAIN-EU": {"start": 24, "end": 27, "notes": "End user training"},
+        "DEPLOY-PROD": {"start": 26, "end": 27, "notes": "Production deployment"},
+        "DEPLOY-TECH": {"start": 27, "end": 27, "notes": "Technical go-live"},
+        "DEPLOY-EU": {"start": 28, "end": 28, "notes": "End user go-live"},
+        "NEXT-WAVE": {"start": 8, "end": 28, "notes": "Next wave discovery (parallel)"}
+      }
+    },
+    {
+      "id": "COMPACT",
+      "name": "Compact Wave",
+      "scope": "1-5 countries, typically a single market or small cluster",
+      "total_duration_weeks": 18,
+      "total_duration_months": 4.5,
+      "notes": "Compressed timeline for smaller rollouts. Single E2E cycle. BAT compressed to one cycle. Training and deploy overlap. Suitable for markets with minimal customization or where a template from a prior wave is reused.",
+      "week_mapping": {
+        "REQ": {"start": 1, "end": 3, "notes": "Compressed requirements — leverage prior wave templates"},
+        "BUILD-DOE": {"start": 2, "end": 5, "notes": "DOE build (smaller scope)"},
+        "BUILD-MEM": {"start": 2, "end": 7, "notes": "Module config — mostly template reuse"},
+        "BUILD-CUSTOM": {"start": 3, "end": 8, "notes": "Country-specific customizations only"},
+        "BUILD-DATA": {"start": 4, "end": 8, "notes": "Data migration"},
+        "BUILD-HARDEN": {"start": 8, "end": 9, "notes": "Single hardening sprint"},
+        "E2E-PRE": {"start": 6, "end": 7, "notes": "Pre-E2E readiness"},
+        "E2E-C1": {"start": 7, "end": 11, "notes": "Single combined E2E cycle"},
+        "RELEASE": {"start": 10, "end": 14, "notes": "Platform release validation"},
+        "BAT-PREP": {"start": 11, "end": 12, "notes": "BAT preparation (1 week)"},
+        "BAT-C1": {"start": 12, "end": 14, "notes": "Single BAT cycle"},
+        "BAT-CLOSE": {"start": 14, "end": 14, "notes": "BAT close"},
+        "BAT-DEFECT": {"start": 14, "end": 15, "notes": "Defect resolution (1 week)"},
+        "TRAIN-TTT": {"start": 14, "end": 15, "notes": "Train the Trainer"},
+        "TRAIN-EU": {"start": 15, "end": 17, "notes": "End user training"},
+        "DEPLOY-PROD": {"start": 16, "end": 17, "notes": "Production deployment"},
+        "DEPLOY-TECH": {"start": 17, "end": 17, "notes": "Technical go-live"},
+        "DEPLOY-EU": {"start": 18, "end": 18, "notes": "End user go-live"}
+      }
+    },
+    {
+      "id": "COMPLEX",
+      "name": "Complex Wave",
+      "scope": "15+ countries across multiple sub-regions, often with sub-waves for staged go-live",
+      "total_duration_weeks": 40,
+      "total_duration_months": 10,
+      "notes": "Extended timeline for large, complex waves. Countries are grouped into sub-waves (e.g., Sub-Wave 1A in April, 1B in July, 1C in September) to manage risk. Each sub-wave has its own BAT and go-live, but build and E2E are shared. Requires additional hardening sprints and a third E2E cycle.",
+      "sub_wave_model": {
+        "description": "Countries grouped into 2-3 sub-waves within the wave. Sub-wave grouping based on: regulatory similarity, language clusters, shared integration patterns, and go-live readiness.",
+        "sub_wave_example": [
+          {"sub_wave": "1A", "timing": "Month 7", "scope": "5-8 pilot countries — lowest regulatory complexity"},
+          {"sub_wave": "1B", "timing": "Month 8.5", "scope": "8-12 countries — moderate complexity, leverage 1A lessons"},
+          {"sub_wave": "1C", "timing": "Month 10", "scope": "5-10 countries — highest complexity or latest readiness"}
+        ]
+      },
+      "week_mapping": {
+        "REQ": {"start": 1, "end": 8, "notes": "Extended requirements phase — multiple stakeholder groups across sub-regions"},
+        "BUILD-DOE": {"start": 3, "end": 12, "notes": "DOE build — larger exception set across countries"},
+        "BUILD-MEM": {"start": 4, "end": 16, "notes": "Module enhancement — country-specific configuration variants"},
+        "BUILD-EXC": {"start": 10, "end": 16, "notes": "Exceptions build for late-added country requirements"},
+        "BUILD-CUSTOM": {"start": 5, "end": 18, "notes": "Custom solutions — more country-specific integrations"},
+        "BUILD-DATA": {"start": 8, "end": 18, "notes": "Data migration across multiple source systems per country"},
+        "BUILD-HARDEN-1": {"start": 16, "end": 18, "notes": "First hardening sprint — stabilize for E2E Cycle 1"},
+        "BUILD-HARDEN-2": {"start": 24, "end": 26, "notes": "Second hardening sprint — stabilize for BAT entry"},
+        "E2E-PRE": {"start": 10, "end": 11, "notes": "Pre-E2E readiness check"},
+        "E2E-C1": {"start": 11, "end": 17, "notes": "E2E Cycle 1 (6 weeks — larger scope)"},
+        "E2E-PREVIEW": {"start": 17, "end": 18, "notes": "Preview sandbox checkpoint"},
+        "E2E-C2": {"start": 18, "end": 24, "notes": "E2E Cycle 2 (6 weeks)"},
+        "E2E-C3": {"start": 24, "end": 28, "notes": "E2E Cycle 3 — regression-only, final validation"},
+        "RELEASE": {"start": 20, "end": 30, "notes": "Platform release integration (may span 2 releases)"},
+        "BAT-PREP": {"start": 26, "end": 28, "notes": "BAT preparation"},
+        "BAT-KO": {"start": 28, "end": 28, "notes": "BAT kickoff — sub-wave 1A focus"},
+        "BAT-C1": {"start": 28, "end": 30, "notes": "BAT Cycle 1"},
+        "BAT-C2": {"start": 30, "end": 32, "notes": "BAT Cycle 2"},
+        "BAT-CLOSE-1A": {"start": 32, "end": 32, "notes": "BAT close for sub-wave 1A countries"},
+        "BAT-DEFECT": {"start": 32, "end": 34, "notes": "Defect resolution"},
+        "TRAIN-TTT": {"start": 30, "end": 32, "notes": "Train the Trainer (regional trainers)"},
+        "TRAIN-EU-1A": {"start": 32, "end": 35, "notes": "End user training for sub-wave 1A"},
+        "DEPLOY-1A": {"start": 34, "end": 35, "notes": "Sub-wave 1A deployment and go-live"},
+        "BAT-1B": {"start": 33, "end": 36, "notes": "BAT for sub-wave 1B countries (overlaps with 1A deploy)"},
+        "TRAIN-EU-1B": {"start": 35, "end": 37, "notes": "End user training for sub-wave 1B"},
+        "DEPLOY-1B": {"start": 37, "end": 38, "notes": "Sub-wave 1B deployment and go-live"},
+        "BAT-1C": {"start": 36, "end": 39, "notes": "BAT for sub-wave 1C countries"},
+        "TRAIN-EU-1C": {"start": 38, "end": 39, "notes": "End user training for sub-wave 1C"},
+        "DEPLOY-1C": {"start": 39, "end": 40, "notes": "Sub-wave 1C deployment and go-live"},
+        "NEXT-WAVE": {"start": 12, "end": 40, "notes": "Next wave discovery (parallel)"}
+      }
+    }
+  ],
+  "risks_and_mitigations": [
+    {
+      "risk_id": "R1",
+      "risk": "Requirements still pending at scope lock",
+      "description": "Business stakeholders have not finalized requirements by the Scope Lock milestone, creating pressure to extend scope lock or accept incomplete requirements.",
+      "impact": "Delays cascade through build, E2E, and BAT. Late requirements may require rework of already-built features.",
+      "probability": "High",
+      "mitigation": [
+        "Set hard scope lock date at program kickoff — non-negotiable calendar milestone",
+        "Run weekly requirements readiness reviews starting 4 weeks before scope lock",
+        "Implement a 'requirements at risk' tracker — flag pending items 3 weeks before lock",
+        "For items still pending at lock: defer to next wave or treat as CCB swap requests",
+        "Communicate clearly: requirements accepted after scope lock cost 3-5x more to implement"
+      ]
+    },
+    {
+      "risk_id": "R2",
+      "risk": "E2E cycles overlapping with active build",
+      "description": "Build work is still in progress when E2E testing begins, leading to incomplete features, unstable environments, and test failures caused by incomplete code rather than actual defects.",
+      "impact": "E2E testers waste effort on known-incomplete features. Defect triage becomes difficult — is it a real defect or just unfinished code?",
+      "probability": "High",
+      "mitigation": [
+        "Enforce code freeze for E2E scope before each E2E cycle starts",
+        "Use feature flags to isolate incomplete features from E2E test paths",
+        "Run pre-E2E readiness check — verify all E2E-scope features have passed unit and integration tests",
+        "Accept that some build tracks (e.g., custom solutions) may continue during E2E — but keep them on separate branches",
+        "Clearly label E2E scope vs. in-progress scope in the test environment"
+      ]
+    },
+    {
+      "risk_id": "R3",
+      "risk": "BAT defects requiring scope changes",
+      "description": "Business users discover during BAT that the implemented solution does not match their expectations, even though it matches the signed-off requirements. This creates pressure to change scope during BAT.",
+      "impact": "BAT timeline extends. Go-live date at risk. Team morale drops as late changes create rework.",
+      "probability": "Medium",
+      "mitigation": [
+        "Conduct early showcase demos during build phase — show, don't tell",
+        "Include business users in E2E testing — don't let BAT be their first time seeing the system",
+        "Classify BAT defects rigorously: is this a defect (doesn't match requirements), an enhancement (new requirement), or a usability issue?",
+        "Enhancements discovered in BAT go to post-go-live backlog — BAT is for defects only",
+        "Pre-agree on BAT exit criteria with business stakeholders before BAT begins"
+      ]
+    },
+    {
+      "risk_id": "R4",
+      "risk": "Platform release breaking custom code",
+      "description": "A platform vendor release introduces breaking changes to APIs, behaviors, or metadata that custom Apex, LWC, integrations, or configurations depend on.",
+      "impact": "Custom code fails in updated environment. Emergency fixes needed. BAT results invalidated if release hits during BAT.",
+      "probability": "Medium",
+      "mitigation": [
+        "Subscribe to platform release notes and preview programs — know what's changing before it ships",
+        "Allocate 2-3 dedicated sprints for release validation in every wave plan",
+        "Run automated regression suite against preview sandbox as soon as release is available",
+        "Maintain a custom code inventory — know every custom class, trigger, component, and integration",
+        "Plan wave timelines around known platform release dates — avoid going live within 2 weeks of a major release",
+        "Keep custom code minimal — every custom line is a line you must maintain through every release"
+      ]
+    },
+    {
+      "risk_id": "R5",
+      "risk": "Training compressed due to upstream delays",
+      "description": "Build or testing delays push training into the deploy window, leaving insufficient time for effective training delivery.",
+      "impact": "Poorly trained users on Day 1 leads to high support ticket volume, low adoption, and user frustration.",
+      "probability": "High",
+      "mitigation": [
+        "Decouple training content creation from system readiness — write training materials based on requirements, not the live system",
+        "Start Train-the-Trainer early — trainers can practice on sandbox even if production isn't ready",
+        "Have a fallback training plan: if classroom training is compressed, deploy bite-sized video modules for Day 1 basics",
+        "Never sacrifice training for timeline — an untrained user base is worse than a 2-week delay",
+        "Build training sandbox early and keep it updated — don't wait for production deployment"
+      ]
+    },
+    {
+      "risk_id": "R6",
+      "risk": "Sub-wave interdependencies in complex waves",
+      "description": "In complex waves with multiple sub-waves, a delay in sub-wave 1A (pilot countries) cascades to 1B and 1C because later sub-waves depend on pilot lessons, shared configurations, and the same SI team.",
+      "impact": "Entire wave timeline extends. SI team capacity becomes the bottleneck.",
+      "probability": "Medium (complex waves only)",
+      "mitigation": [
+        "Build buffer between sub-waves — minimum 6 weeks between sub-wave go-lives",
+        "Identify and resolve pilot-country issues before committing to sub-wave 1B dates",
+        "Run sub-wave 1B BAT preparation in parallel with sub-wave 1A defect resolution",
+        "Ensure sub-wave configurations are independently deployable — 1A issues should not block 1B",
+        "Staff sub-wave teams with some overlap but not total dependency on the same people"
+      ]
+    },
+    {
+      "risk_id": "R7",
+      "risk": "Data migration quality issues surfacing late",
+      "description": "Data migration defects — orphaned records, incorrect mappings, missing audit trails — are not discovered until E2E or BAT because data validation was insufficient during build.",
+      "impact": "E2E and BAT blocked by data issues. Users lose confidence in the system. Regulatory risk for compliance-sensitive data (samples, consent).",
+      "probability": "High",
+      "mitigation": [
+        "Run data validation rules after every migration load — do not wait for E2E",
+        "Implement the Lumis data migration validation checklist (val-dm-001 through val-dm-007) during build phase",
+        "Conduct a mock migration (dry run) 4 weeks before E2E — full volume, full validation",
+        "Include data quality checks in E2E entry criteria — E2E cannot start until data passes validation",
+        "For compliance data (consent, samples), validate with compliance team separately before BAT"
+      ]
+    },
+    {
+      "risk_id": "R8",
+      "risk": "Mobile sync performance not validated until late",
+      "description": "Mobile sync performance is acceptable in small test environments but degrades at production data volumes. This is not discovered until late E2E or BAT when realistic data volumes are loaded.",
+      "impact": "Go-live at risk. Users cannot work offline effectively. Emergency performance tuning under time pressure.",
+      "probability": "Medium",
+      "mitigation": [
+        "Test sync performance with production-scale data volumes in E2E Cycle 1 — do not wait for Cycle 2",
+        "Establish sync time benchmarks early: initial sync < X minutes, delta sync < Y seconds",
+        "Profile sync by data volume per user — identify accounts/visits/samples that push the limit",
+        "Have a tuning playbook ready: filter configurations, data scoping rules, and sync frequency adjustments",
+        "Test on actual mobile devices on actual networks — emulator performance is not representative"
+      ]
+    }
+  ],
+  "scaling_guidance": {
+    "variant_selection": {
+      "use_compact_when": [
+        "Fewer than 5 countries in the wave",
+        "Countries share the same language and regulatory framework",
+        "Template from a prior wave can be reused with minimal customization",
+        "No complex integrations — standard MDM feed and basic middleware"
+      ],
+      "use_standard_when": [
+        "10-15 countries across a single region",
+        "Moderate customization — some country-specific exceptions but mostly standard",
+        "Single go-live date for all countries in the wave",
+        "Established SI team with prior wave experience"
+      ],
+      "use_complex_when": [
+        "15+ countries or multiple sub-regions with different regulatory environments",
+        "Significant country-specific customizations (e.g., France, Germany, Japan each require unique config)",
+        "Multiple go-live dates needed — risk too high for single big-bang",
+        "Multiple source systems being migrated (e.g., some countries on Veeva, others on a homegrown CRM)",
+        "Wave spans more than one platform release cycle"
+      ]
+    },
+    "team_sizing": {
+      "compact": {
+        "si_consultants": "4-8",
+        "developers": "2-4",
+        "testers": "2-3",
+        "data_migration": "1-2",
+        "project_management": "1",
+        "business_analysts": "1-2"
+      },
+      "standard": {
+        "si_consultants": "8-15",
+        "developers": "4-8",
+        "testers": "4-6",
+        "data_migration": "2-3",
+        "project_management": "2",
+        "business_analysts": "3-5",
+        "training": "2-4"
+      },
+      "complex": {
+        "si_consultants": "15-25",
+        "developers": "8-15",
+        "testers": "6-10",
+        "data_migration": "3-5",
+        "project_management": "3-4",
+        "business_analysts": "5-8",
+        "training": "4-8",
+        "country_leads": "3-5 (one per sub-wave)"
+      }
+    }
+  },
+  "gotcha_level": "critical",
+  "source": "Lumis Knowledge Base — enterprise pharma wave execution patterns",
+  "tags": [
+    "implementation-planning",
+    "wave-execution",
+    "timeline",
+    "program-management",
+    "multi-country",
+    "global-rollout",
+    "BAT",
+    "E2E-testing",
+    "go-live",
+    "training",
+    "sprint-planning",
+    "governance",
+    "change-control",
+    "risk-management"
+  ]
+}

@@ -1,0 +1,207 @@
+[
+  {
+    "id": "oce-cfg-acct-001",
+    "category": "commercialization/crm/oce",
+    "title": "Account Address Junction Object — Structure, Sharing, and Primary Address Logic",
+    "products": ["CRM Platform"],
+    "summary": "The Account Address object is a junction between Account and Address with a master-detail relationship on both sides. Sharing is Controlled by Parent, meaning records inherit territory alignment from the parent account. Primary and preferred address selection determines which address displays on layouts.",
+    "findings": [
+      {
+        "name": "junction-object-sharing-model",
+        "detail": "Account Address uses Controlled by Parent sharing, inheriting from the Account. During migration, any custom sharing rules on address records must be re-evaluated against this parent-controlled model."
+      },
+      {
+        "name": "primary-vs-preferred-address-precedence",
+        "detail": "Three display states exist: if a preferred address is selected on the account territory field, it wins; otherwise the primary address displays; if neither is set, no address appears on layouts. Migration must preserve this three-tier precedence."
+      },
+      {
+        "name": "address-validation-trigger",
+        "detail": "A trigger handler automatically creates validation tasks for new unvalidated addresses. This handler is active out of the box and can be deactivated if the customer does not require address review workflows."
+      },
+      {
+        "name": "address-display-formula-configuration",
+        "detail": "Address display is controlled by formula fields on the Account Address object, configured per profile through Admin Console. Each address context (account, samples management, speaker, meeting location) has its own formula configuration."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release",
+    "tags": ["crm", "configuration", "account-management", "account-address", "junction-object", "sharing-model"]
+  },
+  {
+    "id": "oce-cfg-acct-002",
+    "category": "commercialization/crm/oce",
+    "title": "License Administration — HCP State License, SDL, and DEA Validation for Sample Drops",
+    "products": ["CRM Platform"],
+    "summary": "Three license types gate whether samples can be dropped or shipped to an account address: HCP State License, State Distributor License (SDL), and DEA License. Each uses formula fields for validation display and is configured per user profile through Admin Console.",
+    "findings": [
+      {
+        "name": "triple-license-gate",
+        "detail": "If an account address violates any one of the three license types for a given sample product, the drop or shipment is blocked. Migration must map all three license evaluation chains and their formula dependencies."
+      },
+      {
+        "name": "state-license-auto-copy-behavior",
+        "detail": "When a rep creates a new account address and leaves license number and expiration date blank, the system copies those values from other account addresses of the same account in the same state. If the rep fills them in, the values overwrite all same-state addresses. This cascading write behavior must be preserved during migration."
+      },
+      {
+        "name": "sdl-category-matching",
+        "detail": "SDL evaluation compares the product SDL category against the address SDL category. Categories map to numeric codes (II=02, III=03, Limited II=12, Limited III=13). SDL data copies from the Address object to Account Address via a checkbox. Migration must preserve this copy mechanism and category mapping."
+      },
+      {
+        "name": "sdl-enablement-per-state",
+        "detail": "SDL evaluation is enabled per user profile and per state via a multi-select picklist. If not enabled for a profile and state, SDL icons do not display and evaluation is skipped even if products carry SDL categories."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release",
+    "tags": ["crm", "configuration", "account-management", "license-administration", "sample-management", "compliance"]
+  },
+  {
+    "id": "oce-cfg-acct-003",
+    "category": "commercialization/crm/oce",
+    "title": "Account Affiliations 2.0 — Hard/Soft Types, Network View, and Uniqueness Validation",
+    "products": ["CRM Platform"],
+    "summary": "Affiliations connect accounts with hard (structural) and soft (relationship) types. Version 2.0 adds list view and org-chart views on mobile, network visualization with configurable edge color and thickness, and customizable uniqueness validation through field sets.",
+    "findings": [
+      {
+        "name": "hard-affiliation-trigger-constraint",
+        "detail": "When the hard affiliation trigger handler is active, only one hard-type affiliation can exist between any two accounts. This trigger also auto-classifies affiliations based on primary status, preferred workplace, and workplace address dependencies. Activating this handler is irreversible for existing data without running a batch initialization script."
+      },
+      {
+        "name": "reciprocal-affiliation-handling",
+        "detail": "Reciprocal affiliations are auto-created with type None. A global setting can disable reciprocal generation entirely. When Affiliation 2.0 is enabled, the primary flag is set to false on reciprocal records for primary affiliations. Reverse role mapping is configured through custom metadata types."
+      },
+      {
+        "name": "network-view-vs-table-view-visibility",
+        "detail": "Network view shows only hard affiliations by default, while table view shows both hard and soft. This inconsistency confuses users who create soft affiliations from network view. Users must manually enable the Show Soft Affiliations filter. Migration should document this UI behavior gap."
+      },
+      {
+        "name": "uniqueness-validation-fieldset",
+        "detail": "Uniqueness validation uses a field set on the Affiliation object limited to 5 fields maximum with at most 1 multi-select picklist. Text area fields are not supported. The generic handler replaces the original handler and must be explicitly activated while deactivating the legacy one."
+      },
+      {
+        "name": "mdm-connector-affiliation-mapping",
+        "detail": "When using master data management connectors, affiliation types are mapped through custom attributes: workplace hierarchy maps to hard type, while workplace relation, individual relation, and workplace-to-individual map to soft type. Full data load through the bulk loader is required after mapping."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release",
+    "tags": ["crm", "configuration", "account-management", "affiliations", "network-view", "data-quality"]
+  },
+  {
+    "id": "oce-cfg-acct-004",
+    "category": "commercialization/crm/oce",
+    "title": "Compliance Processes — EPPV and MID Cyclic Communication Configuration",
+    "products": ["CRM Platform"],
+    "summary": "Compliance manages periodic communication between manufacturers and healthcare organizations during product launches. EPPV (Japanese regulatory) requires 1 pre-survey + 8 survey cycles. MID handles urgent safety information delivery with three urgency tiers (yellow letter, blue letter, precaution revisions).",
+    "findings": [
+      {
+        "name": "compliance-template-immutability",
+        "detail": "After modifying an existing compliance template, changes apply only to new compliance records. Existing records retain the original template configuration. Migration must snapshot template state at compliance creation time, not rely on current template values."
+      },
+      {
+        "name": "restart-behavior-variants",
+        "detail": "Four restart behaviors exist: Not Allowed, Recreate Cycles, Create from Subsequent Cycle, and Start Over. Start Over deletes all account compliance cycle data (including completed and skipped) when stopped and recreates from scratch on restart. The Start Over value requires manual picklist addition for orgs updated from versions before March 2024."
+      },
+      {
+        "name": "compliance-job-chain",
+        "detail": "Three jobs must run in sequence: Compliance Sharing Job (shares to product territories), Account Compliance Sharing Job (shares to territory intersection), and Account Compliance Cycles Completing Job (links call to-dos to cycles). Jobs only execute for non-aborted, in-progress cycles between announce date and edit end date."
+      },
+      {
+        "name": "stop-date-selection-rules",
+        "detail": "Stop date selection depends on six combinations of compliance status (aborted or not), current cycle status (new or completed), and whether completed cycles exist in the past. Each combination defines a different valid date range. The stop button is disabled after the compliance end date or when compliance is aborted."
+      },
+      {
+        "name": "activation-15-step-process",
+        "detail": "Activation requires 15 sequential steps including object permissions, field-level security for offline fields, DB schema where clause updates, permission set assignments, trigger handler activation, validation rules, page layouts, record type assignments, and metadata cache generation. The DB schema where clause differs based on whether To-Do is used with compliance only or also with KAM functionality."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release",
+    "tags": ["crm", "configuration", "account-management", "compliance", "eppv", "mid", "regulatory"]
+  },
+  {
+    "id": "oce-cfg-acct-005",
+    "category": "commercialization/crm/oce",
+    "title": "Account Plans — KAM Object Hierarchy, Territory Sharing, and Platform Cache Requirement",
+    "products": ["CRM Platform"],
+    "summary": "Account Plan functionality supports key account management through a five-level object hierarchy: Business Objectives, Account Plans, Account Objectives, Tactics, and To-Dos. Plans align to territories and share with all managers assigned to the territory. Platform Cache must be enabled for the feature to function.",
+    "findings": [
+      {
+        "name": "object-hierarchy-and-sharing",
+        "detail": "When a manager creates an Account Plan for an organization, it aligns to the current territory and shares with all managers in that territory. To-Dos inherit the account from the parent plan, and records are shared with the assigned-to user. Migration must preserve this cascading territory-based sharing model."
+      },
+      {
+        "name": "platform-cache-dependency",
+        "detail": "Account Plans require Salesforce Platform Cache with at least 1 MB allocated to the org cache partition. Without this allocation, the feature will not function. This is a non-obvious prerequisite that must be verified during migration."
+      },
+      {
+        "name": "permission-set-and-record-type-setup",
+        "detail": "Two permission sets are required: Admin and User variants. Record types do not auto-assign in permission sets and must be manually activated in both admin and user profiles. Existing records must be updated to receive the correct record type assignment."
+      },
+      {
+        "name": "trigger-handler-cascade-deletion",
+        "detail": "Seven core trigger handlers manage percent-complete calculations, sharing, and field population. Three additional optional handlers enable cascading deletion of To-Dos when parent objects (Plan, Objective, or Tactic) are deleted. Migration must decide whether cascading deletion behavior should carry forward."
+      },
+      {
+        "name": "aura-to-lwc-migration-for-objectives",
+        "detail": "The Account Objectives Aura component is deprecated and must be replaced with the Lightning Web Component variant. The LWC version supports up to 4 fields in the To-Do related list. This is an in-platform migration step that applies to both source and target systems."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release",
+    "tags": ["crm", "configuration", "account-management", "account-plans", "kam", "territory-sharing"]
+  },
+  {
+    "id": "oce-cfg-acct-006",
+    "category": "commercialization/crm/oce",
+    "title": "Account Profiles — HCO/HCP/Ins-Doc Types, Configurable List Columns, and POA Display",
+    "products": ["CRM Platform"],
+    "summary": "Account profiles support three account types (healthcare organization, healthcare professional, and institutional doctor). Each type has configurable list view columns, sorting, and display settings through field sets and custom settings. The system uses a private sharing model for accounts.",
+    "findings": [
+      {
+        "name": "ins-doc-auto-creation",
+        "detail": "Institutional Doctor accounts are auto-created from affiliations through two trigger handlers: one fires on affiliation creation, another on account changes. Disabling these handlers stops the auto-creation behavior. Migration must decide whether to preserve this automatic relationship-driven account creation."
+      },
+      {
+        "name": "configurable-sort-columns",
+        "detail": "Sort columns for account lists are configured via field sets on the Account Territory Field object. When no field set is configured, hardcoded defaults apply (address fields, name fields, call dates, specialty). When configured, the sort menu includes account name, field set fields, and user-selected display fields. Empty field set values preserve legacy behavior."
+      },
+      {
+        "name": "poa-column-three-number-display",
+        "detail": "Plan of Actions column shows three numbers: actual calls to date (from submitted calls), planned calls to date (submitted plus future planned), and target calls for the cycle. These derive from three separate fields on the Account Territory Field object. Migration must map all three source fields."
+      },
+      {
+        "name": "csv-export-configuration",
+        "detail": "Account list export to CSV requires enabling via custom setting plus granting access to the export visualforce page per profile. Date and number formats in the export follow the exporting user's locale setting. For static list configurations, web and mobile field presentation varies by default when the filter config is not set."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release",
+    "tags": ["crm", "configuration", "account-management", "account-profiles", "list-view", "sorting"]
+  },
+  {
+    "id": "oce-cfg-acct-007",
+    "category": "commercialization/crm/oce",
+    "title": "Account Search — Field Sets, Map Search, Outside Territory, and Advanced Search Layout",
+    "products": ["CRM Platform"],
+    "summary": "Account search is configured through custom field sets per profile or user, supporting search across account, address, and territory field objects. Features include map-based search (mobile only), outside-territory search with online download, country selector, and an advanced search UI with external database integration.",
+    "findings": [
+      {
+        "name": "three-object-field-set-search",
+        "detail": "Search field sets can be configured independently for Account, Account Territory Fields, and Address objects. Each profile or user can have different search field configurations through the Search custom setting. All fields in formula references must belong to the same account."
+      },
+      {
+        "name": "outside-territory-search-labels",
+        "detail": "Search results display three status labels: Offline (in territory and on device), In Territory (aligned but not downloaded), and Out of My Territory (not aligned). The Load action for out-of-territory accounts both aligns the account to the current territory and downloads data. This territory alignment side effect must be documented for migration."
+      },
+      {
+        "name": "map-search-geolocation-requirement",
+        "detail": "Map search displays only accounts with geolocation data on their preferred or primary account address. Preferred address takes precedence over primary for map display. If neither has geolocation data, the account is invisible on the map. This is mobile-only functionality."
+      },
+      {
+        "name": "advanced-search-layout-prerequisites",
+        "detail": "Advanced search UI requires three settings: Split Search From Create enabled, a custom permission assigned to users, and metadata cache regeneration. When using external databases, the layout availability differs: it works on mobile only for one connector type and on both web and mobile for another. Group Addresses setting controls whether addresses appear grouped or as separate cards."
+      },
+      {
+        "name": "search-before-create-workflow",
+        "detail": "The platform supports a Search Before Create workflow that checks for existing records before allowing account creation. This includes parent account affiliation creation in the correct direction. The configuration integrates with external master data management systems for duplicate prevention."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release",
+    "tags": ["crm", "configuration", "account-management", "account-search", "territory", "geolocation", "mdm"]
+  }
+]

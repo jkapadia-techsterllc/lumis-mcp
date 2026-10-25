@@ -1,0 +1,34 @@
+[
+  {
+    "id": "oce-cfg-store-001",
+    "category": "crm-configuration",
+    "title": "Store Management Module — Activation and CHC Package Setup",
+    "products": ["CRM Platform"],
+    "summary": "The Store Management module enables sales reps to verify product presence and placement in retail locations. Configuration uses the CHC/OCE8 package (recommended). The deprecated package is documented separately. Administrators define assortments, create customer segments, and distribute assortments to determine which customers see which product sets during store checks.",
+    "findings": {
+      "db_schema_activation": "Activate the following DB Schema records: StoreCheck__c, StoreCheckDetail__c, Assortment__c, AssortmentProduct__c, StoreCheckMetadata__mdt, Storechecksetting__c. For StoreCheckDetail__c, set SF Files Support to 'Background'. Optionally activate OCE1__AccountPlanSettings__c for displaying Account Objectives in Promo Plan. Path: Setup > Custom Code > Custom Metadata Types > DB Schema > Manage DB Schemas.",
+      "permission_sets": "Admin users: CHCStoreCheck_Admin permission set for Admin Console access. Non-admin users (field reps): 'OCE Store Check User' permission set. Both are assigned via Setup > Permission Sets > Manage Assignments.",
+      "object_access": "Grant Read access to StoreCheck__c, StoreCheckDetail__c, Assortment__c, AccountAssortmentRule__c, and AssortmentProduct__c for all field user profiles (Medical Science Liaison, Sales Representative, District/Regional/National/Key Account Manager). Grant READ on StoreCheck__c.AccountTerritories__c and StoreCheck__c.Account__c fields. Assign Create/Edit/Delete on AccountAssortmentRule__c.",
+      "trigger_handler": "Activate TriggerHandler.CallStoreCheckHandler via Setup > Custom Code > Custom Metadata Types > Trigger Handler > Manage Trigger Handlers.",
+      "quick_action": "Add the Store Check Quick Action button to the Account page layout to launch from calls. Configure via Setup > Custom Metadata Types > Quick Actions."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Store Checks CHC Package Section",
+    "tags": ["store-checks", "CHC", "activation", "permission-sets", "db-schema", "retail"]
+  },
+  {
+    "id": "oce-cfg-store-002",
+    "category": "crm-configuration",
+    "title": "Store Management — Related Lists, Photos, and Configurable Columns",
+    "products": ["CRM Platform"],
+    "summary": "Store checks display on Account pages via related lists, support photo uploads for shelf verification, and allow configurable columns for mobile display. Store checks should only be created from Calls, not directly from Account pages.",
+    "findings": {
+      "related_list_setup": "Add the Store Check related list to the Account page layout and Flexipage. Remove the Create button from the related list since Store Checks should only be created from Calls, not directly from Accounts.",
+      "photo_uploads": "Photos uploaded in Salesforce can be viewed on iPad. Navigate to Setup > Feature Settings > Salesforce Files > General Settings. Uncheck 'Files uploaded to the Attachments related list on records are uploaded as Salesforce Files, not as attachments' to ensure correct file handling.",
+      "configurable_columns": "Activate DB Schema StoreCheckMetadata__mdt to make Store Check columns configurable on mobile. This allows administrators to control which fields appear in the store check detail view.",
+      "product_group_field": "Add StoreCheckGroup__c field to the Product object page layout via Setup > Object Manager > Product > Page Layout > Product Object Layout. This field controls how products are grouped during store check execution.",
+      "job_statistics_picklist": "Add 'Store Management' as a picklist value to the Type__c field in the JobStatistics__c object. Path: Setup > Object Manager > JobStatistics__c > Fields & Relationships > Type__c > Edit > New."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Store Checks Configuration Details",
+    "tags": ["store-checks", "related-lists", "photos", "columns", "product-groups"]
+  }
+]

@@ -1,0 +1,141 @@
+[
+  {
+    "id": "cle-001",
+    "feature": "Clinical Engagement Overview",
+    "category": "clinical-overview",
+    "description": "Clinical engagement features share the same underlying platform infrastructure as customer engagement. The clinical engagement module extends account management, visit management, consent, and compliance features with clinical-specific workflows such as clinical trial management, investigator site management, and medical affairs engagement tracking.",
+    "setup_steps": [
+      "Follow the customer engagement setup guide as the foundation",
+      "Enable clinical-specific permission sets and record types",
+      "Configure clinical record types for visits (e.g., medical science liaison visits)",
+      "Configure clinical-specific consent requirements",
+      "Set up clinical compliance programs using care programs and action plan templates"
+    ],
+    "prerequisites": [
+      "Customer engagement managed package installed and configured",
+      "Clinical engagement add-on license",
+      "Territory management configured for clinical territories"
+    ],
+    "configuration_details": [
+      "Clinical engagement uses the same core objects as customer engagement (Visit, Activity Plan, Consent, etc.)",
+      "Clinical record types differentiate clinical visits from commercial visits",
+      "Medical science liaison (MSL) workflows use the same visit management infrastructure",
+      "Clinical compliance requirements are modeled as care programs with clinical-specific action plan templates",
+      "Investigator engagement tracking uses account management with clinical-specific fields and layouts"
+    ],
+    "objects_and_fields": [
+      "Visit (with clinical record types)",
+      "Activity Plan (with clinical goal measures)",
+      "Care Program (with clinical compliance rules)",
+      "Action Plan Template (clinical-specific templates)",
+      "Consent (clinical consent requirements)",
+      "Medical Inquiry (clinical inquiry types)"
+    ],
+    "permission_sets": [
+      "Clinical Engagement User",
+      "Clinical Engagement Admin"
+    ],
+    "batch_jobs": [
+      "Same batch jobs as customer engagement apply to clinical workflows"
+    ],
+    "gotchas": [
+      "Clinical engagement does NOT have a separate documentation set - it shares the customer engagement documentation and feature infrastructure",
+      "All customer engagement setup steps apply to clinical engagement as a prerequisite",
+      "Clinical-specific functionality is achieved through record types, page layouts, and permission sets rather than separate objects",
+      "Medical affairs and commercial teams may share the same org but need separate profiles and permission sets",
+      "Clinical consent requirements may be more stringent than commercial - configure consent data use purposes accordingly"
+    ],
+    "mobile_considerations": "Clinical field users (MSLs) use the same mobile app as commercial reps. Metadata cache configurations should include clinical record types and clinical-specific fields.",
+    "admin_console_settings": [
+      "Same admin console as customer engagement",
+      "Clinical record type routing",
+      "Clinical-specific visit settings"
+    ]
+  },
+  {
+    "id": "cle-002",
+    "feature": "Medical Science Liaison (MSL) Visits",
+    "category": "clinical-execution",
+    "description": "Specialized visit workflows for medical science liaisons conducting scientific exchange with healthcare providers, key opinion leaders, and investigators. Uses the same visit management infrastructure with clinical-specific record types and engagement pages.",
+    "setup_steps": [
+      "Configure visit management per customer engagement guide",
+      "Create clinical visit record types (MSL Visit, Scientific Exchange, etc.)",
+      "Configure visit engagement page layouts for clinical record types",
+      "Set up clinical-specific GoTo actions and quick actions",
+      "Configure clinical visit compliance statements",
+      "Set up clinical visit objectives and discussion topics"
+    ],
+    "prerequisites": [
+      "Visit management fully configured",
+      "Clinical engagement permissions assigned"
+    ],
+    "configuration_details": [
+      "MSL visits track scientific exchange topics rather than product detailing",
+      "Clinical visit objectives focus on medical education and research collaboration",
+      "Compliance statements for MSL visits address off-label discussion guardrails",
+      "Clinical visit record types route to specialized engagement pages"
+    ],
+    "objects_and_fields": [
+      "Visit (with MSL record type)",
+      "Visit Objective (clinical objectives)",
+      "Product Discussion (scientific topics)",
+      "Compliance Statement (clinical compliance)"
+    ],
+    "permission_sets": [],
+    "batch_jobs": [],
+    "gotchas": [
+      "MSL and commercial visit types must be clearly separated to maintain compliance boundaries",
+      "Clinical compliance statements have different regulatory requirements than commercial",
+      "Ensure medical affairs users cannot access commercial visit types and vice versa"
+    ],
+    "mobile_considerations": "MSLs use the same mobile app with clinical-specific visit engagement pages. Ensure metadata cache includes clinical record types.",
+    "admin_console_settings": [
+      "Visit record type routing for clinical types",
+      "Clinical engagement page configuration"
+    ]
+  },
+  {
+    "id": "cle-003",
+    "feature": "Clinical Compliance Programs",
+    "category": "clinical-compliance",
+    "description": "Regulatory compliance tracking for clinical engagement activities using care programs and action plan templates configured for clinical requirements such as investigator engagement, transparency reporting, and medical information exchange.",
+    "setup_steps": [
+      "Follow provider engagement compliance setup from customer engagement",
+      "Create clinical-specific care programs (e.g., Investigator Engagement, Transparency Reporting)",
+      "Create clinical action plan templates with clinical milestones",
+      "Configure clinical compliance cycles aligned to regulatory periods",
+      "Set up clinical-specific sharing rules for compliance data"
+    ],
+    "prerequisites": [
+      "Provider engagement compliance feature enabled",
+      "Care programs and action plan framework configured"
+    ],
+    "configuration_details": [
+      "Clinical compliance programs may have different cycle periods than commercial (e.g., annual reporting vs quarterly)",
+      "Transparency reporting programs track healthcare provider payments and transfers of value",
+      "Investigator engagement programs track site interactions and study-related activities",
+      "Clinical compliance data may require restricted sharing due to regulatory sensitivity"
+    ],
+    "objects_and_fields": [
+      "Care Program (clinical compliance programs)",
+      "Action Plan Template (clinical milestones)",
+      "Compliance Cycle (regulatory periods)",
+      "Account Compliance (investigator/site compliance)"
+    ],
+    "permission_sets": [],
+    "batch_jobs": [
+      "Clinical compliance cycle generation",
+      "Transparency reporting aggregation"
+    ],
+    "gotchas": [
+      "Clinical compliance requirements vary by country and regulation (e.g., Sunshine Act, EFPIA Code)",
+      "Compliance data for clinical teams may need to be segregated from commercial compliance data",
+      "Transparency reporting deadlines are typically annual with specific cutoff dates"
+    ],
+    "mobile_considerations": "Clinical compliance information is accessible on mobile during investigator visits",
+    "admin_console_settings": [
+      "Clinical care program configuration",
+      "Clinical compliance cycle settings"
+    ]
+  }
+]

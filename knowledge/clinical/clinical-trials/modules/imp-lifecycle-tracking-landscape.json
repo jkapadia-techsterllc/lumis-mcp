@@ -1,0 +1,28 @@
+[
+  {
+    "id": "clin-imp-001",
+    "category": "modules",
+    "title": "IMP Lifecycle Tracking Vendor Landscape",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Competitive analysis of automated investigational medicinal product (IMP) lifecycle tracking platforms, comparing capabilities across visibility, monitoring, and workflow management.",
+    "findings": {
+      "market_context": "Investigational medicinal product (IMP) lifecycle tracking spans the journey from manufacturing through distribution to clinical trial sites and ultimately to patient administration. Regulatory requirements (GxP, GDP, Annex 13) mandate traceability, temperature control, and chain-of-custody documentation throughout this lifecycle.",
+      "vendor_comparison_matrix": "Multiple vendors were evaluated across key capability dimensions: 24/7 shipment visibility, real-time temperature monitoring, automated workflow management, remote site monitoring, mobile application support, and AI/ML-powered analytics. No single vendor excels across all dimensions \u2014 specialization varies between logistics-focused and compliance-focused platforms.",
+      "core_tracking_capabilities": "Modern IMP tracking systems provide: real-time GPS and temperature sensor integration for shipments, automated alerts when environmental thresholds are breached, digital chain-of-custody records from depot to site to patient, integration with randomization and trial supply management (RTSM) systems, dashboard visualization of global supply status across all trial sites.",
+      "technology_trends": "The market is moving toward IoT sensor integration (beyond temperature to humidity, light exposure, vibration), AI-powered demand forecasting to reduce drug waste, blockchain-based provenance tracking for regulatory audit trails, and mobile-first interfaces for site staff receiving shipments.",
+      "operational_challenges": "Key challenges include managing expiry dates across time zones, handling protocol amendments that change dosing and resupply needs, coordinating returns and destruction of unused product, and maintaining tracking accuracy across diverse logistics partners in different countries.",
+      "lsc_relevance": "IMP lifecycle tracking intersects with clinical trial management, site engagement, and patient program management. Integration points exist for visit scheduling (aligning drug availability with patient visits), adverse event correlation (linking product batches to safety events), and regulatory reporting (product accountability logs)."
+    },
+    "source": "Industry landscape analysis, Aug 2022",
+    "tags": [
+      "imp-tracking",
+      "clinical-supply",
+      "gxp",
+      "gdp",
+      "iot-sensors",
+      "cold-chain"
+    ]
+  }
+]

@@ -1,0 +1,224 @@
+[
+  {
+    "id": "am-001",
+    "category": "account-management",
+    "topic": "Account Management Architecture",
+    "description": "Account Management centralizes HCP and HCO relationships with key profile information: contact details, professional networks, specialties, affiliations, licenses, ratings, territories, products, and team assignments. The platform extends the standard Account data model with industry-specific fields for a holistic customer view. HealthcareProvider object contains provider-specific attributes including speaker designation.",
+    "objects": [
+      "Account",
+      "HealthcareProvider",
+      "HealthcareOrganization",
+      "ProviderAffiliation",
+      "CareSpecialty",
+      "Expert"
+    ],
+    "setup_steps": [
+      "Enable Person Accounts (irreversible org-wide setting)",
+      "Configure record types for HCP, HCO, and patient account types",
+      "Set up provider affiliation relationships",
+      "Configure care specialty assignments",
+      "Enable expert designation tracking",
+      "Set up account team member assignments"
+    ],
+    "gotchas": [
+      "Person Accounts must be enabled BEFORE go-live - this is irreversible",
+      "Mixed model (Person Account for individuals + Business Account for orgs) breaks reports/list views built around a single Account concept - plan record types upfront",
+      "HealthcareProvider object (not Account) contains speaker designation flag",
+      "Define matching keys (MRN, national ID, email+DOB) BEFORE enabling duplicate rules"
+    ],
+    "migration_relevance": "Veeva Account_vod maps to Account with HealthcareProvider extension. Account type field mapping requires careful record type planning."
+  },
+  {
+    "id": "am-002",
+    "category": "account-management",
+    "topic": "Provider Cards and Account Profiles",
+    "description": "Provider Cards consolidate key account information from multiple objects and fields into a single user-friendly view. Cards show whether an account is a target account in the assigned territory alongside other key attributes. Provider Cards are the designed solution for quick account-level information display, not custom components.",
+    "objects": [
+      "ProviderCard",
+      "Account",
+      "HealthcareProvider"
+    ],
+    "setup_steps": [
+      "Configure Provider Card fields and layout",
+      "Set up target account indicators",
+      "Configure territory-specific card content",
+      "Enable on account profile pages"
+    ],
+    "gotchas": [
+      "Provider Cards are the standard approach - do not build custom LWC for this use case",
+      "Card content can vary by territory assignment"
+    ],
+    "migration_relevance": "Maps to Veeva Account Profile page. Provider Card provides more configuration than Veeva static layout."
+  },
+  {
+    "id": "am-003",
+    "category": "account-management",
+    "topic": "Account Summarization with AI",
+    "description": "Account Summarization uses AI templates to create cross-object summaries for accounts. Uses field history tracking to include latest changes for configured fields. Persona-specific configuration ensures different user types see relevant summaries - custom objects can be excluded from influencing provider summaries for specific user personas.",
+    "objects": [
+      "Account",
+      "FieldHistoryTracking"
+    ],
+    "setup_steps": [
+      "Configure Account Summarization template",
+      "Enable field history tracking for fields that should appear in summaries",
+      "Set up persona-specific summary configurations",
+      "Configure cross-object graph for summary generation"
+    ],
+    "gotchas": [
+      "Field history tracking MUST be enabled for fields to appear in summaries",
+      "Persona-specific configuration prevents irrelevant custom objects from influencing summaries",
+      "Summary generation requires platform AI licenses"
+    ],
+    "migration_relevance": "No direct Veeva equivalent - this is a net-new AI capability on the target platform."
+  },
+  {
+    "id": "am-004",
+    "category": "key-account-management",
+    "topic": "Key Account Management Architecture",
+    "description": "KAM helps Key Account Managers build and execute structured strategies for important customers. KAMs can create account and territory plans, define business objectives, assign tasks, and track progress across global, affiliate, and territory levels. Strategic Goals, Action Plan Templates, and Sprint execution cycles provide a framework for coordinated engagement.",
+    "objects": [
+      "AccountPlan",
+      "StrategicGoal",
+      "ActionPlanTemplate",
+      "ActionPlanTemplateAssignment",
+      "Sprint"
+    ],
+    "setup_steps": [
+      "Configure account plan templates",
+      "Define strategic goal frameworks",
+      "Create action plan templates for standardized planning",
+      "Set up sprint execution cycles (typically two-week cycles)",
+      "Configure sprint completion values in Admin Console under KAM settings"
+    ],
+    "gotchas": [
+      "Sprint completion values are configured in Admin Console under KAM sprint settings, not custom metadata",
+      "Action Plan Template Assignment is the correct object for importing predefined strategic goals",
+      "Sprint cycles support two-week execution by default"
+    ],
+    "migration_relevance": "Veeva Account Plan maps to AccountPlan with significantly more structured planning capabilities."
+  },
+  {
+    "id": "am-005",
+    "category": "activity-plans",
+    "topic": "Activity Plan Configuration",
+    "description": "Activity Plans define target interaction counts per account segment per time period. Plans define target accounts, planning period, required activity types, associated products, and weight of each activity. Provider Plan Cycle is the usage type for strategic planning cycles. Plans must be approved before execution. Employees track progress and can request modifications if business priorities change.",
+    "objects": [
+      "ActivityPlan",
+      "ActivityPlanCategory",
+      "ActivityPlanCriteria"
+    ],
+    "setup_steps": [
+      "Configure Activity Plan with Usage Type = Provider Plan Cycle for strategic cycles",
+      "Define time period configuration",
+      "Set up Activity Plan Categories and Criteria",
+      "Enable calculation in Admin Console",
+      "Configure plan approval workflow",
+      "Set plan status to In Progress after approval"
+    ],
+    "gotchas": [
+      "Usage Type MUST match Provider Plan Cycle for the dashboard to show activities",
+      "Time Period configuration must be correct",
+      "Calculation must be enabled in Admin Console",
+      "Plan Status must be In Progress",
+      "Rep assignment and territory alignment must be correct",
+      "Activity Plan criteria JSON is DISJOINTED from the OOTB batch calculation job - custom criteria may not be automatically picked up"
+    ],
+    "migration_relevance": "Veeva Activity_Plan_vod maps to ActivityPlan. Criteria-based attainment calculation differs significantly."
+  },
+  {
+    "id": "am-006",
+    "category": "activity-plans",
+    "topic": "Activity Plan Attainment Calculation",
+    "description": "A visit contributes to actual count and attainment if it meets ANY configured criteria. For example: Detail Call (In Person, Completed) and Touchpoint (In Person or Phone Call, Completed) both contribute. A single visit cannot have both Detail and Touchpoint values simultaneously. Attainment calculation runs based on configured criteria matching. The criteria JSON stored on Activity Plan Category/Criteria configuration drives which visits count.",
+    "objects": [
+      "ActivityPlan",
+      "ActivityPlanCategory",
+      "ActivityPlanCriteria",
+      "ProviderVisit"
+    ],
+    "setup_steps": [
+      "Define criteria JSON for each activity plan category",
+      "Configure visit attributes that contribute to attainment",
+      "Enable attainment calculation batch job",
+      "Test with sample visit data"
+    ],
+    "gotchas": [
+      "A visit contributes if it meets ANY configured criteria - not ALL",
+      "A single visit CANNOT have both Detail and Touchpoint values simultaneously",
+      "Custom criteria in JSON may NOT be picked up by standard calculation logic",
+      "Batch calculation job must be scheduled and running"
+    ],
+    "migration_relevance": "Veeva Call2_vod attainment maps to criteria-based calculation. The JSON criteria model is more flexible but requires careful configuration."
+  },
+  {
+    "id": "am-007",
+    "category": "medical-inquiries",
+    "topic": "Medical Inquiry Management",
+    "description": "Medical Inquiries captures, routes, and manages questions from HCPs, patients, and consumers. Types include medical information requests, adverse events, product quality complaints, and product use/safety questions. Multi-channel origin (in-person, remote, contact center). MIRF Share Management batch job manages sharing for medical inquiry records across territories. MedicalInsightSharingHandler manages collaboration and access by territory.",
+    "objects": [
+      "MedicalInquiry",
+      "MedicalInquiryResponse"
+    ],
+    "setup_steps": [
+      "Configure medical inquiry record types",
+      "Set up routing rules to medical experts",
+      "Enable MIRF Share Management batch job",
+      "Configure MedicalInsightSharingHandler for territory sharing",
+      "Set up medical inquiry response workflows"
+    ],
+    "gotchas": [
+      "After territory reorganization, reps may lose access to historical Medical Inquiry records - run MIRF Share Management job",
+      "MIRF Share Management is the specific batch job for medical inquiry sharing - not standard sharing rules",
+      "MedicalInsightSharingHandler handles territory-based collaboration for medical insights"
+    ],
+    "migration_relevance": "Veeva Medical_Inquiry_vod maps to MedicalInquiry. Sharing model differs significantly from Veeva territory-based access."
+  },
+  {
+    "id": "am-008",
+    "category": "medical-insights",
+    "topic": "Medical Insight Capture and Subject Management",
+    "description": "Medical Insights captures observations from HCPs, research, meetings, calls, and other interactions. Insights reveal patient needs, evaluate scientific concepts, identify care challenges, and highlight regional practice differences. Users organize insights with tags, voting on relevance, and linking related observations. Subject Management is the standard approach for organizing Medical Insights by topic.",
+    "objects": [
+      "MedicalInsight",
+      "Subject",
+      "MedicalInsightTag"
+    ],
+    "setup_steps": [
+      "Configure Medical Insight capture forms",
+      "Set up Subject Management for topic organization",
+      "Configure tagging and voting capabilities",
+      "Enable insight sharing across territories",
+      "Set up insight analytics and trend reporting"
+    ],
+    "gotchas": [
+      "Subject Management is the STANDARD approach for organizing by topic - do not build custom taxonomy",
+      "Insight sharing requires MedicalInsightSharingHandler configuration"
+    ],
+    "migration_relevance": "Veeva Medical_Event_vod maps partially. Medical Insights is more structured with built-in subject management."
+  },
+  {
+    "id": "am-009",
+    "category": "next-best",
+    "topic": "Next Best Customer and Next Best Message",
+    "description": "Next Best Customer component on homepage helps reps prioritize accounts for outreach. Distance-based sorting requires geolocation data on account addresses. Next Best Message uses product-message scoring data at the territory-account-product-message level. External predictive models can feed scoring data. The platform uses Life Sciences-specific Next Best components, not standard platform NBA components.",
+    "objects": [
+      "NextBestCustomer",
+      "NextBestMessage",
+      "ProviderAccountProductInfo"
+    ],
+    "setup_steps": [
+      "Configure Next Best Customer component on homepage",
+      "Enable geolocation data on account address fields for distance sorting",
+      "Set up Next Best Message scoring at territory-account-product-message level",
+      "Configure external model integration if using custom predictive models",
+      "Use Life Sciences-specific NBA components, not standard platform components"
+    ],
+    "gotchas": [
+      "Distance-based sorting REQUIRES geolocation data on account address - missing geocode means no distance sorting",
+      "Must use Life Sciences-specific Next Best components, NOT standard platform Next Best Action",
+      "External predictive model data must be loaded at territory-account-product-message level granularity"
+    ],
+    "migration_relevance": "Veeva Suggestion_vod maps partially to Next Best Customer/Message. AI-driven recommendations are net-new capability."
+  }
+]

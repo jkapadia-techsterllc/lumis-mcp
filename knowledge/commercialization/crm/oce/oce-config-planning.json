@@ -1,0 +1,47 @@
+[
+  {
+    "id": "oce-cfg-planning-001",
+    "category": "configuration",
+    "title": "Activity Plan Module Overview and Plan Types",
+    "products": ["oce"],
+    "summary": "Activity Plans enable organizations to set structured goals for field representatives across territories, supporting three distinct plan types with configurable cycle periods, approval workflows, and product-based targeting for systematic territory coverage.",
+    "findings": {
+      "plan_types": "Three activity plan types are supported: Account Goal (individual account-level targets), Weighted Goal (proportional distribution across accounts based on weighting factors), and Goal Shared by Multiple Territories (collaborative goals across territory boundaries). Each type has distinct calculation logic and territory assignment rules. Only one active plan cycle per type per territory is permitted.",
+      "permission_and_handlers": "Two permission sets control access: ActivityPlanAdmin (for plan creation and configuration) and ActivityPlanUser (for field representatives working plans). Key trigger handlers include Account Goal Handler, Activity Plan Handler, PlanCyclePeriodHandler, and PlanCycleValidationHandler. Four batch jobs support operations: Plan Cycle Maintenance, Plan Cycle Submission, Activity Plan Calculation, and Activity Plan Reset ATF.",
+      "cycle_workflow": "Plan cycles follow a defined review workflow: Admin creates the plan cycle, Employee Review (reps review their targets), Manager Review (managers approve or adjust), Submitted, and Approved. Each stage transition is governed by the plan cycle status field and associated validation rules.",
+      "product_configuration": "Product-based activity plans support up to 12 product IDs configured via semicolon-separated values in custom metadata. Activities and Activities+Products custom metadata types define the plan structure. The Single Territory Activity flag provides performance optimization for plans that operate within a single territory boundary."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["activity-plan", "account-goal", "weighted-goal", "territory-planning", "batch-jobs", "plan-cycle"]
+  },
+  {
+    "id": "oce-cfg-planning-002",
+    "category": "configuration",
+    "title": "Account Plans (KAM) Module and Object Model",
+    "products": ["oce"],
+    "summary": "Account Plans provide Key Account Management functionality through a multi-object model supporting strategic planning, stakeholder management, situation analysis, and tactical execution with LWC-based components and cross-territory sharing capabilities.",
+    "findings": {
+      "object_model": "Core objects include Account Plan, Account Objective, Account Tactic, To-Do, Business Objective, Stakeholder, and Situation Analysis. Each object has specific permission set requirements and trigger handlers. The module uses over 14 trigger handlers for business logic enforcement across the object hierarchy.",
+      "permission_and_access": "Two primary permission sets: KAMAdmin (administrators who configure and manage the module) and KAMUser (field users who create and execute account plans). Platform Cache is required — the OCEAppCache partition must be configured with a minimum of 1 org cache allocation for the module to function.",
+      "lwc_migration": "The module has migrated from deprecated Aura components to Lightning Web Components. SituationalAnalysisContainer is replaced by the Situational Analysis LWC, and AccountPlanRelatedTodoList is replaced by KAM Related Objective List. Both deprecated components remain functional but are no longer enhanced.",
+      "cross_territory_sharing": "OCE-X sharing enables global accounts to have account plans shared across territories. Denormalization handlers synchronize plan data across territory boundaries. Ecosystem Account Plans (plans without a direct account link) support broader strategic planning that spans multiple accounts within an ecosystem."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["account-plans", "KAM", "key-account-management", "stakeholder", "situation-analysis", "platform-cache", "LWC-migration"]
+  },
+  {
+    "id": "oce-cfg-planning-003",
+    "category": "configuration",
+    "title": "Planner Calendar Configuration and Event Limits",
+    "products": ["oce"],
+    "summary": "The Planner provides a unified calendar view for field representatives covering calls, meetings, time-off-territory, general events, coaching events, and holidays, with configurable event limits, deep linking support, and territory-level read access under a private sharing model.",
+    "findings": {
+      "event_limits": "The Planner enforces a maximum of 1000 events per display period, allocated across event types: 300 calls, and 100 each for meetings, time-off-territory events, general events, coaching events, and holidays. Events exceeding these limits are not displayed. The allocation is fixed and not configurable per organization.",
+      "sharing_and_access": "The Planner operates under a private sharing model where representatives see only their own calendar by default. Territory-level read-only access allows managers and colleagues to view other representatives' schedules within the same territory. Group call indicators show when a call involves multiple representatives.",
+      "deep_linking": "Deep linking support via the oce://deeplink protocol enables external applications to navigate directly to specific planner views, events, or time periods. This supports integration with notification systems, email links, and third-party scheduling tools.",
+      "call_preview": "The call preview layout is configurable and can display Attendees, Samples, Product Details, Items, and Pre/Next Call Objectives. Denormalized Call Preview provides read-only summary data for signed and submitted calls without requiring full call record queries. Business hours validation through CallHolidayValidationHandler prevents scheduling calls outside configured working hours."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["planner", "calendar", "event-limits", "deep-linking", "call-preview", "sharing-model", "scheduling"]
+  }
+]

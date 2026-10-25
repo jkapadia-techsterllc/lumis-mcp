@@ -1,0 +1,110 @@
+[
+  {
+    "id": "pt-001",
+    "category": "competitive-intelligence-platform",
+    "title": "Vault CRM Platform Transition Analysis",
+    "products": [
+      "oce",
+      "lsc",
+      "vault"
+    ],
+    "summary": "Veeva announced Vault CRM on May 2, 2023, signaling its departure from the Salesforce platform. Everest Group analysis indicates Salesforce revenue impact below 1%. Veeva loses access to Salesforce platform accelerators post-2025 agreement expiration.",
+    "timeline": {
+      "announcement": "May 2, 2023",
+      "salesforce_agreement_expiry": "2025",
+      "migration_period": "Multi-year transition expected"
+    },
+    "risks_identified": [
+      "Veeva loses Salesforce ecosystem integrations post-2025",
+      "Customers face re-implementation costs on Vault platform",
+      "Vault CRM maturity gap vs 20+ years of Salesforce platform capabilities",
+      "Data migration complexity from Salesforce-native to Vault-native architecture"
+    ],
+    "salesforce_opportunity": "Veeva's platform move creates a natural migration window for customers evaluating CRM alternatives. Salesforce Health Cloud and Life Sciences Cloud offer a platform continuity path.",
+    "source": "veeva-commercial-summit-monitoring-may2023-everest-group",
+    "tags": [
+      "vault-crm",
+      "platform-transition",
+      "veeva-salesforce-split",
+      "migration-window"
+    ]
+  },
+  {
+    "id": "pt-002",
+    "category": "competitive-intelligence-platform",
+    "title": "Salesforce Health Cloud Platform Capabilities",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Salesforce Health Cloud anchors 13 Industry Clouds with approximately $700M revenue and 30% higher ASPs than core CRM. Einstein processes 75B daily predictions. Hyperforce deployed in 17 countries.",
+    "platform_metrics": {
+      "industry_clouds": 13,
+      "hc_revenue_approx": "$700M",
+      "asp_premium": "30% higher than core CRM",
+      "einstein_daily_predictions": "75B",
+      "hyperforce_countries": 17
+    },
+    "veeva_agreement": "Partnership agreement expiring 2025 — creates competitive repositioning opportunity",
+    "source": "sfdc-marketing-summary-health-cloud-pptx",
+    "tags": [
+      "health-cloud",
+      "platform-capabilities",
+      "einstein",
+      "hyperforce",
+      "industry-cloud"
+    ]
+  },
+  {
+    "id": "pt-003",
+    "category": "competitive-intelligence-platform",
+    "title": "Vault CRM — Product Launch Details, Migration Timeline, and Key Executives",
+    "products": [
+      "oce"
+    ],
+    "summary": "Vault CRM introduced May 2, 2023 at Veeva Commercial Summit. Built entirely on Veeva Vault Platform with full CRM functionality plus CRM Bot (AI assistant) and Service Center (integrated call center, offered free). First Vault CRM customers went live in 2024. First migrations from Veeva CRM (Salesforce-based) expected 2025. Most company migrations projected 2026-2029. Accenture expanded partnership for migration support.",
+    "findings": {
+      "launch_date": "May 2, 2023 at Veeva Commercial Summit. Vault CRM is Veeva's replacement for its Salesforce-based CRM.",
+      "included_capabilities": "Full CRM functionality rebuilt on Vault platform, plus CRM Bot (AI assistant for field reps) and Service Center (integrated call center capability, offered free to Vault CRM customers).",
+      "migration_timeline": "First Vault CRM customers live in 2024 (new deployments). First migrations from existing Veeva CRM expected 2025. Bulk of customer migrations projected 2026-2029.",
+      "accenture_partnership": "Accenture expanded its partnership with Veeva to provide migration consulting and implementation services for the Vault CRM transition.",
+      "revenue_context": "Veeva revenue grew from $1,104M (FY2020) to $2,155M (FY2023) during the transition planning period.",
+      "key_executives": "Frank Defesche (SVP GM Vault CRM, joined 2008, ex-Salesforce); Jonathan Huang (VP Engineering, joined 2012, UC Berkeley); Arno Sosna (GM CRM Products, joined 2010).",
+      "medtech_expansion": "VP of Strategy for MedTech posted — described as a 'virtual CEO' role targeting a $200M+ business line. Signals Vault CRM expansion beyond pharma into medical devices."
+    },
+    "source": "Veeva Commercial Summit Monitoring (May 8, 2023)",
+    "tags": [
+      "vault-crm",
+      "platform-launch",
+      "migration-timeline",
+      "executives",
+      "accenture",
+      "medtech"
+    ]
+  },
+  {
+    "id": "pt-004",
+    "category": "competitive-intelligence-platform",
+    "title": "Veeva-Salesforce Partnership Risks — Everest Group Five-Factor Analysis",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Everest Group identified five key risks in the Veeva-Salesforce partnership that accelerated Veeva's platform departure: customer experience degradation from Salesforce/AWS outages, geographic market restrictions, MedTech domain expansion blocked by Salesforce, competitive product possibility (Salesforce customers building pharma CRM alternatives), and high platform shift costs. These risks collectively made platform independence Veeva's strategic imperative.",
+    "findings": {
+      "risk_1_outages": "Suboptimal customer experience from Salesforce and AWS infrastructure outages. Veeva customers impacted by platform-level incidents outside Veeva's control.",
+      "risk_2_geographic_restrictions": "Market and geography restrictions on where Veeva can sell its Salesforce-based products. Certain territories limited by Salesforce partnership terms.",
+      "risk_3_medtech_blocked": "MedTech domain expansion legally blocked by the partnership agreement. Veeva could not extend CRM into medical devices market while on the Salesforce platform.",
+      "risk_4_competitor_products": "Salesforce customers (including ISVs and SIs) could build custom pharma CRM applications on the Salesforce platform, creating competitive alternatives to Veeva.",
+      "risk_5_exit_cost": "Exorbitant platform shift cost — both for Veeva (rebuilding on Vault) and for customers (migrating from Salesforce-native to Vault-native). High exit costs create switching barriers in both directions.",
+      "strategic_implication": "These five risks collectively explain why Veeva chose platform independence over ecosystem benefits. For Salesforce, this creates the migration window — customers already facing disruption are open to evaluating alternatives."
+    },
+    "source": "Veeva Commercial Summit Monitoring (May 8, 2023) — Everest Group Analysis",
+    "tags": [
+      "vault-crm",
+      "everest-group",
+      "partnership-risks",
+      "platform-strategy",
+      "salesforce-opportunity"
+    ]
+  }
+]

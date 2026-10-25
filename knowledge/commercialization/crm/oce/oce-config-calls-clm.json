@@ -1,0 +1,189 @@
+[
+  {
+    "id": "oce-cfg-ap-001",
+    "category": "configuration",
+    "title": "Activity Plan Types, Plan Cycles, and Goal Calculation",
+    "products": ["oce"],
+    "summary": "Activity Plan supports three planning types for multi-channel, multi-activity engagement management. Each plan cycle follows a lifecycle from employee review through manager approval to active status, with configurable batch jobs for submission, calculation, and maintenance. Weighted goals use a formula-based calculation where target activities multiply by a percentage weight assigned to each activity type.",
+    "findings": {
+      "three_plan_types": "Three activity plan types are available: Account Goal plans where each account gets an individual activity target, Weighted Goal plans where a percentage-based weight is distributed across activity types for each territory, and Shared Goals plans where multiple territories collaborate on a common goal. The plan type is set at the Plan Cycle level and determines how targets are created and managed.",
+      "plan_cycle_lifecycle": "Plan cycles follow a defined status progression: Employee Review (reps set proposed targets) to Manager Review (managers adjust and approve) to Submitted (batch processing) to Approved (final confirmation) to Active (targets enforced). Two custom permission sets control access: one for administration including plan cycle creation and batch scheduling, and one for user-level viewing and editing of account goals.",
+      "batch_job_framework": "Four batch jobs support plan cycle operations: Plan Cycle Maintenance (manages lifecycle transitions), Plan Cycle Submission (processes submitted plans), Plan Cycle Calculation (recalculates targets after changes), and ATF Reset (adjusts targets for territory alignment changes). These are scheduled through the Admin Console and require territory assignment configuration.",
+      "weighted_goal_formula": "For weighted goals, the target for each activity type is calculated as: Target Activities multiplied by the Goal Weight percentage. The weight field accepts values from 0.01 to 100 and represents the percentage of total target allocated to that activity type. Working days calculation uses a custom metadata-driven calendar with holiday exclusions per country.",
+      "change_request_workflow": "Activity Plan Change Requests support three operations: adding new accounts to an active plan, updating existing account goals, and removing accounts from the plan. Each change request follows its own approval workflow with manager review. When accounts are added, the system creates goal records based on the plan type's configuration. Suggested activity plans can auto-generate goals from territory alignment data."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["activity-plan", "plan-cycle", "goal-management", "territory-planning", "batch-jobs", "engagement-planning", "migration-critical"]
+  },
+  {
+    "id": "oce-cfg-ap-002",
+    "category": "configuration",
+    "title": "Activity Plan Configuration — Metadata, Triggers, and Shared Goals",
+    "products": ["oce"],
+    "summary": "Activity Plan configuration requires custom metadata records for plan type definitions, trigger handler activation for lifecycle management, and specific setup for shared goals across multiple territories. The system uses DB schema entities for mobile synchronization and custom metadata types for flexible plan configuration.",
+    "findings": {
+      "custom_metadata_setup": "Plan types are defined through custom metadata records that specify the activity channels (face-to-face, phone, email, etc.), the associated plan objects, and calculation rules. Each metadata record links to a specific plan cycle type and determines which fields are available for goal entry. The metadata cache must be regenerated after any configuration change.",
+      "trigger_handlers": "Four trigger handlers manage plan lifecycle events: one handles account goal creation and validation during plan changes, another manages plan cycle status transitions and enforces business rules, a third validates plan cycle period boundaries and prevents overlapping periods, and a fourth enforces plan cycle validation rules during submission. All handlers must be activated through the Admin Console.",
+      "shared_goals_configuration": "Shared Goals plans require additional configuration where multiple territories can contribute to a common target. The system tracks individual territory contributions while maintaining an aggregate goal. Territory changes during an active plan cycle are handled through the ATF Reset batch job, which recalculates targets based on new territory assignments.",
+      "filters_and_graphs": "Activity Plan supports configurable filters on the account plan view to narrow displayed accounts by various criteria. Graph components can be added to plan pages to visualize progress against targets. These use standard Lightning component configuration on the plan-related Lightning pages and support custom chart types through field set definitions.",
+      "mobile_sync_requirements": "Activity Plan entities must be activated in the DB Schema for mobile synchronization. Required entities include the plan cycle, plan cycle period, account plan, account goal, and change request objects. The Where clause on each entity must be configured to filter by territory alignment for appropriate data scoping on mobile devices."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["activity-plan", "custom-metadata", "trigger-handlers", "shared-goals", "mobile-sync", "territory-alignment"]
+  },
+  {
+    "id": "oce-cfg-calls-adv-001",
+    "category": "configuration",
+    "title": "Call 2.0 Acknowledgement of Products (AOP) and Signature Capture",
+    "products": ["oce"],
+    "summary": "Acknowledgement of Products automates signature capture from licensed healthcare professionals during call visits. The system generates PDF documents from call data, tracks outstanding acknowledgements, and enforces compliance through validation handlers. Configuration requires a 22-step activation process spanning permission sets, page layouts, field sets, compliance statements, and trigger handlers.",
+    "findings": {
+      "aop_architecture": "AOP creates records linking call attendees to product acknowledgements with signature capture. Three permission sets control access: one for end users performing signatures, one for administrators configuring the feature, and one for integration users processing signature data. The signature page renders call summary data through Visualforce with configurable sections controlled by field sets.",
+      "signature_page_configuration": "The signature page summary layout is controlled by four field sets on the call and related objects: one for details displayed on the signature page, one for items, one for samples, and one for DTP records. Each field set determines which fields appear in the corresponding section of the generated PDF. The PDF generation uses Visualforce pages that read these field sets at render time.",
+      "outstanding_aop_display": "Outstanding AOP records from previous visits are displayed on the Call 2.0 page using a list view component with a configurable where-clause filter. This allows representatives to see which acknowledgements remain pending for the current attendee. A validation handler checks for outstanding AOPs during call submission and can block submission until signatures are collected.",
+      "compliance_statements_and_disclaimers": "Compliance statements display configurable disclaimer text during calls. Two statement types are supported: read-only compliance notes and compliance agreements requiring acceptance. Agreements can be optional or mandatory. Disclaimer text for individual users is configured through a separate statement type that renders user-specific text on the call page. A threshold setting controls auto-save behavior to manage asynchronous processing limits.",
+      "call_attachments": "Call attachments use content document records linked to calls. An attachment indicator field on the call object tracks whether attachments exist. The workflow path must be configured to grant appropriate create/edit/delete access to attachment records based on call status (draft vs. submitted). The document creation entity type setting controls the storage mechanism."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "AOP", "signatures", "compliance", "PDF-generation", "acknowledgement", "migration-critical"]
+  },
+  {
+    "id": "oce-cfg-calls-adv-002",
+    "category": "configuration",
+    "title": "Call 2.0 Expenses, Concur Integration, and Currency Support",
+    "products": ["oce"],
+    "summary": "Call 2.0 supports expense logging during call visits with integration to external expense management systems. Expense types are defined as configurable records with line item categorization. The system supports multi-currency environments and automated expense report synchronization through scheduled batch jobs.",
+    "findings": {
+      "expense_activation": "Expense functionality requires two permission sets (admin and user level), expense type records with line item classification, and a list view component added to the Call 2.0 Lightning page. The component must be configured with visibility filters to hide on child calls and from non-record owners. Two trigger handlers manage expense creation and deletion when parent calls are removed.",
+      "concur_integration": "Integration with external expense management systems supports automatic transfer of call expenses through a mapping framework. The integration requires: mapping configuration using default mapping applier classes, connection setup between the CRM instance and the external system, authorization endpoint configuration, trigger handlers for expense transfer and locking, and a scheduled synchronization job. Expense type records must include type codes and payment type identifiers from the external system.",
+      "workflow_path_configuration": "The workflow path for expenses follows a two-state model: draft calls grant full create/edit/delete access to expense records, while submitted calls restrict all access. The workflow path must be activated and deployed separately from other call workflow paths. The currency type DB schema entity must be activated for multi-currency support.",
+      "expense_field_management": "A field set controls which columns appear in the expense edit table. If the field set is not configured, users see an error message directing them to contact an administrator. The expense list view component on the Lightning page supports the same visibility filter pattern used by other call components."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "expenses", "concur-integration", "currency", "workflow-paths", "expense-management"]
+  },
+  {
+    "id": "oce-cfg-calls-adv-003",
+    "category": "configuration",
+    "title": "Call 2.0 Channel Validations and Discussion Configuration",
+    "products": ["oce"],
+    "summary": "Call 2.0 enforces channel-specific validation rules that require minimum content (details, samples, DTPs, or combinations) based on the call's channel value. Call Discussions support product-specific discussion types with configurable record types, auto-add behavior, and discussion-per-product limits.",
+    "findings": {
+      "channel_validation_framework": "Channel validations enforce minimum content requirements based on the call's channel field value. Seven target validation types are supported: details required, samples required, DTPs required, details or samples required, details and samples required, samples or DTPs required, and a combined validation requiring HCP or insurance documents on HCO calls. These validations fire during call submission and reference JavaScript validation scripts.",
+      "call_discussions": "Call Discussions allow structured conversation tracking per product. Record types on the discussion object define different discussion categories. Configuration includes: setting discussion types per product through related records, controlling whether discussions auto-add when products are selected, and limiting one discussion per product per call. Discussions support separate record type page layouts for different business processes.",
+      "clm_launch_from_calls": "Launching CLM presentations from Call 2.0 requires workflow path activation, presentation-related list configuration on the call page layout, and optional quick action configuration in the Admin Console. The CLM component on the call page displays available presentations filtered by territory alignment and product restrictions.",
+      "mirf_integration": "Medical Information Request Form (MIRF 2.0) integration allows creating medical inquiries directly from the call context. This requires enabling the inquiry functionality, assigning the creator permission set, and activating the inquiry quick action through the Admin Console. Inquiries created from calls link to both the account and the call record.",
+      "generic_related_lists": "Generic Related Lists replace standard Salesforce related lists on Call 2.0 for attendees, details, items, DTPs, and samples tabs. Each generic related list uses a list view component with configurable visibility filters. Counter trigger handlers automatically update count fields on the parent call record when child records are created, updated, or deleted."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "channel-validations", "discussions", "CLM-integration", "MIRF", "generic-related-lists"]
+  },
+  {
+    "id": "oce-cfg-calls-adv-004",
+    "category": "configuration",
+    "title": "Call 2.0 JavaScript Validation Scripts and Custom Logic",
+    "products": ["oce"],
+    "summary": "Call 2.0 supports asynchronous JavaScript validation scripts that execute during call submission to enforce complex business rules. Scripts use a query builder framework to access call data and related records, supporting conditional validation based on channel values, attendee types, and content requirements.",
+    "findings": {
+      "validation_script_framework": "Validation scripts are asynchronous functions that receive the call record context and return validation results. The framework provides a bulk query interface for accessing related records, a condition builder for constructing complex filters, and field condition helpers for evaluating specific field values. Scripts execute during the save/submit workflow and can block submission with error messages.",
+      "available_validation_patterns": "Pre-built validation functions cover common scenarios: requiring at least one survey completion, requiring minimum details and/or samples, enforcing channel-specific content requirements (details required, samples required, DTPs required, combined requirements), validating HCP presence on HCO-type calls, restricting multiple HCO records per call, and preventing items or DTPs on HCO calls. Each function can be activated and configured independently.",
+      "target_validation_types": "The validation framework supports eight named validation types that can be mapped to channel values: details required, samples required, DTPs required, details or samples required, details and samples required, samples or DTPs required, HCP or insurance documents required on HCO calls, and message selection required on selected details. These are referenced by channel validation records that map channel values to validation functions.",
+      "custom_script_capabilities": "Custom scripts can query across call-related objects using the bulk query interface, build complex conditions using set conditions and field conditions, and access the full call context including attendees, details, samples, and territory information. The condition builder supports nested AND/OR logic with field-level comparisons against static values or related record fields."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "validation-scripts", "javascript", "custom-logic", "submission-validation", "business-rules", "migration-critical"]
+  },
+  {
+    "id": "oce-cfg-calls-adv-005",
+    "category": "configuration",
+    "title": "Call 2.0 Attendee Management — Add, Edit, Group Calls, and Quick Actions",
+    "products": ["oce"],
+    "summary": "Call 2.0 provides multiple attendee management workflows including adding attendees from new call creation, from the edit details screen, and through dedicated quick actions. Group call creation supports up to 15 attendees with product restriction awareness. Quick actions enable signing, last call viewing, inquiry creation, and document generation directly from the attendee context.",
+    "findings": {
+      "add_from_new_call": "Adding attendees from the new call screen requires activating a custom metadata type for component container, overriding the standard New button with a custom Lightning component, creating a formula field on the Call object that evaluates record type to control button visibility, and adding a Call Record Page Router component to the Lightning page. The formula field controls which record types display the add attendee button.",
+      "add_from_edit_details": "Adding attendees from the edit details screen enables creating group calls containing only product details. This requires replacing the standard details wrapper component with a custom version, adding a formula field that evaluates record type for button visibility, and configuring appropriate visibility filters. A recommendation limit of 15 attendees applies, and attendees with product restrictions for added details are disabled during selection.",
+      "territory_and_shared_accounts": "By default, account lists exclude accounts not aligned with the current user's territory, even if shared. A custom permission enables selection of shared but non-aligned accounts. This requires using specific component versions (marked with OCE1 suffix) for attendee buttons, details wrappers, and edit quick actions. Shared and non-aligned accounts are not synchronized to mobile, requiring careful DB schema query filter modification.",
+      "quick_action_suite": "Five attendee quick actions can be activated: sign (signature capture), last call (view previous call history), inquiry (create medical inquiry), document ID (digital document capture), and generate document (PDF generation from call data, mobile only). Each action is configured through the Admin Console Quick Action Administration and requires the appropriate DB schema entity activation and metadata cache regeneration.",
+      "delay_reason_capture": "When enabled, call submission delay tracking requires representatives to provide an explanation when submitting calls after a configurable time threshold. This applies only to parent calls where the submitting user owns the record."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "attendees", "group-calls", "quick-actions", "territory-alignment", "attendee-management"]
+  },
+  {
+    "id": "oce-cfg-clm-001",
+    "category": "configuration",
+    "title": "CLM Presentations — Click Stream Metrics and Content Tracking",
+    "products": ["oce"],
+    "summary": "Closed-loop marketing tracks content engagement through click stream metrics that record presenter and attendee interaction with presentation slides. Metrics capture usage duration (minimum 3-second threshold), slide-level engagement, and remote attendee participation data including browser and device information. Multiple metric types support evaluation, public content, overall tracking, recording, and content rating scenarios.",
+    "findings": {
+      "click_stream_metrics": "Click stream metrics track six measurement types: Evaluation (training mode assessment), Public Content (downloadable material tracking), Overall Tracking (aggregate presentation engagement), Tracking (slide-level time tracking), Recordings (recording session data), and Content Rating (user feedback scores). Each metric record captures usage start time, end time, duration, and the specific presentation version and sequence file version viewed.",
+      "presenter_and_attendee_tracking": "Presenter tracking captures the sales representative's engagement with each slide during both face-to-face and remote calls. Attendee tracking captures each healthcare professional's viewing data during remote calls, including browser type, device operating system, and device type. Either presenter or attendee tracking can be disabled independently through custom permissions when privacy or regulatory requirements apply.",
+      "remote_call_metrics": "Remote engagement click stream metrics require web conferencing integration for attendee-side data capture. Attendee metrics track actual viewing time — if an attendee joins a 20-minute session at minute 5 and leaves at minute 15, only 10 minutes are tracked. Tracking pauses automatically when modal dialogs (attendee selection, presentation picker, cancellation) are open.",
+      "storage_and_delivery": "Presentation content is stored in cloud object storage with trusted site configuration required for content delivery. Two URL patterns must be added to content security policy trusted sites — one for the storage bucket and one for the regional endpoint. Sequence content uses ZIP or PDF format with version-controlled delivery to mobile devices through territory-aligned synchronization."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["CLM", "click-stream", "metrics", "content-tracking", "remote-engagement", "presentations", "migration-critical"]
+  },
+  {
+    "id": "oce-cfg-clm-002",
+    "category": "configuration",
+    "title": "CLM Sequence and Presentation Management — Territory Alignment and Availability",
+    "products": ["oce"],
+    "summary": "CLM presentations are composed of sequences (individual slides/content pieces in ZIP or PDF format) organized within a presentation container. Presentations are territory-aligned for field force distribution, support date-based availability windows, and offer bulk upload/update operations for content management at scale. Content management APIs support programmatic creation and versioning.",
+    "findings": {
+      "sequence_configuration": "Sequences represent individual content pieces within a presentation. Each sequence has a name, active/inactive status, version number, content type (ZIP or PDF), mandatory flag (forces viewing before proceeding), and an optional email template for direct emailing from CLM. Sequences support reporting fields through field sets for custom data capture. Asset sequences use an 'oceasset_' name prefix for supplementary content files. Deactivating a sequence automatically deactivates its parent presentation.",
+      "territory_distribution": "Presentations must be aligned to territories to be available to field users. Territory selection supports parent-child hierarchy with three selection modes: single-select (parent selected, children independently selectable), double-select (parent and all children selected, children locked), and deselected. Product-territory alignment is enforced — territories without aligned products are visually distinguished. A toggle enables selection of non-aligned territories when needed.",
+      "availability_and_lifecycle": "Presentation availability depends on three conditions: active status, current date within the start/end date range, and territory alignment. Presentations are created in inactive status. Active but date-restricted presentations are downloaded during sync but hidden until the date range is met, enabling pre-staged content distribution. Inactive presentations are excluded from mobile sync entirely. Presentations can be locked to prevent name, date, and sequence modifications.",
+      "bulk_operations": "Bulk upload creates presentations from multiple ZIP files or a single PDF. ZIP sequences are validated for thumbnail presence and sorted alphabetically. PDF files up to 524 MB and 200 pages are supported. Bulk update replaces sequence content while preserving configuration — matching sequence names auto-populate, new sequences can be added, and unselected existing sequences are removed. Bulk edit updates products and messages across sequences without changing content versions.",
+      "content_api": "A REST API supports programmatic content management with two versions. Version 1 creates presentations from PDF content (up to 65 pages), handling sequence creation and cloud storage upload as a single operation. Version 2 supports individual ZIP sequence creation, updates, and multi-sequence presentation updates with a 200-sequence limit and 500 MB request size limit. Both versions use base64-encoded file content and return asynchronous job identifiers for status tracking."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["CLM", "sequences", "presentations", "territory-alignment", "bulk-upload", "content-API", "availability"]
+  },
+  {
+    "id": "oce-cfg-clm-003",
+    "category": "configuration",
+    "title": "CLM Web Player, Custom Presentations, and In-Context Actions",
+    "products": ["oce"],
+    "summary": "CLM supports web-based presentation delivery, custom presentation creation by field users, and in-context actions (email, survey, medical inquiry) during presentations. The web player requires public site configuration with sharing rules for guest user access. Remote engagement extends CLM to virtual calls with participant audio/video control.",
+    "findings": {
+      "web_clm_player": "The web CLM player runs presentations in the browser from Call 2.0, Planner, or a dedicated CLM tab. Configuration requires a public Salesforce site with a designated Visualforce page, guest user sharing rules for presentation and viewer data objects, and account sharing rules for messaging platform integration. Supported features include training mode, presentation locking, advanced account search, territory-restricted visibility, and participant audio/video muting during remote sessions.",
+      "custom_presentations": "Field users can create custom presentations by combining sequences from different available presentations into personalized collections. Custom presentations are available immediately for face-to-face calls but require sync for remote calls. Email sending from custom presentations follows the original sequence's email eligibility. Sequences marked as mandatory in the source presentation retain that requirement in custom presentations. A tag is automatically applied to custom presentations for filtering.",
+      "email_from_clm": "Sending emails from CLM sequence content uses a function call within the sequence content that launches the approved email template viewer. One email template can be linked per sequence. This feature supports both a single-template launch function and a multi-template selection function. Email sending from CLM is supported on mobile for face-to-face and remote calls. Users must have access to the email template object with appropriate sharing.",
+      "survey_and_inquiry_actions": "During CLM presentations, quick actions enable account-based survey capture and medical inquiry creation without leaving the presentation. Click stream metrics automatically pause during modal interactions. Both features operate through the Admin Console quick action administration and support face-to-face and group calls. Surveys link to the account only (not the call), and medical inquiries similarly link to the account. On web, medical inquiries open in a separate browser tab.",
+      "meetings_integration": "CLM can be launched from meeting records in addition to calls. This requires CLM permission sets, quick action activation for the presentation action on meetings, presentation field addition to the topic material layout, and where-clause updates on the topic material and call presentation DB schema entities to include meeting territory references."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["CLM", "web-player", "custom-presentations", "email", "survey", "medical-inquiry", "remote-engagement", "meetings"]
+  },
+  {
+    "id": "oce-cfg-fc-001",
+    "category": "configuration",
+    "title": "Field Coaching — Event Lifecycle, Forms, and Evaluation Workflow",
+    "products": ["oce"],
+    "summary": "Field Coaching enables manager-to-representative coaching through structured evaluation forms with scored questions, configurable event workflows, and dual-role support. The system tracks coaching events through a seven-status lifecycle with separate page layouts for coach and employee perspectives. Total scores are calculated from weighted question responses using a formula-based scoring model.",
+    "findings": {
+      "permission_model": "Three mutually exclusive permission sets control access: administration (full form template and question management), coach (create and manage events, enter scores), and sales representative (view events, complete self-evaluation). By default, only one permission set should be assigned per user. However, dual-role support allows a user to be both coach to subordinates and employee to their own manager by assigning both coach and sales representative permission sets simultaneously, with a dynamic action setting enabled.",
+      "event_lifecycle": "Coaching events progress through seven statuses: Planned (scheduled), In Review (coach evaluating), Employee Review (published for employee acknowledgement), Acknowledged (employee confirmed), Finished (completed), Self Evaluation (employee self-assessing before coach review), and Cancelled. Each status has a corresponding record type with separate page layouts for coach and employee profiles. The sharing model is private by default, with optional sharing to the evaluated user. Territory fields auto-populate for synchronization scoping.",
+      "scoring_and_forms": "Questions use a JSON-based scale format where each answer option includes a label, numeric score (must be unique within one question), description, and weight. The total score formula sums each question's score multiplied by its weight across all questions. A previous score comparison shows the same employee's most recent finished event using the same form template. Form templates contain questions organized through a junction object that supports categories and sort ordering, with mandatory question flagging.",
+      "coaching_constraints": "Four configurable constraints protect coaching integrity: subordinate-only assignment validation (checks up to 3 levels in the management hierarchy with an optional bypass permission), overlap prevention (blocks creation of time-conflicting events for the same employee), employee change blocking after event creation, and self-evaluation modification control for coaches. Previous evaluation data viewing requires a trigger handler swap from V1 to V2 and a dedicated custom permission.",
+      "custom_settings": "Four custom settings control behavior: acknowledgement enabled (coach can publish for employee review), acknowledgement required (publication mandatory before finishing), self-evaluation enabled (employees can self-assess before coach review), and total score calculation (displays computed score with previous comparison). Long text comment support (up to 1000 characters vs. the default 255) requires field access grants, layout updates, and trigger handlers that copy between short and long field versions."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["field-coaching", "evaluation", "scoring", "coaching-forms", "manager-assessment", "self-evaluation", "migration-critical"]
+  },
+  {
+    "id": "oce-cfg-calls-adv-006",
+    "category": "configuration",
+    "title": "Call 2.0 DTP Additional Fields and Counter Trigger Handlers",
+    "products": ["oce"],
+    "summary": "Call 2.0 supports additional custom fields on DTP (Detail to Present) records through a form component with configurable field types and a counter trigger handler framework that automatically maintains count fields on parent call records when child records change.",
+    "findings": {
+      "dtp_additional_fields": "A DTP Additional Fields form component can be added to the Call 2.0 Lightning page to display custom fields on DTP records. Supported field types include text, number, picklist, date, checkbox, and lookup fields. Certain field types (multi-select picklist, formula, auto-number, and rich text) are not supported in the DTP form. The form component uses the same visibility filter pattern as other Call 2.0 components — hidden on child calls and for non-record owners.",
+      "counter_trigger_handlers": "Four counter trigger handlers automatically update count fields on the parent call record: one for call details (product mentions), one for samples distributed, one for sample orders placed, and one for items recorded. These handlers fire on create, update, and delete operations of the respective child objects and maintain accurate counts without requiring manual recalculation. All handlers must be activated through the Admin Console trigger handler administration.",
+      "clm_content_viewer": "A CLM Content Viewer component can be added to the Call 2.0 Lightning page to display presentation content directly within the call context. This component integrates with the CLM module to show active presentations aligned to the current territory and respects product restrictions for the call's attendees."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "DTP", "additional-fields", "counter-handlers", "trigger-handlers", "CLM-viewer"]
+  }
+]

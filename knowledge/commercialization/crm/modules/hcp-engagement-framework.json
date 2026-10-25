@@ -1,0 +1,27 @@
+[
+  {
+    "id": "mod-engage-001",
+    "category": "modules",
+    "title": "HCP Engagement Framework \u2014 Models and Configuration",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Life sciences CRM engagements follow a structured hierarchy for tracking HCP-facing events, meetings, and programs. Three primary models exist: Standalone Engagement (single self-contained event), Multi-Activity Engagement (parent engagement with child sessions and activities), and Linked Engagement (independent engagements connected through shared context or program). The framework supports event types including speaker programs, congress participation, event sponsorships, speaker training, consulting services, and advisory boards.",
+    "findings": {
+      "engagement_hierarchy": "Engagement (top-level container) contains Sessions (time-based groupings) which contain Activities (individual touchpoints). Linked Engagements connect independent events under a shared program umbrella",
+      "configuration_model": "Each engagement type defines its own allowed activity types, required fields, approval workflows, and compliance rules. Configuration is customer-specific and can vary by country, business unit, or therapeutic area",
+      "design_principles": "Scalable (handles single-rep meetings to multi-day congresses), Configurable (customer-defined event types and workflows), Modular (components can be assembled per use case), Extendable (new activity types added without core changes)",
+      "compliance_integration": "Engagements connect to transparency reporting (Sunshine Act, EFPIA), aggregate spend tracking, fair market value validation, and attendee cap enforcement"
+    },
+    "source": "Engagement Anatomy.pptx (commercial compliance framework, circa 2018)",
+    "tags": [
+      "engagement",
+      "speaker-program",
+      "congress",
+      "advisory-board",
+      "compliance",
+      "hcp-interaction"
+    ]
+  }
+]

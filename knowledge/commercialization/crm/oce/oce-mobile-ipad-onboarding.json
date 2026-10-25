@@ -1,0 +1,224 @@
+[
+  {
+    "id": "veeva-onboard-001",
+    "category": "mobile-onboarding",
+    "title": "CRM Mobile iPad — Authentication and Login Flow",
+    "products": [
+      "CRM iPad"
+    ],
+    "summary": "The legacy CRM iPad app authenticates via Salesforce credentials with multi-factor verification. Users can connect to Production, Sandbox, or regional cloud environments (including a China-specific connection hosted on a .cn domain via a regional cloud provider). After credential entry, the app may prompt for Salesforce Authenticator approval or a numeric authentication code. First login triggers a full database synchronization for the selected territory.",
+    "findings": {
+      "login_sequence": [
+        "Launch app from iPad home screen",
+        "If enterprise certificate trust prompt appears, navigate to Settings > General > Device Management to trust the developer",
+        "Choose connection environment (Production, Sandbox, or regional cloud)",
+        "Enter Salesforce username and password",
+        "Complete MFA verification (authenticator approval or numeric code)",
+        "Grant app permissions for listed items",
+        "Set a passcode for app unlock",
+        "Optionally enable biometric unlock (Touch ID or Face ID)",
+        "Select territory if multiple are available",
+        "Wait for full synchronization to complete"
+      ],
+      "connection_environments": [
+        "Production — standard daily work environment",
+        "Sandbox — testing purposes only, not for daily work",
+        "Regional cloud (China) — for users in China mainland, Hong Kong, or Macao with matching iPad Language & Region settings; hosted on .cn domain"
+      ],
+      "mfa_methods": [
+        "Salesforce Authenticator push approval on mobile device",
+        "Numeric authentication code entry"
+      ],
+      "migration_considerations": [
+        "Authentication relies on Salesforce platform credentials — migration to a new CRM requires re-provisioning user accounts",
+        "MFA configuration is tied to the Salesforce org, not the app",
+        "China-region connectivity is app-specific and must be re-evaluated for any replacement platform",
+        "Territory-scoped database download means first login per territory incurs significant sync time"
+      ]
+    },
+    "source": "legacy CRM iPad onboarding guide",
+    "tags": [
+      "authentication",
+      "login",
+      "mfa",
+      "china-region",
+      "territory",
+      "ipad"
+    ]
+  },
+  {
+    "id": "veeva-onboard-002",
+    "category": "mobile-onboarding",
+    "title": "CRM Mobile iPad — Passcode Policies and Biometric Authentication",
+    "products": [
+      "CRM iPad"
+    ],
+    "summary": "The legacy CRM iPad app supports two passcode types configured by an administrator: numeric (4-digit) and alpha-numeric (8+ characters). Both types enforce complexity rules to prevent weak codes. Biometric unlock (Touch ID and Face ID) can be enabled as a convenience layer on top of the passcode.",
+    "findings": {
+      "numeric_passcode_rules": [
+        "Four digits required",
+        "No digit may be used more than two times (e.g., 1121 is invalid)",
+        "Consecutive sequences are not allowed (e.g., 1234 is invalid)"
+      ],
+      "alphanumeric_passcode_rules": [
+        "Minimum eight characters",
+        "Must include at least one number, one uppercase letter, one lowercase letter, and one symbol",
+        "Consecutive sequences are not allowed (e.g., Abcd123! is invalid)"
+      ],
+      "biometric_options": [
+        "Touch ID — fingerprint authentication via iPad Home button",
+        "Face ID — facial recognition in portrait orientation",
+        "Both are optional, enabled during initial login or via Change Passcode",
+        "Passcode remains the fallback if biometric recognition fails"
+      ],
+      "admin_controlled_settings": [
+        "Passcode type (numeric vs. alpha-numeric) is admin-configured, not user-selectable",
+        "Biometric enablement is user-controlled once available"
+      ],
+      "migration_considerations": [
+        "Replacement platform must support equivalent passcode complexity enforcement",
+        "Admin-controlled passcode type is a compliance feature customers depend on",
+        "Biometric unlock is expected on both iPad and iPhone form factors",
+        "Forgot-passcode flow forces full logout and re-login with Salesforce credentials"
+      ]
+    },
+    "source": "legacy CRM iPad onboarding guide",
+    "tags": [
+      "passcode",
+      "biometric",
+      "touch-id",
+      "face-id",
+      "security",
+      "ipad"
+    ]
+  },
+  {
+    "id": "veeva-onboard-003",
+    "category": "mobile-onboarding",
+    "title": "CRM Mobile iPad — Database Synchronization Types and Behavior",
+    "products": [
+      "CRM iPad"
+    ],
+    "summary": "The legacy CRM iPad app uses an offline-first architecture with multiple synchronization modes: Full Sync (all metadata + data for a territory), Delta Sync (incremental changes), and Upload Only Sync (one-way push of transactions). Synchronization runs automatically over Wi-Fi and can be manually triggered. A configurable offline limit forces a full sync if the device has been disconnected too long.",
+    "findings": {
+      "sync_types": {
+        "full_sync": "Downloads all metadata and data for the selected territory; uploads transactions, logs, and statistics. Triggered on initial login, territory switch, or exceeding the configured days-offline limit. Also triggered by admin-set 'Force Full Sync' flag.",
+        "delta_sync": "Updates database schema if needed, downloads/uploads incremental changes, downloads list views. Runs on manual sync or when metadata changes are detected after unlocking the app. Can run in foreground or background.",
+        "upload_only_sync": "One-way from mobile to server — uploads transactions, logs, and statistics only. Triggered automatically after creating or modifying data. If no Wi-Fi, transactions queue until next sync attempt."
+      },
+      "sync_indicators": [
+        "Animated App Settings icon during background sync",
+        "Sync Progress Bar shows completion percentage during foreground sync",
+        "Red last-sync timestamp if more than 24 hours since last sync"
+      ],
+      "database_management": [
+        "View Database screen shows object name, column count, record count, not-synced count, and not-verified count",
+        "Database Optimize frees unused space in the offline database",
+        "Submit Database uploads the offline database for support investigation",
+        "Platform events tracked separately — not stored in local database, show sync transaction count instead"
+      ],
+      "migration_considerations": [
+        "Full sync on territory switch means data is territory-scoped — replacement must handle the same isolation model",
+        "Admin-controlled 'Force Full Sync' flag is a support tool used in production — must have equivalent",
+        "Background auto-sync after record save is expected behavior — users do not manually sync after every change",
+        "Submit Database for support is a critical production support feature"
+      ]
+    },
+    "source": "legacy CRM iPad onboarding guide",
+    "tags": [
+      "sync",
+      "offline",
+      "database",
+      "territory",
+      "ipad"
+    ]
+  },
+  {
+    "id": "veeva-onboard-004",
+    "category": "mobile-onboarding",
+    "title": "CRM Mobile iPad — Device Settings, Siri Integration, and App Updates",
+    "products": [
+      "CRM iPad"
+    ],
+    "summary": "The legacy CRM iPad app integrates with several iOS system features: GPS location services for proximity calculations, camera and photo library for attachments, microphone and speech recognition for voice search, Siri shortcuts for hands-free access, and push notifications for activity reminders. The app also supports dark mode, display density settings, and over-the-air updates for both the app binary and metadata.",
+    "findings": {
+      "ios_integrations": {
+        "location_services": "GPS for distance-to-account (Next Best Customer), map centering, and optional coordinate capture during presentations, signatures, or call submission. Can be configured to warn if GPS is off during signature capture.",
+        "camera_and_photos": "Camera access for capturing photos as record attachments. Photo library access (full or limited) for attaching existing images.",
+        "microphone_and_speech": "Microphone for Remote Engagement audio and speech-to-text in search fields. Speech Recognition permission required separately.",
+        "siri_shortcuts": "Pre-built shortcuts: 'My Appointments for the Day' (Up Next list), 'Last Sync Time' (sync status), 'Unsubmitted Calls' (queue), 'Navigate to Next Appointment' (directions).",
+        "notifications": "Push notifications for planned activity reminders via iPad Notification Center.",
+        "background_refresh": "Background App Refresh for checking updates when app is not in foreground."
+      },
+      "app_update_mechanisms": [
+        "App Update — message prompts for new app version; can postpone with 'Later' or manually trigger via App Settings > Update App",
+        "Metadata Update — in-session prompt when server-side metadata changes; postpone triggers re-prompt later",
+        "New Build Available — install prompt for new build; cancel postpones until next app open"
+      ],
+      "display_settings": {
+        "dark_mode": "Toggle via App Settings > Enable/Disable Dark Mode",
+        "display_density": "Comfy (more spacing) or Compact (condensed) — set in the online web application, synced to iPad after full sync",
+        "locale_and_timezone": "Set in Salesforce web app; requires logout/login or territory switch to apply in iPad app"
+      },
+      "migration_considerations": [
+        "Siri shortcuts represent a differentiated user experience — replacement platform should offer equivalent voice automation",
+        "GPS capture during call submission is a compliance feature in some markets",
+        "Over-the-air metadata refresh without app store update is expected — silent config push is the norm",
+        "Dark mode and display density are expected features — not differentiators but table stakes"
+      ]
+    },
+    "source": "legacy CRM iPad onboarding guide",
+    "tags": [
+      "siri",
+      "gps",
+      "camera",
+      "dark-mode",
+      "updates",
+      "ios-integration",
+      "ipad"
+    ]
+  },
+  {
+    "id": "veeva-onboard-005",
+    "category": "mobile-onboarding",
+    "title": "CRM Mobile iPad — Territory Management and Profile Settings",
+    "products": [
+      "CRM iPad"
+    ],
+    "summary": "The legacy CRM iPad app scopes all data to a single selected territory. Users with multiple territories can switch between them, triggering a full resynchronization. Managers can access their direct reports' territories. Profile settings including language, time zone, locale, and display density are managed via the Salesforce web application and require a sync to take effect on the device.",
+    "findings": {
+      "territory_behavior": [
+        "Only one territory active at a time — all app data is scoped to the selected territory",
+        "Territory switch triggers upload of current territory data, then download of new territory data",
+        "Multi-level territory hierarchy supported — must select a leaf-level territory",
+        "Managers can view territories of their direct reports"
+      ],
+      "profile_settings": [
+        "Language and Time Zone changed via Salesforce web app (Settings > Language & Time Zone)",
+        "Locale setting drives Speech Recognition language in the iPad app",
+        "Time Zone setting used throughout the iPad app for scheduling and display",
+        "Changes require logout/login or territory switch to trigger full sync with updated metadata"
+      ],
+      "additional_features": [
+        "View Online — opens the Salesforce web application from within the iPad app",
+        "Provide Feedback — configurable in-app feedback mechanism with rating and text input; can be general or screen-specific",
+        "Help and Training link — admin-configurable link to an external help/training website, opens in app web viewer with navigation controls"
+      ],
+      "migration_considerations": [
+        "Territory-scoped data isolation is a fundamental design pattern — any replacement must support equivalent scoping",
+        "Manager territory access (viewing direct report territories) is used for field coaching workflows",
+        "Settings round-trip through the web app is a known friction point — opportunity for improvement in replacement",
+        "In-app feedback mechanism may be customer-specific and should be assessed for migration"
+      ]
+    },
+    "source": "legacy CRM iPad onboarding guide",
+    "tags": [
+      "territory",
+      "profile",
+      "settings",
+      "language",
+      "timezone",
+      "ipad"
+    ]
+  }
+]

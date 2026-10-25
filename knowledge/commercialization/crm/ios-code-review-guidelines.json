@@ -1,0 +1,63 @@
+[
+  {
+    "id": "crm-bp-009",
+    "category": "commercialization/crm",
+    "title": "iOS Mobile CRM Code Review Guidelines",
+    "products": [
+      "oce"
+    ],
+    "summary": "Comprehensive code review checklist for iOS mobile CRM applications covering namespace handling, logging, localization, database access, threading, accessibility, and performance patterns for SI and ISV development teams.",
+    "findings": {
+      "review_scope": "Code reviewers verify syntax, efficiency, performance, and adherence to coding guidelines. Developers are expected to test functionality against ticket requirements before submitting merge requests.",
+      "namespace_handling": "Salesforce custom objects use suffixes (__c, __r, __mdt, __s, __pc, __history) with dynamic namespace prefixes per customer deployment. Use dedicated namespace extension functions (.ns() for original casing, .dbns() for lowercase) and fixNamespace() for SOQL queries. Reject immediately if hardcoded namespaces or incorrect casing are found.",
+      "logging_levels": "Use structured logging through the platform logging library, not print statements. Debug-level logs for development only (must be removed before merge). Info-level for persistent console messaging. Error-level pushes to Salesforce for support team visibility and automatic ticket creation. Warning-level for non-critical configuration or data issues.",
+      "localization_requirements": "All UI-displayed text must be localized using localizedString(key:defaultValue:). Keys should reflect the message content (not module names unless truly unique). Use %@ as the universal variable placeholder to avoid confusing translators. Use utf16.count for length validation as Salesforce sync uses utf16 encoding (270 character limit). Append '2' to existing key names when changing translation values.",
+      "delegate_naming": "Prefix delegate protocols and functions with the corresponding class name to disambiguate across multiple delegates. Example: RatingsTabViewControllerDelegate with ratingsTabDidTapCancel() rather than generic cancel().",
+      "force_unwrap_prohibition": "Never force unwrap optional objects. Use guard, if-let, or optional chaining instead.",
+      "core_class_scrutiny": "Changes to core layers (DynamicUI, metadata, sync, database, formula) require heightened review. If changes are not immediately understandable, request developer explanation. Escalate to platform lead if doubts persist.",
+      "gmt_date_handling": "Use GMT(0) formatting only when writing to DATETIME database fields. Reading from DATETIME and all DATE field operations should use local timezone formatting through platform date extensions.",
+      "provisioning_xproj_changes": "Reject provisioning-related changes to the project file as they break CI/CD pipelines.",
+      "file_organization": "Use separate XIB/Swift files only for UI objects shared between view controllers or dynamically controlled. Non-shared UI objects go directly in storyboard with class definition at the top of the ViewController. Minimize file path length to avoid Xcode compiler string concatenation failures.",
+      "code_efficiency": "Use .first(where:) over .filter().first for collections. Avoid custom date format strings \u2014 use locale-aware formatting through platform date extensions. Use color literals instead of hex converters. Avoid magic numbers \u2014 use named constants.",
+      "metadata_field_access": "Use the platform field(named:) function for metadata field lookup (up to 16x faster than Swift filter operations). Use platform database object subscripts for database access to ensure formula evaluations and data handling execute correctly.",
+      "database_transactions": "Re-throw exceptions caught inside database transaction blocks. Swallowing exceptions causes partial saves without rollback, leading to data integrity issues.",
+      "related_object_access": "Use getUID() to retrieve related object IDs rather than fetching and traversing the full related object. Verify field existence before querying to prevent backwards compatibility issues across app versions.",
+      "query_efficiency": "Use range-limited predicates when fetching a single record from the database instead of fetching all matching records. Use the database manager createObject() method for new record creation.",
+      "string_safety": "Escape apostrophes in all string condition fields used in database queries using the platform escapedApostrophe extension.",
+      "observer_management": "Remove sync observers in deinit. Use database entity observers for UI refresh on local changes (not sync-triggered). Remove block-based notification observers in deinit (selector-based observers auto-remove when self goes out of scope).",
+      "ioc_resolution": "Resolve frequently-used services lazily as instance properties. New service containers require development lead approval.",
+      "access_modifiers": "Apply private access modifiers to functions and properties where appropriate to improve build times.",
+      "background_threading": "Perform database fetches on background threads with wait indicators. UI updates must occur on the main thread.",
+      "computed_properties": "Always declare explicit return types on computed properties and hardcoded collections to speed up build times.",
+      "accessibility_labels": "Apply accessibility labels to text fields, text views, dynamic labels, search bars, icon-only buttons, and ambiguous-text buttons. Do not prefix with control type (iOS handles this). Do not localize accessibility labels. Do not use dynamic values as labels.",
+      "commenting_standards": "No commented-out code unless there is a planned uncommenting timeline. Avoid comments that explain what \u2014 use self-documenting variable and function names. Comments should only explain why.",
+      "unused_code_removal": "Remove dead code including Xcode template boilerplate, aspirational methods that simply call super, and empty UIApplicationDelegate methods.",
+      "storyboard_usage": "Place non-dynamic UI formatting in storyboards rather than code to bypass deprecation in iOS updates and centralize UI change locations.",
+      "functional_programming": "Prefer filter, reduce, first, map, and compactMap over for/while loops where possible.",
+      "pragma_marks": "Use pragma marks and extensions to separate code into logical sections (public/private methods, protocol implementations, etc.).",
+      "third_party_libraries": "No additional third-party libraries or pods without team lead approval.",
+      "image_bundles": "Pull images from the framework bundle using UIImage.bundled() or UIImage(named:in:compatibleWith:) rather than string-based image literals.",
+      "unit_test_requirements": "Unit tests required for core functionality, model classes, methods, and UI workflows. All boundary conditions must be covered. Tests should be lightweight, independent, and not share setup/teardown state.",
+      "checklist_priorities": "Items marked CRITICAL are mandatory reject reasons. HIGH items should be fixed before merge. MEDIUM items are recommended. TRIVIAL items are suggestions.",
+      "object_oriented_design": "Enforce MVC design patterns. Group database interactions into single helper classes. Place reusable code in accessible service directories.",
+      "thread_safety": "Verify all UI changes happen on the main thread. Ensure weak-strong dance for block references (except NSOperations).",
+      "scalability": "Test solutions with large datasets (e.g., 10,000 records). Eliminate hardcoded values \u2014 use static variables for configuration. Follow DRY principles.",
+      "error_handling": "Use try/catch for exception handling. Check function return errors. Use Design by Contract practices. Handle nil values explicitly. Log critical errors through the platform error reporting library.",
+      "api_encryption": "All API calls must be encrypted.",
+      "commit_size": "Keep commits under approximately 50 lines of code per commit so reviewers do not have to review too much at once.",
+      "array_iteration_safety": "Arrays being iterated must not be modified during iteration."
+    },
+    "source": "SI/ISV iOS code review guidelines and coding standards documentation",
+    "tags": [
+      "ios",
+      "swift",
+      "code-review",
+      "si-isv",
+      "mobile",
+      "localization",
+      "database",
+      "accessibility",
+      "threading"
+    ]
+  }
+]

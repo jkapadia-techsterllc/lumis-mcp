@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-gdpr-001",
+    "category": "modules",
+    "title": "GDPR Data Privacy Framework for Life Sciences CRM",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "The EU General Data Protection Regulation (effective May 25, 2018) establishes requirements for processing personal data of EU data subjects. Key concepts include: data subject (identified natural person), processing (any operation on personal data), controller (determines purpose/means of processing), and processor (processes data on behalf of controller). Major requirements include affirmative consent as the basis for processing, mandatory Data Protection Officer for organizations handling data at scale, 72-hour breach notification to supervisory authority, and penalties of up to EUR 20 million or 4% of annual global revenue.",
+    "findings": {
+      "data_subject_rights": "Right to be forgotten (erasure), data portability between controllers, right of access to all personal data, restriction of processing, right to object to profiling and automated decision-making",
+      "salesforce_controls": "Individual object for tracking data privacy preferences, data processing engine for automated consent management, platform encryption for data at rest, consent management framework for opt-in/opt-out tracking",
+      "life_sciences_impact": "HCP and HCO personal data processing requires lawful basis documentation. Consent records must track channel preferences (email, phone, in-person). Cross-border data transfers between EU and non-EU affiliates require appropriate safeguards (Standard Contractual Clauses or Binding Corporate Rules)",
+      "implementation_considerations": "Configure Individual object to track consent per communication channel. Implement data retention policies with automated purge. Enable field-level encryption for sensitive HCP data. Build data subject access request (DSAR) workflows for timely response within the mandated 30-day window"
+    },
+    "source": "GDPR.pptx (internal training material, circa 2018)",
+    "tags": [
+      "gdpr",
+      "data-privacy",
+      "consent",
+      "compliance",
+      "hcp-data",
+      "eu-regulation"
+    ]
+  }
+]

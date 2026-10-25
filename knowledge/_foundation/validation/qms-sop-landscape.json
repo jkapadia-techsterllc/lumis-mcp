@@ -1,0 +1,656 @@
+[
+  {
+    "id": "val-qms-001",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "QMS SOP Structure and ISO 9001:2015 Foundation",
+    "summary": "All Quality Management System SOPs follow an ISO 9001:2015-aligned document structure with standardized sections, two-level document approval, and controlled version management. This structure governs every process in the QMS — from validation to incident management to release development.",
+    "standard_sections": {
+      "document_detail": "Cover page with document number, version, owner, effective date, expiration date, and cross-references to related documents.",
+      "purpose": "States why the SOP exists and what quality objective it serves.",
+      "scope": "Defines applicability — which products, teams, geographies, and lifecycle phases are covered.",
+      "roles_and_responsibilities": "RACI matrix or role listing for every activity in the procedure. Each SOP defines between 4 and 14+ roles depending on process complexity.",
+      "definitions": "Standardized terminology used in the SOP. Critical for audit consistency — inspectors verify that terms are used consistently across the QMS.",
+      "systems_and_tools": "Named tools that support the process (work tracking, test management, document management, service management, CI/CD platforms).",
+      "procedure": {
+        "inputs": "Documents, artifacts, or triggers that initiate the process.",
+        "flowchart": "Swim-lane diagram showing the step-by-step procedure across roles. Each step has a numbered reference.",
+        "outputs": "Deliverables produced by the process that feed into downstream SOPs."
+      },
+      "references": "Cross-references to related SOPs, work instructions, and templates within the QMS."
+    },
+    "document_control": {
+      "approval_levels": "Two-level review: Document Approver (content owner) and Document Quality Control (QMS compliance reviewer).",
+      "version_numbering": "Integer versioning with full revision history tracked in the Document Detail section.",
+      "retention": "Per corporate Records Management Policy. Validation-related records are retained for product life plus 10 years."
+    },
+    "gotcha": "Every SOP in the QMS cross-references the CSV SOP (SOP-0239) either directly or through a parent SOP. This means that changes to ANY process SOP can trigger a validation impact assessment. QMS auditors verify that change control was followed when SOPs were revised — a revised SOP without a corresponding change record is an audit finding.",
+    "gotcha_level": "critical",
+    "source": "qms-sop-analysis",
+    "tags": [
+      "qms",
+      "iso-9001",
+      "sop-structure",
+      "document-control",
+      "audit-readiness"
+    ]
+  },
+  {
+    "id": "val-qms-002",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Computer System Validation (CSV) Lifecycle Phases",
+    "summary": "The CSV lifecycle spans four phases — Concept, Feasibility & Planning, Develop, and Launch — with a CSV Approach Matrix that maps technology lifecycle phases to validation stages. A 14-step swim-lane procedure across 8 roles governs how validation activities are executed within each phase.",
+    "lifecycle_phases": {
+      "concept": "Initial system concept. SDLC Categorization and Regulatory Assessment determines GxP applicability, HIPAA/SOX/data classification/privacy requirements, and system category.",
+      "feasibility_and_planning": "Functional Risk Assessment (FRA) is conducted. Validation Plan is authored per template (TEM-0017). System architecture and technical design are reviewed.",
+      "develop": "IQ/OQ/PQ testing is executed. Requirements Traceability Matrix (RTM) is maintained. Test scripts are authored and executed per the Validation Plan.",
+      "launch": "Validation Summary Report (VSR) is completed. Go/No-Go checkpoint confirms validation readiness. System is released to production with formal sign-off."
+    },
+    "key_roles": [
+      "Good-by-Design (GbD) — ensures quality is built into the system from the start",
+      "Product Management — defines requirements and business context",
+      "PMO — project governance and milestone tracking",
+      "Testing — executes IQ/OQ/PQ protocols and documents results",
+      "Engineering — implements the system per validated requirements",
+      "DevOps — manages deployment automation and infrastructure",
+      "Documentation — produces user guides, technical documents, and training materials",
+      "Training — develops and delivers training programs for validated systems",
+      "Security by Design — ensures security requirements are addressed throughout the lifecycle"
+    ],
+    "csv_approach_matrix": "Maps each technology lifecycle phase to the corresponding validation stage, defining which validation deliverables are required at each phase gate. This matrix is the authoritative reference for scoping validation effort.",
+    "record_retention": "All validation outputs — Validation Plan, risk assessments, test protocols, RTM, VSR — are retained for product life plus 10 years in the Document Repository.",
+    "gotcha": "The CSV lifecycle is NOT a standalone waterfall process — it runs in parallel with the product development lifecycle. Validation activities must be integrated into sprint planning and release schedules. A common failure mode is treating validation as a phase-gate at the end of development rather than a continuous activity, which results in compressed timelines and incomplete test coverage.",
+    "gotcha_level": "critical",
+    "source": "csv-sop-0239",
+    "tags": [
+      "csv-lifecycle",
+      "validation-plan",
+      "iq-oq-pq",
+      "rtm",
+      "validation-summary-report"
+    ]
+  },
+  {
+    "id": "val-qms-003",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Regulatory Requirements Addressed by CSV",
+    "summary": "The CSV SOP addresses three primary regulatory frameworks: 21 CFR Part 11 (electronic records and signatures), EU Annex 11 (computerised systems in GMP), and PDMA (drug sample distribution tracking). Each framework imposes specific requirements on system validation scope, testing depth, and documentation.",
+    "regulatory_frameworks": {
+      "21_cfr_part_11": {
+        "scope": "Electronic records and electronic signatures used in FDA-regulated activities.",
+        "key_requirements": "Audit trails, access controls, electronic signature controls, system validation, record retention, authority checks.",
+        "validation_impact": "Systems that create, modify, maintain, archive, retrieve, or transmit electronic records must be validated. Audit trail testing is mandatory."
+      },
+      "eu_annex_11": {
+        "scope": "Computerised systems used in GMP environments within the European Union.",
+        "key_requirements": "Risk management, personnel qualification, suppliers and service providers, operational phase controls, business continuity, archiving.",
+        "validation_impact": "Requires documented evidence that the computerised system is fit for its intended purpose. Periodic evaluation is mandatory."
+      },
+      "pdma": {
+        "scope": "Prescription Drug Marketing Act — drug sample distribution, tracking, and reconciliation.",
+        "key_requirements": "Chain of custody for drug samples, distribution records, physical inventory reconciliation, theft/loss reporting.",
+        "validation_impact": "Sample management systems require full IQ/OQ/PQ validation with specific test categories for delivery tracking, distribution, inventory, transfers, returns, and reporting."
+      }
+    },
+    "validation_deliverables": {
+      "functional_risk_assessment": "Evaluates risks to patient safety, product quality, and data integrity for each system function. Drives test intensity.",
+      "requirements_traceability_matrix": "Traces each requirement from the User Requirement Specification (URS) through functional specifications to test scripts and test results. Provides end-to-end traceability.",
+      "iq_oq_pq": {
+        "installation_qualification": "Verifies that the system is installed correctly per documented specifications.",
+        "operational_qualification": "Verifies that the system operates according to functional specifications under normal and stress conditions.",
+        "performance_qualification": "Verifies that the system performs as intended in the production environment with real workflows."
+      }
+    },
+    "gotcha": "PDMA compliance audits are conducted by the FDA Office of Criminal Investigations (OCI), not by FDA field investigators. OCI audits are enforcement-focused — they specifically request the OPQ protocol and Validation Summary Report for sample tracking systems. Missing or incomplete validation documentation for a sample management system carries direct enforcement risk.",
+    "gotcha_level": "critical",
+    "source": "csv-sop-0239",
+    "tags": [
+      "21-cfr-part-11",
+      "eu-annex-11",
+      "pdma",
+      "regulatory-compliance",
+      "fra",
+      "rtm",
+      "iq-oq-pq"
+    ]
+  },
+  {
+    "id": "val-qms-004",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Product Release Development Process",
+    "summary": "Product releases follow a Scrum/Sprint-based delivery model with a 13-step flowchart from requirement grooming through release finalization. The process involves 14+ roles and cross-references 15+ related documents, making it one of the most complex processes in the QMS.",
+    "process_flow": {
+      "step_1": "Requirement grooming — user stories are refined and prioritized.",
+      "step_2": "Sprint planning — stories are assigned to sprints with capacity allocation.",
+      "step_3": "Development — feature branch workflow with code review gates.",
+      "step_4": "Code review and merge — approved merge requests are integrated.",
+      "step_5": "Build and package — CI/CD pipeline produces build artifacts.",
+      "step_6_through_10": "Testing stages — unit tests, integration tests, MAT, CORE regression, and AUX testing.",
+      "step_11": "Release candidate preparation — artifacts are promoted to staging.",
+      "step_12": "Go/No-Go checkpoint — formal assessment of release readiness.",
+      "step_13": "Release to production — deployment with rollback plan."
+    },
+    "inputs": "Product Release Scope Definition, Technical Design Document, User Stories.",
+    "outputs": "Released product version, release notes, updated documentation, validation artifacts.",
+    "validation_relevance": "Every product release that affects a validated system triggers a validation impact assessment. The release development process includes explicit checkpoints where validation status is evaluated — a release cannot proceed to production if validation is incomplete or if unresolved deviations exist.",
+    "gotcha": "The CTS (Commercial Technology Solutions) variant of this SOP has different role mappings than the core product variant. When planning validation for a SaaS product, use the CTS variant which maps roles to the SaaS delivery organization. Using the wrong variant leads to incorrect role assignments in the Validation Plan.",
+    "gotcha_level": "warning",
+    "source": "sop-0014-release-development",
+    "tags": [
+      "release-development",
+      "scrum",
+      "sprint",
+      "go-no-go",
+      "validation-impact"
+    ]
+  },
+  {
+    "id": "val-qms-005",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Product Testing — MAT, CORE, and AUX Campaign Taxonomy",
+    "summary": "Product testing uses a three-tier test campaign taxonomy: MAT (Minimum Acceptance Testing) covers critical-severity functions, CORE covers high-priority regression scenarios, and AUX covers feature-specific auxiliary testing. This taxonomy determines which test campaigns are executed for each release type.",
+    "test_campaigns": {
+      "mat": {
+        "name": "Minimum Acceptance Testing",
+        "scope": "Critical-severity test scenarios that must pass before any build is promoted. Covers core functionality that, if broken, would render the system unusable.",
+        "execution_trigger": "Every build, every release.",
+        "pass_criteria": "100% pass rate required. Any MAT failure blocks the build."
+      },
+      "core": {
+        "name": "Core Regression Testing",
+        "scope": "High-priority regression scenarios covering the most-used features and workflows. Ensures that new changes have not broken existing functionality.",
+        "execution_trigger": "Every release. Subset may run per sprint.",
+        "pass_criteria": "Defined threshold per quality scorecard. Failures are triaged by severity."
+      },
+      "aux": {
+        "name": "Auxiliary Testing",
+        "scope": "Feature-specific test scenarios for new or modified functionality. Covers edge cases, boundary conditions, and feature interactions.",
+        "execution_trigger": "When specific features are changed or added.",
+        "pass_criteria": "Per test plan. Failures are classified and tracked."
+      }
+    },
+    "quality_milestones": {
+      "zero_bug_bounce": "The first point in the release cycle where the count of open critical and high-severity bugs reaches zero. This is a milestone, not a gate — development continues but this marker indicates stabilization.",
+      "quality_scorecard": "Tracks pass rates across all test campaigns, defect trends, and code coverage metrics. Used at Go/No-Go checkpoints.",
+      "minimum_deliverable_set": "The minimum set of features and fixes that must be included in the release to meet customer commitments."
+    },
+    "validation_relevance": "MAT and CORE test campaigns map directly to validation test categories. MAT failures in a validated system constitute a validation deviation that requires formal documentation. The test campaign taxonomy informs how validation test scripts are organized — high-risk functions align with MAT, medium-risk with CORE, and low-risk with AUX.",
+    "gotcha": "Do not confuse product testing campaigns (MAT/CORE/AUX) with validation qualification protocols (IQ/OQ/PQ). They serve different purposes: product testing verifies that the software works correctly, while validation qualification provides documented evidence that the system meets predetermined specifications for regulatory compliance. A system can pass all MAT/CORE/AUX tests and still fail validation if the test scripts do not trace to validated requirements.",
+    "gotcha_level": "critical",
+    "source": "sop-0012-product-testing",
+    "tags": [
+      "mat",
+      "core",
+      "aux",
+      "test-campaigns",
+      "zero-bug-bounce",
+      "quality-scorecard"
+    ]
+  },
+  {
+    "id": "val-qms-006",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "QC Testing for Client Implementations — Development vs Implementation Testing",
+    "summary": "QC testing distinguishes between Development QA/TESTS (product-level testing done by the engineering team) and Implementation QA/TESTS (client-specific testing done during deployment). The QC Test Life Cycle has two phases: Initialization and Validation & Analysis.",
+    "test_types": {
+      "development_qa_tests": {
+        "scope": "Product-level testing performed by the engineering organization during the development lifecycle.",
+        "ownership": "Product engineering and QA teams.",
+        "purpose": "Verify that the product meets functional specifications before release."
+      },
+      "implementation_qa_tests": {
+        "scope": "Client-specific testing performed during system deployment and configuration for a specific customer.",
+        "ownership": "Implementation team with client participation.",
+        "purpose": "Verify that the system meets the client's specific requirements and configuration."
+      }
+    },
+    "qc_test_lifecycle": {
+      "phase_1_initialization": "Test environment setup, test data preparation, test plan creation, role and access configuration. The controlled test environment must be representative of the production configuration.",
+      "phase_2_validation_and_analysis": "Test execution, defect logging, root cause analysis, retesting after fixes, final results documentation."
+    },
+    "iq_oq_protocol_structure": "Implementation QC testing follows the IQ/OQ protocol structure: Installation Qualification verifies correct deployment, Operational Qualification verifies correct function per requirements.",
+    "validation_relevance": "Implementation QC testing is where validation protocols (IQ/OQ/PQ) are executed for client-specific deployments. The controlled test environment requirements align with validation environment requirements — test data must be representative, user profiles must match production roles, and ETL processes must be configured.",
+    "gotcha": "Development QA/TESTS and Implementation QA/TESTS are not interchangeable for validation purposes. Product-level test results do not satisfy client-specific validation requirements unless the client's configuration is identical to the tested configuration. Each client deployment requires its own validation execution, even if the underlying product version is the same.",
+    "gotcha_level": "critical",
+    "source": "sop-0071-qc-testing",
+    "tags": [
+      "qc-testing",
+      "implementation-testing",
+      "development-testing",
+      "test-environment",
+      "iq-oq"
+    ]
+  },
+  {
+    "id": "val-qms-007",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Change Management — Standard, Emergency, and Normal Changes",
+    "summary": "Change management uses three categories: Standard (pre-authorized, low-risk changes), Emergency (critical changes requiring immediate action), and Normal (changes requiring full Change Advisory Board review). All changes to validated systems require a validation impact assessment.",
+    "change_categories": {
+      "standard": {
+        "definition": "Pre-authorized changes that follow a documented, repeatable procedure. Low risk with well-understood impact.",
+        "approval": "Pre-approved through the SOP — no individual CAB review required.",
+        "examples": "Routine patches, scheduled maintenance, pre-approved configuration changes.",
+        "validation_impact": "Minimal — validation impact is pre-assessed as part of the standard change authorization."
+      },
+      "emergency": {
+        "definition": "Changes required immediately to restore service or prevent imminent service failure.",
+        "approval": "Emergency Change Advisory Board (ECAB) provides expedited approval. Full documentation is completed retrospectively.",
+        "examples": "Critical hotfix for production outage, security vulnerability patch, data corruption remediation.",
+        "validation_impact": "Post-implementation validation assessment is mandatory. If the emergency change affects validated functions, a deviation report is required."
+      },
+      "normal": {
+        "definition": "Changes that require full assessment, planning, and approval before implementation.",
+        "approval": "Change Advisory Board (CAB) reviews and approves. CAB membership includes technical leads, QA, operations, and business stakeholders.",
+        "examples": "New feature deployment, major configuration change, infrastructure upgrade, third-party system integration.",
+        "validation_impact": "Full validation impact assessment before approval. If validated functions are affected, the change must include a validation plan update and re-qualification scope."
+      }
+    },
+    "rfc_process": "All Normal and Emergency changes are tracked through a Request for Change (RFC) in the service management system. The RFC documents the change description, risk assessment, implementation plan, rollback plan, and validation impact.",
+    "gotcha": "Emergency changes that affect validated systems create a documentation debt that must be resolved within a defined timeline (per the SOP). Regulators accept that emergency changes cannot always follow the full change control process, but they do NOT accept indefinitely open retrospective documentation. An emergency change to a validated system that is not formally documented within the required timeframe is a regulatory finding.",
+    "gotcha_level": "critical",
+    "source": "sop-0090-change-management",
+    "tags": [
+      "change-management",
+      "cab",
+      "ecab",
+      "rfc",
+      "standard-change",
+      "emergency-change",
+      "normal-change"
+    ]
+  },
+  {
+    "id": "val-qms-008",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Incident and Problem Management — Severity Classification and Root Cause Analysis",
+    "summary": "Incident management uses a 5-level severity scale (0-Major through 4-Low) with tiered support and defined SLA response times. Problem management conducts root cause analysis through both reactive (post-incident) and proactive (trend analysis) modes. Incidents affecting validated systems require assessment against validation status.",
+    "incident_severity_levels": {
+      "severity_0_major": {
+        "description": "Invokes Major Incident Procedure. Complete service outage or data corruption affecting multiple clients.",
+        "response": "Immediate mobilization of all tiers. Dedicated incident manager."
+      },
+      "severity_1_urgent": {
+        "description": "Data corruption, security breach, or critical functionality completely unavailable.",
+        "response_sla": "2 business hours."
+      },
+      "severity_2_high": {
+        "description": "Major functionality errors affecting business operations.",
+        "response_sla": "4 business hours."
+      },
+      "severity_3_medium": {
+        "description": "System not functioning correctly but usable with workaround.",
+        "response_sla": "6 business hours."
+      },
+      "severity_4_low": {
+        "description": "Cosmetic issues, minor usability problems.",
+        "response_sla": "8 business hours."
+      }
+    },
+    "support_tiers": {
+      "tier_1": "Initial incident receipt and categorization.",
+      "tier_2a": "Application management and service delivery — functional investigation and workaround identification.",
+      "tier_3": "Operations and resolution team — deep technical investigation, code fixes, infrastructure changes."
+    },
+    "problem_management": {
+      "reactive": "Triggered by incidents. Root cause investigation, workaround documentation, Known Error Database (KEDB) entry, and Request for Change (RFC) if a permanent fix is needed.",
+      "proactive": "Trend analysis across incidents to identify systemic issues before they cause major incidents. Continual Service Improvement initiatives."
+    },
+    "validation_relevance": "Incidents affecting validated systems require an assessment of whether the incident constitutes a validation deviation. A Severity 0 or 1 incident in a validated system triggers a formal deviation investigation and may require re-validation of affected functions. The KEDB must include validation status for known errors in validated systems.",
+    "gotcha": "Problem management and change management are tightly coupled but serve different purposes. Problem management identifies the root cause and proposes a fix; change management controls the implementation of that fix. An RFC from problem management still requires CAB approval and validation impact assessment before implementation. Skipping the change control process because 'the root cause is already known' is a compliance failure.",
+    "gotcha_level": "warning",
+    "source": "sop-0002-incident-management, sop-0007-problem-management",
+    "tags": [
+      "incident-management",
+      "problem-management",
+      "severity-classification",
+      "sla",
+      "kedb",
+      "root-cause-analysis"
+    ]
+  },
+  {
+    "id": "val-qms-009",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "IT Service Continuity and Disaster Recovery",
+    "summary": "IT Service Continuity management ensures Disaster Recovery Plans (DRP) are created, tested, and maintained for all products throughout their lifecycle. DR planning starts at the Feasibility & Plan phase, with three stages of DR testing: tabletop, component test, and full live test.",
+    "dr_lifecycle": {
+      "planning": "DR Plan is created during the Feasibility & Plan phase using standard templates. The plan covers recovery procedures, recovery time objectives (RTO), recovery point objectives (RPO), and resource requirements.",
+      "authorization": "Global IT DR Manager reviews and authorizes the DRP. The Authorized DR Plan is stored in controlled document management and copies are provided to product and service owners.",
+      "testing": {
+        "stage_1_tabletop": "Walkthrough of the DR Plan during plan creation. Validates that the documented procedures are complete and logical.",
+        "stage_2_component_test": "Live simulation of recovery procedures for specific components. Requested by the Product Owner.",
+        "stage_3_full_live_test": "Full live DR test, often customer-specific and contractually required. Validates end-to-end recoverability."
+      },
+      "execution": "When a disaster occurs, the DRP is activated. Recovery teams follow documented procedures. Post-recovery assessment validates data integrity."
+    },
+    "product_lifecycle_mapping": {
+      "concept": "DR requirements are identified.",
+      "feasibility_and_plan": "DRP is authored and authorized.",
+      "develop": "DR capacity is provisioned.",
+      "launch": "DR capacity is available and tested.",
+      "customer_success": "DRP is maintained and periodically tested.",
+      "retirement": "DR resources are decommissioned."
+    },
+    "validation_relevance": "DR testing validates system recoverability and data integrity post-disaster. For validated systems, DR test results must demonstrate that GxP-critical data is recoverable and that the system can be restored to a validated state. A successful DR test is documented as evidence of business continuity controls in the validation lifecycle.",
+    "gotcha": "DR Plans that are authorized but never tested provide a false sense of security. Stage 2 and Stage 3 tests are the only way to verify that recovery procedures actually work. Regulators are increasingly asking for DR test evidence during GxP system inspections — particularly for cloud/SaaS systems where the customer has limited control over infrastructure recovery.",
+    "gotcha_level": "warning",
+    "source": "sop-0019-it-service-continuity",
+    "tags": [
+      "disaster-recovery",
+      "drp",
+      "business-continuity",
+      "rto",
+      "rpo",
+      "dr-testing"
+    ]
+  },
+  {
+    "id": "val-qms-010",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Product Documentation Management — Document Types and Lifecycle",
+    "summary": "Product documentation management defines seven document types with a 12-step lifecycle flowchart. Documentation is produced in parallel with product development and serves as reference material for validation test script creation and user training evidence.",
+    "document_types": {
+      "user_guide": "End-user documentation for each user role. Covers workflows, screen navigation, and feature usage.",
+      "technical_document": {
+        "subtypes": [
+          "Installation Guide — deployment and installation procedures",
+          "Configuration Guide — system configuration settings and options",
+          "Administration Guide — system administration and maintenance",
+          "Development Operations Guide — DevOps procedures and automation",
+          "Upgradeability Guide — upgrade procedures and compatibility",
+          "Data Model Guide — data structure, relationships, and schema"
+        ]
+      },
+      "knowledge_base_article": "Self-service knowledge articles for common issues, procedures, and FAQs.",
+      "quick_reference_card": "Condensed reference guides for frequently performed operations.",
+      "online_help": "Context-sensitive help integrated into the application."
+    },
+    "documentation_lifecycle": [
+      "Kick-off — documentation scope is defined based on release content",
+      "Define documentation plan — topics, assignments, and schedule",
+      "Assign topics to writers",
+      "Branch by document type (User Guide vs Technical Document)",
+      "Read specifications and attend sprint demos for content gathering",
+      "View, test, format, and rewrite content",
+      "Create or update content in the documentation platform",
+      "Send for engineering review (SME review)",
+      "Check final output against specifications",
+      "Peer review by Document Quality Control",
+      "Content testing for accuracy",
+      "Publish to documentation platform"
+    ],
+    "roles": [
+      "Product Documentation Writer — authors content",
+      "Documentation Lead — manages assignments and schedule",
+      "Product Owner — defines scope and priorities",
+      "Product Engineering (SME) — reviews for technical accuracy",
+      "Document Quality Control (Peer Reviewer) — reviews for quality and consistency"
+    ],
+    "validation_relevance": "Product documentation serves as reference for validation test script creation — test steps reference User Guides for expected behavior. Training materials serve as evidence of user qualification, which is required for validated systems under 21 CFR Part 11 (personnel must be trained on the systems they use). Documentation updates must be tracked through change control when they affect validated system descriptions.",
+    "source": "sop-0011-documentation-management",
+    "tags": [
+      "documentation",
+      "user-guide",
+      "technical-document",
+      "knowledge-base",
+      "training-evidence"
+    ]
+  },
+  {
+    "id": "val-qms-011",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Solution Architecture and Technical Design — TDD and TDC Governance",
+    "summary": "Solution architecture is governed through the Technical Design Document (TDD), which translates business and technical requirements into information system design. A cross-functional Technical Design Committee (TDC) reviews and approves all TDDs before implementation begins.",
+    "tdd_content": {
+      "required_inputs": [
+        "Application technical diagrams",
+        "High-level global design diagram",
+        "Product explanation and functionality description",
+        "Technical components specification",
+        "High-level view diagram"
+      ],
+      "purpose": "Provides the authoritative technical specification that development teams implement. The TDD is the bridge between business requirements and code."
+    },
+    "tdc_governance": {
+      "composition": "Architects from all business units and the enterprise architecture team. This is a company-wide board, not a team-specific review.",
+      "authority": "Approves each system architecture before it is deployed. TDC approval is a hard gate — no deployment without approval.",
+      "review_process": {
+        "step_1": "Architecture and DevOps prepare the TDD in collaboration with Product Engineering and Product Management.",
+        "step_2": "TDD is verified internally before submission.",
+        "step_3": "TDD is submitted to TDC for review.",
+        "step_4": "TDC reviews the TDD.",
+        "step_5": "If not agreed, feedback is provided and the TDD is updated. Resubmission loops until approved.",
+        "step_6": "Finalized TDD is baselined and feeds into Product Release Development."
+      }
+    },
+    "validation_relevance": "The TDD is a key input to the Validation Plan and Functional Risk Assessment. The system architecture described in the TDD determines which components require validation, which interfaces need testing, and how data flows through the system. Changes to the TDD after validation has begun require a formal change control assessment and may require re-scoping the validation effort.",
+    "gotcha": "The TDC approval is architecture-level, not code-level. A TDC-approved architecture does not mean the implementation is correct — that is verified through code review, testing, and validation. Conversely, a code change that alters the system architecture (even if the code works) without TDC review is a governance violation.",
+    "gotcha_level": "warning",
+    "source": "sop-0018-solution-architecture",
+    "tags": [
+      "tdd",
+      "tdc",
+      "solution-architecture",
+      "technical-design",
+      "architecture-review"
+    ]
+  },
+  {
+    "id": "val-qms-012",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Code Review and Development Workflow",
+    "summary": "Development follows a feature branch workflow where developers commit only to feature branches, never directly to the main branch. Merge requests require designated reviewer approval before integration. Work tracking integration moves items to 'code review' status on merge request creation.",
+    "workflow": {
+      "branching": "Feature branch model. Each development task is implemented on a dedicated feature branch.",
+      "merge_request": "Developer submits a merge request to a designated reviewer. The reviewer is assigned based on code ownership and domain expertise.",
+      "code_review": "Reviewer evaluates code quality, correctness, security, and adherence to coding standards. Approval is required before the merge request is accepted.",
+      "integration": "Approved merge requests are merged to the main branch. Automated CI/CD pipeline triggers on merge.",
+      "status_tracking": "Work tracking tool status is automatically updated: 'In Progress' → 'Code Review' on merge request creation → 'Done' on merge."
+    },
+    "validation_relevance": "Code review records serve as evidence of development controls in the validation lifecycle. For GAMP Category 5 (custom-developed software), regulators expect documented evidence that code was reviewed by someone other than the author. The merge request approval record, including reviewer identity and timestamp, satisfies this requirement. For GAMP Category 4 (configured software), configuration review records serve the same purpose.",
+    "gotcha": "Code review approval is necessary but not sufficient for validation. A code review confirms that the code is correct and follows standards — it does not confirm that the code meets validated requirements. The link between code changes and validation requirements is established through the Requirements Traceability Matrix (RTM), not through code review.",
+    "gotcha_level": "warning",
+    "source": "wi-0007-code-review",
+    "tags": [
+      "code-review",
+      "feature-branch",
+      "merge-request",
+      "development-controls",
+      "gamp-category-5"
+    ]
+  },
+  {
+    "id": "val-qms-013",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Deployment Automation and CI/CD Pipeline Validation",
+    "summary": "Product deployment uses CI/CD pipelines with Infrastructure as Code (IaC) for repeatable, auditable deployments. The pipeline includes Build Acceptance Tests (BAT) and Minimum Acceptance Tests (MAT) as automated quality gates. DRP automation ensures disaster recovery procedures are codified and testable.",
+    "cicd_pipeline": {
+      "continuous_integration": "Automated build, unit test, and static analysis on every code commit. Build artifacts are versioned and stored in a container registry.",
+      "continuous_deployment": "Automated deployment to staging and production environments following approval gates. Infrastructure changes are managed through IaC (e.g., Terraform).",
+      "pipeline_testing": {
+        "bat": "Build Acceptance Tests — automated smoke tests that validate the build is deployable. Run on every build.",
+        "mat": "Minimum Acceptance Tests — critical-path automated tests that validate core functionality. Run before any environment promotion."
+      }
+    },
+    "deployment_workflow": [
+      "Product Release Development defines scope",
+      "Solution Architecture provides the TDD",
+      "IaC, application code, and pipeline code are developed",
+      "Refinement and review cycles",
+      "CI/CD pipeline code is committed and tested",
+      "Pipeline testing (BAT/MAT) validates the deployment",
+      "Handover to Production Operations for go-live"
+    ],
+    "roles": [
+      "Product Owner — defines deployment requirements and approves promotion",
+      "Architect — designs the deployment architecture and IaC",
+      "Developer Lead — manages pipeline development and refinement",
+      "Engineer — implements pipeline code and IaC"
+    ],
+    "validation_relevance": "CI/CD pipeline validation confirms that deployment automation produces consistent, reproducible builds. For validated systems, the pipeline itself is a controlled system — changes to deployment scripts, IaC definitions, or pipeline configuration require change control. Pipeline test results (BAT/MAT) provide evidence that each deployment produces a known-good state.",
+    "gotcha": "IaC drift — where the actual infrastructure configuration diverges from the IaC definition — is a validation concern for cloud/SaaS systems. If a manual change is made to infrastructure that bypasses IaC, the deployed system no longer matches the validated configuration. Automated drift detection is essential for maintaining validation status in IaC-managed environments.",
+    "gotcha_level": "warning",
+    "source": "sop-0023-automation-readiness",
+    "tags": [
+      "cicd",
+      "iac",
+      "terraform",
+      "bat",
+      "mat",
+      "deployment-automation",
+      "pipeline-validation"
+    ]
+  },
+  {
+    "id": "val-qms-014",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Program Go/No-Go Checkpoints — MAP Methodology",
+    "summary": "Go/No-Go checkpoints use the Milestone Assessment Process (MAP) methodology with an 8-step RACI procedure across 6 roles. Each checkpoint evaluates deliverables against predefined criteria to determine whether a program advances to the next phase.",
+    "map_methodology": {
+      "purpose": "Standardized framework for assessing program progress and readiness at defined milestones.",
+      "procedure_steps": [
+        "Identify checkpoint and required deliverables",
+        "Assign roles per RACI (Program Manager, Project Manager, Delivery Director, Practice Lead, Business Owner, Client Service Manager)",
+        "Gather and review deliverables",
+        "Assess each deliverable against acceptance criteria",
+        "Document assessment results",
+        "Make Go/No-Go decision",
+        "Communicate decision to stakeholders",
+        "Archive checkpoint artifacts in the Projects Filing System"
+      ]
+    },
+    "checkpoint_deliverables": {
+      "start_uat": "Test Execution Report from prior testing phases.",
+      "go_live": "Production Deployment Checklist, validation completion evidence, change control records.",
+      "all_checkpoints": "Program Risks & Issues Log, Program Dashboard, Delivery Playbook."
+    },
+    "handover_to_support": "At the final checkpoint, a Handover to Support Checklist ensures that operational teams have all documentation, access, and training needed to support the system post-launch.",
+    "validation_relevance": "Go/No-Go checkpoints are formal gates where validation status is assessed. The Go-Live checkpoint requires documented evidence that validation is complete: signed Validation Summary Report, closed deviation log, approved RTM, and training records. A 'No-Go' decision at this checkpoint specifically because of incomplete validation is a defined outcome — and it happens.",
+    "gotcha": "The Go/No-Go checkpoint is an assessment, not a rubber stamp. The MAP methodology requires that each deliverable is independently evaluated against criteria — not just that deliverables exist, but that they are complete and acceptable. A common failure is treating the checkpoint as a formality when there is schedule pressure, which results in launching with known gaps that become audit findings.",
+    "gotcha_level": "warning",
+    "source": "sop-0103-go-no-go-checkpoints",
+    "tags": [
+      "go-no-go",
+      "map-methodology",
+      "checkpoint",
+      "program-governance",
+      "uat",
+      "go-live"
+    ]
+  },
+  {
+    "id": "val-qms-015",
+    "category": "validation-qms-landscape",
+    "products": [
+      "lsc",
+      "oce",
+      "vault"
+    ],
+    "title": "Vulnerability and Penetration Testing",
+    "summary": "Security testing covers three scopes: product testing (during development and annually), deployment testing (new client deployments), and ongoing deployed testing (annually). Findings are scored using CVSS 3.0+ with a Critical/High threshold at 7.0+. Findings above threshold require Corrective and Preventive Action (CAPA).",
+    "testing_scopes": {
+      "product_testing": {
+        "when": "During product development and at least annually for released products.",
+        "scope": "Application-level security testing including DAST (Dynamic Application Security Testing), open-source dependency scanning, and manual penetration testing.",
+        "ownership": "Product engineering and security teams."
+      },
+      "deployment_testing": {
+        "when": "For new client deployments before go-live.",
+        "scope": "Deployment-specific security assessment including infrastructure configuration, access controls, and network security.",
+        "ownership": "Deployment team with security oversight."
+      },
+      "ongoing_deployed_testing": {
+        "when": "At least annually for all deployed systems.",
+        "scope": "Recurring security assessment of the production environment covering new vulnerabilities, configuration drift, and emerging threats.",
+        "ownership": "Security operations with product team support."
+      }
+    },
+    "cvss_scoring": {
+      "scoring_standard": "CVSS (Common Vulnerability Scoring System) version 3.0 or later.",
+      "critical_high_threshold": "CVSS score of 7.0 or above requires immediate remediation and CAPA.",
+      "below_threshold": "CVSS score below 7.0 is tracked, prioritized, and remediated per the risk-based schedule."
+    },
+    "validation_relevance": "Security testing results feed into the Functional Risk Assessment. Critical or high-severity vulnerabilities in validated components may trigger re-validation if the vulnerability affects a GxP-critical function. Security patches applied to address vulnerabilities in validated systems require change control assessment.",
+    "gotcha": "Vulnerability scanning tools generate findings that include both true positives and false positives. For validated systems, each finding above the CVSS threshold must be individually assessed for GxP impact — a vulnerability in a non-GxP component does not require the same urgency as one in a GxP-critical function. The CAPA process must document this triage decision, not just the remediation.",
+    "gotcha_level": "warning",
+    "source": "sop-0175-vulnerability-testing",
+    "tags": [
+      "vulnerability-testing",
+      "penetration-testing",
+      "cvss",
+      "dast",
+      "capa",
+      "security-testing"
+    ]
+  }
+]

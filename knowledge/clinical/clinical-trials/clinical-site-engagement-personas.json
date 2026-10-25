@@ -1,0 +1,45 @@
+[
+  {
+    "id": "clin-engage-001",
+    "category": "modules",
+    "title": "Clinical Site Engagement Personas and Orchestrated Engagement Model",
+    "products": ["LSC"],
+    "summary": "Framework for clinical stakeholder engagement using an orchestrated multi-persona approach, addressing site recruitment challenges, investigator management, and connected intelligence capabilities.",
+    "findings": [
+      {
+        "area": "enrollment_challenges",
+        "detail": "Industry data indicates approximately 85% of clinical trials experience delays, endpoints have doubled with per-participant procedures increasing by roughly 58%, 48% of trial sites miss enrollment targets, and 20% of sites enroll 80% of patients. These statistics drive the need for technology-enabled site engagement."
+      },
+      {
+        "area": "site_engagement_barriers",
+        "detail": "Key barriers include limited site knowledge visibility, recruitment challenges with lack of cross-team coordination, clinical operations interactions not visible to other users, and a site-centric approach that fails to meet needs of all stakeholders (sites, sponsors, partners)."
+      },
+      {
+        "area": "orchestrated_engagement_personas",
+        "detail": "An effective clinical engagement model requires multiple coordinated personas: Key Account Manager (interacts with medical organizations, hospitals, decision makers), Medical Science Liaison (interacts with investigators and KOLs), Market Access (views key stakeholders at managed market accounts), and Clinical Site Account Manager (manages site relationships). These personas must share context and work toward common goals."
+      },
+      {
+        "area": "engagement_plan_capabilities",
+        "detail": "A CRM-based clinical engagement platform should support: multi-channel engagement plans for sites and investigators, stakeholder engagement orchestration across personas, field email and remote engagement, workflow and MIRF (Medical Information Request Form) capture, to-do management, and business planning features."
+      },
+      {
+        "area": "connected_intelligence_features",
+        "detail": "Embedded intelligence capabilities for clinical engagement include: segmentation and 360-degree views, account ratings and insights, survey capture, profiling questions, next-best-action recommendations for key accounts, influencer identification, and multi-channel engagement plan suggestions personalized per site or investigator."
+      },
+      {
+        "area": "site_scoring_and_recommendations",
+        "detail": "Algorithms that calculate scores across all profile data help identify top-performing sites (to focus efforts based on performance), top influencers (for direct thought leadership engagement), and prepare interactions with the right messaging and content for each stakeholder."
+      },
+      {
+        "area": "investigator_recommendations",
+        "detail": "When creating a study, external intelligence systems can provide recommended investigators and sites. A CRM platform should display these recommendations to users and capture acceptance or dismissal to improve future study outcomes and increase advocacy."
+      },
+      {
+        "area": "insights_management",
+        "detail": "Clinical users and account teams can create insight records, view community feeds of insights, and vote on insights to rank importance. Insights can be linked at discussion and interaction levels (molecule, brand, indication, therapeutic area) and shared globally across orgs for authorized users."
+      }
+    ],
+    "source": "clinical_persona_value_proposition_engagement",
+    "tags": ["site-engagement", "clinical-personas", "orchestrated-engagement", "connected-intelligence", "next-best-action", "investigator-management"]
+  }
+]

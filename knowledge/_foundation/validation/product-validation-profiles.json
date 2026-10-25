@@ -1,0 +1,102 @@
+[
+  {
+    "id": "val-pvp-001",
+    "category": "validation-product-profiles",
+    "title": "Validation Profile Comparison — LSC vs OCE vs Veeva Vault",
+    "products": ["lsc", "oce", "vault"],
+    "summary": "The three major platforms in life sciences — Life Sciences Cloud (Salesforce), OCE (legacy CRM), and Veeva Vault (document/quality management) — have fundamentally different validation profiles. The deployment model, release cadence, customization surface area, and available validation tooling all affect the scope and effort of a computer system validation. Organizations migrating between platforms or running multiple platforms must understand these differences to avoid under-validating one system while over-investing in another.",
+    "profiles": {
+      "lsc": {
+        "platform_name": "Life Sciences Cloud (Salesforce)",
+        "gamp_classification": "GAMP 5 Category 4 (Configured Product) when using standard features; Category 5 (Custom Application) when Apex, LWC, or custom integrations are added.",
+        "deployment_model_impact": {
+          "description": "Multi-tenant SaaS on Salesforce Platform. The vendor manages infrastructure, patching, and platform upgrades. The customer validates their configuration, customizations, and business processes.",
+          "shared_responsibility": "Salesforce provides SOC 2 Type II reports and a Trust site for infrastructure assurance. The customer is responsible for validating that their configured instance meets URS requirements. The vendor's compliance documentation covers infrastructure — it does not cover the customer's business process configuration.",
+          "environment_considerations": "Sandboxes are used for validation testing. Sandbox refresh timing must align with validation cycles — a sandbox refreshed mid-validation invalidates in-progress test results."
+        },
+        "release_and_change_impact": {
+          "cadence": "Three major Salesforce platform releases per year plus monthly Life Sciences Cloud managed package updates. Each release requires a validation impact assessment.",
+          "managed_package_upgrades": "Life Sciences Cloud ships as a second-generation managed package (2GP). Package upgrades can introduce new objects, fields, and behaviors. The customer must assess whether each upgrade affects validated functionality.",
+          "configuration_changes": "Changes deployed via change sets or metadata API from sandbox to production are customer-initiated releases that require change control and, depending on scope, re-qualification.",
+          "gotcha": "Salesforce platform releases can change underlying behavior (e.g., security defaults, API versions, Lightning component rendering) without the customer initiating any change. The validation program must monitor Salesforce release notes for changes that affect validated functionality — not just the Life Sciences Cloud release notes."
+        },
+        "customization_surface_area": {
+          "low_risk": "Declarative configuration — page layouts, record types, validation rules, flows, permission sets. These are GAMP Category 4 and require functional testing but not code-level testing.",
+          "medium_risk": "Formulas, Flow orchestrations with complex branching, report customizations with calculated fields. Require functional testing with boundary conditions.",
+          "high_risk": "Apex code (triggers, batch jobs, web services), Lightning Web Components, custom integrations via middleware or API. These are GAMP Category 5 and require unit testing, integration testing, and code review as part of validation."
+        },
+        "validation_tooling": "No built-in validation management capability. Customers use external platforms (Kneat, Veeva Vault QMS, Qualio, MasterControl, or document-based processes) to manage validation plans, test protocols, traceability matrices, and deviation reports."
+      },
+      "oce": {
+        "platform_name": "OCE (Legacy CRM)",
+        "gamp_classification": "GAMP 5 Category 4 (Configured Product) for the base platform; Category 5 where JavaScript customizations, custom objects, or custom integrations exist. Mobile client components may have a separate classification.",
+        "deployment_model_impact": {
+          "description": "Deployment model varies by generation and customer — on-premise, hosted, or cloud. Mobile clients (iPad app) add a second deployment surface that requires separate validation consideration.",
+          "shared_responsibility": "For cloud deployments, the vendor manages infrastructure. For hosted/on-premise deployments, the customer or a managed services partner handles infrastructure qualification (IQ). Mobile app distribution through the App Store introduces a third-party dependency on Apple's review and distribution process.",
+          "environment_considerations": "Test environments may not perfectly mirror production, especially for on-premise or hosted deployments. Environment equivalence must be documented and any differences must be assessed for validation impact."
+        },
+        "release_and_change_impact": {
+          "cadence": "Vendor-driven release schedule. Customers can defer upgrades, but deferred upgrades accumulate change scope — validating a multi-version jump is more expensive than validating each release incrementally.",
+          "mobile_app_updates": "Mobile client updates distributed through the App Store are a separate release event. App Store review timing is not under the customer's control, which complicates validation scheduling.",
+          "gotcha": "Organizations that defer upgrades across multiple release cycles face a compounding validation problem. The scope of change grows with each deferred release, and the vendor's release notes may not clearly distinguish cumulative changes from single-release changes."
+        },
+        "customization_surface_area": {
+          "low_risk": "Standard configuration through the admin console — layouts, profiles, settings. GAMP Category 4.",
+          "medium_risk": "Configuration-driven business rules, territory hierarchies, product catalog customizations.",
+          "high_risk": "JavaScript customizations, custom objects, custom API integrations, and any modifications to the mobile sync layer. These require code-level testing and are the primary source of regression risk during upgrades."
+        },
+        "validation_tooling": "No built-in validation management. Customers use external tools — commonly Veeva Vault QMS for organizations already in the Veeva ecosystem, or standalone document management for others."
+      },
+      "vault": {
+        "platform_name": "Veeva Vault (QMS, QualityDocs, RIM, Clinical, CTMS)",
+        "gamp_classification": "GAMP 5 Category 4 (Configured Product) for standard Vault applications. Category 5 only when custom Vault Java SDK extensions or complex integration workflows are added, which is less common than in CRM platforms.",
+        "deployment_model_impact": {
+          "description": "Multi-tenant SaaS. All customers run on the same platform version within a release window. Vault provides a validation-aware release process with pre-release documentation.",
+          "shared_responsibility": "Veeva provides a Validation Package with each release that includes release notes, functional change summaries, and validation impact assessments. This is a significant head start compared to platforms that provide only technical release notes.",
+          "environment_considerations": "Vault sandboxes are available for validation testing and mirror production configuration. Vault's release process includes a sandbox pre-release period specifically designed for customer validation."
+        },
+        "release_and_change_impact": {
+          "cadence": "Three general releases per year plus interim releases. Vault publishes validation impact summaries with each release, categorizing changes as 'validation impacting' or 'non-validation impacting'.",
+          "configuration_changes": "Configuration changes in Vault (object types, lifecycles, workflows, roles, security policies) are the primary customer-initiated change type. Vault's configuration audit trail provides built-in traceability for these changes.",
+          "gotcha": "Vault's release validation packages are helpful but not sufficient — they reflect the vendor's assessment of change impact, not the customer's. A change the vendor classifies as non-validation-impacting may affect a customer's specific validated business process. The customer must perform their own impact assessment informed by (but not limited to) the vendor's documentation."
+        },
+        "customization_surface_area": {
+          "low_risk": "Application configuration — object types, lifecycles, workflows, document templates, roles, security policies. This is the bulk of Vault customization and is GAMP Category 4.",
+          "medium_risk": "Complex workflow configurations, multi-step approval processes, cross-application data flows (e.g., QMS to QualityDocs to RIM).",
+          "high_risk": "Vault Java SDK custom extensions, external API integrations, custom reporting connectors. These are less common in Vault than custom code is in CRM platforms, which generally results in a smaller Category 5 validation footprint."
+        },
+        "validation_tooling": "Built-in. Vault Validation Management provides native requirements management, test case authoring, test execution with electronic signatures, deviation tracking, traceability matrix generation, and periodic review workflows. This eliminates the need for an external validation tool for organizations that use Vault as their quality platform."
+      }
+    },
+    "comparison_summary": {
+      "validation_scope_drivers": {
+        "lsc": "Platform release frequency + managed package upgrades + custom Apex/LWC + lack of built-in validation tooling. Validation effort is moderate to high depending on customization.",
+        "oce": "Mobile/server dual surface + JavaScript customizations + deferred upgrade accumulation + no built-in validation tooling. Validation effort is high for heavily customized deployments.",
+        "vault": "Built-in validation support + vendor-provided impact assessments + minimal custom code + configuration-centric model. Validation effort is lower than CRM platforms for comparable scope."
+      },
+      "migration_validation_impact": "Migrating from OCE to LSC is not an upgrade — it is a new system implementation. The entire validation package (URS, FRA, IQ/OQ/PQ, RTM, VSR) must be created from scratch for the LSC instance. Validation artifacts from the OCE deployment cannot be reused directly, although the URS may be adapted if business requirements have not changed."
+    },
+    "source": "product-validation-analysis",
+    "tags": ["lsc", "oce", "vault", "gamp-classification", "deployment-model", "release-cadence", "customization", "validation-tooling", "comparison"]
+  },
+  {
+    "id": "val-pvp-002",
+    "category": "validation-product-profiles",
+    "title": "Product Tag Schema — Filtering Knowledge by Platform",
+    "products": ["lsc", "oce", "vault"],
+    "summary": "Knowledge entries in the Lumis knowledge base can be tagged with a 'products' field to indicate which platforms the entry applies to. This enables platform-specific search and prevents cross-platform assumptions (e.g., applying OCE sample management validation patterns to an LSC implementation without considering the architectural differences).",
+    "schema": {
+      "field_name": "products",
+      "field_type": "Array of strings",
+      "allowed_values": {
+        "lsc": "Life Sciences Cloud — Salesforce-native 2GP platform for commercial CRM, including sample management, consent management, visit management, field coaching, and territory alignment.",
+        "oce": "OCE — Legacy CRM platform with mobile (iPad/Android) and web clients. Covers the same commercial CRM functional areas as LSC but on a different technology stack.",
+        "vault": "Veeva Vault — Document and quality management platform covering QMS, QualityDocs, Regulatory Information Management (RIM), Clinical (eTMF, CTMS), and Safety. Not a CRM — but frequently co-deployed alongside CRM platforms and subject to the same validation requirements."
+      },
+      "default_behavior": "Entries without a 'products' field are treated as cross-platform (applicable to all). This preserves backward compatibility with existing knowledge entries.",
+      "search_behavior": "When a user specifies a product in their query (e.g., 'LSC sample management validation'), the search tool should prefer entries tagged with that product. Entries tagged with all three products or with no product tag are included as secondary results."
+    },
+    "source": "product-taxonomy-design",
+    "tags": ["schema", "products", "taxonomy", "search-filtering"]
+  }
+]

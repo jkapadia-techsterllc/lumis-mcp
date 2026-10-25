@@ -1,0 +1,184 @@
+[
+  {
+    "id": "oce-cfg-tsu-001",
+    "category": "commercialization/crm/configuration",
+    "title": "Synchronization Architecture and Sync Types",
+    "products": ["CRM Platform"],
+    "summary": "Bidirectional data synchronization between mobile devices and the platform supports three sync types: full sync (downloads all data for a user's territory), delta sync (downloads only changes since last sync), and upload-only sync (pushes local changes without downloading). A PIN sync triggers after the app is unlocked and behaves as delta. Background sync runs periodically when the app is open but not in the foreground. Force sync can be triggered by administrators to push configuration changes immediately.",
+    "findings": {
+      "sync_types": "Full sync downloads the complete data set scoped to a user's territory. Delta sync downloads only records modified since the last successful sync timestamp. Upload-only sync pushes locally created or modified records without pulling server changes. Initial sync is always a full sync and occurs at first login.",
+      "conflict_resolution": "The platform uses a 'last one wins' conflict resolution strategy. Data created in the mobile application has higher priority than data received from the web application until the transaction is synchronized from the server with a terminal status (Success, Cancelled, or Manual). After a transaction reaches terminal status, the latest modification from either mobile or web has highest priority.",
+      "offline_fields": "Four offline tracking fields are required for bidirectional sync on any synced object: a field for the offline creator user ID, offline creation timestamp, offline last modifier user ID, offline last modification timestamp, and an offline unique identifier field. These fields enable the platform to track which records were created or modified while the device was offline.",
+      "force_sync": "Administrators can trigger a forced sync for individual users by toggling a flag on the user record. This is used to push urgent configuration or data changes. The force sync flag resets after the user's next sync completes.",
+      "sync_statistics": "Each sync operation creates a statistics record containing the sync trigger type (Force, Initial, PIN, Manual), upload and download completion status, duration metrics, freeze time (when app was backgrounded during sync), and error details. The sharing setting for the statistics object should be set to Private."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["sync", "offline", "mobile", "delta-sync", "conflict-resolution", "force-sync"]
+  },
+  {
+    "id": "oce-cfg-tsu-002",
+    "category": "commercialization/crm/configuration",
+    "title": "Synchronization Configuration Settings",
+    "products": ["CRM Platform"],
+    "summary": "The synchronization process is governed by a custom setting with four configuration sections: server settings control transaction processing behavior, mobile settings control device-side sync parameters, jobs settings control batch processing, and advanced settings enable optimization features.",
+    "findings": {
+      "server_settings": "Key server-side settings include: enforce original user permissions (controls whether transactions are processed in the context of the original user or the admin), transaction log retention period, maximum items per transaction (default 24), and retry attempts for failed transactions.",
+      "mobile_settings": "Device-side settings include: non-WiFi data limit (restricts sync data volume on cellular connections), offline days limit (controls how many days of data are stored locally), and timeout values for sync operations.",
+      "jobs_settings": "Batch processing settings include: batch size for transaction processing, number of concurrent system job instances, and queue overflow handling behavior. The queue overflow setting determines whether to use a queueable approach when the batch queue is full.",
+      "advanced_settings": "Advanced optimization settings include: auto-grouping of transaction items (groups items with the same operation and entity type to reduce queries), ignore invalid fields (skips unrecognized fields instead of failing the transaction), auto-cancel for deleted or not-found records, and auto-retry on locked row or older success conditions.",
+      "transaction_processing": "Transaction processing is initiated by a trigger on the sync transaction object and handled by a scheduled job. The trigger fires when new transactions arrive from mobile devices and queues them for processing. The scheduled job processes queued transactions in order, respecting dependencies between parent and child transactions."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["sync-config", "batch-processing", "transaction-processing", "mobile-settings", "server-settings"]
+  },
+  {
+    "id": "oce-cfg-tsu-003",
+    "category": "commercialization/crm/configuration",
+    "title": "Sync Transaction Lifecycle and Error Handling",
+    "products": ["CRM Platform"],
+    "summary": "Sync transactions follow a defined lifecycle from creation on the mobile device through server-side processing. Administrators have tools to monitor, retry, cancel, simulate, and debug failed transactions. Two processing engines are available: the standard platform jobs engine and an external sync transaction service.",
+    "findings": {
+      "transaction_statuses": "Mobile-side statuses: Local (created), Published (pushed to server). Server-side statuses: New (received), Retry (failed but retries remaining), Success (processed and applied), Cancelled (cancelled by admin), Manual (pending over 24 hours, needs manual intervention), Failed (exceeded retry limit).",
+      "admin_actions": "Available administrative actions on transactions: Analyze (batch evaluates issues like duplicates and invalid IDs), Retry All / Retry & Process All (requeues failed transactions), Cancel All (mass cancellation with reason tracking), Ignore (cancel single transaction), Simulate (process without committing), Repair (mark as Manual for pending transactions over 24 hours). Results are emailed to the initiating admin.",
+      "signature_protection": "When cancelling transactions that contain signature data (for inquiry, consent, order, remote request, call, meeting member, or document objects), a warning is displayed. A log record is created tracking cancelled signature transactions. A dedicated view filter exists for finding cancelled transactions that contained signatures.",
+      "sync_transaction_service": "An alternative processing engine handles transactions using API limits instead of daily async apex execution limits. It processes transactions in the admin user context and automatically identifies heavyweight transactions that need asynchronous processing. Switching between engines is managed through an admin console interface with rollback capability.",
+      "error_codes": "Standard error codes include: generic sync errors, invalid object name, invalid field name, invalid operation, offline ID not found, attachment not found, incorrect blob data format, and multiple permission-related errors (object-level, field-level, record-level, and record reference permissions).",
+      "dependency_optimization": "An enhanced dependency validation feature reduces async apex limit usage by skipping transactions whose parent transactions have not yet been successfully processed. Skipped transactions are re-evaluated on each processing cycle."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["sync-transactions", "error-handling", "transaction-lifecycle", "admin-tools", "sync-service"]
+  },
+  {
+    "id": "oce-cfg-tsu-004",
+    "category": "commercialization/crm/configuration",
+    "title": "Territory Management Migration and ETM Setup",
+    "products": ["CRM Platform"],
+    "summary": "The platform supports two territory management approaches: Legacy Territory Management (1.0) and Enterprise Territory Management (ETM 2.0). Organizations on TM 1.0 must migrate to ETM 2.0, which involves replacing direct territory object queries with a custom territory management API class that abstracts the underlying territory implementation.",
+    "findings": {
+      "tm_versions": "TM 1.0 uses the legacy Territory object with direct SOQL queries. ETM 2.0 uses Territory2, UserTerritory2Association, and ObjectTerritory2Association objects with a richer feature set including territory models, types, and assignment rules. Only one territory model can be active at a time.",
+      "custom_tm_api": "The platform provides a custom territory management class with data transfer objects for territories (containing record ID, name, API name, parent ID, description, color, external ID, and mirror territory fields), user-territory associations (territory ID and user ID), and share records (record ID, parent ID, territory name, scope, sharing type, access level, and user/group ID).",
+      "api_methods": "Key API methods include: get all territories, get territories by names, get assigned territories for accounts, get user territories, create/update/delete territories, assign/remove users from territories, share/unshare records with territories, and territory existence checks. All methods abstract the TM version, so the same code works regardless of the underlying implementation.",
+      "migration_steps": "Migration from TM 1.0 to ETM 2.0 involves: replacing all direct territory SOQL queries with custom TM API calls, updating unit tests to initialize a custom setting record (specifying the TM type as either '1.0' or 'ETM'), creating territory test data through the API rather than direct DML, and wrapping territory insert operations in a system run-as block.",
+      "etm_setup": "ETM 2.0 setup requires: enabling enterprise territory management features in the org, creating at least one territory type (for organizing territories, not visible in hierarchies), building a territory model with hierarchy and assignment rules, activating the model (which archives the previous model), and assigning users and accounts.",
+      "territory_uniqueness": "The platform requires unique territory names. Organizations migrating from earlier versions need to create a trigger on the Territory object to enforce name uniqueness, as the built-in check from the previous version is no longer active."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["territory-management", "ETM", "migration", "territory-api", "territory-model"]
+  },
+  {
+    "id": "oce-cfg-tsu-005",
+    "category": "commercialization/crm/configuration",
+    "title": "Territory Alignment Rules and Account Assignment",
+    "products": ["CRM Platform"],
+    "summary": "Accounts are assigned to territories through three types of alignment rules: customer alignment rules (direct account-to-territory mapping), territory alignment rules (geographic zip-to-territory or brick-to-territory mapping), and affiliation alignment rules (based on account relationships). Each territory supports up to 15 assignment rules and a recommended maximum of 10,000 accounts.",
+    "findings": {
+      "customer_alignment": "Customer alignment rules directly map individual accounts to one or more territories. Only one active rule can exist per account. Territories are specified as semicolon-separated labels. Territories can be added or dropped through dedicated fields that modify the master territory list on save.",
+      "geographic_alignment": "Territory alignment rules use geographic criteria: zip-to-territory ties postal codes to territories, and brick-to-territory ties brick codes to territories. The system checks all addresses linked to an account and assigns it to a territory if at least one address matches. Rules have distribution start and end dates controlling when they are active.",
+      "territory_switching": "Users can be assigned to multiple territories but work with one at a time. The territory switcher in the web application separates directly assigned territories from child territories. The first assigned territory becomes the default. Selecting a directly assigned territory updates the default; selecting a child territory does not.",
+      "manual_sharing": "By default, manual sharing of accounts is removed when alignment rules run. A custom setting flag can preserve manual sharing during realignment. After any account territory realignment, the call share management job should be run to update call sharing accordingly.",
+      "user_territory_updates": "To keep the active territory field current, a trigger must be created on the user territory association object. This trigger fires on insert and delete events and invokes the territory management trigger framework to update user records."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["territory-alignment", "account-assignment", "geographic-alignment", "customer-alignment", "territory-switching"]
+  },
+  {
+    "id": "oce-cfg-tsu-006",
+    "category": "commercialization/crm/configuration",
+    "title": "Territory Plans and Business Objectives",
+    "products": ["CRM Platform"],
+    "summary": "Territory plans allow organizations to set target parameters for territories and track business objectives and goals. Business objectives come in three record types with different access levels: territory-level (available to admin and users), global (admin only), and affiliate (admin only). Objectives can be linked to calls through tactic and to-do objects.",
+    "findings": {
+      "objective_types": "Territory business objectives are created by users and admins in both web and mobile. Global and affiliate business objectives are created by admins only, either through the web interface or via data loader. Territory objectives can be imported from affiliate objectives when the affiliate objective has an approved status and the current date falls within its date range.",
+      "call_linking": "Objectives are linked to calls through an indirect relationship via call account tactic and call to-do junction objects. Changing the status of a tactic or to-do on a call screen updates the linked record through dedicated trigger handlers. This status synchronization does not work offline; a manual sync is required to reflect changes on mobile.",
+      "todo_filtering": "Business to-do records can be filtered based on products selected in call details. When enabled, the products filter is automatically activated in the advanced search interface. This requires the key account management permission sets and a batch job to denormalize business objective product associations.",
+      "activation": "Territory plan activation requires: adding the territory plans tab to navigation, assigning admin and user permission sets, configuring record types with territory business objective as default, activating five related database schema entities, activating trigger handlers for percentage completion calculations and cascading deletes, and replacing a deprecated component with a modern web component. Platform cache must be enabled with at least 1 MB allocated.",
+      "percentage_tracking": "Completion percentages are automatically calculated at multiple levels through trigger handlers: territory plan, business objective, and business tactic. A separate handler manages cascading deletion when a territory plan is removed."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["territory-plans", "business-objectives", "call-linking", "KAM", "goal-tracking"]
+  },
+  {
+    "id": "oce-cfg-tsu-007",
+    "category": "commercialization/crm/configuration",
+    "title": "Translation and Localization Framework",
+    "products": ["CRM Platform"],
+    "summary": "The platform leverages native translation workbench functionality for multi-language support across web and mobile. Translation applies to custom components, managed package components (via override), custom labels, tabs, and standard section headers. A metadata cache regeneration is required after any translation change.",
+    "findings": {
+      "translation_scope": "Translatable elements include: custom field labels, related list labels, help text, actions, custom fields of standard objects, managed package components (via override mechanism), custom labels (both managed and unmanaged), tabs (primary navigation, lightning page tabs, default tabs, standard tabs), and standard section headers (via layout-sections category custom labels).",
+      "standard_labels_document": "A standard label translations document (JSON format) is generated through the admin console for mobile applications. This document contains translations of standard objects and their standard fields. It must be regenerated and a new metadata cache created whenever standard translations change.",
+      "tab_translation": "Tab translation uses custom labels with specific category values: 'tabs' for primary navigation items, '{Lightning Page Name}-tabs' for page-specific tabs, 'default-tabs' as fallback for lightning page tabs, and 'std-tabs' for standard tabs. The short description field must contain the API name of the tab being overridden.",
+      "global_value_set_issue": "The translation workbench does not properly handle global value sets with namespaces, creating duplicate translations. Two remediation methods exist: re-importing a modified bilingual file with empty translation markers, or manually removing duplicates through the translate interface. This is a known platform limitation affecting packaged global value set values.",
+      "layout_names": "Due to a platform limitation, different page layout names should be used between business and person account record types, and between packaged and non-packaged layouts, to avoid translation conflicts."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["translation", "localization", "i18n", "translation-workbench", "metadata-cache"]
+  },
+  {
+    "id": "oce-cfg-tsu-008",
+    "category": "commercialization/crm/configuration",
+    "title": "User Profiles and Role Configuration",
+    "products": ["CRM Platform"],
+    "summary": "The platform supports seven built-in user profiles spanning commercial and medical roles. Each profile has specific configuration requirements. Geolocation tracking and manager role enablement require additional setup steps. The platform's mobile application is completely custom and unrelated to the standard mobile app.",
+    "findings": {
+      "supported_profiles": "Seven standard profiles: Admin (requires customize application permission), Sales Representative, Medical Science Liaison (MSL), Key Account Manager (KAM), District Manager, Regional Manager, and National Account Manager (NAM). Custom profiles can be created by cloning existing ones.",
+      "kam_requirements": "The KAM profile requires explicit assignment of calendar configuration and account list item database schema entities. Without this configuration, the mobile application will hang when users navigate between tabs. This is a critical post-configuration step that is easy to miss.",
+      "geolocation_tracking": "Device geolocation at sync time can be tracked by granting read and edit access to the user location field on the sync statistics object. The geolocation data is stored in a device last location field on the user object and updated through a trigger handler. Location services must be enabled on the device; errors are logged silently without user notification.",
+      "manager_profiles": "District Manager and Regional Manager profiles are enabled by copying all permissions from the Sales Representative profile, copying configuration entity assignments, enabling access to team activity and territory web services, and assigning the profiles to the user database schema entity.",
+      "nam_installation": "The National Account Manager profile is installed by cloning the Sales Representative profile and deploying NAM-specific changes via the Ant Migration Tool. After deployment, all metadata must be copied from the Sales Representative profile to the new NAM profile through the admin console.",
+      "timezone_behavior": "When the mobile device timezone differs from the user's configured timezone in the platform, the mobile app refreshes to match the server-configured timezone. This refresh occurs during initial sync, metadata updates, forced sync, territory switches, or app restarts following a sync."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["user-profiles", "KAM", "geolocation", "manager-roles", "NAM", "timezone"]
+  },
+  {
+    "id": "oce-cfg-tsu-009",
+    "category": "commercialization/crm/configuration",
+    "title": "Field Coaching Configuration",
+    "products": ["CRM Platform"],
+    "summary": "Field coaching enables managers to evaluate sales representatives through structured coaching events with customizable form templates, scored questions, and multi-status workflows. The system supports dual coach/employee roles, self-evaluation, acknowledgement workflows, and historical score tracking.",
+    "findings": {
+      "permission_model": "Three mutually exclusive permission sets control access: Administration (full CRUD on all coaching objects), Coach (create and manage coaching events), and Sales Rep (employee-level access to assigned events). A dual-role configuration allows a user to be both coach and employee by assigning both Coach and Sales Rep permission sets simultaneously.",
+      "coaching_workflow": "Coaching events follow a seven-status workflow: Planned, In Review, Employee Review (optional, requires acknowledgement setting), Acknowledged (after employee review), Self Evaluation (optional, enables employee self-scoring), Finished, and Cancelled. Each status has a corresponding record type with dedicated page layouts for coach and employee profiles.",
+      "scoring_system": "Questions use a JSON-based scale definition containing label, score, description, and weight for each answer option. The total score formula is: sum of (score × weight) for each question. Previous scores are tracked from the last finished event using the same coaching form template for the same employee.",
+      "form_templates": "Coaching form templates have start and end dates and an active flag. Only active templates within their date range are available for selection. Templates are shared with coaches through standard sharing settings. Questions are linked to templates through a junction object with category and sort order fields.",
+      "territory_scoping": "Coaching event visibility is controlled by a territories field that is automatically populated with the coach's current territory and the employee's assigned territories. This field controls synchronization scope on mobile and visibility on the team tab and planner. It should not be exposed to users for editing.",
+      "advanced_features": "Configurable features include: blocking employee changes after event creation (via validation rule), preventing overlapping coaching events (via trigger handler with custom permission), long text comments (up to 1000 characters, replacing the default 255), limiting coaching assignments to subordinates within 3 hierarchy levels, and viewing previous evaluation data in self-evaluation mode."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["field-coaching", "coaching-events", "form-templates", "scoring", "manager-evaluation"]
+  },
+  {
+    "id": "oce-cfg-tsu-010",
+    "category": "commercialization/crm/configuration",
+    "title": "Planner and Calendar Management",
+    "products": ["CRM Platform"],
+    "summary": "The planner provides a unified calendar interface for registering and displaying calls, general events, times off territory, meetings, field coaching events, holidays, and to-do tasks. It enforces entity limits per view period and supports configurable layouts, call previews, and event type filtering.",
+    "findings": {
+      "entity_limits": "The web planner enforces per-period limits: 300 calls, 100 general events, 100 times off territory, 100 meetings, 100 coaching events, and 100 to-dos per selected period (day/week/working week/month). The combined cap is 1000 events. Account search is limited to the first 10,000 accounts in a territory.",
+      "security_model": "Calls, general events, times off territory, and meetings use private organization-wide defaults with territory-based sharing at read-only level. Coaching events use user-based sharing and are visible on territories listed in their territories field. Holidays use public read-only access filtered by business hours and user/profile alignment. To-do items use user-based private sharing.",
+      "call_preview": "Call previews can display attendees, samples, last/next call objectives, product details, and items sections. Section order is hardcoded. Header fields are not configurable. A custom permission can skip the call preview and open the full call page directly from the planner (only for the modern call interface).",
+      "event_filtering": "Users can filter event types on the planner. Web resets all types to enabled on each page load. Mobile remembers the last selection and resets only on logout, sync, or app restart. External events (imported from systems like Google Calendar) can be filtered separately from platform-native events.",
+      "preferred_lists": "Users can pin a list or filter as their preferred default in the planner using a set-as-preferred action. Available items include static lists, routes, out-of-box filters, shared filters/routes, and user-created filters. The preference persists across logout/login sessions.",
+      "scheduling_constraints": "Calls and meetings cannot overlap with holidays or times off territory. Events can only be created within configured business hours. A dedicated trigger handler prevents calls from being scheduled on holidays, weekends, or outside business hours."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["planner", "calendar", "scheduling", "call-preview", "event-management", "business-hours"]
+  },
+  {
+    "id": "oce-cfg-tsu-011",
+    "category": "commercialization/crm/configuration",
+    "title": "Survey Configuration and Management",
+    "products": ["CRM Platform"],
+    "summary": "The survey module enables account-based and call-embedded surveys on mobile and web, leveraging the standard platform survey builder with custom extensions for offline support, branching logic, display logic, retake functionality, online guest access, and product-linked surveys. Surveys require database schema activation, permission sets, trigger handlers, and metadata cache generation.",
+    "findings": {
+      "activation_requirements": "Survey activation requires: enabling the standard survey feature, assigning creator/admin/user permission sets, activating eight database schema entities (Survey, SurveyInvitation, SurveyPage, SurveyQuestion, SurveyQuestionChoice, and three custom objects for responses), enabling two trigger handlers (invitation sharing and response handlers), granting object and field permissions across relevant profiles, and generating a metadata cache after each survey creation or modification.",
+      "question_types": "Mobile supports: Date, Multiple Selection, Single Selection, Rating, Long Text, Short Text, Slider, and Picklist. Not supported on mobile: Score, Ranking, Like/Dislike, Matrix, Net Promoter Score. All types are supported on web. Long text support (up to 1000 characters) requires field-level security configuration for extended text fields.",
+      "branching_and_display_logic": "Branching logic enables different question paths based on responses, with backward navigation support. Display logic dynamically shows/hides questions on the same page based on other responses. These two features are mutually exclusive: if branching is enabled, display logic is ignored. The equals operator behaves differently between web (acts like contains) and mobile (exact match) for multi-select questions.",
+      "survey_invitations": "Surveys are shared through invitation records that can target a specific account, all accounts in a territory, or an account-territory combination. Invitations support product linking (up to 12 product IDs), compliance validation rules to block surveys for non-compliant accounts, and online guest access via digital experience sites without authentication.",
+      "retake_and_sync": "Submitted surveys can be retaken with optional copying of last responses (mobile only). A batch job synchronizes standard survey response records with custom response objects. Web survey responses only appear after the sync batch runs. Survey response data for reports requires a separate batch job to populate a text field from choice values.",
+      "satisfaction_surveys": "Survey invitations can be classified as satisfaction surveys. When multiple satisfaction surveys exist, the mobile app uses the one with the latest modified date. Activity history integration requires custom setting configuration mapping the survey response object to account, date, status, territory, and display fields."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["surveys", "survey-builder", "branching-logic", "survey-invitations", "offline-surveys", "satisfaction-surveys"]
+  }
+]

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "fmp-001",
+    "category": "field-medical-modules",
+    "title": "Field Medical Planning Tool \u2014 MSL Territory and Activity Planning",
+    "products": [
+      "oce"
+    ],
+    "summary": "The Field Medical Planning Tool supports Medical Science Liaison territory management, scientific engagement planning, and medical activity tracking. It addresses the distinct requirements of medical affairs teams compared to commercial field teams.",
+    "planning_capabilities": {
+      "territory_planning": "MSL territories are defined differently from commercial territories \u2014 based on key opinion leader (KOL) concentrations, academic medical centers, and research sites rather than prescriber volume.",
+      "activity_planning": "MSL activity planning focuses on scientific exchange quality rather than call frequency. Plans include congress attendance, advisory board participation, and investigator-initiated study support.",
+      "stakeholder_mapping": "Medical stakeholder mapping emphasizes expertise, publication history, trial involvement, and scientific influence rather than prescribing volume.",
+      "hcp_view": "HCP View displays all accounts in the CRM universe with filtering by Expert Panel status, Level of Expertise, and Interactions Planned count. Supports advanced account search to add HCPs not already in the system.",
+      "interaction_planning": "Interactions are planned per HCP by month with structured fields: Product/Indication (determines available Medical Objectives and Discussion Topics), Interaction Type, and date range. Clone Visit feature enables duplicating plans across HCPs for efficiency.",
+      "reporting": "Interactions Planned Report provides aggregate views by HCP, Product/Indication, Medical Objective, Discussion Topics, and date ranges. Exportable to spreadsheet format for offline review and management reporting."
+    },
+    "differentiation_from_commercial": "Commercial CRM planning focuses on call targets, frequency, and sales metrics. Medical planning requires compliance-sensitive workflows, scientific exchange tracking, and medical inquiry management that differ fundamentally from commercial workflows.",
+    "source": "field-medical-planning-tool-training-guide, enriched with operational training details",
+    "tags": [
+      "field-medical",
+      "msl",
+      "territory-planning",
+      "medical-affairs",
+      "kol-management"
+    ]
+  },
+  {
+    "id": "fmp-002",
+    "category": "field-medical-modules",
+    "title": "Field Medical Planning Tool \u2014 Compliance and Reporting",
+    "products": [
+      "oce"
+    ],
+    "summary": "Medical affairs compliance requirements drive specific planning tool capabilities around transparency reporting, separation of commercial and medical activities, and regulatory documentation.",
+    "compliance_features": {
+      "transparency_reporting": "Automated capture of HCP interactions for aggregate spend reporting and sunshine act compliance.",
+      "firewall_enforcement": "System-enforced separation between commercial and medical data \u2014 MSL activity is not visible to commercial teams and vice versa.",
+      "scientific_exchange_documentation": "Structured documentation of scientific discussions, medical information requests, and unsolicited off-label inquiries with appropriate routing workflows."
+    },
+    "reporting_capabilities": {
+      "medical_kpis": "Reports focus on scientific engagement quality, KOL development, medical insight generation, and medical information request resolution.",
+      "compliance_dashboards": "Real-time visibility into transparency reporting completeness, firewall adherence, and documentation quality."
+    },
+    "source": "field-medical-planning-tool-training-guide",
+    "tags": [
+      "field-medical",
+      "compliance",
+      "transparency-reporting",
+      "medical-reporting"
+    ]
+  }
+]

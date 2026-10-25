@@ -1,0 +1,164 @@
+[
+  {
+    "id": "oce-cfg-fop-001",
+    "category": "commercialization/crm/configuration",
+    "title": "Field Insights Capture and Core Configuration",
+    "products": ["CRM Platform"],
+    "summary": "Insights are captured from multiple entry points across the application with mandatory title and text fields, product and account linking constraints, hierarchical tag classification, and a private-by-default sharing model.",
+    "findings": {
+      "capture_entry_points": "Insights can be created from five locations: the Home page, a dedicated Insights tab, the Account record, Meeting records, and Call records. Each entry point creates an insight record with the same underlying data model but may pre-populate different contextual fields (e.g., account from an Account record, attendees from a Meeting).",
+      "mandatory_fields": "Two fields are mandatory for insight creation: Insight Title and the Insight text body. The text body defaults to a 255-character standard text area but can be upgraded to a Long Text Area supporting up to 1000 characters. This upgrade requires a field type change on the insight object.",
+      "product_linking": "Products can be linked to insights, but only products configured for on-label detailing are available in the selection list. Competitor products can optionally be included by enabling a metadata configuration setting. Product linking helps organizations track which product insights are generating the most field intelligence.",
+      "account_linking": "Multiple accounts can be linked to a single insight. Account search supports KanaName for Japanese localization. Linked accounts include a territory field that provides organizational context for the insight. The number of linked accounts contributes to the insight's ranking score in feeds.",
+      "tag_classification": "Insights are classified using Topic records of a specific Tag record type. Tags support hierarchical structures, allowing nested categorization (e.g., Therapeutic Area > Disease State > Treatment Pattern). Tags must be shared to territories before they are available for field users to apply.",
+      "sharing_model": "Insight records are private by default — only the creator can view them. Administrators must establish a sharing procedure to enable broader visibility. This private-default model means migration planning must account for sharing rules, manual sharing, and any custom sharing logic."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["insights", "field-intelligence", "capture", "product-linking", "tags", "sharing", "private-default"]
+  },
+  {
+    "id": "oce-cfg-fop-002",
+    "category": "commercialization/crm/configuration",
+    "title": "Insight Feeds, Voting, and Parent-Child Linking",
+    "products": ["CRM Platform"],
+    "summary": "Insights are surfaced through categorized feed views with configurable ranking algorithms, a voting mechanism for crowdsourced prioritization, and parent-child linking that consolidates similar insights while aggregating engagement metrics.",
+    "findings": {
+      "feed_views": "Insights are displayed in feeds grouped by tabs: Latest (chronological), Trending (highest recent engagement), All Channels (cross-territory visibility), and My Insights (user's own submissions). Feed views provide the primary discovery mechanism for field teams to consume peer-generated intelligence.",
+      "ranking_algorithm": "Insight ranking in feeds is calculated by a formula that defaults to the sum of upvotes plus the count of linked accounts. This formula is customizable, allowing organizations to weight different engagement signals (votes, account links, recency) according to their prioritization strategy.",
+      "voting_mechanism": "Users can vote on insights from both the feed view and the edit screen. Votes are tracked via a dedicated custom Vote object, enabling audit trails and analytics on voting patterns. The voting user interface component (InsightUpvoteContainer) is configurable on the insight lightning page.",
+      "parent_child_linking": "Similar insights can be linked in a parent-child relationship. When an insight becomes a child of a parent, it disappears from feed views to reduce duplication. Engagement counters (votes and linked accounts) aggregate upward — the parent insight's totals include all child contributions. This consolidation helps surface the strongest signals from redundant field observations.",
+      "global_insights": "When cross-org transactions are configured, insights can be received from other orgs as global insights. Global insights display a distinct icon and use lower color density for products and tags added by other orgs. Certain fields (DateTime, Title, Insight text, Tags, Products) from global insights are denormalized and cannot be edited by the receiving user. Custom fields are not supported on global insights."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["insights", "feeds", "voting", "ranking", "parent-child", "global-insights", "cross-org"]
+  },
+  {
+    "id": "oce-cfg-fop-003",
+    "category": "commercialization/crm/configuration",
+    "title": "Insight Collaboration, Objectives, and Workflow Control",
+    "products": ["CRM Platform"],
+    "summary": "Insights support colleague collaboration filtered by organizational division, business objective linking via Dynamic Tree View for strategic alignment, and workflow-controlled access that locks insight editing based on parent record status.",
+    "findings": {
+      "colleague_collaboration": "Users can add colleagues to insights for collaborative strategic discussion. Colleagues are selected from the User object filtered by the current user's organizational division. Adding a colleague triggers a sharing handler that grants access to the insight record. Colleague additions are limited to parent insights only (not child insights in a linked hierarchy). Read/write access level for colleagues is controlled via a custom permission.",
+      "divisions_integration": "The colleague feature requires the platform Divisions functionality. Divisions must be configured with the Modify All Data permission for administrators and Affected by Divisions plus View Setup and Configuration permissions for field users. Each user's Default Division field determines which colleagues are visible in the selection list. The User DB Schema entity must be updated to include the division field.",
+      "business_objectives_on_insights": "Business objectives can be linked to insights through a dedicated Objectives tab, connecting field intelligence to organizational strategy. Only Territory Business Objectives with an Approved approver status can be linked. The linked objectives display in a hierarchy (Objectives > Tactics > To-Dos) using the Dynamic Tree View component, configured through DTV Component Config and DTV Object Config metadata records.",
+      "workflow_controlled_access": "Insight record access can be controlled by the workflow engine. When enabled, insight editing permissions follow the parent record's workflow status — for example, insights created on a Call record are editable when the call is in Draft status but become locked when the call is Submitted. Configuration requires creating a workflow context type for the Insight object and defining child contexts for each parent status.",
+      "reporting": "Administrators can build reports showing only unique insights (parents and stand-alone, excluding children) by creating a formula checkbox field that checks for null parent references. This formula is then used as a locked filter in the report configuration."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["insights", "collaboration", "colleagues", "divisions", "business-objectives", "workflow", "dtv", "reporting"]
+  },
+  {
+    "id": "oce-cfg-fop-004",
+    "category": "commercialization/crm/configuration",
+    "title": "Managed Markets - Payer and Formulary Management",
+    "products": ["CRM Platform"],
+    "summary": "Managed markets functionality adds three account record types for payer organizations and two custom objects for formulary tracking, providing a lightweight data model for monitoring drug coverage across health plans.",
+    "findings": {
+      "account_record_types": "Three new account record types support managed markets workflows: Payer (insurance companies and government programs), Plan (specific insurance plans under a payer), and Pharmacy Benefits Manager (PBM organizations managing prescription drug benefits). These record types extend the standard Account object without requiring separate custom objects.",
+      "formulary_objects": "Two custom objects track drug coverage: Formulary (linked to Plan-level Account records, representing a plan's drug coverage list) and Formulary Product (child records containing product name, formulary tier, copay amount, and covered lives count). This two-level structure enables tracking coverage across multiple plans and products.",
+      "mobile_activation": "For mobile (iPad) display, both the Formulary and Formulary Product DB Schema entities must be activated in the Admin Console. Without activation, the managed markets data is available on the web but invisible on mobile devices.",
+      "minimal_configuration": "The managed markets module has minimal configuration overhead compared to other CRM modules. It primarily extends existing account and product data models rather than introducing complex new workflows. This makes it one of the simpler modules to migrate, though the account record type and custom object mapping must be carefully planned."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["managed-markets", "payer", "formulary", "pbm", "health-plans", "drug-coverage", "account-record-types"]
+  },
+  {
+    "id": "oce-cfg-fop-005",
+    "category": "commercialization/crm/configuration",
+    "title": "Sprint-Based Account Tactic Execution",
+    "products": ["CRM Platform"],
+    "summary": "Sprints organize account tactic execution into time-boxed iterations with a one-tactic-per-sprint constraint, percentage complete tracking via trigger handlers, and bulk update support for managing tactics at scale.",
+    "findings": {
+      "sprint_model": "Sprints provide time-boxed containers for account tactic execution within Key Account Management. A dedicated Sprints tab displays sprint records with their linked account tactics. Sprints can be added or removed from account plans via a menu on the account plan record. The sprint object includes start date, end date, and percentage complete fields.",
+      "tactic_constraints": "Each account tactic can be associated with only one active sprint at a time, enforcing focused execution. However, a single sprint can contain multiple tactics, enabling parallel work within a time box. This constraint prevents the same tactic from being double-counted across sprints.",
+      "sharing_model": "Sprint records are shared with record owners only by default. This means only the sprint creator and users with higher role hierarchy access can view sprint details. Custom sharing rules or manual sharing must be configured for team visibility.",
+      "dynamic_tree_view": "Sprint visualization uses the DynamicTreeViewContainer lightning component configured with 'Account Plan Sprints View' metadata. This provides a hierarchical display of account plans, sprints, and linked tactics in a navigable tree structure. DTV Component Config and DTV Object Config metadata records define the display configuration.",
+      "trigger_handlers_and_bulk_update": "Two trigger handlers automate sprint management: SetSprintPercentCompleteHandler (recalculates sprint completion based on tactic progress) and SetAccountPlanOnAccountTacticHandler (maintains the account plan reference on tactics). Bulk update support is provided via a configurable button component with parent/related object parameters for managing multiple tactics simultaneously."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["sprints", "account-tactics", "kam", "percent-complete", "dtv", "bulk-update", "time-boxed"]
+  },
+  {
+    "id": "oce-cfg-fop-006",
+    "category": "commercialization/crm/configuration",
+    "title": "Clinical Study, Site, Staff, and Milestone Management",
+    "products": ["CRM Platform"],
+    "summary": "Clinical study management uses a Study object with child Site and Staff records sharing a single underlying object with record types, and Milestone records supporting linkage to either study-level or site/staff-level tracking.",
+    "findings": {
+      "study_object": "The Study object represents clinical research experiments or trials. Each study record captures trial metadata and serves as the parent for site, staff, and milestone information. Studies can be linked to business objectives for strategic alignment between clinical operations and commercial goals.",
+      "site_records": "Sites represent healthcare organization (HCO) locations participating in a clinical study. Sites use the Study Account object with a 'Site' record type, enabling them to share the underlying data model with staff records. Each site can have a Principal Investigator designated via an HCP (healthcare professional) lookup field.",
+      "staff_records": "Staff represent healthcare professional (HCP) personnel involved in clinical studies. Staff records also use the Study Account object but with a different record type. Each staff record includes a self-lookup field to a related Site, establishing the organizational relationship between personnel and their study location.",
+      "milestone_tracking": "Milestones represent trial phases (e.g., screening, enrollment, treatment, follow-up). Each milestone record links to EITHER a Study (study-level milestone) OR a Study Site/Staff record (site-level milestone) — but not both simultaneously. This constraint enforces clear scope for each milestone and prevents ambiguous tracking.",
+      "business_objectives_linkage": "Studies can be connected to territory business objectives through junction objects, enabling key account managers to track alignment between clinical operations and commercial strategy. The Dynamic Tree View component provides hierarchical visualization of the study-objective relationship with configurable search, picklist filters, and column limits (max 5 columns, max 10 info popup fields)."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["clinical-studies", "sites", "staff", "milestones", "hco", "hcp", "trial-phases", "junction-objects"]
+  },
+  {
+    "id": "oce-cfg-fop-007",
+    "category": "commercialization/crm/configuration",
+    "title": "Gantt Chart and Timeline Visualization Components",
+    "products": ["CRM Platform"],
+    "summary": "Two visualization components support temporal data display: a Gantt Chart for milestone timelines spanning three consecutive years with configurable status colors, and a generic Timeline component for chronological child record display on any parent object.",
+    "findings": {
+      "gantt_chart_component": "A custom lightning component renders milestones as horizontal bars on a Gantt chart spanning three consecutive years. The chart supports scrollable X-axis (time) and Y-axis (milestones), with bars color-coded by configurable status values. Gantt Chart configuration is managed through GanttChartConfig custom metadata that maps status values to dates and visual properties.",
+      "timeline_component": "The Timeline is a generic, reusable component that displays chronological child records on any parent object. It supports multiple field types including formula fields and can be configured to show records grouped by Activity Group. Configuration uses Timeline custom metadata defining Parent Object, Activity Group, Object, Date Field, Name Field, icon references, and optional Record Type filtering.",
+      "timeline_activation": "Enabling the Timeline requires assigning Timeline Admin and Timeline user permission sets, activating DB Schema records for the timeline metadata, and configuring a custom tab in Lightning App Builder. The Timeline component can be added to any object's lightning page where chronological child record display is valuable.",
+      "dtv_configuration_details": "The Dynamic Tree View component supports extensive configuration through DTV Component Config and DTV Object Config metadata: search enablement, picklist filter fields, junction object specification (with lookups to grandparent and related object), additional filter expressions, parent/child/grandchild config chaining, column display (max 5), info popup fields (max 10), progress bar display, and sort field/order configuration.",
+      "cross_component_reuse": "Both Gantt and Timeline components are designed for reuse across multiple functional areas. The same Timeline component can display activities on accounts, insights, or studies. The DTV component is shared across sprints, insights objectives, and study objectives. Migration planning should map all current uses of each shared component."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["gantt-chart", "timeline", "visualization", "dtv", "custom-metadata", "reusable-components", "milestone-display"]
+  },
+  {
+    "id": "oce-cfg-fop-008",
+    "category": "commercialization/crm/configuration",
+    "title": "Territory Plans and Business Objective Hierarchy",
+    "products": ["CRM Platform"],
+    "summary": "Territory plans set target parameters per territory and track business objectives in a three-tier hierarchy (Objectives > Tactics > To-Dos), with three record types controlling access levels and cross-object status synchronization to calls.",
+    "findings": {
+      "territory_plan_structure": "Territory plans establish target parameters for specific territories and serve as containers for business objectives. Each territory plan tracks percent complete based on the progress of linked objectives. The plan provides a strategic framework connecting organizational goals to field execution within a territory.",
+      "objective_record_types": "Business objectives have three record types with different access levels: Territory Business Objective (available to both administrators and field users), Global Business Objective (administrator-only access), and Affiliate Business Objective (administrator-only access). Global and Affiliate objectives can be created in the UI or uploaded via Data Loader. Territory objectives can be imported from Affiliate objectives when they have Approved status and current date falls within the date range.",
+      "call_linkage": "Territory and Account objectives can be linked to calls through a derived relationship via Tactics and To-Dos. Call Account Tactic and Call To-Do junction objects enable this linkage. Status values must match exactly (case-sensitive) across Call Tactic, Account Tactic, and Business Tactic objects for synchronization to work. Status updates from calls propagate to linked Tactic/To-Do records via trigger handlers, though this synchronization does not work offline.",
+      "todo_filtering_by_call_products": "Business To-Do records can be filtered based on products selected in Call Details. When enabled, the Products filter activates automatically in the Advanced Search for To-Dos during call documentation. This connects tactical execution items to the specific products discussed during a field interaction.",
+      "activation_requirements": "Territory Plan activation requires: adding the Territory Plans tab to navigation items, assigning KAMAdmin and KAMUser permission sets, setting Territory Business Objective as the default record type, activating five DB Schema entities (TerritoryPlan, BusinessObjective, BusinessObjectiveProduct, BusinessTactic, BusinessToDo), enabling three percent-complete trigger handlers, enabling Platform Cache with at least 1MB org cache allocation, and replacing the deprecated Aura territory objectives component with the KAM Related Objective List LWC."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["territory-plans", "business-objectives", "tactics", "to-dos", "kam", "percent-complete", "call-linkage", "status-sync"]
+  },
+  {
+    "id": "oce-cfg-fop-009",
+    "category": "commercialization/crm/configuration",
+    "title": "Translation and Localization Framework",
+    "products": ["CRM Platform"],
+    "summary": "Localization uses the platform's native Translation Workbench for custom components and managed package overrides, a JSON document for mobile standard label translations, and a category-based system for tab name translation with known issues around Global Value Set duplicates.",
+    "findings": {
+      "translation_workbench": "The platform's native Translation Workbench provides the primary localization mechanism for custom components (field labels, related list labels, help text, actions, custom fields on standard objects). Administrators select language, setup component type, object, and aspect to locate and translate individual items. Only custom components created by the subscriber org can be directly translated — managed package components require the Override mechanism.",
+      "managed_package_overrides": "Translations for components included in the managed package are overridden rather than translated directly. The Override interface in Translation Workbench allows administrators to replace package-provided translations with customer-specific values. This mechanism preserves the package translations as defaults while enabling localization customization.",
+      "mobile_standard_labels": "Mobile application standard object and field translations use a JSON document generated from the Admin Console. The 'Create Standard Label Translations Document' action produces a StdObjectsTranslations document stored in the Configurations document folder. Metadata cache regeneration is required after creating or updating this document for changes to take effect on mobile.",
+      "tab_translation_system": "Tab names are translated through custom labels with specific categories: 'tabs' for primary navigation bar items, '{Lightning Page Name}-tabs' for page-specific custom tabs, 'default-tabs' for fallback custom tab labels, and 'std-tabs' for standard tabs. The Short Description field contains the API name of the tab to override. Custom label placeholders can also be used directly on lightning page tab configurations for platform-native translation handling.",
+      "global_value_set_duplicates": "Translation Workbench Import creates duplicate translations for Global Value Set values with namespaces. The import creates new translations instead of modifying managed package translations, resulting in two translations per value. Duplicates must be removed either by re-importing with empty translation markers or by manually clearing values through the Translate interface. This is a known platform limitation affecting picklist value retrieval through APIs.",
+      "standard_section_headers": "Standard section headers on layouts can be translated by creating custom labels with the 'layout-sections' category. The metadata service identifies sections requiring custom translation (marked with customLabel = false) and replaces headers with corresponding custom label values."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["translation", "localization", "translation-workbench", "managed-package", "global-value-set", "tab-translation", "standard-labels", "mobile-localization"]
+  },
+  {
+    "id": "oce-cfg-fop-010",
+    "category": "commercialization/crm/configuration",
+    "title": "User Profiles, Geolocation Tracking, and Profile Management",
+    "products": ["CRM Platform"],
+    "summary": "The platform uses native user management with seven supported profiles, time zone synchronization from server to mobile on sync events, geolocation tracking during sync, and specific upgrade procedures for manager profiles.",
+    "findings": {
+      "supported_profiles": "Seven user profiles are supported across web and mobile: Admin, Sales Representative, Medical Science Liaison (MSL), Key Account Manager (KAM), District Manager, Regional Manager, and National Account Manager. Custom profiles can be created by cloning existing ones. The Customize Application permission must be enabled for admin-type profiles.",
+      "platform_mobile_distinction": "The mobile application is a fully custom application unrelated to the platform's standard mobile app. Features related to the standard mobile app (e.g., Offline Access) should not be enabled for CRM application users. This distinction is critical during migration — standard mobile settings do not apply to the custom CRM mobile experience.",
+      "time_zone_synchronization": "When a discrepancy exists between the mobile device time zone and the user's platform-configured time zone, the mobile app inherits the platform setting after UI reload. Synchronization occurs during: Initial Sync, Manual/PIN sync with new metadata or permission changes, user-level Forced Sync, territory switch, or app restart after a sync that downloads updated time zone settings.",
+      "kam_profile_requirement": "KAM profile users require specific DB Schema entity assignments for the CalendarConfig and AccountListItem records before the mobile app will function. Without these assignments, the app hangs when tapping any left navigation tab on the iPad. This is a known prerequisite that must be completed before KAM user onboarding.",
+      "geolocation_tracking": "Device geolocation can be tracked at the moment of app sync by granting read/edit access to the User Location field on the Sync Statistics object. Location data is stored in the Device Last Location field of the User object. The UserSyncStatisticHandler trigger handler updates geolocation data on change. Location services must be enabled on the device — if disabled, errors are logged without user notification.",
+      "manager_profile_upgrade": "Upgrading District Manager and Regional Manager profiles from an earlier version requires: copying all permissions from Sales Representative, copying profile assignments to configuration entities, enabling specific field access (Offline Unique Id, Status on Account), granting Metadata Entities access, assigning to User DB Schema, and enabling access to team webservices (MyTeamActivitiesWebservice, MyTeamTerritoryWebservice)."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["user-profiles", "kam", "geolocation", "time-zone", "profile-management", "manager-upgrade", "mobile-configuration"]
+  }
+]

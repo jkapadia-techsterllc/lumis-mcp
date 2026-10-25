@@ -1,0 +1,281 @@
+[
+  {
+    "id": "ag-ps-001",
+    "area": "Platform Pre-Installation",
+    "topic": "Org Readiness Checklist",
+    "content": "Before installing the customer engagement managed package, complete these prerequisite tasks in a new, blank org. The package installation fails if prerequisites are not met. Required steps: (1) Assign Commercial Admin and Health Cloud Starter permission sets to admin user. (2) Turn on Customer Engagement Setup from Setup menu. (3) Turn on Surveys and configure survey settings. (4) Click 'Verify and Enable Settings' then 'Enable All' for all prerequisite settings. (5) Configure organization-wide default sharing: Account and Contract must be Private; Provider Affiliation and Provider Affiliation Product must be Public Read/Write. (6) Turn on Account-Based Sharing, Best Contact Time Custom Sharing, Contact Point Social Custom Sharing, Parent Territory Product Alignment, and Product Hierarchy Business Group Filter. (7) Turn on Inventory Count Settings. (8) Verify Chatter is enabled. (9) Enable data protection details in records. (10) Enable Translation Workbench and add admin as English translator. (11) Turn on Multi-Currency. (12) Turn on State and Country/Territory Picklists. (13) Enable contacts to relate to multiple accounts, then enable Person Accounts. (14) Set up sales territories.",
+    "prerequisites": ["New blank org recommended", "Account Executive must confirm licenses are applied to the correct org"],
+    "gotchas": [
+      "Never turn off prerequisite settings or feature preferences via metadata APIs — doing so causes future package upgrades to fail",
+      "Installing in an org with pre-existing configurations can have unpredictable impact — evaluate carefully",
+      "Filter Admin Console Tiles Based On User Permissions setting must be enabled with care — ensure users have permissions to see needed tiles before activation"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Platform Setup"}
+  },
+  {
+    "id": "ag-ps-002",
+    "area": "Territory Setup",
+    "topic": "Sales Territory Configuration",
+    "content": "Create a territory type, create a territory model, then create a hierarchy of territories. Activate the territory model and assign users to territories. Steps: (1) From Setup, search for Territory Settings. (2) Enable Sales Territories if not already on. (3) Create territory types. (4) Create a territory model record. (5) Create hierarchy of territories within the model. (6) Activate the territory model. Maximum 1000 territories per org — can request increase but impacts performance. Every customer engagement user MUST be assigned to a territory or they will have limited access to the mobile app.",
+    "prerequisites": ["Complete all org readiness tasks first", "Customize Application permission required"],
+    "gotchas": [
+      "Territory limit of 1000 applies across business units and countries",
+      "Users without territory assignment have limited mobile app access",
+      "Territory model must be activated before users can be assigned"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Territory Setup"}
+  },
+  {
+    "id": "ag-ps-003",
+    "area": "Package Installation",
+    "topic": "Managed Package Installation",
+    "content": "Install the customer engagement managed package after completing all prerequisite tasks. The package contains the Commercial app with Admin Console for centralized feature configuration. Steps: (1) Click install packages link from welcome email. (2) For sandbox, use the test login URL and append the package link. (3) Login to the target org. (4) Select 'Install for Admin Users only'. (5) Acknowledge and click Install. (6) Verify installation on Installed Packages page. Package URL is included in the welcome email — not published in the admin guide.",
+    "prerequisites": ["All org readiness tasks completed", "Commercial Admin and Health Cloud Starter permission sets assigned"],
+    "gotchas": [
+      "Always install in a new blank org — pre-existing configurations can cause issues",
+      "For SSO orgs, use Custom Domain on the login page",
+      "You receive an email when installation is successful"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Package Installation"}
+  },
+  {
+    "id": "ag-ps-004",
+    "area": "User Management",
+    "topic": "Profile and Permission Set Configuration",
+    "content": "Create custom profiles by cloning: (1) Clone System Administrator profile for Business Admin and Mobile Admin profiles. (2) Clone Standard User profile for Field Sales Representative and Medical Science Liaison profiles. For standard user profiles, turn OFF 'View Setup and Configuration' permission. Do NOT include underscores in profile names. Permission sets available: Life Sciences Commercial Admin (full access to features, data model, and metadata objects), Life Sciences Field Sales Representative (field user access), and Health Cloud Starter (base platform access). When assigning a permission set, the corresponding permission set license is automatically assigned.",
+    "prerequisites": ["Package installed", "Manage Users permission required"],
+    "gotchas": [
+      "Do not include underscores in profile names — this can cause issues",
+      "Permission set license is auto-assigned when permission set is assigned",
+      "Multiple assignment methods: Company Information page, Permission Sets page, or Users page"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / User Management"}
+  },
+  {
+    "id": "ag-ps-005",
+    "area": "Mobile App Setup",
+    "topic": "Mobile App Configuration Overview",
+    "content": "The mobile app is available for iPad in the Apple App Store. Supported devices: iPad (11th gen), iPad Air 11-in and 13-in (7th gen), iPad Pro 11-in and 13-in (7th gen). Requires iOS 18.0+. Key configuration areas: (1) Object Metadata Cache Configuration — defines which objects sync to mobile. (2) Application Settings — default browser, password type, search, notifications, dynamic actions. (3) Profile-Based App Settings — customize per-profile behavior. (4) Synchronization Management — define sync settings between mobile and org. (5) Deep Linking — URL schemes for cross-app navigation. (6) Global Search — search across predefined objects and fields in the iPad database.",
+    "prerequisites": ["Package installed", "Territories configured", "Users created with profiles and permission sets"],
+    "gotchas": [
+      "OmniStudio components (FlexCards, OmniScripts, DataRaptors) are NOT available in the mobile app — web only",
+      "Metadata cache must be generated and validated before mobile app can sync",
+      "Lightning App Builder shows placeholders for mobile-only components"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Mobile App Setup"}
+  },
+  {
+    "id": "ag-ps-006",
+    "area": "Mobile App Setup",
+    "topic": "Metadata Cache Generation",
+    "content": "Create Object Metadata Cache Configuration to define what syncs to mobile. Steps: (1) Create configuration for the objects that should be available offline. (2) Validate configurations before generating — prevents failures during generation. (3) Assign profiles to configurations. (4) Generate metadata cache. The mobile app uses this cache to sync with the org, enabling both online and offline access. You can cancel validation while in progress. After any configuration changes, regenerate the metadata cache for changes to take effect on mobile devices.",
+    "prerequisites": ["DB Schema records configured and active", "Profiles assigned to cache configurations"],
+    "gotchas": [
+      "Always validate before generating — invalid configs cause generation failures",
+      "Cache must be regenerated after any object or field configuration change",
+      "Users cannot access the mobile app until cache is generated for their profile"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Metadata Cache"}
+  },
+  {
+    "id": "ag-ps-007",
+    "area": "Mobile App Setup",
+    "topic": "Home Page Configuration",
+    "content": "The home page provides a centralized view of critical information. Available components: (1) Announcements — show announcements with title, description, and links. (2) Activities — show upcoming visits, time off territory, and events. (3) UpNextMap — show upcoming visits on a map with distance and ETA (mobile only, requires location services). (4) UnsubmittedVisits — show visits in Planned state after planned start time (fills 50% of mobile page). (5) Standard components: List View (up to 5 records on mobile), Rich Text, Dashboard, and Report Chart. Configure per-profile home pages to show each user what matters most. For mobile reports and dashboards, turn on report settings in Admin Console.",
+    "prerequisites": ["Package installed", "User profiles created"],
+    "gotchas": [
+      "UpNextMap component is mobile-only — Lightning App Builder shows placeholder",
+      "UnsubmittedVisits component fills only 50% of mobile page",
+      "List View shows max 5 records on mobile",
+      "Reports/dashboards on mobile require Admin Console report settings enabled"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Home Page"}
+  },
+  {
+    "id": "ag-ps-008",
+    "area": "Account Management",
+    "topic": "Account Management Features Setup",
+    "content": "Manage relationships with healthcare organizations (HCOs) and healthcare professionals (HCPs). Provides comprehensive view including contact details, social network, specialties, affiliations, business licenses, ratings, territory and product info, and team details. Key features: Account Address management, Provider Card with related information, Data Change Requests (DCR) for controlled data updates, Account Search and Smart Business Card, Multi-Object Component for related records. Create record types and page layouts for HCP (PersonAccount) and HCO (Business Account) records.",
+    "prerequisites": ["Person Accounts enabled", "Package installed"],
+    "gotchas": [
+      "Person Accounts must be enabled before account migration",
+      "HCPs use PersonAccount record type, HCOs use Business Account",
+      "Account-Based Sharing must be turned on during pre-installation"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Account Management"}
+  },
+  {
+    "id": "ag-ps-009",
+    "area": "Engagement Planning",
+    "topic": "Activity Plans Configuration",
+    "content": "Activity Plans manage omni-channel cycle plans and call plans with specific strategies for field representative interactions. Set targets by object type (event, meeting, email) and measure outcomes. The workflow involves different user roles: plan creation, review, and implementation. Configure: (1) Time periods for plan cycles. (2) Activity plan territories. (3) Account-level goals with weighted measures. (4) Product-based activity goals. (5) Shared territory goals. Related features: Calendar for schedule visualization, Key Account Management for strategic engagement, Time Off Territory for managing field absence.",
+    "prerequisites": ["Territory model activated", "Users assigned to territories"],
+    "gotchas": [
+      "Activity plans follow a structured workflow across multiple user roles",
+      "Time periods must be configured before creating plans",
+      "Territory assignment is required for activity plan targets to work"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Engagement Planning"}
+  },
+  {
+    "id": "ag-ps-010",
+    "area": "Engagement Planning",
+    "topic": "Calendar and Time Off Territory",
+    "content": "Calendar helps sales teams visualize visits, meetings, and time off territory. Provides best-time recommendations to avoid conflicts, optimized daily plans, save visit sets as routines, and team member schedule access. Time Off Territory setup: (1) Configure time off rules in Planner to prevent scheduling during inconvenient slots. (2) Create predefined time slot intervals (All Day, Morning, Afternoon, Evening) with configurable time ranges. (3) Option to allow users to create time-off spanning multiple days. When users select a slot, start and end times auto-populate.",
+    "prerequisites": ["Calendar feature enabled", "User profiles configured"],
+    "gotchas": [
+      "Time slot intervals control what users see when creating time-off entries",
+      "Multi-day time-off must be explicitly enabled",
+      "Calendar shows different event types alongside key information and status"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Calendar and TOT"}
+  },
+  {
+    "id": "ag-ps-011",
+    "area": "Engagement Execution",
+    "topic": "Visit Management Overview",
+    "content": "Visit Management optimizes face-to-face visit experience by simplifying scheduling, pre-visit planning, in-visit execution, and post-visit reporting. Reduces administrative tasks so field users can focus on relationship building. Supports intelligent content sharing and remote capabilities during visits. Manages sample distribution and direct-to-practitioner requests with built-in compliance controls. Key components: Visit record types, visit page layouts, engagement sidebar configuration, compliance statement definitions, and visit submission workflows.",
+    "prerequisites": ["Package installed", "Account records created", "Territory assignments configured"],
+    "gotchas": [
+      "Visit replaces legacy CRM 'Call' concept — different data model",
+      "Engagement sidebar items require related list configuration on visit page layout",
+      "Visit signatures require ContentVersion/ContentDocument storage"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Visit Management"}
+  },
+  {
+    "id": "ag-ps-012",
+    "area": "Engagement Execution",
+    "topic": "Consent Management Setup",
+    "content": "Consent Management captures, synchronizes, and honors communication preferences across subscription types and channels. Limits outreach to consented professionals for data privacy compliance. Uses Individual + ContactPointConsent model for granular consent tracking. Supports capture date preservation, channel-specific consent (Email/Phone/Address), and expiration tracking. Key setup: configure consent types, subscription channels, communication preferences, and compliance snapshot settings.",
+    "prerequisites": ["Data Protection and Privacy enabled", "Contact Point objects configured"],
+    "gotchas": [
+      "Default opt-in vs opt-out depends on country regulation — EU requires explicit opt-in",
+      "Platform has no 'unsubscribe all' API — must handle per-channel",
+      "Implied consent from legacy CRM has no direct equivalent — must be explicitly recorded",
+      "GDPR requires consent renewal tracking — some legacy systems lack expiration dates"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Consent Management"}
+  },
+  {
+    "id": "ag-ps-013",
+    "area": "Engagement Execution",
+    "topic": "Remote Engagement Setup",
+    "content": "Remote engagement facilitates virtual meetings with healthcare professionals. When users schedule remote visits, professionals receive invitations with meeting link and passcode. During meetings, users can manage participants, share screens, and end sessions. Eliminates need for in-person visits when virtual interaction suffices. Requires video platform integration (provider configuration). Configure: meeting provider settings, invitation templates, and remote visit record types.",
+    "prerequisites": ["Visit Management configured", "Video platform provider configured"],
+    "gotchas": [
+      "Remote visit requires provider integration — platform supports multiple providers",
+      "Meeting invitations must include correct link and passcode format",
+      "Remote visits are a visit record type, not a separate object"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Remote Engagement"}
+  },
+  {
+    "id": "ag-ps-014",
+    "area": "Engagement Execution",
+    "topic": "Survey Configuration",
+    "content": "Surveys enable design and distribution of questionnaires for structured feedback from healthcare professionals. Use data to analyze behavioral trends, monitor patient outcomes, and strengthen provider relationships. Supports innovation, treatment planning, and strategic decision-making. Setup: (1) Enable Surveys from Setup. (2) Turn on 'Survey Owners Can Manage Responses'. (3) Configure sharing and launch points. (4) Set up response tracking. Survey Invitation and Survey Subject objects become available after Surveys are enabled.",
+    "prerequisites": ["Surveys enabled during org readiness", "Survey Owners Can Manage Responses turned on"],
+    "gotchas": [
+      "Surveys must be enabled during pre-installation setup — not after package install",
+      "Survey objects only appear after Surveys feature is turned on",
+      "Mobile survey support may differ from web — verify capabilities"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Surveys"}
+  },
+  {
+    "id": "ag-ps-015",
+    "area": "Engagement Execution",
+    "topic": "Medical Inquiries and Insights",
+    "content": "Medical Inquiries capture and manage critical questions from healthcare professionals. Supports inquiry types: general medical inquiries, adverse events, and product quality complaints. Provides configurable workflows and compliance capabilities for medical, legal, and regulatory standards. Medical Insights give field teams structured capture and sharing of insights from HCP/HCO engagements. Configure customized record pages with specific field sets and related lists. Create quick actions for streamlined workflows and define granular permissions for insight interaction.",
+    "prerequisites": ["Package installed", "Visit Management configured"],
+    "gotchas": [
+      "Adverse event handling has specific regulatory workflow requirements",
+      "Medical inquiry workflows must comply with medical, legal, and regulatory standards",
+      "Insight data should be visible for collaboration through customized record pages"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Medical Inquiries"}
+  },
+  {
+    "id": "ag-ps-016",
+    "area": "Content Management",
+    "topic": "Intelligent Content Setup",
+    "content": "Manage content distribution to field teams including presentations, PDFs, HTML5 content, and videos. Features: Content Library for recommended presentations, send as email links or attachments, Presentation Player with drawing tools and HCP feedback capture, interactive presentations with dynamic content (embedded surveys, record queries, record updates), and presentation metrics tracking. Mobile-specific capabilities: drawing tools, HCP feedback, advanced dynamic content, and metrics tracking (not available on desktop). Desktop supports: preview/training mode, interactive presentations, simple dynamic content, and link sharing.",
+    "prerequisites": ["Package installed", "Content records configured"],
+    "gotchas": [
+      "Advanced dynamic content (embedded surveys, record queries/updates) is mobile-only",
+      "Drawing tools and HCP feedback capture are mobile-only features",
+      "Presentation metrics tracking is mobile-only",
+      "Legacy CRM's proprietary JavaScript APIs in HTML content will NOT work — must be stripped or rewritten",
+      "Content approval workflows from legacy CRM do not migrate"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Intelligent Content"}
+  },
+  {
+    "id": "ag-ps-017",
+    "area": "Product Management",
+    "topic": "Product and Territory Alignment",
+    "content": "Manage product hierarchy, territory alignment, messages/objectives, and account restrictions. Key operations: (1) Product Territory Alignments bulk import — import multiple products from external systems and align with territories. (2) Publish Draft Product Territory Alignments batch job — changes status from Draft to Active and creates Product Territory Detailed Availability records for all child territories. (3) Product Account Restrictions — restrict specific products for specific accounts in specific territories. Run from Admin Console > Product > Product Alignment Job. Monitor runs for status tracking.",
+    "prerequisites": ["Territory model activated", "Products configured", "Commercial Admin permission set"],
+    "gotchas": [
+      "Bulk import assigns Draft status automatically if not provided",
+      "Batch job creates Detailed Availability records for ALL child territories",
+      "Product restriction without territory selection applies universally for that account",
+      "Run Product Alignment Job from Admin Console, not from Setup"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Product Management"}
+  },
+  {
+    "id": "ag-ps-018",
+    "area": "Sample Management",
+    "topic": "Sample Management Overview",
+    "content": "Enable pharmaceutical companies to handle and distribute drug samples to healthcare providers. Track and manage sales representative inventories ensuring regulatory compliance and accurate distribution records. Key components: (1) Sample Inventory Management — request and manage samples, define product batches and unique identifiers, configure inventory operations and counts. (2) Sample Limits — precise control over distribution using templates and rules based on products and accounts, reduces audit risks for new launches and controlled substances. (3) Territory Product Quantity Allocations — control which products are available per territory, assign sample quantities for specified periods, reps can only distribute approved allocated samples.",
+    "prerequisites": ["Products configured", "Territory model activated", "Inventory Count Settings enabled"],
+    "gotchas": [
+      "PDMA/FDA 21 CFR Part 11 requires complete audit trail — all transactions must be traceable",
+      "Sample limit calculation differs from legacy CRM: target uses configurable periods vs legacy rolling calendar",
+      "Reps can only distribute samples allocated to their assigned territories",
+      "Lot expiration dates are critical — validate during any data migration"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Sample Management"}
+  },
+  {
+    "id": "ag-ps-019",
+    "area": "Common Components",
+    "topic": "Data Analytics Integration",
+    "content": "Integrate analytics platforms (Data360, Tableau Next) with customer engagement for data-driven insights. Configure reports and dashboards for mobile and web access. For mobile: turn on report settings from Admin Console to enable reports and dashboards on mobile home page. Standard dashboard and report chart components available for home page customization. CRM Analytics templates available for pre-built analytics.",
+    "prerequisites": ["Analytics licenses", "Package installed"],
+    "gotchas": [
+      "Mobile reports/dashboards require explicit Admin Console report settings activation",
+      "Standard report chart components work on both web and mobile",
+      "Analytics setup is separate from core CRM configuration"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Analytics Integration"}
+  },
+  {
+    "id": "ag-ps-020",
+    "area": "Sharing and Security",
+    "topic": "Metadata Object Sharing Rules",
+    "content": "Create object sharing rules for Life Science Metadata Categories and Life Science Metadata Records to support access to customer engagement features. OWD settings: Account and Contract must be Private, Case and Opportunity must be Private, Provider Affiliation and Provider Affiliation Product must be Public Read/Write. Account-Based Sharing must be enabled for proper territory-based access control.",
+    "prerequisites": ["OWD settings configured during pre-installation"],
+    "gotchas": [
+      "Sharing rules must be in place before users access features",
+      "Changing OWD after package installation can cause access issues",
+      "Provider Affiliation objects need Public Read/Write — different from most objects"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Sharing Rules"}
+  },
+  {
+    "id": "ag-ps-021",
+    "area": "Localization",
+    "topic": "Supported Languages and Translation",
+    "content": "The platform is localized in over 30 languages with two support levels: (1) Fully Supported — all features and UI text appear in selected language. (2) End-User Support — individual users can select a language other than company default for end-user facing UI. Translation Workbench must be enabled during org setup. Admin must be added as translator for English. Multi-Currency must be enabled for international deployments.",
+    "prerequisites": ["Translation Workbench enabled", "Multi-Currency enabled"],
+    "gotchas": [
+      "Translation Workbench must be enabled during pre-installation — cannot be enabled after package install without issues",
+      "Admin must be explicitly added as translator for English",
+      "Some languages only have end-user support, not full feature localization"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Admin Guide / Localization"}
+  }
+]

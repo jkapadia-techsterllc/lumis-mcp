@@ -1,0 +1,204 @@
+[
+  {
+    "id": "dm-001",
+    "area": "Account and Territory Management",
+    "mappings": [
+      {
+        "source_object": "Account (legacy CRM)",
+        "target_object": "Account",
+        "field_mappings": [
+          {"source": "Account_Id", "target": "External_Id__c or Id", "transformation": "Direct map; preserve legacy ID as external ID for cross-reference", "notes": "Legacy CRM uses VARCHAR IDs; target uses 18-char platform IDs"},
+          {"source": "Account_Type (HCP/HCO)", "target": "RecordType", "transformation": "Map to platform RecordTypes: PersonAccount for HCP, Business Account for HCO", "notes": "PersonAccount must be enabled in the org before migration"},
+          {"source": "Specialty__c", "target": "Specialty__c or PersonAccount.Specialty", "transformation": "Picklist value mapping required; legacy CRM uses different specialty codes", "notes": "Industry specialty taxonomy differs; build a mapping table"},
+          {"source": "Territory_Id", "target": "Territory2 or Custom Territory Object", "transformation": "Enterprise Territory Management (ETM) if enabled; otherwise custom object", "notes": "Legacy CRM has flat territory model; target supports hierarchical territories"},
+          {"source": "Parent_Account_Id", "target": "ParentId", "transformation": "Recursive lookup; ensure parent accounts are migrated before children", "notes": "Watch for circular references in legacy data"},
+          {"source": "Address fields (multiple)", "target": "Address compound field or custom address objects", "transformation": "Legacy CRM stores multiple addresses as child records; target may use compound fields", "notes": "Country-specific address formats need locale-aware transformation"}
+        ],
+        "gaps": [
+          "Legacy CRM supports unlimited account addresses; target platform has limits without custom objects",
+          "Account team hierarchy in legacy CRM is flatter than target platform's Account Team model",
+          "Legacy CRM's 'customer status' field has no direct equivalent — use custom field or RecordType"
+        ],
+        "migration_notes": "Account migration is always Phase 1. Must complete before any transactional data (calls, samples, orders). Allow 2-3 weeks for data cleansing and deduplication before load."
+      }
+    ]
+  },
+  {
+    "id": "dm-002",
+    "area": "Visit and Call Management",
+    "mappings": [
+      {
+        "source_object": "Call (legacy CRM)",
+        "target_object": "Visit / Event",
+        "field_mappings": [
+          {"source": "Call_Id", "target": "External_Id__c", "transformation": "Preserve for audit trail", "notes": "Every legacy call becomes a Visit record"},
+          {"source": "Call_Type", "target": "Visit RecordType or Type picklist", "transformation": "Map: Detail Call → In-Person Visit, Phone Call → Remote Visit, Group Call → Group Visit", "notes": "Legacy CRM call types are more granular; consolidate into target visit types"},
+          {"source": "Call_Date", "target": "ActivityDate / StartDateTime", "transformation": "Direct map; ensure timezone conversion", "notes": "Legacy CRM stores in rep's local time; target may use UTC"},
+          {"source": "Account_Id (on call)", "target": "WhatId or AccountId", "transformation": "Lookup to migrated Account", "notes": "Must verify account exists in target before loading calls"},
+          {"source": "Attendees (junction)", "target": "Visit Attendee junction object", "transformation": "One-to-many; each attendee becomes a separate junction record", "notes": "Legacy CRM stores attendees as a comma-separated list in some implementations"},
+          {"source": "Call_Notes / Discussion_Items", "target": "Visit Discussion / Key Message records", "transformation": "Structured discussion items map to Key Message Feedback; free text maps to Visit notes", "notes": "Key message recall tracking differs significantly between platforms"},
+          {"source": "Products_Detailed", "target": "Visit Product Detail records", "transformation": "Each product detailed becomes a child record of the Visit", "notes": "Product detail sequencing (priority, position) needs custom mapping"},
+          {"source": "Signature", "target": "Visit Signature object", "transformation": "Binary signature data must be converted to ContentVersion/ContentDocument", "notes": "Signature image format may differ (PNG vs SVG vs proprietary)"}
+        ],
+        "gaps": [
+          "Legacy CRM's 'Call Objective' workflow has no direct equivalent — use custom picklist or Activity Plan Goals",
+          "Pre-call planning templates don't migrate; must be recreated in target platform",
+          "Call sampling (random call audits) is a legacy CRM feature not present in target — use Reports",
+          "Multi-channel engagement attribution from legacy CRM doesn't map cleanly to target's engagement model"
+        ],
+        "migration_notes": "Visit history is typically the largest data volume. Consider migrating only 12-24 months of history to start. Archived calls can go to a data lake. Visit signatures require special handling due to binary data."
+      }
+    ]
+  },
+  {
+    "id": "dm-003",
+    "area": "Sample Management",
+    "mappings": [
+      {
+        "source_object": "Sample Transaction (legacy CRM)",
+        "target_object": "Sample Transaction / Sample Lot / Sample Inventory",
+        "field_mappings": [
+          {"source": "Transaction_Id", "target": "External_Id__c", "transformation": "Direct map", "notes": "Audit trail requirement — every transaction must be traceable"},
+          {"source": "Transaction_Type", "target": "RecordType or Type__c", "transformation": "Map: Disbursement, Receipt, Transfer, Adjustment, Return, Acknowledgment", "notes": "Transaction type taxonomy is similar but not identical"},
+          {"source": "Lot_Number", "target": "Sample Lot record lookup", "transformation": "Create Sample Lot records first, then link transactions", "notes": "Lot expiration dates are critical — validate during migration"},
+          {"source": "Quantity", "target": "Quantity__c", "transformation": "Direct map; validate against lot limits", "notes": "Negative quantities represent returns"},
+          {"source": "Call_Id (parent)", "target": "Visit lookup", "transformation": "Link to migrated Visit record", "notes": "Sample drops during a visit must point to the correct Visit"},
+          {"source": "Signature_Id", "target": "Signature object reference", "transformation": "Link to migrated signature or create new ContentVersion", "notes": "HCP signature on sample receipt is a regulatory requirement"},
+          {"source": "Rep_Inventory", "target": "Sample Inventory object", "transformation": "Current inventory snapshot; reconcile with transaction history", "notes": "Run inventory reconciliation job after migration to verify balances"}
+        ],
+        "gaps": [
+          "Legacy CRM's real-time inventory sync has no equivalent — target uses batch reconciliation",
+          "Sample limit calculation differs: legacy uses rolling calendar, target uses configurable periods",
+          "Cold chain tracking (temperature-sensitive samples) is custom in both platforms",
+          "Sample request workflow from HCP portal doesn't map — must rebuild in target"
+        ],
+        "migration_notes": "PDMA/FDA 21 CFR Part 11 compliance requires complete audit trail. ALL sample transactions must be migrated — you cannot selectively migrate. Run reconciliation validation after migration. Lot expiration dates must be future-dated or marked as expired."
+      }
+    ]
+  },
+  {
+    "id": "dm-004",
+    "area": "Content Management (CLM)",
+    "mappings": [
+      {
+        "source_object": "Presentation / Media (legacy CRM)",
+        "target_object": "Content Management records / ContentVersion",
+        "field_mappings": [
+          {"source": "Presentation_Id", "target": "External_Id__c", "transformation": "Direct map", "notes": "Preserve for analytics continuity"},
+          {"source": "Media_File (HTML/PDF)", "target": "ContentVersion", "transformation": "Upload as ContentVersion; link to Content Management record", "notes": "Legacy CRM's proprietary JavaScript APIs in HTML content will NOT work — must be removed or rewritten"},
+          {"source": "Slides (child records)", "target": "Content Management child records", "transformation": "Each slide becomes a child record with sequence number", "notes": "Slide-level analytics (time spent, swipes) require re-instrumentation"},
+          {"source": "Approved_Status", "target": "Approval Status field", "transformation": "Map approval workflow states", "notes": "Content approval workflows must be rebuilt — they don't migrate"},
+          {"source": "Product_Linkage", "target": "Product lookup on Content record", "transformation": "Link to migrated Product records", "notes": "One content piece can map to multiple products"}
+        ],
+        "gaps": [
+          "Legacy CRM's proprietary JavaScript APIs (slide navigation, surveys, forms) have no equivalent",
+          "Interactive content (embedded quizzes, branching logic) must be rebuilt",
+          "Content analytics (engagement scores, slide-level metrics) don't migrate",
+          "Offline content caching behavior differs significantly between platforms",
+          "Content versioning and approval chain history is lost — only current approved version migrates"
+        ],
+        "migration_notes": "CLM content migration is the most labor-intensive module. Budget 40-60% of content rebuild time. Proprietary JavaScript must be stripped from HTML presentations. PDF content migrates cleanly. Plan a content audit before migration to retire unused presentations."
+      }
+    ]
+  },
+  {
+    "id": "dm-005",
+    "area": "Consent Management",
+    "mappings": [
+      {
+        "source_object": "Consent Record (legacy CRM)",
+        "target_object": "Individual / ContactPointConsent / ConsentRecord",
+        "field_mappings": [
+          {"source": "HCP_Id + Consent_Type", "target": "Individual + ContactPointConsent", "transformation": "Create Individual record linked to Contact; create ContactPointConsent per channel per consent type", "notes": "Target platform uses a more granular consent model"},
+          {"source": "Opt_In_Status", "target": "CaptureContactPointType + PrivacyConsentStatus", "transformation": "Map: OptIn → OptIn, OptOut → OptOut, Not Captured → convert based on country default", "notes": "CRITICAL: Default opt-in vs opt-out depends on country regulation (EU = opt-in required, US = varies by state)"},
+          {"source": "Consent_Date", "target": "CaptureDate", "transformation": "Direct map", "notes": "Must preserve original consent capture date for compliance"},
+          {"source": "Channel", "target": "ContactPointType (Email/Phone/Address)", "transformation": "Map legacy channel codes to standard ContactPointType values", "notes": "Legacy CRM may have custom channels not in standard picklist"},
+          {"source": "Expiration_Date", "target": "EffectiveTo", "transformation": "Direct map; calculate from consent date + regulation period if not set", "notes": "GDPR requires consent renewal; some legacy systems don't track expiration"}
+        ],
+        "gaps": [
+          "Legacy CRM's 'implied consent' concept has no direct equivalent — must be explicitly recorded",
+          "Multi-brand consent (same HCP, different brands) requires careful junction record design",
+          "Consent audit trail (who captured, when, where) may be incomplete in legacy data",
+          "Double opt-in verification workflow must be rebuilt in target platform",
+          "Right to erasure (GDPR Art. 17) implementation differs between platforms"
+        ],
+        "migration_notes": "Consent migration is the highest regulatory risk. Work with Legal/Compliance team before starting. Never assume a default consent status — if unknown, treat as opt-out in EU, verify with legal for other regions. Run consent completeness validation after migration."
+      }
+    ]
+  },
+  {
+    "id": "dm-006",
+    "area": "Order Management",
+    "mappings": [
+      {
+        "source_object": "Order (legacy CRM)",
+        "target_object": "Order / OrderItem",
+        "field_mappings": [
+          {"source": "Order_Id", "target": "External_Id__c", "transformation": "Direct map", "notes": "Preserve for ERP reconciliation"},
+          {"source": "Order_Lines", "target": "OrderItem records", "transformation": "Each line item becomes an OrderItem child record", "notes": "Pricing and discount logic must be validated post-migration"},
+          {"source": "Order_Status", "target": "Status picklist", "transformation": "Map legacy statuses to target: Draft, Activated, Fulfilled, Cancelled", "notes": "Intermediate statuses in legacy may not have equivalents"},
+          {"source": "Account_Id", "target": "AccountId", "transformation": "Lookup to migrated Account", "notes": "Ship-to vs Bill-to account distinction may differ"},
+          {"source": "Delivery_Address", "target": "ShippingAddress", "transformation": "Compound address mapping", "notes": "Legacy CRM may store delivery instructions in a separate field"}
+        ],
+        "gaps": [
+          "Legacy CRM's real-time pricing engine doesn't migrate — must configure pricing rules in target",
+          "Order approval workflows must be rebuilt",
+          "Backorder management differs between platforms",
+          "Credit check integration with ERP must be re-established",
+          "Order splitting (partial fulfillment) logic varies"
+        ],
+        "migration_notes": "Only migrate orders from the last 2 fiscal years unless regulatory requirements dictate otherwise. Historical orders can go to a reporting data store. ERP integration must be tested end-to-end before go-live."
+      }
+    ]
+  },
+  {
+    "id": "dm-007",
+    "area": "Event Management",
+    "mappings": [
+      {
+        "source_object": "Medical Event (legacy CRM)",
+        "target_object": "Event Management objects",
+        "field_mappings": [
+          {"source": "Event_Id", "target": "External_Id__c", "transformation": "Direct map", "notes": "Preserve for Sunshine Act reporting continuity"},
+          {"source": "Event_Type", "target": "RecordType or Type picklist", "transformation": "Map: Speaker Program, Advisory Board, Symposium, Congress, Lunch & Learn", "notes": "Event taxonomy needs agreement between marketing and compliance teams"},
+          {"source": "Attendees (junction)", "target": "Event Attendee records", "transformation": "Each attendee becomes a junction record with role and status", "notes": "HCP vs non-HCP attendee distinction is critical for compliance reporting"},
+          {"source": "Budget/Expense", "target": "Event Budget / Expense records", "transformation": "Budget line items become child records", "notes": "Currency conversion for multi-country events"},
+          {"source": "Speaker_Contracts", "target": "Related files / custom object", "transformation": "Contract documents as ContentVersion; payment tracking may need custom object", "notes": "Speaker fee tracking is Sunshine Act reportable"}
+        ],
+        "gaps": [
+          "Legacy CRM's event logistics management (venue booking, catering) has no equivalent — use integration",
+          "Cross-event analytics (speaker utilization, budget trends) must be rebuilt in reports",
+          "Event templating and cloning differs between platforms",
+          "Virtual/hybrid event management is more mature in legacy CRM — target is catching up",
+          "Post-event surveys require integration with survey platform"
+        ],
+        "migration_notes": "Event data has the largest compliance surface area due to Sunshine Act / transparency reporting. All HCP spend data must be migrated completely for any open reporting period. Budget 3-4 weeks for event data validation alone."
+      }
+    ]
+  },
+  {
+    "id": "dm-008",
+    "area": "Field Coaching",
+    "mappings": [
+      {
+        "source_object": "Coaching Report (legacy CRM)",
+        "target_object": "Coaching Assessment / KPI objects",
+        "field_mappings": [
+          {"source": "Assessment_Id", "target": "External_Id__c", "transformation": "Direct map", "notes": "Coaching history is valuable for manager continuity"},
+          {"source": "Manager_Id", "target": "Coach (User lookup)", "transformation": "Lookup to migrated User record", "notes": "Manager hierarchy must be in place before coaching data"},
+          {"source": "Rep_Id", "target": "Coachee (User lookup)", "transformation": "Lookup to migrated User record", "notes": "Ensure rep-manager relationship is correct"},
+          {"source": "KPI_Scores", "target": "KPI Score child records", "transformation": "Each KPI becomes a child record with category, score, and comments", "notes": "KPI taxonomy must be aligned before migration; different names for same concepts"},
+          {"source": "Action_Items", "target": "Coaching Action Items", "transformation": "Each action item becomes a child record with status and due date", "notes": "Open action items should be flagged for manager review post-migration"},
+          {"source": "Overall_Rating", "target": "Overall Score field", "transformation": "Map rating scale (legacy may use 1-5, target may use 1-10 or qualitative)", "notes": "Rating scale normalization is required if scales differ"}
+        ],
+        "gaps": [
+          "Legacy CRM's ride-along scheduling integration doesn't migrate",
+          "Coaching templates and forms must be rebuilt in target platform",
+          "Historical trend analytics (rep improvement over time) require report rebuilding",
+          "Video coaching / call recording integration points differ"
+        ],
+        "migration_notes": "Coaching data is lower priority than transactional data. Migrate last 12 months of coaching assessments. Historical coaching data can be archived. Ensure manager hierarchy is set up correctly before loading coaching records."
+      }
+    ]
+  }
+]

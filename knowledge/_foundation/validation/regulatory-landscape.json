@@ -1,0 +1,238 @@
+[
+  {
+    "id": "val-reg-001",
+    "category": "validation-regulatory",
+    "title": "21 CFR Part 11 — Electronic Records and Electronic Signatures",
+    "jurisdiction": "US (FDA)",
+    "applies_to": ["all-phases"],
+    "summary": "The foundational US regulation governing electronic records and electronic signatures used in FDA-regulated industries. Establishes requirements for closed/open system controls, audit trails, electronic signature manifestation and linking, access controls, and system validation.",
+    "key_sections": {
+      "Subpart B — Electronic Records": {
+        "11.10": "Closed system controls — validation, audit trails, access control, authority checks, device checks, training, written policies, change control",
+        "11.30": "Open system controls — all closed system controls PLUS encryption and digital signatures for data in transit",
+        "11.50": "Signature manifestation — printed name, date/time, and meaning must accompany every electronic signature",
+        "11.70": "Signature/record linking — signatures must be bound to records to prevent excision, copying, or transfer"
+      },
+      "Subpart C — Electronic Signatures": {
+        "11.100": "General requirements — unique to one individual, identity verification before first use, FDA certification that e-signatures are legally binding",
+        "11.200": "Electronic signature components — biometric (must be impractical for others to use) and non-biometric (at least two identification components, e.g. user ID + password)",
+        "11.300": "Controls for identification codes/passwords — uniqueness, periodic revision, loss management, unauthorized use detection"
+      }
+    },
+    "enforcement_status": "Fully enforced. FDA conducts Part 11 inspections as part of GMP/GCP/GLP inspections. Warning letters issued for non-compliance.",
+    "scope_note": "Part 11 applies to records required to be maintained under any FDA predicate rule AND that are maintained in electronic form. It does NOT apply to paper records that happen to be stored electronically.",
+    "gotcha_level": "critical",
+    "source": "21-cfr-part-11",
+    "tags": ["part-11", "electronic-records", "electronic-signatures", "fda", "us-regulation"]
+  },
+  {
+    "id": "val-reg-002",
+    "category": "validation-regulatory",
+    "title": "21 CFR Part 210 & 211 — Current Good Manufacturing Practice (cGMP)",
+    "jurisdiction": "US (FDA)",
+    "applies_to": ["commercialization", "clinical"],
+    "summary": "The cGMP regulations that govern manufacturing of drug products. Part 210 sets general scope. Part 211 covers production and process controls, laboratory controls, equipment, and records/reports. Computer systems used in cGMP operations must be validated per these rules.",
+    "key_sections": {
+      "211.68": "Automatic, mechanical, and electronic equipment — must be routinely calibrated, inspected, or checked per a written program. Input to and output from the computer must be checked for accuracy. A backup system must be in place.",
+      "211.180": "General requirements for records and reports — must be retained for at least 1 year after product expiration date",
+      "211.188": "Batch production and control records — accurate reproduction of master record, documentation of each significant step",
+      "211.192": "Production record review — thorough review of batch records by quality unit before release"
+    },
+    "validation_implication": "Any computerized system used in cGMP drug manufacturing must be validated to ensure it performs reliably and consistently. This includes LIMS, MES, ERP systems, and CRM systems that manage GxP data (samples, adverse events).",
+    "gotcha_level": "critical",
+    "source": "21-cfr-part-210-211",
+    "tags": ["cgmp", "manufacturing", "production-records", "batch-records", "fda"]
+  },
+  {
+    "id": "val-reg-003",
+    "category": "validation-regulatory",
+    "title": "21 CFR Part 820 — Quality System Regulation (QSR) for Medical Devices",
+    "jurisdiction": "US (FDA)",
+    "applies_to": ["commercialization"],
+    "summary": "The quality system regulation for medical devices. Requires design controls, production and process controls, CAPA, and software validation. Relevant when life sciences companies also produce combination products or software as a medical device (SaMD).",
+    "key_sections": {
+      "820.70(i)": "Automated processes — when computers or automated data processing systems are used as part of production or QMS, the manufacturer shall validate computer software for its intended use per an established protocol",
+      "820.30": "Design controls — applies to the design of medical device software; requires design input/output, verification/validation, design review, and design transfer",
+      "820.90": "Nonconforming product — must have procedures to control nonconforming product",
+      "820.198": "Complaint files — maintained for the life of the device, accessible at the manufacturing site"
+    },
+    "validation_implication": "For companies with medical device or combination product lines, QSR adds a parallel validation mandate. Software used in QMS processes (complaint handling, CAPA, document control) must be validated under 820.70(i). Note: FDA is harmonizing QSR with ISO 13485 via the Quality Management System Regulation (QMSR) effective Feb 2026.",
+    "gotcha_level": "warning",
+    "source": "21-cfr-part-820",
+    "tags": ["qsr", "medical-devices", "design-controls", "samd", "fda"]
+  },
+  {
+    "id": "val-reg-004",
+    "category": "validation-regulatory",
+    "title": "EU Annex 11 — Computerised Systems (EudraLex Volume 4)",
+    "jurisdiction": "EU (EMA)",
+    "applies_to": ["all-phases"],
+    "summary": "The EU equivalent of 21 CFR Part 11, but more prescriptive. Part of the EU GMP guidelines (EudraLex Volume 4). Covers risk management, personnel, suppliers/service providers, project phases, validation, operational requirements, and security. Applies to all computerised systems used in GMP environments.",
+    "key_sections": {
+      "Principle": "Computerised systems that replace manual operations should not result in decreased product quality, process control, or quality assurance",
+      "4 — Validation": "Must have documented evidence that the system consistently performs per its specifications. Validation must be commensurate with risk — including risk to data integrity and product quality.",
+      "7 — Data Storage": "Data must be secured by both physical and electronic means against damage. Stored data should be checked for accessibility, readability, and accuracy. Regular backups required.",
+      "9 — Audit Trail": "Consideration should be given to building into the system the creation of a record of all GMP-relevant changes and deletions (system-generated audit trail). Audit trail data availability should be at least as long as the underlying GMP records.",
+      "10 — Change and Configuration Management": "Changes must be made in a controlled manner in accordance with a defined procedure",
+      "11 — Periodic Evaluation": "Computerised systems should be periodically evaluated to confirm they remain in a valid state and are compliant with GMP",
+      "12 — Security": "Physical and/or logical controls to restrict access; creation/amendment/cancellation of access authorizations must be recorded",
+      "17 — Archiving": "Data may be archived. Archived data should be accessible, readable, and complete. Relevant printouts should be verified."
+    },
+    "key_differences_from_part_11": [
+      "Annex 11 requires supplier audits (Section 3) — Part 11 does not explicitly require this",
+      "Annex 11 mandates risk management per entire lifecycle — Part 11 focuses on controls",
+      "Annex 11 requires periodic evaluation/re-validation — Part 11 addresses this indirectly via change control",
+      "Annex 11 addresses business continuity (Section 16) — Part 11 does not",
+      "Annex 11 is part of GMP law — Part 11 is a standalone regulation",
+      "Both require audit trails, but Annex 11 uses 'should be given consideration' language vs Part 11's 'shall'"
+    ],
+    "gotcha_level": "critical",
+    "source": "eu-annex-11",
+    "tags": ["annex-11", "eu-gmp", "ema", "computerised-systems", "data-integrity", "periodic-evaluation"]
+  },
+  {
+    "id": "val-reg-005",
+    "category": "validation-regulatory",
+    "title": "21 CFR Part 212 — cGMP for Positron Emission Tomography (PET) Drugs",
+    "jurisdiction": "US (FDA)",
+    "applies_to": ["commercialization"],
+    "summary": "Specific cGMP requirements for PET drug production. Requires validation of automated production systems and computer controls. Relevant for radiopharmaceutical companies.",
+    "key_sections": {
+      "212.50(b)": "Computer controls for production processes must be validated",
+      "212.70": "Equipment must be qualified and processes validated"
+    },
+    "gotcha_level": "info",
+    "source": "21-cfr-part-212",
+    "tags": ["pet-drugs", "radiopharmaceutical", "cgmp", "fda"]
+  },
+  {
+    "id": "val-reg-006",
+    "category": "validation-regulatory",
+    "title": "21 CFR Part 600/610 — Biological Products (Biologics)",
+    "jurisdiction": "US (FDA)",
+    "applies_to": ["clinical", "commercialization"],
+    "summary": "Regulations for biological products including vaccines, blood products, gene therapy. Requires validated systems for lot release, potency testing, and adverse event reporting. Computer systems used in biologics manufacturing or testing must be validated.",
+    "key_sections": {
+      "600.11": "Physical establishment and equipment standards",
+      "610.1-610.2": "Release requirements — systems that support lot release records must be validated",
+      "606": "Current good manufacturing practice for blood and blood components — specific record-keeping requirements"
+    },
+    "gotcha_level": "warning",
+    "source": "21-cfr-part-600-610",
+    "tags": ["biologics", "vaccines", "blood-products", "gene-therapy", "fda"]
+  },
+  {
+    "id": "val-reg-007",
+    "category": "validation-regulatory",
+    "title": "21 CFR Part 58 — Good Laboratory Practice (GLP)",
+    "jurisdiction": "US (FDA)",
+    "applies_to": ["discovery", "clinical"],
+    "summary": "GLP regulations for non-clinical laboratory studies that support regulatory submissions. Computer systems used to capture, store, or process GLP study data must be validated. Particularly relevant for LIMS, electronic notebooks, and chromatography data systems.",
+    "key_sections": {
+      "58.61": "Equipment design — must be of appropriate design and adequate capacity. Computer systems are equipment under this section.",
+      "58.63": "Maintenance and calibration — equipment must be maintained and calibrated, with written SOPs. Applies to computerized data acquisition systems.",
+      "58.130": "Conduct of study — raw data shall be recorded directly, promptly, and legibly. If entered into a computerized system, the entry must be made by authorized personnel and changes must not obscure the original data.",
+      "58.190": "Storage and retrieval of records — must be maintained and retrievable"
+    },
+    "gotcha_level": "warning",
+    "source": "21-cfr-part-58",
+    "tags": ["glp", "laboratory", "non-clinical", "lims", "fda"]
+  },
+  {
+    "id": "val-reg-008",
+    "category": "validation-regulatory",
+    "title": "ICH E6(R2) — Good Clinical Practice (GCP)",
+    "jurisdiction": "Global (ICH)",
+    "applies_to": ["clinical"],
+    "summary": "International guideline for the design, conduct, performance, monitoring, auditing, recording, analyses, and reporting of clinical trials. Section 5.5.3 specifically addresses computerized systems used in clinical trials. Adopted by FDA, EMA, PMDA, and most regulatory agencies worldwide.",
+    "key_sections": {
+      "5.5.3": "When using electronic trial data handling and/or remote electronic trial data systems, the sponsor should: (a) ensure and document that the system conforms to established requirements for completeness, accuracy, reliability, and consistent intended performance (i.e., validation); (b) maintain SOPs for use; (c) ensure systems designed to enable data changes include an audit trail; (d) maintain adequate security; (e) maintain a list of authorized personnel and their access privileges; (f) maintain adequate backup",
+      "4.9": "Records and reports — CRF data shall be documented at the time of the observation. Electronic data shall have an audit trail.",
+      "8": "Essential documents — must be maintained during and after the trial; electronic storage systems must have adequate security"
+    },
+    "validation_implication": "Clinical trial management systems (CTMS), electronic data capture (EDC), interactive response technology (IRT/IVRS/IWRS), and ePRO/eCOA systems all require GCP-compliant validation. This includes randomization systems, drug supply management, and safety reporting databases.",
+    "gotcha_level": "critical",
+    "source": "ich-e6-r2-gcp",
+    "tags": ["gcp", "clinical-trials", "ich", "edc", "ctms", "irt", "audit-trail"]
+  },
+  {
+    "id": "val-reg-009",
+    "category": "validation-regulatory",
+    "title": "PIC/S PI 011-3 — Good Practices for Computerised Systems in Regulated GxP Environments",
+    "jurisdiction": "Global (PIC/S — 56 member countries)",
+    "applies_to": ["all-phases"],
+    "summary": "The Pharmaceutical Inspection Co-operation Scheme guidance on computerised systems. Provides detailed guidance on validation lifecycle, risk management, and operational management that supplements both FDA and EU regulations. Widely adopted by regulators in Australia, Canada, Switzerland, Singapore, and others.",
+    "key_topics": [
+      "Risk-based validation approach aligned with GAMP 5",
+      "Supplier assessment and qualification requirements",
+      "Project phase requirements (specification, configuration, coding, testing)",
+      "Validation documentation requirements (URS, FS, DS, IQ/OQ/PQ)",
+      "Operational management (data migration, business continuity, incident management)",
+      "System retirement and data archiving",
+      "Periodic review requirements"
+    ],
+    "gotcha_level": "warning",
+    "source": "pics-pi-011",
+    "tags": ["pics", "gxp", "computerised-systems", "global-guidance", "risk-based"]
+  },
+  {
+    "id": "val-reg-010",
+    "category": "validation-regulatory",
+    "title": "WHO Technical Report Series No. 996 Annex 5 — Guidance on Good Data and Record Management Practices",
+    "jurisdiction": "Global (WHO)",
+    "applies_to": ["all-phases"],
+    "summary": "WHO guidance on data integrity for pharmaceutical products. Establishes ALCOA+ principles and provides guidance for electronic systems. Particularly relevant for companies operating in WHO-prequalification markets (vaccines, essential medicines for developing countries).",
+    "key_principles": {
+      "ALCOA+": {
+        "A": "Attributable — who performed an action and when",
+        "L": "Legible — data must be readable and permanent",
+        "C": "Contemporaneous — recorded at the time of activity",
+        "O": "Original — first recording of data (or certified true copy)",
+        "A": "Accurate — no errors or editing without documented amendments",
+        "+Complete": "All data including repeated tests and outliers",
+        "+Consistent": "Chronological recording, date/time stamps in expected sequence",
+        "+Enduring": "Recorded on permanent media, not on scrap paper or temporary storage",
+        "+Available": "Accessible for review throughout the retention period"
+      }
+    },
+    "gotcha_level": "warning",
+    "source": "who-trs-996-annex5",
+    "tags": ["who", "data-integrity", "alcoa", "record-management", "global-guidance"]
+  },
+  {
+    "id": "val-reg-011",
+    "category": "validation-regulatory",
+    "title": "Japan MHLW — Ministerial Ordinance on Standards for Manufacturing Control and Quality Control (GMP Ordinance)",
+    "jurisdiction": "Japan (PMDA/MHLW)",
+    "applies_to": ["commercialization"],
+    "summary": "Japanese GMP requirements include validation of computerized systems. Japan's requirements often exceed US and EU requirements in specificity, particularly around data integrity and system validation documentation. PMDA inspections focus heavily on data integrity and audit trail review.",
+    "key_requirements": [
+      "All computerized systems must be validated before GxP use",
+      "CSV documentation must include Japanese-language summaries for PMDA inspectors",
+      "Audit trail review is a standard PMDA inspection activity",
+      "Electronic signatures require strict identity verification",
+      "Data integrity is the primary focus of PMDA GMP inspections since 2015"
+    ],
+    "gotcha_level": "warning",
+    "source": "japan-gmp-ordinance",
+    "tags": ["japan", "pmda", "mhlw", "gmp", "data-integrity"]
+  },
+  {
+    "id": "val-reg-012",
+    "category": "validation-regulatory",
+    "title": "China NMPA — Annex on Computerised Systems (Volume 1, Appendix)",
+    "jurisdiction": "China (NMPA)",
+    "applies_to": ["commercialization"],
+    "summary": "China's computerised systems requirements align closely with EU Annex 11 but add specific requirements for data localization and system access by NMPA inspectors. Systems storing GxP data must have data accessible within China.",
+    "key_requirements": [
+      "Validation required before GxP use, with documented evidence",
+      "Data generated in China must be stored and accessible within China",
+      "Cloud systems must have validated data sovereignty controls",
+      "Audit trail requirements follow EU Annex 11 approach",
+      "Supplier qualification required for software vendors"
+    ],
+    "gotcha_level": "warning",
+    "source": "china-nmpa-cs-annex",
+    "tags": ["china", "nmpa", "data-sovereignty", "cloud-systems"]
+  }
+]

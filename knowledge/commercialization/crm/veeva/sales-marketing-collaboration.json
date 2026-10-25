@@ -1,0 +1,27 @@
+[
+  {
+    "id": "veeva-sales-mktg-001",
+    "category": "modules",
+    "title": "Sales and Marketing Collaboration in Life Sciences CRM",
+    "products": [
+      "oce",
+      "veeva"
+    ],
+    "summary": "Analysis of sales-marketing alignment challenges and solutions in life sciences CRM, covering 360-degree customer views, marketing automation integration, and closed-loop marketing requirements.",
+    "findings": {
+      "customer_360_gap": "Industry research indicates only about 10% of life sciences organizations have an adequate 360-degree view of their HCP customers across sales and marketing interactions. The remaining 90% operate with fragmented views where CRM data and marketing engagement data exist in separate systems.",
+      "marketing_automation_integration": "Effective sales-marketing alignment requires bidirectional integration between CRM and marketing automation: marketing qualified signals flowing to field teams as next-best-action suggestions, and field interaction data informing marketing segmentation and targeting.",
+      "closed_loop_marketing": "Closed-loop marketing connects content delivery (via field reps and digital channels) to downstream outcomes (prescribing changes, formulary decisions). This requires: content tagging at creation, interaction tracking at delivery, and outcome attribution across 6-12 month windows.",
+      "multichannel_orchestration": "Effective multichannel engagement coordinates field visits, approved emails, medical content, speaker programs, and digital interactions into coherent sequences. The orchestration layer must respect compliance rules (call frequency limits, content approval status, do-not-contact preferences).",
+      "data_requirements": "Building a true 360-degree view requires: CRM interaction history, marketing engagement data, third-party prescribing data, medical inquiry history, speaker program participation, and clinical trial involvement \u2014 all linked to a single HCP identity."
+    },
+    "source": "Analysis of sales-marketing collaboration challenges in life sciences CRM covering customer 360 gaps, marketing automation, and multichannel orchestration",
+    "tags": [
+      "sales-marketing",
+      "customer-360",
+      "marketing-automation",
+      "closed-loop-marketing",
+      "multichannel"
+    ]
+  }
+]

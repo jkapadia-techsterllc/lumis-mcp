@@ -1,0 +1,1257 @@
+[
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-management",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Account Management Features",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Manage your relationships with healthcare organizations (HCOs) and healthcare professionals (HCPs). Gain a comprehensive view of HCPs and HCOs, including their contact and social network details, specialties, affiliations, business licenses, ratings, as well as territory and product, and...",
+    "findings": [
+      {
+        "name": "Set Up Account Management Features",
+        "detail": "Manage your relationships with healthcare organizations (HCOs) and healthcare professionals (HCPs). Gain a comprehensive view of HCPs and HCOs, including their contact and social network details, specialties, affiliations, business licenses, ratings, as well as territory and product, and team-specific details."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Configure the Dashboard tab on the Account record page to give your field reps a centralized view of territory-specific account data and account summary. Use these components to surface the most relevant information for your users. Account Territory Fields: Shows details of the Provider Account Territory Info record along with the associated visit details to help users track recent interactions. Account Summary: Provides a summary of the account for a specific territory. Account Dashboard View: Shows an overview of specialties and addresses, including a map view for visual reference. Note The Account Dashboard View component is not customizable. To ensure data integrity, Life Sciences for Customer Engagement considers an account a valid healthcare provider only when: The account has at least one associated healthcare provider marked as the primary provider. In the Healthcare Provider object, the IsPrimaryProvider field = true. To learn more about healthcare provider records, see Set Up Healthcare Providers . The account is active, ensuring it’s currently valid and eligible for use within the system. In the Account object, the IsActive field = true. Account Address Account Address helps manage addresses for diverse accounts like healthcare professionals (HCPs) and organizations (HCOs). Accurate address tracking and grouping are important for effective engagement, compliance, logistics, and data integrity. Accounts often have multiple addresses for different purposes (for example billing, shipping). Sales reps use this to tailor outreach, ensuring targeted deliveries and optimized efficiency. Account Merge Merge duplicate accounts to create a single, accurate view of customer data. This brings consistency, and improves business decisions and customer satisfaction. Account Search Customize how users find and manage accounts by configuring various settings in the Admin Console. You can define search criteria and results and adjust the appearance and behavior of search options. You can manage this setup at both the org and profile levels, and further refine it by record type. Account Summarization Prepare for more efficient and smoother customer interactions with the highly customizable Account Summarization solution. Help users save the time that’s lost while switching between tabs to find the latest and most relevant information about an account before any customer interaction. Provide contextual information about provider accounts in a territory, including key account details and updates made to the account and the account’s related records since the user’s last interaction with the account. Help users access account summaries on the web and on mobile devices, even when the user is offline. Agentforce for Account Summarization Optimize visit-planning measures and improve provider engagement by leveraging the power of AI-generated summarization. Get real-time, data-driven insights and contextual information about an account's latest updates, historical interactions, and related records, tailored for the current user's assigned territory. Use natural language utterances to interact with persona-based agents in the intuitive and conversational Agent window to easily get account summaries on the go, on the web and on the iPad. Create an Account Team Let team members view details of all the collaborators of an account across different territories. Choose which fields to display to the account team. Activity Timeline The Activity Timeline in Life Sciences Cloud gives you a 360-degree view of all activities for an account. It helps sales representatives, Key Account Managers (KAM), and Medical Science Liaisons (MSLs) visualize past and upcoming interactions with healthcare providers (HCPs) and healthcare organizations (HCOs). Activity Timeline helps you work more effectively by consolidating relevant account activities in one place, enabling better collaboration, informed decision-making, and smarter preengagement planning. Affiliations Use Affiliations to understand and map the connections between Healthcare Professionals (HCPs) and Healthcare Organizations (HCOs). Mapping these relationships in the healthcare ecosystem provides insights that help you target your engagement and improve outcomes. Bulk Update for Account-Related Records from Related Lists Give your users an efficient way to update multiple account-related records in a single action from a related list. To allow bulk updates from related lists, enable bulk edits for the user profile, create a custom button, and add the custom button to the account page layout. Data Change Request Use Data Change Request to manage how data changes are submitted, validated, and implemented across the Life Sciences Cloud for Customer Engagement app. Reduce manual corrections, prevent unapproved changes from being applied, and maintain data consistency across both web and mobile apps. Institution Doctor Accounts In countries like Japan, tracking healthcare professional (HCP) interactions at the healthcare organization (HCO) level is a best practice. Institution Doctor Accounts support this practice by creating accounts that represent each HCP's relationship with a specific institution. Your field reps can capture all activities—visits, inquiries, and insights—in these accounts. Lists and Filters Use lists and filters to organize and prioritize accounts in the Life Sciences Cloud for Customer Engagement app. Segment accounts to focus on specific engagement strategies, territory priorities, or business objectives. Next Best Actions Provide sales reps with scheduled action recommendations. Improve time management and strategic engagement by recommending actions, such as account visits and sending emails, in an optimal sequence. Next Best Customer With the Next Best Customer scores, your field reps can identify the highest priority accounts for their next engagement. Next Best Customer leverages user-configured data, such as engagement history and territory alignment, to rank the accounts that are most likely to respond, so your reps can maximize the impact of each interaction. Provider Cards for Life Sciences Provider Cards in Life Sciences Cloud consolidates an account’s information that’s scattered across various objects and fields, such as the provider’s locations and specialties and the user’s scheduled visits, and displays it all in a one place on the mobile. You can choose which records to show in the card. To create provider cards, you can use the predefined template or create them from scratch. Ratings Ratings help prioritize and organize customer accounts into meaningful segments. Field users can use ratings to focus on the right customers, align on relevant accounts, and adjust strategies for maximum efficiency. Territory Management Batch Jobs Territory Management relies on automated batch jobs to handle large-scale data processing. The batch jobs align accounts to specific territories, either through explicit mappings loaded from external systems, or based on geographical representations such as zip/postal codes or bricks. Territory Planning Territory Planning in Agentforce Life Sciences applies Sales Planning segments and Territory Planning rules to account and related healthcare data. It creates account and user to territory associations in Enterprise Territory Management so that territory assignments reflect your commercial planning criteria and goals."
+      },
+      {
+        "name": "See Also",
+        "detail": "Trailhead : Account Management Data Model for Agentforce Life Sciences"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_management.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-address",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Account Address",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Account Address helps manage addresses for diverse accounts like healthcare professionals (HCPs) and organizations (HCOs). Accurate address tracking and grouping are important for effective engagement, compliance, logistics, and data integrity. Accounts often have multiple addresses for different...",
+    "findings": [
+      {
+        "name": "Account Address",
+        "detail": "Account Address helps manage addresses for diverse accounts like healthcare professionals (HCPs) and organizations (HCOs). Accurate address tracking and grouping are important for effective engagement, compliance, logistics, and data integrity. Accounts often have multiple addresses for different purposes (for example billing, shipping). Sales reps use this to tailor outreach, ensuring targeted deliveries and optimized efficiency."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Primary Address",
+        "detail": "The Primary Address is the single, main contact point for an account, which is used for all official correspondence and regulatory filings. An HCP's main practice location or an HCO's headquarters is their primary address. An account can have only one primary address at a time to provide a clear and consistent point of contact. The Primary address is stored on the Contact Point Address object, where users can select the Is Primary checkbox to designate a record as primary. Understanding the Primary Address helps you know the established main point of contact for an account."
+      },
+      {
+        "name": "Preferred Address",
+        "detail": "A preferred address is a specific location that an account designates for particular interactions or communications within a territory. For instance, a healthcare professional (HCP) might prefer product samples sent to their home. Or, a healthcare organization (HCO) might specify a delivery address for certain supplies. With this distinction, life sciences companies can tailor their outreach. It ensures targeted information, product samples, or deliveries reach the most desired location. It also optimizes engagement and operational efficiency. The preferred address is a field on the Provider Account Territory Information object. It stores territory-based account addresses. Only the user within the territory can access the data. This helps keep the data personal to the user in that territory and the healthcare professional (HCP). Sales reps can access an account’s preferred address in the Account Territory Field component on an account dashboard. Custom Formula Fields for Account Address Configure how addresses are shown across the Life Sciences Commercial app by creating custom formula fields. Use the custom fields for both Contact Point Addresses and Sample Management Addresses. For example, Sample Management Addresses appear when you create a sample order or sample transfer. You can apply this custom field usage across the entire organization or for individual profiles. Field-Level Security Configuration for Account Address For your users to create and manage account addresses, grant them access to the Parent field on the Contact Point Address object for all relevant profiles. Configure Addresses for an Account Configure how account addresses appear in the accounts list view by using Admin Console. This configuration defines the display format for Contact Point Addresses and Sample Management Addresses, enhancing their visibility for users in critical areas such as the Ship To field on a Sample Order. Optimized address views aid sales representatives in quickly identifying important account locations for better engagement and streamlined workflows. Set Up Best Time for Account Address Customize the Best Time feature to help sales reps identify the optimal times for contacting healthcare providers (HCPs) at their addresses. Configure Provider Territory Fields Information on Account Pages Help sales reps access and manage their assigned provider accounts in the context of the territories that the providers operate in. Customize the provider's account page to show territory-specific information in the account’s dashboard. Configure Search-Before-Create for Contact Point Addresses To help users check for duplicate contact point addresses before creating new business or person accounts, configure Search-Before-Create (SBC) for the Account and Person Account page layouts. Batch Jobs for Account Address Account Address batch jobs are designed to process large volumes of records and help you overcome the governor limits faced by trigger handlers."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_address.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-address-create-custom-formula-fields",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Custom Formula Fields for Account Address",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure how addresses are shown across the Life Sciences Commercial app by creating custom formula fields. Use the custom fields for both Contact Point Addresses and Sample Management Addresses. For example, Sample Management Addresses appear when you create a sample order or sample transfer. You...",
+    "findings": [
+      {
+        "name": "Custom Formula Fields for Account Address",
+        "detail": "Configure how addresses are shown across the Life Sciences Commercial app by creating custom formula fields. Use the custom fields for both Contact Point Addresses and Sample Management Addresses. For example, Sample Management Addresses appear when you create a sample order or sample transfer. You can apply this custom field usage across the entire organization or for individual profiles."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. For the account’s list view, you can configure how the address is listed for each account. Object | task | related admin console setting Contact Point Address | Create a custom formula field that returns a text data type to format the account address to be displayed in the Accounts List view. | Contact Point Address Formula Field Address | Create a custom formula field that returns a text data type to format the sample management address to be displayed in the Accounts List view. | Samples Management Address Formula Field"
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help: Build a Formula Field"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_address_create_custom_formula_fields.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-address-configure-field-level-security",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Field-Level Security Configuration for Account Address",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "For your users to create and manage account addresses, grant them access to the Parent field on the Contact Point Address object for all relevant",
+    "findings": [
+      {
+        "name": "Field-Level Security Configuration for Account Address",
+        "detail": "For your users to create and manage account addresses, grant them access to the Parent field on the Contact Point Address object for all relevant profiles."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. On the Contact Point Address object, set the access level of the Parent field to Visible. Make this change for all relevant user profiles. See Set Field-Level Security for a Field on All Profiles ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_address_configure_field_level_security.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-address-configure-addresses-for-an-account",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Addresses for an Account",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure how account addresses appear in the accounts list view by using Admin Console. This configuration defines the display format for Contact Point Addresses and Sample Management Addresses, enhancing their visibility for users in critical areas such as the Ship To field on a Sample Order....",
+    "findings": [
+      {
+        "name": "Configure Addresses for an Account",
+        "detail": "Configure how account addresses appear in the accounts list view by using Admin Console. This configuration defines the display format for Contact Point Addresses and Sample Management Addresses, enhancing their visibility for users in critical areas such as the Ship To field on a Sample Order. Optimized address views aid sales representatives in quickly identifying important account locations for better engagement and streamlined workflows."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access account address settings | Life Sciences Commercial Admin permission set Before you begin, create the required custom formula fields. See Custom Formula Fields for Account Address . From the App Launcher, find and select Admin Console . Select Address , and then select Account Address . Under the Account Address section, for the Contact Point Address Formula Field, select the custom formula field you created for Contact Point Address. Under Sample Management Address, for the Address Formula Field, select the formula field you created on the Address object. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_address_configure_addresses_for_an_account.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-address-set-up-best-time",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Best Time for Account Address",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Customize the Best Time feature to help sales reps identify the optimal times for contacting healthcare providers (HCPs) at their",
+    "findings": [
+      {
+        "name": "Set Up Best Time for Account Address",
+        "detail": "Customize the Best Time feature to help sales reps identify the optimal times for contacting healthcare providers (HCPs) at their addresses."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up best time | Life Sciences Commercial Admin permission set"
+      },
+      {
+        "name": "Configure Best Time Parameters",
+        "detail": "Set up Best Time parameters and manage how sales reps can view and edit their personal best times, the provider's best times, unavailable times, appointments, and set appointment duration. From the App Launcher, find and select Admin Console . Select Address Administration , and then select Best Time Setup . For Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Under Availability Settings, configure these settings as needed. Let users edit the unavailable time. Let users edit the healthcare provider’s best time. Let users edit appointments. Let users edit their best time. Select an appointment duration. Under General Settings, select whether you want to allow users to filter accounts by best time or not. Save your changes. Note If you apply availability settings at a profile level, repeat steps 4 and 5 for all the relevant profiles."
+      },
+      {
+        "name": "Enable Planner Settings",
+        "detail": "Configure Planner settings for the Best Times tab's calendar view. From the App Launcher, find and select Admin Console . Select the Planner Administration tile. For First Day of Work Week, select a day. For Work Day Start Time, select a start time for the workday. For Hourly Slots Viewable on Calendar, select the number of slots you want to display on the calendar. For Time Format, enter a time format for the calendar. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_address_set_up_best_time.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-address-configure-search-before-create-for-contact-point-address",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Search-Before-Create for Contact Point Addresses",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To help users check for duplicate contact point addresses before creating new business or person accounts, configure Search-Before-Create (SBC) for the Account and Person Account page",
+    "findings": [
+      {
+        "name": "Configure Search-Before-Create for Contact Point Addresses",
+        "detail": "To help users check for duplicate contact point addresses before creating new business or person accounts, configure Search-Before-Create (SBC) for the Account and Person Account page layouts."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To edit a page layout: | Life Sciences Commercial Admin permission set Note Make sure you add the Contact Point Addresses related list onto the Account record page or the Person Account record page. From the object management settings for Accounts, go to Page Layouts. Alternatively, to configure SBC for person accounts, go to the object management settings for Person Accounts. To add the New button for a person account record page, find and select Person Account . Select the appropriate page layout. The page layout must be active. Select Related Lists . In the Contact Point Addresses related list section, and click In the Buttons section, click , and make these changes. Under Standard Buttons, deselect New . Under Custom Buttons, move the New button from the Available Buttons column to the Selected Buttons column. To confirm your changes, select OK . Save your changes. If prompted, select the overwrite checkbox."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_address_configure_search_before_create_for_contact_point_address.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts",
+      "contacts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-merge",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Account Merge",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Merge duplicate accounts to create a single, accurate view of customer data. This brings consistency, and improves business decisions and customer",
+    "findings": [
+      {
+        "name": "Account Merge",
+        "detail": "Merge duplicate accounts to create a single, accurate view of customer data. This brings consistency, and improves business decisions and customer satisfaction."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. When you merge accounts, the account records are consolidated into one unified record. The account that remains is the Consolidated Account (also called the winner account), and the account that's removed is the Merged Account (also called the loser account). During the merge process, the related records on both accounts are evaluated and all associated child records, transactions, and other account references are realigned from the Merged Account to the Consolidated Account. The related records include records on these objects: HealthcareProvider, HealthcareProviderNpi, HealthcareProviderSpecialty, BusinessLicense, ProviderAcctTerritoryInfo, ContactPointEmail, ContactPointSocial, ContactPointPhone, ContactPointAddress, PrvdAccountTerritorySummary, CommSubConsentCmplSnpsht, ProviderAffiliation, ProviderAcctProductInfo, and CommSubscriptionConsent. Each evaluated record has a unique key combination. If a record on the Merged Account matches a record on the Consolidated Account by that key, it's treated as a duplicate and isn't realigned. With a quick action, you can merge two accounts from the account record page. To merge more than two accounts at once, use Connect APIs or batch jobs. Configure Manual Account Merge Let your users manually merge two accounts by adding the Account Merge quick action to account record pages. First, create the Account Merge action, and then add it to the Account page layout. Merge Multiple Accounts by Using Connect APIs The Account Merge feature provides Connect APIs to merge customer accounts in real time. You can integrate these APIs with any Salesforce capability or an external application to automate your merge processes. Merge Multiple Accounts by Using a Batch Job Use the Merge Account batch job to efficiently merge multiple accounts at once. This job retrieves all merge request records in Requested status and merges the corresponding accounts. Merge Two Accounts Manually Combine two duplicate account records from the account record page. Select a consolidated (winner) account, choose which field values to keep from each record, and merge them into a single, unified record."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_merge.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-merge-configure-manual-merge",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Manual Account Merge",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Let your users manually merge two accounts by adding the Account Merge quick action to account record pages. First, create the Account Merge action, and then add it to the Account page",
+    "findings": [
+      {
+        "name": "Configure Manual Account Merge",
+        "detail": "Let your users manually merge two accounts by adding the Account Merge quick action to account record pages. First, create the Account Merge action, and then add it to the Account page layout."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create the quick action and edit page layouts | Life Sciences Commercial Admin permission set"
+      },
+      {
+        "name": "Create an Action",
+        "detail": "Set up the Account Merge quick action on the Account object by using a Lightning web component. From Setup, go to Object Manager, find and select Accounts . Click Button, Links, and Actions , and then click New Action . Select the action type as Lightning Component . Select lsc4ce:CustomerMerge as the Lightning web component. Enter Account Merge as the label and, if needed, add a description. Save your changes."
+      },
+      {
+        "name": "Add Account Merge Action to Account Page Layout",
+        "detail": "Give your users the option to merge accounts by adding the Account Merge action to the highlights panel on the Account layout and the Person Account page layout. From Setup, go to Object Manager, find and select Account . Select Page Layout , and then select Account Layout . In the palette at the top, select Mobile & Lightning Actions . If prompted, click the link to override the predefined actions. From the Mobile & Lightning Actions category in the palette, drag the Account Merge action to the Salesforce Mobile and Lightning Experience Actions section. Save your changes. Repeat these steps to add the action to the Person Account Page layout."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_merge_configure_manual_merge.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-merge-merge-multiple-accounts-uisng-connect-apis",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Merge Multiple Accounts by Using Connect APIs",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Account Merge feature provides Connect APIs to merge customer accounts in real time. You can integrate these APIs with any Salesforce capability or an external application to automate your merge",
+    "findings": [
+      {
+        "name": "Merge Multiple Accounts by Using Connect APIs",
+        "detail": "The Account Merge feature provides Connect APIs to merge customer accounts in real time. You can integrate these APIs with any Salesforce capability or an external application to automate your merge processes."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Choose the API that best fits your integration's error-handling and data integrity requirements based on the details in the table. Connect API | Transaction Type | Error Handling | Best For Merge Customer Accounts | Atomic | The entire transaction is rolled back if a single merge fails. All or nothing. | Scenarios where every merge in a batch must succeed together to ensure data consistency. Merge Customer Accounts With Status | Non-Atomic | Partial success is allowed. Successful merges are committed even if others in the batch fail. | Processing large batches where individual failures don't affect the entire operation."
+      },
+      {
+        "name": "Merge Customer Accounts API",
+        "detail": "This API performs an atomic transaction. When you submit multiple account merges in a single request, the entire operation succeeds or fails as a single unit. If even one merge request is unsuccessful, the entire transaction is rolled back, and no accounts are merged. This ensures complete data integrity. To use this API, provide values for the winningId and losingId fields, along with other required fields of the Merge Request object."
+      },
+      {
+        "name": "Merge Customer Accounts with Status API",
+        "detail": "This API performs a non-atomic transaction to allow partial success. It processes each winning and losing account pair in a request independently. Successful merges are committed to the database, while any that fail don't stop the others from completing. The API response returns the processing status for each individual merge attempt, allowing you to identify which specific merges succeeded or failed. To identify accounts, you must provide values for one of these valid ID combinations for each merge request: winningId and losingId winningId and losingExternalId winningExternalId and losingId winningExternalId and losingExternalId"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_merge_merge_multiple_accounts_uisng_connect_apis.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts",
+      "api"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-merge-merge-accounts-manually",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Merge Two Accounts Manually",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Combine two duplicate account records from the account record page. Select a consolidated (winner) account, choose which field values to keep from each record, and merge them into a single, unified",
+    "findings": [
+      {
+        "name": "Merge Two Accounts Manually",
+        "detail": "Combine two duplicate account records from the account record page. Select a consolidated (winner) account, choose which field values to keep from each record, and merge them into a single, unified record."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To merge accounts | Life Sciences Commercial Admin permission set From the App Launcher, find and select Accounts . Select the account record you want to keep as the consolidated account. Under Quick Actions, select Account Merge . In the Merge Account window, search for and select the duplicate account to merge. If needed, select Retain merged account field values when consolidated account field values are blank , and click Next . On the Select Fields to Retain window, select the field values that you want to see in the consolidated account, and click Next . Click Confirm ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_merge_merge_accounts_manually.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-set-account-search",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Account Search",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Customize how users find and manage accounts by configuring various settings in the Admin Console. You can define search criteria and results and adjust the appearance and behavior of search options. You can manage this setup at both the org and profile levels, and further refine it by record",
+    "findings": [
+      {
+        "name": "Account Search",
+        "detail": "Customize how users find and manage accounts by configuring various settings in the Admin Console. You can define search criteria and results and adjust the appearance and behavior of search options. You can manage this setup at both the org and profile levels, and further refine it by record type."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Locate and manage accounts efficiently with Account Search. Focus on strategic, high-value tasks by using an extensive search functionality with customizable search options and result layouts. Note Because you can manage this setup at both the org and profile levels, these settings use the Admin Console hierarchical framework. Before you configure them, review how precedence works and the related considerations in Hierarchical Settings in the Admin Console . Account Search makes it easier for users to find accounts efficiently in the Salesforce org. Users can find accounts across the entire Salesforce ecosystem or even search external systems such as a master data management (MDM) system or IQVIA’s OneKey database. Users can focus on the right accounts by downloading and aligning accounts to a specific territory. Users begin their workflow with an internal Salesforce search by using keywords. The search checks for accounts not in their territory. If users don’t find the account they're looking for, they have the option to search externally to identify potential accounts. Users can also use advanced search to further refine their search by using attributes. If the required account doesn't exist, the user confirms its absence before initiating the account creation process. This ‌flow prevents duplicates, thus maintaining data integrity and reducing redundancy. Here’s a video of the process to help you get started. <!-- --> If you aren’t able to watch the video in full screen mode, open the video on a new tab: Configure Account Search and Search Before Create Settings . Define Sharing Settings for Account Search Ensure the automatic update of searchable HCP data in the batch job runs successfully by configuring the Care Specialty object’s sharing settings. Configure User-Specific Country Settings Narrow the account search scope by configuring the user-specific country settings. Define countries accessible by a user, and designate a country preferred by the user for specific interactions. Relevance Based Account Search on the iPad Help users run an enhanced Account Search to find accurate, precise, and relevant results. Configure field sets with which you want users to run the search on the mobile. You can configure and add custom fields, such as custom IDs, to the field sets for account, healthcare provider, provider account territory info, and contact point addresses. Then, configure the field sets in the Account Management admin console settings. Users find the matching fields using dynamic filters that identify the category the field belongs to. Customize Account Search Preferences Customize the appearance and behavior of account search options available to users by configuring settings in the Admin Console. You can do this at the org and profile level. Configure External Search Customize the behavior of external search functionality for users‌. You can configure these settings at the org and user levels. Configure Advanced Search (Search-Before-Create) for Accounts Enable advanced search (a search-before-create step) for accounts, and configure the search criteria and results shown on the Advanced Search page. Set up External Search by Using Built-In MuleSoft Integration Integrate Life Sciences Cloud with configured external data sources, such as an MDM or IQVIA’s OneKey, to extend account searches beyond Salesforce. This integration helps sales reps find and add accounts that aren't yet available in Salesforce."
+      },
+      {
+        "name": "See Also",
+        "detail": "Search for Accounts and Align Accounts with Your Territory Refine Account Search Results by Using Advanced Search Criteria"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_set_account_search.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-define-sharing-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Define Sharing Settings for Account Search",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Ensure the automatic update of searchable HCP data in the batch job runs successfully by configuring the Care Specialty object’s sharing",
+    "findings": [
+      {
+        "name": "Define Sharing Settings for Account Search",
+        "detail": "Ensure the automatic update of searchable HCP data in the batch job runs successfully by configuring the Care Specialty object’s sharing settings."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To define sharing settings for account search: | Life Sciences Commercial Admin permission set From Setup, in the Quick Find box, find and select Sharing Settings . In the Organization-Wide Defaults section, click Edit . For the Care Specialty object, set the default internal access to Public Read Only. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_define_sharing_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-configure-search-before-account-creation",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Advanced Search (Search-Before-Create) for Accounts",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enable advanced search (a search-before-create step) for accounts, and configure the search criteria and results shown on the Advanced Search",
+    "findings": [
+      {
+        "name": "Configure Advanced Search (Search-Before-Create) for Accounts",
+        "detail": "Enable advanced search (a search-before-create step) for accounts, and configure the search criteria and results shown on the Advanced Search page."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. If the search-before-create step is enabled for accounts, when a user clicks New on the Accounts tab to create an account record, they get an option to first search for matching records. This search confirms that the account doesn't already exist and prevents the creation of duplicate account records. On the Advanced Search page, a user can search for an account by attributes other than the account name, to further refine their search. After the user confirms that the account doesn't exist, they can proceed with creating it. Here is the workflow for configuring advanced search for accounts: Enable advanced search (search-before-create) for accounts. Configure the search fields on the Advanced Search page and the fields shown in the search results. Enable Advanced Search for Accounts Enable users to search for matching accounts before creating a new record on the standard Accounts tab. This prevents the creation of duplicate account records. Configure Advanced Search and Search Result Pages Configure the field sets and settings that control the Advanced Search page, where users search for existing accounts before creating an account. Field set mappings define the fields used for search criteria and results by record type. General settings control related options, including external search results, contact point address sorting, and the field sets used for business license search and for affiliation and specialty details. You can apply these configurations at the org and profile level."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_configure_search_before_account_creation.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-configure-advanced-search",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Advanced Search and Search Result Pages",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure the field sets and settings that control the Advanced Search page, where users search for existing accounts before creating an account. Field set mappings define the fields used for search criteria and results by record type. General settings control related options, including external...",
+    "findings": [
+      {
+        "name": "Configure Advanced Search and Search Result Pages",
+        "detail": "Configure the field sets and settings that control the Advanced Search page, where users search for existing accounts before creating an account. Field set mappings define the fields used for search criteria and results by record type. General settings control related options, including external search results, contact point address sorting, and the field sets used for business license search and for affiliation and specialty details. You can apply these configurations at the org and profile level."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure advanced search: | Life Sciences Commercial Admin permission set Note Auto-calculated fields, such as the Healthcare Provider's Specialties field, are not supported for advanced account search on the Life Sciences mobile app. From the App Launcher, find and select Admin Console . Select Search Before Create , and then select Field Set Mapping . The lsc4ce_HcoAccountSearchResults and lsc4ce_HcpAccountSearchResults field sets, included in the managed package, are set by default for the Health Care Organization (HCO) and Health Care Provider (HCP) record types. These field sets control which fields appear on the HCO and HCP search result cards. To associate custom field sets based on your preferences, create custom ‌field sets and select them for the required record type. Warning Don't use checkbox fields in field sets used for Advanced Search. Checkbox default values can prevent account matches from appearing in search results. Warning Don't use lookup fields in field sets used for Advanced Search. Advanced Search excludes lookup fields from the search layout without showing an error. Supported field types for Advanced Search field sets are Text, Picklist, Multi-Select Picklist, Text Area, Email, and Phone. Warning In the lsc4ce__HcpAccountSearch Account field set, use the Billing Country Code picklist field, not the Billing Country text field. The text field doesn’t drive the dependent country picklist logic, and search criteria don’t resolve correctly. To customize the Advanced Search layout further, select Search Before Create on the Admin Console page, and then select General Settings . To show external search results together with internal search results, select Show external search results along with internal search results . To control the fields that appear in the business license search and its results, select the required field sets for Business License Search Field Set and Business License Search Results Field Set . Note Set the organization-wide default (OWD) for the Business License object to Private so that users see only the licenses tied to their accounts. If necessary, select a sorting option for Sort Contact Point Addresses By to set the order in which contact point addresses appear in search results. The lsc4ce_HcpContactPtAddrSearchResults and lsc4ce_HcoContactPtAddrSearchResults field sets control which address fields appear for HCP and HCO records, respectively. To require a workplace address when a user manually creates an affiliation, select Enforce Workplace Address Dependency . For more information, see lsc_affiliations_workplace_address_dependencylsc_affiliations_workplace_address_dependency Streamline Address Management . To control the fields shown for affiliations and specialties after they're added to an account, select the required field sets for Affiliations Details Field Set and Specialty Details Field Set . Note These field sets don't control the fields shown on the New Affiliation or New Speciality page. Those fields come from the page layout assigned to the Provider Affiliation and Healthcare Provider Specialty objects. To change the fields that appear when creating an affiliation or specialty, edit that object's page layout instead. Populate searchable fields on HCP records by using the data from associated records. On the General Settings page, in the left pane, click Search Before Create Jobs . Run the Update HCP Records with Searchable Data job Alternatively, activate the Update Healthcare Provider with Searchable Data data processing engine definition from Setup. You can create data change requests while creating an account that requires approval."
+      },
+      {
+        "name": "See Also",
+        "detail": "Data Change Request Salesforce Help: Create and Edit Field Sets Salesforce Help: Run Data Processing Engine Definitions"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_configure_advanced_search.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-external-search-mulesoft-integration",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set up External Search by Using Built-In MuleSoft Integration",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Integrate Life Sciences Cloud with configured external data sources, such as an MDM or IQVIA’s OneKey, to extend account searches beyond Salesforce. This integration helps sales reps find and add accounts that aren't yet available in",
+    "findings": [
+      {
+        "name": "Set up External Search by Using Built-In MuleSoft Integration",
+        "detail": "Integrate Life Sciences Cloud with configured external data sources, such as an MDM or IQVIA’s OneKey, to extend account searches beyond Salesforce. This integration helps sales reps find and add accounts that aren't yet available in Salesforce."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Use prebuilt integration applications, including the Provider Services API and Onekey System API, which are deployed via MuleSoft Direct to facilitate interaction with external data sources. To address end-to-end business needs, integrate Salesforce apps with external systems by using Integration Solutions with MuleSoft Direct. To set up MuleSoft Direct, see Integrate Solutions with Mulesoft Direct . To set up integration for external search, see Explore MuleSoft Direct Integration Apps . Create an Integration Definition Use integration definitions to quickly set up integrations with different external endpoints by using a low-code interface. Create integration definitions for Apex classes used to integrate with third-party systems."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_external_search_mulesoft_integration.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-integration-definition",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create an Integration Definition",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use integration definitions to quickly set up integrations with different external endpoints by using a low-code interface. Create integration definitions for Apex classes used to integrate with third-party",
+    "findings": [
+      {
+        "name": "Create an Integration Definition",
+        "detail": "Use integration definitions to quickly set up integrations with different external endpoints by using a low-code interface. Create integration definitions for Apex classes used to integrate with third-party systems."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create an integration definition: | Customize Application Before you create an integration definition, make sure your named credential is set up. This named credential is typically auto-created as part of the MuleSoft integration and Connected App setup. Find the named credential in the {MuleSoft Application Name}_provider-services-impl format. From Setup, in the Quick Find box, enter Integration Definitions , and then select Integration Definitions . Click New . For Type, select Apex Defined . For Name, enter the name of the integration definition. The Developer Name is auto-populated. For Apex Class, select lsc4ce.ExternalSearchCalloutService . For Attribute Value, enter the API Name of your named credential. Click Save and Activate ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_integration_definition.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-summarization",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Account Summarization",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Prepare for more efficient and smoother customer interactions with the highly customizable Account Summarization solution. Help users save the time that’s lost while switching between tabs to find the latest and most relevant information about an account before any customer interaction. Provide...",
+    "findings": [
+      {
+        "name": "Account Summarization",
+        "detail": "Prepare for more efficient and smoother customer interactions with the highly customizable Account Summarization solution. Help users save the time that’s lost while switching between tabs to find the latest and most relevant information about an account before any customer interaction. Provide contextual information about provider accounts in a territory, including key account details and updates made to the account and the account’s related records since the user’s last interaction with the account. Help users access account summaries on the web and on mobile devices, even when the user is offline."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement, Agentforce for LifeSciences Cloud, Einstein GPT Prompt Builder, and Einstein GPT Platform Add-on licenses, and the Life Sciences Customer Engagement managed package. Important Account Summarization uses LLM tokens to generate summaries. Make sure you account for token usage and associated costs. Generate separate summaries for different profiles by configuring profile-specific graphs in the admin console. Customize and extend the Account Summarization solution to generate summaries of objects and records of your choice. Permissions and Admin Settings for Account Summarization Make sure your admins and users have the right permissions and licenses to access the Account Summarization solution. Enable the admin settings that grant access to Einstein Generative AI and Cross-Object Field History settings. Account Summarization Data Setup Account Summarization relies on data set up in your org. Review these prerequisites before setting up Account Summarization. Account Summarization Workflow Account Summarization helps sales reps stay informed and prepared for provider visits with agent-generated summaries of the latest changes that have taken place in account since the user’s last interaction with the account. The agent-generated summaries are available on both on the web and in the mobile, and supports both online and offline viewing in the mobile. Configure History Tracking for Account Summarization Account Summarization informs sales reps of the latest changes in a provider account since their last interaction. Choose which fields to include in the information summary. Create a Cross-Object Graph for Account Summarization A cross-object graph represents a set of objects and the relationship between the objects. In Account Summarization, the Account object is the root node in the graph. The Account Summarization graph template references the objects related to the provider's account. You can configure graphs for different profiles by customizing the related objects and fields. You can also create a graph from scratch. Assign a Cross-Object Graphs to an Org or Profile Choose the cross-object graph that’s relevant for performing account summaries, and configure the graph for the org or for a specific profile. Account Summarization Customizations Achieve more personalized solutions that cater to the unique needs of your organization by customizing each component of the Account Summarization capability."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_summarization.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-summarization-data-setup",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Account Summarization Data Setup",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Account Summarization relies on data set up in your org. Review these prerequisites before setting up Account",
+    "findings": [
+      {
+        "name": "Account Summarization Data Setup",
+        "detail": "Account Summarization relies on data set up in your org. Review these prerequisites before setting up Account Summarization."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement, Agentforce for LifeSciences Cloud, Einstein GPT Prompt Builder, and Einstein GPT Platform Add-on licenses, and the Life Sciences Customer Engagement managed package. Make sure you’re assigned the Life Sciences Commercial Admin permission set. Configure territory models and activate the models . Assign users and accounts to territories . Set up data in the Account object and in these related objects. Accreditation Award Party Publication Healthcare Provider Specialty Provider Visit Request Sample Contact Point Address Provider Account Territory Info Provider Affiliation Provider Visit Product Detailing Provider Visit Detail Product Message Provider Activity Goal Inquiry Inquiry Question If you’re adding other objects to the graph, make sure that you have access to the objects and set up the data. Configure the Provider Summary Lightning App Builder component to enable history tracking for the fields that you want to include in the information summary. To provide offline access to account summaries in the mobile app, create the object metadata cache configuration for the Provider Account Territory Summary object."
+      },
+      {
+        "name": "See Also",
+        "detail": "Generate Metadata Cache Get Your Org Ready for the Customer Engagement Managed Package Track Object Field History"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_summarization_data_setup.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-summarization-define-cross-object-graphs",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create a Cross-Object Graph for Account Summarization",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "A cross-object graph represents a set of objects and the relationship between the objects. In Account Summarization, the Account object is the root node in the graph. The Account Summarization graph template references the objects related to the provider's account. You can configure graphs for...",
+    "findings": [
+      {
+        "name": "Create a Cross-Object Graph for Account Summarization",
+        "detail": "A cross-object graph represents a set of objects and the relationship between the objects. In Account Summarization, the Account object is the root node in the graph. The Account Summarization graph template references the objects related to the provider's account. You can configure graphs for different profiles by customizing the related objects and fields. You can also create a graph from scratch."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement, Agentforce for LifeSciences Cloud, Einstein GPT Prompt Builder, and Einstein GPT Platform Add-on licenses, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create cross-objects graph: | Life Sciences Commercial Admin permission set Note Make sure you enable cross-objects field history. From Setup, in the Quick Find box, enter and select Cross-Object Field History Graphs . In Feature Settings, select Cross-Object Field History Graphs . Click New Graph . To use the predefined template, select Account Summarization , and then click Create Graph . You can also create a graph from scratch. In Graph Properties, enter a label for the graph. The developer name is automatically populated. Make note of graph's developer name for related tasks, such as assigning the graph to the org or to a profile. Customize the template as needed. Save your changes. Next, assign the graph to a profile or to the org."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create a Cross-Object Field History Graph"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_summarization_define_cross_object_graphs.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-summarization-customize-autolaunched-flow",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize How and When an Account Summary is Generated",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Customize the Generate Provider Account Territory Summary flow to fetch records of objects other than the Account object. Choose when to capture summary",
+    "findings": [
+      {
+        "name": "Customize How and When an Account Summary is Generated",
+        "detail": "Customize the Generate Provider Account Territory Summary flow to fetch records of objects other than the Account object. Choose when to capture summary changes."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement, Agentforce for LifeSciences Cloud, Einstein GPT Prompt Builder, and Einstein GPT Platform Add-on licenses, and the Life Sciences Customer Engagement managed package. User Permissions Needed To use Account Summarization: | Life Science Commercial Admin permission set AND Access Life Sciences Customer Engagement Agentforce To open, edit, or create a flow in Flow Builder: | Manage Flow From Setup, in the Quick Find box, enter and select Flows . Select Generate Provider Account Territory Summary to open Flow Builder. To change the time period to generate summaries, edit the GetLastVisitStartDateTime element. To fetch specific objects records in the associated cross-object graph, add a Get Records element and add the filter conditions. To pass the data onto custom prompt templates, clone the GetRetrieveKeyInformationSummaryandChangedInformationSummary action, and associate it with the custom prompt template. Add customizations as needed. In the top-right corner, click and select Save as New Version . Activate the flow."
+      },
+      {
+        "name": "See Also",
+        "detail": "Get Started Automating a Business Task with a Flow"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_summarization_customize_autolaunched_flow.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-summarization-schedule-batch-jobs",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize When to Run a Summarization Batch Job",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Choose when and how often to perform summarizations by customizing the Run Account Summarization Batch Job",
+    "findings": [
+      {
+        "name": "Customize When to Run a Summarization Batch Job",
+        "detail": "Choose when and how often to perform summarizations by customizing the Run Account Summarization Batch Job flow."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement, Agentforce for LifeSciences Cloud, Einstein GPT Prompt Builder, and Einstein GPT Platform Add-on licenses, and the Life Sciences Customer Engagement managed package. User Permissions Needed To use Account Summarization: | Life Science Commercial Admin permission set AND Access Life Sciences Customer Engagement Agentforce To open, edit, or create a flow in Flow Builder: | Manage Flow Note The Run Account Summarization Batch Job is a template flow. Regardless of whether you use the default configuration or customize the flow, you must first save it as a new flow. From Setup, in the Quick Find box, enter and select Flows . Select the new flow you saved the template Run Account Summarization Batch Job flow as. In Flow Builder, select the first element. Enter the date and time to start the flow and the frequency. Click and select Action . Select the batch job that you want to associate with the action. For userType, select All Users . Enter the territory ID used in the original action element. Delete the default action element. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_summarization_schedule_batch_jobs.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-summarization-agentforce",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Agentforce for Account Summarization",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Optimize visit-planning measures and improve provider engagement by leveraging the power of AI-generated summarization. Get real-time, data-driven insights and contextual information about an account's latest updates, historical interactions, and related records, tailored for the current user's...",
+    "findings": [
+      {
+        "name": "Agentforce for Account Summarization",
+        "detail": "Optimize visit-planning measures and improve provider engagement by leveraging the power of AI-generated summarization. Get real-time, data-driven insights and contextual information about an account's latest updates, historical interactions, and related records, tailored for the current user's assigned territory. Use natural language utterances to interact with persona-based agents in the intuitive and conversational Agent window to easily get account summaries on the go, on the web and on the iPad."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud for Customer Engagement Add-on license, Agentforce for Life Sciences Cloud, Flex Credits Metering, Agentforce Employee Agent, Einstein GPT Platform, Einstein GPT Copilot, and Einstein GPT Prompt Builder. Also available with Einstein GPT Trust and Genie Data Platform Starter add-on licenses. The Agentforce for Account Summarization solution consists of a topic, two actions, and a flow. The Pre Visit Planning topic helps the agent summarize provider records in the context of the user's territory by using the Generate Healthcare Provider Summary action and the Identify Records By Name action to identify the provider record and the territory of the user. The Pre Visit Planning topic also calls the Generate Account Summary flow which generates the account summary. To tailor the Agentforce for Account Summarization solution to your specific needs, customize the topic and related actions . Set Up Agentforce for Account Summarization To start using the Agentforce features, make sure you enable Einstein Setup, visit-specific topics and actions, and account summarization. Also verify that you have records set up in your org. Create an Agent for Account Summarization Provide key account managers, field sales agents, and medical science liaisons with intelligent agents who summarize information from multiple data points and offer key insights that support planning initiatives before a visit. Use predefined agent templates to configure agents that cater to the specific needs of personas in Life Sciences. Account Summarization Flows for Agentforce The Generate Healthcare Provider Summary agent action invokes the Generate Account Summary flow, which determines if an existing summary record exists and if the existing summary record captures the latest updates in an account. If there are no summary records or if the account record has updates that haven't been summarized, the flow retrieves the latest summary details. Provide Access to Your Pre Visit Planning Agent To help users access the Pre Visit Planning agent, create a permission set with agent access enabled, and assign it to the user. Or, provide agent access to your user's current profile."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_summarization_agentforce.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts",
+      "agentforce"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-management-customize-account-teams",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create an Account Team",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Let team members view details of all the collaborators of an account across different territories. Choose which fields to display to the account",
+    "findings": [
+      {
+        "name": "Create an Account Team",
+        "detail": "Let team members view details of all the collaborators of an account across different territories. Choose which fields to display to the account team."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create account teams: | Life Sciences Commercial Admin permission set To create an account team, you must have territories set up, and accounts and users assigned to each territory. Choose the fields that you want to display. From the object management settings for Users, select Field Set . Click New , and enter the field label. The field name is automatically populated. Note the field set’s API name. You need to add it in the Lightning App Builder. Enter where the field set is used. Save your changes. In the properties panel, move the fields that you want to display onto the editable part of the page. Save your changes. On the Account’s record page, click and select Edit Page . In the Lightning App Builder, on the Additional Information tab, select the Account Team component. In the Properties pane, for Field Set Name, enter the field set’s API name. Save your changes. Activate the page, and assign it as the org default."
+      },
+      {
+        "name": "See Also",
+        "detail": "Coordinating with Account Teams Across Territories"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_management_customize_account_teams.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-view-for-managing-affiliations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Views for Managing Affiliations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Agentforce Life Sciences provides distinct views for affiliations, each designed to help you visualize account relationships for different purposes. The Table View presents data in a structured list. The Hierarchy View shows relationships in an org-chart format for mobile users. The Network View...",
+    "findings": [
+      {
+        "name": "Views for Managing Affiliations",
+        "detail": "Agentforce Life Sciences provides distinct views for affiliations, each designed to help you visualize account relationships for different purposes. The Table View presents data in a structured list. The Hierarchy View shows relationships in an org-chart format for mobile users. The Network View visualizes connections as a graph. Understanding each view helps you select the one that best fits your workflow."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Note The Account Affiliations component shows affiliations in an Account record page layout. The component works only on a single layout Lightning page template such as Header and One Region, rather than on multi-column layouts."
+      },
+      {
+        "name": "Affiliations Table View",
+        "detail": "The Affiliations Table View presents account relationships in a structured table format. This view is also called the list or grid view. This view lists all active affiliations with a start date that falls within the effective start and end dates of the Provider Affiliation. Configure columns to show the key details for each affiliation. The affiliations table view is available on both web and mobile, but some controls differ on mobile. Note On the Life Sciences Cloud mobile app, the Affiliations table view has these display limitations: Cross-object fields aren't supported. The mobile app shows only fields that exist directly on the Provider Affiliation object. Fields from a related object—for example, an Account field added as Account ID > <field>—appear on the web but don't appear on mobile. Column limit. The mobile table view shows up to 4 field set columns, in addition to the Account column. If your field set includes more than 4 fields, the mobile table view shows only the first 4. The web table view has no such limit, so a field set with 5 or more fields can look different on the web versus mobile. Search and account-type filters aren't available. The mobile table view doesn't include the search box or the Healthcare Professionals and Healthcare Organizations filters. The Filters menu includes Show Inactive, Show Outside Territory, Show Soft Affiliations, and Record Type when affiliation record types exist. Users can use a search box to filter accounts by name. The view includes out-of-the-box filters such as Strength, Healthcare Professionals (HCPs), Healthcare Organizations (HCOs), and Territories. The search box and the HCP and HCO filters are available only on the web. For the web affiliation table view, if a user selects a single territory as a filter, the filtered territory only shows an account if both affiliated accounts are in the same territory. Otherwise, the All Territories filter option shows the account. The table view shows accounts both within and outside the user's territory. Clicking an affiliated account in the table view opens a profile panel that shows details about the account. Create affiliations and update existing ones directly within the view."
+      },
+      {
+        "name": "Affiliations Hierarchy View",
+        "detail": "The Hierarchy view gives mobile users an org chart style view of affiliations between HCPs and HCOs. This view shows only an account’s Hard Affiliations. It presents these relationships in a structured hierarchy that can be viewed for accounts within the current territory or outside it. If an account has multiple hard affiliations, the view displays separate tiles for each. Filtering options available in the Hierarchy view include Record Type, Role, Show Inactive, and Show Outside Territory. Unlike the List and Network views, the Hierarchy view doesn't support configurable filters. The Show Inactive filter depends on the Effective Start and End Dates of the Provider Affiliation. Tapping an account name within the Hierarchy opens the Account Summary for that account. The parent account nodes are intentionally not clickable for popover display in the Hierarchy view. They serve as navigation controls when multiple parent accounts exist in the hierarchy. When you tap a parent node, it reorganizes the view by fetching and displaying that parent's children in the bottom section. Note The Affiliations Hierarchy view is available only on mobile."
+      },
+      {
+        "name": "Affiliations Network View",
+        "detail": "The Network View visualizes affiliations as a graph. In the graph, lines (or connectors) link account nodes to represent the affiliations. You enable this view in the Admin Console. The appearance of the connectors is configurable. This view shows Hard or Soft types of affiliations. The Network View includes configurable filters such as Record Type and Role. The Show Inactive filter depends on the Effective Start and End Dates of the Provider Affiliation. Opening an account node in the network diagram expands the view to show its related affiliations. Use the network diagram to view affiliations. To edit an affiliation, use the Table View. Depending on the affiliation's direction, the graph connecting accounts shows either a one-way or two-way arrow. A one-way arrow indicates a unidirectional affiliation, while a two-way arrow represents a bidirectional affiliation. Note The affiliations network view is available on both web and mobile."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_view_for_managing_affiliations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-territory-alignment-for-affiliated-accouts",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Territory Alignment for Affiliated Accounts",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "A user's territory determines which accounts they can view and manage. With territory alignment for affiliations, users can manually align an affiliated account from outside their territory to their current",
+    "findings": [
+      {
+        "name": "Territory Alignment for Affiliated Accounts",
+        "detail": "A user's territory determines which accounts they can view and manage. With territory alignment for affiliations, users can manually align an affiliated account from outside their territory to their current one."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. To enable this functionality, select Enable users to search for accounts outside the user’s territory in Account Search Preferences of Account Management. See Customize Account Search Preferences . From the Salesforce mobile app's Affiliations view, an account outside a user's current territory is identifiable by the absence of an edit action next to its name. Tapping this account record shows a window with an Align option. Selecting this option aligns the affiliated account with the user's current territory."
+      },
+      {
+        "name": "How Parent and Child Territories Access Accounts",
+        "detail": "A user has access only to accounts that are aligned to the same territory as the user. Account alignments don't inherit between parent and child territories. If an account is aligned to a parent territory, it's not available on its child territories. If an account is aligned to a child territory, it's not available on the parent territory. To access an account from a different territory level, manually align the account to your territory."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_territory_alignment_for_affiliated_accouts.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-create-fields-and-field-sets",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create Field Sets and Custom Fields for Affiliation Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create the necessary field sets and custom fields on affiliation objects that are required to configure affiliation settings in the Admin",
+    "findings": [
+      {
+        "name": "Create Field Sets and Custom Fields for Affiliation Settings",
+        "detail": "Create the necessary field sets and custom fields on affiliation objects that are required to configure affiliation settings in the Admin Console."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create custom fields and field sets: | Life Sciences Commercial Admin permission set Object | task | related admin console setting Provider Affiliation | Create a field set to uniquely identify provider affiliation records. | Provider Affiliation Unique Field Set Create a field set to show a list of columns in the table view of affiliations. | Provider Affiliation Columns Field Set Create a custom or formula field that stores value in hexadecimal format to show the color of connectors in the network view of affiliation. For example, #FF0000. | Connector Color Field Create a custom or formula field that stores numeric values to show the thickness of connectors in the network view of affiliation. | Connector Thickness Field Account | Create a text field to search for an account in the table view of affiliations. | Account Search Field Provider Affiliation Product | Create a field set to filter provider affiliations in the network view of affiliations. To enable product filter in network view, add the Product field. You can also include Provide Affiliation fields in the field set. After you enable the Product filter, all the active products from the LifeSciMarketableProduct and the Product2 objects are shown the Product filter picklist in the Affiliation network view. | Provider Affiliation Product Filters Field Set Create a Custom Field and Define Field Sets . Considerations for Affiliations Field Sets Make sure your implementation is successful by reviewing the considerations for affiliation field sets. These field sets directly control the appearance and functionality of the affiliation views, such as the columns in the table view and the filters in the network view. Understanding these limitations beforehand helps you tailor the experience for your users."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_create_fields_and_field_sets.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-considerations-primary",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Considerations for Primary Affiliations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Review how the primary flag behaves across an account's affiliations and how primary affiliation changes interact with Data Change",
+    "findings": [
+      {
+        "name": "Considerations for Primary Affiliations",
+        "detail": "Review how the primary flag behaves across an account's affiliations and how primary affiliation changes interact with Data Change Requests."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "How Primary Affiliations Work",
+        "detail": "A provider affiliation connects two accounts, such as a Healthcare Professional (HCP) and a Healthcare Organization (HCO). Agentforce Life Sciences maintains one primary affiliation to a healthcare organization for each account. The relationship type determines how a primary affiliation affects the parent organization. Relationship | Primary Affiliation Behavior Healthcare Professional to Healthcare Organization (HCP-HCO) | Setting the affiliation as primary assigns the affiliated HCO as the HCP's parent organization. Healthcare Organization to Healthcare Organization (HCO-HCO) | Setting the affiliation as primary assigns the affiliated HCO as the other HCO's parent organization. Healthcare Professional to Healthcare Professional (HCP-HCP) | The affiliation doesn't update the Parent Organization field and isn't included in the one-primary enforcement. An HCP-HCP affiliation can remain primary alongside a primary HCP-HCO affiliation. Note The one-primary restriction applies to the parent organization and not to the affiliated account. The same healthcare organization can therefore be the parent organization for multiple HCPs or HCOs."
+      },
+      {
+        "name": "When a Primary Affiliation Changes",
+        "detail": "When an account has multiple affiliations with healthcare organizations, marking one affiliation as primary clears the Primary field on the account's previous primary affiliation. The affiliated HCO on the new primary affiliation becomes the account's parent organization. The same behavior applies to HCO-HCO relationships. When you clear the Primary field without selecting another qualifying primary affiliation, the corresponding Parent Organization field is also cleared."
+      },
+      {
+        "name": "When Multiple Primary Affiliations Exist",
+        "detail": "If an account already has multiple primary affiliations with healthcare organizations, Agentforce Life Sciences prevents another affiliation from being marked as primary. Resolve the existing primary affiliations before selecting a new one. This limit doesn't apply to HCP-HCP affiliations because their affiliated account is a person rather than an organization."
+      },
+      {
+        "name": "Data Change Requests",
+        "detail": "When the primary flag is cleared on an affiliation as a result of marking another affiliation as primary, the Data Change Request (DCR) approval process isn't started for that change. The DCR approval process is intentionally skipped for primary flag changes made by this automatic update."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_considerations_primary.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-customize-picklist-values",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Picklist Values Customization for Affiliations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To make it easier for your sales rep to select the appropriate options, customize the picklist values for fields in the Provider Affiliation",
+    "findings": [
+      {
+        "name": "Picklist Values Customization for Affiliations",
+        "detail": "To make it easier for your sales rep to select the appropriate options, customize the picklist values for fields in the Provider Affiliation object."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Here are some recommended values, but you can configure any values to fit your business needs. Object | Field | Recommended Picklist Values Provider Affiliation | Affiliation Title | Board Member Chairman Specialist Surgery Specialist Vice Chairman Role | Attending Admitting Co-Business Consulting Staff Territory Provider Affiliation Assignment Rule | Affiliation Role Note We recommend that you define default values for the Role field on the Provider Affiliation object. This default value is used in the HealthcareProviderAffiliationHandler trigger handler."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help: Add or Edit Picklist Values Salesforce Help: Define Default Field Values"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_customize_picklist_values.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-customize-how-affiliations-are-displayed",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize How Affiliations Are Displayed",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Customize the appearance and behavior of account affiliations in the list, network, and hierarchy views by configuring Affiliation settings. Use these settings to also manage data relationships, enforce data validation rules, and streamline address management. Configure Core Affiliation Behavior...",
+    "findings": [
+      {
+        "name": "Customize How Affiliations Are Displayed",
+        "detail": "Customize the appearance and behavior of account affiliations in the list, network, and hierarchy views by configuring Affiliation settings. Use these settings to also manage data relationships, enforce data validation rules, and streamline address management. Configure Core Affiliation Behavior Use General Settings in the Admin Console to configure core behaviors and views for the Affiliations tab on an account record page. These settings control aspects such as the creation of reverse affiliations and how the affiliation type, hard or soft, is determined. The settings also manage the visibility of the network graph view, and the fields used for uniqueness validation. Customize the Table View Appearance Configure the appearance and search capabilities of the Affiliations table view. Customize the view on the account record page by adjusting pagination and defining the sort order for columns. Customize the Network View Appearance Customize the color and thickness of connectors (edges) between accounts in the network view of affiliations by using Use Network View Settings. You can also configure the filters available to users within the network view by referencing field sets on the Provider Affiliation Product object."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_customize_how_affiliations_are_displayed.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-customize-table-view-appearance",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize the Table View Appearance",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure the appearance and search capabilities of the Affiliations table view. Customize the view on the account record page by adjusting pagination and defining the sort order for",
+    "findings": [
+      {
+        "name": "Customize the Table View Appearance",
+        "detail": "Configure the appearance and search capabilities of the Affiliations table view. Customize the view on the account record page by adjusting pagination and defining the sort order for columns."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access account management | Life Sciences Commercial Admin permission set Create Field Sets and Custom Fields for Affiliation Settings From the App Launcher, find and select Admin Console . Select Account Management , and then select Affiliations . For Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Under Table View Settings, configure these settings as needed. Provider Affiliation Columns Field Set : Select the field set from the Provider Affiliation object that includes fields to display as columns in the affiliations table view. Records per Page : Enter the default number of records to show on each page. Fields and Order for Sorting : Enter comma-separated API names of the fields and their sort order (ASC or DESC). For example, CreatedDate ASC, EffectiveStartDate DESC . This setting applies only to the web version of the affiliations table. Note To find a field’s API name, go to the object management settings for the Provider Affiliation object. Records per Page Dropdown Values : Enter comma-separated values for the Records per Page dropdown. For example, 10, 15, 20, 25. The default values are 5, 10, 20, 30. Account Search Field : Select text fields from the Account object to use for searching for accounts in the affiliations table view."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help: Define a Field Set"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_customize_table_view_appearance.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-customize-network-view-appearance",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize the Network View Appearance",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Customize the color and thickness of connectors (edges) between accounts in the network view of affiliations by using Use Network View Settings. You can also configure the filters available to users within the network view by referencing field sets on the Provider Affiliation Product",
+    "findings": [
+      {
+        "name": "Customize the Network View Appearance",
+        "detail": "Customize the color and thickness of connectors (edges) between accounts in the network view of affiliations by using Use Network View Settings. You can also configure the filters available to users within the network view by referencing field sets on the Provider Affiliation Product object."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access account management settings | Life Sciences Commercial Admin permission set Prerequisite: Create Field Sets and Custom Fields for Affiliation Settings . From the App Launcher, find and select Admin Console . Select Account Management , and then select Affiliations . For Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Under Network View Settings, configure these settings as needed. Connector Color Field : Select a custom or formula field containing a hexadecimal code to determine the connector color in the network view. The default value is #808080 (gray). Connector Thickness Field : Select a custom or formula number field to determine the thickness of the connectors in the network view. The default is Affiliation Strength Type. Provider Affiliation Product Filters Field Set : Select the field set from the Provider Affiliation Product object. The fields in this set are available as filters in the network view. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help: Define a Field Set"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_customize_network_view_appearance.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-map-direct-and-reverse-roles",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Map Direct and Reverse Affiliation Roles",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Simplify relationship management by automatically creating a reverse role for every direct role you define. For instance, when you map a healthcare professional (HCP) as an employee of a healthcare organization (HCO), Life Sciences Cloud automatically creates the reverse relationship, designating...",
+    "findings": [
+      {
+        "name": "Map Direct and Reverse Affiliation Roles",
+        "detail": "Simplify relationship management by automatically creating a reverse role for every direct role you define. For instance, when you map a healthcare professional (HCP) as an employee of a healthcare organization (HCO), Life Sciences Cloud automatically creates the reverse relationship, designating the HCO as the HCP's Employer. This automation eliminates manual inverse entries and ensures consistent, efficient relationship management."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access account management settings | Life Sciences Commercial Admin permission set Prerequisite: Picklist Values Customization for Affiliations . Reverse Affiliations are only created if the Influence Type field on the Provider Affiliation object is selected as either Unidirectional, Bidirectional, or Neutral. From the App Launcher, find and select Admin Console . Select Account Management , and then select Affiliation Reverse Role Mapping . Click New . Enter a name. Select a direct role. Select a reversed role. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_map_direct_and_reverse_roles.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-affiliated-account-summary",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Affiliated Account Summary",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Affiliated Account Summary modal provides a customizable view that surfaces essential information about affiliated accounts. Users get immediate access to key details without having to navigate away from their current screen. The feature also includes a quick action button to help users create...",
+    "findings": [
+      {
+        "name": "Affiliated Account Summary",
+        "detail": "The Affiliated Account Summary modal provides a customizable view that surfaces essential information about affiliated accounts. Users get immediate access to key details without having to navigate away from their current screen. The feature also includes a quick action button to help users create a visit directly from the summary."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Note Healthcare Provider (HCP) details are shown in the account summary only if the HCP is the primary provider for the account. Address details for an account are shown only if these two conditions are met: the account has an active provider account territory info (PATI) record, and it's linked to an active user territory record. The address is fetched from the preferred address field of the PATI record, which stores the associated contact point address. Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. On the web, the Affiliated Account Summary modal only displays information related to the account. On the iPad, the Affiliated Account Summary modal consists of two tabs: Account and Account Plans. Account tab Both the default modal on the web and the Account tab on the mobile show account details and a \"New Visit\" quick action button. If needed, you can tailor the information that's shown in the Account tab by editing the Account Summary Columns field set on the Healthcare Provider and Contact Point Address objects. Before you add fields to the field set , make sure that the user has the approriate access. Account Plans tab On the iPad, the Account Plans tab displays the list of active account plans associated with the account, if any. However, as a prerequisite, you must set up object metadata cache settings for account plans ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_affiliated_account_summary.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-batch-jobs",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Batch Jobs for Affiliations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Affiliation batch jobs efficiently process large volumes of records at once by bypassing the governor limits faced by trigger handlers. These batch jobs automate tasks such as setting affiliation types, creating reciprocal affiliations, and establishing primary affiliations between accounts and...",
+    "findings": [
+      {
+        "name": "Batch Jobs for Affiliations",
+        "detail": "Affiliation batch jobs efficiently process large volumes of records at once by bypassing the governor limits faced by trigger handlers. These batch jobs automate tasks such as setting affiliation types, creating reciprocal affiliations, and establishing primary affiliations between accounts and parent organizations."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "AffiliationDataLoadProcessorBatch",
+        "detail": "This batch job is an alternative to the HardAffiliationHandler and AffiliationReciprocalHandler trigger handlers. It performs these primary functions: It sets the affiliation type on provider affiliation records to hard or soft when the necessary conditions are met, without requiring explicit user input. It creates the corresponding reverse affiliation for a given affiliation record. The batch job determines the reverse role for this reverse affiliation by referring to the mapping configured in the Affiliation Reverse Role Mapping."
+      },
+      {
+        "name": "AccountPrimaryAffiliationBatch",
+        "detail": "This batch job provides an alternative to the HealthcareProviderAffiliationHandler trigger handler. When a parent account is specified on the provider's record, the job creates a primary affiliation between the healthcare provider's account and its parent organization account. If an affiliation already exists, it updates the primary flag accordingly. Run Affiliation ‌Batch Apex Jobs Run batch Apex jobs from the Developer console to automate tasks such as setting affiliation types, creating reciprocal affiliations, and establishing primary affiliations between accounts and parent organizations. Track the status and health of your batch Apex jobs and terminate them from Setup when necessary."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help: Batch Apex"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_batch_jobs.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affilation-batch-jobs-run-and-monitor",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Run Affiliation ‌Batch Apex Jobs",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Run batch Apex jobs from the Developer console to automate tasks such as setting affiliation types, creating reciprocal affiliations, and establishing primary affiliations between accounts and parent organizations. Track the status and health of your batch Apex jobs and terminate them from Setup...",
+    "findings": [
+      {
+        "name": "Run Affiliation ‌Batch Apex Jobs",
+        "detail": "Run batch Apex jobs from the Developer console to automate tasks such as setting affiliation types, creating reciprocal affiliations, and establishing primary affiliations between accounts and parent organizations. Track the status and health of your batch Apex jobs and terminate them from Setup when necessary."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create, edit, and delete Life Sciences Cloud data: | Life Sciences Commercial Admin permission set Before you run the AffiliationDataLoadProcessorBatcha batch job, turn off the HardAffiliationHandler and the AffiliationReciprocalHandler trigger handlers. Before you run the AccountPrimaryAffiliationBatch batch job, turn off the HealthcareProviderAffiliationHandler trigger handler. Run the batch Apex job using this Apex code: Map<String, Object> paramMap = new Map<String, Object>{ 'batchName' => '{your_batch_name}', 'batchSize' => '{your_batch_size}', 'isCreatedByCurrentUser' => '{your_is_created_by_current_user_boolean}', 'createdAfter' => '{your_datetime}', 'whereClause' => '{your_where_clause_string}' }; // Call Boolean result = (Boolean)(lsc4ce.LifeScienceApi.getInstance(lsc4ce.LifeScienceApi.Command.AffiliationBatchJob).execute(paramMap)); System.debug('Result: ' + result); The batchSize, createdAfter, isCreatedByCurrentUser, and whereClause parameters are optional. For instructions on how to run batch Apex jobs, see Executing Anonymous Apex Code . Example Map<String, Object> paramMap = new Map<String, Object>{ 'batchName' => 'AffiliationDataLoadProcessorBatch', 'batchSize' => 200, 'isCreatedByCurrentUser' => true, 'createdAfter' => Datetime.newInstance(2025, 8, 1, 0, 0, 0), 'whereClause'=> 'AffiliationStrengthType = \\'High\\'' }; // Call Boolean result = (Boolean)(lsc4ce.LifeScienceApi.getInstance(lsc4ce.LifeScienceApi.Command.AffiliationBatchJob).execute(paramMap)); System.debug('Result: ' + result); This code runs the AffiliationDataLoadProcessorBatch job, setting the batch size to 200. It processes only the records that were created by the logged in user on the 1 st of August 2025 at 0 hours. It executes the records with the affiliation-strength type as high."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affilation_batch_jobs_run_and_monitor.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-management-provider-cards-arc-enhancements",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "ARC Components for Provider Card",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Provider Cards help you get a head start on configuring cards by providing a provider-specific template and a builder where you can choose how you want to render the card interface at",
+    "findings": [
+      {
+        "name": "ARC Components for Provider Card",
+        "detail": "Provider Cards help you get a head start on configuring cards by providing a provider-specific template and a builder where you can choose how you want to render the card interface at run-time."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Graph Components for Cards",
+        "detail": "Here’s a list of components in the ARC graph that support the provider card. Provider Card Template: A predefined, customizable graph with 10 nodes that capture information related to records of the following objects: Account Healthcare Provider Contact Point Address Business License Contact Point Best Contact Time Provider Account Territory Information Healthcare Provider Specialty Card View graph type: A card-specific graph type that displays the Switch to Card button, through which you can access the card builder. Record Retrieval Limit: Helps you select the maximum number of records to fetch for a node. Switch to Card and Switch to Graph buttons: To help you easily toggle between the graph and the card builder."
+      },
+      {
+        "name": "Card Builder",
+        "detail": "Provider Cards supports a card builder that consists of sections, elements, and items. Each section is made up of elements, while each element is made up of individual items. Here's a breakdown of the provider card's interface. Sections store information about an object’s related records, such as information about the provider's specialties, ratings, preferred address, best time to contact the provider, etc. Elements help you configure the display of record details specific to a section. Choose how you want to show each element type by using pill groups or repeaters. You can add multiple elements within a section. Items represent fields, separators, and display texts. In pill groups, you can represent fields and add a label for the field by using display texts. In repeaters, you add multiple fields that are linked by separators. A pill group contains an assortment of pills from multiple data sources (node objects). Each pill can display a text or show information about a field. A repeater displays multiple records belonging to the same data source (node object) in a series. Within a repeater, you can further display your data by using a pill or a text block."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create a Custom ARC Relationship Graph"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_management_provider_cards_arc_enhancements.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-advanced-search",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Refine Account Search Results by Using Advanced Search Criteria",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enhance your search experience with advanced criteria such as account type and licenses when Search Outside Territory is insufficient for finding specific accounts. Perform targeted, attribute-based searches to locate accounts in Salesforce and in external",
+    "findings": [
+      {
+        "name": "Refine Account Search Results by Using Advanced Search Criteria",
+        "detail": "Enhance your search experience with advanced criteria such as account type and licenses when Search Outside Territory is insufficient for finding specific accounts. Perform targeted, attribute-based searches to locate accounts in Salesforce and in external systems."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To refine account search results by using advanced search criteria: | Health Cloud Starter AND Life Sciences Core AND Life Sciences Field Sales Representative As a prerequisite for a healthcare organization (HCO) search in the mobile, make sure that users have access to at lease one account record type that's not a person account record type, such as a business account record type. Advanced Account Search helps improve ‌performance by making relevant data easily accessible irrespective of the territory assignment. From the App Launcher, find and select Life Sciences Commercial and then click the Accounts tab. Select Advanced Search . Select your search criteria, such as HCP accounts, HCO accounts, and business licenses. Then, select Next . Enter additional criteria related to account information and address, based on the available information. The criteria can include details such as country, last name, first name, specialties, national provider identifier, city, and country code. Click Search . Matching results from Salesforce are shown. To align an account from the matching accounts in Salesforce to your territory, click Align to Territory . You can align only active accounts to a territory. To search for accounts not available in Salesforce, click Search in External System . The result shows all matching results from the external system. To add an account from the external system, click Add Account Information . The account is added to Salesforce and aligned to your territory. If you can’t find the required account, proceed to create an account . Note An advanced search is necessary before you create an account to prevent duplicate records. Create an Account Maintain an accurate and up-to-date collection of various accounts by creating an account for new customers. Add information related to the account that enables further communication with the account owner. You can also add affiliation and specialty records for the account."
+      },
+      {
+        "name": "See Also",
+        "detail": "Account Search"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_advanced_search.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-search-create-account",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create an Account",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Maintain an accurate and up-to-date collection of various accounts by creating an account for new customers. Add information related to the account that enables further communication with the account owner. You can also add affiliation and specialty records for the",
+    "findings": [
+      {
+        "name": "Create an Account",
+        "detail": "Maintain an accurate and up-to-date collection of various accounts by creating an account for new customers. Add information related to the account that enables further communication with the account owner. You can also add affiliation and specialty records for the account."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create an account: | Health Cloud Starter AND Life Sciences Core AND Life Sciences Field Sales Representative Note An advanced search is necessary before you create an account to prevent duplicate records. From the App Launcher, find and select Life Sciences Commercial and then click the Accounts tab. Complete advanced search to check if there are any matching results. If the required account isn't available, proceed to create an account. Note If you selected healthcare organization (HCO) in the account type selection of advanced search, select whether it’s an HCO or a Sales record type. In the Life Sciences Cloud mobile app, you select the record type before adding the details. Add account information. For healthcare professional (HCP) record type, add details like Account Name, and Phonetic Name. For HCO/Sales record type, add details like First Name, Last Name, and Phonetic Name. For business licenses, add details like License Number, and Compliance Scope. Select an appropriate provider type for the account. For Status , select whether the account is active, pending, or inactive. Add address information. Add details like name, address, country code, city, state/province code, and zip/postal code, as needed. Select Is Primary if the provided address is the primary address to contact the account owner. Create an affiliation. Click New and add details like related account and affiliation type. Add the affiliation to the account. To create a specialty, Click New and add details like specialty name and specialty. Add the specialty to the account. Select Create Account . The account is created. If your admin has enabled data change request validation, the account is created only after the request is approved."
+      },
+      {
+        "name": "See Also",
+        "detail": "Affiliations Data Change Request Salesforce Help: Create Care Specialty Records"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_search_create_account.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-management-account-summary",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "View a Smart Summary of an Account",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Stay up to date and ready for provider visits with Einstein-generated summaries of an account’s key details and the latest",
+    "findings": [
+      {
+        "name": "View a Smart Summary of an Account",
+        "detail": "Stay up to date and ready for provider visits with Einstein-generated summaries of an account’s key details and the latest updates."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement, Agentforce for LifeSciences Cloud, Einstein GPT Prompt Builder, and Einstein GPT Platform Add-on licenses, and the Life Sciences Customer Engagement managed package. Check recent interactions with an account on the go, on the web and on a mobile device. The smart summaries capture all the changes in the provider account since your last provider visit."
+      },
+      {
+        "name": "See Also",
+        "detail": "Account Summarization"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_management_account_summary.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-management-account-summary-agent",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "View Agent Generated Summary of an Account",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Prepare for visits and boost customer engagement with Agentforce-powered account summaries. Use natual language utterances to interact with agents, and get real-time, data-driven insights that are tailored based on persona. Access the summaries faster without drilling into individual Account...",
+    "findings": [
+      {
+        "name": "View Agent Generated Summary of an Account",
+        "detail": "Prepare for visits and boost customer engagement with Agentforce-powered account summaries. Use natual language utterances to interact with agents, and get real-time, data-driven insights that are tailored based on persona. Access the summaries faster without drilling into individual Account records, by viewing them in the Agent window from anywhere on the web and on the iPad."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud for Customer Engagement Add-on license, Agentforce for Life Sciences Cloud, Flex Credits Metering, Agentforce Employee Agent, Einstein GPT Platform, Einstein GPT Copilot, and Einstein GPT Prompt Builder. Also available with Einstein GPT Trust and Genie Data Platform Starter add-on licenses."
+      },
+      {
+        "name": "See Also",
+        "detail": "Agentforce for Account Summarization"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_management_account_summary_agent.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-management-account-snapshot-provider-card",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Get a Quick Snapshot of an Account",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Instead of navigating to multiple records to get information about a provider, view all the details in one place on your iPad. Go to the Provider Card to check whether a provider is a target account, a speaker, or a key opinion leader, and verify the provider’s eligibility for receiving sample...",
+    "findings": [
+      {
+        "name": "Get a Quick Snapshot of an Account",
+        "detail": "Instead of navigating to multiple records to get information about a provider, view all the details in one place on your iPad. Go to the Provider Card to check whether a provider is a target account, a speaker, or a key opinion leader, and verify the provider’s eligibility for receiving sample orders. View the provider’s specialty areas, and check the preferred addresses and contact times. Stay on top of your communications by viewing information about your last interaction and upcoming visits."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "See Also",
+        "detail": "Provider Cards for Life Sciences"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_management_account_snapshot_provider_card.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-affiliations-create-provider-affiliations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create a Provider Affiliation",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Define the affiliation between Healthcare Professionals (HCPs) and Healthcare Organizations (HCOs) by creating provider affiliation records. Use these records to track their roles, interests, and influence for comprehensive relationship",
+    "findings": [
+      {
+        "name": "Create a Provider Affiliation",
+        "detail": "Define the affiliation between Healthcare Professionals (HCPs) and Healthcare Organizations (HCOs) by creating provider affiliation records. Use these records to track their roles, interests, and influence for comprehensive relationship management."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a provider affiliation: | Life Sciences Core AND Life Sciences Field Sales Representative From the App Launcher, find and select Accounts . Select the account record that you want to create the affiliation for. Select Affiliations , and then click New . Select an account and a related account. Select a role. If it’s a primary affiliation, select Primary . Note When you mark an HCP-HCO affiliation as primary, the primary flag is cleared on the HCP's other HCP-HCO affiliations. Affiliations between two HCPs (HCP-HCP) are exempt and keep their primary flag. This automatic change doesn't start the Data Change Request approval process. See Considerations for Primary Affiliations . For workplace affiliations, select Hard as the affiliation type; otherwise, select Soft . Select an effective start date and an effective end date for the affiliation. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_affiliations_create_provider_affiliations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-accounts-ind-lsc-account-management-coordinate-account-teams",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Coordinating with Account Teams Across Territories",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Sales reps, account managers, contact center agents, and medical team members are often assigned to different territories. To improve collaboration, users can share each other’s roles, departments, and contact information, all from the Account Teams account record page. You can set up an account...",
+    "findings": [
+      {
+        "name": "Coordinating with Account Teams Across Territories",
+        "detail": "Sales reps, account managers, contact center agents, and medical team members are often assigned to different territories. To improve collaboration, users can share each other’s roles, departments, and contact information, all from the Account Teams account record page. You can set up an account team using business accounts or person accounts."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. View each user’s assigned territory and other information (1), based on the fields configured. To view more fields, click the infobubble icon (2)."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create an Account Team"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_account_management_coordinate_account_teams.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "accounts"
+    ]
+  }
+]

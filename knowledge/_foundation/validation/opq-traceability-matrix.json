@@ -1,0 +1,141 @@
+[
+  {
+    "id": "val-rtm-001",
+    "category": "validation-traceability",
+    "title": "Requirements Traceability Matrix (RTM) — Structure and Purpose",
+    "products": ["lsc", "oce", "vault"],
+    "summary": "A Requirements Traceability Matrix maps every User Requirement Specification (URS) item to its corresponding OQ/PQ test case, test result, and risk rating. It is the single document that proves every requirement was tested — or explains why it was not. Inspectors use the RTM to verify validation completeness. An incomplete RTM is one of the most common audit findings in life sciences system validation.",
+    "document_purpose": "The RTM answers one question: for each requirement, where is the evidence that it was tested and confirmed to work? It creates a bidirectional trace — from requirement to test (forward traceability) and from test back to requirement (reverse traceability). Both directions are needed: forward traceability catches untested requirements; reverse traceability catches orphaned tests that do not map to any requirement.",
+    "matrix_structure": {
+      "requirement_identifier": "A unique reference number from the URS document (e.g., '13.3.4'). The numbering follows the URS section structure, making it possible to trace any finding back to the original requirement.",
+      "requirement_description": "The full text of the requirement as stated in the URS. This should be copied verbatim — paraphrasing introduces interpretation risk that auditors will question.",
+      "risk_rating": "The risk classification assigned to this requirement during the Functional Risk Assessment (FRA). Common scales: High, Medium, Low. Risk drives testing depth — High-risk requirements demand more test cases, more boundary conditions, and stricter acceptance criteria.",
+      "test_reference": "The identifier of the OQ/PQ test case that validates this requirement. One requirement may map to multiple test cases. A requirement with no test reference is a gap that must be justified.",
+      "test_result": "Pass, Fail, or Not Tested. A 'Not Tested' result requires a documented justification and risk assessment explaining why the gap is acceptable.",
+      "deviation_reference": "If the test failed, a reference to the deviation report or corrective action form. Deviations must be resolved before the system can be released to production — or a risk acceptance must be formally documented and approved."
+    },
+    "gap_analysis_methodology": {
+      "purpose": "The RTM gap analysis identifies requirements that were not tested or were incompletely tested during OQ/PQ execution. The gap analysis document is a companion to the RTM — it lists every untested or partially tested requirement with its risk rating and a rationale for the gap.",
+      "gap_categories": [
+        "Not Tested — Requirement was excluded from the protocol entirely. Requires justification (e.g., environment limitation, deferred to a future release, requirement withdrawn).",
+        "Incompletely Tested — Some aspects of the requirement were covered but not all specified conditions. Requires identification of what was missed and why.",
+        "Tested with Deviation — The test was executed but produced unexpected results. A deviation report must exist with root cause analysis and corrective action.",
+        "Requirement Changed — The URS was modified after protocol execution. Requires re-testing or a documented impact assessment."
+      ],
+      "risk_based_prioritization": "Gaps in High-risk requirements must be resolved before system release. Gaps in Medium-risk requirements require a documented risk acceptance signed by QA and the System Owner. Gaps in Low-risk requirements may be deferred to the next periodic review with documented justification."
+    },
+    "source": "opqp-trace-matrix-analysis",
+    "tags": ["rtm", "traceability", "urs", "opq", "gap-analysis", "risk-assessment", "audit-readiness"]
+  },
+  {
+    "id": "val-rtm-002",
+    "category": "validation-traceability",
+    "title": "Sample Management System — OQ/PQ Functional Areas and Test Coverage",
+    "products": ["oce", "lsc"],
+    "summary": "Sample management is one of the most heavily validated modules in life sciences CRM because it directly supports PDMA (Prescription Drug Marketing Act) compliance and 21 CFR Part 11 requirements. The OQ/PQ protocol must cover approximately 10 functional areas, each with specific high-risk requirements that inspectors will verify. This entry defines what those areas are and what constitutes adequate test coverage for each.",
+    "functional_areas": {
+      "home_and_navigation": {
+        "description": "The entry point for sales representatives and compliance users. Must enforce role-based access — a sales representative sees only their own data while compliance users can switch between profile views.",
+        "critical_requirements": [
+          "Role-based view routing — the system directs each user to the correct view based on their profile group",
+          "Compliance users can switch between profile groups to review any representative's activity",
+          "Navigation elements (home, transaction entry, reporting) are accessible from every screen"
+        ],
+        "risk_profile": "High — incorrect role routing could expose one representative's data to another, which is both a compliance violation and a data privacy issue."
+      },
+      "acknowledgement_of_delivery": {
+        "description": "Records the receipt of sample shipments by the sales representative. This is the chain-of-custody entry point — from this moment, the representative is accountable for every unit received.",
+        "critical_requirements": [
+          "Representatives see only shipment records assigned to them — no cross-representative visibility",
+          "Required data capture: date received, product identification, lot number, expiration date, quantity, and discrepancy indicator",
+          "Manual acknowledgements require a reference number that is validated for uniqueness (duplicates are rejected unless the original has a voided, test, or cancelled status)",
+          "The discrepancy flag is revalidated on every update — the system cannot allow a discrepancy to be silently cleared",
+          "Quantity verification is possible by product and lot number combination"
+        ],
+        "risk_profile": "High — this is the primary chain-of-custody record. Errors here propagate through the entire sample accountability trail."
+      },
+      "discrepancy_management": {
+        "description": "Handles four types of shipment discrepancies: damage, lot variance, overage, and shortage. Each type has different data capture requirements reflecting the investigative questions that compliance must answer.",
+        "critical_requirements": [
+          "Damage: records the type of damage, affected product/lot/quantity",
+          "Lot Variance: captures both expected and actual lot number, expiration date, and quantity — the delta is the discrepancy",
+          "Overage: captures how the overage was determined, number of cartons received, whether cartons reflect the correct representative name and reference number",
+          "Shortage: captures how the shortage was determined, carton count, evidence of tampering, correct labeling verification",
+          "Warning notices display at the top of the discrepancy page to guide users through required steps"
+        ],
+        "risk_profile": "Medium to High — discrepancies that are not properly recorded can mask diversion, loss, or theft of controlled substances."
+      },
+      "transfer_requests": {
+        "description": "Handles inter-representative sample transfers. Transfers require compliance authorization and can be face-to-face or through a logistics channel.",
+        "critical_requirements": [
+          "Multi-product line item support with add/delete capability before submission",
+          "Representatives cannot edit after submission; compliance retains edit access for corrections",
+          "Face-to-face transfers require a Transfer Authorization number before the representative can record the transfer date",
+          "Cancellation or denial requires a Field Compliance Verification entry with documented reason",
+          "Changes to pickup information require compliance to enter a reason — prevents unauthorized rerouting of samples"
+        ],
+        "risk_profile": "High — uncontrolled transfers break the chain of custody. The authorization number is the audit trail anchor."
+      },
+      "acknowledgement_of_transfers": {
+        "description": "Records the receipt side of a sample transfer. Mirrors the AOD process but for inter-representative transfers rather than shipments from the warehouse.",
+        "critical_requirements": [
+          "Manual creation capability for both representatives and compliance",
+          "Expired and short-dated product visibility — the system must flag products approaching expiration",
+          "Representatives cannot see transfer discrepancies directly (prevents bias) but are prompted to submit a discrepancy report if the system detects one",
+          "Post-submission edit lock for representatives; compliance retains edit access",
+          "Manual transfers require a Transfer Authorization number to close"
+        ],
+        "risk_profile": "High — must maintain parity with the transfer request to prevent quantity mismatches in the accountability trail."
+      },
+      "virtual_transfers": {
+        "description": "Transfers of virtual (non-physical) sample inventory between representatives. Subject to additional constraints because virtual inventory does not have physical chain-of-custody verification.",
+        "critical_requirements": [
+          "Inventory availability validation — the system must confirm the sending representative has sufficient virtual inventory before allowing the transfer",
+          "Profile-based transfer restrictions — virtual transfers are only allowed to profiles that support virtual inventory, and the receiving representative must be in the same profile group (with exceptions for regional managers and compliance)",
+          "Same edit-lock and compliance verification patterns as physical transfers"
+        ],
+        "risk_profile": "High — virtual inventory is inherently harder to audit than physical inventory. System-enforced constraints are the primary control."
+      },
+      "sample_returns": {
+        "description": "Manages the return of sample inventory from the field to the warehouse. Involves logistics coordination (carrier, pickup scheduling, tracking) and warehouse receipt verification.",
+        "critical_requirements": [
+          "Address auto-population from the sales roster when the representative has a single location; dropdown selection when multiple locations are assigned",
+          "Compliance determines whether a pickup is required — this decision drives two different data capture paths with different required fields",
+          "Warehouse receipt verification with automatic discrepancy detection comparing shipped quantities to received quantities",
+          "Status transitions are gated by required field completion — the system cannot advance to 'closed' until all required fields are populated"
+        ],
+        "risk_profile": "High — returns close the sample accountability loop. Discrepancies between shipped and received quantities are a primary indicator of diversion."
+      },
+      "theft_and_loss_reporting": {
+        "description": "Documents incidents of sample theft or loss. Requires dual compliance review — the initial report is entered by one compliance user and must be verified by a different compliance user before closure.",
+        "critical_requirements": [
+          "Only compliance users can file a theft/loss report — representatives have view-only access",
+          "Separation of duties: the report must be approved and then verified by a different compliance user",
+          "Conditional field display: theft (break-in) incidents expose police report fields; loss (lost-in-transit) incidents expose carrier and transit date fields",
+          "Cancellation requires a documented status reason"
+        ],
+        "risk_profile": "High — theft/loss reports may involve controlled substances and can trigger DEA notification requirements. The separation of duties control is a regulatory requirement."
+      },
+      "physical_inventory": {
+        "description": "Records periodic physical counts of sample inventory at representative storage locations. Physical inventory reconciliation is the primary mechanism for detecting discrepancies between system records and actual stock.",
+        "critical_requirements": [
+          "Multi-location support — representatives can record inventory counts across multiple storage locations in a single submission",
+          "Auditor form number tracking per location — links the system record to the physical audit document",
+          "Compliance can add and remove locations, change status, and enter comments",
+          "Post-submission edit lock for representatives; compliance retains edit access",
+          "Cancellation requires a documented status reason"
+        ],
+        "risk_profile": "Medium to High — physical inventory reconciliation is the last line of defense against undetected sample loss or diversion."
+      }
+    },
+    "cross_cutting_test_patterns": [
+      "Role-based access control — every functional area must verify that representatives see only their own data and cannot perform compliance-only actions",
+      "Edit lock after submission — representatives lose edit access after submitting any transaction; compliance retains access for corrections",
+      "Compliance verification on cancellation/denial — every functional area that supports cancellation or denial requires a documented reason from compliance",
+      "Multi-product line item management — the ability to add and delete product line items before submission is a common requirement across deliveries, transfers, returns, and inventories",
+      "Audit trail completeness — every state transition (submission, approval, cancellation, closure) must produce an audit trail entry that includes who, what, and when"
+    ],
+    "source": "opqp-trace-matrix-analysis",
+    "tags": ["sample-management", "opq", "traceability", "pdma", "chain-of-custody", "functional-areas", "test-coverage"]
+  }
+]

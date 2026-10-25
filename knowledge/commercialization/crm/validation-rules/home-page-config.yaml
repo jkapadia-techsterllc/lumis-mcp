@@ -1,0 +1,266 @@
+schema_version: "1.0"
+category_name: "Home Page Configuration"
+description: |
+  Validation rules for CRM Home Page configuration.
+  Covers FlexiPage assignments, widget configuration, quick action
+  navigation, announcements, NBC widget, and mobile cache requirements.
+
+rules:
+  - id: homepage-001
+    name: FlexiPage assigned for CRM Home Page
+    description: |
+      Verifies that a FlexiPage record is assigned as the CRM Home Page.
+      The Home Page is composed of platform-configured widgets rendered via FlexiPage.
+      Without a FlexiPage assignment, users will see the default platform home
+      page instead of the configured CRM home page with widgets like
+      NBC, Activity Plan, Announcements, and Quick Actions.
+    category: configuration
+    severity: error
+    check:
+      type: soql
+      query: >
+        SELECT Id, DeveloperName, MasterLabel
+        FROM FlexiPage
+        WHERE Type = 'HomePage'
+      expect: "records.length > 0"
+    symptoms:
+      - "Users see default platform home page instead of CRM home"
+      - "CRM widgets not showing on Home page"
+      - "Home page is blank or shows standard components"
+    resolution:
+      steps:
+        - "Navigate to Setup > Lightning App Builder"
+        - "Create or edit a Home Page FlexiPage"
+        - "Add CRM components (NBC, Activity Plan, Announcements, Quick Actions)"
+        - "Activate the page and assign to appropriate profiles or app"
+        - "Verify assignment in Setup > Home Page Layouts"
+      ui_path: "Setup > Lightning App Builder"
+    tags: [home-page, configuration, flexipage]
+
+  - id: homepage-002
+    name: App Alerts configured for Home Office Announcements widget
+    description: |
+      Checks whether AppAlert records with Type = 'Announcement' exist.
+      Announcements appear in the Home Office Announcements widget on the
+      Home page. Without announcement-type alerts, the Home Office Announcements
+      widget will be empty. This is informational — the Home page functions
+      without announcements, but they are commonly used for marketing campaigns,
+      compliance reminders, and corporate communications.
+    category: configuration
+    severity: info
+    check:
+      type: soql
+      query: >
+        SELECT Id, Subject, Message, ImageURL, EffectiveDate, ValidUntilDate
+        FROM AppAlert
+        WHERE Type = 'Announcement'
+      expect: "records.length > 0"
+    symptoms:
+      - "Home Office Announcements widget empty"
+      - "No announcements visible on Home page"
+      - "Marketing campaigns not showing"
+    resolution:
+      steps:
+        - "Navigate to App Launcher > App Alerts > New"
+        - "Set Type to 'Announcement'"
+        - "Populate Subject, Message, and ImageURL (optional)"
+        - "Set EffectiveDate and ValidUntilDate"
+        - "Add AppAlertTerritory records to control visibility"
+        - "Verify the Home Office Announcements widget is added to the Home page FlexiPage"
+      ui_path: "App Launcher > App Alerts > New"
+    tags: [home-page, announcements, configuration]
+
+  - id: homepage-003
+    name: Quick actions configured for Home page
+    description: |
+      Checks whether quick actions are configured for the Home page location.
+      Quick actions on the Home page provide one-tap access to core functionalities
+      like creating visits, logging calls, and sending emails. They appear as a
+      floating action button (FAB) on mobile. Without quick actions, the FAB
+      will not appear and users must navigate deeper to perform common tasks.
+      Quick actions are configured via Admin Console and stored as
+      LifeSciConfigRecord metadata.
+    category: configuration
+    severity: info
+    check:
+      type: tooling_soql
+      query: >
+        SELECT Id, MasterLabel, IsActive
+        FROM LifeSciConfigRecord
+        WHERE LifeSciConfigCategoryId IN (
+          SELECT Id FROM LifeSciConfigCategory WHERE Category = 'QuickAction'
+        )
+        AND IsActive = true
+      expect: "records.length > 0"
+    symptoms:
+      - "No floating action button on Home page"
+      - "Quick actions missing from Home page"
+      - "Cannot create visits from Home page"
+    resolution:
+      steps:
+        - "Navigate to Admin Console > Quick and Custom Action Administration"
+        - "Create quick actions for Home location"
+        - "Assign profiles to the actions"
+        - "Regenerate metadata cache for mobile"
+      ui_path: "Admin Console > Quick and Custom Action Administration"
+    tags: [home-page, quick-actions, configuration]
+
+  - id: homepage-004
+    name: TerritoryAccountScore records exist for NBC widget
+    description: |
+      Checks whether TerritoryAccountScore records exist. The Home page
+      NBC (Next Best Customer) widget displays the top 5 recommended accounts
+      based on TerritoryAccountScore data. Without these records, the NBC
+      widget will be empty and the "See All" link will show no results.
+      TerritoryAccountScore records are typically loaded from Einstein Studio
+      or Data Cloud predictive models.
+    category: configuration
+    severity: info
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM TerritoryAccountScore
+      expect: "count > 0"
+    symptoms:
+      - "NBC widget empty on Home page"
+      - "Top 5 recommended accounts not showing"
+      - "See All link shows no results"
+    resolution:
+      steps:
+        - "Create TerritoryAccountScore records via Einstein Studio or manual data load"
+        - "Ensure each record has Account, Territory2, TotalScore, and Rank populated"
+        - "Verify Territory2Id matches users' active territory assignments"
+        - "Optional: Populate ScoreExplainabilityInfo with valid JSON for score factors"
+      ui_path: "Setup > Object Manager > TerritoryAccountScore"
+    tags: [home-page, nbc, data]
+
+  - id: homepage-005
+    name: ActivityPlan records exist for Activity Plan widget
+    description: |
+      Checks whether ActivityPlan records exist. The Home page Activity Plan
+      widget shows a doughnut chart summarizing scheduled vs. actual activities
+      for the current time period. Without ActivityPlan data, the widget will
+      show "No data available" or not render at all. The widget requires
+      ActivityPlan, ProviderActivityGoal, and ProviderAcctTerritoryInfo data.
+    category: configuration
+    severity: info
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ActivityPlan
+      expect: "count > 0"
+    symptoms:
+      - "Activity Plan widget shows no data"
+      - "Doughnut chart not rendering on Home page"
+      - "Activity plan section empty"
+    resolution:
+      steps:
+        - "Navigate to App Launcher > Activity Plans"
+        - "Create ActivityPlan records with TimePeriod, PlanType, and Status"
+        - "Create ActivityPlanTerritory records to link plans to territories"
+        - "Create ProviderActivityGoal records for target accounts"
+        - "Verify the Calculate Provider Activity Goal Measures batch job is scheduled"
+      ui_path: "App Launcher > Activity Plans"
+    tags: [home-page, activity-plan, data]
+
+  - id: homepage-006
+    name: LifeSciMobileMetadataRecord active for home page objects
+    description: |
+      Verifies that mobile metadata cache is active. The Home page on mobile
+      requires an active metadata cache that includes objects used by widgets
+      (TerritoryAccountScore for NBC, ActivityPlan for Activity Plan chart,
+      AppAlert for Announcements). Without active cache, Home page widgets
+      will not load on mobile devices.
+    category: metadata-cache
+    severity: warning
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM LifeSciMobileMetadataRecord
+        WHERE Status IN ('Active', 'Published')
+      expect: "count > 0"
+      error_detail_query: >
+        SELECT Id, Name, Status, IntegrationStatus, LastModifiedDate
+        FROM LifeSciMobileMetadataRecord
+        ORDER BY LastModifiedDate DESC
+        LIMIT 10
+    symptoms:
+      - "Home page widgets not loading on mobile"
+      - "NBC widget empty on iPad"
+      - "Activity Plan chart not showing on mobile"
+      - "Device sync transaction record was not found"
+    resolution:
+      steps:
+        - "Navigate to Admin Console > Mobile > Object Metadata Cache Configuration"
+        - "Verify TerritoryAccountScore, ActivityPlan, AppAlert objects are in DB Schema"
+        - "Regenerate metadata cache for affected profiles"
+        - "Have users sync their mobile devices"
+      ui_path: "Admin Console > Mobile > Object Metadata Cache Configuration"
+    tags: [home-page, mobile, cache]
+
+  - id: homepage-007
+    name: Home page FlexiPage includes CRM components
+    description: |
+      Informational check to verify the Home page FlexiPage includes
+      expected CRM components. A properly configured Home page should
+      include at minimum: NBC widget, Activity Plan chart, Home Office
+      Announcements, and Quick Actions. Missing components reduce the
+      Home page's value as a command center for field reps.
+    category: configuration
+    severity: info
+    check:
+      type: soql
+      query: >
+        SELECT Id, DeveloperName, MasterLabel
+        FROM FlexiPage
+        WHERE Type = 'HomePage'
+      expect: "records.length > 0"
+    symptoms:
+      - "Home page missing expected widgets"
+      - "Some CRM components not showing"
+      - "Home page looks incomplete"
+    resolution:
+      steps:
+        - "Navigate to Setup > Lightning App Builder"
+        - "Edit the CRM Home Page FlexiPage"
+        - "Add missing components from the component palette"
+        - "Recommended components: NBC, Activity Plan, Announcements, Quick Actions"
+        - "Save and activate the page"
+      ui_path: "Setup > Lightning App Builder"
+    tags: [home-page, configuration, components]
+
+groups:
+  home-page-check:
+    name: "Home Page Configuration Check"
+    description: "Full home page configuration check - FlexiPage, widgets, quick actions, announcements, and mobile cache"
+    rules:
+      - homepage-001
+      - homepage-002
+      - homepage-003
+      - homepage-004
+      - homepage-005
+      - homepage-006
+      - homepage-007
+
+  home-page-mobile:
+    name: "Home Page Mobile Check"
+    description: "Mobile-specific home page checks - metadata cache and widget data requirements"
+    rules:
+      - homepage-006
+
+  home-page-announcements:
+    name: "Home Page Announcements Check"
+    description: "Announcements and alerts checks for Home page"
+    rules:
+      - homepage-002
+
+  pre-deployment-home:
+    name: "Pre-Deployment Home Page Check"
+    description: "Run before deploying Home page to users - FlexiPage, quick actions, and mobile cache"
+    rules:
+      - homepage-001
+      - homepage-003
+      - homepage-006

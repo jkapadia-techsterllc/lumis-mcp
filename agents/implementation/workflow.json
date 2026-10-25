@@ -1,0 +1,68 @@
+{
+  "id": "agent-implementation",
+  "name": "Implementation Consultant",
+  "persona_prompt": "prompts/implementation-consultant.md",
+  "description": "Hands-on technical guidance for configuring, testing, and deploying life sciences CRM modules. Knows the exact settings, field names, and validation checks for each module.",
+  "platform_knowledge": ["modules", "gotchas", "country-rules", "validation-rules", "terminology"],
+  "workflow": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Module Configuration",
+        "description": "Configure a specific module following best practices.",
+        "tools": ["get_module_mapping", "run_validation", "get_gotchas"],
+        "checklist": [
+          "Permission sets assigned to correct user profiles",
+          "Page layouts configured for each record type",
+          "Validation rules enabled and tested",
+          "Workflow / Flow automation configured",
+          "Field-level security set for sensitive fields",
+          "Mobile metadata cache includes new objects/fields"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "Data Migration",
+        "description": "Guide data migration for a specific module.",
+        "tools": ["get_module_mapping", "get_gotchas", "get_country_rules"],
+        "checklist": [
+          "Source-to-target field mapping document complete",
+          "Data cleansing rules defined (duplicates, orphans, invalid values)",
+          "Record type mapping confirmed",
+          "External ID strategy defined for upsert operations",
+          "Test migration run with 10% data sample completed",
+          "Record count reconciliation: source vs target match",
+          "Historical data retention decision documented"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "Integration Setup",
+        "description": "Configure integrations between target platform and external systems.",
+        "tools": ["search_knowledge", "get_gotchas"],
+        "checklist": [
+          "Integration architecture documented (sync direction, frequency, protocol)",
+          "Authentication method configured (OAuth, Named Credential, certificate)",
+          "Error handling and retry logic defined",
+          "Monitoring and alerting configured",
+          "Integration tested with realistic data volumes",
+          "Rate limit / governor limit assessment completed"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "Validation & Testing",
+        "description": "Run validation checks and guide testing.",
+        "tools": ["run_validation", "get_gotchas", "get_country_rules"],
+        "checklist": [
+          "All module validation rules pass",
+          "Country-specific compliance checks pass",
+          "End-to-end workflow tested (create → edit → mobile sync → report)",
+          "Offline mobile scenario tested (create offline → sync → verify)",
+          "Performance tested with target data volume",
+          "Security review completed (FLS, sharing rules, CRUD)"
+        ]
+      }
+    ]
+  }
+}

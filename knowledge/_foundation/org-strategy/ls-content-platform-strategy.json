@@ -1,0 +1,18 @@
+[
+  {
+    "id": "fnd-strat-011",
+    "category": "org-strategy",
+    "title": "Life Sciences Content Management Platform Strategy",
+    "products": ["lsc"],
+    "summary": "Strategic proposal for a unified content management platform serving the life sciences industry, addressing the molecule-to-market content lifecycle across clinical, regulatory, quality, and commercial functions with native CRM integration.",
+    "findings": {
+      "market_opportunity": "The life sciences industry-specific software market represents a total addressable market exceeding $20 billion. A strategic inflection point has emerged with the incumbent leader's decision to terminate its CRM platform partnership and migrate to a proprietary platform, creating a substantial window to capture market share among customers accustomed to the existing ecosystem.",
+      "problem_statement": "Life sciences organizations operate with deeply fragmented digital infrastructure: clinical trial documentation in eTMF systems, regulatory submissions in RIM systems, quality processes in QMS, and commercial content in separate approval systems. This siloed approach causes error-prone manual processes, extended review timelines, lack of cross-lifecycle visibility, and heightened compliance risk under regulations such as FDA 21 CFR Part 11.",
+      "molecule_to_market_vision": "The strategic objective is a single unified digital thread connecting every stage of a product's journey from molecule to market. In this model: clinical trial outcomes directly inform regulatory submissions, approved regulatory claims become the foundation for promotional materials, and all content flows through compliant review and distribution. A marketing claim in a promotional brochure should be digitally traceable back to the specific clinical study report and regulatory submission.",
+      "platform_architecture": "Multi-layered platform design featuring: (1) GxP-compliant storage foundation meeting FDA, EMA, and global regulatory standards, (2) advanced content lifecycle management spanning authoring, Medical-Legal-Regulatory (MLR) review, distribution, and withdrawal, (3) highly configurable workflow engine for approval processes, (4) native connection to the CRM platform for seamless commercial operations.",
+      "business_impact": "The platform aims to: dismantle operational siloes between R&D and Commercial functions, accelerate the molecule-to-market process, embed compliance into the platform core to mitigate risk, enable organizations to achieve more with fewer resources, and elevate the CRM from a field operations tool into the central nervous system for the entire life sciences value chain."
+    },
+    "source": "Life Sciences Content Platform Opportunity strategic proposal (Project Unify)",
+    "tags": ["content-management", "platform-strategy", "molecule-to-market", "mlr-review", "gxp-compliance", "etmf", "rim", "qms", "unified-platform"]
+  }
+]

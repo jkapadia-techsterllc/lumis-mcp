@@ -1,0 +1,206 @@
+[
+  {
+    "id": "oce-cfg-meetings-001",
+    "category": "configuration",
+    "title": "Meeting Module Activation and Basic Setup",
+    "products": ["oce"],
+    "summary": "Covers the foundational activation steps for the Meetings module in the CRM platform, including permission sets, record types, page layout configuration, button overrides, field and picklist setup, sharing settings, Lightning pages, validation rules, and the critical trigger handler migration from the deprecated package to the recommended package.",
+    "findings": [
+      "Activation requires assigning two core permission sets: a Meetings Admin set for administrators and a Meetings User set for end users. Additional feature-specific permission sets exist for areas such as expense management, Concur integration, and budget administration.",
+      "The module supports four meeting record types out of the box: Speaker Meeting, Rep Presentation, Displays and Exhibits, and HCP Sponsorship. Each record type has its own page layout, and administrators must configure button overrides (New, Edit, Delete) to use the recommended package's Visualforce pages or Lightning components rather than the deprecated versions.",
+      "A comprehensive trigger handler migration is required: the recommended package (OCE9) handlers must be activated while corresponding deprecated (OCE) handlers are disabled. This pattern applies across all meeting-related objects including Meeting, Meeting Member, Meeting Expense, Meeting Expense Allocation, and Meeting Budget. The guide provides detailed tables mapping each active handler to its deprecated counterpart.",
+      "Field and picklist configuration involves setting up fields on Meeting, Meeting Member, and related objects, configuring picklist values for statuses (Invitation Status, Attendance Status), and ensuring proper field-level security. Sharing settings must be configured to control meeting visibility, and specific validation rules need to be activated or deactivated depending on the desired behavior.",
+      "Lightning page configuration requires placing specific LWC components on the Meeting record page. The recommended package provides updated LWC-based components that replace deprecated Aura components. Administrators must also activate relevant DB Schemas for mobile sync support through the Metadata Cache.",
+      "The Generic Workflow system controls the meeting lifecycle and status transitions. Administrators configure workflow paths in the Admin Console that define which actions are available at each meeting status, who can perform them, and what the resulting status transitions are. This includes configuring permissions for creating, editing, and deleting related records like expenses and budgets at each stage."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "activation", "permission-sets", "trigger-handlers", "record-types", "page-layouts", "lightning-pages", "generic-workflow", "mobile-sync"]
+  },
+  {
+    "id": "oce-cfg-meetings-002",
+    "category": "configuration",
+    "title": "Speaker Management Configuration",
+    "products": ["oce"],
+    "summary": "Covers the configuration of speakers within the Meetings module, including speaker creation, account nomination, eligible speakers setup, compliance topics, speaker restrictions, HCP as new speaker functionality, invite-all capabilities, write-in and reconciliation processes, speaker recommendations using connected intelligence, mobile signature disclaimers, and restricted roles.",
+    "findings": [
+      "Speakers are created and managed through the Speaker object, which links an account (typically a healthcare professional) to the meeting as a presenter. Administrators configure which accounts are eligible to be speakers through the Eligible Speakers functionality, which uses criteria based on account fields, speaker status, and compliance requirements.",
+      "Account nomination allows organizations to control which accounts can be nominated as speakers for meetings. This involves configuring nomination workflows, approval processes, and the criteria that determine speaker eligibility. The system supports both pre-approved speaker lists and on-demand nomination processes.",
+      "Compliance topics can be associated with speakers to track required training, certifications, or other compliance requirements. Speaker restrictions allow administrators to define rules that prevent certain speakers from being added to meetings based on criteria such as geographic restrictions, product expertise, or compliance status.",
+      "The HCP as New Speaker feature allows meeting organizers to add healthcare professionals who are not yet in the speaker pool directly from the meeting creation flow. This involves configuring the speaker creation process, required fields, and any approval workflows that must be completed before the new speaker can be used.",
+      "Speaker and attendee recommendations use a Connected Intelligence framework that provides AI-powered suggestions based on historical meeting data, account relationships, and territory alignments. The configuration involves a JSON schema that defines recommendation criteria, scoring weights, and display settings. Recommendations can be customized per meeting record type and user profile.",
+      "The mobile signature disclaimer feature allows administrators to configure legal disclaimer text that speakers must acknowledge when signing in to meetings on mobile devices. This is configured through custom settings and supports multiple languages. Restricted roles allow administrators to limit which meeting member roles can perform certain actions, such as adding speakers or modifying attendance."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "speakers", "compliance", "nominations", "recommendations", "connected-intelligence", "signature", "mobile"]
+  },
+  {
+    "id": "oce-cfg-meetings-003",
+    "category": "configuration",
+    "title": "Meeting Members and Attendee Management",
+    "products": ["oce"],
+    "summary": "Covers the configuration of meeting members including account attendees, colleagues, write-in and reconciliation processes, attendee record type validation, public group sharing, meeting member services, the file uploader feature, and configurable search, filter, and display columns across web and mobile platforms.",
+    "findings": [
+      "Meeting members encompass three types: Account Attendees (external contacts such as healthcare professionals), Speakers (presenters at the meeting), and Colleagues (internal users). Each type has its own record type on the Meeting Member object, and administrators can configure which record types are available for each meeting record type through the Admin Console.",
+      "The search, filter, and display capabilities for account attendees, speakers, and colleagues are highly configurable through field sets on the respective objects. Administrators can define separate field sets for display/filter columns and search fields. The system supports a comprehensive matrix of field types with varying capabilities across Salesforce and iOS platforms, including differences in search, filter, and display support for types such as Text, Picklist, Lookup, Currency, Date, and Formula fields.",
+      "Write-in and reconciliation processes handle scenarios where meeting attendees were not pre-registered. Write-ins allow organizers to add attendees who were not originally invited, while reconciliation provides a process to match write-in records with existing accounts in the system. This ensures data accuracy while allowing flexibility during actual meeting execution.",
+      "Account Attendee Record Type Validation ensures that only appropriate record types of accounts can be added as attendees to specific meeting types. This is configured through validation rules and custom settings that map meeting record types to allowed account record types.",
+      "Share Meetings by Public Groups allows administrators to control meeting visibility by sharing meeting records with specific public groups. This is useful for organizations where meeting data needs to be visible across territories or teams that may not have standard sharing rule access.",
+      "Meeting Member Services provide utility functionality including the automatic population of denormalized fields from Account, Speaker, and User objects onto the Meeting Member record when members are created. This is handled by the Meeting Member Populate Fields trigger handler. The file uploader feature enables users to attach documents to meeting member records directly from the meeting interface."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "attendees", "colleagues", "write-ins", "reconciliation", "field-sets", "search", "filter", "sharing", "mobile"]
+  },
+  {
+    "id": "oce-cfg-meetings-004",
+    "category": "configuration",
+    "title": "Topics, Topic Products, and Content Materials",
+    "products": ["oce"],
+    "summary": "Covers the configuration of meeting topics, topic products, topic materials, and the advanced topic search and filtering capabilities including multiselect record types, multiselect subtypes, configurable columns, system-generated filter conditions with SOQL syntax, and field type support matrices.",
+    "findings": [
+      "Topics represent the subjects to be discussed at a meeting. They are created through the Topic object and can be organized hierarchically using parent-child relationships. Each topic can be associated with a meeting type, account specialty, and account record type to control when it appears as an available option. Because Topic is a private object, records must be explicitly shared with users, territories, groups, or roles for visibility.",
+      "Topic Products link products to topics, establishing the relationship between what is discussed at a meeting and which products are relevant. When a user selects a topic for a meeting, the associated topic products are automatically populated in the Meeting Products list. A uniqueness validation ensures the same product cannot be linked to the same topic more than once. Topic Materials allow administrators to link content resources such as presentations, invitation templates, email templates, sign-in templates, and general content to specific topics.",
+      "Meeting Topic configuration requires activating specific DB Schemas (MeetingTopic_c, Topic_c, TopicProduct_c, TopicMaterial_c), configuring custom UI component overrides on the Meeting Topic object, and scheduling a batch job (MeetingProductsAlignmentBatch) to handle data inconsistency between online and offline usage.",
+      "Advanced topic search and filtering supports multiselect meeting record types and multiselect meeting subtypes on the Topic object, allowing administrators to associate a single topic with multiple meeting types. Configurable columns use field sets on the Topic object for both display/filter and search purposes, supporting up to 10 fields maximum (including the mandatory Name field). The system supports different field type capabilities between Salesforce and iOS platforms.",
+      "The system-generated filter on the topic search screen is highly configurable. Administrators can define custom SOQL-syntax filter conditions per profile and meeting record type. The filter supports standard fields, packaged fields, and custom fields, and can use dynamic variables ($meeting and $user) that are substituted with actual values at runtime. Variables for string and ID type fields must be enclosed in quotes in the SOQL condition.",
+      "An additional configuration option allows hiding the mandatory Name column and enforcing the display field set as the primary column source, enabling text fields up to 255 characters to be displayed without truncation. Users can collapse long text with a Show Less link."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "topics", "topic-products", "topic-materials", "search", "filter", "field-sets", "SOQL", "mobile", "advanced-search"]
+  },
+  {
+    "id": "oce-cfg-meetings-005",
+    "category": "configuration",
+    "title": "Meeting Expenses, Allocations, and Expense Types",
+    "products": ["oce"],
+    "summary": "Covers the configuration of expense types (categories and line items), meeting expenses, meeting expense allocations, distribution types, uneven and partial allocations, configurable expense type search columns, expense calculation algorithms, and the deletion/reallocation of expense allocations upon member removal.",
+    "findings": [
+      "Expense Types are organized in a two-tier hierarchy: Categories (for estimated expenses, such as 'Lodging') and Line Items (for actual expenses, such as 'Hotel Room'). Each expense type has a Distribution Type that controls how the expense is allocated to meeting members: 'All' distributes evenly among all qualifying members, 'Individual' allocates to one selected member, 'Multiple' allows allocation to selected members, and 'Not Applicable' requires no allocation. Expense types also have status, date range, and Lightning icon configuration.",
+      "Meeting Expenses and Meeting Expense Allocations require activating a comprehensive set of trigger handlers in the recommended package while disabling their deprecated counterparts. Key handlers include MEA To Meeting Relation, Meeting Calculation Event, Meeting Expense, Meeting Expense Allocation Calculation, Meeting Expense Allocation Creator, Meeting Expense Allocation Locker, MEA Recalculation on ME Change, Meeting Expense Calculation, Meeting Expense Locker, and Meeting Member Expense Calculation.",
+      "Expense calculation algorithms compute four key fields: Total Estimated Expenses (sum of all estimated expenses regardless of distribution type), Total Actual Expenses (sum of all actual expenses), Average Estimated Expense (estimated total excluding 'Not Applicable' types divided by members with qualifying invitation statuses), and Average Actual Expense (actual total excluding 'Not Applicable' types divided by members with qualifying attendance statuses). The qualifying statuses are configurable through custom settings at the org level.",
+      "Uneven Allocation allows users to divide expenses non-equally among meeting members when the expense type distribution is 'Multiple'. This requires Edit access to the Uneven Allocation field on Meeting Expense and activation of a specific recalculation handler. Partial Allocation extends this by allowing users to allocate less than the full expense amount, controlled by the 'Allow Partial Meeting Expense Allocations' custom permission.",
+      "The expense type selection screen columns are configurable through field sets on the Expense Type object, similar to the topic search configuration. Advanced search must be enabled, and separate field sets can be defined for display/filter and search. Inactive expense types are always excluded from search results. The system-generated filter ensures only expense types matching the meeting record type are shown.",
+      "Automatic deletion of Meeting Expense Allocations upon Meeting Member deletion is controlled by the 'Delete MEA On MM Delete' trigger handler. This only deletes estimated (not actual) allocations and only manually created ones. A 'Reallocate' button appears when expense records need reallocation after member deletion. The system also supports creating allocations with zero amounts when using the checkbox-based selection on the budget allocation screen."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "expenses", "allocations", "expense-types", "distribution-types", "uneven-allocation", "partial-allocation", "calculations", "mobile"]
+  },
+  {
+    "id": "oce-cfg-meetings-006",
+    "category": "configuration",
+    "title": "Meeting Budgets and Budget Allocation Management",
+    "products": ["oce"],
+    "summary": "Covers the configuration of the Meeting Budgets module (version 2), including Meeting Budget 2 objects, Meeting Expense Budget Allocations (MEBA), currency management, automatic and manual allocation workflows, validation of estimated and actual allocations, recalculation on expense changes, and budget column configuration.",
+    "findings": [
+      "The Meeting Budgets module uses two key objects: Meeting Budget 2 (which links a Budget to a Meeting and supports proper visibility for all colleagues) and Meeting Expense Budget Allocation (MEBA, which allocates a Meeting Expense to a Meeting Budget 2). This is a second-generation design that replaced the original Meeting Budget object to address visibility limitations.",
+      "Configuration requires enabling the Enable Currency and Enable Budgets custom settings, assigning budget-related permission sets (Budget Admin, Budget Manager, Budget User), activating relevant DB Schemas, and configuring the Generic Workflow to define which meeting statuses trigger actual expense calculations (defaulting to Concluded, Closed, and Cancelled). Two trigger handler configurations are available: Configuration 1 uses platform events, while Configuration 2 (recommended) uses synchronous trigger handlers for more stable and predictable behavior.",
+      "The automatic MEBA creation workflow: when a user adds a Meeting Expense, a corresponding MEBA record is automatically created linking the expense to the first Meeting Budget 2 added to the meeting by the Organizer or Coordinator. If multiple budgets are assigned, users can manually split expenses across budgets using the Allocate Budget feature. A known concurrency issue exists when an Organizer and Co-Organizer create expenses simultaneously on the same Meeting Budget 2.",
+      "Budget validation enforces that users cannot allocate estimated expenses exceeding the budget's Remaining amount. For actual expenses, the validation behavior depends on whether the WarnActualMEBA custom permission is assigned -- when assigned, users receive a warning but can proceed; otherwise no warning is shown. The Validate Auto Meba handler provides more accurate budget remaining calculation on both Salesforce and mobile, including unprocessed mobile data. A REST API option enables online mobile budget recalculation.",
+      "Currency handling follows standard multi-currency conversion: Meeting Budget 2 inherits currency from the parent Budget, while MEBA and Meeting Expense Allocation inherit from Meeting Expense. Budget and Meeting Expense can have different currencies that are automatically converted. The system requires specific field replacements on page layouts, switching from number-type Amount fields to currency-type CurrencyAmount fields on Meeting Expense and Meeting Expense Allocation objects.",
+      "Budget columns on the Meeting Budget screen are configurable through field sets on the Budget object, supporting up to 10 fields for both display/filter and search. The configuration follows the same pattern as topic and expense type column configuration, with the same field type support matrix across Salesforce and iOS platforms. A one-time batch job (MeetingBudgetUpdateAmountsBatch) must be run to update historical data on Meeting Budget 2 records."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "budgets", "budget-allocation", "MEBA", "currency", "multi-currency", "validation", "trigger-handlers", "mobile"]
+  },
+  {
+    "id": "oce-cfg-meetings-007",
+    "category": "configuration",
+    "title": "Meeting Sign-In, QR Code Scanning, and Consent",
+    "products": ["oce"],
+    "summary": "Covers the configuration of meeting sign-in processes including lock-on-sign-in, add-attendee-on-sign-in, QR code scanning for contactless sign-in, consent management within meetings, surveys and retake survey functionality, and mobile signature disclaimer configuration.",
+    "findings": [
+      "Lock on Sign In prevents modifications to meeting details once the sign-in process begins. This ensures data integrity during the attendance capture phase. When enabled, fields on the meeting and meeting member records become read-only after the organizer initiates the sign-in process, preventing changes to attendee lists, expenses, or meeting details during active sign-in.",
+      "Add Attendee on Sign In allows new attendees to be added to the meeting during the sign-in process itself, accommodating walk-in participants who were not originally invited. This feature works in conjunction with the write-in and reconciliation processes to capture unplanned attendees while maintaining data quality.",
+      "QR Code Scanning enables contactless sign-in for meeting attendees. The configuration involves setting up QR code generation for invited attendees and configuring the scanning interface on mobile devices. The system generates unique QR codes per attendee-meeting combination that can be scanned to record attendance and capture electronic signatures. Code samples are provided in the configuration guide for implementing the QR generation and scanning logic.",
+      "Consent in Meetings integrates with the platform's consent management framework to capture and record attendee consent during meetings. This is relevant for meetings where healthcare professional data is collected and must comply with data privacy regulations. The configuration involves activating consent-related components on the meeting page layout and configuring the consent capture workflow.",
+      "Surveys can be associated with meetings and distributed to attendees for feedback collection. The Retake Surveys feature allows attendees to complete surveys multiple times, which is configured through custom settings. Survey configuration involves setting up the survey object, linking surveys to meeting types, and configuring the survey distribution and collection workflow.",
+      "The External User Meeting Creation feature allows users outside the standard organization hierarchy to create meetings, while On Behalf Of allows one user to create meetings on behalf of another. Search Before Create helps prevent duplicate meetings by prompting users to check for existing meetings before creating new ones. Share Content enables content sharing with meeting attendees through the meeting interface."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "sign-in", "QR-code", "consent", "surveys", "lock-on-sign-in", "walk-ins", "contactless", "mobile"]
+  },
+  {
+    "id": "oce-cfg-meetings-008",
+    "category": "configuration",
+    "title": "Remote and Virtual Meetings",
+    "products": ["oce"],
+    "summary": "Covers the configuration of remote/virtual meeting capabilities including integration with a video conferencing provider, email sending for remote meeting invitations, Experience Cloud site configuration for attendee access, satellite meetings with parent-child structure, and the fields-to-inherit-from-host configuration.",
+    "findings": [
+      "Remote Meetings enable virtual meeting functionality through integration with a video conferencing provider (such as Twilio). The configuration involves setting up the provider connection, configuring meeting room creation, and establishing the link between the CRM meeting record and the virtual meeting session. Email sending capabilities allow organizers to send meeting invitations with join links to attendees.",
+      "Experience Cloud integration provides a portal where external attendees (such as healthcare professionals) can access remote meeting sessions without requiring full platform access. The configuration involves setting up an Experience Cloud site, configuring the meeting join page, and establishing authentication for external users. This provides a branded, controlled entry point for virtual meeting participation.",
+      "Satellite Meetings create a parent-child meeting structure where a host meeting can have multiple satellite meetings associated with it. This supports scenarios where a central event has breakout sessions or where a meeting spans multiple locations. Administrators configure which record types support satellite meeting creation and which fields are inherited from the host meeting to the satellite.",
+      "The Fields to Inherit from Host configuration controls which meeting field values are automatically copied from a parent meeting to its satellite meetings when they are created. This ensures consistency across related meetings while allowing satellite-specific overrides where needed. Administrators define the inheritance rules through the Admin Console.",
+      "Alternate Dates functionality allows meeting organizers to propose multiple possible dates for a meeting, enabling attendees to indicate availability across the options. Additional Territory Fields support displaying territory-related information on meeting records for organizations that use territory management. Change Meeting Owner allows reassigning meeting ownership with proper handling of related records and workflow state.",
+      "Meeting Share Management controls how meeting records are shared when ownership or team membership changes. Compliance Statements can be configured to display required legal or compliance text during the meeting creation or sign-in process. The History Tab provides an audit trail of changes made to meeting records."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "remote-meetings", "virtual-meetings", "video-conferencing", "experience-cloud", "satellite-meetings", "email", "territory"]
+  },
+  {
+    "id": "oce-cfg-meetings-009",
+    "category": "configuration",
+    "title": "Locations, Venues, and Meeting Logistics",
+    "products": ["oce"],
+    "summary": "Covers the configuration of meeting locations, primary meeting locations, meeting creation from plans, CLM in meetings, business hours, related lists, to-do items, and email configuration within the meetings module.",
+    "findings": [
+      "Meeting Locations allow administrators to define venues where meetings can take place. The Location object stores details such as address, capacity, and availability. Meeting Locations link a Location record to a specific Meeting, establishing where the meeting will occur. Primary Meeting Locations designate the main venue when a meeting has multiple associated locations.",
+      "The Locations configuration supports both predefined venue lists and ad-hoc location entry. Administrators can configure which location fields are displayed and searchable, control whether location selection is required, and set up validation rules to ensure appropriate location data is captured for compliance and reporting purposes.",
+      "Meeting Creation from Plan integrates the meetings module with activity planning, allowing meetings to be created directly from an activity plan. This streamlines the workflow for field representatives who work from account plans and need to schedule meetings as part of their planned activities. The configuration involves linking the meeting creation process to the activity plan interface.",
+      "CLM (Closed Loop Marketing) in Meetings enables content presentation tracking during meetings. When configured, meeting organizers can present marketing-approved content and the system records which slides were shown, for how long, and to which attendees. This provides valuable engagement analytics for marketing and compliance teams.",
+      "Business Hours configuration controls when meetings can be scheduled, enforcing organizational policies about meeting timing. To Do in Meetings allows creating task items associated with a meeting for follow-up actions. Emails on Meeting enables sending emails directly from the meeting context, and the Related Lists configuration controls which related objects are displayed on the meeting record page.",
+      "The module also supports configuring the meeting's interaction with other platform features such as the History Tab for audit trails, the File Uploader for document attachment, and the ability to share content with meeting attendees through integrated content management."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "locations", "venues", "CLM", "business-hours", "to-do", "email", "activity-plans", "related-lists"]
+  },
+  {
+    "id": "oce-cfg-meetings-010",
+    "category": "configuration",
+    "title": "Account Utilization Limits and Monetary Caps",
+    "products": ["oce"],
+    "summary": "Covers the configuration of account utilization limits for meetings, including Activity Plan Config metadata for controlling meeting frequency per account, JSON criteria structure for estimated/committed/actual phases, the Account Utilization UI Component, and monetary caps for expense control.",
+    "findings": [
+      "Account Utilization Limits control how many meetings can be conducted per account within a given time period, supporting compliance requirements in regulated industries. The configuration uses Activity Plan Config custom metadata, which defines utilization rules through a JSON criteria structure that specifies limits at different stages: estimated (planned), committed (approved), and actual (completed).",
+      "The JSON criteria structure within Activity Plan Config metadata defines the conditions under which utilization limits are evaluated. It supports configuring different limits by meeting record type, account type, territory, and time period. Each criterion includes a field reference, an operator, a value, and a phase indicator that determines whether the limit applies during estimation, commitment, or actual execution of the meeting.",
+      "The Account Utilization UI Component provides a visual interface showing the current utilization status for an account, including how many meetings have been planned, committed, and completed against the configured limits. This component can be placed on account pages, meeting creation flows, or activity plan views to give users real-time visibility into utilization status before scheduling new meetings.",
+      "Monetary Caps extend the utilization concept to expense control, setting limits on the total monetary value of expenses that can be incurred for meetings with a specific account. This supports compliance with industry regulations that limit the value of interactions with healthcare professionals. The configuration allows setting different caps for estimated and actual expenses.",
+      "Plan Cycle and Account Goal configurations work alongside utilization limits to define the planning periods and targets for meeting activities. Plan Cycles define the time boundaries (such as quarterly or annual periods) within which utilization is measured, while Account Goals set the target number of meetings or interactions for each account within a cycle.",
+      "The utilization system integrates with the meeting creation workflow to provide real-time validation: when a user attempts to create a meeting that would exceed the configured limits, the system can either block the creation or display a warning, depending on the configuration. This enforcement works both on the web platform and on mobile devices through the sync framework."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "account-utilization", "monetary-caps", "activity-plan", "compliance", "limits", "JSON-criteria", "plan-cycle"]
+  },
+  {
+    "id": "oce-cfg-meetings-011",
+    "category": "configuration",
+    "title": "Multi-Level Approvals for Meetings",
+    "products": ["oce"],
+    "summary": "Covers the configuration of multi-level approval processes for meetings, including advanced approver roles, threshold-based approval routing using custom settings with JSON format, status picklist extensions, Generic Workflow Admin Console configuration, and custom validation scripts for threshold enforcement.",
+    "findings": [
+      "Multi-level approval processes allow organizations to require additional approval steps for meetings that meet certain criteria, such as total estimated expenses exceeding a configurable threshold. For example, a meeting with expenses over a threshold amount may need both standard approval and an advanced approval from a senior manager.",
+      "Configuration involves extending the Status picklist on the Meeting object with additional values (such as 'Advanced Pending Approval'), creating a new approver role (such as 'Advanced Approver') in the Meeting Member Type picklist, and creating a threshold field in the MeetingValidationSettings custom settings object. The threshold value is stored in JSON format keyed by meeting type, such as: {\"Speaker_Meeting\":1000,\"HCP_Sponsorship\":1500}.",
+      "The Generic Workflow Admin Console must be configured with the new approval role and status values. This includes setting up actions for each approval level: for example, at the standard 'Pending Approval' status, configuring both an 'Approve' action (transitioning to 'Approved') and a 'Submit for Advanced Approval' action (transitioning to 'Advanced Pending Approval'). The advanced approver then has their own 'Advanced Approve' action.",
+      "A trigger on the Meeting object verifies that status changes align with the threshold settings. A custom validation script in the Custom Script object implements the threshold logic: it reads the configured threshold from the custom settings, calculates the total estimated expense amount from related Meeting Expense records, and validates whether the transition is appropriate based on whether the total exceeds the threshold.",
+      "The validation scripts use a set of 'noNs_' (no namespace) helper functions to query fields that were created without a namespace prefix. These functions include noNs_rowById, noNs_rowsByEntity, noNs_query on the database object, and noNs_stringValue, noNs_numValue, noNs_boolValue, noNs_dateValue, noNs_setValue on database row objects. These are necessary because custom fields created for multi-level approvals may not have the package namespace prefix.",
+      "The Admin Console Meetings tile requires the Meetings custom permission to be assigned to users who need access. The multi-level approval configuration is entirely admin-driven through the combination of custom settings, workflow configuration, and validation scripts, without requiring code deployment beyond the initial Custom Script setup."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "approvals", "multi-level", "workflow", "threshold", "custom-script", "validation", "admin-console"]
+  },
+  {
+    "id": "oce-cfg-meetings-012",
+    "category": "configuration",
+    "title": "Concur Integration with Meetings",
+    "products": ["oce"],
+    "summary": "Covers the integration of the CRM Meetings module with SAP Concur for expense management, including connecting Salesforce and Concur instances, authorization and endpoint configuration, field mapping for expenses, attendees, and allocations, picklist mapping, sync job scheduling, use cases for assigning expense reports, and the detailed push/pull synchronization workflows.",
+    "findings": [
+      "The Concur integration enables assigning Concur Expense Reports to Meeting Expenses and synchronizing expense data bidirectionally between the two systems. Prerequisites include pre-loading accounts and users with Concur IDs for performance, enabling the Meeting Member Populate Fields trigger handler (which denormalizes name and address fields from Account, Speaker, and User onto Meeting Member records), and assigning the Concur Admin permission sets from the recommended package.",
+      "Connecting the instances requires installing the connector application from the Concur marketplace, granting access to the Salesforce instance, and verifying that authorization and base endpoints are automatically populated. Endpoints vary by geolocation (US, EU, China). A one-time setup step creates a static resource (ConcurMapping) and runs an Apex job (ConcurDefaultMappingApplier) to prepare the predefined field mapping and migrate any existing mapped fields.",
+      "Field mapping is configured through the Concur Data Connector Admin Console under three mandatory mappings: Expense Entry to Meeting Expense, Expense Attendee to Meeting Member, and Expense Entry Attendee Association to Meeting Expense Allocation. Each mapping includes a primary key (external ID to Concur ID) and additional field pairs. A User to User mapping captures the login ID correlation. Picklist field mapping supports 1-to-1 value mapping between Concur list values and Salesforce picklist values.",
+      "Three scheduled sync jobs pull information from Concur: Pull Meeting Expenses, Pull Meeting Expense Allocations, and Check for Deleted Expense Reports. The push process (ConcurAllocationSyncJob) processes Meeting Expense Allocations in chunks of 10, syncing Meeting Members first (creating Concur Expense Attendees if no Concur ID exists), then syncing allocations, and finally processing attachments and content documents as receipts (supporting jpeg, jpg, png, pdf up to 10MB, one file per expense).",
+      "Synchronization conditions require the meeting to be in 'Concluded' or 'Closed' status, the expense report approval status to be 'Not submitted' or 'Needs to be resubmitted', and the 'Paid by' field to equal 'Rep'. For attendee types, colleagues need a non-blank Integration ID on the User record, account attendees need one on the Account, and non-profiled attendees will have new Concur records created automatically. Integration status tracking uses 'Sent', 'Failed to Send', and 'Deleted' values.",
+      "A special handler (SendDataToConcurHandler on DataChangeEvent) resolves a Salesforce Queueable Job limit conflict that occurs when Concur integration is used alongside the 'Use Queueable for System Job' mobile sync setting. Expense reports can only be assigned to Meeting Expenses created by the current user (co-organizers cannot cross-assign), and the system does not re-validate data on the CRM side after an expense report is approved in Concur."
+    ],
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["meetings", "configuration", "concur", "expense-integration", "SAP", "field-mapping", "sync-jobs", "receipts", "expense-reports", "picklist-mapping"]
+  }
+]

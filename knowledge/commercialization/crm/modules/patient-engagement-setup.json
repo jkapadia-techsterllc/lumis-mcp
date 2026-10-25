@@ -1,0 +1,1809 @@
+[
+  {
+    "id": "pe-001",
+    "feature": "Account Summarization",
+    "category": "Account Management",
+    "description": "AI-powered account summarization generates pre-visit briefings and account overviews using cross-object data graphs and configurable prompt templates. Informs sales reps of the latest changes in a provider account since their last interaction.",
+    "setup_steps": [
+      "Enable org permission: ProviderAccountSummarization",
+      "Assign permission set: Commercial Admin with Agentforce add-on enabled",
+      "Enable cross-object field history tracking on target objects (Setup > Cross-Object Field History Graphs)",
+      "In object management settings, go to Fields & Relationships > Set History Tracking for each object \u2014 select fields to track past and new values",
+      "Create a cross-object graph: Setup > Feature Settings > Cross-Object Field History Graphs > New Graph > select Account Summarization template or create from scratch",
+      "In Graph Properties, enter a label; note the developer name for assignment tasks",
+      "Customize graph nodes \u2014 add objects with direct or indirect lookup to Account (max 3 levels, up to 5 nodes per level)",
+      "Assign graph to org or profile: Admin Console > Account Management > Account Summarization Graph Settings",
+      "Optionally customize the autolaunched flow that controls summary generation timing",
+      "Optionally customize the prompt template for AI-generated summaries",
+      "Schedule batch jobs for bulk summarization processing"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with Agentforce add-on SKU installed",
+      "Agentforce org permission AgtfreForLifeSciCustEngmt must be enabled (comes with the Agentforce add-on)",
+      "Einstein/Agentforce platform features enabled in the org",
+      "Prompt Builder and Einstein GPT Platform Add-on licenses assigned",
+      "Field history tracking enabled for target fields (formula, text area, and derived fields cannot be tracked)"
+    ],
+    "configuration_details": [
+      "Cross-object graphs map connected objects and relationships \u2014 Account is always the root node",
+      "Predefined Account Summarization template provided; can be customized or built from scratch",
+      "Graphs can be assigned at org level or per-profile for targeted summarization",
+      "Custom prompt templates allow tailoring AI-generated summaries to business needs",
+      "Autolaunched flow controls when and how summaries are generated \u2014 can be customized",
+      "Batch jobs can be scheduled for off-peak bulk summarization across provider accounts",
+      "Each component (graph, prompt, flow) can be independently customized per organization needs"
+    ],
+    "objects_and_fields": [
+      "Account (root node in cross-object graph)",
+      "Cross-Object Field History Graph (configuration object)",
+      "Any object with direct/indirect lookup to Account can be included in the graph",
+      "Field History Tracking records (automatically generated)"
+    ],
+    "permissions": [
+      "Org Permission: ProviderAccountSummarization",
+      "Org Permission: AgtfreForLifeSciCustEngmt (from Agentforce add-on)",
+      "Permission Set: Commercial Admin (to configure)",
+      "User needs Prompt Template Manager permission set",
+      "Field-level read access on all summarized fields"
+    ],
+    "batch_jobs": [
+      "Account Summarization batch job \u2014 bulk generates summaries across provider accounts",
+      "Configurable scheduling for off-peak execution"
+    ],
+    "gotchas": [
+      "Account Summarization requires the Agentforce for Customer Engagement add-on SKU \u2014 it is NOT available with just the base Commercial Admin permission set",
+      "History tracking cannot be enabled for formula, text area, or derived fields",
+      "Cross-object graphs support maximum 3 levels of relationships and up to 5 nodes per level",
+      "Object must have a direct or indirect lookup to Account to be included in the graph",
+      "The feature will not appear in the UI until the Agentforce add-on org permission is enabled"
+    ],
+    "mobile_considerations": [
+      "Summaries generated server-side; mobile app displays pre-generated summaries",
+      "Ensure metadata cache includes summary-related objects for offline access"
+    ],
+    "admin_console_settings": [
+      "Account Management > Account Summarization Graph Settings"
+    ]
+  },
+  {
+    "id": "pe-002",
+    "feature": "Activity Timeline",
+    "category": "Account Management",
+    "description": "Chronological view of all activities (visits, emails, calls, tasks) associated with an account, providing sales reps a comprehensive interaction history. Tracks sent emails and other engagement touchpoints.",
+    "setup_steps": [
+      "Enable Activity Timeline for accounts in Admin Console",
+      "Configure which activity types appear in the timeline",
+      "Set up field-level security for activity records",
+      "Add Activity Timeline component to account record pages via Lightning App Builder",
+      "Configure activity object metadata cache for mobile offline access"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Visit Management configured (for visit activities)",
+      "Email feature configured (for email tracking)"
+    ],
+    "configuration_details": [
+      "Timeline aggregates activities across Visit, Email, Task, Event, and other interaction objects",
+      "Configurable filters for activity type, date range, and user",
+      "Supports both web and mobile interfaces",
+      "Integrates with email tracking to show sent email activities"
+    ],
+    "objects_and_fields": [
+      "Task (standard activity)",
+      "Event (standard activity)",
+      "Visit (custom engagement)",
+      "Email activity records",
+      "Account (parent)"
+    ],
+    "permissions": [
+      "Read access to activity-related objects",
+      "Commercial Admin permission set (for configuration)"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Timeline performance can degrade with very high activity volumes per account",
+      "Activity types must be individually enabled to appear in the timeline",
+      "Mobile offline access requires metadata cache configuration for each activity object type"
+    ],
+    "mobile_considerations": [
+      "Create object metadata cache configurations for activity-related objects",
+      "Generate metadata cache after configuration changes",
+      "Timeline available in mobile app with offline support when properly configured"
+    ],
+    "admin_console_settings": [
+      "Account Management > Activity Timeline Settings"
+    ]
+  },
+  {
+    "id": "pe-003",
+    "feature": "Activity Plans",
+    "category": "Planning & Execution",
+    "description": "Structured visit and engagement planning that enables managers and reps to define account-level goals, target visit frequencies, and track plan completion. Supports category-based organization and criteria-based account filtering.",
+    "setup_steps": [
+      "Enable Activity Plan permissions in Admin Console",
+      "Define Activity Plan Categories to organize plans (e.g., by therapeutic area or business unit)",
+      "Configure Activity Plan Criteria for account filtering and segmentation",
+      "Create Activity Plan Templates with default goals and visit frequencies",
+      "Configure account assignment rules for plans",
+      "Set up Activity Plan Goals and KPIs",
+      "Enable trigger handlers: activity plan-related handlers in Trigger Handler Administration",
+      "Create object metadata cache configurations for Activity Plan objects for mobile",
+      "Generate metadata cache after configuration"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Account and territory management configured",
+      "Visit Management enabled"
+    ],
+    "configuration_details": [
+      "Activity Plan Categories provide organizational grouping for plans",
+      "Criteria JSON defines filtering rules for which accounts are included in plans",
+      "Templates define default visit frequencies, goals, and timeframes",
+      "Plans can be assigned to individual reps or territories",
+      "Goals track both quantitative (visit count) and qualitative (key message delivery) targets",
+      "Plans integrate with visit scheduling and territory alignment",
+      "The category/criteria system allows filtering accounts by attributes like segment, tier, or therapeutic area"
+    ],
+    "objects_and_fields": [
+      "ActivityPlan (primary)",
+      "ActivityPlanGoal (child \u2014 goals per plan)",
+      "ActivityPlanTemplate (templates)",
+      "ActivityPlanCategory (categorization)",
+      "ActivityPlanCriteria (account filtering)",
+      "Account (target accounts)",
+      "Territory2 (territory alignment)"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for setup)",
+      "Activity Plan management permissions for end users",
+      "Read access to Account and Territory objects"
+    ],
+    "batch_jobs": [
+      "Activity Plan assignment batch \u2014 assigns plans to accounts based on criteria and territory rules"
+    ],
+    "gotchas": [
+      "Activity Plan Category/Criteria JSON is disjointed from the OOTB Activity Plan batch job \u2014 they serve different purposes",
+      "Template changes do not retroactively update existing plan instances",
+      "Large-scale plan generation should be tested in sandbox before production to assess governor limit impact",
+      "Criteria-based filtering uses custom JSON configuration, not declarative platform rules"
+    ],
+    "mobile_considerations": [
+      "Create metadata cache configurations for ActivityPlan and related objects",
+      "Plans visible and trackable in mobile app when properly configured",
+      "Offline support requires complete metadata cache generation"
+    ],
+    "admin_console_settings": [
+      "Activity Plans (main configuration)",
+      "Trigger Handler Administration (enable activity plan handlers)"
+    ]
+  },
+  {
+    "id": "pe-004",
+    "feature": "Consent Management",
+    "category": "Compliance",
+    "description": "Captures, synchronizes, and honors communication preferences of healthcare professionals across subscription types and channels. Manages consent status, signature requirements, geolocation settings, and filtering rules for regulatory compliance.",
+    "setup_steps": [
+      "Assign Commercial Admin permission set to administrators",
+      "Add a custom Consent tab on account record pages via Lightning App Builder (Edit Page > Add Tab > drag Consent component + Related List - Single for Communication Subscription Consents)",
+      "Create subscription records: navigate to Comm Subscriptions and create records for each subscription type",
+      "Create channel type records: define communication channels (email, phone, in-person, etc.)",
+      "Configure consent statuses (opt-in, opt-out, not captured)",
+      "Configure signature requirements per subscription/channel combination",
+      "Set up geolocation settings for location-based consent capture",
+      "Define filtering rules to control which subscriptions appear to which users",
+      "Upload a logo via static resources for the signature capture page",
+      "Configure confirmation email settings for post-consent follow-up",
+      "Set up batch jobs for consent sharing alignment",
+      "Create object metadata cache configurations for Consent objects for mobile",
+      "Generate metadata cache"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with managed package installed",
+      "Commercial Admin permission set assigned to setup user",
+      "Account record pages editable via Lightning App Builder"
+    ],
+    "configuration_details": [
+      "Consent Management uses a subscription + channel model: each HCP has consent per subscription per channel",
+      "Consent statuses track opt-in/opt-out/not-captured per combination",
+      "Signature requirements can be configured per subscription type",
+      "Geolocation can be captured at the time of consent capture",
+      "Filtering rules control which subscriptions and channels are visible to reps",
+      "Static resources used to upload organization logos for branding on signature capture pages",
+      "Confirmation emails sent automatically after consent capture",
+      "Batch jobs realign sharing records when account/territory mappings change"
+    ],
+    "objects_and_fields": [
+      "CommSubscription (subscription types)",
+      "CommSubscriptionChannelType (channel definitions)",
+      "CommSubscriptionConsent (actual consent records)",
+      "CommunicationSubscriptionComplianceSnapshot (compliance snapshots)",
+      "Individual / ContactPointConsent (platform consent model)",
+      "DataUsePurpose (data usage purpose)",
+      "ContentDocument / ContentVersion (signatures and logos)"
+    ],
+    "permissions": [
+      "Permission Set: Commercial Admin (for configuration)",
+      "Org Permission: Consent Management feature enabled",
+      "Field-level security on consent-related fields",
+      "Customize Application (for Lightning page edits)"
+    ],
+    "batch_jobs": [
+      "CommSubscriptionConsentShareMgmtBatch \u2014 realigns sharing records for Communication Subscription Consent when account/territory mappings change",
+      "CommSubConsentCmplSnpshtShareMgmtBatch \u2014 realigns sharing records for Communication Subscription Compliance Snapshot objects"
+    ],
+    "gotchas": [
+      "Batch jobs may not be visible in Setup > Batch Management if the managed package is not properly installed or if org permissions are missing",
+      "The Apex class LifeScienceApi must be accessible to run consent batch configuration scripts \u2014 if it fails with Variable does not exist: LifeScienceApi, the managed package is not installed or not accessible",
+      "Consent batch jobs also require Batch Management UI permissions to be visible",
+      "The platform does NOT have an unsubscribe-all API \u2014 consent must be managed per subscription/channel combination",
+      "Consent records have regulatory significance \u2014 migration and changes require legal/compliance review"
+    ],
+    "mobile_considerations": [
+      "Required metadata cache objects: CommSubscription (Data), CommSubscriptionChannelType (Data), CommSubscriptionConsent (Data), ContentDocument (Data), ContentDocumentLink (Data), ContentVersion (Data), DataUsePurpose (Data)",
+      "Must generate metadata cache after creating configurations",
+      "Consent capture including signature available on mobile when properly configured"
+    ],
+    "admin_console_settings": [
+      "Consent Management (main settings)",
+      "Trigger Handler Administration (consent-related handlers)"
+    ]
+  },
+  {
+    "id": "pe-005",
+    "feature": "Visit Management",
+    "category": "Engagement Execution",
+    "description": "Core visit tracking for in-person and scheduled engagements with healthcare professionals. Manages the complete visit lifecycle including scheduling, check-in, detailing, sample distribution, signature capture, and submission with configurable lock/unlock behavior.",
+    "setup_steps": [
+      "Configure Visit record types for different visit scenarios",
+      "Enable trigger handlers in Admin Console > Trigger Handler Administration",
+      "Configure Visit settings in Admin Console > Visit Management",
+      "Set up visit status picklist values and transitions",
+      "Configure lock/unlock behavior for completed visits",
+      "Set up visit-related quick actions on account pages",
+      "Add Visit component to account and contact record pages",
+      "Configure child object settings (product detailing, discussions, samples)",
+      "Create object metadata cache configurations for Visit and child objects",
+      "Generate metadata cache for mobile"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with managed package installed",
+      "Account and territory management configured",
+      "Product catalog configured (for product detailing)"
+    ],
+    "configuration_details": [
+      "Visit lifecycle: Planned > In Progress > Completed > Submitted/Signed",
+      "Lock behavior prevents modifications after submission \u2014 controlled by trigger handlers",
+      "Visit record types enable different workflows for different visit types",
+      "Child records capture product detailing, key message discussions, sample drops",
+      "Signature capture uses ContentDocument/ContentVersion for binary signature storage",
+      "Admin Console provides centralized visit configuration"
+    ],
+    "objects_and_fields": [
+      "Visit (primary \u2014 previously Event-based)",
+      "ProviderVisit (managed package visit object)",
+      "ProviderVisitDtlProductMsg (product detail messaging)",
+      "ProviderVisitMarketingItem (marketing items shown)",
+      "ProviderVisitProdDetailing (product detailing records)",
+      "ProviderVisitProdDiscussion (product discussion records)",
+      "ProviderVisitRqstSample (sample request records)",
+      "Visit Attendee (junction for multi-attendee visits)",
+      "ContentDocument / ContentVersion (signatures)"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for configuration)",
+      "Visit create/edit/delete permissions for field users",
+      "Read access to Product, Account, Territory objects"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "PVLockHandler and VisitLockHandler control lock behavior \u2014 must be enabled in Trigger Handler Administration",
+      "PVUpdateChildFieldsHandler propagates changes from parent visit to child records",
+      "Signature image format differences between platforms (PNG vs SVG) can cause migration issues",
+      "Visit object has evolved from Event-based to standalone Visit object \u2014 data model varies by org vintage",
+      "Timezone handling: platform may use UTC while legacy systems use local time \u2014 ensure conversion during migration"
+    ],
+    "mobile_considerations": [
+      "Core mobile workflow: visits are the primary mobile use case",
+      "Offline visit creation and editing supported with proper metadata cache",
+      "Signature capture available offline with sync on connectivity",
+      "Required metadata cache objects include Visit, ProviderVisit, and all child objects",
+      "Sync processor must be scheduled for offline data synchronization"
+    ],
+    "admin_console_settings": [
+      "Visit Management (main settings)",
+      "Trigger Handler Administration (PVLockHandler, VisitLockHandler, PVUpdateChildFieldsHandler, VisitSignOrSubmitInTransactionHandler)"
+    ],
+    "trigger_handlers": [
+      "PVLockHandler \u2014 locks provider visit records after submission",
+      "VisitLockHandler \u2014 locks visit records after submission",
+      "PVUpdateChildFieldsHandler \u2014 propagates parent visit field changes to child records",
+      "VisitSignOrSubmitInTransactionHandler \u2014 handles signature and submission within transaction context"
+    ]
+  },
+  {
+    "id": "pe-006",
+    "feature": "Sample Distribution and Compliance",
+    "category": "Compliance",
+    "description": "Manages the complete sample lifecycle including inventory management, distribution during visits, limit enforcement, lot tracking, reconciliation, and regulatory compliance. Uses a hierarchical batch limit calculation framework (Brand > Molecule > SKU).",
+    "setup_steps": [
+      "Configure sample products in Product catalog",
+      "Set up Sample Lot records with lot numbers and expiration dates",
+      "Configure Sample Inventory tracking",
+      "Define Sample Limit Templates at brand/molecule/SKU hierarchy levels",
+      "Assign sample limit templates to accounts and products",
+      "Enable trigger handlers: SampleLimitTransactionHandler, CalculateShippedQuantityHandler",
+      "Configure sample-related Admin Console settings",
+      "Set up batch jobs for limit calculation and inventory reconciliation",
+      "Create metadata cache configurations for sample objects for mobile",
+      "Generate metadata cache"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with managed package installed",
+      "Visit Management configured (samples are distributed during visits)",
+      "Product catalog with sample-eligible products configured",
+      "Lot management configured with valid lot numbers and expiration dates"
+    ],
+    "configuration_details": [
+      "Hierarchical limit framework: Brand > Molecule > SKU \u2014 limits cascade down the hierarchy",
+      "Sample Limit Templates define maximum quantities per time period per account",
+      "Batch calculation jobs compute consumed vs remaining limits",
+      "Inventory reconciliation validates rep inventory against transaction history",
+      "Transaction types: Disbursement, Receipt, Transfer, Adjustment, Return, Acknowledgment",
+      "Every transaction requires an audit trail for PDMA/regulatory compliance",
+      "Lot expiration dates enforced \u2014 expired lots cannot be disbursed"
+    ],
+    "objects_and_fields": [
+      "SampleTransaction (primary transaction record)",
+      "SampleLot (lot tracking with expiration)",
+      "SampleInventory (rep/location inventory)",
+      "SampleLimitTemplate (limit definitions)",
+      "PrvdVstSmplLmtTransaction (visit-linked sample limit transactions)",
+      "ProviderVisitRqstSample (sample requests during visits)",
+      "Product2 (sample products)",
+      "Account (receiving HCP/HCO)"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for configuration)",
+      "Sample management permissions for field users",
+      "Read access to Product and Account objects"
+    ],
+    "batch_jobs": [
+      "SampleLimitJobInit \u2014 initializes sample limit calculation for a given period",
+      "Assign Sample Limit Templates to Accounts \u2014 bulk assignment of limit templates to account records",
+      "Assign Sample Limit Template to Products \u2014 bulk assignment of limit templates to product records",
+      "Sample Inventory Reconciliation \u2014 validates inventory balances against transaction history"
+    ],
+    "gotchas": [
+      "Sample limit calculation uses a batch framework \u2014 not real-time; there is a delay between transaction and limit update",
+      "Lot expiration dates are critical \u2014 always validate during data migration",
+      "All sample transactions MUST be migrated for regulatory compliance (PDMA/FDA 21 CFR Part 11) \u2014 selective migration is not permitted",
+      "Hierarchical limits (Brand > Molecule > SKU) differ from flat product-level caps in legacy systems",
+      "Inventory reconciliation job must be run after migration to verify balances",
+      "Signature capture on sample receipt is a regulatory requirement \u2014 must be configured"
+    ],
+    "mobile_considerations": [
+      "Sample distribution is a core mobile workflow \u2014 offline support critical",
+      "Metadata cache must include all sample-related objects",
+      "Offline sample drops queue for sync when connectivity is restored",
+      "Rep inventory tracking available offline",
+      "Lot validation occurs both offline (cached) and online (verified on sync)"
+    ],
+    "admin_console_settings": [
+      "Sample Management (main settings)",
+      "Trigger Handler Administration (SampleLimitTransactionHandler, CalculateShippedQuantityHandler)"
+    ],
+    "trigger_handlers": [
+      "SampleLimitTransactionHandler \u2014 enforces sample limits during transactions",
+      "CalculateShippedQuantityHandler \u2014 calculates and updates shipped quantity tracking"
+    ]
+  },
+  {
+    "id": "pe-007",
+    "feature": "Remote Engagement",
+    "category": "Engagement Execution",
+    "description": "Enables video-call-based remote visits with healthcare professionals using Twilio as the video provider. Includes session management, invitation emails, terms and conditions, recording, and Experience Cloud portal access for HCPs.",
+    "setup_steps": [
+      "Set up Twilio credentials: Setup > Named Credentials > External Credentials > select Twilio External Credentials",
+      "Add authentication parameters: accountId (Account SID), authToken (Auth Token), apiKeySid (API Key SID), apiKeySecret (API Key Secret)",
+      "Add Twilio WSS endpoints as trusted URLs in the org (Setup > Trusted URLs)",
+      "Set up Experience Cloud site for remote engagement: create a portal profile, add as member, assign Access Remote Engagement for Digital Experience permission set",
+      "Create a Remote Engagement Channel Value: add new value to Channel dynamic enum field on Visit object",
+      "Configure Remote Engagement Admin Console Settings: video call settings and phone numbers",
+      "Enable trigger handlers: RemoteSessionInvitationPVHandler (Provider Visit), RemoteSessionInvitationVisitHandler (Visit)",
+      "Configure video call terms and conditions text",
+      "Add Video Call Recordings related list to visit record page",
+      "Set up quick actions for starting remote sessions from accounts (Admin Console > Quick Action > Start Remote Session)",
+      "Add Start Remote Session action to Person Account HCP Layout (Object Manager > Mobile & Lightning Actions)",
+      "Create object metadata cache configurations for remote engagement objects for mobile",
+      "Generate metadata cache"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with managed package installed",
+      "Twilio account with Video API access (Account SID, Auth Token, API Key, API Secret)",
+      "Experience Cloud enabled in the org",
+      "Named Credentials and External Credentials framework available",
+      "Visit Management configured"
+    ],
+    "configuration_details": [
+      "Twilio named and external credentials delivered in the managed package \u2014 admin adds parameter values",
+      "Channel dynamic enum on Visit determines communication type (in-person vs remote)",
+      "Trigger handlers generate session keys, passcodes, and send invitation emails automatically",
+      "Experience Cloud site provides portal access for HCPs to join video calls without platform license",
+      "Terms and conditions displayed to participants before joining \u2014 must be accepted",
+      "Video call recordings stored as related records on the visit",
+      "Quick actions enable starting remote sessions from account lists and individual records",
+      "Remote engagement supports ad hoc remote sessions from account records"
+    ],
+    "objects_and_fields": [
+      "VideoCall (video call record)",
+      "VideoCallParticipant (participant records)",
+      "VideoCallPtcpSession (participant session tracking)",
+      "VideoCallRecording (recording records)",
+      "Visit (parent engagement record with Channel field)",
+      "ProviderVisit (managed package visit object)"
+    ],
+    "permissions": [
+      "Org Permission: Remote Engagement feature enabled",
+      "Permission: Use Remote Engagement (user access)",
+      "Permission Set: Commercial Admin (for admin configuration)",
+      "Permission Set: Access Remote Engagement for Digital Experience (portal users)",
+      "Manage Named Credentials or Customize Application (for Twilio credential setup)"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Twilio credentials are pre-configured in the managed package \u2014 you only add the parameter values, not create new credentials",
+      "WSS (WebSocket Secure) endpoints must be trusted URLs or video calls will fail to connect",
+      "Experience Cloud site must be properly configured or HCPs cannot join calls",
+      "Channel field is a dynamic enum, not a standard picklist \u2014 adding values requires specific steps",
+      "Terms and conditions are required for compliance in most pharma organizations",
+      "Video call recordings can consume significant file storage",
+      "The platform provides Twilio integration natively \u2014 separate third-party connector not needed"
+    ],
+    "mobile_considerations": [
+      "Required metadata cache objects: VideoCall (Data), VideoCallParticipant (Data), VideoCallPtcpSession (Data), VideoCallRecording (Data)",
+      "Must generate metadata cache after creating configurations",
+      "Remote sessions can be initiated from mobile app",
+      "Video call quality dependent on mobile network connectivity"
+    ],
+    "admin_console_settings": [
+      "Remote Engagement settings",
+      "Video call configuration",
+      "Phone number management",
+      "Trigger Handler Administration (RemoteSessionInvitationPVHandler, RemoteSessionInvitationVisitHandler)",
+      "Quick Action Management (Start Remote Session action)"
+    ],
+    "trigger_handlers": [
+      "RemoteSessionInvitationPVHandler \u2014 generates session keys/passcodes and sends invitation emails for Provider Visit",
+      "RemoteSessionInvitationVisitHandler \u2014 generates session keys/passcodes and sends invitation emails for Visit"
+    ]
+  },
+  {
+    "id": "pe-008",
+    "feature": "Email Templates and Field Email",
+    "category": "Engagement Execution",
+    "description": "Enables sales reps to send approved email templates to healthcare professionals with configurable delivery settings, consent integration, scheduling, and tracking. Admins upload templates via content management Connect API.",
+    "setup_steps": [
+      "Ensure admin users have System Administrator profile or clone with FLS on all email objects",
+      "Set up consent management for email delivery (honors opt-in/opt-out preferences)",
+      "Set up Activity Timeline for email tracking on accounts",
+      "Enable email template upload via content management Connect API",
+      "Configure Email Settings in Admin Console: Admin Console > Email > Email Settings",
+      "Configure General Settings: edit subject, add CC recipients, schedule emails, sort by last modified",
+      "Configure Delivery Settings: send to HCOs, send unless opted out, prioritize channel consent, allow sending when consent status blank",
+      "Create object metadata cache configurations for email objects",
+      "Generate metadata cache for mobile"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with managed package installed",
+      "Consent Management configured (emails respect consent preferences)",
+      "Admin users must have FLS on: LifeSciEmailTemplate, LifeSciEmailTmplSnapshot, LifeSciEmailTmplFragment, LifeSciEmailTmplRelaFrgmt"
+    ],
+    "configuration_details": [
+      "Email settings configurable at org level, per profile, or per individual user",
+      "General Settings: subject editing, CC recipients, scheduled send, sort order",
+      "Delivery Settings: HCO sending, opt-out behavior, channel consent priority, blank consent handling",
+      "Templates use platform merge field syntax ({!Account.Name}), NOT Handlebars syntax",
+      "Template availability controlled by start/end dates and subscription settings",
+      "Scheduled emails still adhere to template availability windows",
+      "Email queue management for bulk sending"
+    ],
+    "objects_and_fields": [
+      "LifeSciEmailTemplate (email templates)",
+      "LifeSciEmailTmplSnapshot (template snapshots)",
+      "LifeSciEmailTmplFragment (template fragments)",
+      "LifeSciEmailTmplRelaFrgmt (related fragments)",
+      "LifeScienceEmail (sent email records)",
+      "LifeSciMarketableProduct (product association)",
+      "CommSubscription, CommSubscriptionChannelType, CommSubscriptionConsent (consent integration)",
+      "ContentDocument / ContentVersion / ContentDocumentLink (attachments)",
+      "Survey, Topic, TopicAssignment (optional survey/topic integration)"
+    ],
+    "permissions": [
+      "Permission Set: Commercial Admin (for email configuration)",
+      "FLS access on all email template objects",
+      "Content management Connect API access for template uploads"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Template merge field syntax is {!Object.Field} \u2014 source platform Handlebars syntax ({{Object.Field}}) will NOT work",
+      "Consent integration is bidirectional \u2014 emails honor subscription preferences AND track activity back to consent records",
+      "Template availability windows (start/end dates) apply even to scheduled emails",
+      "FLS must be explicitly granted on all four email template objects or upload will fail",
+      "Email tracking requires Activity Timeline to be configured separately"
+    ],
+    "mobile_considerations": [
+      "Required metadata cache objects: LifeSciMetadataRecord (Configuration, category=EmailSettings), CommSubscription (Data), CommSubscriptionChannelType (Data), CommSubscriptionConsent (Data), ContentDocument (Data), ContentDocumentLink (Data), ContentVersion (Data), DataUsePurpose (Data), LifeSciEmailTemplate (Data), LifeSciEmailTmplFragment (Data), LifeSciEmailTmplRelaFrgmt (Data), LifeSciEmailTmplSnapshot (Data, attachment download method=Cache), LifeScienceEmail (Data), LifeSciMarketableProduct (Data), Survey (Data), Topic (Data), TopicAssignment (Data)",
+      "LifeSciEmailTmplSnapshot requires attachment download method set to Cache",
+      "Must generate metadata cache after creating all configurations",
+      "Email send available offline with queue sync"
+    ],
+    "admin_console_settings": [
+      "Email > Email Settings (org/profile/user level)"
+    ]
+  },
+  {
+    "id": "pe-009",
+    "feature": "Presentations and Content Management (CLM)",
+    "category": "Engagement Execution",
+    "description": "Delivers approved marketing content (slide presentations, PDFs, videos) to sales reps for use during visits. Supports content assignment, tracking, and detailing analytics.",
+    "setup_steps": [
+      "Upload content assets (HTML presentations, PDFs, videos) via content management system",
+      "Configure content assignment rules (by product, territory, or user)",
+      "Set up content tracking for slide-level analytics",
+      "Add Presentations component to visit record pages",
+      "Configure content approval workflows",
+      "Create object metadata cache for content objects for mobile",
+      "Generate metadata cache"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with managed package installed",
+      "Visit Management configured",
+      "Product catalog configured (for product-content linkage)",
+      "Content files prepared and approved through MLR process"
+    ],
+    "configuration_details": [
+      "Content Management delivers approved presentations and materials to field users",
+      "Content can be linked to products for product-specific detailing",
+      "Slide-level engagement tracking measures time spent and interactions",
+      "Content versioning supports approval workflows \u2014 only current approved version is active",
+      "Offline content caching enables presentation delivery without connectivity"
+    ],
+    "objects_and_fields": [
+      "ContentDocument / ContentVersion (files)",
+      "ProviderVisitProdDetailing (detailing records)",
+      "ProviderVisitMarketingItem (marketing content shown during visit)",
+      "Product2 (product linkage)",
+      "Content assignment and tracking records"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for configuration)",
+      "Content creation and management permissions",
+      "Read access to Product objects"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Legacy platform proprietary JavaScript APIs in HTML content will NOT work \u2014 must be removed or rewritten for target platform",
+      "Interactive content (embedded quizzes, branching logic) must be rebuilt",
+      "Content analytics (engagement scores, slide-level metrics) do not migrate from source platform",
+      "Offline content caching behavior differs significantly between platforms",
+      "Content versioning and approval chain history is lost during migration \u2014 only current approved version migrates",
+      "PDF content migrates cleanly; HTML content requires significant rework",
+      "Budget 40-60% of content rebuild time for CLM migration"
+    ],
+    "mobile_considerations": [
+      "Content delivered via offline cache for field presentation",
+      "Presentation playback during visits is a core mobile use case",
+      "Large content files impact mobile storage and sync times",
+      "Must generate metadata cache including content objects"
+    ],
+    "admin_console_settings": [
+      "Content Management settings",
+      "Presentation configuration"
+    ]
+  },
+  {
+    "id": "pe-010",
+    "feature": "Enablement Coaching",
+    "category": "People Management",
+    "description": "Enables managers to coach and assess sales reps during ride-alongs and field observations. Supports configurable KPI categories, scoring, action items, and assessment templates.",
+    "setup_steps": [
+      "Configure coaching assessment templates",
+      "Define KPI categories and scoring criteria",
+      "Set up coaching permissions for managers and reps",
+      "Configure assessment workflow (draft > in-progress > completed)",
+      "Add coaching components to appropriate record pages",
+      "Enable coaching-related objects for mobile access"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "User hierarchy (manager-rep relationships) configured",
+      "Visit Management configured (coaching often occurs during ride-along visits)"
+    ],
+    "configuration_details": [
+      "Assessment templates define the coaching framework (KPIs, categories, scoring scales)",
+      "KPI categories organize evaluation criteria by competency area",
+      "Scoring supports numeric scales and qualitative ratings",
+      "Action items track follow-up commitments from coaching sessions",
+      "Assessment workflow controls the coaching lifecycle from draft to completion"
+    ],
+    "objects_and_fields": [
+      "Coaching Assessment (primary)",
+      "KPI Score (child \u2014 per-KPI evaluation)",
+      "Coaching Action Item (follow-up items)",
+      "User (coach and coachee)",
+      "Visit (optional ride-along linkage)"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for template configuration)",
+      "Coaching management permissions for managers",
+      "Read access to coaching records for reps"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "KPI taxonomy must be aligned before migration \u2014 different platforms use different names for the same concepts",
+      "Rating scales may differ between platforms (1-5 vs 1-10 vs qualitative) \u2014 normalization required",
+      "Coaching templates do not migrate from source platform \u2014 must be recreated",
+      "Open action items from prior platform should be flagged for manager review post-migration"
+    ],
+    "mobile_considerations": [
+      "Coaching assessments can be completed on mobile during ride-along visits",
+      "Offline support available with proper metadata cache configuration"
+    ],
+    "admin_console_settings": [
+      "Coaching configuration",
+      "Assessment template management"
+    ]
+  },
+  {
+    "id": "pe-011",
+    "feature": "Key Account Management (KAM)",
+    "category": "Account Management",
+    "description": "Provides strategic account planning capabilities for key accounts, including account plans, stakeholder mapping, SWOT analysis, and objective tracking for high-value healthcare organizations.",
+    "setup_steps": [
+      "Enable Key Account Management in Admin Console",
+      "Configure account plan templates",
+      "Set up stakeholder mapping objects and relationships",
+      "Configure SWOT analysis framework",
+      "Define account plan objectives and KPIs",
+      "Add KAM components to account record pages",
+      "Set up mobile access for KAM objects"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Account hierarchy configured",
+      "Territory management configured"
+    ],
+    "configuration_details": [
+      "Account plans provide structured strategic planning for key accounts",
+      "Stakeholder mapping visualizes influence and decision-making relationships",
+      "SWOT analysis framework supports strategic assessment",
+      "Objectives track progress against key account goals",
+      "Integration with visit and activity planning for tactical execution"
+    ],
+    "objects_and_fields": [
+      "AccountPlan (primary)",
+      "AccountPlanObjective (goals and KPIs)",
+      "StakeholderMap (relationship mapping)",
+      "Account (target key accounts)",
+      "Contact (stakeholders)"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for configuration)",
+      "KAM access permissions for key account managers"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Account plan templates must be recreated in target platform \u2014 they do not migrate",
+      "Stakeholder relationship data requires careful migration planning",
+      "KAM features may require additional licensing depending on edition"
+    ],
+    "mobile_considerations": [
+      "KAM plans accessible on mobile with offline support",
+      "Metadata cache configuration required for KAM objects"
+    ],
+    "admin_console_settings": [
+      "Key Account Management settings"
+    ]
+  },
+  {
+    "id": "pe-012",
+    "feature": "Surveys",
+    "category": "Data Collection",
+    "description": "Enables sales reps to conduct structured surveys with healthcare professionals during visits, capturing feedback, market intelligence, and clinical insights.",
+    "setup_steps": [
+      "Enable Survey feature in Admin Console",
+      "Create survey templates with questions and response options",
+      "Configure survey assignment to products, accounts, or visit types",
+      "Set up survey-related trigger handlers",
+      "Add survey components to visit record pages",
+      "Create metadata cache for survey objects for mobile",
+      "Generate metadata cache"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Visit Management configured"
+    ],
+    "configuration_details": [
+      "Surveys can be assigned to specific products, accounts, or visit types",
+      "Question types include single-select, multi-select, free text, numeric, and rating scales",
+      "Survey responses link to visit records for contextual tracking",
+      "Survey results reportable via standard platform reporting",
+      "Survey scheduling supports one-time and recurring surveys"
+    ],
+    "objects_and_fields": [
+      "Survey (survey definition)",
+      "SurveySubject (survey subject/assignment)",
+      "SurveyQuestion (questions within survey)",
+      "SurveyResponse (response records)",
+      "Visit (parent engagement)",
+      "Product2 (product association)"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for survey management)",
+      "Survey access permissions for field users"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Survey templates must be recreated in target platform",
+      "Historical survey response data migration requires mapping old question IDs to new ones",
+      "Large survey response volumes can impact sync times on mobile"
+    ],
+    "mobile_considerations": [
+      "Survey completion during visits is a core mobile use case",
+      "Offline survey completion supported with sync on connectivity",
+      "Metadata cache must include Survey and SurveySubject objects"
+    ],
+    "admin_console_settings": [
+      "Survey settings"
+    ]
+  },
+  {
+    "id": "pe-013",
+    "feature": "Affiliations",
+    "category": "Account Management",
+    "description": "Manages relationships between healthcare professionals and healthcare organizations (hospital affiliations, practice memberships, institutional associations).",
+    "setup_steps": [
+      "Configure affiliation record types for different relationship categories",
+      "Set up affiliation validation rules",
+      "Add affiliation components to account/contact record pages",
+      "Configure affiliation-related permissions"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Account and contact records configured with appropriate record types (Person Account for HCP, Business Account for HCO)"
+    ],
+    "configuration_details": [
+      "Affiliations define HCP-to-HCO and HCO-to-HCO relationships",
+      "Record types categorize different affiliation types",
+      "Affiliation data used for targeting and influence mapping",
+      "Integration with stakeholder mapping in Key Account Management"
+    ],
+    "objects_and_fields": [
+      "Affiliation (junction object)",
+      "Account (HCP via PersonAccount, HCO via Business Account)",
+      "Contact (individual)",
+      "Affiliation Type (categorization)"
+    ],
+    "permissions": [
+      "Affiliation read/write permissions for relevant users"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "PersonAccount must be enabled before migration \u2014 required for HCP records",
+      "Affiliation hierarchies in source platform may be flatter than target",
+      "Bidirectional affiliations may need two records depending on data model"
+    ],
+    "mobile_considerations": [
+      "Affiliation data available offline with metadata cache configuration"
+    ],
+    "admin_console_settings": [
+      "Affiliation settings (if applicable)"
+    ]
+  },
+  {
+    "id": "pe-014",
+    "feature": "Territory Planning and Alignment",
+    "category": "Territory & Alignment",
+    "description": "Enterprise Territory Management with alignment tools for territory hierarchy definition, account-territory assignment, user-territory assignment, and rule-based territory alignment.",
+    "setup_steps": [
+      "Enable Enterprise Territory Management in Setup",
+      "Define territory model and hierarchy (country > region > district > territory)",
+      "Configure territory types and priorities",
+      "Set up account assignment rules for territories",
+      "Assign users to territories with appropriate roles",
+      "Configure territory-based sharing rules",
+      "Set up alignment analytics for territory coverage analysis"
+    ],
+    "prerequisites": [
+      "Enterprise or Unlimited edition",
+      "Enterprise Territory Management enabled in org",
+      "Account data with geographic or segmentation attributes for assignment rules"
+    ],
+    "configuration_details": [
+      "Territory hierarchy supports multiple levels (typically 4-5)",
+      "Assignment rules use account attributes (geography, specialty, segment) for automated assignment",
+      "Users can be assigned to multiple territories with different roles",
+      "Territory-based sharing controls data visibility across the hierarchy",
+      "CRM Analytics (formerly Wave/Einstein Analytics) provides alignment dashboards",
+      "Territory changes trigger re-alignment of related data (visits, samples, consent sharing)"
+    ],
+    "objects_and_fields": [
+      "Territory2 (territory records)",
+      "Territory2Model (territory model)",
+      "Territory2Type (territory types)",
+      "UserTerritory2Association (user assignments)",
+      "ObjectTerritory2Association (account assignments)",
+      "TerritoryBusinessPlan (territory-level planning)",
+      "TerritoryContentTmplAsgnt (content template assignments)",
+      "TerritoryAcctRcmdAction (territory account recommendation actions)"
+    ],
+    "permissions": [
+      "Manage Territories permission (for admin configuration)",
+      "View All Territories or assigned territory access for users"
+    ],
+    "batch_jobs": [
+      "Territory realignment batch \u2014 processes territory assignment rule changes",
+      "Sharing recalculation batch \u2014 updates sharing records after territory changes"
+    ],
+    "gotchas": [
+      "Source platform has flat territory model; target supports hierarchical \u2014 requires mapping",
+      "Territory realignment triggers cascading updates to consent sharing, sample limits, and visit assignments",
+      "Large territory realignments can be resource-intensive \u2014 schedule during off-peak hours",
+      "Territory model deployment requires careful planning to avoid data access disruption"
+    ],
+    "mobile_considerations": [
+      "Territory-based data filtering applies to mobile data access",
+      "Metadata cache must include Territory2 and related objects",
+      "Territory changes may require metadata cache regeneration and re-sync"
+    ],
+    "admin_console_settings": [
+      "Territory alignment configuration"
+    ]
+  },
+  {
+    "id": "pe-015",
+    "feature": "Medical Inquiries",
+    "category": "Medical Affairs",
+    "description": "Manages medical information requests from healthcare professionals, routing inquiries through case-based workflows with SLA tracking, response templates, and compliance audit trails.",
+    "setup_steps": [
+      "Configure Case record types for medical inquiries",
+      "Set up inquiry categories and subcategories",
+      "Configure assignment rules for medical affairs team routing",
+      "Set up SLA tracking with entitlement processes",
+      "Configure response templates for common inquiry types",
+      "Add medical inquiry components to relevant record pages",
+      "Set up approval workflows for sensitive responses"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Case management configured",
+      "Medical affairs team users provisioned"
+    ],
+    "configuration_details": [
+      "Medical inquiries leverage the Case object with specialized record types",
+      "Inquiry routing uses assignment rules based on category, product, or geography",
+      "SLA tracking monitors response time compliance",
+      "Response templates ensure consistent, approved medical language",
+      "Audit trail tracks all interactions for regulatory compliance",
+      "Integration with knowledge base for standard medical responses"
+    ],
+    "objects_and_fields": [
+      "Case (medical inquiry record)",
+      "CaseComment (inquiry notes)",
+      "Product2 (product association)",
+      "Account/Contact (requesting HCP)",
+      "Entitlement/EntitlementProcess (SLA tracking)"
+    ],
+    "permissions": [
+      "Medical affairs user permissions",
+      "Case management permissions"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Medical inquiry responses are subject to regulatory review \u2014 approval workflows are critical",
+      "SLA tracking requires careful timezone configuration for global teams",
+      "Historical inquiry data migration must preserve audit trail for compliance"
+    ],
+    "mobile_considerations": [
+      "Medical inquiry viewing available on mobile; response typically desktop-only"
+    ],
+    "admin_console_settings": [
+      "Medical Inquiry settings (if available in Admin Console)"
+    ]
+  },
+  {
+    "id": "pe-016",
+    "feature": "Medical Insights",
+    "category": "Medical Affairs",
+    "description": "Captures and tracks medical insights and intelligence gathered from healthcare professional interactions, enabling medical affairs teams to identify trends and inform strategy.",
+    "setup_steps": [
+      "Enable Medical Insights feature",
+      "Configure insight categories and types",
+      "Set up insight capture workflows",
+      "Add insight components to visit and account pages",
+      "Configure insight reporting and dashboards"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Visit Management configured"
+    ],
+    "configuration_details": [
+      "Insights can be captured during or after visits",
+      "Categorization supports therapeutic area, product, and topic-based organization",
+      "Insights feed into medical affairs reporting and trend analysis",
+      "Integration with visit records for contextual insight capture"
+    ],
+    "objects_and_fields": [
+      "Medical Insight (primary)",
+      "Visit (linked engagement)",
+      "Product2 (product association)",
+      "Account/Contact (source HCP)"
+    ],
+    "permissions": [
+      "Insight capture permissions for field users",
+      "Insight management for medical affairs"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Insight data is often unstructured \u2014 define clear categories before deployment"
+    ],
+    "mobile_considerations": [
+      "Insight capture available on mobile during and after visits"
+    ],
+    "admin_console_settings": [
+      "Medical Insights settings"
+    ]
+  },
+  {
+    "id": "pe-017",
+    "feature": "Provider Engagement Compliance",
+    "category": "Compliance",
+    "description": "Tracks and enforces engagement rules across all provider interactions, including visit frequency limits, sample distribution caps, and spend tracking for transparency reporting requirements.",
+    "setup_steps": [
+      "Configure engagement compliance rules",
+      "Set up frequency limits per account/territory/product",
+      "Configure spend tracking for transparency reporting",
+      "Enable compliance alerts and notifications",
+      "Set up compliance dashboards and reports"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Visit Management and Sample Management configured",
+      "Compliance rules defined by legal/regulatory team"
+    ],
+    "configuration_details": [
+      "Compliance rules enforce visit frequency, sample, and spend limits",
+      "Rules can be configured at account, territory, or product level",
+      "Spend tracking supports Sunshine Act / transparency reporting requirements",
+      "Compliance alerts notify users and managers of approaching or breached limits",
+      "Dashboard reporting provides real-time compliance visibility"
+    ],
+    "objects_and_fields": [
+      "Compliance Rule (configuration)",
+      "Visit (engagement tracking)",
+      "SampleTransaction (sample compliance)",
+      "Spend records (transparency reporting)",
+      "Account (target HCP/HCO)"
+    ],
+    "permissions": [
+      "Compliance configuration permissions for admin",
+      "Compliance read access for field users"
+    ],
+    "batch_jobs": [
+      "Compliance calculation batch \u2014 periodic compliance status recalculation"
+    ],
+    "gotchas": [
+      "Sunshine Act reporting requires complete and accurate spend data \u2014 any gaps will trigger compliance issues",
+      "Different countries have different transparency reporting requirements",
+      "Compliance rules must be defined before deployment \u2014 retroactive application is complex"
+    ],
+    "mobile_considerations": [
+      "Compliance warnings displayed during visit and sample workflows on mobile"
+    ],
+    "admin_console_settings": [
+      "Compliance settings"
+    ]
+  },
+  {
+    "id": "pe-018",
+    "feature": "Briefings",
+    "category": "Content Delivery",
+    "description": "Scheduled flow-based content delivery that pushes relevant briefings and updates to sales reps based on account changes, territory events, or scheduled intervals.",
+    "setup_steps": [
+      "Configure briefing templates",
+      "Set up scheduled flows for briefing generation",
+      "Define briefing content sources and rules",
+      "Configure delivery channels (in-app, email notification)",
+      "Set up briefing components on home and account pages"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Flow Builder access for administrators"
+    ],
+    "configuration_details": [
+      "Briefings use scheduled flows to generate and deliver content",
+      "Content sources can include account changes, territory news, competitive intelligence",
+      "Delivery can be in-app notifications, email, or both",
+      "Templates control briefing format and content selection"
+    ],
+    "objects_and_fields": [
+      "Briefing (delivery record)",
+      "Flow (scheduled automation)",
+      "Account (context)",
+      "Territory2 (context)"
+    ],
+    "permissions": [
+      "Flow Builder access (for admin configuration)",
+      "Briefing read access for end users"
+    ],
+    "batch_jobs": [
+      "Scheduled flow execution for briefing generation"
+    ],
+    "gotchas": [
+      "Scheduled flow limits apply \u2014 monitor flow execution limits for large user populations"
+    ],
+    "mobile_considerations": [
+      "Briefings displayed in mobile app home page or notifications"
+    ],
+    "admin_console_settings": [
+      "Briefing settings"
+    ]
+  },
+  {
+    "id": "pe-019",
+    "feature": "Data Change Requests",
+    "category": "Data Governance",
+    "description": "Enables field users to submit requests for account data changes (address updates, new accounts, merges) through a governed approval workflow, maintaining data quality and stewardship.",
+    "setup_steps": [
+      "Enable Data Change Request feature",
+      "Configure change request types (new account, address change, merge, inactivation)",
+      "Set up approval workflows with appropriate routing",
+      "Configure data stewardship team assignments",
+      "Add change request components to account pages",
+      "Set up reporting for change request SLAs"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Data stewardship team identified and provisioned"
+    ],
+    "configuration_details": [
+      "Change requests capture proposed changes with before/after values",
+      "Approval workflows route requests to appropriate data stewards",
+      "SLA tracking monitors request processing time",
+      "Completed requests update account data through governed process",
+      "Audit trail maintains history of all data changes"
+    ],
+    "objects_and_fields": [
+      "DataChangeRequest (primary)",
+      "Account (target of changes)",
+      "ApprovalProcess (workflow)",
+      "User (requestor and approver)"
+    ],
+    "permissions": [
+      "Change request submission for field users",
+      "Approval and execution for data stewards"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Data change requests do not auto-apply \u2014 they must be reviewed and approved by data stewards",
+      "Merge requests require special handling as merges are irreversible",
+      "High-volume change request periods (territory realignment) may require batch processing"
+    ],
+    "mobile_considerations": [
+      "Change request submission available on mobile",
+      "Approval typically desktop-only"
+    ],
+    "admin_console_settings": [
+      "Data Change Request settings"
+    ]
+  },
+  {
+    "id": "pe-020",
+    "feature": "Next Best Customer / Next Best Action / Next Best Channel",
+    "category": "AI & Intelligence",
+    "description": "AI-powered recommendations that suggest the best customer to visit, the best action to take, and the best channel to use for engagement. Uses platform AI and CRM Analytics for scoring and recommendations.",
+    "setup_steps": [
+      "Enable Next Best features in Admin Console",
+      "Configure scoring models for customer prioritization",
+      "Set up recommendation strategies using platform Next Best Action component",
+      "Configure CRM Analytics dashboards for AI insights",
+      "Integrate with visit planning for customer recommendations",
+      "Configure channel scoring for multi-channel engagement optimization"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "CRM Analytics (formerly Einstein Analytics) enabled",
+      "Sufficient historical engagement data for model training",
+      "Visit Management and Activity Plans configured"
+    ],
+    "configuration_details": [
+      "Next Best Customer uses engagement history, account attributes, and plan goals to rank accounts",
+      "Next Best Action recommends specific activities (visit, email, sample) based on context",
+      "Next Best Channel suggests optimal communication method (in-person, remote, email)",
+      "Recommendations displayed in Lightning components on account and home pages",
+      "CRM Analytics provides scoring model management and insight dashboards",
+      "Models can be customized by therapeutic area or business unit"
+    ],
+    "objects_and_fields": [
+      "RecommendationStrategy (platform NBA)",
+      "Recommendation (individual recommendations)",
+      "Account (target)",
+      "CRM Analytics datasets and lenses",
+      "Scoring model outputs"
+    ],
+    "permissions": [
+      "AI feature permissions",
+      "CRM Analytics access",
+      "Recommendation read access for users"
+    ],
+    "batch_jobs": [
+      "Scoring batch \u2014 periodic recalculation of customer/action/channel scores"
+    ],
+    "gotchas": [
+      "Source platform AI features (MyInsights, Suggestions) have different branding \u2014 target uses Next Best umbrella",
+      "Model training requires sufficient historical data \u2014 plan data migration before AI enablement",
+      "CRM Analytics requires separate licensing in some editions",
+      "Recommendation quality depends heavily on data quality and completeness"
+    ],
+    "mobile_considerations": [
+      "Recommendations displayed on mobile home page and account pages",
+      "Scores cached for offline viewing"
+    ],
+    "admin_console_settings": [
+      "Next Best settings",
+      "AI/Analytics configuration"
+    ]
+  },
+  {
+    "id": "pe-021",
+    "feature": "Mobile App Setup and Sync",
+    "category": "Mobile Platform",
+    "description": "Core mobile application configuration including object metadata cache creation, validation, profile assignment, metadata generation, and sync processor scheduling. The metadata cache defines how the mobile app fetches and stores data for online and offline access.",
+    "setup_steps": [
+      "Step 1: Create Object Metadata Cache Configuration \u2014 define which objects are available offline with their type (Data or Configuration) and any special settings",
+      "Step 2: Validate metadata cache configuration for correctness",
+      "Step 3: Assign metadata cache to target user profiles",
+      "Step 4: Generate metadata cache \u2014 packages the object schema configuration for the mobile app",
+      "Step 5: Schedule sync processor for periodic data synchronization",
+      "For each feature area (visits, samples, emails, consent, remote engagement), create the specific object metadata cache configurations listed in that feature documentation",
+      "After any schema changes to supported objects, regenerate the metadata cache"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition with mobile add-on",
+      "All feature-specific objects configured before metadata cache creation",
+      "User profiles defined for mobile users"
+    ],
+    "configuration_details": [
+      "Object metadata cache configurations define: Object name, Type (Data or Configuration), Category (for Configuration type), Notes/special settings (e.g., attachment download method)",
+      "Configuration type objects define application behavior settings (e.g., LifeSciMetadataRecord with category EmailSettings)",
+      "Data type objects contain actual business data for offline access",
+      "Metadata cache generation creates a packaged schema definition for the mobile app",
+      "Sync processor handles bidirectional data synchronization between mobile and server",
+      "Each feature area has a specific list of required metadata cache objects \u2014 these are documented in the respective feature setup sections",
+      "After any schema changes, metadata cache MUST be regenerated or mobile app will use stale definitions"
+    ],
+    "objects_and_fields": [
+      "LifeSciMetadataRecord (metadata configuration records)",
+      "Object Metadata Cache Configuration (admin configuration)",
+      "Sync Processor (sync scheduling)",
+      "All business objects configured for offline access"
+    ],
+    "permissions": [
+      "Permission Set: Commercial Admin (for metadata cache management)",
+      "Mobile app deployment permissions"
+    ],
+    "batch_jobs": [
+      "Metadata Cache Generation \u2014 creates mobile metadata package",
+      "Sync Processor \u2014 scheduled bidirectional data synchronization"
+    ],
+    "gotchas": [
+      "Metadata cache MUST be regenerated after any schema changes to supported objects \u2014 failure to do so results in the mobile app using stale metadata definitions",
+      "The 5-step flow (create > validate > assign > generate > schedule sync) must be followed in order",
+      "Each feature area documents its specific required metadata cache objects \u2014 missing any object will break that feature on mobile",
+      "Some objects require special configuration (e.g., LifeSciEmailTmplSnapshot requires attachment download method set to Cache)",
+      "Sync processor scheduling affects mobile data freshness \u2014 balance frequency against server load",
+      "Large data volumes per object increase sync time and mobile storage usage"
+    ],
+    "mobile_considerations": [
+      "This IS the mobile configuration feature \u2014 all other mobile_considerations in other entries reference this setup",
+      "Offline-first architecture: mobile app works without connectivity using cached data",
+      "Sync processor handles conflict resolution for data modified both offline and online",
+      "Profile-based configuration allows different mobile experiences for different user types",
+      "Metadata cache version must match app version for compatibility"
+    ],
+    "admin_console_settings": [
+      "Mobile Setup",
+      "Metadata Cache Management",
+      "Sync Processor Scheduling"
+    ]
+  },
+  {
+    "id": "pe-022",
+    "feature": "Calendar and Scheduling",
+    "category": "Planning & Execution",
+    "description": "Integrated calendar for visit scheduling, time off territory management, and daily/weekly planning with territory-based account filtering.",
+    "setup_steps": [
+      "Configure calendar settings in Admin Console",
+      "Set up working hours and time zone defaults",
+      "Configure calendar integration with visit management",
+      "Enable territory-based account filtering in calendar views",
+      "Set up mobile calendar sync"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Visit Management configured",
+      "Territory management configured"
+    ],
+    "configuration_details": [
+      "Calendar integrates with Visit Management for scheduling",
+      "Territory-based filtering shows only accounts in assigned territories",
+      "Support for recurring visits and standing appointments",
+      "Time Off Territory (TOT) integration blocks scheduling during approved time off"
+    ],
+    "objects_and_fields": [
+      "Event (calendar entries)",
+      "Visit (scheduled visits)",
+      "TerritoryUserDowntime (time off territory)",
+      "Territory2 (territory filtering)",
+      "Account (visit targets)"
+    ],
+    "permissions": [
+      "Calendar access permissions",
+      "Visit scheduling permissions"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Timezone handling must be carefully configured for multi-timezone organizations"
+    ],
+    "mobile_considerations": [
+      "Calendar is a core mobile navigation feature",
+      "Offline calendar available with cached data"
+    ],
+    "admin_console_settings": [
+      "Calendar settings"
+    ]
+  },
+  {
+    "id": "pe-023",
+    "feature": "Time Off Territory",
+    "category": "Planning & Execution",
+    "description": "Manages sales rep time off territory requests including vacation, training, conferences, and other non-field activities with approval workflows and calendar integration.",
+    "setup_steps": [
+      "Enable Time Off Territory feature",
+      "Configure time off types and categories",
+      "Set up approval workflows for time off requests",
+      "Integrate with calendar for scheduling visibility",
+      "Enable trigger handlers for validation and sharing",
+      "Create metadata cache for mobile access"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Calendar and territory management configured"
+    ],
+    "configuration_details": [
+      "Time off types categorize different absence reasons",
+      "Approval workflows route requests based on duration and type",
+      "Calendar integration blocks scheduling during approved time off",
+      "Sharing rules control visibility of time off across management hierarchy",
+      "Validation rules prevent scheduling visits during approved time off"
+    ],
+    "objects_and_fields": [
+      "TerritoryUserDowntime (primary \u2014 time off records)",
+      "Territory2 (territory context)",
+      "User (requesting rep)",
+      "ApprovalProcess (approval workflow)"
+    ],
+    "permissions": [
+      "Time off request submission for users",
+      "Approval for managers"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Time off records affect visit planning and territory coverage calculations",
+      "Historical time off data migration may be needed for accurate coverage analytics"
+    ],
+    "mobile_considerations": [
+      "Time off requests submittable from mobile",
+      "Calendar shows approved time off in schedule view"
+    ],
+    "admin_console_settings": [
+      "Time Off Territory settings"
+    ],
+    "trigger_handlers": [
+      "TUDUpdateHandler \u2014 handles time off territory update logic",
+      "TUDSharingHandler \u2014 manages sharing rules for time off records",
+      "TUDVisitValidationHandler \u2014 validates visit scheduling against time off",
+      "UDBHValidationHandler \u2014 validates user downtime business hours",
+      "Territory2Handler \u2014 handles territory-related changes affecting time off"
+    ]
+  },
+  {
+    "id": "pe-024",
+    "feature": "Custom LWC Apps",
+    "category": "Platform Extensibility",
+    "description": "Lightning Web Component framework enables building custom interactive applications within the platform, extending functionality beyond standard features.",
+    "setup_steps": [
+      "Set up development environment with Lightning Web Components framework",
+      "Deploy custom LWC components via metadata API or CLI",
+      "Add custom components to record pages via Lightning App Builder",
+      "Configure component visibility rules and permissions",
+      "Test in sandbox before production deployment"
+    ],
+    "prerequisites": [
+      "Platform developer permissions",
+      "Lightning Experience enabled",
+      "Development tools configured"
+    ],
+    "configuration_details": [
+      "LWC provides a modern component framework for custom UI development",
+      "Components can be added to any Lightning page via App Builder",
+      "Platform data access via Lightning Data Service (wire service) or Apex",
+      "Mobile-responsive by default when following SLDS design guidelines"
+    ],
+    "objects_and_fields": [
+      "Any platform object accessible via Lightning Data Service or Apex"
+    ],
+    "permissions": [
+      "Customize Application (for deployment)",
+      "Component-specific permissions"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Custom LWC components from source platform are NOT compatible \u2014 must be rewritten",
+      "Source platform proprietary JavaScript APIs have no equivalent in LWC",
+      "Performance testing required for data-intensive custom components"
+    ],
+    "mobile_considerations": [
+      "LWC components can be mobile-responsive when built with SLDS"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-025",
+    "feature": "Lists and Filters",
+    "category": "Data Navigation",
+    "description": "Configurable list views with advanced filtering, sorting, and grouping for accounts, visits, and other objects. Supports territory-based and role-based data filtering.",
+    "setup_steps": [
+      "Configure default list views for key objects",
+      "Set up territory-based filters",
+      "Configure list view permissions and sharing",
+      "Define filter criteria and sort defaults",
+      "Enable mobile list view access"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Territory management configured"
+    ],
+    "configuration_details": [
+      "List views support filter by territory, account type, status, and custom fields",
+      "Sorting and grouping configurable per view",
+      "Territory-based filtering automatically scopes data to assigned territories",
+      "Custom list views can be shared across teams or kept personal"
+    ],
+    "objects_and_fields": [
+      "ListView (configuration)",
+      "Any filterable platform object"
+    ],
+    "permissions": [
+      "List view creation for end users",
+      "Public list view management for admins"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Large list views with complex filters may impact performance",
+      "Mobile list views may show fewer columns than desktop"
+    ],
+    "mobile_considerations": [
+      "List views available on mobile with adapted column display",
+      "Offline list access with cached data"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-026",
+    "feature": "Provider Card Interface",
+    "category": "Account Management",
+    "description": "Compact account card view displaying key provider information at a glance, including contact details, recent activity summary, consent status, and engagement metrics.",
+    "setup_steps": [
+      "Configure compact layout for account object",
+      "Select fields to display on provider card",
+      "Add provider card component to relevant pages",
+      "Configure mobile compact layout"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Account records configured"
+    ],
+    "configuration_details": [
+      "Provider card uses compact layout to show key information in a card format",
+      "Configurable fields allow organization-specific information display",
+      "Card integrates with highlights panel on account pages",
+      "Supports both HCP and HCO account types"
+    ],
+    "objects_and_fields": [
+      "Account (compact layout)",
+      "Contact (contact details)",
+      "Recent activities (summary)"
+    ],
+    "permissions": [
+      "Read access to Account and displayed fields"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Compact layout field limits may require prioritization of displayed fields"
+    ],
+    "mobile_considerations": [
+      "Provider card is the primary account view on mobile",
+      "Compact layout optimized for small screens"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-027",
+    "feature": "Ratings",
+    "category": "Account Management",
+    "description": "Account and contact rating system for segmentation and prioritization, supporting both automatic scoring and manual rating overrides.",
+    "setup_steps": [
+      "Configure rating fields on Account object",
+      "Define rating scales and criteria",
+      "Set up automatic rating calculation rules (if applicable)",
+      "Configure rating visibility on pages and reports"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Account data with attributes for scoring"
+    ],
+    "configuration_details": [
+      "Ratings support both numeric and categorical scales",
+      "Automatic scoring based on configurable business rules",
+      "Manual override capability for field user adjustments",
+      "Rating data used in territory planning and activity plan prioritization"
+    ],
+    "objects_and_fields": [
+      "Account (rating fields)",
+      "Rating configuration records"
+    ],
+    "permissions": [
+      "Rating read access for users",
+      "Rating configuration for admins"
+    ],
+    "batch_jobs": [
+      "Rating recalculation batch (if automatic scoring configured)"
+    ],
+    "gotchas": [
+      "Rating scale differences between source and target require normalization mapping"
+    ],
+    "mobile_considerations": [
+      "Ratings visible on mobile account views"
+    ],
+    "admin_console_settings": [
+      "Rating settings (if available in Admin Console)"
+    ]
+  },
+  {
+    "id": "pe-028",
+    "feature": "Account Address Management",
+    "category": "Account Management",
+    "description": "Manages multiple addresses per account (office, shipping, mailing) with address validation and country-specific formatting.",
+    "setup_steps": [
+      "Configure address fields and custom address objects (if multiple addresses needed)",
+      "Set up address validation rules",
+      "Configure country-specific address formats",
+      "Add address components to account record pages"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed"
+    ],
+    "configuration_details": [
+      "Standard compound address fields for primary address",
+      "Custom address objects for unlimited additional addresses",
+      "Country-specific address formatting and validation",
+      "Address data used in territory assignment and visit routing"
+    ],
+    "objects_and_fields": [
+      "Account (compound address field)",
+      "Custom Address object (multiple addresses)",
+      "Address validation records"
+    ],
+    "permissions": [
+      "Address edit permissions for relevant users"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Source platform supports unlimited account addresses natively; target has limits without custom objects",
+      "Country-specific address formats need locale-aware transformation during migration",
+      "Address data quality directly impacts territory assignment accuracy"
+    ],
+    "mobile_considerations": [
+      "Address fields editable on mobile",
+      "Geolocation integration for address capture"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-029",
+    "feature": "Account Merge",
+    "category": "Account Management",
+    "description": "Deduplication and merge capability for account records, combining duplicate accounts while preserving related data and audit trails.",
+    "setup_steps": [
+      "Configure merge rules and permissions",
+      "Set up duplicate detection rules",
+      "Configure which fields survive the merge (master record selection)",
+      "Set up merge audit trail"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Data stewardship team identified"
+    ],
+    "configuration_details": [
+      "Merge combines duplicate accounts into a single master record",
+      "Related records (visits, samples, consent) re-parented to surviving account",
+      "Duplicate detection identifies potential merge candidates",
+      "Merge audit trail preserves history for compliance"
+    ],
+    "objects_and_fields": [
+      "Account (merge source and target)",
+      "DuplicateRecordSet (duplicate detection)",
+      "All related child records"
+    ],
+    "permissions": [
+      "Account merge permissions (typically restricted to data stewards)"
+    ],
+    "batch_jobs": [
+      "Duplicate detection batch (periodic scanning for duplicate accounts)"
+    ],
+    "gotchas": [
+      "Account merges are IRREVERSIBLE \u2014 require careful validation before execution",
+      "Related record re-parenting must be verified for data integrity",
+      "Consent records require special attention during merge to maintain regulatory compliance",
+      "Large accounts with many child records may require off-peak merge processing"
+    ],
+    "mobile_considerations": [
+      "Merge operations typically desktop-only",
+      "Merged data appears on mobile after sync"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-030",
+    "feature": "Account Search",
+    "category": "Account Management",
+    "description": "Global and contextual search for account records with configurable search fields, territory scoping, and search result layouts.",
+    "setup_steps": [
+      "Configure search layouts for account object",
+      "Set up searchable fields",
+      "Configure territory-scoped search behavior",
+      "Customize search result layouts"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed"
+    ],
+    "configuration_details": [
+      "Search integrates with platform global search infrastructure",
+      "Territory scoping limits results to user assigned territories",
+      "Search layouts configurable per object and record type",
+      "Recent items and search history for quick access"
+    ],
+    "objects_and_fields": [
+      "Account (search target)",
+      "SearchLayout (configuration)"
+    ],
+    "permissions": [
+      "Read access to Account object"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Search index updates are not real-time \u2014 newly created records may take minutes to appear in search results"
+    ],
+    "mobile_considerations": [
+      "Search is a primary mobile navigation pattern",
+      "Offline search available with cached data"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-031",
+    "feature": "Home Page",
+    "category": "UI & Navigation",
+    "description": "Configurable home page displaying key metrics, alerts, pending tasks, today schedule, and AI-powered recommendations for field sales reps.",
+    "setup_steps": [
+      "Configure home page layout via Lightning App Builder",
+      "Add relevant components (calendar, alerts, recommendations, metrics)",
+      "Set up profile-specific home page assignments",
+      "Configure mobile home page layout"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Relevant features configured (calendar, alerts, etc.)"
+    ],
+    "configuration_details": [
+      "Home page is the landing page for the application",
+      "Configurable components include: calendar/schedule, task list, alerts, Next Best recommendations, key metrics",
+      "Different layouts can be assigned to different profiles",
+      "Mobile-specific home page layout available"
+    ],
+    "objects_and_fields": [
+      "HomePage layout (configuration)",
+      "Dashboard components"
+    ],
+    "permissions": [
+      "Customize Application (for home page configuration)"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Home page performance depends on component complexity \u2014 minimize heavy data-loading components"
+    ],
+    "mobile_considerations": [
+      "Mobile home page is the first screen users see \u2014 optimize for quick daily orientation"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-032",
+    "feature": "Account Teams",
+    "category": "Account Management",
+    "description": "Defines team members associated with an account, including roles, access levels, and team composition for coordinated account engagement.",
+    "setup_steps": [
+      "Enable Account Teams in Setup",
+      "Configure account team roles",
+      "Set up team member access levels",
+      "Configure default account teams by profile or territory",
+      "Add Account Team component to record pages"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Account Teams enabled in org settings"
+    ],
+    "configuration_details": [
+      "Account teams define which users have access to an account and their roles",
+      "Team roles are configurable (e.g., primary rep, medical liaison, key account manager)",
+      "Access levels control read/write permissions per team member",
+      "Default teams can be auto-assigned based on territory or profile"
+    ],
+    "objects_and_fields": [
+      "AccountTeamMember (team member records)",
+      "Account (parent)",
+      "User (team members)",
+      "AccountTeamRole (role definitions)"
+    ],
+    "permissions": [
+      "Account Team management for account owners",
+      "Team member read access"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Account team hierarchy is more complex than source platform \u2014 allow for mapping time",
+      "Team changes affect data visibility \u2014 test sharing rules thoroughly"
+    ],
+    "mobile_considerations": [
+      "Account team visible on mobile account pages"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-033",
+    "feature": "Bulk Update",
+    "category": "Data Operations",
+    "description": "Mass update capability for account and visit records, enabling administrators and managers to update multiple records simultaneously.",
+    "setup_steps": [
+      "Configure bulk update permissions",
+      "Set up bulk update templates for common operations",
+      "Define field-level restrictions for bulk operations",
+      "Test bulk operations in sandbox before production"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Appropriate admin permissions"
+    ],
+    "configuration_details": [
+      "Bulk update supports updating fields across multiple records",
+      "Templates define which fields can be bulk-updated",
+      "Audit trail tracks all bulk operations for compliance",
+      "Governor limits apply \u2014 large bulk operations may need to be batched"
+    ],
+    "objects_and_fields": [
+      "Any bulk-updatable platform object",
+      "BulkOperation tracking records"
+    ],
+    "permissions": [
+      "Bulk update permissions (typically restricted to admins/managers)"
+    ],
+    "batch_jobs": [
+      "Bulk operation execution (for large-scale updates)"
+    ],
+    "gotchas": [
+      "Bulk operations trigger all configured trigger handlers \u2014 test for performance impact",
+      "Governor limits restrict the number of records per bulk operation \u2014 plan batching for large datasets"
+    ],
+    "mobile_considerations": [
+      "Bulk update typically desktop-only"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-034",
+    "feature": "Expense Sync",
+    "category": "Data Integration",
+    "description": "Integration capability for synchronizing expense data between the CRM platform and external expense management systems for transparency reporting.",
+    "setup_steps": [
+      "Configure expense integration endpoints",
+      "Map expense fields between systems",
+      "Set up sync schedule and error handling",
+      "Configure expense visibility on account pages"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "External expense management system accessible via API"
+    ],
+    "configuration_details": [
+      "Expense sync bridges CRM engagement data with financial expense tracking",
+      "Supports Sunshine Act / transparency reporting data requirements",
+      "Configurable field mapping between systems",
+      "Error handling and retry logic for failed syncs"
+    ],
+    "objects_and_fields": [
+      "Expense records (custom or integration)",
+      "Account (linked HCP/HCO)",
+      "Visit/Event (engagement context)"
+    ],
+    "permissions": [
+      "Integration user permissions",
+      "Expense data access for reporting users"
+    ],
+    "batch_jobs": [
+      "Expense sync batch \u2014 scheduled synchronization with external systems"
+    ],
+    "gotchas": [
+      "Expense data accuracy is critical for regulatory compliance (Sunshine Act)",
+      "Integration mapping must handle currency conversion for multi-country deployments"
+    ],
+    "mobile_considerations": [
+      "Expense data visible on mobile for reference; entry typically via external system"
+    ],
+    "admin_console_settings": []
+  },
+  {
+    "id": "pe-035",
+    "feature": "Life Sciences Workflow Configuration",
+    "category": "Platform Configuration",
+    "description": "Five-step framework for preparing industry-specific workflow automation: (1) outline the workflow, (2) define objects and permissions, (3) identify fields for conditions, (4) plan actions per stage, (5) consider validation rules and checklists.",
+    "setup_steps": [
+      "Step 1: Outline the workflow \u2014 map the business process to be automated",
+      "Step 2: Define objects and permissions \u2014 identify which objects are involved and what access is needed",
+      "Step 3: Identify fields for conditions \u2014 determine which fields drive workflow transitions",
+      "Step 4: Plan actions per stage \u2014 define what happens at each workflow stage (notifications, field updates, tasks)",
+      "Step 5: Consider validation rules and checklists \u2014 add guardrails and mandatory checks"
+    ],
+    "prerequisites": [
+      "Customer Engagement edition installed",
+      "Business process documented",
+      "Flow Builder or Process Builder access"
+    ],
+    "configuration_details": [
+      "Workflows can be built using Flow Builder (recommended) or Process Builder (legacy)",
+      "Five-step framework ensures comprehensive workflow design before implementation",
+      "Validation rules enforce data quality at each workflow stage",
+      "Checklists guide users through required steps at each stage",
+      "Platform workflow supports record-triggered flows, scheduled flows, and screen flows"
+    ],
+    "objects_and_fields": [
+      "Any platform object can participate in workflows",
+      "Flow (automation definition)",
+      "ValidationRule (guardrails)"
+    ],
+    "permissions": [
+      "Flow Builder access for admin",
+      "Modify All Data or specific object permissions"
+    ],
+    "batch_jobs": [],
+    "gotchas": [
+      "Process Builder is being retired \u2014 use Flow Builder for all new workflows",
+      "Complex workflows with many criteria can hit platform limits \u2014 design with governor limits in mind",
+      "Test workflows thoroughly in sandbox including all branch paths"
+    ],
+    "mobile_considerations": [
+      "Workflow-triggered updates reflected on mobile after sync"
+    ],
+    "admin_console_settings": []
+  }
+]

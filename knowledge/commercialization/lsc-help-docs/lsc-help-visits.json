@@ -1,0 +1,635 @@
+[
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-hide-goto-completed",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Hide GoTo Actions on Completed or Submitted Visits",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add a visibility filter to hide GoTo actions on completed, submitted, or abandoned visits, keeping the action wheel relevant to active",
+    "findings": [
+      {
+        "name": "Hide GoTo Actions on Completed or Submitted Visits",
+        "detail": "Add a visibility filter to hide GoTo actions on completed, submitted, or abandoned visits, keeping the action wheel relevant to active visits."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To edit Lightning Record Pages: | Life Sciences Commercial Admin From Setup, open Object Manager , select Visit , click Lightning Record Pages , select the Lightning page you want to update, and select Edit . Select the Highlight Panel component. On the right, add a GoTo action or select an existing one, and then select + Add Filter . Set the filter criteria. Filter Type : Select Record Field . Field : Select Status . Operator : Select Not Equal . Value : Select Completed . To hide the action on abandoned visits, add another filter, and set Value to Abandoned . Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "GoTo Actions"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_hide_goto_completed.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-hide-goto-desktop",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Hide GoTo Actions on the Desktop Site",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add a visibility filter to prevent GoTo actions from appearing on the desktop site so the actions are available only in the mobile app where they are",
+    "findings": [
+      {
+        "name": "Hide GoTo Actions on the Desktop Site",
+        "detail": "Add a visibility filter to prevent GoTo actions from appearing on the desktop site so the actions are available only in the mobile app where they are supported."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To edit Lightning Record Pages: | Life Sciences Commercial Admin From Setup, open Object Manager , select Visit , click Lightning Record Pages , select the Lightning page you want to update, and select Edit . Select the Highlight Panel component. In the right-side menu, add a GoTo action or select an existing one, and then select + Add Filter . Set the filter criteria. Filter Type : Select Device . Field : Select Form Factor . Operator : Select Not Equal . Value : Select Desktop . Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "GoTo Actions"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_hide_goto_desktop.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-add-actions-with-dynamic-actions",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add Actions with Dynamic Actions",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use Dynamic Actions to add actions to the Visit record page so users see only the actions that are relevant to the current visit status and",
+    "findings": [
+      {
+        "name": "Add Actions with Dynamic Actions",
+        "detail": "Use Dynamic Actions to add actions to the Visit record page so users see only the actions that are relevant to the current visit status and device."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To edit Lightning Record Pages: | Life Sciences Commercial Admin Verify that dynamic actions are on. From the Admin Console, select Mobile , then select Application Settings , and verify that Enable Dynamic Actions is selected. In Setup, find and select Object Manager . Click Visit , and then go to the Lightning record pages section and select the Visit Record Page. Click Edit . Drag the Highlights Panel component or Action Bar to the page. Click Add Action , search for the actions you want to add, and add them to the bar. Configure Unlock Visibility. Select the Unlock action. In Set Component Visibility, add a filter to make sure that the action only appears for submitted parent visits: Status Equal 'Completed' AND Parent Visit Equal 'Empty' Configure GoTo Custom Actions visibility. See Hide GoTo Actions . Click Save , and then click Activation to activate the page."
+      },
+      {
+        "name": "See Also",
+        "detail": "Configure Visit Settings Define Messages and Objectives for Product Detailing Page Layouts Rename Object, Tab, and Field Labels"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_add_actions_with_dynamic_actions.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-locale-field-display",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "User Locale and Visit Engagement Fields",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Your users' locale settings affect which fields appear on the Visit Engagement page. This visibility is independent of page layouts, field-level security, and related-list",
+    "findings": [
+      {
+        "name": "User Locale and Visit Engagement Fields",
+        "detail": "Your users' locale settings affect which fields appear on the Visit Engagement page. This visibility is independent of page layouts, field-level security, and related-list configurations."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. If fields such as Product ID, Production Batch ID, or Requested Quantity don't appear on the Visit Engagement page on the desktop site but appear correctly in the mobile app, check the user's locale setting. Verify this setting before investigating page layouts or permissions. Certain unsupported locale variants can cause fields to render incorrectly on the web interface."
+      },
+      {
+        "name": "Unsupported Locale Variants",
+        "detail": "Salesforce supports locales in Language (Region) format, such as English (United States) or English (India), but doesn't support Language (Region, Currency) variants—for example, Spanish (Spain, Euro) or French (France, Euro)—which cause certain fields to appear incorrectly on the Visit Engagement page in the desktop site. The same fields appear correctly when the user accesses the page on the Life Sciences Cloud mobile app. Note The unsupported locale variant itself causes this behavior, not a misconfiguration of page layouts, related-list settings, or field-level security. Verifying those settings doesn't resolve the issue."
+      },
+      {
+        "name": "Supported Locales for Life Sciences Customer Engagement Visits",
+        "detail": "Assign Life Sciences Customer Engagement users a locale in Language (Region) format, such as English (United States) or English (India). Salesforce doesn't support locales in Language (Region, Currency) format, which cause field display issues on the Visit Engagement page. Resolve Field Display Issues Caused by Unsupported Locale Variants Restore field visibility on the Visit Engagement page. Update the user's locale from an unsupported variant to a standard locale."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_locale_field_display.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-locale-field-display-remediate",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Resolve Field Display Issues Caused by Unsupported Locale Variants",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Restore field visibility on the Visit Engagement page. Update the user's locale from an unsupported variant to a standard",
+    "findings": [
+      {
+        "name": "Resolve Field Display Issues Caused by Unsupported Locale Variants",
+        "detail": "Restore field visibility on the Visit Engagement page. Update the user's locale from an unsupported variant to a standard locale."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To resolve field display issues: | Life Sciences Commercial Admin permission set From Setup, in the Quick Find box, enter Users , and then select Users . Select the affected user. On the user detail page, select Edit . In the Locale field, replace the unsupported locale variant with the standard locale. For example, replace English (Ireland, EURO) with English (Ireland) . Select Save . Ask the user to log out and log back in for the change to take effect. You don't need to generate the metadata cache when switching between already supported locales. After you update the locale, the affected fields appear correctly on the Visit Engagement page in the desktop site."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_locale_field_display_remediate.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-config-mobile-sync",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Mobile Sync Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Improve mobile app performance and reduce data usage with a more efficient synchronization model. Turn on periodic background synchronization during idle times so that field reps have the most current data is always available to field",
+    "findings": [
+      {
+        "name": "Configure Mobile Sync Settings",
+        "detail": "Improve mobile app performance and reduce data usage with a more efficient synchronization model. Turn on periodic background synchronization during idle times so that field reps have the most current data is always available to field reps."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage visit settings: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Synchronization | Mobile Sync Settings . Check the options to configure how mobile sync works for your org. Related Record Retrieve fetches records that are related to the ones being synced. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_config_mobile_sync.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits",
+      "sync",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-admin-console",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure the Visit Management Admin Console",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To configure what information fields users can see and how they can interact with and manage visit records, use the Admin",
+    "findings": [
+      {
+        "name": "Configure the Visit Management Admin Console",
+        "detail": "To configure what information fields users can see and how they can interact with and manage visit records, use the Admin Console."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage visit settings: | Life Sciences Commercial Admin permission set Use the Admin Console to customize the visit user experience at the org, user profile, or individual user level. See Configure Visit Settings . Activate the trigger handlers that ensure data integrity, locking, and synchronization for the web-based app. See Activate Trigger Handlers . Schedule a job to make sure that the territory information in the Next Visit and Last Visit fields of account profiles is always current. See Schedule Visit Jobs . After configuring the Admin Console, generate the metadata cache to sync changes between the desktop site and Life Sciences Cloud mobile app. See Generate Metadata Cache . Configure Visit Settings To customize the visit user experience at the org, user profile, or individual user level, configure the visit settings in the Admin Console. Activate Trigger Handlers Activate the trigger handlers that ensure data integrity, locking, and synchronization for Life Sciences Customer Engagement on the desktop site. Schedule Visit Jobs Schedule a job to make sure the territory information in the Next Visit and Last Visit fields of account profiles is always current."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_admin_console.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-activate-trigger-handlers",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Activate Trigger Handlers",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Activate the trigger handlers that ensure data integrity, locking, and synchronization for Life Sciences Customer Engagement on the desktop",
+    "findings": [
+      {
+        "name": "Activate Trigger Handlers",
+        "detail": "Activate the trigger handlers that ensure data integrity, locking, and synchronization for Life Sciences Customer Engagement on the desktop site."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage visit settings: | Life Sciences Commercial Admin permission set These steps apply only to the desktop site. This functionality is available by default in the Life Sciences Cloud app. From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Trigger Handler Administration . Activate these trigger handlers. ContentDocumentLinkLockHandler ContentDocumentLockHandler PVChangedEventUpdateAccountTerrInfo PVLockHandler VisitChangePrimaryAccountHandler VisitLifeScienceAccountListLinkHandler VisitLockHandler VisitPopulateEndTimeHandler"
+      },
+      {
+        "name": "See Also",
+        "detail": "Trigger Handler Administration Trigger Handlers by Object"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_activate_trigger_handlers.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-sched-visit-jobs",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Schedule Visit Jobs",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Schedule a job to make sure the territory information in the Next Visit and Last Visit fields of account profiles is always",
+    "findings": [
+      {
+        "name": "Schedule Visit Jobs",
+        "detail": "Schedule a job to make sure the territory information in the Next Visit and Last Visit fields of account profiles is always current."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage visit settings: | Life Sciences Commercial Admin permission set This job uses visit data to calculate Year to Date Visits, Next Visits, and Last Visits on Provider Account Territory Information records. From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Visit Information | Visit Jobs . Locate the Update Provider Account Territory Information job. Click Schedule to run the job repeatedly or Run Now to run the job immediately."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_sched_visit_jobs.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-config-list-view-quick-visit",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Actionable List View",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure Actionable List View, also known as Quick Visit, so that field reps can perform routine tasks from a list view. Streamline mobile workflows with card-based lists and embedded quick actions to perform",
+    "findings": [
+      {
+        "name": "Configure Actionable List View",
+        "detail": "Configure Actionable List View, also known as Quick Visit, so that field reps can perform routine tasks from a list view. Streamline mobile workflows with card-based lists and embedded quick actions to perform tasks."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage visit settings: | Life Sciences Commercial Admin permission set From Setup, use the Quick Find box to find and select App Manager . Edit your mobile app and make sure the Visits tab is added to Navigation Items. Create or edit a visit list view. See Create a Custom List View in Lightning Experience . The first five columns map to the mobile card layout. Row 1 shows the first column. Row 2 shows the second column. Row 3 shows the third, fourth, and fifth columns. From the App Launcher, find and select Life Sciences Commercial . Select Admin Console , and then select Quick and Custom Action Administration . Select Custom Actions . Select New . For Action Target, enter GoTo . For Target Parameters, enter the API name of the related list for the specific sidebar menu. If you leave this field blank, the action opens the Visit Engagement page without jumping to a specific section. For Quick Action, enter a unique API name and copy the name. From the object management settings for visits, go to Buttons, Links, and Actions . Select New Action . For Action Type, select Lightning Component . For Name, paste the exact Quick Action name copied step in 7c. Add the new action to the visit page layout or Lightning record page. Generate the metadata cache. See Generate Metadata Cache ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_config_list_view_quick_visit.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-config-visit-plan-execution",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Visit Planning and Execution Features",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Capture visit interactions, share intelligent content, and record medical inquiries or survey responses to document field activities. Use these visit management features to streamline data entry and plan future",
+    "findings": [
+      {
+        "name": "Configure Visit Planning and Execution Features",
+        "detail": "Capture visit interactions, share intelligent content, and record medical inquiries or survey responses to document field activities. Use these visit management features to streamline data entry and plan future objectives."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Recommendations The Recommendations sidebar menu suggests the Next Best Messages or Content for specific Healthcare Professionals (HCPs). Capture Product Detailing Configure product detailing so field reps can record products, messages, and reactions during visits. Set up related lists, admin settings, and trigger handlers. Capture Product Discussions Configure product discussions to capture qualitative insights during visits. Set up custom fields, related lists, and discussion rules for field reps. Share Intelligent Content Set up Intelligent Content so field reps can open presentations and track metrics during visits. Capture Next Visit Objectives Configure next visit objectives so field reps can record goals for future interactions. Add the required section and fields to the page layout. Capture Medical Inquiries Configure medical inquiries so field reps can capture and submit unsolicited, off-label questions or requests for medical information during a visit. How Visit Agent Works Visit Agent uses on-device speech-to-text transcription to capture healthcare provider (HCP) engagement details and auto-populate visit records. No internet connection required. Before deploying Visit Agent for your field reps, review how data processing, territory priming, privacy handling, and group visit limitations work. Set Up Voice-Based Visit Logging Set up Visit Agent for field reps to record healthcare provider (HCP) engagement details by voice in the Life Sciences Cloud mobile app. Visit Agent uses on-device speech-to-text to populate visit records offline. Log Visits with Visit Agent Use Visit Agent in the Life Sciences Cloud mobile app to record your healthcare provider (HCP) engagement using voice. On-device transcription fills in the visit record with products discussed, product messages, HCP reactions, presentations, and visit time, even offline. Respond to Surveys Configure surveys so field reps can launch and complete them during visits."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_config_visit_plan_execution.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-capture-product-detailing",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Capture Product Detailing",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure product detailing so field reps can record products, messages, and reactions during visits. Set up related lists, admin settings, and trigger",
+    "findings": [
+      {
+        "name": "Capture Product Detailing",
+        "detail": "Configure product detailing so field reps can record products, messages, and reactions during visits. Set up related lists, admin settings, and trigger handlers."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage visit settings: | Life Sciences Commercial Admin permission set To create and save Lightning pages in the Lightning App Builder: | Customize Application Make sure that products are set up in LifeSciMarketableProduct and aligned to territories. From the object management settings for visits, go to Page Layouts . Add the Provider Visit Product Detailings related list and the Provider Visit Detailing Product Messages related list to the layout. The Provider Visit Product Detailings list enables the sidebar menu. The Provider Visit Detailing Product Messages list enables the Messages subsections within the Product Details card. From the App Launcher, find and select Life Sciences Commercial . Select Admin Console , and then select Visit Administration . Select Visit Settings . In the Product Detailing Settings section, enable Show recent details and product selector and Discuss off-label products . Return to the Admin Console and select Trigger Handler Administration . Activate these trigger handlers: ProviderVisitProdDtlNameHandler , ProviderVisitProdDtlLockHandler , and ProviderVisitDtlProductMsgLockHandler . The object lock handlers apply only to the desktop site. For the mobile app, this logic is built in. Generate the metadata cache. See Generate Metadata Cache ."
+      },
+      {
+        "name": "See Also",
+        "detail": "Trigger Handler Administration Trigger Handlers by Object"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_capture_product_detailing.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-share-intelligent-content",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Share Intelligent Content",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set up Intelligent Content so field reps can open presentations and track metrics during",
+    "findings": [
+      {
+        "name": "Share Intelligent Content",
+        "detail": "Set up Intelligent Content so field reps can open presentations and track metrics during visits."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed Modify page layouts, rename tabs, and rename labels: | Customize Application Access the Admin Console to activate trigger handlers: | Life Sciences Commercial Admin permission set Note Be sure to upload the content and share it with users. From the object management settings for visits, go to Page Layouts . Add the Presentation Forums related list to the layout. After adding the related list, the five most recently used presentations appear in the Content sidebar. To improve the user experience, rename the Presentation Forums related list label to Content or Presentations . From the App Launcher, find and select Life Sciences Commercial , and then click Admin Console | Trigger Handler Administration . Activate the PresentationForumLockHandler trigger handler. This handler applies only to the desktop site. For the mobile app, this logic is built in. To help sales reps engage more effectively with their accounts, define recommended presentations. See Set Up Recommended Presentations ."
+      },
+      {
+        "name": "See Also",
+        "detail": "Trigger Handler Administration Trigger Handlers by Object"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_share_intelligent_content.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-capture-medical-inquiries",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Capture Medical Inquiries",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure medical inquiries so field reps can capture and submit unsolicited, off-label questions or requests for medical information during a",
+    "findings": [
+      {
+        "name": "Capture Medical Inquiries",
+        "detail": "Configure medical inquiries so field reps can capture and submit unsolicited, off-label questions or requests for medical information during a visit."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed Modify objects, page layouts, and Lightning record pages: | Customize Application From Setup , in Object Manager , select Person Account or Account . Select Page Layouts or Lightning Record Pages and edit the layout assigned to your field users. Drag the Inquiry action into the Salesforce Mobile and Lightning Experience Actions section. In the mobile app, the feature is available from the Floating Action Button . In the desktop site, it's available from the Actions Menu on the Visit Engagement page or Visit Record page."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_capture_medical_inquiries.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-visit-agent-overview",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "How Visit Agent Works",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Visit Agent uses on-device speech-to-text transcription to capture healthcare provider (HCP) engagement details and auto-populate visit records. No internet connection required. Before deploying Visit Agent for your field reps, review how data processing, territory priming, privacy handling, and...",
+    "findings": [
+      {
+        "name": "How Visit Agent Works",
+        "detail": "Visit Agent uses on-device speech-to-text transcription to capture healthcare provider (HCP) engagement details and auto-populate visit records. No internet connection required. Before deploying Visit Agent for your field reps, review how data processing, territory priming, privacy handling, and group visit limitations work."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Life Sciences Cloud mobile app for iOS (iPad) Available in: Enterprise and Unlimited Editions with Life Sciences Cloud and the Agentforce for Life Sciences Cloud add-on."
+      },
+      {
+        "name": "What Visit Agent Captures",
+        "detail": "After a rep transcribes the visit details, Visit Agent auto-populates these fields on the Visit record based on the voice recording. Visit Agent populates these fields as drafts. Field | How It's Populated Account | Carried from the account the rep selected before transcribing visit details Products Discussed | Matched against the rep's territory-aligned product list Product Messages | Matched from active ProductMessage records for each discussed product HCP Reactions | AI-generated draft label for each product message: positive, negative, or neutral Presentations Shown | Matched from marketing presentations associated with discussed products Contact Point Address | Matched against ContactPointAddress records for the account Visit Start Time and Visit End Time | Extracted from what the rep said, or device time when time is unavailable in the rep's transcription. Reps review every value before saving. Reps enter or update these fields manually: Channel — Face-to-face, Remote, Video, or Phone HCP attendees other than the primary account Samples distributed Direct to Practitioner requests Promotional materials left behind Record Type (see Record Type Configuration ) Any custom fields on the Visit object"
+      },
+      {
+        "name": "Language Support",
+        "detail": "Visit Agent supports English only."
+      },
+      {
+        "name": "Product Recognition and Territory Priming",
+        "detail": "Visit Agent primes speech-to-text with the rep's territory-aligned products and the selected account name before each recording. It includes only active company products in the rep's territory."
+      },
+      {
+        "name": "Custom Vocabulary",
+        "detail": "Visit Agent derives its priming vocabulary automatically from the rep's territory-aligned product list and the selected account name. Admins can't add custom synonyms or brand aliases."
+      },
+      {
+        "name": "Channel",
+        "detail": "The picklist configuration in Salesforce determines the default value for the Channel field."
+      },
+      {
+        "name": "Record Type Configuration",
+        "detail": "Visit Agent doesn't infer the visit record type from conversation content. Record type assignment follows the standard Visit Management precedence: Account-to-visit record type mapping User profile default record type The record type of an existing unsubmitted planned visit To make sure reps land on the correct record type after recording, configure account-to-visit record type mappings and set profile-level default record types by role before deploying Visit Agent."
+      },
+      {
+        "name": "Data Sync and Refresh",
+        "detail": "Product, account, and territory data stays current through the standard mobile sync."
+      },
+      {
+        "name": "Data Privacy and On-Device Processing",
+        "detail": "Visit Agent processes all speech-to-text transcription, entity extraction, and HCP Reaction inference on-device. The agent doesn't send data off the device, retain audio after transcription, or store transcripts separately after you save the visit record."
+      },
+      {
+        "name": "Group Visit or Multi Attendee Visit Limits",
+        "detail": "Visit Agent doesn't support Group Visit. Visit Agent captures one primary account per session—the account that the rep selects before recording. It doesn't expand attendees by affiliation or resolve named attendees mentioned during recording."
+      },
+      {
+        "name": "Integration Limits for Visit Agent",
+        "detail": "Visit Agent runs as an on-device process and isn't a cloud-connected subagent. You can't call Visit Agent from a cloud Agentforce orchestrator. Additionally, Visit Agent doesn't expose hooks for custom automation inside its data extraction and mapping."
+      },
+      {
+        "name": "Before Deploying Visit Agent",
+        "detail": "Visit Agent requires a physical Apple Silicon iPad with Apple Intelligence turned on, so you can't test it in a simulator or browser harness. Before you turn on Visit Agent for each territory, verify these requirements. Products aligned with the territory are correct and current. Life Sciences Cloud mobile sync completes successfully and metadata is up to date. Sales reps are trained to review all populated values on the review page before saving."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_visit_agent_overview.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-use-voice-logging",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Log Visits with Visit Agent",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use Visit Agent in the Life Sciences Cloud mobile app to record your healthcare provider (HCP) engagement using voice. On-device transcription fills in the visit record with products discussed, product messages, HCP reactions, presentations, and visit time, even",
+    "findings": [
+      {
+        "name": "Log Visits with Visit Agent",
+        "detail": "Use Visit Agent in the Life Sciences Cloud mobile app to record your healthcare provider (HCP) engagement using voice. On-device transcription fills in the visit record with products discussed, product messages, HCP reactions, presentations, and visit time, even offline."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Life Sciences Cloud mobile app for iOS (iPad) Available in: Enterprise and Unlimited Editions with Life Sciences Cloud and the Agentforce for Life Sciences Cloud add-on. User Permissions Needed To use Visit Agent: | Access Custom Agents permission set, and one of: Life Sciences Field Sales Representative, Life Sciences Key Account Management, or Life Sciences Field Medical permission set based on your role Before you use Visit Agent, turn on Apple Intelligence on your device. For a list of supported devices, see the Apple Intelligence system requirements . When you open the app, the app automatically downloads the Whisper speech-to-text model (about 632 MB). This initial download requires an internet connection. After the download completes, Visit Agent works offline. Warning Voice transcription works after your device connects to the internet and downloads the Whisper model. The app downloads the model again after each major update, so make sure that you have internet access for the initial model download. Visit Agent processes your audio on your device and doesn't store the recording or send data off-device. Note Visit Agent supports English only. Dictate your visit notes in English. Visit Agent fills in fields as a starting point. Before you tap Save , review and confirm the entire visit record, including fields that the agent doesn't populate. In the mobile app, from the Home tab, tap the Agentforce icon. Select Visit Agent from the agent list. From the list above the chat area, select a recent account. Before recording starts, Visit Agent automatically loads your territory-aligned product names to improve transcription accuracy. Tap the microphone to start recording. Note When the Whisper model is still downloading, a progress window appears. Wait for the download to complete before recording. Dictate your visit notes. To improve recognition, speak product names clearly. To pause recording, tap Pause . To resume, tap Continue . When you finish dictating, tap Done . Tap View Details to review the transcribed visit record. Tip The agent sets the start and end times based on your voice recording. Verify that the time resolved correctly on the review page, especially when you record close to midnight or across time zones. When the time is wrong, correct it before saving. Note HCP Reactions are AI-generated draft summaries — one of three labels (positive, negative, or neutral) — of how a healthcare provider responded to a specific product message during a single visit, inferred on-device from the rep's own spoken account of the conversation matched against the admin-configured product/message catalog. The rep is the source of truth and reviews and edits every reaction before the visit is saved. Audio is not retained, and transcripts aren’t sent off-device for reaction inference. HCP Reactions aren't psychological assessments, predictive scores, medical opinions, or authoritative records of HCP intent, and they're not used by Salesforce systems for downstream decisioning, scoring, targeting, or next-best-action recommendations. Treat them as decision-support drafts only. Review and correct the visit record before saving. Verify that the products you mentioned appear on the visit. When a product is missing, enter it yourself. Verify that the correct product messages are populated based on your recording. Update the transcription as needed. Save the visit record. Warning Save the visit record before you close the agent or clear the chat history. When you close the mobile app or clear the chat before saving, the transcription is discarded. When you return to the agent in the same session, the previous transcription is available. After you save the visit record, return to the Visit Agent page to log another visit. What Visit Agent Populates After you stop the voice recording and tap View Details , Visit Agent populates these fields on your visit record. Review each field before you save. Field | Where the Value Comes From Account | Carried from the account you selected before recording Products Discussed | Matched from the products in your territory Product Messages | Matched from active messages for each discussed product HCP Reactions | An AI-generated draft label (positive, negative, or neutral) for each product message Presentations Shown | Matched from marketing presentations for discussed products Contact Point Address | Matched from address records for the account Visit Start Time and Visit End Time | Derived from your recording, or your device clock when you don't mention a time These values are drafts. Review and correct them before you save. Enter these fields yourself. Visit Agent doesn't populate them. Channel — Face-to-face, Remote, Video, or Phone Samples distributed Direct to Practitioner requests Promotional materials left behind Any required custom fields your org uses Troubleshooting If the agent is turned off in Setup, ask your Salesforce admin to turn it on. If you see a progress bar when you tap the microphone, the Whisper model is downloading. Connect your device to the internet to complete the download. If you see a Loading Model message when you open the agent, the model is loading into memory. Wait a moment for the model to load. When your recording is unclear or the agent doesn't recognize any products, the review page shows only your account. Enter the remaining fields manually and tap Save . When you close the agent or go to another page before stopping the recording, the mobile app discards the audio and doesn't save anything to the visit record. Start a new session when you're ready."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_use_voice_logging.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-configsample-disbursement",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Sample Disbursement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure sample disbursement so field reps can record physical samples provided to health care professionals during",
+    "findings": [
+      {
+        "name": "Configure Sample Disbursement",
+        "detail": "Configure sample disbursement so field reps can record physical samples provided to health care professionals during visits."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed Modify page layouts: | Customize Application Access the Admin Console to configure sample settings and activate trigger handlers: | Life Sciences Commercial Admin permission set Set up sample products in the Product and Life Science Marketable Product objects with an allowed distribution method of Drop or Drop and Ship . For each product, populate the Parent Product field with the parent Brand-type Life Science Marketable Product record. Only products with a parent Brand-type record appear in the Samples sidebar during a visit. Set up inventory with Product Item records. If managing batches, set up Production Batch and Product Batch Item records. From the object management settings for visits, go to Page Layouts . Add the Product Disbursements related list to the visit page layout and the visit record page layout. Adding the related list to the visit page layout enables the Samples sidebar menu. From the App Launcher, find and select Life Sciences Commercial , and then click Admin Console | Visit Administration | Visit Settings | Samples and Items Settings . In HCO Types Allowed for Samples and Items , enter the API names of business account record types eligible to receive samples, separated by semicolons. Turn on Require batch number and Show expired batches based on your business requirements. From the App Launcher, find and select Life Sciences Commercial , and then click Admin Console | Trigger Handler Administration . Activate these trigger handlers: ProductDisbursementInventoryOpCreation and ProductDisbursementSubmitLockHandler . Object lock handlers apply only to the desktop site because the Salesforce mobile app includes this logic natively."
+      },
+      {
+        "name": "See Also",
+        "detail": "Trigger Handler Administration Trigger Handlers by Object"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_configsample_disbursement.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-config-sample-inventory-validation",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Sample Inventory Validation",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure inventory validation to check if sales reps have sufficient physical stock when recording",
+    "findings": [
+      {
+        "name": "Configure Sample Inventory Validation",
+        "detail": "Configure inventory validation to check if sales reps have sufficient physical stock when recording samples."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed Modify objects, page layouts, and Lightning record pages: | Customize Application Access the Admin Console to manage trigger handlers and generate the metadata cache: | Life Sciences Commercial Admin permission set Verify that you configured the sample disbursement feature. See Configure Sample Disbursement . When you turn on sample inventory validation, Salesforce performs two types of checks. First, it checks whether the sales rep has enough remaining inventory to cover the samples recorded in the visit. Second, if you populate the Max Disbursement Limit Quantity field on a Territory Product Quantity Allocation record of type Drop , Salesforce checks whether the samples exceed the maximum limit per visit. If the same product appears on a parent visit and one or more child visits (for example, when sales reps add multiple attendees), Salesforce aggregates the quantities across all visits. Note For a sample that requires a signature, Salesforce validates the sample when the field rep clicks Get Signature . On the desktop site, where signatures can't be captured, Salesforce validates the sample when the field rep clicks Document Id . If a signature isn't required, Salesforce validates the sample when the field rep clicks Submit . Note Changes to sample inventory validation settings take effect immediately on the desktop site. To pick up the new settings in the Salesforce mobile app, instruct field reps to sync the app. From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Visit Administration , select Visit Settings , and then select Samples and Items Settings . Select Validate sample inventory . This setting is off by default. For Sample Inventory Validation Mode , select Error or Warning . Select Error to prevent recording drops that exceed inventory. Select Warning to alert reps, but they can still proceed. Note If you don't select a mode, the setting shows as None but acts as Error . Save your changes. Sample inventory validation settings follow a User > Profile > Org precedence. A user-level setting overrides a profile-level setting, which overrides the org-level setting."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_config_sample_inventory_validation.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-hcp-license-validation",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "HCP License Validation",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Ensure healthcare professionals (HCPs) have valid licenses before they receive hand-carried samples or request",
+    "findings": [
+      {
+        "name": "HCP License Validation",
+        "detail": "Ensure healthcare professionals (HCPs) have valid licenses before they receive hand-carried samples or request shipments."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions License validation is a compliance feature that verifies an HCP's state, DEA, or state distributor license against a visit location or shipping address. This feature helps your organization enforce regulatory requirements for sample drops and Direct to Practitioner shipments. It supports state licenses, DEA licenses for controlled substances, and State Distributor Licenses (SDLs)."
+      },
+      {
+        "name": "License Indicators",
+        "detail": "When validation is enabled, license validity icons provide immediate feedback on the Visit Engagement page. Green Check: The license is valid. Red X: The license is invalid, expired, or missing. Icons appear below these fields. The Place (Address) field in the Visit Information section for sample drops The Shipping Address field in the Direct to Practitioner section for shipment requests"
+      },
+      {
+        "name": "Validation Formula",
+        "detail": "If a validation formula is specified for the license in License Managementn the Admin Console that formula is used to evaluate validity. Otherwise, the IsLicenseValidated field uses this default formula. AND(!ISBLANK(LicenseNumber), PeriodEnd > NOW(), IF(OR(ISPICKVAL(ComplianceScope, 'Address'), ISPICKVAL(ComplianceScope, 'StateDistributorLicense')), AND(!ISNULL(ContactPointAddressId), ContactPointAddress.IsActive = true), IF(ISPICKVAL(ComplianceScope, 'JurisdictionState'), true, false))) Configure HCP State License Validation Configure state license validation to verify that healthcare professionals (HCP) have a valid license to receive samples in a specific state. Configure DEA License Validation Configure Drug Enforcement Administration (DEA) license validation to verify that healthcare professionals can compliantly receive controlled substances. Configure State Distributor License Validation Configure SDL validation to verify that healthcare professionals can receive samples categorized as dangerous drugs, such as Terminal Distributor of Dangerous Drugs (TDDD)."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_hcp_license_validation.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-config-hcp-state-license-valid",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure HCP State License Validation",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure state license validation to verify that healthcare professionals (HCP) have a valid license to receive samples in a specific",
+    "findings": [
+      {
+        "name": "Configure HCP State License Validation",
+        "detail": "Configure state license validation to verify that healthcare professionals (HCP) have a valid license to receive samples in a specific state."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed Create and manage business license records and translate custom labels: | Customize Application Access the Admin Console to enable state license validation and generate the metadata cache: | Life Sciences Commercial Admin permission set Prerequisites Make sure that you create Business License records with these field values: Compliance Scope : JurisdictionState Organization (AccountId) : The account ID of the healthcare professional. Jurisdiction State : The state code, for example, MD for Maryland, from contact point addresses. License Number , Period Start , and Period End . Make sure the Contact Point Address record and the business license are both active. The account ID must be present in the list of Account IDs from Contact Point Addresses. The business licenses must be sorted by PeriodEnd in descending order. The period start date must be less than or equal to the current date and the period end date must be greater than or equal to the current date. In the admin console settings for License Management, in State License Number Setup, make sure Override Validation Formula returns true and Evaluate license validity and show icon in visits is selected. From the App Launcher, find and select Admin Console . Select the License Management tile. Enable state license validation. A license is valid if at least one record matches the account, the state code of the selected address, and the validation formula. Licenses are validated during signature capture, document ID capture, or visit submission. Optional: Rename the State label: From Setup , search for and select Custom Labels . Locate the label for state licenses, click the label name, and click New Local Translations/Overrides to define a new value. Generate the metadata cache. See Generate Metadata Cache ."
+      },
+      {
+        "name": "See Also",
+        "detail": "Define State License Number Validations"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_config_hcp_state_license_valid.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-visits-ind-lsc-visit-management-use-visits",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Visit Your Customers",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Plan and schedule visits by using the planner tool, which includes a calendar-based view of activities, various event types, and account targeting based on best contact times. Create visits, plan routes, and manage events efficiently, taking advantage of shared calendars. During visits, use the...",
+    "findings": [
+      {
+        "name": "Visit Your Customers",
+        "detail": "Plan and schedule visits by using the planner tool, which includes a calendar-based view of activities, various event types, and account targeting based on best contact times. Create visits, plan routes, and manage events efficiently, taking advantage of shared calendars. During visits, use the Visit Engagement page for recommendations, presentations, product discussions, samples, attendee management, and inquiry input."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Plan",
+        "detail": "Use the calendar and routines to help create efficient visit schedules. Visualize and prioritize key events, such as visits, meetings, and time off territory. Schedule events with the best time recommendations, avoiding conflicts and creating optimized daily plans. Sales reps can save sets of visits as routines and access colleagues’ schedules for seamless collaboration."
+      },
+      {
+        "name": "Engage",
+        "detail": "The Visit Engagement page acts as a central hub during a visit. From here, you can view recommendations, which include presentations and messages, and select and personalize presentations from a content library. If configured by your admin, you can select See Why on a recommended message to view the rationale for the message being recommended for this visit. For group visits, select Attendee Visit in the Attendees section of the parent visit to capture information for each attendee. From the Attendee Visit Engagement page, use the name buttons at the top of the page to switch between attendees without returning to the parent visit. Selecting another attendee saves the current attendee's visit and opens that attendee's page. Add presentations to your visit, preview content, or open the content library to find the presentation that you need. Information and warnings about product restrictions and targeted presentations for your territories help you select the right content and add the right accounts to your visit. During presentations, navigate between the presentation player and the Visit Engagement page to review and update visit details. Metrics about the slides presented and the linked products and messages are captured automatically during presentations and saved on the Visit Engagement page. Choose specific products for discussion, and manage, disperse, and track samples that are either on-hand, delivered directly to the physician post-visit (DTP), or marketing items. In addition, you can log medical inquiries, link them to a product and topic, and upload attachments. Capture key visit information and acknowledge any mandatory compliance statements from the Visit Engagement page. For remote visits, you can send invitation emails and control the meeting, and view the room ID and passcode. Use device authentication to capture a signature at the end of a visit for compliance."
+      },
+      {
+        "name": "Report",
+        "detail": "After completing a visit, update and save the visit record. You can save a visit as either planned (draft) or submitted (completed). Salesforce tracks your unsubmitted (planned) visits and monitors your pace of activity, showing your current progress against a target. You can view visit goals, and Salesforce measures provider activity by using metrics like Activity Weight, Total Actual Activity, Total Scheduled, Weighted Actual, and Weighted Schedule. The Activity Timeline on an account profile provides a chronological record of your interactions, such as visits, surveys, and emails. You can filter this timeline by interaction type, address, affiliation, and whether you view your interactions or all interactions. Account profiles also include a Smart Summary that highlights key changes and recent interactions to provide context for future engagements. You can log visit-related expenses, including details such as the expense type, attendee allocation, and amount. View and edit rating data from the Ratings tab or open and complete surveys to gather feedback on topics like patient treatment, drug preferences, meeting value, and service satisfaction. Finally, you can view recordings of remote sessions in the Recordings related list on the visit record."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_visit_management_use_visits.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "visits"
+    ]
+  }
+]

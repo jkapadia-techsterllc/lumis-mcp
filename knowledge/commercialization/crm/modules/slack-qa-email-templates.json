@@ -1,0 +1,92 @@
+[
+  {
+    "id": "sq-et-001",
+    "category": "email-templates",
+    "question": "How do I configure a custom sender email address for templates?",
+    "answer": "Use SenderEmailFieldApiName, not the default Sender Type. Steps: (1) Verify the User's email and Org-Wide Email Address are configured, (2) Add a custom field to the Email Template object to store the sender email address, (3) Set SenderEmailFieldApiName to the API name of that custom field. Using the wrong Sender Type option sends from the rep's email instead of the configured address.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["email", "sender", "configuration", "org-wide-email"]
+  },
+  {
+    "id": "sq-et-002",
+    "category": "email-templates",
+    "question": "Why doesn't the Email Queue respect SenderEmailFieldApiName?",
+    "answer": "Known issue: emails generated via the Email Queue do not respect the SenderEmailFieldApiName configuration. The FROM address reflects the logged-in user instead of the configured custom field value. This is a platform limitation that affects implementations relying on centralized sender addresses for compliance-approved emails.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["email", "queue", "sender", "known-issue"]
+  },
+  {
+    "id": "sq-et-003",
+    "category": "email-templates",
+    "question": "Is BCC supported for approved emails?",
+    "answer": "No. The 'Send Email' functionality does not provide an option to add BCC recipients. Users can only use To and CC fields. This impacts scenarios where approved emails need to be shared with compliance teams, legal, or CRM tracking systems via BCC.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["email", "bcc", "gap", "compliance"]
+  },
+  {
+    "id": "sq-et-004",
+    "category": "email-templates",
+    "question": "Does the platform support email open and click tracking?",
+    "answer": "The email template object does not provide built-in support for tracking email open counts or link-click counts after a recipient receives an email. This is a significant gap compared to Veeva Approved Email, which provides engagement metrics. Workarounds include third-party email tracking integration or marketing automation platform integration.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["email", "tracking", "analytics", "gap", "veeva-difference"]
+  },
+  {
+    "id": "sq-et-005",
+    "category": "email-templates",
+    "question": "How do I handle ISILink, PILink, PieceLink tokens from Veeva?",
+    "answer": "Veeva tokens (ISILink, PILink, PieceLink) resolve to regulated document URLs in Veeva Vault. There is no direct equivalent in the target platform. Migration approach: (1) Define standard or custom objects/fields to store document references, (2) Create a supported method to generate shareable URLs for regulatory documents, (3) Map Veeva tokens to merge fields in the new template syntax ({!Object.Field}).",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["email", "veeva-tokens", "migration", "regulatory-documents"]
+  },
+  {
+    "id": "sq-et-006",
+    "category": "email-templates",
+    "question": "Can custom picklist fields be used as email template filters?",
+    "answer": "The Send Email runtime template picker has FIXED filters. Custom picklist fields on the email template object do not surface as filter options, even with Read field-level security granted. This is by design; only predefined filter fields (like product, brand, template category) are supported in the filter UI.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["email", "filters", "picklist", "limitation"]
+  },
+  {
+    "id": "sq-et-007",
+    "category": "email-templates",
+    "question": "How does the 'Edit Subject Line' flag work?",
+    "answer": "The template's 'Edit Subject Line' flag (combined with org-level AllowEditSubject setting) controls both the subject dropdown visibility and free-text 'Other' option. When OFF: fixed subject from the template is used. When ON: predefined subject options appear plus an 'Other' option with free text input. There is no way to show predefined subject options WITHOUT the 'Other' free-text option.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["email", "subject-line", "edit-flag", "configuration"]
+  },
+  {
+    "id": "sq-et-008",
+    "category": "email-templates",
+    "question": "Can email template fragment custom fields be updated via API?",
+    "answer": "This capability is being added as an enhancement. In earlier releases, custom fields on email template fragments were not updatable via API. Check your specific release version for availability. This is relevant for implementations that need programmatic management of template content.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["email", "fragments", "api", "enhancement"]
+  },
+  {
+    "id": "sq-et-009",
+    "category": "email-templates",
+    "question": "What merge field syntax does the target platform use?",
+    "answer": "The target platform uses {!Object.Field} merge field syntax (e.g., {!Account.Name}, {!Contact.Email}). Veeva uses a different token-based syntax ({{tokens}}). During migration, all Veeva tokens must be mapped to the corresponding {!} merge fields. Some Veeva tokens (like ISILink, PILink) have no direct merge field equivalent and need custom solutions.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["email", "merge-fields", "syntax", "migration"]
+  },
+  {
+    "id": "sq-et-010",
+    "category": "email-templates",
+    "question": "Is sharing presentations via links possible without Experience Cloud?",
+    "answer": "Currently, sharing presentations or email content via shareable links requires setting up an Experience Cloud site. There are no alternative native options to generate and share presentation links directly within the product without the Experience Cloud license and configuration.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["email", "sharing", "experience-cloud", "limitation"]
+  }
+]

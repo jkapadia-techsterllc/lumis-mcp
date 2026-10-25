@@ -1,0 +1,201 @@
+[
+  {
+    "id": "val-di-001",
+    "category": "validation-data-integrity",
+    "title": "ALCOA+ Principles — The Foundation of Data Integrity",
+    "summary": "ALCOA+ is the universally accepted framework for data integrity in regulated industries. Every computerized system handling GxP data must satisfy these principles. ALCOA+ applies to both electronic and paper records.",
+    "principles": {
+      "A — Attributable": {
+        "requirement": "Every action on a record must be traceable to the person who performed it",
+        "system_implications": [
+          "Unique user accounts — no shared or generic accounts (e.g., no 'admin', 'lab1', 'rep_team')",
+          "User authentication before any data creation or modification",
+          "Audit trail captures user identity with every action",
+          "Electronic signatures identify the signer by name",
+          "API and integration actions must be traceable to the initiating user or system"
+        ],
+        "common_violations": [
+          "Shared login accounts in production systems",
+          "Service accounts performing actions on behalf of users without recording the original user",
+          "Audit trail shows system user ID instead of human user for batch operations",
+          "Mobile devices shared between field reps without proper session management"
+        ]
+      },
+      "L — Legible": {
+        "requirement": "Data must be readable, permanent, and unambiguous throughout its retention period",
+        "system_implications": [
+          "Records must be displayable in human-readable format",
+          "Exports must produce complete and accurate copies",
+          "Data must survive platform migrations without loss of readability",
+          "PDF/CSV exports must include all relevant fields including audit trail data",
+          "Encrypted data must be decryptable when needed for regulatory review"
+        ],
+        "common_violations": [
+          "Encoded or serialized data stored without a documented decoding mechanism",
+          "Historical records become unreadable after system migration",
+          "Exported reports truncate long fields or omit audit trail entries",
+          "Signature images degrade in quality during migration"
+        ]
+      },
+      "C — Contemporaneous": {
+        "requirement": "Data must be recorded at the time the activity occurs, not after the fact",
+        "system_implications": [
+          "System timestamps must reflect actual event time, not data entry time",
+          "Mobile offline data must preserve the original capture timestamp, not the sync timestamp",
+          "Backdating of records must be prevented or flagged in the audit trail",
+          "Time zone handling must be correct and documented",
+          "Server clocks must be synchronized via NTP"
+        ],
+        "common_violations": [
+          "Mobile CRM records showing sync timestamp instead of visit/activity timestamp",
+          "Batch data loads that stamp all records with the load timestamp",
+          "Users allowed to freely modify date/time fields on historical records",
+          "Time zone confusion causing apparent backdating (UTC vs local time)"
+        ]
+      },
+      "O — Original": {
+        "requirement": "The first recording of data is the original record. Subsequent copies are certified true copies only if verified as exact and complete.",
+        "system_implications": [
+          "Electronic records in the system of record are the 'original' — not printouts",
+          "If data originates in one system and flows to another, the source system holds the original",
+          "Certified true copies (for regulatory submissions) must include all fields, audit trail, and metadata",
+          "Data migration must produce validated true copies with documented verification"
+        ],
+        "common_violations": [
+          "Organizations claiming paper printouts are the 'official' record while the electronic record is the true original",
+          "Data migration without verification that migrated records match source records exactly",
+          "Deleting source system records after migration without proper archive"
+        ]
+      },
+      "A — Accurate": {
+        "requirement": "Data must be correct, truthful, and free from errors. Corrections must not obscure the original entry.",
+        "system_implications": [
+          "Validation rules to prevent obviously incorrect data entry",
+          "Audit trail preserves original values when records are corrected",
+          "Deleted records are soft-deleted (marked inactive) not hard-deleted",
+          "Calculations and derived values must be verified and reproducible",
+          "Integration data must be validated at receipt — not blindly trusted"
+        ],
+        "common_violations": [
+          "Hard deletion of records without audit trail",
+          "Overwriting field values without capturing the previous value",
+          "Allowing administrators to directly modify database records bypassing the application layer",
+          "Batch updates that overwrite corrected values with stale data from source systems"
+        ]
+      },
+      "Complete (+ extension)": {
+        "requirement": "All data must be present — including retests, OOS results, outliers, and failed attempts. No selective reporting.",
+        "system_implications": [
+          "System must not allow selective deletion of unfavorable results",
+          "Voided or cancelled records must be retained with reason codes",
+          "Retry/re-test attempts must all be captured, not just the successful one",
+          "Reporting must include all records, not just filtered subsets"
+        ]
+      },
+      "Consistent (+ extension)": {
+        "requirement": "Data must be recorded in a consistent, chronologically logical sequence. Timestamps should make sense in context.",
+        "system_implications": [
+          "Workflow enforcement to prevent out-of-sequence operations",
+          "Timestamps should show logical progression (visit start < sample drop < signature < visit end)",
+          "System should flag chronological anomalies (e.g., signature timestamp before visit start)"
+        ]
+      },
+      "Enduring (+ extension)": {
+        "requirement": "Data must be recorded on permanent media, not temporary storage that could be lost.",
+        "system_implications": [
+          "Data must not reside solely in volatile storage (session cache, local storage without sync)",
+          "Mobile offline data must be designed to survive app crashes and device reboots",
+          "Export files for regulatory submissions must be in durable formats (PDF/A, CSV)"
+        ]
+      },
+      "Available (+ extension)": {
+        "requirement": "Data must be accessible for review and inspection throughout its required retention period.",
+        "system_implications": [
+          "Archived data must remain queryable and retrievable",
+          "System retirement must include data accessibility plan",
+          "Data must be available to regulatory inspectors upon request — typically within 24-48 hours",
+          "Retention periods vary: 3 years (PDMA samples), 15 years (clinical trial data), life of product + 2 years (adverse events)"
+        ]
+      }
+    },
+    "gotcha_level": "critical",
+    "source": "who-alcoa-plus-mhra-data-integrity",
+    "tags": ["alcoa", "data-integrity", "alcoa-plus", "who", "mhra", "fda"]
+  },
+  {
+    "id": "val-di-002",
+    "category": "validation-data-integrity",
+    "title": "Data Integrity Regulatory Enforcement — Warning Letters and Trends",
+    "summary": "Data integrity has been the #1 FDA enforcement topic since 2015. Understanding enforcement trends helps organizations prioritize their validation efforts.",
+    "enforcement_trends": [
+      "FDA issued 30+ Warning Letters citing data integrity violations from 2015-2024",
+      "MHRA (UK) has been the most aggressive EU regulator on data integrity — multiple site closures",
+      "PMDA (Japan) made data integrity the primary focus of GMP inspections starting 2015",
+      "WHO published comprehensive data integrity guidance in 2016 (TRS 996 Annex 5)",
+      "Most Warning Letters involve: shared accounts, missing audit trails, backdated records, and deleted unfavorable results"
+    ],
+    "common_findings_in_inspections": [
+      "Shared user accounts — the single most common Part 11 finding",
+      "Insufficient audit trail — either not enabled or not reviewing audit trail data",
+      "No periodic review — systems validated once and never re-evaluated",
+      "Inadequate change control — changes to validated systems without impact assessment",
+      "Insufficient vendor management — no vendor audit for cloud/SaaS providers",
+      "Training gaps — users not trained on electronic record/signature responsibilities",
+      "Data deletion — records hard-deleted without audit trail or justification",
+      "Insufficient backup/restore testing — backups exist but never tested"
+    ],
+    "inspection_readiness_checklist": [
+      "Can you demonstrate unique user accounts for all system users?",
+      "Can you show an immutable audit trail for any GxP record?",
+      "Can you produce a Validation Summary Report for this system?",
+      "Can you show the most recent periodic review report?",
+      "Can you demonstrate your change control process for this system?",
+      "Can you show vendor qualification documentation?",
+      "Can you produce training records for all current users?",
+      "Can you demonstrate backup/restore by performing a test restore?",
+      "Can you produce records in both electronic and human-readable format?",
+      "Can you show your validation traceability matrix with full test coverage?"
+    ],
+    "gotcha_level": "critical",
+    "source": "fda-enforcement-trends",
+    "tags": ["data-integrity", "warning-letters", "enforcement", "inspection-readiness", "fda", "mhra"]
+  },
+  {
+    "id": "val-di-003",
+    "category": "validation-data-integrity",
+    "title": "Audit Trail Configuration Best Practices for Cloud/SaaS Platforms",
+    "summary": "Platform-native audit trail capabilities vary widely. Understanding the gaps and remediation options is critical for Part 11 and Annex 11 compliance.",
+    "platform_audit_trail_assessment": {
+      "what_must_be_captured": [
+        "WHO — user identity (not just user ID, but resolvable to a named person)",
+        "WHAT — field-level old value and new value",
+        "WHEN — timestamp with time zone",
+        "WHY — reason for change (for high-risk fields; may require a custom 'reason for change' prompt)",
+        "Record creation (including which user created it and when)",
+        "Record deletion or inactivation (soft delete preferred)",
+        "Login/logout events and failed login attempts",
+        "Permission and configuration changes"
+      ],
+      "common_platform_gaps": [
+        "Field history tracking limited to N fields per object (Salesforce: 20 fields)",
+        "Audit trail retention shorter than regulatory requirement (Salesforce Setup Audit Trail: 180 days)",
+        "No native 'reason for change' capture — must be custom-built",
+        "Deleted records may not retain full audit history",
+        "Bulk data operations may bypass field-level audit trail",
+        "API-initiated changes may not capture the originating user consistently",
+        "Formula fields and rollup summaries are calculated, not audited"
+      ],
+      "remediation_approaches": [
+        "Custom audit trail objects — trigger-based capture of all field changes with no field count limit",
+        "Event-driven audit capture — platform events or change data capture for real-time audit logging",
+        "Third-party audit trail solutions (e.g., Salesforce Shield, Odaseva, OwnBackup)",
+        "External audit log aggregation (Splunk, ELK) for long-term retention",
+        "Custom 'reason for change' lightning components for high-risk fields",
+        "Soft-delete patterns with IsDeleted flags and RecycleBin retention"
+      ]
+    },
+    "gotcha_level": "critical",
+    "source": "audit-trail-best-practices",
+    "tags": ["audit-trail", "configuration", "platform-gaps", "remediation", "part-11", "annex-11"]
+  }
+]

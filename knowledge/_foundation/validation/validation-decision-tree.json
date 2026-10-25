@@ -1,0 +1,272 @@
+[
+  {
+    "id": "val-tree-001",
+    "name": "system-validation-scope",
+    "category": "validation-decision-tree",
+    "title": "System Validation Scope Decision Tree — Does This System Need Validation?",
+    "description": "Walk through this decision tree to determine if a computerized system requires GxP validation, what regulations apply, and what level of validation is needed.",
+    "nodes": [
+      {
+        "id": "N1",
+        "question": "Does this system create, modify, maintain, archive, retrieve, or transmit records required to be maintained under any FDA predicate rule or EU GMP requirement?",
+        "yes": "N2",
+        "no": "N1a",
+        "guidance": "Predicate rules include 21 CFR Parts 210/211 (drugs), 820 (devices), 58 (GLP), 600 (biologics). EU GMP rules include EudraLex Volume 4. Clinical trial regulations include ICH E6 GCP."
+      },
+      {
+        "id": "N1a",
+        "question": "Does this system support or interface with any GxP process (even if it doesn't directly maintain regulated records)?",
+        "yes": "N2",
+        "no": "RESULT_NO_VALIDATION",
+        "guidance": "Systems that feed data to GxP systems, or that GxP processes depend on (e.g., scheduling systems, email for regulatory communications), may need validation even if they don't directly hold regulated records."
+      },
+      {
+        "id": "N2",
+        "question": "Is this system used in a GxP context? (GMP manufacturing, GCP clinical trials, GLP laboratory, GDP distribution, GPvP pharmacovigilance)",
+        "yes": "N3",
+        "no": "RESULT_RISK_ASSESSMENT_ONLY",
+        "guidance": "Even non-GxP systems may benefit from a risk assessment to document the decision not to validate."
+      },
+      {
+        "id": "N3",
+        "question": "Does this system use electronic records as the official record (vs paper being the official record with electronic as a convenience copy)?",
+        "yes": "N4",
+        "no": "N3a",
+        "guidance": "If paper is the official record and electronic is only a convenience copy, 21 CFR Part 11 does not apply to those electronic records. However, EU Annex 11 may still apply if the electronic system is used in GMP."
+      },
+      {
+        "id": "N3a",
+        "question": "Even though paper is the official record, is the electronic system used to make GxP decisions (e.g., batch release, sample disposition)?",
+        "yes": "N4",
+        "no": "RESULT_MINIMAL_VALIDATION",
+        "guidance": "If the electronic system is used to make GxP decisions, it must be validated for those decision-support functions even if paper is the official record."
+      },
+      {
+        "id": "N4",
+        "question": "Select the applicable GxP contexts (all that apply):",
+        "options": {
+          "GMP — Manufacturing of drugs or devices": "N5_GMP",
+          "GCP — Clinical trials": "N5_GCP",
+          "GLP — Non-clinical laboratory studies": "N5_GLP",
+          "GPvP — Pharmacovigilance / safety reporting": "N5_GPvP",
+          "GDP — Good Distribution Practice": "N5_GDP"
+        }
+      },
+      {
+        "id": "N5_GMP",
+        "result": "RESULT_FULL_VALIDATION_GMP",
+        "regulations": ["21 CFR Part 11", "21 CFR Part 210/211", "EU Annex 11", "EU GMP Volume 4", "PIC/S PI 011"],
+        "validation_scope": "Full CSV/CSA validation required. System must comply with Part 11 (electronic records/signatures), cGMP (production and process controls), and Annex 11 (computerised systems). Includes audit trail, electronic signature, access control, and data integrity validation."
+      },
+      {
+        "id": "N5_GCP",
+        "result": "RESULT_FULL_VALIDATION_GCP",
+        "regulations": ["21 CFR Part 11", "ICH E6(R2)", "EU CTR (536/2014)", "EU Annex 11"],
+        "validation_scope": "Full validation required per GCP. System must comply with Part 11, ICH E6 Section 5.5.3 (computerized systems), and applicable clinical trial regulations. Includes audit trail, data integrity, access control, and 21 CFR Part 11 electronic signature requirements if signatures are captured."
+      },
+      {
+        "id": "N5_GLP",
+        "result": "RESULT_FULL_VALIDATION_GLP",
+        "regulations": ["21 CFR Part 11", "21 CFR Part 58", "OECD GLP Principles"],
+        "validation_scope": "Full validation required per GLP. Raw data captured electronically must be in a validated system. Audit trail and data integrity are critical. Includes computerized data acquisition, LIMS, and electronic notebooks."
+      },
+      {
+        "id": "N5_GPvP",
+        "result": "RESULT_FULL_VALIDATION_GPvP",
+        "regulations": ["21 CFR Part 11", "21 CFR 314.80/314.98", "ICH E2B(R3)", "EU GVP Module I"],
+        "validation_scope": "Full validation required. Pharmacovigilance systems handling ICSRs, safety signal detection, and regulatory reporting must be validated. Includes ICSR processing, MedWatch/EudraVigilance submission, signal detection algorithms, and PBRER/PSUR generation."
+      },
+      {
+        "id": "N5_GDP",
+        "result": "RESULT_VALIDATION_GDP",
+        "regulations": ["EU GDP Guidelines (2013/C 343/01)", "21 CFR Part 211 Subpart H"],
+        "validation_scope": "Validation required for temperature monitoring, logistics tracking, and serialization/track-and-trace systems. Level of validation depends on GxP criticality of the distribution data."
+      }
+    ],
+    "result_definitions": {
+      "RESULT_NO_VALIDATION": {
+        "conclusion": "This system does NOT require GxP validation.",
+        "action": "Document the assessment decision for regulatory traceability. Retain the risk assessment showing why the system is out of GxP scope."
+      },
+      "RESULT_RISK_ASSESSMENT_ONLY": {
+        "conclusion": "Formal validation is not required, but a documented risk assessment is recommended.",
+        "action": "Perform and document a risk assessment. If the system interfaces with validated systems, validate the interface/integration points."
+      },
+      "RESULT_MINIMAL_VALIDATION": {
+        "conclusion": "Minimal validation required — focus on the electronic functions that support GxP decisions.",
+        "action": "Validate the specific decision-support functions. Verify data accuracy, access controls, and calculation integrity for those functions."
+      }
+    },
+    "gotcha_level": "critical",
+    "source": "lumis-validation-decision-tree",
+    "tags": ["decision-tree", "validation-scope", "gxp-assessment", "regulatory-applicability"]
+  },
+  {
+    "id": "val-tree-002",
+    "name": "validation-methodology-selector",
+    "category": "validation-decision-tree",
+    "title": "CSV vs CSA Methodology Selector",
+    "description": "Determine whether to use traditional CSV, modern CSA, or a hybrid approach based on regulatory geography, system type, and organizational maturity.",
+    "nodes": [
+      {
+        "id": "M1",
+        "question": "Which regulatory jurisdictions will this system operate in?",
+        "options": {
+          "US only (FDA)": "M2_US",
+          "EU only (EMA/national authorities)": "M2_EU",
+          "Japan (PMDA)": "M2_JP",
+          "Global (multiple jurisdictions)": "M2_GLOBAL",
+          "WHO prequalification markets": "M2_WHO"
+        }
+      },
+      {
+        "id": "M2_US",
+        "question": "Has your organization adopted CSA per FDA's 2022 draft guidance?",
+        "yes": "RESULT_CSA",
+        "no": "M3_US",
+        "guidance": "FDA is actively encouraging CSA adoption. If your QA team has approved CSA, use it."
+      },
+      {
+        "id": "M3_US",
+        "question": "Is your QA team open to adopting CSA with appropriate SOPs?",
+        "yes": "RESULT_CSA_WITH_TRANSITION",
+        "no": "RESULT_CSV_TRADITIONAL"
+      },
+      {
+        "id": "M2_EU",
+        "result": "RESULT_HYBRID_EU",
+        "recommendation": "Use a HYBRID approach. Apply CSA risk assessment to determine testing depth, but maintain Annex 11-compliant documentation for GMP-critical functions. EU regulators (especially MHRA, BfArM, ANSM) still expect formal validation documentation."
+      },
+      {
+        "id": "M2_JP",
+        "result": "RESULT_CSV_TRADITIONAL",
+        "recommendation": "Use traditional CSV. PMDA expects comprehensive validation documentation and may request Japanese-language validation summaries. CSA is not yet widely accepted by PMDA inspectors."
+      },
+      {
+        "id": "M2_GLOBAL",
+        "result": "RESULT_HYBRID_GLOBAL",
+        "recommendation": "Use a HYBRID approach that satisfies the most stringent jurisdiction. CSA risk assessment drives testing depth; CSV-style documentation maintained for all GxP-critical functions. This satisfies FDA (CSA-friendly), EMA (Annex 11 documentation), and PMDA (comprehensive documentation). Risk-based testing matrix should map each function's testing approach (scripted/unscripted/verification) with justification."
+      },
+      {
+        "id": "M2_WHO",
+        "result": "RESULT_CSV_TRADITIONAL",
+        "recommendation": "Use traditional CSV. WHO prequalification inspections expect formal validation documentation aligned with WHO TRS 996 Annex 5 and ALCOA+ principles."
+      }
+    ],
+    "result_definitions": {
+      "RESULT_CSA": {
+        "methodology": "Computer Software Assurance (CSA)",
+        "key_documents": ["Assurance Plan", "Risk Assessment", "Test Summary", "Ongoing Monitoring Plan"],
+        "testing_approach": "Risk-based tiered testing: scripted for high-risk, unscripted for medium-risk, verification for low-risk",
+        "estimated_effort_reduction": "30-50% reduction vs traditional CSV"
+      },
+      "RESULT_CSA_WITH_TRANSITION": {
+        "methodology": "CSA (with transition support)",
+        "action": "Develop CSA SOPs, train QA team, pilot CSA on a low-risk system, then expand to all systems",
+        "transition_timeline": "3-6 months to establish CSA framework and pilot"
+      },
+      "RESULT_CSV_TRADITIONAL": {
+        "methodology": "Traditional CSV per GAMP 5",
+        "key_documents": ["Validation Plan", "URS", "FS", "FRA", "IQ/OQ/PQ Protocols", "Traceability Matrix", "Validation Summary Report"],
+        "testing_approach": "Scripted testing for all GxP functions with formal protocols and signed execution"
+      },
+      "RESULT_HYBRID_EU": {
+        "methodology": "Hybrid CSV/CSA",
+        "key_documents": ["Validation Plan (with CSA risk tiers)", "URS", "FRA", "IQ Protocol", "OQ Protocol (with mixed scripted/unscripted)", "PQ Protocol", "RTM", "VSR"],
+        "testing_approach": "CSA risk assessment, but scripted testing documentation for GMP-critical functions per Annex 11 expectations"
+      },
+      "RESULT_HYBRID_GLOBAL": {
+        "methodology": "Hybrid CSV/CSA (Global)",
+        "key_documents": ["Validation Plan (with regulatory jurisdiction matrix)", "URS", "FRA (with jurisdiction-specific risk overlays)", "IQ/OQ/PQ Protocols", "RTM", "VSR"],
+        "testing_approach": "Strictest-jurisdiction documentation: CSV-level for high-risk functions, CSA-level for medium/low-risk. Testing approach documented per function with regulatory justification."
+      }
+    },
+    "gotcha_level": "critical",
+    "source": "lumis-methodology-selector",
+    "tags": ["csv", "csa", "methodology-selection", "decision-tree", "regulatory-geography"]
+  },
+  {
+    "id": "val-tree-003",
+    "name": "validation-gap-assessment",
+    "category": "validation-decision-tree",
+    "title": "Part 11 / Annex 11 Gap Assessment Checklist",
+    "description": "Use this checklist to identify gaps in a system's compliance with 21 CFR Part 11 and EU Annex 11. Each item is a question — a 'No' answer indicates a gap requiring remediation.",
+    "assessment_areas": {
+      "1. Access Controls (Part 11.10(d), Annex 11 Section 12)": [
+        "Does every user have a unique, individual account? (No shared accounts)",
+        "Are user accounts disabled/removed upon departure within a defined timeframe?",
+        "Are access rights reviewed periodically (at least annually)?",
+        "Is there a documented process for granting, modifying, and revoking access?",
+        "Does the system enforce password complexity and expiration policies?",
+        "Is multi-factor authentication (MFA) enabled for GxP system access?",
+        "Are there separate admin and user roles with appropriate segregation of duties?",
+        "Is there an automated account lockout after failed login attempts?"
+      ],
+      "2. Audit Trail (Part 11.10(e), Annex 11 Section 9)": [
+        "Does the system generate computer-generated audit trails for all GxP records?",
+        "Does the audit trail capture WHO (user), WHAT (old value + new value), and WHEN (timestamp)?",
+        "Is the audit trail immutable — can users or administrators modify audit trail entries?",
+        "Is audit trail data retained for at least as long as the underlying records?",
+        "Is the audit trail available for regulatory review in human-readable format?",
+        "Are audit trails enabled for record creation, modification, AND deletion?",
+        "Does the audit trail cover ALL GxP-critical fields (not just a subset)?",
+        "Is there a process for periodic audit trail review?"
+      ],
+      "3. Electronic Signatures (Part 11.50, 11.70, 11.100, 11.200)": [
+        "Does each electronic signature display the signer's printed name, date/time, and meaning?",
+        "Are electronic signatures linked to their records such that they cannot be excised, copied, or transferred?",
+        "Are electronic signatures unique to one individual and never reused or reassigned?",
+        "Does the system use at least two identification components for non-biometric signatures (e.g., user ID + password)?",
+        "Has the organization certified to FDA that electronic signatures are legally binding equivalents?",
+        "For subsequent signings in the same session, is at least one component re-verified?",
+        "Are biometric signatures (if used) designed to prevent use by anyone other than the owner?"
+      ],
+      "4. System Validation (Part 11.10(a), Annex 11 Section 4)": [
+        "Has the system been validated per a documented validation plan?",
+        "Is there a current Validation Summary Report?",
+        "Is there a requirements traceability matrix showing all requirements were tested?",
+        "Was a risk assessment performed to determine testing scope and depth?",
+        "Has the system vendor been assessed/qualified?",
+        "Is the validation documentation maintained and accessible?"
+      ],
+      "5. Change Control (Part 11.10(k)(2), Annex 11 Section 10)": [
+        "Is there a formal change control process for the validated system?",
+        "Are vendor releases (patches, upgrades) assessed for GxP impact before deployment?",
+        "Are changes to validated functionality re-tested before production deployment?",
+        "Is there a documented change history with approval records?"
+      ],
+      "6. Data Integrity (ALCOA+)": [
+        "Is all GxP data attributable to a specific individual?",
+        "Is GxP data contemporaneously recorded (timestamps reflect actual event time)?",
+        "Is the electronic record the original record (or is there a documented true copy process)?",
+        "Is data protected against deletion or modification outside of the application layer?",
+        "Is there a documented data backup and recovery process?",
+        "Has backup/restore been tested and verified?"
+      ],
+      "7. Training (Part 11.10(i), Annex 11 Section 2)": [
+        "Are all system users trained on their responsibilities regarding electronic records and signatures?",
+        "Are training records maintained and current?",
+        "Is there a process for re-training when the system is updated?",
+        "Does training cover the legal significance of electronic signatures?"
+      ],
+      "8. Ongoing Compliance (Annex 11 Section 11)": [
+        "Is there a periodic review process for this system (at least annual)?",
+        "Is there an incident/deviation management process for system issues?",
+        "Is there a CAPA process for recurring system issues?",
+        "Are SOPs in place for system operation, administration, and maintenance?"
+      ]
+    },
+    "scoring": {
+      "method": "Count 'No' answers per area. Each 'No' is a gap requiring remediation.",
+      "severity": {
+        "0 gaps in area": "Compliant — no action needed for this area",
+        "1-2 gaps in area": "Minor gaps — remediate within 90 days",
+        "3-4 gaps in area": "Significant gaps — remediate within 60 days, escalate to QA",
+        "5+ gaps in area": "Critical gaps — remediate immediately, risk of regulatory finding"
+      }
+    },
+    "gotcha_level": "critical",
+    "source": "lumis-gap-assessment",
+    "tags": ["gap-assessment", "part-11", "annex-11", "compliance-checklist", "remediation"]
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-pharma-operating-model-001",
+    "category": "org-strategy",
+    "title": "Pharma Operating Model Evolution and Post-Pandemic Organizational Priorities",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Survey-based analysis of how pharmaceutical companies are restructuring their operating models after pandemic-driven changes, including digital capability building, agile adoption, and HCP engagement model shifts.",
+    "findings": {
+      "accelerated_trends": "The pandemic accelerated existing trends: digital capability building for virtual HCP engagement, agile ways of working adoption, and cross-functional team structures. Companies already using agile adapted faster to pandemic disruption.",
+      "deprioritized_initiatives": "Some organizational restructuring initiatives were deprioritized: HCP-segment-based business unit reorganization was put on hold as relatively unimportant compared to digital capability gaps.",
+      "digital_commercial_shift": "Companies doubled down on digital capabilities for virtual HCP connectivity. This is not just channel addition but organizational redesign \u2014 new roles (digital engagement managers), new skills (content personalization), and new processes (omnichannel orchestration).",
+      "agile_correlation_with_resilience": "Survey data suggests that organizations with established agile practices showed greater operational resilience during disruption. This strengthens the business case for agile transformation in pharma commercial organizations.",
+      "operating_model_design_principles": "Emerging principles: organize around customer journeys not internal functions, embed digital capabilities in commercial teams not as a separate function, use data-driven decision rights that push authority to the edge, and design for speed-to-decision over consensus."
+    },
+    "source": "Executive survey on pharma operating model changes and organizational priority shifts influenced by the pandemic",
+    "tags": [
+      "operating-model",
+      "organizational-design",
+      "agile",
+      "digital-transformation",
+      "hcp-engagement"
+    ]
+  }
+]

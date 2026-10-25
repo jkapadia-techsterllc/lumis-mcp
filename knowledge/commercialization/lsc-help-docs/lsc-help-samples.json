@@ -1,0 +1,575 @@
+[
+  {
+    "id": "lsc-help-samples-ind-lsc-samples-management",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Sample Management Features",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enable pharmaceutical companies to efficiently handle and distribute drug samples to healthcare providers. Enhance drug sales and keep healthcare providers informed about the safe and effective use of products, leading to quicker treatments. Track and manage sales representative inventories of...",
+    "findings": [
+      {
+        "name": "Set Up Sample Management Features",
+        "detail": "Enable pharmaceutical companies to efficiently handle and distribute drug samples to healthcare providers. Enhance drug sales and keep healthcare providers informed about the safe and effective use of products, leading to quicker treatments. Track and manage sales representative inventories of samples, ensuring compliance with regulations, and maintaining accurate records of distribution. Effective sample management is crucial for supporting healthcare providers and low-income patients, and ensuring ethical practices and regulatory compliance."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Sample Inventory Management Help users request and manage samples in one place. Define product batches and unique identifiers to simplify the tracking of the inventory operations. Configure inventory operations, counts, and other options in the sample inventory dashboard. Sample Limits Sample limits provide precise control over sample distribution to help ensure your organization’s compliance with governmental regulations and organizational policies. Use sample limit templates and rules based on products and accounts to enforce limits. Streamline administrative tasks, optimize resource allocation, and reduce audit risks, especially for new product launches or controlled substances. Territory Product Quantity Allocations With territory product quantity allocations, you can control which products are available in each territory as part of your company’s business strategy. Assign sample quantities to sales territories for a specified period. Sales reps can only distribute or request approved samples that are allocated to their assigned territories."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_samples_management.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Sample Inventory Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Help users request and manage samples in one place. Define product batches and unique identifiers to simplify the tracking of the inventory operations. Configure inventory operations, counts, and other options in the sample inventory dashboard. Prerequisites for Sample Inventory Management Before...",
+    "findings": [
+      {
+        "name": "Sample Inventory Management",
+        "detail": "Help users request and manage samples in one place. Define product batches and unique identifiers to simplify the tracking of the inventory operations. Configure inventory operations, counts, and other options in the sample inventory dashboard. Prerequisites for Sample Inventory Management Before setting up Sample Inventory Management, review and complete the prerequisite tasks. Enable the Sample Inventory Management Dashboard Give a user profile access to the Sample Inventory Management dashboard, where users can manage inventory operations and request samples. Configure Org-Wide Settings for Sample Inventory Management Configure the admin console settings that apply universally in your Salesforce org. Configure Profile Settings for Sample Inventory Management Configure the sample inventory settings. You can apply the settings to a specific profile or the entire org. Select Custom Fields to Use for Sample Inventory Management Use field sets to define and manage your custom fields based on your specific business needs. First, create custom fields. Then, add them to field sets to show them in the inventory count assessment types, inventory operation types, product requests, and disbursement windows. Add a Quick Action Button for Resolving Disbursements Add a button to make it easy to resolve disbursements. In Sample Inventory Management, you can get samples disbursements first, and address the unresolved disbursement records later. This scenario arises when a user hasn't acknowledged the samples they're received, and so they’re in possession of the quantity required to make a disbursement, but the system count shows otherwise. Sample Inventory Management enables users to perform the disbursement, but the Product Disbursement record is created with a warning and the system temporarily pauses the update of the Product Batch Item’s Remaining Quantity and Product Item’s Quantity On Hand fields. The user must acknowledge the received inventory and resolve the disbursement. Customize Actions for Inventory Processes Create custom actions to override buttons in the Inventory Count Assessment records and in the Inventory Operations records. Set Up Data for Sample Inventory Management Configure location types that serve as the sales representative’s inventory on hand,and define addresses for the inventory’s storage locations. To easily track product samples in the sample inventory workflow, configure production batches that store external identifiers, such as unique identification numbers, and internal identifiers, such as the production batch name. View the sample product quantity in a sales rep’s possession by configuring product batch items."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create Inventory Count Assessments Transfer Sample Inventory Between Users and Locations Return Sample Inventory to the Warehouse Manually Adjust a Sample Inventory Count Discrepancy Submit a Request to Replenish Sample Inventory Acknowledge Received Samples from Transfers and Shipments"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-custom-tab",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Enable the Sample Inventory Management Dashboard",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Give a user profile access to the Sample Inventory Management dashboard, where users can manage inventory operations and request",
+    "findings": [
+      {
+        "name": "Enable the Sample Inventory Management Dashboard",
+        "detail": "Give a user profile access to the Sample Inventory Management dashboard, where users can manage inventory operations and request samples."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To enable the Sample Inventory Management tab: | Life Sciences Commercial Admin permission set Here’s a video about the dashboard to help you get started. <!-- --> If you aren’t able to watch the video in full screen mode, open the video on a new tab: Learn about the Sample Inventory Management Dashboard . Note The Sample Inventory Management Dashboard is available only on the web and not in the iPad. From Setup, in the Quick Find box, find and select Profiles . Select the profile, and click Edit . In the Tab Settings, for Sample Inventory Management, select Default On . Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Manage Sample Inventory"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_custom_tab.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-configure-org-wide-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Org-Wide Settings for Sample Inventory Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure the admin console settings that apply universally in your Salesforce",
+    "findings": [
+      {
+        "name": "Configure Org-Wide Settings for Sample Inventory Management",
+        "detail": "Configure the admin console settings that apply universally in your Salesforce org."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure admin console settings: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select the Sample Inventory Management tile. In the left navigation pane, select Org-Wide Settings . Configure the settings that apply across the org. Select the location type that represents the user’s inventory location. Choose whether you want to show only active batch assignments. If this setting is selected, only active batch assignments are considered for all sample inventory processes, such as in inventory counts, transfers, returns, and disbursements. Select a validation type for restricting or allowing inventory operations and count assessments when records aren’t synced. Configure the inventory operation settings. Select the status that indicates that an Inventory Operation record is final. Select the status that represents that the product sample is returned to the sender. Select the status that indicates that a Transfer In record is a duplicate record. Select the inventory count assessment validation type for inventory disbursed during the visits that are still in Planned state and have signatures captured. Configure the product request settings. Select the final product request status. To control the quantity requested, select Require approval for product requests that exceed the territory’s remaining quantity and Show a warning when a product request crosses maximum and minimum limits . Add statuses to indicate that a product request requires approval. When you define a status in the Product Request Approval Required Status field, Sample Inventory Management applies the defined minimum and maximum limits and checks the remaining territory allocation. Activate the required trigger handler. From the Admin Console, select the Trigger Handler Administration tile. Find the ProductDisbursementInventoryOpCreation trigger handler by using the Object API Name list or Search field. Turn on the trigger handler. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_configure_org_wide_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-customize-field-sets",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Select Custom Fields to Use for Sample Inventory Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use field sets to define and manage your custom fields based on your specific business needs. First, create custom fields. Then, add them to field sets to show them in the inventory count assessment types, inventory operation types, product requests, and disbursement",
+    "findings": [
+      {
+        "name": "Select Custom Fields to Use for Sample Inventory Management",
+        "detail": "Use field sets to define and manage your custom fields based on your specific business needs. First, create custom fields. Then, add them to field sets to show them in the inventory count assessment types, inventory operation types, product requests, and disbursement windows."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To edit field sets: | Customize Application Note Sample Inventory Management doesn't provide field sets out of the box. When you create the field sets for Sample Inventory Management, you can add only custom fields. From the object management settings for Inventory Operation, go to Field Sets. To modify the field sets for the Adjustment header, click , and click Edit . Move the fields that you want to show to the In the Field Set list. Save your changes. Repeat these steps for the Disbursement, Transfer in, Transfer out, Return, and Return to Sender field sets. From the object management settings for Inventory Count Assessment, select the fields for the Ad Hoc, Audited, Initial, and Periodic field sets. From the object management settings for Product Request, and select the fields for the Product Request field set."
+      },
+      {
+        "name": "See Also",
+        "detail": "About Field Sets"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_customize_field_sets.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-action-button-resolve-disbursement",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add a Quick Action Button for Resolving Disbursements",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add a button to make it easy to resolve disbursements. In Sample Inventory Management, you can get samples disbursements first, and address the unresolved disbursement records later. This scenario arises when a user hasn't acknowledged the samples they're received, and so they’re in possession of...",
+    "findings": [
+      {
+        "name": "Add a Quick Action Button for Resolving Disbursements",
+        "detail": "Add a button to make it easy to resolve disbursements. In Sample Inventory Management, you can get samples disbursements first, and address the unresolved disbursement records later. This scenario arises when a user hasn't acknowledged the samples they're received, and so they’re in possession of the quantity required to make a disbursement, but the system count shows otherwise. Sample Inventory Management enables users to perform the disbursement, but the Product Disbursement record is created with a warning and the system temporarily pauses the update of the Product Batch Item’s Remaining Quantity and Product Item’s Quantity On Hand fields. The user must acknowledge the received inventory and resolve the disbursement."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To add quick action buttons: | Life Sciences Commercial Admin permission set Create an action button. From the object management settings for Product Disbursement, go to Buttons, Links, and Actions. Click New Action . For Action Type, select Lightning Component . For Lightning Component, select Isc4ce:ResolveProductDisbursementRecordAction . Enter a label, for example, Resolve Disbursement . The name is automatically populated. Save your changes. Add the button to the page layout. From the object management settings for Product Disbursement, go to Page Layout. Click Product Disbursement Layout . In the Page Layout editor, go to Mobile & Lightning Actions. Move the button to the Salesforce Mobile and Lightning Experience Actions section. Save your changes. The button appears on the Product Disbursement page’s highlights panel."
+      },
+      {
+        "name": "See Also",
+        "detail": "https://help.salesforce.com/s/articleView?id=platform.actions_overview.htm&type=5 Quick Actions Fix Unresolved Product Disbursements"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_action_button_resolve_disbursement.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-data-setup",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Data for Sample Inventory Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure location types that serve as the sales representative’s inventory on hand,and define addresses for the inventory’s storage locations. To easily track product samples in the sample inventory workflow, configure production batches that store external identifiers, such as unique...",
+    "findings": [
+      {
+        "name": "Set Up Data for Sample Inventory Management",
+        "detail": "Configure location types that serve as the sales representative’s inventory on hand,and define addresses for the inventory’s storage locations. To easily track product samples in the sample inventory workflow, configure production batches that store external identifiers, such as unique identification numbers, and internal identifiers, such as the production batch name. View the sample product quantity in a sales rep’s possession by configuring product batch items."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Prerequisites",
+        "detail": "Before you start configuring data, make sure that you have the following records in place. To configure products, make sure you create a Product (Product2) record. To designate it as a sample product, create a corresponding Life Science Marketable Product (LifeSciMarketableProducts) record . Create users who represent sales reps."
+      },
+      {
+        "name": "Additional Information",
+        "detail": "To learn more about digital signature capture for samples distributed during a visit, see these resources. Configure Sample Inventory Validation Configure Signature Capture Add an Inventory Location and Address for Sample Inventory Management In Sample Inventory Management, the Location record represents the inventory that’s currently in a sales rep’s possession, rather than a physical location. Each sales rep is assigned a particular location to help you trace inventory. Create locations and add addresses for the storage of sample inventory. Create Production Batches for Sample Inventory Manage and track inventory transactions by organizing products into batches. Products are tracked by batches across all inventory operations, counts, acknowledgments, returns, and disbursements. Create Product Items for Sample Inventory Product items help establish a one-to-one relationship between a product and a location. When the location is designated as an inventory location, product items represent the total quantity of a product assigned to a user as inventory. Create Product Batch Items for Sample Inventory A product batch item establishes the relationship between the Product, Life Science Marketable Product, Production Batch, Product Batch Item, Location, and User records. It captures information about the product items allocated to a sales rep, organized by the batches that the products belong to. A product batch item record helps maintain compliance by keeping a sales rep within the defined disbursement limits. The allotted quantity is updated whenever the sales rep executes an inventory operation."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_data_setup.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-create-locations-addresses",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add an Inventory Location and Address for Sample Inventory Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "In Sample Inventory Management, the Location record represents the inventory that’s currently in a sales rep’s possession, rather than a physical location. Each sales rep is assigned a particular location to help you trace inventory. Create locations and add addresses for the storage of sample...",
+    "findings": [
+      {
+        "name": "Add an Inventory Location and Address for Sample Inventory Management",
+        "detail": "In Sample Inventory Management, the Location record represents the inventory that’s currently in a sales rep’s possession, rather than a physical location. Each sales rep is assigned a particular location to help you trace inventory. Create locations and add addresses for the storage of sample inventory."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create locations: | Life Sciences Commercial Admin permission set Before adding locations, make sure that the Location's page layout contains the Primary User field and the Inventory Location field. The addresses that you add here are the addresses that sales reps can select in the Destination Address field of a Transfer In or Transfer Out inventory operation. For Transfer Out operations, reps select from the addresses on the destination location. For Transfer In operations, reps select from the addresses associated with their own user. Your admin must define addresses for every sales rep and for every location that samples are shipped to or received at. Otherwise, the Destination Address dropdown is empty. From the App Launcher, find and select Locations . Click New , and enter these details. For the primary user, select the sales rep who is assigned the inventory for the location. Select a location type. Select the custom picklist value that indicates that the location type represents a sales rep’s inventory. Select Inventory Location . If you set the location as an inventory-related location for a sales rep, you must set the location type as a User Inventory Location Type in the admin console settings. See Configure Org-Wide Settings for Sample Inventory Management . Save your changes. On the Related tab, under Addresses, click New . Select a location type. Enter an address for the inventory and a postal code. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Manage Sample Inventory"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_create_locations_addresses.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-create-product-batch-item",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create Product Batch Items for Sample Inventory",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "A product batch item establishes the relationship between the Product, Life Science Marketable Product, Production Batch, Product Batch Item, Location, and User records. It captures information about the product items allocated to a sales rep, organized by the batches that the products belong to. A...",
+    "findings": [
+      {
+        "name": "Create Product Batch Items for Sample Inventory",
+        "detail": "A product batch item establishes the relationship between the Product, Life Science Marketable Product, Production Batch, Product Batch Item, Location, and User records. It captures information about the product items allocated to a sales rep, organized by the batches that the products belong to. A product batch item record helps maintain compliance by keeping a sales rep within the defined disbursement limits. The allotted quantity is updated whenever the sales rep executes an inventory operation."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create product batch items: | Life Sciences Commercial Admin permission set The Production Batch Item related list must be added to the Production Batch’s related tab. From the App Launcher, go to the Production Batch record that you want to add a production batch item to. On the Related tab, under Product Batch Item, click New . Select the product item assigned to a user. Select Active . In the Remaining Quantity field, enter the number of samples of the product batch to allocate to the user's inventory. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_create_product_batch_item.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-limit-templates-add-default",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add Default Sample Limit Templates to Your Salesforce Org",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Life Sciences Customer Engagement provides a generic sample limit template and several country-specific templates that you can add to your org. These templates contain predefined rules and operations for sample distribution, and they can’t be edited or",
+    "findings": [
+      {
+        "name": "Add Default Sample Limit Templates to Your Salesforce Org",
+        "detail": "Life Sciences Customer Engagement provides a generic sample limit template and several country-specific templates that you can add to your org. These templates contain predefined rules and operations for sample distribution, and they can’t be edited or deleted."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To add default sample limit templates: | Life Sciences Commercial Admin permission set These templates are available for you to add to your org. Belgium Generic Template Germany AMG Germany AMG + EPFIA Italy Class A Italy Class C Netherlands Turkey From the App Launcher, find and select Admin Console . Select Sample Limits , and then select Sample Limit Templates . Select Add Default Templates . If the templates are added already, you don't see this button. Review the templates, and then add them to your org. To see each template's rules and conditions, assign the template to a product from the Template Product Assignments page. Then, from the App Launcher, find the Provider Sample Limit Template Assignment record that was created. Open the template, or review the rules in the Rule Conditions field."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_limit_templates_add_default.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-limit-templates-create-advanced",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create Advanced Sample Limit Templates",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To define custom sample limit rules for more complex needs and for regions with stricter requirements, create an advanced sample limit template. For example, use an advanced template to configure sample limit rules for three years from the first drop",
+    "findings": [
+      {
+        "name": "Create Advanced Sample Limit Templates",
+        "detail": "To define custom sample limit rules for more complex needs and for regions with stricter requirements, create an advanced sample limit template. For example, use an advanced template to configure sample limit rules for three years from the first drop date."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create advanced sample limit templates: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select Sample Limits , and then select Sample Limit Templates . Click New , and then click Advanced . Enter a unique label and API name for the template. To make the template available for product assignments, select Active . To configure this template similar to the provided country-specific templates, select Required by Law . If the template isn’t required by law, select the enforcement type to determine what happens when sample limits are violated. To block additional distributions, select Error . To let sales reps choose whether to continue with the distribution or not, select Warning . To determine how to apply the template's rules, select the rule operator. Under Sample Limit Rules, enter a name for the first rule and how many samples can be distributed per period and per visit. Select the period type, and enter the other details for the rule. To enforce sample limits from the date of the first sample distribution, select Rolling Start . Set an interval to define how long to enforce limits after the first drop. Set an offset to add a delay or shift from the time of the first drop. To enforce sample limits from a fixed start date, such as the product’s launch date, select Fixed Start . Set an interval to define how long to enforce limits after the start date. Set an offset to add a delay or shift from the start date. To set the maximum number of samples that can be distributed within a specified date range, select Date Range . To set the maximum number of samples that can be distributed within a calendar year, select Calendar Year . Create more sample limit rules, or delete the ones that you no longer need. You can create up to 3 rules. Save your changes. After you save your template, you can assign it to products and run jobs to apply its sample limit rules to accounts and products."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_limit_templates_create_advanced.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-limit-template-assignments",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Manage Sample Limit Template Product Assignments",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To enforce rules and manage distribution based on the template’s defined limits, assign sample limit templates to individual products or parent products and their child",
+    "findings": [
+      {
+        "name": "Manage Sample Limit Template Product Assignments",
+        "detail": "To enforce rules and manage distribution based on the template’s defined limits, assign sample limit templates to individual products or parent products and their child products."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage sample limit templates product assignments: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select Sample Limits , and then select Template Product Assignments . Select the template that you want to assign to products. If you select the default generic template or a custom generic template, you can modify the maximum quantity for each visit and period. You can also set the period start and end dates for the products that you select. In the product hierarchy, search for products, or use the arrows to expand or collapse parent products. Select the products to apply sample limit templates to. Scroll to the bottom of the page and save your changes. When you save your changes, provider sample limit template assignment records are created automatically for each product and template. If you make changes to the templates, these records aren’t updated. Update provider sample limit template assignment records manually to reflect the updated template rules. Go to the Sample Limits Jobs page and run the relevant job. If this is the first time you’re assigning the template to a product, run the job to initialize the template for accounts . If the template already had a product assigned and you changed the assigned template, run the Assign Sample Limit Templates to Products job instead. After you assign sample limit templates to products, make sure that users can access provider sample limit template assignments. Update the sharing settings for the provider sample limit template assignment object and set the default internal access to Public Read Only . Alternatively, share these records with each user manually."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_limit_template_assignments.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-limits-create-segments-list-builder",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create Account Segments with List Builder for Data 360",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create account segments by using Data 360 segments and Salesforce List Builder. This approach allows you to generate actionable lists directly from Data 360 segment",
+    "findings": [
+      {
+        "name": "Create Account Segments with List Builder for Data 360",
+        "detail": "Create account segments by using Data 360 segments and Salesforce List Builder. This approach allows you to generate actionable lists directly from Data 360 segment data."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage sample limits: | Life Sciences Commercial Admin permission set To create lists from a Data Cloud segment: | Actionable Segmentation permission set AND Data Cloud for Marketing Manager permission set OR Data Cloud for Marketing Specialist permission set AND Data Cloud Data Aware Specialist OR Data Cloud Marketing Admin Before you begin, complete these steps. Enable and configure the required add-ons and permissions . Enable and set up List Builder for Data 360 segments . Then you can use List Builder to create actionable lists. From the App Launcher, find and select Admin Console . Select Sample Limits , and then Segmentation . Select Manage Segmentation . Note From the App Launcher, you can also find and select Actionable Lists . The Actionable Lists page opens. On the Actionable Lists page, create a new actionable list. Select Data Cloud Segment as the source, and then click Next . Enter a name and a description for the actionable list. In the Actionable List Type field, select Healthcare Provider List . To finish creating the actionable list, complete the remaining steps . After you create an account segment, return to the Sample Limits tile in the Admin Console to initialize sample limits for those accounts."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create Actionable Lists by Using List Builder for Data Cloud Segment Initialize Sample Limits for Accounts"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_limits_create_segments_list_builder.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-limits-initialize-job",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Initialize Sample Limits for Accounts",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To initialize the sample limit templates that are assigned to healthcare professional (HCP) and healthcare organization (HCO) accounts for the first time, run the Assign Sample Limit Templates to Accounts job. When you initialize the templates, provider sample limit records are created for each...",
+    "findings": [
+      {
+        "name": "Initialize Sample Limits for Accounts",
+        "detail": "To initialize the sample limit templates that are assigned to healthcare professional (HCP) and healthcare organization (HCO) accounts for the first time, run the Assign Sample Limit Templates to Accounts job. When you initialize the templates, provider sample limit records are created for each account and product based on the sample limit template and rules."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To run sample limit jobs: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select Sample Limits , and then select Sample Limit Jobs . Under Assign Sample Limit Templates to Accounts, click Run Now . In the Account Scope field, select whether to initialize sample limits for all accounts, a specific account, or a segment of accounts. Select whether to initialize sample limits for only HCP accounts, only HCO accounts, or both HCP and HCO accounts. If you’re initializing sample limits for only a certain account, select an account. If you’re initializing sample limits for only a certain segment of accounts, select a segment. Select a sample limit template to apply to the accounts. To set how many accounts to initialize sample limits for in this job run, adjust the batch size. Run the job. The job runs asynchronously. To see the job’s status, monitor the log on the Sample Limit Jobs page. In the job log, this job’s name is SampleLimitJobInit. Running this job for all accounts or for a segment of accounts creates two entries in the log. One entry tracks the sample limit records created and one entry tracks updates to the created records. The number of records processed in each entry can be different if there aren’t records to update."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_limits_initialize_job.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-limits-update-job",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Assign Sample Limit Templates to Products",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To apply sample limits when new products are assigned to an existing sample limit template or when a product’s sample limit rules are updated, run the Assign Sample Limit Template to Products job. When you run this job, additional provider sample limit records are created for new products and...",
+    "findings": [
+      {
+        "name": "Assign Sample Limit Templates to Products",
+        "detail": "To apply sample limits when new products are assigned to an existing sample limit template or when a product’s sample limit rules are updated, run the Assign Sample Limit Template to Products job. When you run this job, additional provider sample limit records are created for new products and existing provider sample limit records are updated based on updates to the template."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To run sample limit jobs: | Life Sciences Commercial Admin permission set Run this job only after you assign a sample limit template to a new product or after you update limits for an existing product. From the App Launcher, find and select Admin Console . Select Sample Limits , and then select Sample Limit Jobs . Under Assign Sample Limit Template to Products, click Run Now . Select the template that you assigned to a product or that you updated sample limit rules for. Only the products that are assigned to the template appear in the list of available products. Move the products with newly assigned templates or updated rules to the Selected Products section. To determine how many sample limits to update, adjust the batch size. Run the job. The job runs asynchronously. To see the job’s status, monitor the list on the Sample Limit Jobs page. In the Sample Limits Job log, this job’s name is SampleLimitJobUpdate. Running the job creates two entries in the log, one to track the sample limit records created and one to track updates to the created records. The number of records processed in each job can be different if there aren’t records to update."
+      },
+      {
+        "name": "See Also",
+        "detail": "Manage Sample Limit Template Product Assignments Update Sample Limit Rules for Products"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_limits_update_job.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-adjustment-discrepancies-assessments",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Discrepancy Adjustments for Inventory Counts",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "When you record a discrepancy in the inventory count, Sample Inventory Management adjusts the system count positively or negatively to match the actual",
+    "findings": [
+      {
+        "name": "Discrepancy Adjustments for Inventory Counts",
+        "detail": "When you record a discrepancy in the inventory count, Sample Inventory Management adjusts the system count positively or negatively to match the actual count."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. For example, the admin has allocated 100 units of samples to you—the Total System Count—but when you count the actual disbursement, you have 105 units. To adjust for this discrepancy, Sample Inventory Management automatically records a product transfer of 5 units to the destination location to increase the total system count value. In the opposite scenario, the admin has allocated 105 units of samples, but you have only 103 units. In this case, Sample Inventory Management transfers 2 units from the source location to reduce the value of the system count In the Sample Inventory Management Dashboard, the adjustment creates two updates: an assessment count added to the Inventory Count Assessment and an adjustment operation record added to the Inventory Timeline."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_adjustment_discrepancies_assessments.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-create-return-type",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Return Sample Inventory to the Warehouse",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Send damaged, obsolete, or unwanted inventory back to the warehouse from the Sample Inventory Management",
+    "findings": [
+      {
+        "name": "Return Sample Inventory to the Warehouse",
+        "detail": "Send damaged, obsolete, or unwanted inventory back to the warehouse from the Sample Inventory Management dashboard."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To return sample inventory: | Life Sciences Field Sales Representative permission set AND Health Cloud Starter permission set From the App Launcher, find and select Sample Inventory Management . Under Inventory Timeline, click and select New Operation . Select Return , and click Next . For Destination Location, select the warehouse that you want to return the samples to. Select a shipping provider, and enter the name of the recipient. Select the product, and enter the quantity to return. Optionally, add the reason for the return. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Customize Actions for Inventory Processes Select Custom Fields to Use for Sample Inventory Management"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_create_return_type.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-create-adjustment",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Manually Adjust a Sample Inventory Count Discrepancy",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To rectify an inventory count error, you can manually adjust the count in the Sample Inventory Management",
+    "findings": [
+      {
+        "name": "Manually Adjust a Sample Inventory Count Discrepancy",
+        "detail": "To rectify an inventory count error, you can manually adjust the count in the Sample Inventory Management dashboard."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To adjust the inventory count: | Life Sciences Field Sales Representative permission set AND Health Cloud Starter permission set There are two scenarios where you submit adjustments. The first scenario is an automatic adjustment made by the system in response to an inventory count assessment discrepancy. When there’s a difference between the system count and the actual count, the system adjusts the shortfall or surplus and ensures that your inventory count remains up-to-date and accurate at all times. The second type of adjustment is a manual adjustment that sales reps must do to rectify disbursement errors made during visits. To manually adjust for an error during disbursement, create an Adjustment type inventory operation. From the App Launcher, find and select Sample Inventory Management . Under Inventory Timeline, click and select New Operation . Select Adjustment , and click Next . Select the product, and enter the quantity. Optionally, add the reason for the adjustment. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Customize Actions for Inventory Processes Select Custom Fields to Use for Sample Inventory Management"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_create_adjustment.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-create-product-request",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Submit a Request to Replenish Sample Inventory",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "When inventory runs low and you require replenishment, you can request samples in the Sample Inventory Management",
+    "findings": [
+      {
+        "name": "Submit a Request to Replenish Sample Inventory",
+        "detail": "When inventory runs low and you require replenishment, you can request samples in the Sample Inventory Management dashboard."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a product request: | Life Sciences Field Sales Representative permission set AND Health Cloud Starter permission set From the App Launcher, find and select Sample Inventory Management . Under Inventory Operations Timeline, click and select New Request . For the product type, select Sample , and click Next . Select the status of the product request. Select the product that you want to replenish, and enter the quantity. Save your changes. When you receive the requested samples, confirm the receipt. After you acknowledge receipt, your inventory count is automatically updated. See Acknowledge Received Samples from Transfers and Shipments."
+      },
+      {
+        "name": "See Also",
+        "detail": "Customize Actions for Inventory Processes Select Custom Fields to Use for Sample Inventory Management"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_create_product_request.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-return-mark-duplicate",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Return Samples or Mark Transfers As Duplicate",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Keep your sample inventory levels up-to-date by returning transfers that you don’t need or by marking transfers as duplicate. The Return to Sender option creates a corresponding Transfer In inventory operation record in the sender’s",
+    "findings": [
+      {
+        "name": "Return Samples or Mark Transfers As Duplicate",
+        "detail": "Keep your sample inventory levels up-to-date by returning transfers that you don’t need or by marking transfers as duplicate. The Return to Sender option creates a corresponding Transfer In inventory operation record in the sender’s dashboard."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To return samples or mark transfers as Duplicate: | Life Sciences Field Sales Representative permission set AND Health Cloud Starter permission set From the App Launcher, find and select Sample Inventory Management . In the Inventory Operations Timeline, next to the transfer that you want to return or mark as duplicate, click . To return a transfer, click Return to Sender , and enter these details. Select a shipping provider. Enter the shipment’s tracking number. Enter the reason for the return. Enter the destination address. Click Return . To remove a duplicate transfer, click Mark as Duplicate ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_return_mark_duplicate.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  },
+  {
+    "id": "lsc-help-samples-ind-lsc-sample-inventory-management-fix-unresolved-product-disbursements",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Fix Unresolved Product Disbursements",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Sample Inventory Management helps you to go forward with sample drops even when you have insufficient inventory on record, but sufficient inventory at",
+    "findings": [
+      {
+        "name": "Fix Unresolved Product Disbursements",
+        "detail": "Sample Inventory Management helps you to go forward with sample drops even when you have insufficient inventory on record, but sufficient inventory at hand."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To resolve disbursements: | Life Sciences Field Sales Representative permission set AND Health Cloud Starter permission set Note Make sure your admin configures the custom action button to resolve disbursements. From the App Launcher, find and select Product Disbursement , and select the record that requires resolution. Select the custom action button your admin configured to resolve disbursements."
+      },
+      {
+        "name": "See Also",
+        "detail": "Add a Quick Action Button for Resolving Disbursements"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sample_inventory_management_fix_unresolved_product_disbursements.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "samples"
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "clin-tech-001",
+    "category": "modules",
+    "title": "Clinical Technology Platform Assessment for CRM-Based Clinical Operations",
+    "products": ["LSC"],
+    "summary": "Assessment of whether a CRM platform can serve as the technology foundation for clinical trial operations, covering platform capabilities, gaps, and build-vs-partner decisions for a molecule-to-market ecosystem.",
+    "findings": [
+      {
+        "area": "market_assumptions",
+        "detail": "Life sciences clients increasingly demand SaaS offerings with self-service capabilities, a common data platform, and compliance-grade applications that accelerate the path from clinical trials to commercialization."
+      },
+      {
+        "area": "assessment_goals",
+        "detail": "Key evaluation questions: Can the base capabilities for clinical technologies be developed on the platform? What can be built natively vs. what requires partner or custom development? Who builds the gap solutions?"
+      },
+      {
+        "area": "current_state_challenges",
+        "detail": "Incumbent clinical technology portfolios tend to have products across multiple technology stacks with no master data management concept, a technology-enabled-services business model, and a mix of acquired vs. built products with inconsistent architectures."
+      },
+      {
+        "area": "platform_architecture_components",
+        "detail": "A CRM platform assessment for clinical use should evaluate: infrastructure (horizontal scaling, SSO, sandboxes, managed packages), data/metadata layer (objects, triggers, metadata API, profiles, permission sets, territories), workflow capabilities (approvals, field updates, emails), and security model (roles, groups, sharing rules)."
+      },
+      {
+        "area": "clinical_data_model_mapping",
+        "detail": "A clinical data model overlay on a CRM platform must address the mapping between clinical entities (studies, sites, investigators, subjects, protocols) and the platform's standard and custom object model, including the Health Cloud data model as a foundation."
+      },
+      {
+        "area": "key_entities_for_clinical_crm",
+        "detail": "Core clinical entities that need platform representation: Study, Site, Investigator, Subject, Protocol, Consent, Visit Schedule, Adverse Event, Study Arm, Randomization, and regulatory submission documents."
+      },
+      {
+        "area": "gap_analysis_approach",
+        "detail": "Platform fitness evaluation should separate capabilities into three tiers: natively supported (standard objects, workflows, security), extendable with configuration (custom objects, flows, Lightning components), and gaps requiring custom development or partner integration (specialized clinical data capture, regulatory submission workflows, advanced analytics)."
+      }
+    ],
+    "source": "clinical_technology_platform_assessment_analysis",
+    "tags": ["clinical-operations", "platform-assessment", "technology-strategy", "crm-platform", "gap-analysis"]
+  }
+]

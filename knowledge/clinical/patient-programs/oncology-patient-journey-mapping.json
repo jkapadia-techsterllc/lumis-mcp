@@ -1,0 +1,28 @@
+[
+  {
+    "id": "clin-onco-journey-001",
+    "category": "modules",
+    "title": "Oncology Patient Journey Mapping \u2014 Episode-Based Experience Framework",
+    "products": [
+      "LSC"
+    ],
+    "summary": "Research study of 1,200+ cancer patients (ages 18-50, primarily digital natives) across three markets \u2014 US, UK, and Germany \u2014 mapping the end-to-end patient experience from initial suspicion through long-term survivorship. Identifies 17 discrete episodes across four themes, 28 specific pain points, and four recurring challenges that apply to any CRM or patient program platform serving oncology populations.",
+    "findings": {
+      "four_recurring_challenges": "The study surfaces four persistent themes across the entire oncology journey: (1) Access to better information \u2014 patients consistently struggle to find trustworthy, personalized information at each stage; (2) More involvement \u2014 patients want to participate in treatment decisions rather than being passive recipients; (3) Increased holistic care \u2014 emotional, psychological, and practical support is fragmented or absent; (4) Reduced organizational hassle \u2014 administrative burden compounds the stress of a cancer diagnosis.",
+      "episode_framework_structure": "The journey maps to 17 episodes organized under four sequential themes: Having a Suspicion (episodes 1a through 3 \u2014 noticing symptoms, researching online, visiting a general practitioner), Getting the Diagnosis (episodes 4 through 8 \u2014 referral, specialist appointments, testing, receiving diagnosis, sharing with family), Getting the Treatment (episodes 9 through 13 \u2014 treatment planning, second opinions, treatment sessions, side effect management, follow-up appointments), and Living with Cancer (episodes 14 through 17 \u2014 adjusting lifestyle, managing long-term effects, ongoing monitoring, survivorship or end-of-life care).",
+      "pain_point_density": "28 pain points span the 17 episodes. The highest density clusters around Getting the Diagnosis (waiting anxiety, information gaps between appointments, inconsistent communication between providers) and Getting the Treatment (inadequate side-effect preparation, poor coordination between treatment teams, financial and insurance complexity). The study notes that digital native patients (the entire sample) have higher expectations for information access, provider responsiveness, and digital engagement than older cohorts.",
+      "digital_engagement_implications": "Since the sample is entirely digital natives (ages 18-50), findings reflect expectations that will become mainstream as this cohort ages: real-time appointment and test result access, digital communication channels with care teams, personalized treatment information delivery, and community or peer support via digital platforms. These expectations map directly to patient program CRM capabilities \u2014 care plan tracking, milestone-based outreach, caregiver coordination, and outcome monitoring.",
+      "cross_market_variation": "While the four recurring challenges are consistent across US, UK, and Germany, the specific pain points vary by healthcare system structure. Insurance and financial complexity is more acute in the US; referral wait times dominate in the UK (NHS pathway); and provider fragmentation across clinic and hospital settings is more prominent in Germany. Platform implementations should account for country-level journey variations.",
+      "implications_for_patient_programs": "For patient support and engagement platforms, this research supports: (1) episode-based program design rather than linear funnel models, (2) proactive outreach timed to known high-anxiety moments (waiting for diagnosis, starting treatment, first follow-up), (3) caregiver and family member inclusion as first-class participants, (4) holistic support integration (financial, emotional, practical) alongside clinical milestones, and (5) outcome tracking that captures patient-reported quality of life, not just clinical endpoints."
+    },
+    "source": "2022 cancer patient experience research study (1,200+ patients, 3 markets, ages 18-50)",
+    "tags": [
+      "oncology",
+      "patient-journey",
+      "patient-experience",
+      "digital-health",
+      "care-programs",
+      "episode-mapping"
+    ]
+  }
+]

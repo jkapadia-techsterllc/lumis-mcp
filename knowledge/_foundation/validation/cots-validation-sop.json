@@ -1,0 +1,218 @@
+[
+  {
+    "id": "val-cots-001",
+    "category": "validation-cots",
+    "title": "COTS Validation Lifecycle — Full Extended Lifecycle Model",
+    "summary": "Commercial Off-the-Shelf (COTS) software follows a modified V-model lifecycle that differs from custom software validation. The key difference: you do not have access to source code, so you replace code review with vendor assessment and focus validation on configured usage.",
+    "v_model_phases": {
+      "left_side_specification": {
+        "Design Qualification (DQ)": "Verify during specification that the COTS product CAN meet the user requirements. Includes gap analysis between requirements and product capabilities. DQ may reveal that the product cannot meet requirements without customization — this escalates GAMP category.",
+        "User Requirements Specification (URS)": "Document what the system must do for your specific GxP use. For COTS, distinguish between requirements met by standard product features vs. requirements needing configuration vs. requirements needing customization.",
+        "Functional Specification (FS)": "Map URS requirements to specific product features and configuration. For COTS, this is often a 'Configuration Specification' — how the product will be configured to meet each requirement."
+      },
+      "bottom_build": {
+        "Vendor Assessment": "Since you cannot review source code, qualify the vendor's development and quality practices. Replaces code review for COTS Category 3/4 systems.",
+        "Installation and Configuration": "Install/deploy the product per vendor instructions. Configure per the Configuration Specification. Document all settings, parameters, and customizations."
+      },
+      "right_side_testing": {
+        "IQ": "Verify installation is correct — version matches, configuration matches specification, environment meets requirements.",
+        "OQ": "Verify each configured function operates correctly per the FS. Test at normal AND stress conditions.",
+        "PQ": "Verify the system performs consistently under real-world conditions with production-representative data and users."
+      }
+    },
+    "cots_gap_analysis": {
+      "purpose": "Compare COTS product capabilities against URS requirements to identify gaps",
+      "gap_categories": {
+        "Met by standard features": "No configuration needed — validate with OQ testing",
+        "Met by configuration": "Product can be configured to meet the requirement — document configuration and validate with OQ/PQ",
+        "Met by customization": "Custom code/scripts needed (e.g., VBA macros, Apex triggers) — escalates component to GAMP Category 5. Requires full SDLC validation for the custom component.",
+        "Not met": "Product cannot meet the requirement. Remediation options: procedural SOP workaround, third-party add-on, or accept the gap with documented risk assessment."
+      }
+    },
+    "gotcha": "A COTS product sold as 'validated' or 'compliant' is NOT validated for YOUR specific use. The vendor validates their development process, not your implementation. You must validate your specific configuration, data, workflows, and integrations.",
+    "gotcha_level": "critical",
+    "source": "cots-validation-sop",
+    "tags": ["cots", "v-model", "gap-analysis", "design-qualification", "lifecycle"]
+  },
+  {
+    "id": "val-cots-002",
+    "category": "validation-cots",
+    "title": "Vendor Assessment Methods for COTS Software — Detailed Approaches",
+    "summary": "When validating COTS software, you cannot review source code. Vendor assessment is your primary mechanism for gaining confidence in the product's quality. The depth of assessment should be proportional to the system's GxP risk and the vendor's maturity.",
+    "assessment_methods": {
+      "External References": {
+        "description": "Research the vendor's reputation, regulatory track record, and industry adoption",
+        "activities": ["Search FDA Warning Letters and 483s mentioning the vendor", "Review industry analyst reports", "Check for published case studies from regulated customers", "Verify regulatory claims (e.g., '21 CFR Part 11 compliant' — what exactly does the vendor mean?)"],
+        "effort": "Low",
+        "when_sufficient": "Low-risk COTS (Category 3) with widespread industry adoption"
+      },
+      "Internal References": {
+        "description": "Leverage your organization's or sister companies' prior experience with the vendor",
+        "activities": ["Review prior vendor audit results", "Interview internal users of the product", "Check if the vendor is on an approved vendor list", "Review prior validation packages for the same product"],
+        "effort": "Low",
+        "when_sufficient": "Product already in use within the organization for a similar GxP purpose"
+      },
+      "Mail Audit (Questionnaire)": {
+        "description": "Send a structured vendor qualification questionnaire covering SDLC, QMS, change management, and security practices",
+        "key_questions": ["Describe your software development lifecycle (SDLC)", "Do you maintain a quality management system (QMS)? Which standard?", "How are software changes managed, tested, and released?", "What security testing is performed (penetration testing, vulnerability scanning)?", "What certifications do you hold (ISO 27001, SOC 2, ISO 9001)?", "Can you provide a summary of your most recent third-party audit?", "How are customers notified of changes that may affect validated functionality?"],
+        "effort": "Medium",
+        "when_sufficient": "Medium-risk COTS (Category 3/4) where the vendor has relevant certifications"
+      },
+      "Third-Party Audit": {
+        "description": "Accept an independent third-party audit of the vendor in lieu of direct audit",
+        "acceptable_audits": ["SOC 2 Type II report", "ISO 27001 certification audit", "ISO 9001 certification audit", "GxP-specific third-party audit"],
+        "effort": "Low (receiving), High (conducting)",
+        "when_sufficient": "Medium to high-risk systems where the vendor provides robust third-party audit reports"
+      },
+      "Direct Audit": {
+        "description": "Conduct an on-site or remote audit of the vendor's development, quality, and security practices",
+        "audit_scope": ["SDLC walkthrough — observe how software is designed, coded, tested, and released", "QMS review — examine quality procedures, CAPA processes, deviation handling", "Change management — review how changes are assessed, tested, and deployed", "Security practices — review penetration testing, vulnerability management, incident response", "Data center / infrastructure — physical security, redundancy, backup, DR"],
+        "effort": "High",
+        "when_sufficient": "Required for high-risk GxP systems, especially when the vendor lacks recognized certifications"
+      }
+    },
+    "decision_factors": [
+      "GxP criticality of the system — higher risk requires deeper assessment",
+      "Vendor maturity and market presence — established vendors with certifications need less direct auditing",
+      "Complexity of the implementation — simple COTS needs less, highly configured needs more",
+      "Business impact of failure — critical systems justify higher audit investment"
+    ],
+    "gotcha": "Vendor assessment is NOT a one-time activity. Re-assess vendors annually or when major version changes occur. A vendor that was qualified two years ago may have changed their practices, been acquired, or had significant staff turnover.",
+    "gotcha_level": "critical",
+    "source": "cots-validation-sop",
+    "tags": ["vendor-assessment", "cots", "mail-audit", "direct-audit", "vendor-qualification"]
+  },
+  {
+    "id": "val-cots-003",
+    "category": "validation-cots",
+    "title": "System Retirement Validation — Decommissioning a Validated System",
+    "summary": "When a validated computerized system is retired (replaced, decommissioned, or sunset), the retirement itself must be validated to ensure data integrity, accessibility, and regulatory compliance are maintained throughout the transition.",
+    "retirement_procedure": {
+      "1. Retirement Plan": "Document the rationale for retirement, timeline, data disposition strategy, and responsible parties. QA must review and approve the plan.",
+      "2. Data Inventory": "Catalog all GxP-critical data in the system: record types, volumes, retention requirements per regulation, and data format.",
+      "3. Data Migration or Archival": {
+        "if_migrating_to_new_system": "Follow Data Migration Validation Protocol (see val-faq-004). Verify record-for-record accuracy, referential integrity, and audit trail continuity.",
+        "if_archiving": "Convert data to standard, durable formats (PDF/A, XML, CSV). Ensure archived data includes audit trails and metadata. Verify archived data is readable and queryable without the source application."
+      },
+      "4. Chain of Custody Documentation": "Document the complete chain of custody for GxP records from source system to destination (new system or archive). Include timestamps, personnel, and verification steps.",
+      "5. Accessibility Verification": "Confirm that archived/migrated data remains accessible for the full regulatory retention period. Test retrieval — can a specific record be found and produced within 24-48 hours for an inspector?",
+      "6. System Inventory Update": "Update the organization's System Inventory Database to reflect the retired status. Include retirement date, data disposition, and archive location.",
+      "7. User Account Deactivation": "Deactivate all user accounts on the retired system. Document the deactivation to maintain the audit trail of who had access.",
+      "8. Retirement Report": "Document the retirement execution: data volumes migrated/archived, verification results, deviations encountered, and final sign-off."
+    },
+    "retention_requirements": {
+      "general_rule": "Validation deliverables and system data must be retained for the product life plus a defined period after retirement",
+      "typical_retention_periods": {
+        "GMP manufacturing records": "Product life + 1 year (US) or product life + 5 years (EU)",
+        "Clinical trial data": "15 years or per ICH E6 requirements",
+        "Adverse event / pharmacovigilance": "Life of product + 2 years",
+        "Validation deliverables (plans, reports, protocols)": "Product life + 10 years (industry best practice)",
+        "Sample management records": "3 years (per PDMA)"
+      },
+      "gotcha": "Retention clock starts from the LAST use of the product, not from system retirement. If the product is still on the market, the retention period has not begun."
+    },
+    "gotcha": "Do NOT simply 'turn off' a validated system. Data in the retired system may be subject to regulatory holds, litigation holds, or ongoing reporting requirements. Always verify with Legal and Regulatory Affairs before decommissioning.",
+    "gotcha_level": "critical",
+    "source": "cots-validation-sop",
+    "tags": ["system-retirement", "decommissioning", "data-archival", "retention", "chain-of-custody"]
+  },
+  {
+    "id": "val-cots-004",
+    "category": "validation-cots",
+    "title": "Revalidation Triggers — When Must a System Be Revalidated?",
+    "summary": "A validated system must be revalidated (partially or fully) when specific trigger events occur. Revalidation scope should be risk-based — not every change requires full revalidation.",
+    "triggers": {
+      "Major Version Upgrade": {
+        "description": "Vendor releases a major version (e.g., v5 → v6) that changes core functionality, data model, or architecture",
+        "revalidation_scope": "Full IQ + targeted OQ for impacted functions + regression PQ. Assess all GxP-critical functions for impact. May require updated URS/FS if new capabilities are adopted.",
+        "timeline": "Plan 2-4 months for assessment and revalidation"
+      },
+      "Major Infrastructure Change": {
+        "description": "Migration to new hosting environment, database platform, or integration middleware",
+        "revalidation_scope": "Full IQ + regression OQ for all integrations + performance PQ. Data migration validation if database changes.",
+        "timeline": "Plan 1-3 months"
+      },
+      "Significant Configuration Change": {
+        "description": "New modules deployed, major workflow changes, new custom code, or new integrations added post-validation",
+        "revalidation_scope": "Targeted: validate the new/changed functionality plus regression testing of adjacent functions. Update URS, FS, RTM, and VSR addendum.",
+        "timeline": "2-8 weeks depending on scope"
+      },
+      "GxP Recategorization": {
+        "description": "A system previously classified as non-GxP is reclassified as GxP (e.g., a reporting tool starts being used for batch release decisions)",
+        "revalidation_scope": "Full validation — treat as a new validation project since the system was never validated for GxP use",
+        "timeline": "3-6 months"
+      },
+      "Retrospective Validation": {
+        "description": "A system already in production use for GxP purposes is identified as requiring validation (common during regulatory gap assessments)",
+        "revalidation_scope": "Full validation with emphasis on documenting and testing the AS-IS state. Must address any existing data integrity gaps. Historical data may require reconciliation.",
+        "gotcha": "Retrospective validation is acceptable BUT must be disclosed if an inspector asks. Do not backdate validation documents."
+      },
+      "Regulatory Requirement Change": {
+        "description": "New or updated regulation (e.g., new Annex 11 revision, new Part 11 guidance) introduces requirements the system does not currently meet",
+        "revalidation_scope": "Gap assessment against new requirements + targeted revalidation to close gaps",
+        "timeline": "Depends on gap severity — plan 1-4 months"
+      }
+    },
+    "testing_frequency_for_cots": {
+      "OQ_repeat": "OQ tests for GxP-critical functions should be repeated annually (or per the periodic review schedule) to confirm the system continues to operate correctly",
+      "PQ_repeat": "PQ testing should be repeated after major upgrades or when performance concerns arise"
+    },
+    "gotcha": "Minor vendor patches (e.g., security patches, bug fixes) typically require only a release assessment, not full revalidation. The release assessment should document: what changed, GxP impact assessment, and testing decision (none/regression/full).",
+    "gotcha_level": "critical",
+    "source": "cots-validation-sop",
+    "tags": ["revalidation", "triggers", "retrospective", "recategorization", "testing-frequency"]
+  },
+  {
+    "id": "val-cots-005",
+    "category": "validation-cots",
+    "title": "FDA Key Principles for COTS and Cloud Software Validation",
+    "summary": "The FDA's guidance on software validation contains specific principles applicable to COTS and cloud-delivered software. These principles go beyond GAMP 5 and represent the FDA's thinking on how validation should be conducted for systems where the end user does not control the source code.",
+    "key_principles": {
+      "End User Responsibility": "For COTS software, the end user is responsible for validation even though they did not develop the software. The end user must validate the software for its intended use. The vendor's internal testing does not satisfy the end user's validation obligation.",
+      "Structural Integrity Assessment": "When source code is not available (which is the case for all COTS), the end user should research the product's use history and reputation. Widespread use without reported issues provides some (but not standalone) evidence of structural integrity.",
+      "Quantified Test Results": "Test results should be QUANTIFIED wherever possible, not just recorded as pass/fail. For example, instead of 'Report generated successfully: PASS', record 'Report generated in 3.2 seconds with 100% of 1,247 expected records present and field values matching source data within 0.01% tolerance.'",
+      "Dynamic Testing Under Stress": "Systems must be tested under both normal AND stress conditions. Stress conditions include: maximum concurrent users, boundary value data, network latency/interruption (for cloud), and high data volumes.",
+      "Regression Analysis for Changes": "When changes are made to a validated system, regression analysis is 'extremely important.' The analysis must determine which functions could be affected by the change — not just the changed function itself but adjacent, dependent, and downstream functions.",
+      "Independence of Review": "Validation activities should be reviewed by personnel independent of the development/implementation team. This can be internal QA, an internal audit function, or a third-party reviewer. The reviewer must be qualified but does not need to be external.",
+      "Internet/Cloud Validation": "For systems that transmit data over the internet, you CANNOT validate the internet itself. Instead: validate the source and destination systems, implement integrity checks (checksums, digital signatures), use delivery acknowledgement mechanisms, and document the security measures (encryption, authentication) in place for data in transit."
+    },
+    "cots_testing_specifics": {
+      "macros_and_customizations": "Any macros, scripts, formulas, or customizations added to COTS software (e.g., Excel macros, Salesforce Apex triggers) must be validated as custom software (Category 5), even if the base product is Category 3 or 4.",
+      "validation_report_contents": "The validation report should include: system description, validation approach, test summary with quantified results, all deviations with corrective actions, and signed approval sections for each responsible party."
+    },
+    "gotcha": "FDA guidance explicitly states that 'off-the-shelf software cannot always be presumed to be validated.' The burden is on the end user to demonstrate the software is validated for its specific GxP use, regardless of vendor claims.",
+    "gotcha_level": "critical",
+    "source": "fda-guidance-software-validation",
+    "tags": ["fda", "cots", "cloud", "quantified-testing", "regression-analysis", "structural-integrity"]
+  },
+  {
+    "id": "val-cots-006",
+    "category": "validation-cots",
+    "title": "Closed vs Open System Classification — 21 CFR Part 11",
+    "summary": "Part 11 distinguishes between closed and open systems. The classification determines which controls are required. Most enterprise SaaS platforms like Salesforce are classified as CLOSED systems, but specific support access scenarios can make them OPEN.",
+    "definitions": {
+      "Closed System (§11.3(b)(4))": "An environment in which system access is controlled by persons who are responsible for the content of electronic records that are on the system. Controls: §11.10 (access controls, audit trails, authority checks, device checks, training, documentation, etc.)",
+      "Open System (§11.3(b)(9))": "An environment in which system access is NOT controlled exclusively by persons responsible for the content of electronic records. Controls: §11.30 — all §11.10 controls PLUS additional measures such as document encryption, use of digital signatures (not just electronic signatures), and additional security measures."
+    },
+    "saas_classification": {
+      "typically_closed": "SaaS platforms like Salesforce are typically CLOSED systems because the customer organization controls access to their records through their own admin-managed user accounts, profiles, permission sets, and security settings.",
+      "becomes_open_when": [
+        "Premier/dedicated support staff have persistent access to the production org with ability to view or modify GxP records",
+        "'Login As' access is granted to vendor support, giving them the ability to access records as a user",
+        "Third-party managed service providers have admin-level access to the org",
+        "Any scenario where persons NOT responsible for the record content can access the records"
+      ],
+      "remediation_for_open": [
+        "Implement §11.30 additional controls: encrypt GxP data, use digital signatures for critical records",
+        "Restrict vendor support access to non-GxP sandboxes only",
+        "Implement time-limited, audited access windows for vendor support when production access is unavoidable",
+        "Log and review all vendor support access as part of periodic review"
+      ]
+    },
+    "fda_note": "FDA's August 2001 Part 11 guidance acknowledged that the closed/open distinction can be complex for modern networked systems. The agency has indicated it may revisit these definitions. In practice, most inspectors focus on whether adequate access controls exist, not on the formal closed/open classification.",
+    "gotcha": "Granting 'Login As' access to vendor support for troubleshooting is common but technically reclassifies the system as OPEN for the duration of that access. Document this scenario in your Validation Plan and implement compensating controls.",
+    "gotcha_level": "critical",
+    "source": "fda-21-cfr-part-11-salesforce-whitepaper",
+    "tags": ["closed-system", "open-system", "part-11", "access-control", "vendor-access", "login-as"]
+  }
+]

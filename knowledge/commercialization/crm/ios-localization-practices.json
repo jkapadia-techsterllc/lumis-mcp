@@ -1,0 +1,32 @@
+[
+  {
+    "id": "crm-bp-010",
+    "category": "commercialization/crm",
+    "title": "iOS Mobile CRM Localization Workflow",
+    "products": [
+      "oce"
+    ],
+    "summary": "End-to-end localization workflow for iOS mobile CRM applications covering custom label management, translation key conventions, batch translation processing, and the automated label validation toolchain for SI and ISV teams.",
+    "findings": {
+      "translation_pipeline": "Labels are defined in a CustomLabels metadata file in the Salesforce git repository, referenced in Swift code via localizedString(key:defaultValue:), submitted to the translation service after each release for batch processing, and returned as .translation metadata files that deploy with the next package.",
+      "key_naming_conventions": "Keys use underscore_separated or camelCase format with no punctuation or spaces. Keys are case-insensitive. Default to generic keys (e.g., 'Duration', 'assign_to_team') reusable across modules. Only prefix with module name when the text is clearly module-specific (e.g., 'ActivityPlanAttainmentError').",
+      "existing_translation_reuse": "Before creating new labels, search the CustomLabels file for existing entries with the same or similar text. Reusing translations enables immediate QA testing, avoids weeks of translation service wait time, reduces translation costs, and decreases memory footprint (currently 4,000+ labels in production).",
+      "variable_placeholders": "Always use %@ as the text placeholder for variables, even when %d or %f would technically work. Translators are trained to expect %@ and other format specifiers (like '%.2f') cause confusion.",
+      "value_change_protocol": "When changing an existing translation value, append '2' to the key name (e.g., 'app_needs_metadata_update2'). This flags the key as a missing translation for the automated validation tool, and the reviewer knows the '2' suffix means the original CustomLabel should be updated with the new text. Remove the '2' from Swift code after the CustomLabel is updated.",
+      "batch_translation_process": "Translations are batched at the end of each release rather than processed individually during development. This allows grammar and spelling review before submission, deduplication of similar messages, label max-length validation, consolidation when iOS and Salesforce teams create the same translations, and validation of all localization entries before packaging.",
+      "automated_label_fixer": "A dedicated Mac application scans all Swift files for localizedString function calls, parses keys and values, cross-references against CustomLabels, reports missing entries with suggested existing matches, and generates an XML file of missing entries for bulk import into CustomLabels.",
+      "branch_workflow": "The localization workflow described applies to development and feature branches. Patch branch localization has a separate process managed by the development lead.",
+      "label_definition_format": "CustomLabels entries include fullName (the key), language (e.g., en_US), protected flag, shortDescription, and value. The shortDescription should be descriptive of the label purpose."
+    },
+    "source": "SI/ISV iOS hardcoded text localization workflow documentation",
+    "tags": [
+      "ios",
+      "localization",
+      "i18n",
+      "translations",
+      "custom-labels",
+      "si-isv",
+      "mobile"
+    ]
+  }
+]

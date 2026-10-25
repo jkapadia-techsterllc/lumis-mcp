@@ -1,0 +1,49 @@
+[
+  {
+    "id": "mod-clm-001",
+    "category": "modules",
+    "title": "Closed Loop Marketing Maturity Continuum",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "A three-stage maturity model for pharmaceutical closed loop marketing: Traditional (product-centric, single-channel), Evolving (multi-channel pilots, partial analytics), and Target State (customer-centric, fully integrated analytics-driven engagement). Organizations progress by shifting from product-focused to customer-focused messaging, expanding channel mix, and connecting feedback loops between field execution and brand strategy.",
+    "findings": {
+      "maturity_stages": "Traditional state relies on paper-based detailing and rep-driven messaging with no feedback loop. Evolving state introduces tablet-based CLM with selective analytics. Target state achieves real-time analytics-driven message selection with cross-channel orchestration.",
+      "four_stage_cycle": "CLM operates as a continuous cycle: (1) Analytics \u2014 assess HCP segment behavior and message effectiveness, (2) Message Planning \u2014 select content and channel mix per segment, (3) Execution \u2014 deliver personalized content through field and digital channels, (4) Feedback \u2014 capture engagement metrics to refine the next cycle.",
+      "organizational_requirements": "Successful CLM requires cross-functional alignment between brand teams, sales operations, analytics, legal/medical review, and IT. Technology alone (tablets, CRM) is insufficient without process redesign and change management.",
+      "key_metrics": "Share of voice, message recall, prescribing behavior shift, rep adoption of approved content, detail duration, and content interaction rates."
+    },
+    "source": "Capgemini \u2014 Closed Loop Marketing whitepaper",
+    "tags": [
+      "clm",
+      "marketing-maturity",
+      "hcp-engagement",
+      "analytics",
+      "multichannel"
+    ]
+  },
+  {
+    "id": "mod-clm-002",
+    "category": "modules",
+    "title": "CLM Implementation Considerations for Life Sciences",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Implementation of closed loop marketing in pharmaceutical organizations requires significant organizational transformation beyond technology deployment. Key success factors include executive sponsorship, phased rollout starting with willing brand teams, integration with existing CRM and content management systems, and robust legal/medical/regulatory review workflows for digital content.",
+    "findings": {
+      "implementation_phases": "Phase 1 focuses on tablet deployment and basic content delivery. Phase 2 adds analytics integration and message effectiveness tracking. Phase 3 achieves full closed-loop feedback with automated message optimization based on engagement data.",
+      "content_management_integration": "CLM content requires a separate approval workflow from traditional print materials. Digital assets need versioning, expiration management, and audit trails. Content must be pre-approved for specific audiences and channels before field deployment.",
+      "analytics_requirements": "Effective CLM depends on capturing interaction-level data (slide views, duration, sequence) and correlating with prescribing outcomes. Data latency from interaction capture to actionable insight should be minimized to support near-real-time message optimization.",
+      "change_management": "Rep adoption is the primary risk factor. Training should focus on value proposition (personalized engagement drives better outcomes) rather than compliance (use the tablet because we say so). Phased rollout with champion reps helps build organizational momentum."
+    },
+    "source": "Capgemini \u2014 Closed Loop Marketing case study analysis",
+    "tags": [
+      "clm",
+      "implementation",
+      "change-management",
+      "content-approval"
+    ]
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "ci-compass-001",
+    "category": "competitive-intelligence",
+    "title": "Veeva Compass — Prescriber-Level Data Products and Field Intelligence",
+    "products": [
+      "oce",
+      "vault"
+    ],
+    "summary": "Veeva Compass provides prescriber-level intelligence, patient-level analytics, and field trend data. Competes directly with IQVIA data offerings.",
+    "compass_products": {
+      "compass_prescriber": {
+        "description": "Prescriber-level data showing HCP prescribing patterns, market share, and switching behavior.",
+        "competitive_comparison": "Competes with IQVIA Xponent/DDD. IQVIA has broader historical data.",
+        "use_cases": "Territory planning, targeting, call planning, incentive compensation."
+      },
+      "compass_patient": {
+        "description": "Anonymized patient-level data showing treatment patterns, therapy duration, adherence, switching.",
+        "competitive_comparison": "Competes with IQVIA longitudinal patient data (LRx, NPA). IQVIA has deeper coverage.",
+        "use_cases": "Patient journey mapping, treatment analysis, adherence analytics, market sizing."
+      }
+    },
+    "data_delivery": {
+      "integration_with_crm": "Integrates directly with Veeva CRM for in-workflow prescriber intelligence.",
+      "update_frequency": "Prescriber data refreshes around the 28th of each month.",
+      "data_format": "Delivered through Veeva data cloud — CRM integration, dashboards, or exports."
+    },
+    "strategic_significance": {
+      "vertical_integration": "Central to Veeva owning full commercial stack — CRM + content + data.",
+      "iqvia_competition": "Directly challenges IQVIA traditional dominance in pharmaceutical data.",
+      "customer_impact": "Choosing Compass often implies deeper Veeva ecosystem adoption."
+    },
+    "source": "veeva-compass-profile-feb-2024",
+    "tags": [
+      "veeva",
+      "compass",
+      "prescriber-data",
+      "patient-data",
+      "competitive-intelligence"
+    ]
+  },
+  {
+    "id": "ci-compass-002",
+    "category": "competitive-intelligence",
+    "title": "Veeva Compass National and Sub-National Market Data",
+    "products": [
+      "oce",
+      "vault"
+    ],
+    "summary": "National and sub-national market-level data products complementing prescriber-level intelligence. Enable market sizing, geographic analysis, and competitive benchmarking.",
+    "national_data": {
+      "description": "Aggregate national-level data — market volumes, brand share, therapeutic area trends.",
+      "use_cases": "Market sizing, brand tracking, competitive share analysis, executive reporting.",
+      "update_frequency": "Monthly updates."
+    },
+    "subnational_data": {
+      "description": "Geographic breakdowns by region, state, or custom definitions.",
+      "use_cases": "Territory benchmarking, geographic targeting, field force deployment.",
+      "geographic_granularity": "Multiple levels from broad regional to territory/zip-code analysis."
+    },
+    "competitive_positioning": {
+      "vs_iqvia": "IQVIA national products (NPA, NSP, DDD) have decades of depth. Compass is growing but does not match breadth.",
+      "bundled_value": "Strongest when combined with Compass prescriber data and Veeva CRM.",
+      "pricing_dynamics": "Competitive with IQVIA for customers adopting multiple Compass products."
+    },
+    "source": "veeva-compass-profile-sept-2022",
+    "tags": [
+      "veeva",
+      "compass",
+      "national-data",
+      "subnational-data",
+      "market-analytics"
+    ]
+  },
+  {
+    "id": "ci-compass-003",
+    "category": "competitive-intelligence",
+    "title": "Veeva Compass Patient — Delivery Schedules, Formats, and CRM Integration",
+    "products": [
+      "oce"
+    ],
+    "summary": "Veeva Compass Patient provides de-identified longitudinal US prescription and medical claims data. Multiple delivery cadences (one-time, monthly on the 20th, weekly on Sundays at 2PM ET, daily at 12PM ET). No Third Party Administrator (TPA) requirements. CRM MyInsights integration announced August 2023 enables daily-refresh in-workflow prescriber intelligence.",
+    "findings": {
+      "data_scope": "De-identified longitudinal US Rx claims and medical claims. Covers patient journey from diagnosis through treatment and switching.",
+      "delivery_schedules": "One-time delivery for ad-hoc analysis; Monthly (published on the 20th); Weekly (published Sundays at 2PM ET); Daily (published at 12PM ET). Cadence selected at subscription level.",
+      "file_formats": "CSV, Parquet, and Excel delivery formats. Parquet preferred for large-scale analytics pipelines.",
+      "tpa_requirements": "No Third Party Administrator requirements — simplifies procurement vs IQVIA patient-level data which may require TPA contracts.",
+      "crm_integration": "CRM MyInsights integration announced August 2023. Content updated daily within CRM dashboards. Enables reps to see patient-level intelligence in call planning without separate analytics tools.",
+      "compass_pathway_addon": "Compass Pathway is an add-on product providing Rx claims lifecycle data — reversed and rejected transactions. Adds claims adjudication visibility to the patient journey.",
+      "customer_adoption": "11-50 customers as of February 2024. Testimonials from ANI Pharmaceuticals, Horizon Therapeutics, and Karuna Therapeutics."
+    },
+    "source": "Veeva Compass Profile (February 6, 2024)",
+    "tags": [
+      "compass",
+      "patient-data",
+      "delivery-schedules",
+      "crm-integration",
+      "myinsights",
+      "claims-data"
+    ]
+  },
+  {
+    "id": "ci-compass-004",
+    "category": "competitive-intelligence",
+    "title": "Veeva Compass Prescriber and National — Projected Data and Market Coverage",
+    "products": [
+      "oce"
+    ],
+    "summary": "Compass Prescriber provides projected prescription and procedure volumes at HCP, HCO, and ZIP code levels covering the top 4,000 brands. Published monthly on the 28th. Compass National offers state and national level projections. Both products have 1-10 customers as of February 2024, indicating early market traction vs established IQVIA offerings.",
+    "findings": {
+      "prescriber_scope": "Projected Rx volumes and medical procedures at individual HCP, HCO, and ZIP code granularity. Covers the top 4,000 prescription brands.",
+      "prescriber_publishing": "Monthly publication on the 28th of each month. Lag time competitive with IQVIA Xponent refresh cycles.",
+      "national_scope": "State-level and national-level projected data for market sizing, brand tracking, and executive reporting.",
+      "customer_counts_feb2024": "Compass Patient: 11-50 customers. Compass Prescriber: 1-10 customers. Compass National: 1-10 customers. Patient product has the most traction.",
+      "competitive_positioning": "Prescriber and National products are newer entries competing against decades of IQVIA NPA/NSP/DDD depth. Compass bundles appeal to existing Veeva CRM customers seeking data consolidation."
+    },
+    "source": "Veeva Compass Profile (February 6, 2024)",
+    "tags": [
+      "compass",
+      "prescriber-data",
+      "national-data",
+      "projected-data",
+      "market-coverage"
+    ]
+  },
+  {
+    "id": "ci-compass-005",
+    "category": "competitive-intelligence",
+    "title": "Veeva Company Financial Profile and Organizational Scale",
+    "products": [
+      "oce"
+    ],
+    "summary": "Veeva Systems founded 2007, reached 7,206 full-time employees by December 2023 and 1,400+ clients. Revenue trajectory: $1,465M (FY2021) to $1,850M (FY2022) to $2,155M (FY2023). Two product clouds: Commercial Cloud (CRM, Data, and Services) and Development Cloud (Vault platform). Key executives: Peter Gassner (CEO), Lindsey Lofgren (VP Product for Compass).",
+    "findings": {
+      "founding_and_scale": "Founded 2007. 7,206 FTEs as of December 2023 (up from 5,482 in mid-2022). 1,400+ clients globally.",
+      "revenue_trajectory": "FY2021: $1,465M. FY2022: $1,850M. FY2023: $2,155M. Consistent 20-25% year-over-year growth.",
+      "revenue_2020_baseline": "FY2020: $1,104M — provides pre-pandemic baseline for growth comparison.",
+      "product_structure": "Two clouds: Commercial Cloud (CRM + Compass Data + Network + Services) and Development Cloud (Vault for quality, regulatory, clinical, safety).",
+      "key_executives": "Peter Gassner (CEO, co-founder); Lindsey Lofgren (VP Product, Compass data line); Frank Defesche (SVP GM Vault CRM, ex-Salesforce, joined 2008).",
+      "competitive_context": "Revenue scale approaching mid-tier enterprise software. Growth fueled by cross-sell (CRM customers adopting Vault, Compass, Network) and geographic expansion."
+    },
+    "source": "Veeva Compass Profiles (September 2022 V2 and February 2024 combined)",
+    "tags": [
+      "veeva",
+      "financials",
+      "company-profile",
+      "revenue",
+      "employees",
+      "executives"
+    ]
+  }
+]

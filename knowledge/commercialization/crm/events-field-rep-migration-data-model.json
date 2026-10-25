@@ -1,0 +1,146 @@
+[
+  {
+    "id": "events-entity-map-001",
+    "category": "commercialization/crm",
+    "title": "Field Rep Events Entity Migration Map - Core Entity Alignment",
+    "products": ["Life Sciences Cloud", "Field Rep Events"],
+    "summary": "Maps 28 legacy CRM event-related entities to their core platform equivalents under the managed events (MRM) cloud, showing which entities have direct mappings, which are new in MRM with no legacy equivalent, and which legacy entities have been deprecated.",
+    "findings": {
+      "direct_mappings": [
+        "Meeting → MngEvent (MRM cloud org permission scope)",
+        "MeetingMember → MngEventParticipant (MRM)",
+        "MeetingProduct → MngEventProduct (MRM)",
+        "Topic (custom entity) → Subject (MRM, under MRM_OR_LSC org permission)",
+        "TopicProduct → SubjectProduct (MRM, MRM_OR_LSC org permission)",
+        "MeetingTopic → SubjectAssignment (MRM)",
+        "Speaker → Expert (MRM) — the Expert entity has a Detail-of-Account relationship; legacy Speaker had a lookup-based design",
+        "Training → ExpertSubject (MRM) — legacy Training had lookups to Speaker, Account, and User; the core ExpertSubject is a detail record of Expert",
+        "Restriction (from remote engagement module) → RestrictedParty (MRM)",
+        "Budget → Budget (MRM)",
+        "BudgetProduct → BudgetProduct (MRM)",
+        "MeetingBudget2 → MngEventBudget (MRM)",
+        "MeetingExpense (actual expenses) → Expense (under Field Service cloud) — the ExpenseOrigin field provides a polylookup to Visit, MngEvent, or MngEventSession",
+        "MeetingExpense (estimated expenses) → EstimatedExpense (MRM) — the field rep events feature will not use MngEventBudget or Budget for estimates",
+        "MeetingExpenseAllocation → ExpenseParticipant (MRM, detail of Expense) — MRM only supports actual allocations; legacy CRM also allowed estimate allocations",
+        "TopicMaterial → SubjectMaterialTemplate (MRM) — has a polylookup to content entities that needs correction"
+      ],
+      "new_mrm_entities_no_legacy_equivalent": [
+        "MngEventType — event type classification not present in legacy",
+        "MngEventTerritory — territory association for managed events",
+        "MngEventSession — sub-session support within a managed event",
+        "MngEventSessionParticipant — session-level participant tracking",
+        "MngEventResource — proposed equivalent of legacy MeetingLocation (not finalized)",
+        "MngEventResourcePreference — detail of MngEventResource for resource planning and ranking",
+        "MngEventSupplierProduct — supplier product association",
+        "BudgetTerritory — territory-level budget allocation"
+      ],
+      "deprecated_legacy_entities": [
+        "MeetingLocation — no exact match in MRM yet; MngEventResource is the proposed replacement",
+        "MeetingExpenseBudgetAllocation — legacy junction between MeetingExpense and MeetingBudget; the initial version supports only one budget per event, eliminating the need for this junction"
+      ],
+      "key_architectural_differences": "ExpenseType uses the LSC org permission scope rather than MRM. The SubjectMaterialTemplate polylookup to content entities needs correction. Expert entity has a Detail-of-Account issue that needs fixing. Budget per event is limited to one in the initial migration version — if multi-budget is needed, a new junction entity must be introduced."
+    },
+    "source": "internal-field-mapping-migration-analysis",
+    "tags": ["events", "migration", "field-mapping", "data-model", "mrm", "field-rep-events"]
+  },
+  {
+    "id": "events-entity-map-002",
+    "category": "commercialization/crm",
+    "title": "Field Rep Events Migration - Missing Fields and Gap Analysis",
+    "products": ["Life Sciences Cloud", "Field Rep Events"],
+    "summary": "Identifies gaps where legacy CRM entities reference fields or capabilities not yet present in the core platform's MRM entities, organized by usage frequency and release targeting.",
+    "findings": {
+      "highest_usage_gaps": [
+        "User entity (3939 legacy 2GP references) — standard User fields are available but custom extensions need mapping",
+        "Account entity (3705 references) — missing SpeakerReference on HealthcareProvider but can use Flex Index as an alternative",
+        "Legacy Meeting entity (3377 references) — open question on Role field derivation for mobile use cases"
+      ],
+      "activity_plan_gaps": [
+        "ActivityPlan entity (337 references) — missing ProviderActivityGoalMeasure type enums: AccountUtilizationLimit (targeted 260) and MonetaryCap (targeted 262)",
+        "PlanCycle entity (235 references) — missing ActivityPlanType picklist values: AccountLimits (targeted 260) and MonetaryCaps (targeted 262)",
+        "ActivityPlanConfig metadata (195 references) — missing AlertBehavior static enum (Warn/Error) and Criteria long text field"
+      ],
+      "account_goal_gap": "AccountGoal entity (85 references) has missing fields — status open, targeted for Account Utilization feature in release 260",
+      "survey_integration": "SurveyInvitation (124 references) and SurveyResponse (78 references) confirmed OK for mapping",
+      "release_targeting": "Most gaps targeted at release 260 for Account Utilization feature; MonetaryCap enum additions deferred to release 262"
+    },
+    "source": "internal-field-mapping-migration-analysis",
+    "tags": ["events", "migration", "gap-analysis", "field-mapping", "release-planning"]
+  },
+  {
+    "id": "events-entity-map-003",
+    "category": "commercialization/crm",
+    "title": "Field Rep Events Migration - Trigger Handler Migration Status",
+    "products": ["Life Sciences Cloud", "Field Rep Events"],
+    "summary": "Tracks the migration status of legacy CRM trigger handlers to the core platform, covering events core functionality, speaker nomination, attendee recruitment, expense management, compliance, and utilization limits.",
+    "findings": {
+      "migrating_in_260": [
+        "AccountInfoToSpeakerHandler — creates Expert record upon nomination",
+        "AttendeeQuotaCountOfAttendeesHandler — accrued attendees and quota limit checking",
+        "ColleagueSurveyDataSharingHandler — recalculates sharing for survey invitations (needs spike for async without platform events)",
+        "ConsentFieldsValidationHandler — checks consent field permissions on participant update",
+        "MeetingAccountUtilizationHandler — account utilization recalculation",
+        "MeetingBusinessHoursHandler — validates meetings not scheduled outside business hours",
+        "MeetingComplianceStatementsHandler — populates compliance statements on creation",
+        "MeetingDateTimeValidationHandler — validates meeting time does not overlap owner's time-off-territory"
+      ],
+      "deferred_to_262": [
+        "MeetingCalculationEventHandler — expense totals calculation; needs async mechanism replacement since legacy platform events are not available",
+        "AgreementMemberFromAgreementDenormHandler — agreement entities not yet in MRM",
+        "AgreementToAgreementMemberDenormHandler — agreement entities not yet in MRM"
+      ],
+      "deprecated": [
+        "AccountAddressInfoToSpeakerHandler — denormalization not possible since no corresponding fields exist on Expert",
+        "AccountSpeakerHandler2 — legacy field update pattern no longer applicable",
+        "AccountRelatedMeetingSharingAsyncHandler — DataChangeEvent platform event not available",
+        "MeetingDataDenormalizationHandler — DeliveryFormat not on MRM Participant; no business case identified",
+        "MeetingLocationUpdateMeetingAddrHandler — location entity deprecated",
+        "MeetingLocationValidationHandler — location entity deprecated"
+      ],
+      "needs_validation": "CopyAccountInfoToInactiveSpeakerHandler — need to verify if standard account merge handles this automatically since Expert is now a detail of Account",
+      "open_spikes": [
+        "Async sharing recalculation without platform events (affects ColleagueSurveyDataSharing and MeetingAccountBasedSharing)",
+        "ConsentFieldsValidation may need to merge into UI controller approach"
+      ],
+      "mobile_critical": "Handlers with mobile impact: AttendeeQuota, AccountUtilization, BusinessHours, ComplianceStatements, DateTimeValidation"
+    },
+    "source": "internal-field-mapping-migration-analysis",
+    "tags": ["events", "migration", "trigger-handlers", "release-260", "release-262"]
+  },
+  {
+    "id": "events-entity-map-004",
+    "category": "commercialization/crm",
+    "title": "Field Rep Events Migration - Settings and Configuration Mapping",
+    "products": ["Life Sciences Cloud", "Field Rep Events"],
+    "summary": "Maps legacy CRM meeting configuration settings to their core platform equivalents, distinguishing org-level from profile-level settings, and identifying which settings are already available, planned, deprecated, or deferred.",
+    "findings": {
+      "already_available_org_level": [
+        "AccountNameFieldToCopyToExpert — mapped to ManagedEventOrgLevelConfig",
+        "ClosedStatuses — mapped to ManagedEventOrgLevelConfig",
+        "CreateStandardEventsForHCPs — mapped to ManagedEventOrgLevelConfig",
+        "PopulateColleaguesBeforeSync — mapped to ManagedEventOrgLevelConfig",
+        "PreventSystemGeneratedMemberDeletion — mapped to ManagedEventOrgLevelConfig",
+        "SignInSheetCountryFieldName — mapped to ManagedEventOrgLevelConfig"
+      ],
+      "planned_additions_org_level": "EnableAdvancedCurrency targeted for release 262",
+      "deprecated_org_level": [
+        "EnableCurrency — legacy needed a number/currency field toggle; the core platform uses currency fields by default",
+        "MealFieldType — no longer applicable",
+        "OrganizerActiveTerritorySharingOnMobile — deferred to release 264; should share for user's active territory only",
+        "Validation settings for lead time, max meal amounts, and max estimated amounts per attendee — all were custom script driven; customers can recreate using standard validation rules"
+      ],
+      "already_available_profile_level": [
+        "AccountAttendeeDisplayFieldSet — mapped to ManagedEventConfig",
+        "AccountAttendeeSearchFieldSet — mapped to ManagedEventConfig",
+        "ActiveTrainingFieldName — mapped to ManagedEventConfig"
+      ],
+      "planned_additions_profile_level": [
+        "ActiveAgreementFieldName — targeted release 262",
+        "AllocationAttendanceStatuses — targeted release 262",
+        "AcceptedStatuses — release 260 TBD; not used in business logic currently"
+      ]
+    },
+    "source": "internal-field-mapping-migration-analysis",
+    "tags": ["events", "migration", "settings", "configuration", "release-planning"]
+  }
+]

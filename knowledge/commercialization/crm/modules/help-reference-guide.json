@@ -1,0 +1,442 @@
+[
+  {
+    "id": "hr-001",
+    "area": "Account Management",
+    "topic": "Account Address",
+    "content": "Account Address helps manage addresses for diverse accounts like HCPs and HCOs. Accurate address tracking and grouping are important for effective engagement, compliance, logistics, and data integrity. Accounts often have multiple addresses for different purposes (billing, shipping). Sales reps use this to tailor outreach, ensuring targeted deliveries and optimized efficiency.",
+    "related_objects": ["Account", "ContactPointAddress", "HealthcareProvider"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-002",
+    "area": "Account Management",
+    "topic": "Account Merge",
+    "content": "Merge duplicate accounts to create a single, accurate view of customer data. This brings consistency and improves business decisions and customer satisfaction. Used when duplicate HCP or HCO records exist in the system.",
+    "related_objects": ["Account"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-003",
+    "area": "Account Management",
+    "topic": "Account Search Configuration",
+    "content": "Customize how users find and manage accounts by configuring search settings in the Admin Console. Define search criteria and results, adjust appearance and behavior of search options. Manage setup at both org and profile levels, and refine by record type.",
+    "related_objects": ["Account", "HealthcareProvider"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-004",
+    "area": "Account Management",
+    "topic": "Account Summarization and Agentforce",
+    "content": "Prepare for efficient customer interactions with Account Summarization. Provides contextual information about provider accounts in a territory, including key account details and updates since the user's last interaction. Available on web and mobile (including offline). Agentforce enables AI-generated summarization with real-time, data-driven insights using natural language utterances in the Agent window.",
+    "related_objects": ["Account", "HealthcareProvider", "ProviderAcctTerritoryInfo"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-005",
+    "area": "Account Management",
+    "topic": "Activity Timeline",
+    "content": "The Activity Timeline gives a 360-degree view of all activities for an account. Helps sales representatives, Key Account Managers (KAM), and Medical Science Liaisons (MSLs) visualize past and upcoming interactions with HCPs and HCOs. Consolidates relevant account activities in one place for better collaboration, informed decision-making, and smarter pre-engagement planning.",
+    "related_objects": ["Account", "Event", "Task", "Visit"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-006",
+    "area": "Account Management",
+    "topic": "Affiliations",
+    "content": "Use Affiliations to understand and map connections between HCPs and HCOs. Mapping these relationships in the healthcare ecosystem provides insights that help target engagement and improve outcomes. Critical for understanding referral networks and organizational hierarchies.",
+    "related_objects": ["ProviderAffiliation", "Account", "HealthcareProvider"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-007",
+    "area": "Account Management",
+    "topic": "Data Change Request (DCR)",
+    "content": "Manage how data changes are submitted, validated, and implemented. Reduce manual corrections, prevent unapproved changes, and ensure data consistency across web and mobile. Supports Account, HealthcareProvider, HealthcareProviderSpecialty, HealthcareProviderNPI, ContactPointAddress, ContactPointPhone, ContactPointSocial, ContactPointEmail, BusinessLicense, and ProviderAffiliation objects. Three modes: Don't apply immediately, Apply changes to each field individually, or Apply changes immediately.",
+    "related_objects": ["LifeSciDataChgDefMngFld", "Account", "HealthcareProvider", "ContactPointAddress"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-008",
+    "area": "Account Management",
+    "topic": "Bulk Update for Account-Related Records",
+    "content": "Enable bulk updates on account-related records from related lists. Requires enabling bulk edits in Admin Console > Mobile > Profile Based App Settings, creating a custom button with List Button display type and URL format using the BulkUpdate component, then adding the button to the account page layout's related lists.",
+    "related_objects": ["Account"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-009",
+    "area": "Account Management",
+    "topic": "Lists and Filters",
+    "content": "Organize and prioritize accounts and associated data. Sales reps manage and refine large volumes of accounts into meaningful segments based on business priorities, territory requirements, or engagement strategies. Next Best Action provides AI-driven weekly action plans with recommended visits, meetings, and emails in optimal sequence.",
+    "related_objects": ["Account", "ProviderAcctTerritoryInfo"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-010",
+    "area": "Account Management",
+    "topic": "Provider Cards",
+    "content": "Consolidates an account's information scattered across various objects and fields (locations, specialties, scheduled visits) into a single mobile card view. Choose which records to show. Can use predefined template or create from scratch.",
+    "related_objects": ["Account", "HealthcareProvider", "Visit"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-011",
+    "area": "Engagement Planning",
+    "topic": "Activity Plans Overview",
+    "content": "Drive omni-channel interaction strategy and align field representatives with organizational objectives. The lifecycle involves: Define the plan (set goals, time frames, territories, activity types, product assignments, weights), Review and approve (collaborative review between reps, managers, and home office), Execute and track (engage HCPs, monitor progress with visualizations). Supports automatic proration of goals based on available working days, accounting for holidays and time off.",
+    "related_objects": ["ActivityPlan", "ActivityPlanTerritory", "TimePeriod", "ProviderActivityGoal", "ProviderActivityGoalMeasure"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-012",
+    "area": "Engagement Planning",
+    "topic": "Activity Plan Setup Requirements",
+    "content": "Getting org ready requires: correct user profiles, licenses, and permission sets. Key setup steps: Add a tab for Activity Plan Reviews in the Commercial app, embed Lightning components on Home Page and Account Record Page for at-a-glance visibility, set up Provider Activity Measure Types based on Visit, Provider Visit, Provider Visit Detailing, Email, or custom objects. Configure ratings, lists, filters, batch size, and calculation logic.",
+    "related_objects": ["ActivityPlan", "ProviderActivityGoal", "PrvdActvtyGoalMeasurePrdct"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-013",
+    "area": "Engagement Planning",
+    "topic": "Calendar Configuration",
+    "content": "Help sales teams visualize and prioritize key events (visits, meetings, time off territory). Schedule events with best time recommendations to avoid conflicts. Prerequisites: Visits, Lists and Filters, Account Address, and Best Time features must be set up first. Configure via Admin Console > Planner > Planner Settings. Key settings include: First Day of Work Week, Work Day Start Time, Time Format, Hourly Slots, account type icons, and routine management.",
+    "related_objects": ["Event", "Visit", "TimeOffTerritory"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-014",
+    "area": "Engagement Planning",
+    "topic": "Key Account Management",
+    "content": "Drive strategic, insight-based customer engagement. Foster long-term, high-value partnerships by configuring account plans. Implement strategic initiatives focused on specific territories. Identify growth opportunities, anticipate customer concerns, and promote cross-functional collaboration. Users can configure records, manage goals, and execute tasks on web and iPad.",
+    "related_objects": ["Account", "Territory2"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-015",
+    "area": "Engagement Planning",
+    "topic": "Time Off Territory",
+    "content": "Let users log and manage time away from assigned territories. Configure time off territory rules in Planner to prevent scheduling during inconvenient time slots. Create predefined time slot intervals (All Day, Morning, Afternoon, Evening) for multiple-day time-offs. Settings are per-profile or org-wide default.",
+    "related_objects": ["TimeOffTerritory"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-016",
+    "area": "Engagement Execution",
+    "topic": "Consent Management",
+    "content": "Capture, synchronize, and honor communication preferences of HCPs across subscription types and channels. Helps organizations stay compliant with data privacy regulations. Setup includes: adding Consent tab to account record page, managing subscriptions and channels, configuring consent statuses, signature requirements, geolocation settings, filtering rules, adding logo to signature section, and configuring mobile cache for offline consent capture.",
+    "related_objects": ["CommunicationSubscriptionConsent", "CommunicationSubscription"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-017",
+    "area": "Engagement Execution",
+    "topic": "Medical Inquiries",
+    "content": "Capture, manage, and respond to critical questions from HCPs. Streamline the inquiry creation process for sales representatives and medical science liaisons. Handle general medical inquiries, adverse events, and product quality complaints. Leverage configurable workflows and compliance capabilities to ensure inquiries are handled per medical, legal, and regulatory standards.",
+    "related_objects": ["Case"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-018",
+    "area": "Engagement Execution",
+    "topic": "Remote Engagement",
+    "content": "Facilitate virtual meetings with HCPs. When users schedule remote visits, HCPs receive invitations with meeting link and passcode. During meetings, users can manage participants, share screens, and end sessions. Eliminates the need for in-person visits when virtual interaction is sufficient. Supports integration with video conferencing platforms.",
+    "related_objects": ["Visit"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-019",
+    "area": "Engagement Execution",
+    "topic": "Surveys",
+    "content": "Design and distribute questionnaires to gather structured feedback from HCPs. Analyze behavioral trends, monitor patient-related outcomes, and strengthen provider relationships. Insights support innovation, treatment planning, and strategic decision-making.",
+    "related_objects": ["Survey"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-020",
+    "area": "Engagement Execution",
+    "topic": "Visit Management",
+    "content": "Optimizes face-to-face visit experience by simplifying visit scheduling, planning, engagement, and post-visit reporting. Reduces administrative tasks so field users can focus on building relationships. Integrates with intelligent content and remote capabilities. Manages sample distribution and direct-to-practitioner requests with built-in compliance controls.",
+    "related_objects": ["Visit", "ProviderVisit", "ProviderVisitPrdDetailing"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-021",
+    "area": "Intelligent Content",
+    "topic": "Emails and Templates",
+    "content": "Configure email templates and fragments for personalized HCP communication. Unlike standard email templates, these provide a controlled framework for compliance and brand alignment. Setup includes: configuring RSVP email address, enabling email quick actions, setting up bulk email from account lists, configuring email topics for sorting/filtering, setting up Consent Management integration, configuring Activity Timeline tracking. Supports third-party email service integration via EmailQueueProcessor Apex interface.",
+    "related_objects": ["LifeSciEmailTemplate", "LifeSciEmailTmplFragment", "LifeSciEmailTmplSnapshot"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-022",
+    "area": "Intelligent Content",
+    "topic": "Presentations",
+    "content": "Streamline content management and empower commercial teams to deliver tailored presentations to HCPs. Create, manage, and distribute presentations with current materials. Link presentations to specific products, key messages, and territories. Track engagement metrics from every interaction to improve marketing strategies and content relevance.",
+    "related_objects": ["Presentation", "PresentationPage", "PresentationClickStrmEntry"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-023",
+    "area": "Intelligent Content",
+    "topic": "Email Template ZIP File Structure",
+    "content": "Email template ZIP files must contain: index.html (required, contains email body HTML), thumbnail.jpg (required, 2.97MB limit, optimal 220x280px), optional attachments folder (attachments under 6MB, required__ prefix for mandatory attachments, no semicolons in filenames), optional fragments folder (reusable HTML content blocks). Multi-language support via index_en_US.html, index_fr.html suffixes matching ISO codes (case-sensitive).",
+    "related_objects": ["LifeSciEmailTemplate"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-024",
+    "area": "Intelligent Content",
+    "topic": "Presentation Source Files",
+    "content": "Two types of source files supported: ZIP files and PDFs. Admins upload to the platform and distribute to sales reps. Dynamic content can be included for personalizing presentations for HCPs and HCOs. Engagement metrics are tracked when users spend at least 3 seconds on a slide, including: presentation details (pages, content versions), related products/messages/guidance, HCP account info, visit details, participant browser/device/OS, timestamps, and content feedback.",
+    "related_objects": ["Presentation", "PresentationPage", "PresentationClickStrmEntry"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-025",
+    "area": "Product Management",
+    "topic": "Product Setup and Hierarchy",
+    "content": "Products are classified as sellable or non-sellable. Further classified into markets, brands, products, therapeutic areas, brand indications, and indications. Sellable products categorized into order items, promotional items, and samples via record types in Product2 object. Product hierarchy provides centralized view for drilling down. Settings to display all products at once or 500 at a time. Additional fields can be shown in hierarchy view.",
+    "related_objects": ["Product2", "LifeSciMarketableProduct"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-026",
+    "area": "Product Management",
+    "topic": "Product Territory Alignments",
+    "content": "Control how products and product messages are assigned to territories. Ensure correct users access correct products in correct territories for compliance and risk reduction. Products can be organized by priority within a territory to help reps prepare for detailing and discussions. Prerequisites: territory settings enabled, territory records created, specific trigger handlers active (LifeSciMarketableProductMetadataHandler, ProductGuidanceDeactivationHandler, ProductTerrDtlAvailabilityHandler, ProductTerritoryAvailabilityExclHandler).",
+    "related_objects": ["Product2", "Territory2", "ProductGuidance"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-027",
+    "area": "Sample Management",
+    "topic": "Sample Inventory Management",
+    "content": "Unified view of transactions, shipments, inventory counts, and assigned batches. Users can manage inventory operations, request samples, create product requests, submit inventory counts, and track operations in a timeline. Key capabilities: inventory count assessments, inventory operations, disbursement process, and custom actions for overriding buttons. Location types serve as rep's inventory on hand, with addresses defined for storage locations.",
+    "related_objects": ["ProductItem", "ProductBatchItem", "InventoryOperation", "ProductDisbursement", "ProductionBatch", "Location"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-028",
+    "area": "Sample Management",
+    "topic": "Sample Inventory Prerequisites",
+    "content": "Permission sets required: Commercial Admin for admins, Field Sales Representative + Health Cloud Starter for users. Product setup: create Product record and Marketable Product record with Drop or Drop and Ship distribution method. Create picklist values for Location.LocationType, InventoryOperation.Status, ProductTransfer.Status, ProductRequest.Status, ProductionBatch.QuantityUnitOfMeasure ('Each' required). Offline access requires Data-type metadata cache configs for 8 objects. Location object needs primaryUserId = '{USER.ID}' SOQL filter.",
+    "related_objects": ["Product2", "LifeSciMarketableProduct", "ProductionBatch", "Location"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-029",
+    "area": "Sample Management",
+    "topic": "Sample Limits",
+    "content": "Precise control over sample distribution for compliance with regulations and organizational policies. Use sample limit templates and rules based on products and accounts to enforce limits. Streamline administration, optimize resource allocation, and reduce audit risks, especially for new product launches or controlled substances. Territory Product Quantity Allocations control which products are available in each territory for a specified period.",
+    "related_objects": ["ProviderSampleLimit", "TimePeriod"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-030",
+    "area": "Common Components",
+    "topic": "App Alerts",
+    "content": "Deliver in-app notifications to sales reps in their flow of work. Create alerts and assign to specific territories. Three creation methods: manual (Record Alert, App Alert, App Alert Territories objects), automatic (Business Rules Engine or Flows), or from external systems. On mobile, alerts appear from bell icon organized into tabs for notifications, recommendations, and guided actions. Users can dismiss, resolve, complete tasks, or navigate to records/URLs directly from alerts.",
+    "related_objects": ["AppAlert", "RecordAlert", "AppAlertTerritory"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-031",
+    "area": "Common Components",
+    "topic": "License Management",
+    "content": "Comply with legal and regulatory standards and adhere to audit-tracking measures with flexible license validity evaluations. Ensures HCPs have required license and authorization to receive pharmaceutical samples. Critical for sample distribution compliance.",
+    "related_objects": ["BusinessLicense"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-032",
+    "area": "Common Components",
+    "topic": "Trigger Handler Administration",
+    "content": "View and manage trigger handlers in the Admin Console. All trigger handlers are inactive by default, except the DCRHandler. Must be activated before features that depend on them will work. Key trigger handlers include: SampleTriggerHandler, VisitTriggerHandler, DCRHandler, CalculateShippedQuantityHandler, SampleLimitTransactionHandler, and various product-related handlers.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-033",
+    "area": "Common Components",
+    "topic": "Workflows for Life Sciences",
+    "content": "Automate business processes and guide users through tasks with clear steps. Configure permissions and actions for each workflow step based on user context and role. Implement custom validations and provide checklists. Supported both online and offline in the mobile app. Works in conjunction with Custom Scripts for complex validation scenarios.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-034",
+    "area": "Common Components",
+    "topic": "Dynamic Tree View Components",
+    "content": "Show related data in an expandable hierarchy. Users can explore related records in one place without navigating multiple pages. Examples: account hierarchy within a health system, or how HCPs and HCOs are aligned under specific territories.",
+    "related_objects": ["Account", "HealthcareProvider"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-035",
+    "area": "Common Components",
+    "topic": "Multi-Object Components",
+    "content": "Consolidate fields from several related objects onto a single record page. Simplifies workflows for accounts, inquiries, and visits by avoiding navigation to multiple pages. Supports three object combinations: Account and HealthcareProvider, Visit and ProviderVisit, and Case and Inquiry.",
+    "related_objects": ["Account", "HealthcareProvider", "Visit", "ProviderVisit"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-036",
+    "area": "Custom Scripts",
+    "topic": "Custom Scripts Overview",
+    "content": "Programmatic tools for data validation across web and mobile (online and offline). Three types: Checklist (helps users understand steps before next workflow stage), Validation (enforces business rules before stage transitions), Visit Action Validation (validates before visit sign/submit). Created as headless Lightning web components (JavaScript + metadata only). Logic contained in self-calling function (IIFE pattern). Return array of objects with title (string) and status (success/warning/error).",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-037",
+    "area": "Custom Scripts",
+    "topic": "Custom Script Best Practices",
+    "content": "Use IIFE pattern for script logic. Custom scripts consolidate validation logic and can query any accessible database data (unlike standard validation rules that only access related records). Provide dynamic user feedback with warnings and custom error messages. Testing requires custom Jest tests since these are not typical LWC components. Debug using Chrome Developer Tools Console and Network tabs.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-038",
+    "area": "Mobile App Configuration",
+    "topic": "Object Metadata Cache Configuration",
+    "content": "Create configurations to generate metadata cache for mobile app sync. Two types: Data (database for mobile) and Configuration (queried records with config data that cannot be synced). Configuration steps: set unique name, select active status, choose type, select SObject, assign profiles, set Delta Sync Date Field, optionally enable Web-to-Mobile Sync, select Attachment Download Method, and set SOQL Filter Conditions. SOQL filters can use Simple Editor or Advanced Editor with variables.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-039",
+    "area": "Mobile App Configuration",
+    "topic": "Mobile Application Settings",
+    "content": "Configure essential mobile app settings in Admin Console including: default browser behavior, security features (password type), user access to functionalities, notifications, search capabilities, and UI customization. Profile-Based App Settings allow per-profile customization. UI Settings configure custom UI components for tabs and static resources.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-040",
+    "area": "Mobile App Configuration",
+    "topic": "Provider Bulk Sync",
+    "content": "Manage relationships with HCOs and HCPs by integrating data from Veeva OneKey directly into the platform data model. Provides verified HCP data for customer engagement plans and activities. Verified data can be used for territory planning and other processes.",
+    "related_objects": ["Account", "HealthcareProvider"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-041",
+    "area": "Data and Analytics",
+    "topic": "Tableau Next Integration",
+    "content": "Transform complex life sciences data into actionable insights and enhanced visualizations. Requires Data 360 and the Data 360 semantic layer. Permission sets needed: Data Cloud Architect/User for data, Tableau Next Admin/Creator/Consumer/Platform Analyst for visualization. Setup includes: creating Tableau Next Admin, configuring Data 360 with Data Model Objects, creating semantic models, and embedding Tableau View LWC on Lightning pages.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-042",
+    "area": "Data and Analytics",
+    "topic": "Sales Data Setup",
+    "content": "Give users access to drug distribution data and prescription data. Help users better understand customers and plan effective interactions. Embedded Tableau reports work in org and mobile app. Mobile requires direct authentication with Tableau from within the embedded view.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-043",
+    "area": "Platform Setup",
+    "topic": "Pre-Installation Tasks",
+    "content": "Before installing the Customer Engagement managed package: turn on setup settings, enable org preferences (inventory counts, territories), enable person accounts, set up territory types, and create territory hierarchy in a territory model record. Assign Commercial Admin and Health Cloud Starter permission sets to admin user.",
+    "related_objects": ["Territory2", "Territory2Model"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-044",
+    "area": "Platform Setup",
+    "topic": "Post-Installation Tasks",
+    "content": "After installing the managed package: turn on Admin Console for admin users, add tabs to the Commercial app, run territory alignment jobs, create record types and page layouts for HCP (Person Account) and HCO accounts, create Life Science Metadata Object Sharing Rules, and configure the Home Page.",
+    "related_objects": ["Account", "Territory2"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-045",
+    "area": "Platform Setup",
+    "topic": "Permission Sets",
+    "content": "Users need appropriate permission sets and permission set licenses. Key permission sets: Life Sciences Commercial Admin (for admin tasks), Life Sciences Field Sales Representative (for field users), Health Cloud Starter (base requirement). Permission Set Licenses control capacity. The Permission Sets page in Setup describes each set and shows related license.",
+    "related_objects": ["PermissionSet", "PermissionSetAssignment", "PermissionSetLicense"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-046",
+    "area": "Platform Setup",
+    "topic": "Admin Console",
+    "content": "Central configuration hub in the Commercial app. Available only with the Customer Engagement managed package installed. From Admin Console, configure all Customer Engagement features in one place: Account Management, Visit Administration, Sample Management, Territory, Product, Planner, Lists and Filters, Mobile settings, and more.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-047",
+    "area": "Platform Setup",
+    "topic": "Multi-Entity Layouts",
+    "content": "Add fields from two objects onto a single page layout for improved user experience. Three supported combinations: Account and HealthcareProvider, Visit and ProviderVisit, Case and Inquiry. Reduces tab-switching and provides a consolidated record view.",
+    "related_objects": ["Account", "HealthcareProvider", "Visit", "ProviderVisit"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-048",
+    "area": "Platform Setup",
+    "topic": "Supported Languages",
+    "content": "Customer Engagement is localized in over 30 languages. Fully supported languages show all features and UI text in the chosen language. End-user support languages allow individual users to select a language other than the company default for end-user facing UI.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-049",
+    "area": "End User Features",
+    "topic": "Home Page",
+    "content": "Starting point for the user's day. Components include: Activity Plan goals visualization, Agentforce Welcome (search bar + predefined utterances), Home Office Announcements, List Views, Next Best Customers (top 5 prioritized accounts with location-based distance), Notifications and Recommendations, Quick Actions and Agentforce Chat (mobile floating actions menu), Reports and Dashboards, and Up Next (upcoming visits, time-offs, events with map view).",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-050",
+    "area": "End User Features",
+    "topic": "Manual Sync on Mobile",
+    "content": "Connect to the platform from the mobile app using Wi-Fi or cellular data. Background synchronization indicated by animated App Settings icon. Users can manually trigger sync from the gear icon to force data refresh. Sync Database option performs full manual sync.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-051",
+    "area": "End User Features",
+    "topic": "Sample Inventory End User",
+    "content": "Unified view of transactions, shipments, inventory counts, and assigned batches. Highlights items requiring urgent attention such as pending acknowledgments of transferred samples. Users can track inventory operations in a timeline, create product requests, submit inventory counts, perform cycle counts with barcode scanning for serialized products, and manage custom flows for visit actions.",
+    "related_objects": ["ProductItem", "InventoryOperation", "ProductDisbursement"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-052",
+    "area": "End User Features",
+    "topic": "Key Account Management End User",
+    "content": "Nurture long-term partnerships with key accounts and target territories. Create Account Plans to build relationships with major customers, analyze prescribing power, and gather input about pharma product impact. Use Territory Plans to monitor regional treatment patterns, gain medical insights, and disseminate scientific information.",
+    "related_objects": ["Account", "Territory2"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-053",
+    "area": "Medical Insights",
+    "topic": "Medical Insights",
+    "content": "Provide field teams a structured way to capture and share insights from HCP and HCO engagements. Show relevant insight data through customized record pages with specific field sets and related lists. Streamline workflow with quick actions and granular permissions to control user interaction with insights.",
+    "related_objects": ["Account"],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-054",
+    "area": "Common Components",
+    "topic": "Reports and Dashboards for Mobile",
+    "content": "Deliver information to mobile app users through standard platform report charts and dashboards. Help users visually understand changing business conditions for real-time data-driven decisions. Users can identify trends, measure activity impact, view source reports, expand charts, and refresh data. Configured through Admin Console > Reports and Dashboards Administration.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  },
+  {
+    "id": "hr-055",
+    "area": "Common Components",
+    "topic": "Batch Jobs",
+    "content": "Automate processing of large record volumes by running Apex batch jobs from Admin Console. Used across multiple features: Activity Plan batch jobs (Calculate Goals, Calculate Working Days, Calculate Goal Measures, Recalculate Providers), Territory alignment jobs (Account, Zip, Brick), Sample limit jobs, and Consent Management alignment jobs. Can be triggered immediately or scheduled.",
+    "related_objects": [],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Help Reference"}
+  }
+]

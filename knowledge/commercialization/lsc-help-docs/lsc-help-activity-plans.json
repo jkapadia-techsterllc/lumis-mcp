@@ -1,0 +1,496 @@
+[
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-org",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Get Your Org Ready for Activity Plans",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Before ​you set up Activity Plans in Life Sciences Cloud, make sure that you have the required user profiles, licenses, and permission",
+    "findings": [
+      {
+        "name": "Get Your Org Ready for Activity Plans",
+        "detail": "Before ​you set up Activity Plans in Life Sciences Cloud, make sure that you have the required user profiles, licenses, and permission sets.​"
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Create custom user profiles for sales representatives and sales managers based on the Standard User profile. Associate the profiles with the corresponding user records. See Create Custom Profiles for Customer Engagement Users . Assign the Life Sciences Core and Life Sciences Field Sales Representative permission sets to sales representatives and sales managers. See Assign Permission Sets to Life Sciences Customer Engagement Users . Set up HCP accounts, territories, and provider account territory information. See Get Your Org Ready for the Customer Engagement Managed Package . Associate the HCP accounts with an active, primary healthcare specialty. See Create Care Specialty Records . Assign territories to the sales representatives and sales managers. You must assign the sales manager to the parent territory of the sales representatives’ territory. See Assign Users to Territories . Make sure the Activity Plan trigger handlers are active. For details of each trigger handler, including descriptions, and trigger conditions, see the ActivityPlan and ActivityPlanTerritory tables in Trigger Handlers by Object . ActivityPlanTerritoryValidationHandler ActivityPlanValidationHandler ActivityPlanTerritoryModHandler ActivityPlanTerritorySharingHandler PAPATerritoryUpdateHandler PAPAApproveProcessHandler"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_org.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-process",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Activity Plan Process Checklist",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Setting up Activity Plans for your organization involves multiple steps, such as defining clear objectives for the field reps, tracking their progress, and making the necessary adjustments to maximize impact. Follow this checklist for a smoother implementation of Activity Plans for your...",
+    "findings": [
+      {
+        "name": "Activity Plan Process Checklist",
+        "detail": "Setting up Activity Plans for your organization involves multiple steps, such as defining clear objectives for the field reps, tracking their progress, and making the necessary adjustments to maximize impact. Follow this checklist for a smoother implementation of Activity Plans for your organization."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Complete the prerequisites for Activity Plans setup. Set up provider activity measure types for activity plans Define a time period . Create an activity plan of type Account Goal, Weighted Territory Goal, or Account Goal Shared. Create an Account Goal Type activity plan . Create a Weighted Territory Goal Type activity plan Create an Account Goal Shared Type activity plan . Assign a territory to the activity plan Set provider activity goals for the activity plan Set provider activity goal measures for the activity plan Assign goals for specific products related to the activity plan Explore the extended capabilities of Activity Plans. Learn about Activity Plan Review Prepare for Activity Plan Adjustments"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_process.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-create-tab",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add a Tab for Activity Plan Reviews",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Streamline the activity plan review cycle and help your users easily review the plan by creating a centralized, dedicated tab in the Life Sciences Commercial app or the Life Sciences Cloud mobile app. Grant access to the appropriate user profiles to make sure that this tab is visible only to your...",
+    "findings": [
+      {
+        "name": "Add a Tab for Activity Plan Reviews",
+        "detail": "Streamline the activity plan review cycle and help your users easily review the plan by creating a centralized, dedicated tab in the Life Sciences Commercial app or the Life Sciences Cloud mobile app. Grant access to the appropriate user profiles to make sure that this tab is visible only to your sales teams. Sales representatives can view, review, and request changes in the activity plans, while managers can view, approve, and update the activity plans, all from one place. Set up the tab on the mobile app so your sales teams can review and submit plans on the go. The Field Review phase is optional. If you decide not to allow it, you can manually set the status of the plan cycles to Approved."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a tab: | Life Sciences Commercial Admin permission set The Employee Review and Manager Review stages help ensure buy-in and catch errors before plan activation. Set realistic review periods; for example, 2 weeks for employee review and 1 week for manager review. Communicate review deadlines clearly to users. Use the review period to identify unrealistic goals, missing accounts, or territory assignment issues before the plan goes live. Note Activity Plan Review is available on the web and, with an internet connection, on the Life Sciences Cloud mobile app for iPad. To help you with this task, this video shows how to set up the activity plan review process. <!-- --> If you aren’t able to watch the video in full screen mode, open the video in a new tab: Set Up the Activity Plan Review Process . From Setup, use the Quick Find box to search for and select Tabs . Under Lightning Component Tabs, click New . In Lightning Component, select the component for the platform where you want the tab. We recommend creating only one tab, based on how your users work, on the web or on the mobile app. For a tab on the web, select lsc4ce:PlanCycle . For a tab on the Life Sciences Cloud mobile app, select lsc4ce:PlanCycleModalWrapper . To make Activity Plan Review available on both platforms, create a separate tab for each. Users then see a duplicate tab on the web and on the mobile app. Alternatively, to support both platforms with a single tab, select lsc4ce:PlanCycleModalWrapper and use it on both. On the web, this component requires more scrolling, and users select Back to return to the previous page. Enter a label and name for the tab. For example, enter Activity Plan Review for the web tab or Activity Plan Review Mobile for the mobile tab. Select a tab style. Enter a description for the tab, and click Next . Select the user profiles that require access to the tab, such as sales representatives and sales managers. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_create_tab.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-configure-plan-edit-component",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add the Plan Edit Screen Component to the Activity Plan Record Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Embed the plan edit screen into your Activity Plan record page to review and adjust a plan's goals from one place, without opening each goal measure record. Users can also sync associated accounts to match the current territory",
+    "findings": [
+      {
+        "name": "Add the Plan Edit Screen Component to the Activity Plan Record Page",
+        "detail": "Embed the plan edit screen into your Activity Plan record page to review and adjust a plan's goals from one place, without opening each goal measure record. Users can also sync associated accounts to match the current territory alignment."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create and save Lightning pages in Lightning App Builder: | Customize Application To access the plan edit screen component: | Life Sciences Commercial Admin permission set From Setup, in the Quick Find box, search for and select Lightning App Builder . Edit the Activity Plan record page, or create one. Search the list of components for Activity Plan Edit Screen, and then drag the component to the page. Save your changes to the record page, and then activate the page to share it with your users."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_configure_plan_edit_component.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-home-page",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Activity Plan Home Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The home page of the Life Sciences Commercial app gives sales representatives and managers a data-rich view of their activity plan goals. The embedded Activity Plan component pairs a high-level goal summary with a granular, product-by-product performance view, set as the default experience to...",
+    "findings": [
+      {
+        "name": "Activity Plan Home Page",
+        "detail": "The home page of the Life Sciences Commercial app gives sales representatives and managers a data-rich view of their activity plan goals. The embedded Activity Plan component pairs a high-level goal summary with a granular, product-by-product performance view, set as the default experience to surface strategic goals. Apply filters to compare actual and potential goal completion rates."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. The Activity Plan homepage shows the Activity Plan by Product component on the Web, and the Activity Plan Progress component on the iPad, if configured. Find out more about the key characteristics of the components on the Activity Plan homepage. The Activity Plan By Product component is only available for activity plans of type Account Goal and Weighted Territory Goal. It's not available for activity plans of the type Account Goal Shared. When you add the Activity Plan By Product component ito any page other than the home page, the default version shows on both web and mobile. The Activity Plan Progress widget assigns one of three statuses based on a field user's completed activities compared to the expected count at an even pace across the cycle. A field user who has completed 110% or more of expected activities is Exceeding pace. Between 90% and 109% is At Pace. Less than 90% is At Risk. For example, if a cycle is 100 working days long and the target is 120 activities, a field user on day 50 is expected to have completed 60 activities. If they've done 57, that's 95% of expected, so they would be At Pace. The band accounts for normal day-to-day variation, such as scheduling gaps, holidays, or call cancelations. These thresholds aren't configurable. Completed and planned activity plans are represented by blue and purple progress bars, respectively. When the progress of the completed and planned activity plans are equal, only the blue bar is visible because it overlays the purple bar. The purple bar is visible only when the progress of the planned activity plans is either behind or ahead of the completed progress bar. Today's Pace compares a field user's current completed count against a target for today. The target is the prorated goal, which is the share of the total goal that a user working at an even pace is expected to have completed by today. The prorated goal is calculated as the number of calendar days elapsed since the plan cycle's start date, divided by a denominator, and then multiplied by the total goal. The denominator depends on whether working days calculations are turned on for activity plans: When working days calculations are turned on, the denominator is the working days defined on the plan cycle. When working days calculations are turned off, the denominator is the total number of calendar days in the plan cycle, which is the end date minus the start date, plus one. The working days value isn't used. On the Life Sciences Cloud mobile app, this metric appears as Today's Pace with Current and Target values. The web app labels the goal Activity Goal and doesn't show the current-pace value. To configure working days calculations, see Configure Working Days Calculation for Activity Plans ."
+      },
+      {
+        "name": "Add the Activity Plan Lightning Component to the Home Page",
+        "detail": "Embed the Activity Plan Lightning component into the home page of the Life Sciences Commercial app for an at-a-glance visibility."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure a Lightning component: | Life Sciences Commercial Admin permission set On the Life Sciences Commercial home page, from the Setup menu, click Edit Page . In the Lightning App Builder, from the Components section's Custom-Managed list, drag the Activity Plan By Product component to an appropriate spot on the home page. In the Activity Plan By Product component properties, select a plan cycle type, such as AccountGoal or WeightedTerritoryGoal. The Activity Plan By Product component doesn't support product and activity filters for plan cycle weighted types. To help users focus on their activity goals, select Show the enhanced Activity Plan Progress component on the mobile’s home page . Note This option replaces the default Activity Plan By Product component with the new Activity Plan Progress widget on the Life Sciences Cloud Mobile app's home page. However, the web app's home page continues to display the default Activity Plan By Product component. Save your changes. Click Activation . Click Assign as Org Default and select Desktop and Phone . Click Next , and save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_home_page.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-admin-console-configurations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Activity Plan Admin Console Configurations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To help Activity Plan admins define plans without hassle, configure provider activity measure types and batch-related settings. Set Up Provider Activity Measure Types for Activity Plans Provider activity measure type helps you track activities at a more granular level, down to the specific activity...",
+    "findings": [
+      {
+        "name": "Activity Plan Admin Console Configurations",
+        "detail": "To help Activity Plan admins define plans without hassle, configure provider activity measure types and batch-related settings. Set Up Provider Activity Measure Types for Activity Plans Provider activity measure type helps you track activities at a more granular level, down to the specific activity that a field representative performs. Define measure types for various kinds of interactions, such as face-to-face visits, product-related meetings, emails, and any other customer touchpoint that you want to track. These measure types help organizations establish the activities that count towards a representative's goal and monitor their progress. Set Up Batch Size and Calculations for Activity Plans Configure operational settings such as the size of batch jobs that govern your entire Activity Plan management. Define the fundamental calculation logic, such as basing performance pace on actual working days. Turn on flexible reporting options so users can view their progress by product or non-product activities. Batch Jobs for Activity Plans Batch jobs are automated processes designed to update and manage multiple activity plan records efficiently. Save time, reduce the risk of manual errors, and maintain the integrity and reliability of activity plan data with these jobs. Make sure that all relevant records are updated consistently and accurately by either triggering a job immediately or scheduling it for later. Set Up Ratings, Lists, and Filters for Activity Plans Help your sales representatives and sales managers view and analyze the granular details of activity plans by configuring ratings, lists, and filters. With these configurations, your users can set up Activity Plan filters in the Planner and in the Next Best Customer component on the home page. Users can also see dedicated list view filters on the Account record page, and use default ratings for filtering Activity Plan records."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_admin_console_configurations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-set-provider-activity-measure-type",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Provider Activity Measure Types for Activity Plans",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Provider activity measure type helps you track activities at a more granular level, down to the specific activity that a field representative performs. Define measure types for various kinds of interactions, such as face-to-face visits, product-related meetings, emails, and any other customer...",
+    "findings": [
+      {
+        "name": "Set Up Provider Activity Measure Types for Activity Plans",
+        "detail": "Provider activity measure type helps you track activities at a more granular level, down to the specific activity that a field representative performs. Define measure types for various kinds of interactions, such as face-to-face visits, product-related meetings, emails, and any other customer touchpoint that you want to track. These measure types help organizations establish the activities that count towards a representative's goal and monitor their progress."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up provider activity measure types: | Life Sciences Commercial Admin permission set Create measure types based on the Visit, Provider Visit, Provider Visit Product Detailing, or Life Science Email object, or any custom object you want. Watch these videos to learn more. Configure Account Plan Administration Settings Configure an Activity Plan Type that Includes Products Integrate Custom and Email Objects with Activity Plans Prerequisites The Activity Type Field and the Activity Type Field Value fields are optional, but if you want to capture these details for visits, add picklist values to the Channel field on the Visit object. Also, review the fields on the Provider Visit, Provider Visit Product Detailing, and Life Science Email objects, and add the required picklist values. For non-product activity types, create custom number fields on the Provider Account Territory Information object that capture the following information. Scheduled activity count: Stores total count of scheduled activities. Actual activity value: Stores total goal value from provider activity goals. Actual activity count: Stores total count of completed activities. Note To track the total volume of activity performed, leave the Activity Type Field and the Activity Type Field Value fields blank. This helps the system to track records in aggregate, such as processing all the Visit records without filtering by activity type. From the App Launcher, find and select Admin Console . Select Activity Plans , and then select Activity Plan Administration . To create a provider activity measure type, click New . On the New Provider Activity Measure Type window, under General Information, complete the fields as needed. For Activity Object, select the object that represents the activity or interaction you want to track. Possible values include standard objects like Visit, Provider Visit, Provider Visit Detailing, or Life Science Email, or any custom object you set up. Enter a custom label and API name for the activity type. The label is shown in reports. The API name represents the unique identifier of the record. For example, for an activity type that represents a visit, enter Phone Visit as the label. The API name is automatically populated. For Activity Type Field, select a field on the activity object that you want to include for tracking. This field helps you filter your tracking to a category or sub-type of an activity. For example, if you select Visit as the activity object, select one of its fields in Activity Type Field, such as Channel. For Activity Type Field Value, enter the value of the field you selected as the activity type. This field helps you filter for the specific activity you want to track. Make sure that the value you enter exactly matches the field value in the org. For example, if you select Channel as the Activity Type Field, add the type of channel the activity is performed through, such as Phone . Make sure Phone is a valid picklist value in Visit's Channel field. If needed, for Activity Type Exclusion Field, select a field you want to exclude from the activity plan. For Activity Account Field, select a field on the activity object that references an account. For activities set up by using custom objects, select a field that has a lookup to the Account object, or select any text field that stores an external identifier of an account. For example, select the Visit object's Account ID as the activity account field. For Activity Territory Field, select a field on the activity object that references a territory. For activities set up by using a standard object, select a field that has a lookup to the Territory object. Custom objects don't support a lookup field to the Territory object. For activities set up by using a custom object, create a text field with a length of 18 characters to store the 18-character Salesforce record ID of the associated Territory2 record, and then select the External ID checkbox for that field. This configuration makes the field available for selection as the Activity Territory Field. For example, select the Visit object's Territory ID as the activity territory field. For Activity Type Date Time Field, select the date time field that stores information about when the activity occurred. For custom activities, select the corresponding date time type field on the custom object. For example, select the Visit object's Planned Start Date field. Assign a number for the display order. This field determines the order in which an activity plan is shown on the account page and the home page. Select Active . This configuration enables goal tracking for the provider activity. Activity plans track both scheduled (future) and completed (past) activities. To facilitate activity tracking as it moves from one state to another, in the Activity Status Information section, define the statuses that correspond to each state. Verify the status values exist or are configured in your org. For Activity Type Status Field, select the field on the activity object that represents the status that you want to track. For example, select the Visit object's Status field. For Activity Type Scheduled Status List, enter a semicolon-separated list of status values that represent scheduled activities. For example, enter Planned . If you enter multiple values using semicolons, avoid spaces after the semicolons. For example, enter Planned;Draft;NotStarted. For Activity Type Status List, enter a semicolon-separated list of status values that represent completed activities. For example, enter Completed . If you enter multiple values using semicolons, avoid spaces after the semicolons. For example, enter Completed;Done;Over. Add provider account territory info for non-product-based activities. In the Provider Account Territory Information Field section, add the following fields. For Aggregated Activity Scheduled Field, enter the custom number field on the Provider Account Territory Information that refers to the scheduled activity count. For Aggregated Goal Field, enter the custom number field on the Provider Account Territory Information that refers to the actual activity value. For Aggregated Activity Actual Field, enter the custom number field on the Provider Account Territory Information that refers to the actual activity count. Save your changes. Provider Activity Measure Type: Product-Based Visit Monitor interactions between field representatives and healthcare professionals that involve the discussion of products. Define provider activity measure types to track product-based visits by using the Provider Visit Product Detailing object. Provider Activity Measure Type: Email Monitor different kinds of employee activities, including interactions that happen over email. Configure provider activity measure types to track activities defined by the Life Science Email object. Provider Activity Measure Type: Custom Object Track any activity of your choice by defining provider activity measure types for custom objects."
+      },
+      {
+        "name": "Provider Activity Measure Type: Product-Based Visit",
+        "detail": "Monitor interactions between field representatives and healthcare professionals that involve the discussion of products. Define provider activity measure types to track product-based visits by using the Provider Visit Product Detailing object. From the App Launcher, find and select Admin Console . Select Activity Plans , and then select Activity Plan Administration . To create a provider activity measure type, click New . On the New Provider Activity Measure Type window, under General Information, complete the fields as needed. For Activity Object, select Provider Visit Product Detailing . Enter a custom label and API name for the activity type. For example, enter Phone Visit - Products as the label. The API name is automatically populated. For Activity Type Field, select Provider Visit Channel Refers to the field that references the activity type via the parent Provider Visit object. For Activity Account Field, select Account . For Activity Territory Field, select Territory For Activity Type Date Time Field, select the field that stores information about when the activity occurred, such Provider Visit Planned Start Time . Assign a number for the display order. Select Active . Activity plans track both scheduled (future) and completed (past) activities. In the Activity Status Information section, define the statuses that correspond to each state. For Activity Type Status Field, select the field on the activity object that represents the activity type's status, such as Provider Visit Status . For Activity Type Scheduled Status List, enter a semicolon-separated list of status values that represent scheduled activities. For Activity Type Status List, enter a semicolon-separated list of status values that represent completed activities. Add advanced configurations for related objects because the activity object, Provider Visit Product Detailing, doesn’t directly reference an account field. For Activity Parent Object, select Provider Visit . Refers to the activity object's parent. For Activity Product Field, select Product ID . This configuration is required for tracking product-based visit activities. For Activity Parent Object Relationship Field, select Provider Visit ID . Refers to the lookup field on the child object that references the parent object. Save your changes."
+      },
+      {
+        "name": "Provider Activity Measure Type: Email",
+        "detail": "Monitor different kinds of employee activities, including interactions that happen over email. Configure provider activity measure types to track activities defined by the Life Science Email object. The following steps help you track scheduled emails that have been successfully sent. Use them as an example to set up your own configurations. From the App Launcher, find and select Admin Console . Select Activity Plans , and then select Activity Plan Administration . To create a provider activity measure type, click New . On the New Provider Activity Measure Type window, under General Information, complete the following fields. For Activity Object, select Life Science Email . Enter a custom label and API name for the activity type. For example, enter Email as the label. The API name is automatically populated. For Activity Type Field, select a field on the Life Science Email object that you want to include for tracking. For example, select Urgency Type . For Activity Type Field Value, enter Scheduled Make sure that the value you enter exactly matches the field value in the org. If needed, for Activity Type Exclusion Field, select a field you want to exclude from the activity plan. For example, select Bounced . For Activity Account Field, select a field on the activity object that references an account, such as To Account ID For Activity Territory Field, select a field on the activity object that references a territory, such as Territory ID . For Activity Type Date Time Field, select Sent Date Time . Assign a number for the display order. Select Active . In the Activity Status Information section, define the statuses that are relevant for tracking. For Activity Type Status Field, select Email Status . For Activity Type Scheduled Status List, enter Scheduled . For Activity Type Status List, enter Sent Save your changes."
+      },
+      {
+        "name": "Provider Activity Measure Type: Custom Object",
+        "detail": "Track any activity of your choice by defining provider activity measure types for custom objects. The following steps help you track a custom object called Meeting Product. Use the steps as an example to set up your own configurations. As a prerequisite, create the following custom objects and fields. Meeting Product: A custom object that represents the activity you want to track, and contains following fields that are relevant for the provider activity measure type. A picklist field (Channel) to represent activities. The picklist values are On Premise and Virtual. A picklist field (Status) that represents the statuses of the activity. The picklist values are Planned and Completed. A date and time field (Meeting Start Date) that indicates the date and time the meeting starts. A text field, 18 characters long, configured as an External ID, that stores the 18-character Salesforce record ID of the associated Territory2 record (Territory). A lookup relationship to the custom Meeting object (Related Meeting). Meeting Member: Represents a custom object that has a lookup to an account and is a child of the custom Meeting object. Meeting: Represents the parent of the custom Meeting Member object. From the App Launcher, find and select Admin Console . Select Activity Plans , and then select Activity Plan Administration . To create a provider activity measure type, click New . On the New Provider Activity Measure Type window, under General Information, complete the fields as needed. For Activity Object, select the custom object you created. For example, select Meeting Product. Enter a custom label and API name for the activity type. For example, enter Meeting for Product as the label. The API name is automatically populated. For Activity Type Field, select the sub-type of activity that you want to track. For example, select Channel. For Activity Type Field Value, enter the value representing the activity that you want to specifically track For example, enter On Premise . For Activity Account Field, select a field that has an indirect lookup relationship with the Account object, or select any text field that stores an external identifier of an account. For example, select Related Meeting. The Meeting Product's Related Meeting field looks up to the Meeting object. The Meeting object is the parent of the Meeting Member object which has a lookup to the Account object. For Activity Territory Field, select the text field that stores the territory's record ID. For example, select Territory. Custom objects don't support a lookup field to the Territory object. Configure the field as an External ID so that it's available for selection here. For Activity Type Date Time Field, select the date time field that stores information about when the activity occurred. For example, select Meeting Start Date. Assign a number for the display order. Select Active . In the Activity Status Information section, select the statuses that are relevant for tracking the activity. For Activity Type Status Field, select Status . For Activity Type Scheduled Status List, enter Planned . For Activity Type Status List, enter Completed Add advanced configurations when the custom activity object doesn’t directly reference the Account field. For Level 1 Related Account Object, select the related object that contains the Account field. For example, select Meeting Member. For Account Field On Account Object, select the field in the related object that has a lookup to the Account object. For example, select Account. For Activity Parent Object, select the parent object associated with the activity. For example, select Meeting. For Activity Parent Object Relationship Field, select the field on the activity object that has a lookup to the parent object. For example, select Related Meeting. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_set_provider_activity_measure_type.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-set-batch-size",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Batch Size and Calculations for Activity Plans",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure operational settings such as the size of batch jobs that govern your entire Activity Plan management. Define the fundamental calculation logic, such as basing performance pace on actual working days. Turn on flexible reporting options so users can view their progress by product or...",
+    "findings": [
+      {
+        "name": "Set Up Batch Size and Calculations for Activity Plans",
+        "detail": "Configure operational settings such as the size of batch jobs that govern your entire Activity Plan management. Define the fundamental calculation logic, such as basing performance pace on actual working days. Turn on flexible reporting options so users can view their progress by product or non-product activities."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up batch size for Activity Plans: | Life Sciences Commercial Admin permission set To help you with this task, this video shows how to configure activity plan jobs and general settings in the Admin Console. <!-- --> If you aren’t able to watch the video in full screen mode, open the video in a new tab: Configure Activity Plan Jobs and General Settings . From the App Launcher, find and select Admin Console . Select Activity Plan and then select Activity Plan Configuration . Under Batch Size Settings, configure the batch size. For example, enter 200. Under General Settings, set up how to calculate performance. To exclude field reps' time-offs such as holidays and weekends from the activity plan calculation, select Enable working days calculations . If you don’t select this option, the calculation is based on the time length of the activity plan. To calculate activity plans only for provider engagements that are associated with a product, select Use product-based calculations . This option also adds a chart option on the account goal plan cycle that shows one aggregated chart of the goal, actual, and prorated attainment values summed across all products for the territory. Because there's no per-product breakdown in this view, the product picker locks to All. To calculate activity plans for provider engagements that don't involve a product, such as generic visits, select Use non-product-based calculations . This option also adds a chart option on the account goal plan cycle that shows the same kind of aggregated chart, built from the non-product-specific goal fields. The product picker locks to None. Note These aggregated chart options are available for the account goal plan cycle only. They aren't available for Weighted Territory Goals or Account Goal Shared plans, and both options are turned off by default. Each option shows a single total rolled up across all matching account and goal records in the territory's active activity plan. It's a cross-record total for the active plan, not a running total over the plan's time period, and inactive plans aren't included. The options work the same way on the desktop site and the mobile app, and need no extra Provider Activity Measure Type setup to appear. The aggregated view is a display-level total and doesn't change how the Calculate Provider Activity Goal Measures batch job computes individual records. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_set_batch_size.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-setup",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Activity Plans Setup",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To configure an activity plan, define the time period, activity types, goals, and metrics. But before you start setting up records, learn about the activity plan statuses and activity plan",
+    "findings": [
+      {
+        "name": "Activity Plans Setup",
+        "detail": "To configure an activity plan, define the time period, activity types, goals, and metrics. But before you start setting up records, learn about the activity plan statuses and activity plan types."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Activity Plan Status Values",
+        "detail": "An activity plan goes through various stages before it’s approved. The status of an activity plan determines which actions are available to admins. In Progress: Refers to the stage in which a cycle plan is being drafted. The plan isn’t active yet, and so it's not visible to managers and employees. Activity plan admins manually select this status. Make sure the Active checkbox remains unselected. Employee Review: Refers to the status that's selected by the Activity Plan admin when employees can edit the plan or when the activity plan admin seeks suggestions. The employees can edit the values until the Employee Due Date. Managers and admins have read-only access to the plan. This status is also used when employees provide suggestions for accounts with no goals, where the Is Suggested checkbox is selected and the Overall Goal field is blank. The Update Activity Plan Status batch job automatically updates the plan's status to Manager Review when the employee submits the plan or when the Employee Due Date is reached. Manager Review: Refers to the status that's automatically assigned to the plan after the employees submit the plan, or when the employees’ due date is reached. The manager reviews and adjusts the values, while the employees and the activity plan admin have read-only access. The Update Activity Plan Status batch job automatically updates the plan's status to Submitted when the manager submits the plan or when the Manager Due Date is reached. Submitted: Refers to the state that’s automatically assigned to the plan when the manager submits the plan or when the Manager Due Date is reached. The plan is now open to the admin for a final round of review, and the employee and manager edits are locked unless the admin overrides the settings. The Activity Plan admin must manually update the status to Admin Review. Admin Review: Refers to the last stage of review in which the admin reviews the proposals before providing their approval. Admins must update the status to Approved or Rejected. Approved: Refers to the state in which the activity plan is approved and active. Admins manually select this status after reviewing and finalizing the plan. The Active checkbox must be selected for the Approved status. Employees can now execute the activities against their goals. Rejected: Admins manually select this status if the plan is not approved during the admin review. The plan does not proceed to execution."
+      },
+      {
+        "name": "Activity Plan Types",
+        "detail": "Activity plans are of three types: account goal, weighted territory goal, and account goal shared. Account goals are the standard activity plans, created for a singular account. Weighted territory goals help you assign weights to activities so that higher-impact activities count more towards a goal. Account goal shared helps sales reps share activities in a territory, boosting team-based selling and collaboration. Define the Time Period for the Activity Plan To help define the duration of an activity plan, configure a Time Period record. Create Activity Plans Establish a strategic activity plan to define activity goals for your sales representatives over a specific period. Tailor the plan's structure with flexible goal types, whether for individual accounts, weighted activities, or shared territories. Implement a formal review process with deadlines and thresholds to govern how sales representatives and managers can modify the plan. Give users the flexibility to adjust their goals as needed. Associate Territories with Activity Plans Connect your strategic activity plans to the territories where sales representatives perform the required activities. Define objectives for a specific territory, cascade performance goals down to the field level, and help provide clear direction to your sales teams. Create Activity Plan Territory records for associating activity plans with territories. Set Goals for Activity Plans Associate an activity plan with individual healthcare accounts and set their high-level performance goals. Define the required targets by breaking down the overall goal into product-specific and non-product-related activities. Establish a baseline to track and populate goal attainment as sales representatives complete their interactions and activities. Set Goal Measures for Activity Plans Refine your account-level goals by setting measurable targets for each distinct type of sales activity. Assign a value to each activity by choosing between a simple target count or a weighted model that values some interactions more than others. Build a complete performance framework that connects the high-level strategic plan to the specific, daily tasks your sales representatives perform. Set Product Goal Measures for Activity Plans Create a highly targeted activity plan that measures performance not just on the activity, but on the specific product being promoted. Link products to individual sales activities that you've defined for each account. Assign a unique weight to each product to strategically prioritize certain items within a weighted goal plan. Edit Goals for an Activity Plan Update an activity plan's goals from one place instead of opening each goal measure record separately. Change goal values for multiple accounts at once, delete goals that are no longer needed, and sync associated accounts to match the current territory alignment. Create Activity Plans by Cloning a Previous Plan Instead of building activity plans manually at the start of every time period, reuse an existing plan. Copy the source plan's goals, goal measures, and goal measure products into new plans for your chosen territories."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_setup.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-time-period",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Define the Time Period for the Activity Plan",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To help define the duration of an activity plan, configure a Time Period",
+    "findings": [
+      {
+        "name": "Define the Time Period for the Activity Plan",
+        "detail": "To help define the duration of an activity plan, configure a Time Period record."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a time period: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Time Period . Click New . Enter a name for the time period, such as Q4 . Select the start date and time and the end date and time of the activity plan. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_time_period.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-set-territories",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Associate Territories with Activity Plans",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Connect your strategic activity plans to the territories where sales representatives perform the required activities. Define objectives for a specific territory, cascade performance goals down to the field level, and help provide clear direction to your sales teams. Create Activity Plan Territory...",
+    "findings": [
+      {
+        "name": "Associate Territories with Activity Plans",
+        "detail": "Connect your strategic activity plans to the territories where sales representatives perform the required activities. Define objectives for a specific territory, cascade performance goals down to the field level, and help provide clear direction to your sales teams. Create Activity Plan Territory records for associating activity plans with territories."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create activity plan territory records: | Life Sciences Commercial Admin permission set Use Salesforce Data Import to import all activity plan data in bulk from external sources to Salesforce. However, if you must manually set up records for activity plans, refer to these steps. From the App Launcher, go to the Life Sciences Commercial app, and select Activity Plan Territories . Click New . Select the territory. Select the activity plan that you want to use. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_set_territories.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-set-provider-activity-goals",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Goals for Activity Plans",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Associate an activity plan with individual healthcare accounts and set their high-level performance goals. Define the required targets by breaking down the overall goal into product-specific and non-product-related activities. Establish a baseline to track and populate goal attainment as sales...",
+    "findings": [
+      {
+        "name": "Set Goals for Activity Plans",
+        "detail": "Associate an activity plan with individual healthcare accounts and set their high-level performance goals. Define the required targets by breaking down the overall goal into product-specific and non-product-related activities. Establish a baseline to track and populate goal attainment as sales representatives complete their interactions and activities."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set goals: | Life Sciences Commercial Admin permission set Use Salesforce Data Import to import all activity plan data in bulk from external sources to Salesforce. However, if you must manually set up records for activity plans, refer to these steps. From the App Launcher, go to the Life Sciences Commercial app, and select Provider Activity Goals . Click New . Select the activity plan and the account of the healthcare professional. For Overall Goal, enter the total target number of all activities associated with the account. Leave the fields in the Overall Attainment section blank. They’re automatically populated when the sales representative schedules, performs, or completes the activities. Under Product Level Attainment, for Product Level Goal, enter the target number of activities that the sales representative must attain for products associated with the account. Leave the fields in the Product Level Attainment section blank because they’re automatically populated when the sales representative schedules, performs, or completes the activities. Under Non Product Level Attainment, for Non Product Level Goal, enter the target number of non-product activities that the sales representative must attain. Leave the fields in the Non Product Level Attainment section blank. They’re automatically populated when the sales representative schedules, performs, or completes the activities. Save your changes. Repeat these steps for each account associated with the activity plan."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_set_provider_activity_goals.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-edit-plan",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Edit Goals for an Activity Plan",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Update an activity plan's goals from one place instead of opening each goal measure record separately. Change goal values for multiple accounts at once, delete goals that are no longer needed, and sync associated accounts to match the current territory",
+    "findings": [
+      {
+        "name": "Edit Goals for an Activity Plan",
+        "detail": "Update an activity plan's goals from one place instead of opening each goal measure record separately. Change goal values for multiple accounts at once, delete goals that are no longer needed, and sync associated accounts to match the current territory alignment."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To edit goals: | Life Sciences Commercial Admin permission set Before you edit goals from an activity plan, add the Activity Plan Edit Screen component to the Activity Plan record page. See Add the Plan Edit Screen Component to the Activity Plan Record Page . Note You can edit goals for activity plans of the Account Goal type only. From the App Launcher, find and select Activity Plans , and then open the activity plan that you want to edit. The plan edit screen lists the accounts on the activity plan and their goals for each measure type. To change a goal, enter the new value in the grid, and then save your changes. You can edit up to 50 cells at a time. To add a product or delete an individual row, open the dropdown menu for the row, and then do one of the following. For an account row, select Add Product to add a product row below it, or select Delete to remove the account row. For a product row, select Delete to remove the product row. To delete goals or goal measures, select their checkboxes, click Delete , and then confirm. If you select provider activity goals, the goals and their related goal measures are deleted. If you select only goal measures, only the selected goal measures are deleted. To sync associated accounts, do the following. Click Sync Associated Accounts . Review the accounts that have exited the plan's territories, and then click Next . Select the accounts to add to the activity plan. Save your changes. Goals for accounts that exited the plan's territories are deleted. Goals are created for the accounts that you selected. Both changes are saved together."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_edit_plan.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-submit-manager-approval",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Review and Submit Activity Goals for Manager Approval",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "As a sales representative, review the activity plans and provider activity goals that are assigned to you by your organization’s activity plan administrator. You can view the account details for your assigned territory and propose adjustments to the",
+    "findings": [
+      {
+        "name": "Review and Submit Activity Goals for Manager Approval",
+        "detail": "As a sales representative, review the activity plans and provider activity goals that are assigned to you by your organization’s activity plan administrator. You can view the account details for your assigned territory and propose adjustments to the goals."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To review provider activity goals: | Life Sciences Core AND Life Sciences Field Sales Representative From the App Launcher, go to Life Sciences Commercial . The home page of the app appears. Select the Activity Plan Review tab. The Provider Activity Goal Overall Status page appears. Review the current status, submission date, and the percentage of changes you can make for an account and activity plan. Make sure the current status is In Progress indicating that the plan is ready for your review. Review your assigned accounts, ratings, specialties, and the activity plan details, such as channel, products, and goal metrics. (Optional) Add or remove an account from the activity plan. To update the activity goals for an account, do the following. Click next to the account you want to update and review the details of the account such as name, activity types, address, specialty, and rating. Under Employee, enter your proposed goal for each activity type. You can update up to the maximum allowed limit of changes. Click Submit . The status of the activity plan changes to Manager Review. Adjust the Goals for Your Activity Plans Prepare for unexpected changes and real-world challenges in reaching your activity goals. Modify the goal measures for existing activity types, set goal measures for additional activity types, and remove accounts from activity plans, based on your requirements."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Activity Plans"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_submit_manager_approval.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-adjust-goals",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Adjust the Goals for Your Activity Plans",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Prepare for unexpected changes and real-world challenges in reaching your activity goals. Modify the goal measures for existing activity types, set goal measures for additional activity types, and remove accounts from activity plans, based on your",
+    "findings": [
+      {
+        "name": "Adjust the Goals for Your Activity Plans",
+        "detail": "Prepare for unexpected changes and real-world challenges in reaching your activity goals. Modify the goal measures for existing activity types, set goal measures for additional activity types, and remove accounts from activity plans, based on your requirements."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To adjust goals for an activity plans: | Life Sciences Core AND Life Sciences Field Sales Representative Note You can only adjust activity goals for non-product based measures. To show suggested activity plans for accounts without a goal, turn on the Show Suggestions toggle in the Activity Plan filter. To incorporate the suggested accounts into your activity plans, go to the suggested account's dropdown menu and select the Activity Plan Adjustment Request option. The display of the Show Suggestions toggle is configured by the admin. See Set Goal Measures for Activity Plans . From the App Launcher, find and select Life Sciences Commercial , and then go to the Accounts tab. In the Activity Plans filter, click next to the account you want to adjust the activity goals for, and then select Activity Plan Adjustment Request . In the New Activity Plan Adjustment Request window, select an adjustment type. Depending upon whether the account for which you're making an adjustment is already included in the activity plan, you can select one of the following. Add New Account to Plan: This action lets you track activity types for an account that's not in the activity plan. Set Goal Measure for Additional Activity Types: This action lets you track activity types that are already part of your activity plan. Alternatively, update the goals for an existing activity type or remove the account from the plan. To add a new account to a plan or set goal measures for additional activity types, do the following. Select the activity type you want to measure. In Assignee Goal, enter your target measure for the activity type. For example, enter the number of times you want to execute a visit activity type. Select a reason for the adjustment. Save your changes. To update the goal measures for an activity type, modify the assignee goals. To remove an account, do the following. Turn on Remove Account from All Activity Plans. Select a reason for the adjustment. Save your changes. This step removes all the Provider Activity Goal Measure records associated with the activity plan for the selected account."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Activity Plan Adjustments"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_adjust_goals.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-submit-admin-approval",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Review and Submit Activity Goals for Final Administrator Approval",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "As a sales manager, review the provider activity goals and measures submitted by your sales representatives. Validate and accept the changes proposed by the sales representative, with or without further modifications, and then submit the goals and measures to the activity plan administrator for...",
+    "findings": [
+      {
+        "name": "Review and Submit Activity Goals for Final Administrator Approval",
+        "detail": "As a sales manager, review the provider activity goals and measures submitted by your sales representatives. Validate and accept the changes proposed by the sales representative, with or without further modifications, and then submit the goals and measures to the activity plan administrator for final approval."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To review provider activity goals: | Life Sciences Core AND Life Sciences Field Sales Representative From the App Launcher, go to Life Sciences Commercial . The home page of the app appears. Select the Activity Plan Review tab. By default, you see the activity plan details for the first active territory in the Territory Switcher. To view details for a different territory, select it from the Territory Switcher. The Provider Activity Goal Overall Status page appears. Review the current status, submission date, percentage of changes you can make for an account and activity plan, and your sales representative’s proposed changes. Make sure the current status is Manager Review indicating that the sales representative has already reviewed and submitted the plan for your review. Review the assigned accounts, ratings, specialties, and the activity plan details, such as channel, products, and goal metrics. (Optional) Add or remove an account from the activity plan. To update the activity goals for an account, do the following. Click next to the account you want to update and review the account details and the goals proposed by your sales representative. If you want to update the details, under Manager, enter your proposed goal for each activity type. You can update up to the maximum allowed limit of changes. Click Submit . The status of the activity plan changes to Submitted."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Activity Plans"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_submit_admin_approval.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-approve-goals",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Approve and Activate Provider Activity Goals",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "As an activity plan administrator, you have the final say on the provider activity goals defined for your sales representatives. Review the goals proposed by your representatives and managers, make modifications as required, and then approve and activate the plan. Make sure that you activate only...",
+    "findings": [
+      {
+        "name": "Approve and Activate Provider Activity Goals",
+        "detail": "As an activity plan administrator, you have the final say on the provider activity goals defined for your sales representatives. Review the goals proposed by your representatives and managers, make modifications as required, and then approve and activate the plan. Make sure that you activate only one activity plan of type Account Goal for each territory at a time."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To approve provider activity goals: | Life Sciences Core AND Life Sciences Commercial Admin From the App Launcher, go to Life Sciences Commercial . The home page of the app appears. Select the Activity Plan Review tab. By default, you see the activity plan details for the first active territory in the Territory Switcher. To view details for a different territory, select it from the Territory Switcher. The Provider Activity Goal Overall Status page appears. Review the current status and percentage of changes that your sales representatives and managers have proposed. Make sure the current status is Submitted, indicating that the manager has already reviewed and submitted the plan for your final review. Review the assigned accounts, ratings, specialties, and activity plan details, such as channel, products, and goal metrics. (Optional) Add or remove an account from the activity plan. To update the activity goals for an account, do the following. Click next to the account you want to update. Review the account details and goals proposed by your representative and manager. Under Admin, enter the final measure for each activity type. Click Submit . The status of the activity plan changes to Admin Review. Run the Validate Activity Plans batch job to activate the activity plan. The plan is activated only if the plan’s start date is on or before the current date."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Activity Plans"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_approve_goals.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-plans-ind-lsc-activity-plans-track-status",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Track Status of Activity Plans by Using List Views and Charts",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Stay informed about the activity plans for your territory and track progress toward your goals. Plan your day for effective operation by using a unified snapshot of targeted, actual, and scheduled activity goals. Execute various activities, such as calls and remote calls, on targeted accounts to...",
+    "findings": [
+      {
+        "name": "Track Status of Activity Plans by Using List Views and Charts",
+        "detail": "Stay informed about the activity plans for your territory and track progress toward your goals. Plan your day for effective operation by using a unified snapshot of targeted, actual, and scheduled activity goals. Execute various activities, such as calls and remote calls, on targeted accounts to meet your defined goals."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To track activity plan status: | Life Sciences Core AND Life Sciences Field Sales Representative As you make progress on your activities, the Calculate Provider Activity Goal Measures batch job calculates the progress metrics. These metrics are not in real time but updated at regular intervals depending on when the job is run. Use dedicated list views and charts for activity plans and weighted activity plans, on the Account page, to identify targeted accounts and see the goal completion progress. Use charts on the home page to get a global overview. From the App Launcher, go to Life Sciences Commercial . By default, you see the details for the first active territory in the Territory Switcher. To view details for a different territory, select it from the Territory Switcher. The home page of the app appears. Review active activity plans by using list views. Select the Accounts tab, and under Lists, select Activity Plan or Weighted Activity Plan . The accounts that are associated with the active activity plan for the selected territory appear. Review the account details, such as the last visit date, actual, scheduled, and total goals, and percentage of goal attainment. If an account has reached the target, the Targeted Activities check box is automatically selected. To see activity metrics for an account in a weighted activity plan, under the Attainment column, click . Review activity plan details by using charts. On the home page, find the Activity Plan component. Select an activity type and product. Review the goal completion data for the current date and for the entire time period of the activity plan. To see additional details on the tracked activities, related accounts, and goal attainment, click View Details . The Activity Plan component is also available on the Account record page, and it shows data at the account level."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Activity Plans"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_plans_track_status.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-plans"
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "mod-arch-001",
+    "category": "modules",
+    "title": "Life Sciences CRM Platform Architecture Layers",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Life sciences CRM platforms are built on a layered architecture designed for offline-capable field operations. The core layers include: native mobile application with local database (SQLite/FMDB) for offline-first operation, data synchronization engine for bidirectional server-device sync, metadata cache for field configurations and business rules, data access layer for abstracting storage operations, and server-side managed packages for business logic. Modern implementations add micro-intelligence layers for field suggestions, content delivery for CLM presentations, and hub/exchange applications for HQ-level analytics and administration.",
+    "findings": {
+      "mobile_architecture": "Native iOS/Android apps use local SQLite databases as the primary data store. All CRUD operations execute locally first, then sync to server. Metadata (layouts, picklists, business rules) is cached locally and refreshed periodically",
+      "sync_engine": "Bidirectional data exchange handles conflict resolution, delta sync optimization, and bandwidth management. Sync operates on configurable schedules and supports manual trigger. Large data volumes require pagination and selective sync strategies",
+      "server_components": "Managed packages on Salesforce contain business logic (validation rules, triggers, workflow), custom objects for CRM data model, and configuration metadata. A rules execution engine evaluates field-level business rules on both client and server",
+      "integration_layer": "Hub/exchange applications provide React-based admin interfaces for HQ users. Real-time collaboration features use event-streaming (Kafka or Platform Events). External data feeds (prescriber data, territory alignments) integrate through scheduled batch processes",
+      "deployment_model": "Content delivery for CLM uses packaged HTML5/JavaScript presentations stored as attachments or files. Analytics dashboards can render on device using cached data or connect to server-side reporting"
+    },
+    "source": "CRM Sales Overview materials (platform architecture, March 2019)",
+    "tags": [
+      "architecture",
+      "mobile-crm",
+      "offline-first",
+      "sync-engine",
+      "managed-package",
+      "data-access-layer"
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "fnd-coding-001",
+    "category": "modules",
+    "title": "Salesforce Apex Coding Standards and Severity Ratings",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Comprehensive Salesforce Apex coding standards with severity classifications (CRITICAL, HIGH, MEDIUM, TRIVIAL). CRITICAL rules focus on governor limit prevention (no SOQL/DML/async in loops, bulkification, collection-based queries), security (CRUD/FLS checks, data sharing context, XSS prevention), and data integrity (no hardcoded IDs, no data-dependent tests). HIGH rules cover code organization (naming conventions, comments, exception handling) and maintainability.",
+    "findings": {
+      "critical_apex_rules": "No SOQL/SOSL queries inside loops. No DML statements inside loops. No async (@future) methods inside loops. Never hardcode IDs. Use SOQL for-loops for large datasets. Anticipate governor limits proactively (cannot be caught in try-catch). Avoid HTTP callouts in loops. No SOQL without WHERE clause or LIMIT. Use appropriate data sharing rules on classes. Avoid unsafe URL redirection. Never declare variables inside loops.",
+      "trigger_standards": "One trigger per object (avoids unpredictable execution order). Delegate all logic to separate Apex classes (no complex logic in triggers). Bulkify to handle up to 200 records per call. Execute DML using collections, not individual records. Use collections in SOQL WHERE clauses. Use consistent naming (e.g., AccountTrigger). Master complex collection patterns (lists of maps, maps of sets) for efficient trigger logic.",
+      "naming_conventions": "Classes: PascalCase, no underscores except test classes, no abbreviations. Variables: camelCase, no underscores, descriptive names (not i/j), use this. prefix for fields. Methods: camelCase, descriptive verbs, capitalize only first letter of acronyms. Constants: ALL_CAPS with underscores. Triggers: include object name (e.g., AccountTrigger).",
+      "unit_testing_standards": "Minimum 85% coverage, goal 100%. No dummy test cases (e.g., i++). Test all functions and all conditional branches. Create all test data (never rely on org data). Separate test classes from production code. No hardcoded IDs in tests. Always use test.startTest()/test.stopTest() for governor limit management. Test bulk scenarios (200 records).",
+      "visualforce_standards": "No hardcoded picklists in VF pages (use controller or static class). Mark controller variables as transient when not needed between server calls (reduces View State). Use static resources for reusable CSS/JS. Place JavaScript at page bottom. Use $ObjectType for change-resistant field references.",
+      "security_standards": "Dedicated integration user profile (Modify All, API Enabled, Password Never Changes, no tab access). Separate System Admin and Sales Admin profiles. API Enabled required for Salesforce for Outlook users. XSS vulnerability prevention.",
+      "database_design_rules": "Always add description to custom objects. Singular object names (not plural). Understand Master-Detail vs Lookup implications (Owner field access, sharing settings). Always include field help text. Never change API names after creation."
+    },
+    "source": "SFDC Coding Standards document \u2014 Titan implementation reference",
+    "tags": [
+      "coding-standards",
+      "apex",
+      "triggers",
+      "naming",
+      "testing",
+      "governor-limits",
+      "security"
+    ]
+  }
+]

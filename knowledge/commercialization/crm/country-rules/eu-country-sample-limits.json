@@ -1,0 +1,272 @@
+[
+  {
+    "id": "eusl-001",
+    "category": "sample-compliance-eu",
+    "question": "What is the EU-wide legal foundation governing pharmaceutical sample distribution?",
+    "answer": "EU Directive 2001/83/EC Article 96 is the foundational legislation. It establishes that: (1) samples may only be supplied to persons qualified to prescribe medicinal products, (2) the number of samples per product per year must be limited, (3) samples may only be supplied for a limited time after the product's first marketing authorization, (4) each supply must be in response to a written, signed, and dated request from the prescriber, (5) member states may impose stricter national rules on top of this baseline. This directive creates a floor — not a ceiling — for sample regulation across the EU.",
+    "gotcha_level": "info",
+    "source": "regulatory-guidance",
+    "tags": ["eu-directive", "2001-83-ec", "article-96", "sample-limits", "framework"]
+  },
+  {
+    "id": "eusl-002",
+    "category": "sample-compliance-eu",
+    "question": "How does the EFPIA Code overlay EU Directive requirements for pharmaceutical samples?",
+    "answer": "The European Federation of Pharmaceutical Industries and Associations (EFPIA) Code of Practice adds an industry self-regulation layer on top of EU Directive 2001/83/EC. Key EFPIA requirements: (1) samples must only be provided to HCPs authorized to prescribe the product, (2) companies must maintain adequate records of sample distribution including recipient, product, quantity, and date, (3) the number of samples per HCP per product per year must not exceed what the member state allows (or EFPIA default if stricter), (4) companies must have effective systems to control, audit, and track sample distribution, (5) EFPIA member companies must comply regardless of whether national law requires it. EFPIA compliance is audited, and violations can result in sanctions including fines and public censure.",
+    "gotcha_level": "info",
+    "source": "regulatory-guidance",
+    "tags": ["efpia", "self-regulation", "industry-code", "documentation", "audit"]
+  },
+  {
+    "id": "eusl-003",
+    "category": "sample-compliance-eu",
+    "question": "What are the universal marking and packaging requirements for pharmaceutical samples in the EU?",
+    "answer": "Across all EU member states, pharmaceutical samples must: (1) be marked with 'free medical sample — not for sale' or the equivalent phrase in the local language (e.g., 'Unverkäufliches Muster' in German, 'Échantillon médical gratuit' in French), (2) not exceed the smallest commercially available presentation/pack size, (3) be identical in composition to the marketed product, (4) be accompanied by the approved Summary of Product Characteristics (SmPC). Companies must maintain records for a minimum period (typically 5 years, though some countries require longer). Adequate internal controls — usually a dedicated sample management system — must prevent quantities exceeding legal limits.",
+    "gotcha_level": "info",
+    "source": "regulatory-guidance",
+    "tags": ["packaging", "labeling", "smallest-presentation", "smpc", "record-keeping"]
+  },
+  {
+    "id": "eusl-004",
+    "category": "sample-compliance-eu",
+    "question": "How does a CRM platform enforce EU country-specific sample limits?",
+    "answer": "The CRM platform enforces sample limits through SampleLimit configuration objects that define: (1) country code, (2) product or product family, (3) maximum samples per HCP per product per period (year, 6 months, etc.), (4) post-launch eligibility window (e.g., 2 years from marketing authorization date), (5) whether the limit counts units or packs (varies by country). At point of sample drop during a visit, the system checks the HCP's year-to-date sample receipt against the configured limit, blocks the transaction if the limit would be exceeded, and captures the HCP's signature on the electronic request form. A nightly or scheduled batch calculation job reconciles totals. Migrating from Veeva CRM: map Veeva's Sample Limit and Sample Transaction objects to the target platform's equivalents, paying special attention to period boundaries (calendar year vs. rolling 12 months) and unit-of-measure differences (units vs. packs).",
+    "gotcha_level": "warning",
+    "source": "regulatory-guidance",
+    "tags": ["crm-configuration", "sample-limit-object", "enforcement", "veeva-migration", "batch-job"]
+  },
+  {
+    "id": "eusl-005",
+    "category": "sample-compliance-eu",
+    "question": "What are Germany's pharmaceutical sample distribution rules under the Heilmittelwerbegesetz (HWG)?",
+    "answer": "Germany's Heilmittelwerbegesetz (HWG) §11 and §47 impose strict sample limits: (1) maximum 2 samples per product per HCP per year, (2) samples may only be provided during the first 2 years after the product's initial market launch in Germany, (3) after 2 years on market, no further samples are permitted at all, (4) each sample supply requires a separate written, signed, and dated request from the HCP — blanket annual requests are not sufficient, (5) products classified under the Betäubungsmittelgesetz (BtMG — Narcotics Act) may not be sampled at all, (6) records must be retained for at least 5 years. CRM configuration: set limit to 2 per product per HCP per calendar year, with a hard stop at the 2-year post-launch date. The per-request signature requirement means every sample drop needs its own signature capture — bulk distribution is non-compliant.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["germany", "hwg", "btmg", "narcotics", "2-year-window", "2-samples", "written-request"]
+  },
+  {
+    "id": "eusl-006",
+    "category": "sample-compliance-eu",
+    "question": "What are France's pharmaceutical sample restrictions under the Loi Bertrand and Code de la Santé Publique?",
+    "answer": "France has among the strictest sample regulations in the EU. Since the Loi Bertrand (2013, codified in Code de la Santé Publique Articles L5122-10 and L5122-11): (1) samples are prohibited for most marketed pharmaceutical products, (2) limited exceptions exist for new products within the first 2 years of commercialization only, (3) for allowed products, maximum 4 units per HCP per product per year, (4) the Transparence Santé (French Sunshine Act) requires reporting of all transfers of value to HCPs, including samples — this data is published on a public database, (5) controlled substances (stupéfiants and psychotropes) may never be sampled, (6) hospital-only products may not be sampled to office-based HCPs. CRM configuration: for most products, sampling should be entirely disabled for France. For newly launched products, set a 4-unit limit with a 2-year post-launch expiry. The anti-gift law reporting requirement means sample transactions must feed into Transparence Santé reporting.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["france", "loi-bertrand", "code-sante-publique", "transparence-sante", "sunshine-act", "4-samples", "most-products-prohibited"]
+  },
+  {
+    "id": "eusl-007",
+    "category": "sample-compliance-eu",
+    "question": "What are the UK's pharmaceutical sample rules under the ABPI Code post-Brexit?",
+    "answer": "Post-Brexit, the UK follows MHRA regulations and the ABPI (Association of the British Pharmaceutical Industry) Code of Practice: (1) maximum 10 sample units per product per HCP per year, or 4 original packs — whichever is smaller, (2) samples should only be provided for products that have been on the UK market for less than 2 years (for new products) or where there is a genuine clinical need, (3) each supply requires a written, signed, and dated request from the HCP, (4) samples of controlled drugs (Schedules 2-5 under the Misuse of Drugs Act 1971) may never be distributed, (5) no more than one sample of a product per HCP per request, (6) companies must maintain records for at least 5 years. The ABPI Code is enforced by the PMCPA — violations result in public case reports and potential expulsion from the ABPI. CRM configuration: set limit to the lesser of 10 units or 4 packs per product per HCP per year. Post-Brexit, UK configurations must be maintained separately from EU configurations.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["uk", "abpi", "mhra", "post-brexit", "10-units", "4-packs", "controlled-drugs-prohibited"]
+  },
+  {
+    "id": "eusl-008",
+    "category": "sample-compliance-eu",
+    "question": "What are Italy's pharmaceutical sample regulations under AIFA rules?",
+    "answer": "Italy's Agenzia Italiana del Farmaco (AIFA) regulates samples through Decreto Legislativo 219/2006 and the Farmindustria Code: (1) maximum 8 samples per product per HCP per year, (2) samples may only be provided during the first 18 months after the product's commercialization in Italy — this is notably shorter than the 2-year window in most other EU countries, (3) detailed records must be maintained and be available for AIFA inspection, (4) the Farmindustria Code (industry self-regulation) may impose additional restrictions, (5) each supply requires a written, dated request signed by the HCP, (6) hospital-only products may only be sampled to hospital physicians. CRM configuration: set limit to 8 per product per HCP per calendar year, with a hard stop at 18 months post-launch — not the more common 24 months. This 18-month window is a common migration misconfiguration when copying rules from other EU countries.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["italy", "aifa", "farmindustria", "18-month-window", "8-samples", "decreto-219-2006"]
+  },
+  {
+    "id": "eusl-009",
+    "category": "sample-compliance-eu",
+    "question": "What are Spain's pharmaceutical sample rules under Royal Decree 1416/1994?",
+    "answer": "Spain regulates pharmaceutical samples through Real Decreto 1416/1994 and the Farmaindustria Code: (1) maximum 10 sample units per product per HCP per year, (2) samples may only be provided during the first 2 years after the product's market authorization in Spain, (3) each supply requires a written, signed request from the prescribing physician, (4) records must be maintained and available for inspection by the Agencia Española de Medicamentos y Productos Sanitarios (AEMPS), (5) regional variation — Spain's Autonomous Communities (Comunidades Autónomas) may impose additional restrictions beyond the national baseline, meaning sampling rules can differ between Catalonia, Madrid, Andalusia, etc. CRM configuration: set the national default to 10 per product per HCP per year with a 2-year window, but support regional overrides. The Autonomous Community variation makes Spain one of the more complex countries for sample compliance — the CRM must be able to apply HCP-location-specific rules, not just country-level rules.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["spain", "royal-decree-1416-1994", "aemps", "farmaindustria", "autonomous-communities", "regional-variation", "10-samples"]
+  },
+  {
+    "id": "eusl-010",
+    "category": "sample-compliance-eu",
+    "question": "What are the Netherlands' pharmaceutical sample rules under the CGR Code?",
+    "answer": "The Netherlands has one of the most restrictive sample regimes in the EU, governed by the Code Geneesmiddelen Reclame (CGR — Code for Pharmaceutical Advertising): (1) maximum 1 sample per product per HCP per year — among the lowest in Europe, (2) the product must be within its first 3 years of marketing in the Netherlands — slightly more generous window than most, (3) each supply requires a written, signed, and dated request, (4) samples must be limited to the smallest commercially available pack size, (5) the CGR Foundation conducts compliance audits and can impose fines. CRM configuration: set limit to 1 per product per HCP per calendar year with a 3-year post-launch window. Migrating from Veeva: if the source system had a higher limit configured (which would indicate a compliance gap), correct to 1 during migration. The extremely low limit means the CRM enforcement is critical — a single over-distribution puts the company in violation.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["netherlands", "cgr", "1-sample", "3-year-window", "strictest-limits"]
+  },
+  {
+    "id": "eusl-011",
+    "category": "sample-compliance-eu",
+    "question": "What are Belgium's pharmaceutical sample rules under the MDEON code?",
+    "answer": "Belgium regulates pharmaceutical samples through the Medicines Act and the MDEON (national ethics platform) requirements: (1) samples are only permitted during the first 2 years after market authorization, (2) the maximum quantity is defined by the smallest commercially available packaging — Belgium does not set a specific numeric unit limit but rather ties it to pack size, (3) each supply requires a written, signed, and dated request from the prescriber, (4) premiums, gifts, and advantages to HCPs (including samples) must be reported through the MDEON/Betransparent platform — Belgium's transparency reporting system, (5) records must be maintained for at least 10 years (notably longer than most EU countries). CRM configuration: set limit based on the smallest available pack per product per HCP per year, with a 2-year post-launch window. The 10-year record retention requirement means sample transaction data must be archived longer than in most countries.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["belgium", "mdeon", "betransparent", "2-year-window", "smallest-pack", "10-year-retention"]
+  },
+  {
+    "id": "eusl-012",
+    "category": "sample-compliance-eu",
+    "question": "What are Austria's pharmaceutical sample rules under the Arzneimittelgesetz (AMG)?",
+    "answer": "Austria's Arzneimittelgesetz (AMG) closely mirrors German regulations: (1) maximum 2 samples per product per HCP per year, (2) samples may only be provided during the first 2 years after the product's market authorization in Austria, (3) each supply requires a written, signed, and dated request from the HCP, (4) narcotics and psychotropic substances under the Austrian Suchtmittelgesetz (SMG) may not be sampled, (5) the Austrian Pharmig Code of Conduct (industry self-regulation) provides additional guidance and enforcement, (6) records must be maintained and be available for inspection. CRM configuration: set limit to 2 per product per HCP per calendar year with a 2-year post-launch window. For DACH-region deployments (Germany, Austria, Switzerland), Austria and Germany share the same numeric limit (2) but have different regulatory bodies and slightly different controlled substance classifications.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["austria", "amg", "pharmig", "dach-region", "2-samples", "2-year-window", "smg-narcotics"]
+  },
+  {
+    "id": "eusl-013",
+    "category": "sample-compliance-eu",
+    "question": "What are Switzerland's pharmaceutical sample rules under the Swiss Pharma Code?",
+    "answer": "Switzerland is not an EU member but is a critical European pharma market, regulated by Swissmedic and the scienceindustries/vips Swiss Pharma Code (Pharma-Kodex): (1) maximum 4 packs per product per HCP per year, (2) samples may only be provided during the first 2 years after market authorization in Switzerland, (3) each supply requires a written, signed, and dated request from the HCP, (4) controlled substances under the Swiss Narcotics Act (BetmG) may not be sampled, (5) Swissmedic conducts periodic audits of pharmaceutical company sample management, (6) the Swiss Pharma Code is enforced through a self-regulatory complaints system. CRM configuration: set limit to 4 packs (not units) per product per HCP per calendar year with a 2-year post-launch window. Switzerland must be configured separately from EU countries — different regulatory framework, different reporting requirements, different currency and language regions (DE/FR/IT). For DACH deployments, note that Switzerland allows 4 packs vs. Germany/Austria's 2 samples.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["switzerland", "swissmedic", "pharma-kodex", "dach-region", "4-packs", "2-year-window", "non-eu"]
+  },
+  {
+    "id": "eusl-014",
+    "category": "sample-compliance-eu",
+    "question": "What are Poland's pharmaceutical sample distribution rules?",
+    "answer": "Poland regulates pharmaceutical samples through the Pharmaceutical Law Act (Prawo Farmaceutyczne) of 2001 and the INFARMA (Employers' Union of Innovative Pharmaceutical Companies) Code: (1) samples are permitted for prescription-only medicines, (2) each supply requires a written, signed, and dated request from an authorized prescriber, (3) companies must register sample distribution activities with the Chief Pharmaceutical Inspector (Główny Inspektor Farmaceutyczny — GIF), (4) maximum quantities are regulated — typically aligned with 2-4 samples per product per HCP per year under industry codes, (5) records of all sample distributions must be maintained and available for GIF inspection, (6) controlled substances under Polish law may not be sampled. CRM configuration: set limits per the INFARMA Code guidance (typically 2-4 per product per HCP per year), ensure sample transaction reporting can be exported in a format acceptable to GIF. Poland's registration requirement with the Chief Pharmaceutical Inspector is unique and may require specific reporting outputs from the CRM.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["poland", "prawo-farmaceutyczne", "gif", "infarma", "registration-required", "2-4-samples"]
+  },
+  {
+    "id": "eusl-015",
+    "category": "sample-compliance-eu",
+    "question": "What are Sweden's pharmaceutical sample rules under the LIF Code?",
+    "answer": "Sweden has strict sample regulations under the LIF (Läkemedelsindustriföreningen — Swedish Association of the Pharmaceutical Industry) Code: (1) maximum 1 sample per product per HCP per 6-month period — effectively 2 per year but enforced semi-annually, (2) samples should only be provided for products where there is a legitimate clinical need, (3) each supply requires a written, signed, and dated request, (4) the LIF Code is enforced by the NBL (Nämnden för Bedömning av Läkemedelsinformation — Information Practices Committee) and IGN (Informationsgranskningsnämnden — Information Examination Board), (5) narcotic and psychotropic substances may not be sampled. CRM configuration: this is a unique case — the limit is per 6-month period, not per year. The CRM must enforce a rolling or calendar half-year period (Jan-Jun, Jul-Dec), not an annual limit. If the platform only supports annual limits, configure as 1 per year to be safe, and flag the gap for custom development. Veeva migration: check whether the source system tracked the semi-annual period correctly.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["sweden", "lif", "nbl", "1-sample-per-6-months", "semi-annual-period", "unique-period"]
+  },
+  {
+    "id": "eusl-016",
+    "category": "sample-compliance-eu",
+    "question": "What are Denmark's pharmaceutical sample rules under the ENLI Code?",
+    "answer": "Denmark regulates pharmaceutical samples through the Danish Medicines Act and the ENLI (Etisk Nævn for Lægemiddelindustrien — Ethical Committee for the Pharmaceutical Industry) Code: (1) maximum 2 samples per product per HCP per year, (2) samples may only be provided for prescription-only medicines, (3) each supply requires a written, signed, and dated request from the HCP, (4) ENLI conducts compliance monitoring and can impose sanctions, (5) all pharmaceutical company interactions with HCPs, including sample provision, must be reported through the Danish Medicines Agency's (Lægemiddelstyrelsen) transparency system, (6) samples of narcotics and psychotropics are prohibited. CRM configuration: set limit to 2 per product per HCP per calendar year. Denmark's transparency reporting requirement means sample transactions must be exportable to the Danish Medicines Agency format.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["denmark", "enli", "danish-medicines-act", "2-samples", "transparency-reporting"]
+  },
+  {
+    "id": "eusl-017",
+    "category": "sample-compliance-eu",
+    "question": "What are Ireland's pharmaceutical sample rules under the IPHA Code?",
+    "answer": "Ireland regulates pharmaceutical samples through the IPHA (Irish Pharmaceutical Healthcare Association) Code of Practice: (1) maximum 4 sample packs per product per HCP per year, (2) samples should only be provided during the first 2 years following the product's initial marketing in Ireland, (3) each supply requires a written, signed, and dated request from the HCP, (4) the IPHA Code is enforced by a compliance committee with power to impose fines and require corrective action, (5) records must be maintained for at least 5 years, (6) controlled drugs under the Misuse of Drugs Acts may not be sampled. CRM configuration: set limit to 4 packs per product per HCP per calendar year with a 2-year post-launch window. Ireland's limits are moderate compared to UK (10 units / 4 packs) and more generous than most continental European countries.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["ireland", "ipha", "4-packs", "2-year-window", "misuse-of-drugs-act"]
+  },
+  {
+    "id": "eusl-018",
+    "category": "sample-compliance-eu",
+    "question": "What are Portugal's pharmaceutical sample rules under the APIFARMA Code?",
+    "answer": "Portugal regulates pharmaceutical samples through the APIFARMA (Associação Portuguesa da Indústria Farmacêutica) Code and Decree-Law 176/2006: (1) samples are permitted only during the first 2 years following the product's market authorization in Portugal, (2) the quantity per HCP per product per year is limited, typically aligned with the smallest available pack, (3) each supply requires a written, signed, and dated request from the prescriber, (4) APIFARMA conducts self-regulatory enforcement, (5) INFARMED (Autoridade Nacional do Medicamento) can audit sample distribution records, (6) controlled substances may not be sampled. CRM configuration: set limits aligned with APIFARMA guidance (typically 2-4 packs per product per HCP per year) with a 2-year post-launch window. Portugal's specific numeric limit can vary by product category, so the CRM should support product-level limit overrides.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["portugal", "apifarma", "infarmed", "decree-law-176-2006", "2-year-window"]
+  },
+  {
+    "id": "eusl-019",
+    "category": "sample-compliance-eu",
+    "question": "What are Greece's pharmaceutical sample regulations under EOF rules?",
+    "answer": "Greece regulates pharmaceutical samples through the National Organization for Medicines (EOF — Ethnikos Organismos Farmakon) and the SFEE (Syndesmos Farmakeutikon Epicheiriseon Ellados — Hellenic Association of Pharmaceutical Companies) Code: (1) maximum 4 units per product per HCP per year, (2) each supply requires a written, signed, and dated request, (3) EOF can audit sample distribution records and impose penalties, (4) the SFEE Code adds self-regulatory compliance layers including periodic auditing of member companies, (5) controlled substances under Greek narcotics law may not be sampled. CRM configuration: set limit to 4 per product per HCP per calendar year. Greece does not impose a specific post-launch window as strictly as some other EU countries, but SFEE guidance suggests limiting sampling to the early marketing period.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["greece", "eof", "sfee", "4-samples", "national-organization-medicines"]
+  },
+  {
+    "id": "eusl-020",
+    "category": "sample-compliance-eu",
+    "question": "What are the Czech Republic's pharmaceutical sample rules under the AIFP Code?",
+    "answer": "The Czech Republic regulates pharmaceutical samples through Act No. 378/2007 on Pharmaceuticals and the AIFP (Asociace inovativního farmaceutického průmyslu — Association of Innovative Pharmaceutical Industry) Code: (1) maximum 2 samples per product per HCP per year, (2) each supply requires a written, signed, and dated request from a qualified prescriber, (3) the State Institute for Drug Control (SÚKL) oversees compliance and can audit records, (4) AIFP self-regulatory enforcement includes compliance monitoring, (5) controlled substances may not be sampled. CRM configuration: set limit to 2 per product per HCP per calendar year. Czech limits match Germany and Austria in quantity, making it straightforward for CEE (Central and Eastern Europe) deployments alongside DACH-region configurations.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["czech-republic", "aifp", "sukl", "2-samples", "cee-region"]
+  },
+  {
+    "id": "eusl-021",
+    "category": "sample-compliance-eu",
+    "question": "What are Norway's pharmaceutical sample rules under the LMI Code?",
+    "answer": "Norway (EEA member, not EU) has the tightest sample restrictions in Europe under the LMI (Legemiddelindustrien — Norwegian Association of Pharmaceutical Manufacturers) Code: (1) maximum 1 sample per product per HCP per year — the strictest limit in Europe, (2) samples may only be provided for products that have been on the Norwegian market for less than 2 years, (3) each supply requires a written, signed, and dated request, (4) the LMI Code is enforced through a self-regulatory compliance system with meaningful sanctions, (5) the Norwegian Medicines Agency (Statens legemiddelverk) oversees regulatory compliance. CRM configuration: set limit to 1 per product per HCP per calendar year with a 2-year post-launch window. Norway's limit is the strictest in Europe and must not be confused with Sweden's 1-per-6-months rule. For Nordic deployments (Norway, Sweden, Denmark, Finland), each country requires its own configuration despite geographic proximity — limits range from 1 (Norway) to 2 (Denmark).",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["norway", "lmi", "eea", "1-sample", "strictest-in-europe", "nordic-region"]
+  },
+  {
+    "id": "eusl-022",
+    "category": "sample-compliance-eu",
+    "question": "What are Finland's pharmaceutical sample rules under the PIF Code?",
+    "answer": "Finland regulates pharmaceutical samples through the PIF (Pharma Industry Finland / Lääketeollisuus ry) Code and the Finnish Medicines Act: (1) samples are restricted to minimal quantities — PIF guidance limits provision to the smallest available presentation, (2) each supply requires a written, signed, and dated request from an authorized prescriber, (3) Fimea (Finnish Medicines Agency) oversees regulatory compliance and can audit sample records, (4) the PIF Code is enforced through a self-regulatory system, (5) controlled substances may not be sampled. CRM configuration: set limits aligned with PIF guidance (typically 1-2 per product per HCP per year) — Finland's rules are among the stricter Nordic countries. For Nordic deployments, Finland should be grouped with Norway and Sweden in the 'strict tier' for sample compliance.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["finland", "pif", "fimea", "minimal-quantities", "nordic-region", "strict"]
+  },
+  {
+    "id": "eusl-023",
+    "category": "sample-compliance-eu",
+    "question": "What are Hungary's pharmaceutical sample rules under the MAGYOSZ Code?",
+    "answer": "Hungary regulates pharmaceutical samples through Act XCV of 2005 on Medicinal Products for Human Use and the MAGYOSZ (Innovative Pharmaceutical Manufacturers' Association) Code: (1) maximum 2 samples per product per HCP per year, (2) each supply requires a written, signed, and dated request from an authorized prescriber, (3) the National Institute of Pharmacy and Nutrition (OGYÉI) oversees compliance and can audit distribution records, (4) MAGYOSZ self-regulatory enforcement provides additional industry oversight, (5) controlled substances and psychotropics may not be sampled. CRM configuration: set limit to 2 per product per HCP per calendar year. Hungary's limits align with the CEE standard of 2 samples, consistent with Czech Republic, making regional CEE rollouts straightforward.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["hungary", "magyosz", "ogyei", "2-samples", "cee-region"]
+  },
+  {
+    "id": "eusl-024",
+    "category": "sample-compliance-eu",
+    "question": "What are Romania's pharmaceutical sample rules under the ARPIM Code?",
+    "answer": "Romania regulates pharmaceutical samples through Law 95/2006 on Healthcare Reform and the ARPIM (Asociația Română a Producătorilor Internaționali de Medicamente — Romanian Association of International Medicine Manufacturers) Code: (1) samples are permitted for prescription-only medicines in limited quantities, (2) each supply requires a written, signed, and dated request from a qualified prescriber, (3) the National Agency for Medicines and Medical Devices (ANMDM) oversees compliance, (4) ARPIM Code provides additional industry self-regulation, (5) controlled substances may not be sampled. CRM configuration: set limits aligned with ARPIM guidance (typically 2-4 per product per HCP per year). Romania's pharmaceutical market is growing rapidly, and regulatory enforcement is tightening — configure conservatively and monitor for regulatory changes.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["romania", "arpim", "anmdm", "law-95-2006", "cee-region", "emerging-market"]
+  },
+  {
+    "id": "eusl-025",
+    "category": "sample-compliance-eu",
+    "question": "What is the summary reference table of EU country sample limits?",
+    "answer": "Quick reference — Annual sample limits per product per HCP: Norway: 1/year (strictest). Netherlands: 1/year (3-year window). Sweden: 1 per 6 months (semi-annual enforcement). Germany: 2/year (2-year window, no samples after). Austria: 2/year (2-year window). Czech Republic: 2/year. Denmark: 2/year. Hungary: 2/year. France: 4/year (most products prohibited entirely; only new products within 2 years). Ireland: 4 packs/year (2-year window). Switzerland: 4 packs/year (2-year window, non-EU). Greece: 4/year. Finland: 1-2/year (minimal quantities). Poland: 2-4/year (GIF registration). Portugal: 2-4/year (varies by product category). Italy: 8/year (18-month window — shorter than others). Spain: 10/year (2-year window, regional variations). UK: 10 units or 4 packs/year (2-year window, post-Brexit separate config). Belgium: smallest-pack based (2-year window, 10-year retention). Romania: 2-4/year (growing enforcement).",
+    "gotcha_level": "warning",
+    "source": "regulatory-guidance",
+    "tags": ["reference-table", "all-countries", "quick-reference", "comparison"]
+  },
+  {
+    "id": "eusl-026",
+    "category": "sample-compliance-eu",
+    "question": "How should country-specific sample limits be configured in the CRM platform?",
+    "answer": "Configure sample limits using a hierarchy of SampleLimit objects: (1) Create a SampleLimit record per country per product (or product family) with fields: Country__c, Product__c, Limit_Per_Period__c (integer), Period_Type__c (Annual, Semi-Annual), Unit_Of_Measure__c (Units or Packs), Launch_Date__c (marketing authorization date), Eligibility_Window_Months__c (e.g., 24 for 2-year, 18 for Italy), Is_Sampling_Prohibited__c (boolean, true for France/most products). (2) The sample drop transaction should check: has the product exceeded its eligibility window? Has this HCP received >= limit for this period? Is sampling prohibited for this product/country? (3) Batch calculation job (typically nightly): recalculates running totals per HCP/product/period, handles period rollovers (calendar year or rolling), flags any over-limit transactions for compliance review. (4) Veeva migration: map Veeva Sample_Limit_vod__c to target SampleLimit, Veeva Sample_Transaction_vod__c to target SampleTransaction — field-by-field mapping is critical because Veeva stores limits differently (per-product-per-account vs. per-product-per-territory).",
+    "gotcha_level": "warning",
+    "source": "regulatory-guidance",
+    "tags": ["crm-configuration", "sample-limit-object", "batch-job", "veeva-migration", "field-mapping"]
+  },
+  {
+    "id": "eusl-027",
+    "category": "sample-compliance-eu",
+    "question": "How should the CRM handle multi-country reps who cross borders (e.g., Benelux, DACH, Nordic)?",
+    "answer": "When reps operate across country borders, the sample limit rules of the HCP's country apply — not the rep's home country or territory. Configuration approach: (1) sample limits must be evaluated based on the HCP's registered country (Account.Country__c), not the rep's territory or current location, (2) for border regions like Benelux (Belgium, Netherlands, Luxembourg), DACH (Germany, Austria, Switzerland), or Nordic (Norway, Sweden, Denmark, Finland), a single rep may need to comply with different limits for HCPs in each country, (3) the CRM's sample limit check at point of drop must resolve the HCP's country and apply that country's rules, (4) example: a Benelux rep visiting an HCP in the Netherlands is limited to 1 sample/year, but visiting an HCP in Belgium follows the smallest-pack rule, (5) year-to-date counts must be maintained per HCP regardless of which rep provided previous samples — if two reps in different territories visit the same HCP, their combined drops count toward the HCP's limit. This HCP-centric (not rep-centric) counting is a frequent Veeva migration gap.",
+    "gotcha_level": "warning",
+    "source": "regulatory-guidance",
+    "tags": ["multi-country", "benelux", "dach", "nordic", "hcp-country-rule", "cross-border", "rep-territory"]
+  },
+  {
+    "id": "eusl-028",
+    "category": "sample-compliance-eu",
+    "question": "What reporting and record retention requirements apply to pharmaceutical sample management by EU country?",
+    "answer": "Reporting and retention requirements vary significantly: (1) Standard EU baseline: retain sample distribution records for at least 5 years, make records available for national authority inspection. (2) Belgium: 10-year record retention — longest in the EU; MDEON/Betransparent reporting of sample value. (3) France: Transparence Santé public database reporting — sample values must be declared and are published publicly. (4) Denmark: Danish Medicines Agency transparency reporting — all HCP interactions including samples. (5) Poland: GIF (Chief Pharmaceutical Inspector) registration of sample distribution activities. (6) UK: PMCPA audit trail — ABPI Code requires companies to have systems that allow retrospective audit. (7) All countries: the CRM must be able to generate reports showing: all samples distributed per product per period, all samples received per HCP per period, any instances where limits were approached or reached, reconciliation between samples shipped and samples distributed, and any samples returned, damaged, or expired. These reports must be exportable in formats acceptable to the relevant national authority. Data retention in the CRM must respect the longest applicable period (10 years for Belgium) across all countries served.",
+    "gotcha_level": "warning",
+    "source": "regulatory-guidance",
+    "tags": ["reporting", "record-retention", "transparency", "audit", "national-authority", "belgium-10-years"]
+  },
+  {
+    "id": "eusl-029",
+    "category": "sample-compliance-eu",
+    "question": "What is the 'smallest presentation' counting pitfall in EU sample compliance?",
+    "answer": "The definition of 'smallest presentation' and the unit of measure for counting samples varies by country, creating a common and dangerous misconfiguration: (1) Some countries count in UNITS (individual tablets, capsules, vials) — e.g., UK allows 10 units. (2) Other countries count in PACKS (the smallest commercially available packaging) — e.g., Ireland allows 4 packs, Switzerland allows 4 packs. (3) Belgium ties the limit to the smallest available packaging without setting a numeric limit. (4) A pack of 28 tablets counts as 1 pack in pack-counting countries but 28 units in unit-counting countries. (5) The CRM's SampleLimit object must have a Unit_Of_Measure field (Units vs. Packs) that is set per country, and the sample drop enforcement logic must convert between the two when checking limits. (6) Veeva migration trap: Veeva's Sample_Limit_vod__c may have been configured inconsistently across countries in the source system — always verify the unit of measure during migration, do not assume the source data is correct. (7) When a product has multiple pack sizes (e.g., 7-tablet starter pack, 28-tablet standard pack, 84-tablet triple pack), the sample must be the smallest available — but 'available' can mean 'commercially marketed in that country,' not 'exists in the global product catalog.'",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["smallest-presentation", "units-vs-packs", "misconfiguration", "veeva-migration", "unit-of-measure", "common-pitfall"]
+  },
+  {
+    "id": "eusl-030",
+    "category": "sample-compliance-eu",
+    "question": "What is the launch date tracking pitfall in EU sample eligibility windows?",
+    "answer": "Most EU countries restrict sample distribution to a window (typically 18-24 months) after a product's launch. The critical pitfall: the eligibility window starts from the marketing authorization date (the date the regulatory authority grants approval to market the product), NOT from the date of first commercial sale, first shipment, or first prescription. This distinction matters because: (1) there can be a gap of weeks to months between marketing authorization and first commercial availability, (2) using the wrong start date shortens or extends the actual eligibility window, (3) for centralized EU marketing authorizations (granted by EMA), the date is the same across all EU countries, but for national authorizations (granted by individual country authorities), the date varies by country, (4) for mutual recognition or decentralized procedures, different countries may have different national authorization dates even for the same product. CRM configuration: the Launch_Date__c field on the SampleLimit or Product object must be populated with the marketing authorization date from the relevant national authority — not the commercial launch date. Veeva migration: audit the launch dates in the source system, as they are frequently set to the commercial availability date rather than the authorization date. A product authorized in January but commercially available in March would have a 2-year window ending in January — not March — of the second year. Configuring this wrong gives 2 extra months of sampling, which is a compliance violation.",
+    "gotcha_level": "critical",
+    "source": "regulatory-guidance",
+    "tags": ["launch-date", "marketing-authorization", "eligibility-window", "common-misconfiguration", "ema", "national-authorization", "veeva-migration"]
+  }
+]

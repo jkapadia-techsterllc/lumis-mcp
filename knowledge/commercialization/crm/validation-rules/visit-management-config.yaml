@@ -1,0 +1,108 @@
+schema_version: "1.0"
+category_name: "Visit Management Configuration"
+description: |
+  Validation rules for CRM Visit Management configuration.
+  Covers record types, trigger handlers, compliance statements,
+  territory visit tracking, and mobile cache requirements.
+
+rules:
+  - id: visit-001
+    name: Visit record types exist and are active
+    description: |
+      Verifies that at least one active Visit record type exists.
+      Record types distinguish between different visit types
+      (Detail Visit, Remote Visit, Medical Education, etc.).
+      Without record types, all visits use the Master record type,
+      limiting configuration flexibility and engagement customization.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM RecordType
+        WHERE SobjectType = 'Visit'
+        AND IsActive = true
+      expect: "count > 0"
+    symptoms:
+      - "Visit record type not available"
+      - "Cannot select visit type"
+      - "All visits showing as same type"
+    resolution:
+      steps:
+        - "Navigate to Setup > Object Manager > Visit > Record Types"
+        - "Create record types for each visit type needed"
+        - "Assign record types to profiles"
+        - "Create matching ProviderVisit record types"
+
+  - id: visit-002
+    name: ProviderVisit record types match Visit record types
+    description: |
+      Verifies ProviderVisit record types exist. Each Visit record type
+      should have a corresponding ProviderVisit record type. Mismatched
+      record types cause errors during visit creation and engagement
+      page rendering. The mapping is configured in Admin Console >
+      Visit Settings > Visit Record Type Mappings.
+    category: configuration
+    severity: warning
+    check:
+      type: soql
+      query: >
+        SELECT Id, Name, DeveloperName, IsActive
+        FROM RecordType
+        WHERE SobjectType = 'ProviderVisit'
+        AND IsActive = true
+      expect: "records.length > 0"
+    symptoms:
+      - "Visit not saving on mobile"
+      - "Detailing summary not saving"
+      - "Record type mismatch error"
+    resolution:
+      steps:
+        - "For each Visit record type, create a matching ProviderVisit record type"
+        - "Names must be identical between Visit and ProviderVisit"
+        - "Configure mapping in Admin Console > Visit Settings"
+
+  - id: visit-003
+    name: Visit trigger handler is active
+    description: |
+      Verifies the Visit trigger handler is active. The trigger handler
+      manages Visit lifecycle events and engagement creation. If inactive,
+      visits may not sync correctly or engagement records won't be created.
+    category: configuration
+    severity: error
+    symptoms:
+      - "Visit sync error on mobile"
+      - "Engagement records not created"
+      - "Visit lifecycle events not firing"
+    resolution:
+      steps:
+        - "Check trigger handler status in Admin Console > Trigger Handlers"
+        - "Find VisitTriggerHandler and enable it"
+        - "Regenerate metadata cache"
+
+  - id: visit-004
+    name: Compliance statement definitions exist
+    description: |
+      Verifies that ComplianceStatementDefinition records exist with
+      Module = Visit and IsActive = true. Compliance statements are
+      required for signature capture at the end of visits.
+    category: compliance
+    severity: warning
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ComplianceStatementDefinition
+        WHERE Module = 'Visit'
+        AND IsActive = true
+      expect: "count > 0"
+    symptoms:
+      - "Signature page not appearing"
+      - "Cannot capture signature after visit"
+    resolution:
+      steps:
+        - "Create ComplianceStatementDefinition with Module = Visit"
+        - "Set IsActive = true"
+        - "Add compliance statement text"
+        - "Regenerate metadata cache"

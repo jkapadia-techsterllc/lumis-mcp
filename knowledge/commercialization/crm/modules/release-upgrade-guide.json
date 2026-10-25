@@ -1,0 +1,137 @@
+[
+  {
+    "id": "rug-001",
+    "category": "release-management",
+    "question": "What is the standard monthly release cycle for the target platform?",
+    "answer": "The target platform follows a monthly release cadence. Each release is first pushed to sandbox environments 3-4 weeks before production. During this validation window, customers and implementation partners run smoke tests, validate custom code, and confirm module-level functionality. Production push follows once the sandbox validation period concludes. This staggered approach gives organizations time to catch regressions before they reach end users in the field.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["release-cadence", "monthly-release", "sandbox", "production", "validation-window"]
+  },
+  {
+    "id": "rug-002",
+    "category": "release-management",
+    "question": "How do major releases differ from monthly releases?",
+    "answer": "The platform delivers 3 major releases per year, each containing larger feature sets, new modules, or significant enhancements to existing capabilities. Major releases may require manual feature activation by administrators — features often ship disabled by default to prevent unplanned changes to field user workflows. Major releases may also include schema changes, new permission sets, or API version bumps that require more thorough regression testing than a standard monthly release.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["major-release", "feature-activation", "schema-changes", "api-version"]
+  },
+  {
+    "id": "rug-003",
+    "category": "release-management",
+    "question": "What criteria determine whether a fix goes into a patch release versus waiting for the next monthly release?",
+    "answer": "A fix qualifies for a patch release when it meets all of these criteria: (1) it is a narrowly scoped fix addressing a specific, well-understood defect, (2) it was reported by a customer with a support case attached, (3) it has been thoroughly tested with minimal blast radius, and (4) the risk of NOT patching — such as data integrity issues, compliance failures, or blocked critical workflows — exceeds the change risk of deploying the patch. Cosmetic issues, minor UX improvements, and broad refactors should wait for the next monthly release. Patch releases go through an expedited but rigorous review process including code review, targeted regression testing, and release management approval.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["patch-release", "hotfix", "criteria", "risk-assessment", "customer-reported"]
+  },
+  {
+    "id": "rug-004",
+    "category": "release-management",
+    "question": "What should be validated in sandbox before accepting an upgrade?",
+    "answer": "Pre-upgrade sandbox validation should cover: (1) Deploy the upgrade to a sandbox environment first — never push directly to production. (2) Run smoke tests on all configured modules — visit management, sample management, email, content, coaching, activity plans, territory alignment, and any custom modules. (3) Validate that all custom code compiles — Apex triggers, LWC components, process builder flows, and any custom integrations. (4) Check API version compatibility — ensure no deprecated API versions are referenced. (5) Verify that existing page layouts render correctly and no unexpected fields have appeared. (6) Test with representative user profiles to confirm permission sets still grant correct access. (7) Validate mobile sync completes successfully after the upgrade.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sandbox-validation", "smoke-test", "custom-code", "api-compatibility", "pre-upgrade"]
+  },
+  {
+    "id": "rug-005",
+    "category": "release-management",
+    "question": "What is the recommended regression test checklist after a platform upgrade?",
+    "answer": "A thorough post-upgrade regression checklist should validate these critical workflows in order: (1) Visit/call creation and submission — including all required fields and validation rules. (2) Sample drop with electronic signature capture — verify sample inventory decrements correctly. (3) Email send via approved email templates — confirm template rendering and tracking. (4) CLM content rendering — verify presentations load and display correctly on tablet. (5) Offline sync — take device offline, perform operations, reconnect, and verify sync completes without errors. (6) Territory alignment — confirm account-territory assignments are intact and hierarchy is correct. (7) Activity plan attainment calculation — verify targets and actual counts are computing correctly. (8) Coaching reports and dashboards — confirm manager-facing analytics still populate. (9) Custom triggers and flows — run any customer-specific automation to verify it still fires correctly.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["regression-test", "checklist", "visit", "sample", "email", "sync", "territory", "activity-plan"]
+  },
+  {
+    "id": "rug-006",
+    "category": "release-management",
+    "question": "How does feature activation work for new capabilities delivered in a release?",
+    "answer": "New features often ship disabled by default and require explicit activation. The platform uses a feature configuration system (UserFeatureConfigurations or equivalent feature flags) to gate new capabilities. Administrators must: (1) Review the release notes to identify which features shipped and their activation requirements. (2) Enable features through the admin console — some require a toggle, others require loading configuration data. (3) Test features in sandbox before enabling in production. (4) Some features may require additional permission set assignments to user profiles. (5) Certain features are auto-enabled and cannot be deactivated — these are typically bug fixes or security patches. Always review the 'What's New' section in release notes to understand which features are opt-in versus auto-enabled.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["feature-activation", "feature-flags", "admin-console", "UserFeatureConfigurations", "opt-in"]
+  },
+  {
+    "id": "rug-007",
+    "category": "release-management",
+    "question": "What custom code compatibility issues commonly arise during platform upgrades?",
+    "answer": "The most common custom code compatibility issues during upgrades include: (1) Deprecated API versions — custom Apex classes referencing API versions that have been retired will fail compilation. Always check the minimum supported API version in release notes. (2) Apex test failures — platform changes to validation rules, sharing model, or field-level security can cause previously passing tests to fail. (3) Process builder and flow compatibility — platform schema changes can break flows that reference renamed or removed fields. (4) LWC component changes — updates to base Lightning components can break custom LWC that depend on specific component APIs. (5) Trigger order changes — new platform triggers introduced in the release may fire before or after custom triggers, changing execution order. (6) Governor limit adjustments — while rare, certain releases may adjust governor limits that affect bulk operations in custom code.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["custom-code", "apex", "lwc", "api-version", "deprecated", "compatibility", "triggers"]
+  },
+  {
+    "id": "rug-008",
+    "category": "release-management",
+    "question": "How should integration endpoints be tested after a platform upgrade?",
+    "answer": "After an upgrade, validate all integration endpoints systematically: (1) Test each REST/SOAP API endpoint used by middleware (MuleSoft, Informatica, etc.) — verify request/response schemas match expectations. (2) Check API version compatibility — if your integration specifies a fixed API version, confirm it is still supported. (3) Validate authentication flows — OAuth token exchange, session management, and refresh token behavior. (4) Test bulk data operations — verify that bulk API import/export still processes within expected timeframes. (5) Confirm webhook/event-driven integrations — platform events, CDC (Change Data Capture), and outbound messages should still fire correctly. (6) Check error handling — verify that error codes and messages returned by the API have not changed in ways that break downstream error handling logic. (7) Run end-to-end integration tests with production-representative data volumes.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["integration-testing", "api", "middleware", "oauth", "bulk-api", "webhooks"]
+  },
+  {
+    "id": "rug-009",
+    "category": "release-management",
+    "question": "What should be done when mobile users report stale data or missing fields after an upgrade?",
+    "answer": "After an upgrade, the metadata cache on mobile devices may not automatically regenerate with the new release's schema changes. To resolve: (1) Administrators should clear the metadata cache from the admin console — this forces all mobile users to re-download metadata on next sync. (2) Mobile users should perform a full sync (not a delta sync) to pick up new metadata definitions, page layouts, and permission changes. (3) If layout or permission changes were included in the release, a metadata cache clear is almost always required. (4) In some cases, users may need to log out and log back in to force a complete metadata refresh. (5) Monitor sync success rates in the admin dashboard for the first 24-48 hours post-upgrade to catch any users stuck with stale metadata.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["metadata-cache", "mobile", "sync", "stale-data", "full-sync", "admin-console"]
+  },
+  {
+    "id": "rug-010",
+    "category": "release-management",
+    "question": "How do permission set changes in new releases affect existing users?",
+    "answer": "New features delivered in a release often require additional permission sets to be assigned before users can access them. Common scenarios: (1) A new module or feature ships with its own permission set — users will not see it until the permission set is assigned to their profile. (2) Existing permission sets may be updated with new field-level security (FLS) entries — typically auto-applied, but verify. (3) Some releases introduce new object permissions that must be explicitly granted. (4) Permission set groups may need to be updated to include new permission sets. (5) Always review the 'Required Permissions' section of release notes for each new feature. (6) Test permission changes with a representative user from each role (rep, manager, admin, medical) before rolling out to all users. Failing to assign new permission sets is one of the most common post-upgrade issues reported by field users.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["permission-sets", "FLS", "user-access", "profiles", "new-features"]
+  },
+  {
+    "id": "rug-011",
+    "category": "release-management",
+    "question": "How should organizations track and plan for deprecated features across releases?",
+    "answer": "Feature deprecation follows a predictable lifecycle: (1) A feature is marked as 'deprecated' in release notes — it still works but is no longer enhanced. (2) In a subsequent release (typically 2-3 releases later), the feature is marked as 'end of life' with a specific sunset date. (3) After the sunset date, the feature may be removed entirely. To manage this: Track all deprecation notices in a central document, mapping each deprecated feature to the release where it was deprecated and the planned sunset date. Identify all places in your configuration and custom code that depend on deprecated features. Plan migration to replacement features before the sunset date. Test the replacement in sandbox. Common deprecation areas include: legacy API versions, older authentication methods, classic UI components, and superseded modules. Ignoring deprecation notices is a leading cause of upgrade failures in later releases.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["deprecation", "end-of-life", "sunset", "migration-planning", "backward-compatibility"]
+  },
+  {
+    "id": "rug-012",
+    "category": "release-management",
+    "question": "What page layout changes should organizations watch for during upgrades?",
+    "answer": "The platform may add new standard fields to default page layouts as part of a release. This can cause issues if: (1) New fields appear on layouts that are customer-facing without review — potentially exposing data that should be restricted. (2) Layout changes alter the field order or grouping that field users are accustomed to, causing confusion during calls or visits. (3) New required fields are added that break existing workflows or integrations. Best practices: Review page layout changes in sandbox before pushing to production. Compare layout XML/metadata before and after the upgrade to identify any platform-injected fields. Remove or hide any new fields that are not relevant to your deployment before enabling in production. Pay special attention to compact layouts used on mobile devices — field real estate is limited and unwanted fields create clutter.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["page-layouts", "field-exposure", "compact-layouts", "mobile", "data-visibility"]
+  },
+  {
+    "id": "rug-013",
+    "category": "release-management",
+    "question": "What is the recommended post-upgrade smoke test script?",
+    "answer": "Execute this ordered validation sequence after every upgrade: (1) Login — verify authentication succeeds for each user role (rep, manager, admin). (2) Home page — confirm dashboard widgets load, KPIs calculate, and recent activity displays. (3) Account search — search for a known account, verify results appear with correct territory assignment. (4) Visit/call creation — create a new visit, add attendees, fill required fields, submit. (5) Sample drop — record a sample drop with lot number, capture electronic signature, verify inventory decrement. (6) Email send — compose and send an approved email, verify template renders and send tracking logs. (7) Content/CLM — open a presentation, navigate slides, record engagement. (8) Sync — force a manual sync, verify it completes without errors, check sync timestamp. (9) Reports — run a standard report (visit activity, sample disbursement), verify data populates. (10) Offline round-trip — disconnect, create a visit, reconnect, sync, verify the visit appears server-side. This sequence covers the critical path through all major modules.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["smoke-test", "post-upgrade", "validation-script", "ordered-checklist"]
+  },
+  {
+    "id": "rug-014",
+    "category": "release-management",
+    "question": "When should an organization consider rolling back an upgrade, and how does rollback work?",
+    "answer": "Consider rollback when any of these conditions exist post-upgrade: (1) Data corruption is detected — records are missing, duplicated, or contain incorrect values. (2) A critical business feature is completely broken — such as visit submission, sample management, or electronic signature. (3) A compliance-critical feature is disabled — such as audit trails, consent management, or sample accountability. (4) Sync failures affect more than 10% of the mobile user base and cannot be resolved with a metadata cache clear. Rollback is typically a support-driven process, not self-service — contact vendor support immediately and document the specific failure conditions. Rollback windows are usually time-boxed (24-48 hours post-upgrade). Beyond that window, forward-fixing with a patch is usually the safer option. Important: rollback may not be possible if the upgrade included data migration steps or schema changes that altered existing records.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["rollback", "criteria", "data-corruption", "compliance", "support-driven", "time-boxed"]
+  },
+  {
+    "id": "rug-015",
+    "category": "release-management",
+    "question": "How should organizations maintain internal release notes documentation for end users?",
+    "answer": "Organizations should maintain their own internal release notes that map platform features to customer-specific configuration and impact: (1) For each release, review the vendor's release notes and filter to features relevant to your deployment — most releases include features for modules you may not use. (2) Translate technical release notes into end-user language — field reps care about what changed in their daily workflow, not API version numbers. (3) Document any configuration changes required — new permission sets, feature activations, admin console settings. (4) Include screenshots or short walkthroughs for visible UI changes. (5) Note any breaking changes or behavior modifications that require user retraining. (6) Distribute internal release notes at least 1 week before production push so field managers can prepare their teams. (7) Maintain a running document across releases so users can reference changes from previous releases. (8) Include a contact for questions or issues — typically the internal help desk or CRM admin team.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["release-notes", "internal-documentation", "end-user-communication", "change-management"]
+  }
+]

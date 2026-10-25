@@ -1,0 +1,166 @@
+[
+  {
+    "id": "ag-cp-005",
+    "area": "Care Programs",
+    "topic": "Care Program Setup and Enrollment",
+    "content": "Enroll participants in care programs like diet/nutrition classes or wellness programs. Support electronic signatures and consent tracking per enrollment. Consent capture methods: in-person (tablet/mobile), remote (Experience Cloud site). Key setup: (1) Map external program enrollment fields to org fields using Care System Field Mapping. (2) Configure enrollment flows. (3) Set up consent documents per care program. (4) Register and ship healthcare devices for biometric tracking. (5) Configure consent forms on Experience Cloud sites for remote consent.",
+    "device_management": "Register healthcare devices or create shipping requests. Care Coordinators track biometric data, identify healthcare gaps, and engage with patients for follow-ups.",
+    "prerequisites": [
+      "Person Accounts enabled",
+      "Care programs created",
+      "Consent documents configured"
+    ],
+    "gotchas": [
+      "Care System Field Mapping must be configured before using the Enrollments API",
+      "Each mapping requires Label, Name, Source System, Target Object, External ID Field, and IsActive",
+      "Device registration and shipping are separate workflows from enrollment"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Care Programs"
+    }
+  },
+  {
+    "id": "ag-cp-006",
+    "area": "Benefit Verification",
+    "topic": "Pharmacy Benefits Verification",
+    "content": "Patient services program reps verify patient insurance and pharmacy benefit details. The platform provides agentic AI automation for benefits reverification: (1) Draft and send emails to patients with assessment URLs. (2) Patients submit updated personal, drug, pharmacy, provider, and insurance details via the assessment link. (3) Reps summarize and review responses comparing existing vs new information. Prebuilt flows automate various reverification tasks. The agent topic accelerates the reverification process by efficiently updating patient details.",
+    "prerequisites": [
+      "Agentic AI licenses (Flex Credits Metering, Employee Agent, GPT Platform, Copilot, Prompt Builder)",
+      "Care programs configured"
+    ],
+    "gotchas": [
+      "Currently English-only interface for the agentic features",
+      "Requires multiple AI-specific add-on licenses",
+      "Clone the default verification flow before customizing \u2014 do not edit the original"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Benefits Verification"
+    }
+  },
+  {
+    "id": "cp-004",
+    "category": "patient-engagement",
+    "topic": "Care Programs Architecture",
+    "description": "Care Programs provide structured patient support workflows. A Care Program defines the overall program; Care Program Products link eligible products; Care Program Enrollees track patient participation. Enrollment criteria can be automated via Flow or Apex triggers. Program types include patient assistance, adherence support, disease management, and outcomes tracking. Each enrollee has a care plan with milestones and tasks.",
+    "objects": [
+      "CareProgram",
+      "CareProgramProduct",
+      "CareProgramEnrollee",
+      "CareProgramEnrolleeProduct",
+      "CarePlan"
+    ],
+    "setup_steps": [
+      "Create Care Program records with eligibility criteria",
+      "Link products to programs via CareProgramProduct",
+      "Configure enrollment workflows (manual or automated)",
+      "Set up care plan templates with milestones",
+      "Configure task assignment and escalation rules"
+    ],
+    "gotchas": [
+      "Enrollment criteria validation runs at enrollment time, not retroactively",
+      "Care plan templates are separate from the Care Program definition",
+      "Product eligibility must be configured per program"
+    ],
+    "migration_relevance": "Veeva patient programs map to Care Programs. Custom HUB implementations require careful object mapping."
+  },
+  {
+    "id": "cp-005",
+    "category": "patient-engagement",
+    "topic": "Financial Assistance and Benefits Verification",
+    "description": "Financial Assistance supports copay card programs, free drug programs, and patient financial aid. Benefits Verification Integration (BVI) checks insurance coverage and patient eligibility. HealthInsuranceBenefit and PharmacyBenefit objects capture coverage details. Prior Authorization workflow tracks approval status. The platform supports both manual and automated BVI through integration with pharmacy benefit managers (PBMs) and payers.",
+    "objects": [
+      "FinancialAssistanceProgram",
+      "FinancialAssistanceEnrollment",
+      "HealthInsuranceBenefit",
+      "PharmacyBenefit",
+      "PriorAuthorization"
+    ],
+    "setup_steps": [
+      "Configure financial assistance program types",
+      "Set up benefits verification integration endpoints",
+      "Configure prior authorization workflows",
+      "Set up copay card issuance and tracking",
+      "Configure payer-specific integration mappings"
+    ],
+    "gotchas": [
+      "BVI integration requires real-time connectivity to PBMs/payers",
+      "Prior authorization status must be tracked and expired authorizations flagged",
+      "Financial assistance eligibility criteria vary by program and must be configurable"
+    ],
+    "migration_relevance": "Specialized patient services capability. Maps to custom HUB/patient services implementations."
+  },
+  {
+    "id": "cp-006",
+    "category": "patient-engagement",
+    "topic": "Intelligent Document Automation",
+    "description": "Intelligent Document Automation (IDA) extracts structured data from unstructured documents (prescriptions, insurance cards, lab results, enrollment forms). Uses OCR and AI-powered extraction to populate platform records. Document classification identifies document type before extraction. Extracted fields are validated against expected schemas before record creation. Supports batch processing for high-volume document intake.",
+    "objects": [
+      "DocumentExtractionResult",
+      "DocumentClassification"
+    ],
+    "setup_steps": [
+      "Configure document type classifications",
+      "Set up extraction templates per document type",
+      "Configure field validation rules for extracted data",
+      "Set up batch processing for high-volume intake",
+      "Configure error handling and manual review queues"
+    ],
+    "gotchas": [
+      "OCR accuracy varies by document quality - build in manual review for low-confidence extractions",
+      "Extraction templates need document-type-specific configuration",
+      "HIPAA and data handling compliance requirements apply to all document processing"
+    ],
+    "migration_relevance": "Net-new AI capability. No direct Veeva equivalent."
+  },
+  {
+    "id": "cp-007",
+    "category": "patient-engagement",
+    "topic": "Patient Program Outcomes and Timeline",
+    "description": "Patient Program Outcomes track measurable results across the patient journey. Outcomes can be clinical (lab values, symptom scores), operational (time to enrollment, time to first fill), or financial (cost savings, reimbursement rates). Patient Timeline provides a chronological view of all patient interactions, treatments, and milestones. Timeline entries auto-populate from care program activities, prescriptions, and clinical encounters.",
+    "objects": [
+      "PatientOutcome",
+      "PatientTimeline",
+      "ClinicalMilestone"
+    ],
+    "setup_steps": [
+      "Define outcome measures and target values",
+      "Configure timeline data sources",
+      "Set up milestone tracking and alerts",
+      "Configure outcome reporting dashboards",
+      "Set up data aggregation for program-level analytics"
+    ],
+    "gotchas": [
+      "Timeline auto-population depends on proper object relationships being configured",
+      "Outcome measures must be defined before enrollment for baseline comparison",
+      "Program-level analytics require aggregation across individual outcomes"
+    ],
+    "migration_relevance": "Outcomes tracking may map to custom analytics implementations. Timeline is platform-native."
+  },
+  {
+    "id": "cp-008",
+    "category": "patient-engagement",
+    "topic": "Electronic Signatures for Patient Consent",
+    "description": "Electronic signatures capture patient consent, enrollment agreements, and authorization forms. Signature records link to the patient (Person Account), the document signed, and the timestamp. Touch-based signature capture works on mobile devices for in-person interactions. Signature images are stored as attachments. 21 CFR Part 11 compliance requires audit trails, unique user identification, and tamper-evident records.",
+    "objects": [
+      "ElectronicSignature",
+      "SignatureDocument",
+      "ConsentRecord"
+    ],
+    "setup_steps": [
+      "Configure signature capture settings",
+      "Set up document templates requiring signatures",
+      "Configure audit trail settings for 21 CFR Part 11",
+      "Enable mobile signature capture for field teams",
+      "Set up signature verification and storage"
+    ],
+    "gotchas": [
+      "21 CFR Part 11 compliance requires specific audit trail configuration",
+      "Signature images should be stored securely with tamper-evident controls",
+      "Mobile signature capture requires device-specific testing",
+      "Signature export for external systems must handle image format compatibility (3KB minimum gate for valid signatures)"
+    ],
+    "migration_relevance": "Veeva signature capture maps to Electronic Signature. CFR compliance requirements are similar but configuration differs."
+  }
+]

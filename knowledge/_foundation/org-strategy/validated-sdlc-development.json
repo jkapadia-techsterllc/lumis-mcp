@@ -1,0 +1,33 @@
+[
+  {
+    "id": "fnd-sdlc-003",
+    "category": "org-strategy",
+    "title": "Product Release Development Process for Validated Systems",
+    "products": [
+      "lsc",
+      "oce",
+      "veeva_vault"
+    ],
+    "summary": "Defines the end-to-end development process from user story creation through release delivery within a QMS-governed SDLC. Covers cross-functional roles, weekly build cadence, stabilization, change management, and all output deliverables required for GxP compliance.",
+    "findings": {
+      "purpose_and_scope": "Spans from creating user stories describing the release backlog to delivering the release and all appropriate material. Operates within the QMS framework and is aligned to ISO 9001:2015 section 8.3. GxP-aligned for regulated life sciences environments.",
+      "cross_functional_roles": "Over 15 defined roles with detailed responsibilities: General Manager (go/no-go authority), Product Management (backlog ownership, user stories, UAT), Product Engineering (development, code quality), Product Testing (test execution, quality gates), Product Documentation, Go-To-Market, Sales Engineering, Technical Sales Engineering, Product Marketing, Product DevOps, UI/UX, Product Support, Product Operations, QMS Core Team, Delivery, Partnership, and PMO.",
+      "development_flow": "Release content is defined and user stories are created and prioritized by Product Management. A kickoff meeting aligns all teams. Teams plan and allocate work. Engineering develops features with weekly build cadence. Stabilization phase follows development. All materials are delivered and General Manager issues go/no-go decision. Final handoff to Product Operations and Delivery teams.",
+      "change_management": "Change requests during development may impact scope or timeline. Bug triage determines whether defects are fixed as part of the current release (patch) or postponed to a future release. Formal change request process tracks scope modifications.",
+      "lifecycle_flowcharts": "Four sub-views of the full lifecycle flowchart, plus dedicated flowcharts for development detail and stabilization phases. A separate launch flowchart covers go-to-market activities.",
+      "output_deliverables": "Fifteen required deliverables including: Go/No-Go Decision, Release Notes, Functional Documentation, Technical Documentation, Installation Guide, Test Results, Webinar recordings, Marketing Collaterals, Training Materials, Demo Scenarios, Validation documentation, Escrow Agreement, and Disaster Recovery Plan.",
+      "kpi": "Number of developed user stories versus number of planned user stories for the release."
+    },
+    "source": "SOP-0014[3] Product Release Development, ISO 9001:2015 section 8.3, effective Apr 2019",
+    "tags": [
+      "sdlc",
+      "development-process",
+      "validated-system",
+      "gxp",
+      "qms",
+      "iso-9001",
+      "release-management",
+      "change-management"
+    ]
+  }
+]

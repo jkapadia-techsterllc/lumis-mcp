@@ -1,0 +1,27 @@
+[
+  {
+    "id": "ci-pbm-001",
+    "category": "modules",
+    "title": "Pharmacy Benefit Program Structures and Clinical Programs",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Pharmacy benefit programs operate across five program categories that directly impact pharmaceutical commercial strategy: PDL (Preferred Drug List) programs controlling formulary positioning, Clinical programs managing utilization through step therapy and supply limits, Specialty Pharmacy programs providing personalized care management with documented adherence improvements, Network programs directing fills through designated pharmacy channels, and Direct Communication programs engaging members to optimize cost and adherence.",
+    "findings": {
+      "pdl_programs": "Preferred Drug List programs include: Exclude at Launch (blocking new drugs from coverage until review), Strategic Exclusions (removing drugs from formulary based on therapeutic alternatives), Refill and Save (incentivizing maintenance medication compliance), and Multiple Copay tiers (differentiating cost-sharing by formulary position).",
+      "clinical_programs": "Clinical utilization management includes: Step Therapy (requiring trial of lower-cost alternatives before approving higher-tier drugs \u2014 branded as ProgressionRx), Supply Limits (quantity restrictions per fill), Notification requirements (prior authorization triggers), and High Narcotic Utilization monitoring.",
+      "specialty_pharmacy_impact": "Specialty pharmacy programs provide personalized care management for complex therapies. Documented outcomes include 50% improvement in oncology medication adherence rates through dedicated care coordination, patient education, and refill management.",
+      "network_channel_control": "Network programs direct fills through controlled channels: Limited Medications Through Mail Order (mandating mail-order for maintenance drugs), Select Designated Pharmacy (restricting specialty drugs to specific pharmacy networks). These programs impact manufacturer distribution strategy.",
+      "direct_member_programs": "Direct-to-member programs include: Half Tablet (splitting higher-dose tablets to reduce cost), ValueMax (generic substitution encouragement), My Rx Choices (formulary awareness), and Mail Advantage (incentivizing mail-order pharmacy use)."
+    },
+    "source": "UnitedHealthcare Pharmacy Benefit Programs reference",
+    "tags": [
+      "pharmacy-benefit",
+      "formulary",
+      "step-therapy",
+      "specialty-pharmacy",
+      "market-access",
+      "payer"
+    ]
+  }
+]

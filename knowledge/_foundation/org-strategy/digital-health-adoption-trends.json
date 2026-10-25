@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fnd-digital-adoption-001",
+    "category": "org-strategy",
+    "title": "Digital Health Technology Adoption Trends and Patient Engagement",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Survey-based analysis of digital health technology adoption patterns among patients and consumers, including post-pandemic trends, virtual care utilization, and implications for patient engagement strategies.",
+    "findings": {
+      "adoption_plateau": "Despite COVID-19 forcing rapid digital adoption, survey data shows the plateauing trend in digital health technology adoption is not clearly over. More than 25% of respondents did not use any digital technologies to manage their health, even post-pandemic.",
+      "virtual_care_persistence": "Virtual care adoption spiked during the pandemic but retention varies by demographic and condition. Organizations cannot assume digital-first preferences are universal \u2014 significant segments prefer in-person care and need different engagement strategies.",
+      "trust_gap": "Digital adoption correlates strongly with trust in the healthcare organization. Patients who trust their providers are significantly more likely to adopt digital tools. Building trust requires transparent data use policies and demonstrated value from digital interactions.",
+      "experience_design_imperative": "The healthcare ecosystem must combine technology and human interaction design to improve digital adoption. Poor user experience is a leading reason for digital tool abandonment, ahead of privacy concerns or lack of access.",
+      "implications_for_crm": "Patient engagement platforms must support hybrid engagement models \u2014 digital for those who prefer it, traditional for those who do not. Segmentation based on digital readiness should inform engagement channel selection."
+    },
+    "source": "Survey-based research on digital health technology adoption covering nearly 1,800 US respondents post-pandemic",
+    "tags": [
+      "digital-adoption",
+      "patient-engagement",
+      "virtual-care",
+      "healthcare-experience",
+      "consumer-health"
+    ]
+  }
+]

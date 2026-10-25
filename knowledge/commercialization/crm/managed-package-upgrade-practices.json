@@ -1,0 +1,28 @@
+[
+  {
+    "id": "crm-bp-003",
+    "category": "gotchas",
+    "title": "Managed Package Upgrade and Preservation Practices for CRM",
+    "products": [
+      "oce"
+    ],
+    "summary": "Covers what gets overwritten during managed package upgrades, strategies for preserving customizations, and constraints of the Salesforce managed package model. Critical for implementation teams planning upgrade cycles.",
+    "findings": {
+      "overwritten_during_major_upgrades": "Out-of-box reports are overwritten in major releases (not patches). Picklist field values and search layouts on package-updated objects are always overwritten regardless of release type. Out-of-box profiles are overwritten when the upgrade includes profile changes. Org-wide defaults may be overwritten during major upgrades.",
+      "preservation_strategies": "Clone out-of-box reports to a separate folder before upgrades. Clone label translations and set their external ID to null. Clone formula fields, page layouts, custom layouts, and list views. Maintain XML scripts for reapplying picklist values and search layouts after upgrades. Use sharing rules instead of modifying org-wide defaults.",
+      "custom_code_safety": "Custom trigger handlers and custom Apex classes are not touched during managed package upgrades. Use custom settings to deactivate out-of-box triggers and replace them with custom implementations. This provides upgrade-safe behavior customization.",
+      "managed_package_constraints": "Profiles, page layouts, and tabs cannot be upgraded once deployed through a managed package. Changes require release notes and manual customer steps. Patches cannot contain new components. Packages cannot contain data. Apex batch classes cannot be upgraded in place and must be replaced. Tabs count against the org's tab limits.",
+      "custom_static_resources": "Custom icons, images, JavaScript, and Lua scripts should be uploaded to static resources using specific naming suffixes (e.g., icon images suffix, mobile validation scripts suffix) to avoid being overwritten during upgrades.",
+      "upgrade_calendar": "Quarterly major releases follow a fixed schedule (end of January, April, July, October). Patches are released on the generally available version bi-weekly, on alternate Thursdays. Full patch support is provided for the latest GA version only. Previous GA version receives blocker-only patches, with 3-6 months to migrate before support ends."
+    },
+    "source": "Managed Packages + Efficient Post Upgrade Processes + Provisioning Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "managed-package",
+      "upgrade",
+      "customization-preservation",
+      "release-calendar",
+      "patch",
+      "isv"
+    ]
+  }
+]

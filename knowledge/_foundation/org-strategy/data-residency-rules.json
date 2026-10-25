@@ -1,0 +1,55 @@
+[
+  {
+    "id": "dr-001",
+    "category": "data-residency",
+    "country": "China",
+    "requirement": "Data must be stored in China unless individual consent is obtained for cross-border transfer.",
+    "org_impact": "MUST be a separate Salesforce org. This is a hard requirement — no exceptions.",
+    "connectivity_options": [
+      {"option": "Salesforce Express Connect", "detail": "VPN service via Orange and TATA Communications with local Chinese network providers. Provides encrypted tunnel between Salesforce data centers and Chinese endpoints."},
+      {"option": "Network Peering", "detail": "Privately peered with China Telecom. Direct network path without traversing public internet."},
+      {"option": "CDN", "detail": "ChinaCache — Chinese-licensed CDN for content delivery within China's network infrastructure."}
+    ],
+    "tags": ["hard-requirement", "separate-org", "china", "data-sovereignty"]
+  },
+  {
+    "id": "dr-002",
+    "category": "data-residency",
+    "country": "Russia",
+    "requirement": "Personal data must be first written/stored in Russia before it can be exported or replicated to systems outside Russia.",
+    "org_impact": "May require a separate org or a Russia-first data write pattern. Evaluate with legal counsel.",
+    "tags": ["data-sovereignty", "russia", "first-write-local"]
+  },
+  {
+    "id": "dr-003",
+    "category": "data-residency",
+    "country": "Turkey",
+    "requirement": "Personal data must be stored in Turkey unless explicit individual consent is obtained for cross-border transfer.",
+    "org_impact": "Can share an org if individual consent is obtained, but safest to plan for local data residency. Evaluate volume — if Turkey is a large market, consider dedicated org or regional grouping.",
+    "tags": ["data-sovereignty", "turkey", "consent-based"]
+  },
+  {
+    "id": "dr-004",
+    "category": "data-residency",
+    "region": "European Union",
+    "requirement": "GDPR: Personal data may only be exported to countries with an 'adequate level of protection' as determined by the European Commission, or with appropriate safeguards (Standard Contractual Clauses, Binding Corporate Rules).",
+    "org_impact": "EU countries can generally share a single org if the data center is in an EU/EEA region. Cross-region transfer (EU→US) requires legal basis. Hyperforce provides in-region data residency.",
+    "tags": ["gdpr", "adequacy", "eu", "data-residency"]
+  },
+  {
+    "id": "dr-005",
+    "category": "data-residency",
+    "region": "Japan",
+    "requirement": "APPI (Act on Protection of Personal Information): Stricter than GDPR on cross-border data transfer. Requires PPC (Personal Information Protection Commission) adequacy finding or explicit individual consent per transfer purpose.",
+    "org_impact": "Japan can share an APAC regional org if data center is in-region, but cross-border transfer to non-adequate countries requires per-purpose consent. Large Japan deployments may warrant dedicated org for compliance simplicity.",
+    "tags": ["appi", "japan", "cross-border", "ppc-adequacy"]
+  },
+  {
+    "id": "dr-006",
+    "category": "data-residency",
+    "region": "Embargoed Countries",
+    "requirement": "US export control and sanctions laws block access from embargoed countries. Users in sanctioned countries may require VPN or region-specific access workarounds.",
+    "org_impact": "Users in embargoed countries cannot access US-hosted Salesforce orgs directly. Requires separate infrastructure or exemption.",
+    "tags": ["sanctions", "export-control", "embargo"]
+  }
+]

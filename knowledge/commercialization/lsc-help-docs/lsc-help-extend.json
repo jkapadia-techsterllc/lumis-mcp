@@ -1,0 +1,23 @@
+[
+  {
+    "id": "lsc-help-extend-ind-lsc-extend-life-sciences-cloud",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Extend Life Sciences",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "In addition to the solution-oriented features you get with Life Sciences Cloud, you can also design and implement your own solutions to meet the business needs of your organization. Here’s a set of Salesforce features you can use to extend your Life Sciences Cloud implementation. Advanced Patient...",
+    "findings": [
+      {
+        "name": "Extend Life Sciences",
+        "detail": "In addition to the solution-oriented features you get with Life Sciences Cloud, you can also design and implement your own solutions to meet the business needs of your organization. Here’s a set of Salesforce features you can use to extend your Life Sciences Cloud implementation. Advanced Patient Card The Advanced Patient Card uses FlexCards from OmniStudio to deliver greater flexibility and ease of use. To show the card on patient accounts, add the HealthCloudPtCardPatientCard FlexCard component to your Account Layout page. Assessments and Surveys in Life Sciences Cloud Improve quality of care by gathering information that helps you manage your patients’ or members’ health more efficiently. Whether it’s an industry standard screener or a member feedback survey, you have the information you need. Electronic Signatures Reduce turnaround time by managing electronic signatures in Salesforce using Digital Verifications. Set up signature trails for records or workflows that require users to verify key updates. HLS Accelerators HLS Accelators are free automations, components, and solutions that help our Health and Life Sciences customers realize a faster time-to-value. The accelerators remove implementation barriers and reduce overall implementation efforts. Intelligent Document Automation Simplify the document management process, reduce manual data entry, and get patients the right care and services faster by managing patient and member forms all in one place, from intake through processing. Patients can upload their own documents on an Experience Cloud site. You can route forms automatically to the right queue for faster review and processing in a digital, HIPAA-compliant workspace. Intelligent Document Reader for Life Sciences Cloud Use optical character recognition to automatically extract data with Amazon Textract using your AWS account. Specify the document type that can be associated with the document, upload the document, and map its fields to a Salesforce object’s fields. The extracted information can be used to create or update record fields, or to verify data that's already in the org. Life Events and Milestones in Life Sciences Cloud With the Events and Milestones component, capture and track significant events in a patient’s life that impact their healthcare. Product Catalog Management in Life Sciences Cloud The Product Catalog Management app is available for Life Sciences Cloud users to create and manage products. For example, users in MedTech organizations can use the app to create and manage products such as pacemakers, X-ray machines, syringes, and other medical devices. Users in Pharma organizations can use the app to create and classify drugs and drug samples. View Events Using Enhanced Timeline in Life Sciences Cloud The Enhanced Timeline component shows key events relating to a person or a resource in one place, so your users can see information from a single source of truth."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_extend_life_sciences_cloud.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "extend"
+    ]
+  }
+]

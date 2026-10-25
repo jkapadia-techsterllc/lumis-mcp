@@ -1,0 +1,29 @@
+[
+  {
+    "id": "fnd-ai-strategy-001",
+    "category": "org-strategy",
+    "title": "Generative AI Strategy and Productivity Assessment Framework for Life Sciences",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Framework for evaluating and deploying generative AI capabilities across life sciences operations, including a 5-level complexity model, cost-benefit assessment approach, and architectural patterns for enterprise AI platforms.",
+    "findings": {
+      "five_level_complexity_model": "AI use cases are classified by implementation complexity: Level 1 (basic chatbot \u2014 general Q&A with off-the-shelf LLMs), Level 2 (domain chatbot \u2014 RAG over internal knowledge bases), Level 3 (workflow assistant \u2014 multi-step task automation with tool use), Level 4 (specialized agent \u2014 domain-trained models with custom fine-tuning), Level 5 (complex bespoke \u2014 multi-agent orchestration with proprietary data pipelines and compliance guardrails).",
+      "cost_benefit_assessment": "Each level has different cost profiles: Level 1-2 use API-based pricing with minimal infrastructure; Level 3-4 require dedicated compute, retrieval infrastructure, and prompt engineering investment; Level 5 requires ML engineering teams, training infrastructure, and ongoing model maintenance. ROI increases with level but so does risk and time-to-value.",
+      "enterprise_architecture_patterns": "Common patterns for enterprise AI deployment: (a) API gateway with model routing for multi-provider flexibility, (b) retrieval-augmented generation (RAG) with vector databases for domain knowledge, (c) Kubernetes-based serving infrastructure for model hosting, (d) observability pipelines for prompt/response monitoring and compliance logging.",
+      "life_sciences_specific_considerations": "Pharma-specific requirements include: GxP compliance for any AI output used in regulated decisions, audit trails for AI-assisted content generation, validated system requirements for clinical-facing applications, and data residency constraints for models processing patient or HCP data.",
+      "productivity_gains_observed": "Early adopters report 20-40% productivity gains in: medical writing (first drafts), regulatory document assembly, field medical insight summarization, and internal IT support. Gains are highest in structured, repetitive tasks with clear quality benchmarks.",
+      "organizational_readiness": "Successful AI adoption requires: executive sponsorship with clear use case prioritization, a center of excellence or AI guild for knowledge sharing, data governance foundations (data catalog, access controls, quality standards), and change management for workflow integration."
+    },
+    "source": "Consolidated from generative AI strategy presentations and productivity assessment frameworks for life sciences internal use cases",
+    "tags": [
+      "generative-ai",
+      "strategy",
+      "productivity",
+      "llm",
+      "rag",
+      "enterprise-ai"
+    ]
+  }
+]

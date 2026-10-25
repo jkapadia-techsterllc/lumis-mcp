@@ -1,0 +1,73 @@
+[
+  {
+    "id": "int-ok-001",
+    "category": "integration-patterns",
+    "title": "OneKey HCP/HCO Master Data Integration \u2014 Architecture and Data Flow",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "OneKey (formerly Cegedim) is the dominant HCP/HCO master data source in regulated pharma markets. Integration with CRM involves consuming reference data feeds, matching and deduplicating against existing CRM records, and maintaining referential integrity across territories, affiliations, and licensing data.",
+    "data_flow": {
+      "inbound_feed": "Periodic data extracts (daily or weekly) containing HCP demographics, specialties, workplace affiliations, and professional license status.",
+      "matching_rules": "Configurable matching using OneKey EID as primary key with secondary matching on name, specialty, and address.",
+      "territory_alignment": "Affiliation data feeds territory alignment calculations.",
+      "compliance_data": "License and credential data feeds into sample management compliance checks."
+    },
+    "source": "onekey-integration-best-practices-guide",
+    "tags": [
+      "onekey",
+      "hcp-master-data",
+      "integration",
+      "data-matching"
+    ]
+  },
+  {
+    "id": "int-ok-002",
+    "category": "integration-patterns",
+    "title": "OneKey Country-Specific Considerations and Data Quality",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "OneKey data coverage and regulatory constraints vary by country. Configurations must account for field availability, GDPR, and HCP/HCO coverage completeness.",
+    "country_considerations": {
+      "eu_markets": "Strong coverage via mandatory professional registration. GDPR constrains stored HCP fields.",
+      "us_market": "NPI as alternative/complementary identifier. DEA numbers critical for sample management.",
+      "emerging_markets": "Varies widely. Hybrid approaches combining OneKey with local HCP databases."
+    },
+    "source": "onekey-integration-best-practices-guide",
+    "tags": [
+      "onekey",
+      "country-specific",
+      "gdpr",
+      "data-quality"
+    ]
+  },
+  {
+    "id": "int-ok-003",
+    "category": "modules",
+    "title": "OneKey CRM Entity and Field Mapping Specification",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "The OneKey integration uses a three-layer mapping configuration: entity mappings (6 object pairs mapping OneKey entities to CRM SObjects), field mappings (52 attribute-to-field pairs with primary key and record type mapping flags), and code mappings (601 code translation records mapping OneKey reference codes to CRM picklist values). The mapping data is stored in custom setting objects with the QIDC namespace prefix.",
+    "findings": {
+      "entity_object_mappings": "Six core entity-to-SObject mappings define the integration scope: Individual maps to Account, Workplace maps to Account, Activity maps to Affiliation (many-to-many), Address maps to Address object, Individual Address maps to AccountAddress (many-to-many), and Workplace Address maps to AccountAddress (many-to-many). The relationship type annotation distinguishes direct vs. junction-table patterns.",
+      "field_attribute_mappings": "52 field-level mappings translate OneKey attributes to CRM fields. Key mappings include: OneKey ID to a dedicated identifier field (marked as primary key), standard name fields (First/Last/Middle/Suffix) to their Account equivalents, gender and language codes to custom fields, and address-specific flags like primary address indicator. Each mapping includes flags for primary key status and whether it requires record type resolution.",
+      "code_reference_mappings": "601 code translation records map OneKey reference data codes (LIS codes) to CRM picklist values. These cover 40+ LIS code categories including titles, specialties, professions, organization types, and status codes. Code mappings are country-specific \u2014 the sample data covers France (FR) as a reference implementation with 1,371 code records and 1,369 translations.",
+      "namespace_and_configuration": "All mapping configuration objects use the QIDC namespace prefix (e.g., QIDC__OK_Object_Mapping_ims__c, QIDC__OK_Field_Mapping_ims__c, QIDC__OK_Code_Mapping_ims__c). The ims suffix indicates IMS Health origin. Mappings are stored as Salesforce records queryable via standard SOQL/API patterns."
+    },
+    "source": "OneKey Entity Mappings and Code Mappings JSON export data",
+    "tags": [
+      "onekey",
+      "entity-mapping",
+      "field-mapping",
+      "code-translation",
+      "integration",
+      "hcp",
+      "hco"
+    ]
+  }
+]

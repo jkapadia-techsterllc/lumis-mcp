@@ -1,0 +1,116 @@
+[
+  {
+    "id": "lsc-help-lists-filters-ind-lsc-lists-filters-best-time-filters",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure a Filter to Find Best Visit Times",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To plan and schedule visits more effectively, let users filter an account by a healthcare professional's preferred engagement time. Before you begin, select the Let users edit their best time option in your Best Time settings. Users can filter accounts by their best time only after you turn on this...",
+    "findings": [
+      {
+        "name": "Configure a Filter to Find Best Visit Times",
+        "detail": "To plan and schedule visits more effectively, let users filter an account by a healthcare professional's preferred engagement time. Before you begin, select the Let users edit their best time option in your Best Time settings. Users can filter accounts by their best time only after you turn on this option. From the App Launcher, select Admin Console . Select Address Administration , and then select Best Time . Select whether to apply the settings to all the profiles in your org or to a specific profile. In the General Settings section, select Allow users to filter accounts by best time . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_lists_filters_best_time_filters.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "lists-filters"
+    ]
+  },
+  {
+    "id": "lsc-help-lists-filters-ind-lsc-lists-filters-configure-columns-lists",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure an Accounts List for Life Sciences Customer Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Define the fields and column structure for an accounts list. Set up sorting and filters to help users find and manage the accounts they",
+    "findings": [
+      {
+        "name": "Configure an Accounts List for Life Sciences Customer Engagement",
+        "detail": "Define the fields and column structure for an accounts list. Set up sorting and filters to help users find and manage the accounts they need."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud and the Life Sciences Cloud for Customer Engagement Add-On license User Permissions Needed To configure lists and filters: | Life Sciences Commercial Admin permission set Before you begin: Create a field set for each filter object containing only the fields that users can filter by. See Create and Edit Field Sets . Configure your provider activity measure types so that they’re available to select for the Activity Plan field column. See Set Goal Measures for Activity Plans . This visit information comes from the Provider Account Territory Info (PATI) record. On the web, last visit and next visit details are read-only and users can't click them. From the App Launcher, find and select Admin Console . Select Lists & Filters , and then select Accounts List . Click New , and enter the configuration details. Select the profile to apply to the account list configuration. Select the type of list that you want to create. Select Default to show the aligned account list and mobile advanced search. Select Search to show the web-only All Accounts list. Select Static to show static lists, including routines. Select the account record type. Important For consistent web and mobile account list column display, select one approach: leave Profile and Record Type blank for all configurations (org-wide), or specify both fields for all profile and record type combinations your users need. Incomplete combinations can cause inconsistent column display across web and mobile. In columns 2 through 5, enter the field API names in ChildRelationshipName.FieldAPIName format. Tip To view the ChildRelationshipName of an object, go to its object management settings, and then go to Field & Relationships. Select the field that has a Master-Detail lookup to Account. Under Field Information, find the child relationship name. If you don't provide an object name, it’s assumed that the field belongs to the Account object. For example, PersonEmail queries from the Account object, but ContactPointAddresses.Name queries from the ContactPointAddress object. The first column is for the account’s preferred address and can’t be changed. If the preferred address isn’t available, the column shows the primary address instead. When entering field API names: Use field API names from the Account , HealthcareProvider , ContactPointAddress , or ProviderAcctTerritoryInfo objects. Use ContactPointPhone , ContactPointEmail , ContactPointSocial , HealthcareProviderNpi , or HealthcareProviderSpecialty for denormalized fields in the healthcare provider object. Omit the object name prefix to query the Account object by default. Enter multilevel queries to find related records, such as ProviderAcctTerritoryInfo.NextProviderVisit.ShippingAddress.Id . The list shows only the two most recently created records for denormalized fields on mobile, and the three most recently created records on the web. More values appear in a +N counter. Note If no configuration exists for a list type, then the web shows only Account Name and Address, while mobile shows more default columns: Last Provider Visit, Target Value, Activity Plan, and Specialty. Create configurations for all list types for consistent display across platforms. To override the second column with the previous and next visit details, select the override option. This visit information comes from the Provider Account Territory Info (PATI) record. To show previous and next visit information in account lists, turn on the ProviderVisitChangedEvent trigger handler. To show the next visit information, add this WHERE condition to the Provider Account Territory Info (PATI) object using SOQL: Territory2.Name = '{USER.TERRITORY}' From the dropdown, select an option to override the fifth column in the list view with the Activity Plan field. Select how to sort the column fields. The default fields for sorting are First Name, Last Name, Full Name, Address, State or Province, City, Zip or Postal Code, Next Provider Visit Date, Last Provider Visit Date, and Specialty. To activate the configuration, select Is Active . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_lists_filters_configure_columns_lists.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "lists-filters"
+    ]
+  },
+  {
+    "id": "lsc-help-lists-filters-ind-lsc-lists-filters-account-search-preferences",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize How Accounts Are Displayed in Lists and Filters",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Control how accounts appear in the Life Sciences Cloud for Customer Engagement lists and",
+    "findings": [
+      {
+        "name": "Customize How Accounts Are Displayed in Lists and Filters",
+        "detail": "Control how accounts appear in the Life Sciences Cloud for Customer Engagement lists and filters."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud and the Life Sciences Cloud for Customer Engagement Add-On license User Permissions Needed To configure lists and filters: | Life Sciences Commercial Admin Before you begin, create account and person account record types so users can use these record types to filter and refine their account lists. See Create Record Types . From the App Launcher, select Admin Console . Select Account Management , and then select Account Search Preferences . Select whether to apply the settings to all the profiles in your org or to a specific profile. In the Additional Search Preferences section, configure the search settings. To turn on map view on mobile, select Show Accounts in a Map View . Note To show accounts accurately in map view, verify that the primary or preferred address includes geolocation data. To update this data, activate data integration rules on the contact point address, which uses the Google Maps API to calculate latitude, longitude, and accuracy. Alternatively, manually update the data by selecting Check for New Data from the record's action menu. For accurate distance calculations, turn on location services on the devices. From the Account Record Type APIs section, move the record type filters that you want to use to the Selected list. These filters are included by default: All, HCP, and HCO. HCP includes accounts where the IsPersonAccount field on the account object equals True . HCO includes accounts where the IsPersonAccount field equals False . To define the default account type filter, select an option from Default Account Type Filters. Make sure that your default filter is in the Selected Values list. If it isn’t in the list, the default is All. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_lists_filters_account_search_preferences.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "lists-filters",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-lists-filters-ind-lsc-lists-filters-focus-targeted-accounts",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Focus on Targeted Accounts",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use lists and filters on the Accounts page to organize and focus on the right set of accounts. View and manage accounts more effectively by applying filters and organizing them into lists, making it easier for you to stay focused and take actions based on your business",
+    "findings": [
+      {
+        "name": "Focus on Targeted Accounts",
+        "detail": "Use lists and filters on the Accounts page to organize and focus on the right set of accounts. View and manage accounts more effectively by applying filters and organizing them into lists, making it easier for you to stay focused and take actions based on your business priorities."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Organize Your View",
+        "detail": "Switch between different views on the Accounts page to move between broad account data and targeted subsets. Aligned Accounts: Shows only the accounts assigned to your territory. If no accounts appear, confirm that your admin has completed territory alignment All Accounts: Shows all the accounts that you have permission to access Filters: Shows accounts that match a saved filter Lists: Shows accounts grouped into the list you created Advanced Filters: Shows accounts that match specific criteria"
+      },
+      {
+        "name": "Filter Accounts by Record Type",
+        "detail": "Apply record type filters to show only accounts that match a specific type. The record type filter is available in the Filter menu. By default, the Life Sciences Cloud for Customer Engagement app includes a few ready-to-use filters. Your admin can configure additional record type filters for your Salesforce org. Use record type filters when: You want to see only specific categories of accounts, such as HCP and HCO. For example, selecting HCP displays all accounts with the Person record type, while selecting HCO displays all accounts with the NonPerson record type You’re preparing for a targeted outreach plan You’re working with a particular customer group"
+      },
+      {
+        "name": "Manage Lists and Filters",
+        "detail": "Maintain Lists and Filters by taking necessary actions to make sure they stay accurate and aligned with your accounts strategy. Here’s the list of actions you can perform based on the view you select. For example, if you’re checking all available accounts, you can quickly create a list, filter, or advanced filter. Create a list, filter, or advanced filters to refine accounts. Edit columns for lists and filters as needed. Note To make sure that you can see the accounts properly in the filter you created, make sure the account has the primary address associated with it. Add selected accounts to a new or existing list to group accounts for a specific objective, such as planning visits, tracking follow-ups, or managing accounts you’re personally responsible for. You can also create a new list, filter, or advanced filters as needed. Manually search for accounts and add them to an existing list to organize and track specific groups of accounts based on your needs. Remove accounts from a list or filter to keep accounts relevant. Rename an existing list or filter to reflect a new purpose, align with updated account strategies, or correct naming inconsistencies. Delete a saved list or filter that's no longer needed. Deleting a shared list or filter also removes access for other users. Create a copy of an existing list to reuse its structure and criteria. Select fields from supported objects and show them as columns for dynamic filters. Select fields from supported objects and show them as columns in the datatable for lists. Define filter criteria to show values for each column. Download lists or filters as a CSV file to analyze account data outside the app or share it with others. Share filters to users with account list access level as needed. Sort accounts by available options, such as city, email, first name. View accounts as lists or view them on a map."
+      },
+      {
+        "name": "See Also",
+        "detail": "Lists and Filters"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_lists_filters_focus_targeted_accounts.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "lists-filters",
+      "accounts"
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fnd-tech-trends-ls-001",
+    "category": "org-strategy",
+    "title": "Technology Trends with Life Sciences Implications",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Life sciences perspective on technology trends covering the convergence of strategy and technology, disappearing physical-virtual boundaries, and data sharing imperatives for the industry.",
+    "findings": {
+      "strategy_technology_inseparability": "Technology and business strategy are becoming inseparable in life sciences. Organizations where CTO/CDO functions are integrated with business strategy show faster time-to-value on technology investments.",
+      "physical_virtual_convergence": "The boundary between physical and virtual worlds is disappearing. For life sciences: virtual clinical trial visits, AR-guided manufacturing, digital twin drug modeling, and hybrid HCP engagement blur traditional distinctions.",
+      "data_sharing_foundation": "Data-sharing platforms must facilitate trust among collaborators. Requirements: data availability and accuracy, security, ease of use, appropriate use policies. Creating a business case for each collaboration requires defining shared purpose, confidentiality requirements, and controls.",
+      "data_privacy_governance": "Proper governance, compliance, privacy, and security boundaries are prerequisites for data sharing. Life sciences faces heightened requirements due to: patient data sensitivity, IP protection for R&D data, regulatory reporting obligations, and cross-border data transfer restrictions.",
+      "disruption_timeline": "These trends are expected to cause significant disruption within 18-24 months. Forward-thinking organizations are investing now in foundational capabilities rather than waiting for proven approaches."
+    },
+    "source": "Technology trends report providing a life sciences perspective on strategy-technology convergence, data sharing, and physical-virtual boundaries",
+    "tags": [
+      "technology-trends",
+      "strategy",
+      "data-sharing",
+      "digital-transformation",
+      "governance"
+    ]
+  }
+]

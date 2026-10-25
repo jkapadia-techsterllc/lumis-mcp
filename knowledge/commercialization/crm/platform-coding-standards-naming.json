@@ -1,0 +1,43 @@
+[
+  {
+    "id": "crm-bp-012",
+    "category": "commercialization/crm",
+    "title": "Salesforce Platform Coding Standards and Naming Conventions",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Comprehensive coding standards, naming conventions, trigger patterns, unit testing requirements, database design guidelines, and security rules for Apex, VisualForce, and Lightning development by SI and ISV teams on the Salesforce platform.",
+    "findings": {
+      "apex_critical_rules": "No SOQL, SOSL, or DML statements inside loops. No async (@future) methods inside loops. Never hardcode IDs. Use SOQL for-loops for large datasets. Check CRUD/FLS permissions before DML on new objects. Anticipate and handle governor limits proactively (cannot trap governor limit errors in try-catch). Avoid HTTP callouts within loops. Include WHERE or LIMIT clauses on all SOQL queries. Use the SObjectType namespace for object and field names instead of hardcoded strings.",
+      "apex_naming_conventions": "ClassName (PascalCase, no underscores except test classes, no abbreviations). variableName (camelCase, descriptive \u2014 no i/j loop variables, use yIndex/personIndex). ConstructorName matches class name. methodName (camelCase, descriptive, no abbreviations, no generic names like run/doSomething). CONSTANT_NAME (ALL_CAPS with underscores). Use this.variableName to distinguish class variables from local scope.",
+      "trigger_patterns": "One trigger per object to ensure deterministic execution order. Bulkify triggers to process up to 200 records per call. Execute DML using collections instead of individual records. Use Collections in SOQL WHERE clauses to retrieve all records in a single query. Naming convention: ObjectNameTrigger. Delegate all logic to handler Apex classes (ObjectNameTriggerHandler) for testability and reuse. Avoid complex logic directly in triggers.",
+      "unit_test_requirements": "Minimum 85% code coverage (target 100%). No dummy test cases (e.g., i++). Every function must have test coverage. Naming convention: ClassNameTest. Test methods prefixed with test and scenario name (e.g., testDeleteCall, testInvalidCallInsert). Create all test data within test methods \u2014 never rely on existing org data. Test each conditional branch. Keep test methods in separate classes from controllers and helper classes. Use test.startTest() and test.stopTest() to manage governor limits within tests. Never reference record IDs in test classes.",
+      "visualforce_rules": "No acronyms in page names. No hardcoded picklists in VF pages \u2014 use the controller. Mark controller variables as transient if not needed between server calls to reduce View State size. Use $ObjectType for change-resistant page references. Create static resources for reusable CSS and JavaScript. Place JavaScript at page bottom for load performance. Use tab indentation.",
+      "lightning_naming_conventions": "Lightning apps: camelCase with 'App' suffix. Components: camelCase with first capital letter. Events: camelCase with 'Event' suffix. Interfaces: camelCase with 'Interface' suffix. Tokens: camelCase with 'Tokens' suffix. Default to camelCase for anything not specifically listed.",
+      "custom_field_conventions": "Standard custom fields use PascalCase with __c suffix (e.g., AccountTerritoryField__c). Same rules apply to Custom Settings. Platform-specific custom fields retain their API names unchanged. Mobile standard fields (offline tracking) include OfflineUniqueId__c, IsDeletedOffline__c, OfflineCreatedById__c, OfflineCreatedDate__c, OfflineLastModifiedById__c, and OfflineLastModifiedDate__c \u2014 these are automatically managed by the mobile app and should be present on all synced objects.",
+      "icon_indicator_fields": "Image formula fields with img__c suffix serve as icon indicators. Formula: IMAGE('/resource/Menu_Icons/' + ObjectName + Type__c + '.png', Type__c). The URL uses a static resource path plus the resource name plus the file name.",
+      "trigger_naming_for_processes": "Triggers and processes managed by the platform use upper case naming with underscores (e.g., ACCOUNT_BEFORE_DELETE). These should not be deactivated.",
+      "deprecated_field_handling": "Prefix deprecated custom field API names with DEL_ (e.g., SomeFieldName \u2192 DEL_SomeFieldName). Update field label to 'DONOT-USE-<FieldLabel>'. Update field description with structured deprecation metadata including old name, datetime, and reason. Truncate from the right side if the prefixed name exceeds field name length limits. Append incremental numbers if truncation causes duplicates.",
+      "database_design_rules": "Always add descriptions to custom objects explaining business purpose. Pay attention to plural labels matching object naming. Understand owner relationships before choosing Master-Detail vs. Lookup. Configure Sharing Settings when creating Master-Detail relationships. Include bubble help on all fields. Never change API names on existing fields as they may be referenced from code.",
+      "security_rules": "Create dedicated integration user profiles with Modify All, API Enabled, and Password Never Changes \u2014 no tab access. Separate System Administrator from Sales Administrator profiles (Sales Admins should not have Author Apex or Customize Application). Require API Enabled on profiles using Salesforce for Outlook or similar tools. Prevent cross-site scripting (XSS) vulnerabilities. Avoid unsafe URL redirection.",
+      "error_message_style": "Make error messages conversational rather than terse. Example: 'Sorry, but you have to supply a value for the Status field to save this record' rather than 'Missing required field'.",
+      "comment_requirements": "Write Javadoc-style comments for each method including @param and @return annotations.",
+      "code_review_additions": "Add null checks wherever required. Surround new custom metadata usage with null checks. Send only required data to Apex methods from UI.",
+      "managed_package_namespace": "The managed package namespace prefix applies to all custom objects, fields, and components at runtime. Use labels for runtime transformation rather than hardcoded namespace strings."
+    },
+    "source": "SI/ISV Salesforce platform coding standards, naming conventions, and code review documentation",
+    "tags": [
+      "apex",
+      "lightning",
+      "visualforce",
+      "coding-standards",
+      "naming-conventions",
+      "triggers",
+      "unit-testing",
+      "database-design",
+      "security",
+      "si-isv"
+    ]
+  }
+]

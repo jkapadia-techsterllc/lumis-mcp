@@ -1,0 +1,227 @@
+[
+  {
+    "id": "oce-cfg-spc-001",
+    "category": "configuration",
+    "title": "Product Hierarchy and Territory Alignment — Structure, Limits, and Governance",
+    "products": ["oce"],
+    "summary": "Products are organized in a three-level hierarchy: Market, Brand, and Detail (with child types Sample, Item, Bundle, Kit Item, Order Item, MIRF Product, and Rx Product). Products must be aligned to territories before field users can access them, with support for inclusion and exclusion overrides at leaf-level territories.",
+    "findings": {
+      "hierarchy_structure": "The product hierarchy follows a Market > Brand > Detail tree. Sample, Item, and Bundle types must be children of Detail, Brand, or Market products. Order Item products must be children of Brand. Kit Items must be children of Order Item products. MIRF Products must be children of Detail products. Rx Products must be children of Market, Brand, or Detail. Modifying the record types on the product object will break system behavior.",
+      "hierarchy_limits": "The hierarchy supports up to 24,000 products (12,000 per division when divisions are enabled) and 800,000 territory product alignment rules. Call 2.0 on web supports 500 Detail products, 1,100 Samples with 3-6 lots each, 1,250 DTPs, and 1,250 Items concurrently. Group calls with samples are limited to one attendee; DTPs and Items support up to 15 attendees.",
+      "territory_alignment": "Products are aligned to territories through a dedicated alignment screen. Alignment cascades to sub-territories by default. Exclusion (removing a product from a sub-territory despite parent alignment) and inclusion (adding a product to a sub-territory despite parent non-alignment) are supported at bottom-level territories only. Alignment data can be bulk-loaded via the territory product alignment rule object.",
+      "product_messages": "Products of Brand and Detail types support product messages — reminders displayed to field users during calls. Messages inherit territory alignment from their parent product. Messages can be grouped, sorted by priority, and excluded at child territory level. Custom reactions can be configured per message and are locked after call save. Deactivated messages are automatically removed from territory sharing.",
+      "additional_product_details": "A custom text or formula field with the API name value for additional product details can be added to the product object to display supplementary information in the hierarchy view. This field is searchable and displays up to 255 characters in the UI with hover for full content. This requires the Load More tree presentation mode.",
+      "migration_considerations": "When migrating from this system, the three-level product hierarchy with strict parent-child type rules must be mapped to the target platform's product model. Territory alignment rules, especially exclusion and inclusion overrides, need careful migration planning. Product message territory associations and grouping configurations represent custom business logic that may not have direct equivalents on the target platform."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Product management and territory alignment sections.",
+    "tags": [
+      "products",
+      "product-hierarchy",
+      "territory-alignment",
+      "product-messages",
+      "limits",
+      "migration-planning"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-002",
+    "category": "configuration",
+    "title": "Product Signature Configuration and Call Validation Rules",
+    "products": ["oce"],
+    "summary": "Product configuration governs call-time behavior including signature requirements, date range validation, DTP vs sample categorization, and per-territory quantity limits. These rules directly affect field user workflows during customer interactions.",
+    "findings": {
+      "signature_configuration": "Customer signatures for call messages, call samples, and call items can be configured as mandatory, optional, or not required at the product level. It is recommended that signature be required for products that also require valid State Distribution Licenses at the delivery address.",
+      "dtp_vs_sample_categorization": "Products of Sample type are displayed in either the Samples or DTP (Direct-to-Patient) section of the call form based on a flag field. Products with the DTP flag set to N appear in the Samples section; products with the flag set to Y appear in the DTP section. Products of Detail type appear in Details, Samples, DTP, Items, and Expenses sections.",
+      "date_range_validation": "Products and product messages have start and end dates. When a call date exceeds the validity range, the system removes the product from the list. If a user changes the call date after adding products, the system validates and blocks signing or submission when the date falls outside the product's range. The same logic applies to child products (dosage variants) in the Samples tab.",
+      "territory_allocation_limits": "Per-territory quantity limits can be configured through product territory allocation records. A maximum quantity per call field controls how many units of a specific sample or DTP a user can distribute in a single call for a given product-territory combination. This maximum cannot exceed the allocated quantity for the same period. Validation occurs at sign or submit time.",
+      "sdl_category": "A picklist field defines the State Distribution License category for sample and order items, used for SDL license validation. Products requiring facilities to have a valid DEA license for drop-off or shipment must have the controlled substance flag selected.",
+      "migration_considerations": "Call-time validation rules (date ranges, quantity limits, signature requirements, SDL/DEA licensing) represent compliance logic that must be preserved during migration. The DTP vs sample categorization model may not have a direct equivalent on the target platform and requires mapping to equivalent distribution type concepts."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Product configuration and call validation sections.",
+    "tags": [
+      "products",
+      "signature",
+      "call-validation",
+      "dtp",
+      "compliance",
+      "sdl",
+      "dea-license",
+      "territory-allocation"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-003",
+    "category": "configuration",
+    "title": "Sample Management — Process Overview, Lot Tracking, and Inventory Reconciliation",
+    "products": ["oce"],
+    "summary": "Sample management encompasses the full lifecycle of pharmaceutical sample distribution: product creation, lot management, territory allocation, shipment acknowledgment, transfers, returns, adjustments, call disbursement, and periodic inventory reconciliation. The system maintains running balances through transaction tracking.",
+    "findings": {
+      "sample_product_setup": "Sample products require the Sample record type and must have parent products of Detail type to appear on call screens (though any hierarchy level works for Inventory and Transaction screens). Each sample product needs active lots, and lots must be allocated to specific users before they can disburse. Order min/max values on the product control validation during sample order creation. Optional per-cycle allocation records define maximum quantities a user can order within a plan cycle.",
+      "shipment_and_acknowledgment": "Initial and ongoing sample shipments (Acknowledgment of Shipment / AOS) are expected to be imported from external systems. AOS records can be manually loaded by admins with specific field requirements: the owner must be the target field user, status must be In Progress, and the system-created flag must be True. Transaction detail records require lot number lookup, product lookup, shipped quantity, and actual quantity fields. When a trigger handler is enabled, product territory allocations update automatically when AOS records are submitted.",
+      "transaction_types": "The system supports Transfer Out, Transfer In, Returns, Adjustments, and AOS transaction types. Transfer Out creates a corresponding Transfer In automatically. Adjustments are created automatically when inventory physical count does not match system count. Transfer Out requires the recipient to have a sample storage address. Returns cannot be partial — users must accept the shipment first and then create a separate returns transaction. Duplicate and Return-to-Sender flagged transactions are excluded from inventory calculations.",
+      "inventory_reconciliation": "Inventory screens show all lots allocated to a user. System count calculates balance of incoming/outgoing quantities against the previous physical count. If system-calculated fields are enabled, a reason is required when physical count differs from system count. Submitting a lot with zero quantity automatically inactivates that lot allocation. Adjustment transactions are generated for discrepancies. An apex error occurs if more than 2,000 unlinked sample transaction details exist — in this case, admin should submit inventory from the backend.",
+      "backdated_disbursement_validation": "Admin can enable validation to prevent discrepancies from backdated (forgotten) disbursements after inventory reconciliation. This can run in Warning mode (alerts but allows save) or Error mode (blocks save). Error mode requires a specific custom permission. The validation checks the latest submitted inventory date against the call date.",
+      "migration_considerations": "Sample management is one of the most complex areas for migration due to interconnected transaction types, running balance calculations, lot-level tracking, and territory allocation dependencies. External system integrations for AOS imports must be replicated. The inventory reconciliation logic with system count calculations and automatic adjustments needs careful mapping to the target platform's sample management model."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Sample management process overview and configuration sections.",
+    "tags": [
+      "sample-management",
+      "lot-tracking",
+      "inventory",
+      "transactions",
+      "territory-allocation",
+      "compliance",
+      "migration-complexity"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-004",
+    "category": "configuration",
+    "title": "Sample Management — Orders, Permission Sets, and Field Configuration",
+    "products": ["oce"],
+    "summary": "Sample order configuration controls how field users request stock refills, including quantity validation, approval workflows, and field set customization for order, transaction, and inventory forms. Permission sets govern access at both user and admin levels.",
+    "findings": {
+      "sample_orders": "Sample orders allow field users to request stock refills. Only Sample-type products aligned to the user's territory appear on the new order screen. Quantity validation can be layered: custom settings provide global rules, product-level min/max define per-product limits, and per-cycle allocation records define territory-specific caps. Orders exceeding min/max may require manager approval based on configuration. Order processing and status updates are expected to be imported from external fulfillment systems.",
+      "permission_sets": "Two permission sets control access: Sample Management User (for field users) and Sample Management Admin (for administrators). In addition, profile-level access must be configured for Sample Inventory and Sample Transaction record types. The permission model is layered — permission sets provide feature access while profiles control record type visibility.",
+      "field_set_customization": "Create and edit forms use hardcoded default fields plus configurable field sets. Sample Orders use a specific header field set for additional fields beyond the defaults (Order Recipient, Recipient Territory, Status, Ship To, Is Urgent). Each transaction type (AOS, Adjustment, Return, Transfer Out, Transfer In) has its own header field set. Sample Inventory has a separate field set. Default fields differ by transaction type.",
+      "address_configuration": "Sample management addresses can be configured to display in specific formats. Ship-to addresses are required for certain transaction types (Transfer Out, Returns). Sample storage addresses must be configured for users who receive transfers.",
+      "trigger_handlers": "Multiple trigger handlers govern sample management behavior including AOS product allocation updates, disbursement creation from call samples, inventory calculations, order validation, and automatic transaction generation. These must be selectively enabled based on the organization's requirements.",
+      "migration_considerations": "The multi-layered permission model (permission sets + profile-level record type access) needs mapping to the target platform's security model. Field set configurations represent org-specific customizations that must be captured during migration discovery. External fulfillment system integrations for order processing require separate migration planning."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Sample management orders and permission configuration sections.",
+    "tags": [
+      "sample-management",
+      "sample-orders",
+      "permission-sets",
+      "field-sets",
+      "trigger-handlers",
+      "approval-workflow"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-005",
+    "category": "configuration",
+    "title": "Consent and Opt Management — Topics, Channels, Signatures, and Terms",
+    "products": ["oce"],
+    "summary": "The opt management module enables field users to record customer communication preferences (opt-in/opt-out) across topics and channels. Configuration includes topic hierarchies, channel definitions, signature capture, terms and conditions, disclaimer text, and attribute-based topic filtering tied to account territory fields.",
+    "findings": {
+      "topic_and_channel_model": "Opt records are stored in a custom object with a master-detail child object for channel-specific details. Topics are stored in a separate object with an Opt record type filter. Topics support a two-level hierarchy (parent-child). Channels are defined as multi-select picklist values on the topic. All channel instances added to an opt are mandatory and cannot be left blank, except for newly added channels in the current session. Integration with digital engagement platforms does not support hierarchical topics or multiple channel values per opt.",
+      "attribute_based_filtering": "Shared topics can be filtered by attributes. Admin defines attributes on topic records (semicolon-separated), then configures which account territory field (or account field as fallback) provides the matching value. Filtering applies only to opt edit and view screens — related lists, list views, and reports show all shared topics. The same account opened from different territories may show different topic sets.",
+      "signature_and_document_id": "Signature capture can be set to Required, Optional, or Not Required at the profile level. Captured signatures are base64-encoded and stored on the opt record. Document ID requirements have the same three options. A web-specific Document ID requirement (pilot feature) is also available. A logo can be configured for the signature page. The signature request receipt button can be hidden via custom permission.",
+      "terms_and_conditions": "Terms and conditions are delivered through static resources containing ZIP archives with locale-specific HTML files. Each HTML file is named by locale code (e.g., en_US.html). HTML supports basic styling and standard links. Terms are copied to the opt record at creation time. UI schema records control which profiles can see which terms. Both terms and disclaimer text can be configured at the user level (not just profile level) through permission-based configuration.",
+      "activation_requirements": "Activation requires enabling specific trigger handlers, DB schema entities with territory-filtered WHERE SOQL queries, permission set assignment, UI schema activation, record type enablement, and page layout configuration. Geolocation tracking on signature requires cloning and extending the DB schema entity to include latitude and longitude mandatory fields.",
+      "migration_considerations": "Consent management involves regulatory compliance logic that varies by country. The two-level topic hierarchy, channel model, and attribute-based filtering represent business rules that must be preserved. Terms and conditions as locale-specific static resources with profile-level visibility control require careful migration to ensure regulatory compliance is maintained. The territory-filtered SOQL queries in DB schema entities represent a performance optimization pattern that may need different implementation on the target platform."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Opt management configuration sections.",
+    "tags": [
+      "consent-management",
+      "opt-management",
+      "channels",
+      "signature",
+      "terms-and-conditions",
+      "compliance",
+      "territory-filtering",
+      "gdpr"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-006",
+    "category": "configuration",
+    "title": "Medical Inquiry Request Forms — Workflow, Self-Response, and Off-Label Handling",
+    "products": ["oce"],
+    "summary": "Medical Inquiry Request Forms (MIRFs) follow a four-status workflow (Submitted, Assigned, Responded, Delivered) with configurable signature requirements, self-response capabilities for medical science liaison users, off-label response tracking, and sales rep feedback with signature confirmation.",
+    "findings": {
+      "mirf_workflow": "MIRFs progress through four statuses, each with its own record type and page layout. When a field user submits a MIRF, the system shares it with the current territory and assigns it to a queue (configurable per record type via custom settings). Record types change automatically as the MIRF moves through statuses. After submission, the owner field equals the queue; after assignment, it equals the responsible medical science liaison user. File attachments up to 25MB are supported.",
+      "self_response_feature": "Medical science liaison users can be enabled to respond to MIRFs they created themselves. When enabled, a MIRF created by a medical science liaison user starts with Assigned status (bypassing the queue) and is assigned to the creating user. The response toggle changes the status to Responded. This requires specific page layout configurations per status per profile.",
+      "off_label_and_feedback": "The off-label response feature allows medical science liaisons to save responses with an empty response field by selecting an off-label flag and specifying the response channel. The sales rep feedback feature allows field users to enter customer feedback about the MIRF response and confirm with signature. After feedback submission, the MIRF status changes to Delivered. Both features must be enabled for both medical science liaison and sales representative profiles.",
+      "mirf_call_linking": "Medical inquiries can be linked to child calls during creation for attendees in parent calls. This linking occurs in the backend only and is not represented in the mobile UI. Activation requires field-level security configuration and adding the call MIRFs related list to appropriate layouts.",
+      "account_record_type_filtering": "MIRFs can be restricted to specific account record types. By default, all HCP record types are enabled. When at least one record type is moved to the selected list, MIRFs are available only for accounts with those record types. Configuration can be set at organization level or per profile.",
+      "migration_considerations": "The MIRF workflow involves queue-based assignment, automatic record type transitions, and multi-profile page layout configurations. The self-response and off-label features represent regulatory compliance workflows specific to medical affairs operations. These workflows must be carefully mapped to the target platform's case or inquiry management capabilities. The feedback-with-signature pattern is a compliance requirement that must be preserved."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Medical inquiry request form sections.",
+    "tags": [
+      "medical-inquiries",
+      "mirf",
+      "medical-affairs",
+      "off-label",
+      "compliance",
+      "queue-assignment",
+      "workflow"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-007",
+    "category": "configuration",
+    "title": "Approval Inquiries — Cross-Org Approval Workflow for Meetings and Events",
+    "products": ["oce"],
+    "summary": "The approval inquiry module enables cross-org approval workflows where records from one Salesforce org are submitted for approval in a separate org. The module supports both middleware-based routing (using integration platforms) and native Salesforce platform routing (using flows and named credentials).",
+    "findings": {
+      "cross_org_architecture": "The module uses a sender-approver org model. Records (from any sObject, though tested primarily with meetings and meeting members) generate approval inquiry records that are transmitted to an approver org. Responses flow back to update the source record's approval status. Two routing approaches are supported: middleware (integration platform) or native Salesforce platform (flows + named credentials).",
+      "middleware_approach": "When using middleware, the integration platform listens on a platform event for outbound approval inquiries. Routing parameters are included as a JSON field on the event. The middleware creates approval inquiry records in the approver org with an Awaiting Response status. Response events update the sender org's approval inquiry status to Completed or Failed. The middleware must maintain credentials for all participating orgs.",
+      "platform_approach": "The native Salesforce approach uses connected apps, auth providers, and named credentials to establish org-to-org communication. A routing flow processes outbound events, evaluates routing criteria (such as hosting country for meetings or country plus specialty for meeting members), and sends records to the appropriate approver org. Platform events trigger the routing flow.",
+      "meeting_use_cases": "Two primary use cases are supported: (1) Meeting hosting country approval — when a meeting's hosting country matches a configured value, an approval inquiry is generated after the meeting is first approved in the source org. (2) Meeting member country-specialty approval — when a member's country and specialty match configured values, an approval inquiry is generated for that member after initial approval in the source org.",
+      "flexipage_integration": "Approval inquiry history can be displayed on meeting and meeting member record pages using a generic related list component configured with a field set and a where clause filtering by the source record ID.",
+      "migration_considerations": "Cross-org approval workflows are complex to migrate because they involve inter-org communication, platform events, named credentials, and potentially middleware integrations. The sender-approver model must be mapped to the target platform's approval and integration capabilities. Organizations using this module should inventory all routing rules, approval criteria, and org interconnections during migration discovery."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Approval inquiry cross-org approval sections.",
+    "tags": [
+      "approval-inquiries",
+      "cross-org",
+      "meetings",
+      "platform-events",
+      "middleware",
+      "named-credentials",
+      "compliance"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-008",
+    "category": "configuration",
+    "title": "Budget Management — Hierarchy, Currency Migration, and Meeting Expense Integration",
+    "products": ["oce"],
+    "summary": "The budgets module enables hierarchical budget creation and allocation across the territory hierarchy, with integration to meeting expenses. Budget records support currency data types with multi-currency and advanced currency options. Migration from earlier versions requires specific data transformation steps.",
+    "findings": {
+      "budget_hierarchy": "Budgets can be created in a hierarchy that mirrors the territory structure. Child budgets receive allocations from parent budgets. Pool budgets (where parent and child share the same territory) cannot be redistributed further. The hierarchy level is maintained by a trigger handler and can be corrected in bulk using a dedicated batch process. Budget calculations are maintained through another batch process that must run after the meeting budget DML handler is enabled.",
+      "currency_migration": "Earlier versions stored amounts in number-type fields. The current version uses currency-type fields. Migration requires exporting records, remapping column names (e.g., actual expenses to actual amount, total budget to total amount), and re-importing. If no currency ISO code is specified, records default to company currency. Multi-currency requires enabling a currency setting in the meetings org-level configuration.",
+      "meeting_expense_integration": "Budget records link to meetings through a meeting budget 2 object (replacing the original meeting budget object). Meeting expense budget allocation records track how expenses draw from budgets. Meeting expense and meeting expense allocation records also require currency field migration. Trigger handlers control calculation cascades between expenses and budgets.",
+      "setup_requirements": "Configuration requires enabling seven trigger handlers, five validation rules, a data change event handler, specific permission sets (Budget Admin, Budget Manager, Budget User), a Lightning record page assignment, field set configuration for child budget list view and gauge components, DB schema WHERE clause configuration, and a create action override with a custom component. Post-setup requires running two batch processes in sequence.",
+      "validation_rules": "Five validation rules govern budget behavior: preventing currency changes, preventing budget reparenting, preventing pool budget redistribution, preventing ultimate parent changes, and preventing currency modifications on records. These rules enforce data integrity across the budget hierarchy.",
+      "migration_considerations": "Budget migration requires careful handling of the currency data type transition, meeting budget object migration (v1 to v2), and expense allocation record creation. The interconnected trigger handlers create calculation cascades that must be disabled during data migration and re-enabled afterward. Custom script validations for meetings business rules may need updating to reference currency-type fields instead of number-type fields."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Budget management and migration sections.",
+    "tags": [
+      "budgets",
+      "currency",
+      "meetings",
+      "expenses",
+      "territory-hierarchy",
+      "data-migration",
+      "trigger-handlers"
+    ]
+  },
+  {
+    "id": "oce-cfg-spc-009",
+    "category": "configuration",
+    "title": "Specialty Management — Automated Picklist Synchronization with Provider Data",
+    "products": ["oce"],
+    "summary": "Specialty management automates the configuration of specialty picklist values by sourcing from a provider data connector. The feature manages picklist values, translations, code mappings, and country-specialty dependencies across a multi-country setup, reducing administrative overhead for global deployments.",
+    "findings": {
+      "picklist_value_management": "The feature automatically populates specialty picklist fields with values sourced from the provider data connector. Picklist API names follow a structured format combining a managed prefix, international specialty code, and optionally a local specialty code. Labels combine the international specialty label with local codes. Both API name and label must be unique. Values with the managed prefix are centrally maintained; custom values (without the prefix) are left untouched.",
+      "country_dependency": "The feature establishes dependency between country code and specialty picklist fields. This means specialty values shown to users are filtered by the country context. The dependency is a prerequisite that must exist before the feature can be initiated.",
+      "translation_management": "Translations are automatically maintained for all picklist values. Each country's spoken languages map to specific Salesforce language codes (e.g., Belgium with French, German, Dutch maps to fr_BE, de_BE, nl_BE). Translations can be verified in the translation workbench after the process completes.",
+      "code_and_mapping_management": "The feature inserts provider codes for all countries enabled in the data connector. Code mappings link managed picklist values to their corresponding codes. Obsolete code mappings are automatically deleted when a country is removed from the connector. Code mapping records are only inserted when no existing mapping exists for that code-country combination.",
+      "process_execution": "The process is initiated from an admin console tile with prerequisite validation before start. The system reads enabled countries and processes them sequentially. A summary section allows monitoring with refresh and detailed log views. Post-completion steps include updating existing account records with new values, assigning new picklist values to record types, and generating metadata cache.",
+      "migration_considerations": "This feature represents a significant automation that reduces multi-country specialty administration. When migrating, organizations should inventory all managed picklist values and their translations, document country-specialty dependencies, and map code relationships. The target platform may require manual configuration of equivalent specialty data if it lacks a similar automated connector integration."
+    },
+    "source": "Legacy CRM configuration guide, March 2025 edition. Specialty management with provider data connector sections.",
+    "tags": [
+      "specialty-management",
+      "picklist-automation",
+      "multi-country",
+      "translations",
+      "provider-data",
+      "code-mappings",
+      "global-deployment"
+    ]
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "lsc-help-time-off-territory-ind-lsc-time-off-territory-get-your-org-ready",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Get Your Org Ready for Time Off Territory",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Before using Time Off Territory, configure the necessary validation settings, downtime categories and business hours. These prerequisites ensure time-off entries align with your working hours, prevent scheduling conflicts, and maintain a consistent scheduling",
+    "findings": [
+      {
+        "name": "Get Your Org Ready for Time Off Territory",
+        "detail": "Before using Time Off Territory, configure the necessary validation settings, downtime categories and business hours. These prerequisites ensure time-off entries align with your working hours, prevent scheduling conflicts, and maintain a consistent scheduling experience."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage time off territory settings: | Life Sciences Commercial Admin permission set"
+      },
+      {
+        "name": "Enable Required Trigger Handlers",
+        "detail": "Activate these trigger handlers to enforce Time Off Territory rules, prevent scheduling conflicts, and ensure consistent validation and sharing. TUDUpdateHandler TUDBHValidationHandler TUDVisitValidationHandler TUDHolidayValidationHandler TUDOverlapHandler TUDEventValidationHandler TUDSharingHandler VisitTimeOffValidationHandler MngEventDateTimeValidationHandler To learn more about these trigger handlers and their trigger conditions, see Trigger Handlers by Object . For instructions on how to activate trigger handlers, see Manage Trigger Handlers ."
+      },
+      {
+        "name": "Configure Downtime Categories for Time Off Territory",
+        "detail": "Define and set up your own downtime categories so that Time Off Territory events reflect the downtime reasons that matter to your organization, such as company celebration days, training, and regulatory duties. Create custom picklist values for the Downtime Category field on the Territory User Downtime object. For more information, see Add or Edit Picklist Values . Make sure you configure the Field-Level Security settings to give visibility access to your chosen profiles. Add the Downtime Category field to your Territory User Downtime page layout. If you’re moving from standard downtime types to your own downtime categories, remove the Downtime Type field. For more information, see Customize Page Layouts ."
+      },
+      {
+        "name": "Configure Business Hours for Time Off Territory",
+        "detail": "Configure business hours to ensure that Time Off Territory entries are validated against your organization’s working hours. From the App Launcher, find and select Admin Console . Select Planner, and then select Planner Settings . Select the profile for which you want to apply the Time Slot Interval settings. To apply the settings to all the profiles in the org, select Default . For Global Business Hours, search for and select the business hours. If no business hours are available, you must create them first. For instructions, see Set Business Hours . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_time_off_territory_get_your_org_ready.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "time-off-territory"
+    ]
+  },
+  {
+    "id": "lsc-help-time-off-territory-ind-lsc-time-off-territory-configure-rules",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Time Off Territory Rules",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Control how Time Off Territory (TOT) events interact with other activities. These rules determine whether TOT events can be created alongside other activities, helping prevent scheduling conflicts and ensuring alignment with organizational policies. You can also configure the TOT rules for custom...",
+    "findings": [
+      {
+        "name": "Configure Time Off Territory Rules",
+        "detail": "Control how Time Off Territory (TOT) events interact with other activities. These rules determine whether TOT events can be created alongside other activities, helping prevent scheduling conflicts and ensuring alignment with organizational policies. You can also configure the TOT rules for custom downtime categories."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage time off territory settings: | Life Sciences Commercial Admin permission set Prerequisite: To apply TOT rules to your configured downtime categories, make sure you've created custom picklist values for the Downtime Category field of the Territory User Downtime object. From the App Launcher, find and select Admin Console . Select Time Off Territory and then select Time Off Territory . Turn on Time Off Territory Rules. This is an org-wide setting. When this setting is inactive, standard validations are enforced without rule-based configuration. In this case, Time Off Territory entries aren’t allowed during visits, non-business hours and holidays. For TOT Event Type, select whether you want to apply the TOT rule to a standard event or a custom event. To apply the rule to standard TOT events, select Downtime Type . To apply the rule to custom TOT events, select Downtime Category . Select the profile for which you want to apply the Time Off Territory rules. To apply the rules to all the profiles in the org, select Default . Select a rule for which you want to set the parameters. Select an existing rule to update its parameters. Select Default to set the default rule parameters. To create a new rule and its parameters, select New Rule , and then enter a name for it. Select the parameters for the default rule. The default rule determines whether a time-off entry can be created during an event. It applies to all the associated TOT types. To override the default rule for a specific TOT type, update the values for the events in the corresponding row. If you don’t select a value, the default rule is applied for the TOT type for the event. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_time_off_territory_configure_rules.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "time-off-territory"
+    ]
+  },
+  {
+    "id": "lsc-help-time-off-territory-ind-lsc-time-off-territory-configure-working-days-calculation-for-activity-plans",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Working Days Calculation for Activity Plans",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Define how working days are calculated for activity plans based on business hours, holidays, and Time Off Territory (TOT) events. These org-level settings define how TOT types are used for the working days calculation and ensure that they are included in the batch job used for recalculating working...",
+    "findings": [
+      {
+        "name": "Configure Working Days Calculation for Activity Plans",
+        "detail": "Define how working days are calculated for activity plans based on business hours, holidays, and Time Off Territory (TOT) events. These org-level settings define how TOT types are used for the working days calculation and ensure that they are included in the batch job used for recalculating working days."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage time off territory settings: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select Time Off Territory and then select Working Days Settings For Activity Plans . Configure the batch job settings. For Hours Per Workday, enter the number of daily working hours used to calculate working days. For Working Day, enter the TOT types to be considered as working hours. These hours aren’t subtracted during working day calculations. You can enter multiple values separated by semicolons. For example, Training; Civic Activity. Save your changes. Note The Activity Plan Cycles Per Batch field isn’t currently used and doesn’t affect the working day calculations. To recalculate working days, run the Calculate Working Days batch job. For instructions, see Batch Jobs for Activity Plans ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_time_off_territory_configure_working_days_calculation_for_activity_plans.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "time-off-territory",
+      "activity-plans"
+    ]
+  }
+]

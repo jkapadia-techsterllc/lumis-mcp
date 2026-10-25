@@ -1,0 +1,91 @@
+{
+  "id": "dt-002",
+  "name": "Migration Path Decision Tree",
+  "description": "Determines the optimal migration approach based on customer situation, risk tolerance, and timeline.",
+  "nodes": [
+    {
+      "id": "start",
+      "question": "What is the migration driver?",
+      "branches": [
+        {"value": "Contract Expiration", "next": "timeline"},
+        {"value": "Cost Reduction", "next": "cost"},
+        {"value": "Platform Consolidation", "next": "consolidation"},
+        {"value": "Feature Gap / Innovation", "next": "feature"},
+        {"value": "Compliance / Regulatory", "next": "compliance"}
+      ]
+    },
+    {
+      "id": "timeline",
+      "question": "How many months until contract expires?",
+      "branches": [
+        {"value": "< 6 months", "next": "fast-track"},
+        {"value": "6-12 months", "next": "standard"},
+        {"value": "> 12 months", "next": "phased"}
+      ]
+    },
+    {
+      "id": "cost",
+      "recommendation": "Start with modules that have highest licensing cost on source platform. Often: Events Management (separate Engage license), CLM (Vault license), or Sample Management (compliance add-on).",
+      "next": "standard"
+    },
+    {
+      "id": "consolidation",
+      "recommendation": "Map all source platform modules currently in use. Prioritize modules with highest user count first for maximum consolidation impact.",
+      "next": "phased"
+    },
+    {
+      "id": "feature",
+      "recommendation": "Target platform strengths: AI/Next Best, agentic workflows, Data Cloud integration, native platform ecosystem. Start with the module where feature gap is most painful.",
+      "next": "standard"
+    },
+    {
+      "id": "compliance",
+      "recommendation": "Prioritize: (1) Consent Management for GDPR/privacy, (2) Sample Management for PDMA/DEA, (3) Events for Sunshine Act. Compliance modules cannot be deferred.",
+      "next": "fast-track"
+    },
+    {
+      "id": "fast-track",
+      "name": "Fast-Track Migration (< 6 months)",
+      "approach": "Big Bang",
+      "phases": [
+        {"phase": 1, "weeks": "1-4", "activity": "Foundation: User, Account, Territory + Data Migration planning"},
+        {"phase": 2, "weeks": "5-12", "activity": "Core modules: parallel configuration + integration testing"},
+        {"phase": 3, "weeks": "13-16", "activity": "UAT + training + data migration execution"},
+        {"phase": 4, "weeks": "17-20", "activity": "Go-live + hypercare"}
+      ],
+      "risks": ["High — no rollback once source is decommissioned", "Compressed UAT window", "Training gaps lead to adoption issues"],
+      "mitigations": ["Run parallel systems for 30 days post go-live", "Prioritize power-user training", "Defer non-critical modules to Phase 2"]
+    },
+    {
+      "id": "standard",
+      "name": "Standard Migration (6-12 months)",
+      "approach": "Wave-Based",
+      "phases": [
+        {"phase": 1, "weeks": "1-8", "activity": "Foundation + first wave (highest-value modules)"},
+        {"phase": 2, "weeks": "9-20", "activity": "Second wave (remaining core modules)"},
+        {"phase": 3, "weeks": "21-28", "activity": "Third wave (digital/advanced modules)"},
+        {"phase": 4, "weeks": "29-36", "activity": "Data migration + UAT + go-live"}
+      ],
+      "risks": ["Medium — extended dual-system period increases cost", "Integration complexity between waves"],
+      "mitigations": ["Clear wave success criteria before proceeding", "Dedicated integration testing between waves"]
+    },
+    {
+      "id": "phased",
+      "name": "Phased Migration (> 12 months)",
+      "approach": "Module-by-Module",
+      "phases": [
+        {"phase": 1, "months": "1-3", "activity": "Discovery + architecture + first module pilot"},
+        {"phase": 2, "months": "4-8", "activity": "Core module migration (one at a time, validate each)"},
+        {"phase": 3, "months": "9-12", "activity": "Advanced modules + integrations"},
+        {"phase": 4, "months": "13-15", "activity": "Data migration + cutover + decommission source"}
+      ],
+      "risks": ["Low technical risk, high cost risk (dual licensing)", "Scope creep as requirements evolve"],
+      "mitigations": ["Fixed scope per phase with formal sign-off", "Monthly cost tracking vs. migration ROI"]
+    }
+  ],
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Decision Trees / Migration Path",
+    "confidence": "High"
+  }
+}

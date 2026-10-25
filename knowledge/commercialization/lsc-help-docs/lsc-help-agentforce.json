@@ -1,0 +1,114 @@
+[
+  {
+    "id": "lsc-help-agentforce-ind-lsc-agent-account-summarization-setup",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Agentforce for Account Summarization",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To start using the Agentforce features, make sure you enable Einstein Setup, visit-specific topics and actions, and account summarization. Also verify that you have records set up in your",
+    "findings": [
+      {
+        "name": "Set Up Agentforce for Account Summarization",
+        "detail": "To start using the Agentforce features, make sure you enable Einstein Setup, visit-specific topics and actions, and account summarization. Also verify that you have records set up in your org."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud for Customer Engagement Add-on license, Agentforce for Life Sciences Cloud, Flex Credits Metering, Agentforce Employee Agent, Einstein GPT Platform, Einstein GPT Copilot, and Einstein GPT Prompt Builder. Also available with Einstein GPT Trust and Genie Data Platform Starter add-on licenses. User Permissions Needed To enable Agentforce: | Customize Application To enable Account Summarization: | Life Sciences Commercial Admin permission set AND Access Life Sciences Customer Engagement Agentforce Prerequisites To use Einstein Generative AI, turn on Einstein Setup . Set up data to summarize accounts . Licenses Assign the following permission sets to your users: Health Cloud Starter Life Sciences Core Prompt Template User Access Life Sciences Customer Engagement Agentforce Assign licenses based on the the standard user's persona: Assign the Life Sciences Key Account Management permission set to key account managers. Assign the Life Sciences Field Medical permission set to medical science liaisons. Assign the Life Sciences Field Sales Representative permission set to sales representatives. From Setup, in the Quick Find box, enter Life Sciences for Customer Engagement Setup , and select it. In the Enable Life Sciences Cloud for Customer Engagement Features section, turn on Territory-Based Derived Sharing admin settings. In the Configure Account Summarization For Customer Engagement section, turn on the Account Summarization. In the Set Up Agentforce for Visit Planning section, turn on Enable Visit Planning Actions and Topics."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_agent_account_summarization_setup.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "agentforce",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-agentforce-ind-lsc-agent-account-summarization-topic-visit-planning",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Agent Topic: Pre Visit Planning",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Pre Visit Planning topic helps optimize customer interactions by providing informed, personalized insights and summaries. The topic processes the user's utterances to extract the provider's name and the user's territory, and calls the Identify Record By Name action and the Generate Healthcare...",
+    "findings": [
+      {
+        "name": "Agent Topic: Pre Visit Planning",
+        "detail": "The Pre Visit Planning topic helps optimize customer interactions by providing informed, personalized insights and summaries. The topic processes the user's utterances to extract the provider's name and the user's territory, and calls the Identify Record By Name action and the Generate Healthcare Provider Summary action to generate account summaries."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud for Customer Engagement Add-on license, Agentforce for Life Sciences Cloud, Flex Credits Metering, Agentforce Employee Agent, Einstein GPT Platform, Einstein GPT Copilot, and Einstein GPT Prompt Builder. Also available with Einstein GPT Trust and Genie Data Platform Starter add-on licenses. topic | description | Included Agent Actions PreVisitPlanning | Help key account managers, medical science liaisons, and field sales reps prepare for visits by generating contextual summaries of provider records | Generate Healthcare Provider Summary * Identify Records By Name *This action executes one or more prompt templates."
+      },
+      {
+        "name": "Examples of Utterances Classified to This Topic",
+        "detail": "\"Give me the summary for the current record.\" \"Provide the Healthcare Provider summary for the current record.\" \"What is the latest summary for the current record?\""
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_agent_account_summarization_topic_visit_planning.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "agentforce",
+      "visits",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-agentforce-ind-lsc-agent-account-summarization-provide-access",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Provide Access to Your Pre Visit Planning Agent",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To help users access the Pre Visit Planning agent, create a permission set with agent access enabled, and assign it to the user. Or, provide agent access to your user's current",
+    "findings": [
+      {
+        "name": "Provide Access to Your Pre Visit Planning Agent",
+        "detail": "To help users access the Pre Visit Planning agent, create a permission set with agent access enabled, and assign it to the user. Or, provide agent access to your user's current profile."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud for Customer Engagement Add-on license, Agentforce for Life Sciences Cloud, Flex Credits Metering, Agentforce Employee Agent, Einstein GPT Platform, Einstein GPT Copilot, and Einstein GPT Prompt Builder. Also available with Einstein GPT Trust and Genie Data Platform Starter add-on licenses. User Permissions Needed To create permission sets: | Manage Profiles and permission sets To assign permission sets: | Assign Permission Sets Make sure you assign the Health Cloud Starter, Life Sciences Core, Prompt Template User, and the Access Life Sciences Customer Engagement Agentforce permission sets, along with the persona-specific permission set to your users. Important The permission sets alone don't grant everything that's required to generate a summary. The Generate Healthcare Provider Summary action runs the Generate Account Summary flow, so each user's profile also requires access to run the flow. The summary generates only when the flow can run, even for users who have the permission sets. For a profile that can't generate summaries (for example, a field sales rep profile), make sure that the profile has these settings. Access to the Generate Account Summary flow. From Setup, in the Quick Find box, enter Flows , and then select Flows . Open the Generate Account Summary flow, and grant flow access to the profile. The Run Flows and View Flows permissions. From Setup, in the Quick Find box, enter Profiles , and then select Profiles . Open the profile, go to the app permissions, and turn on Run Flows and View Flows . From Setup, in the Quick Find box, enter Profile and then select it. Click New , and enter a label and description for the permission set. The API name is automatically populated. Alternatively, select the profile assigned to the user. Click Enabled Agent Access , and then click Edit . Move your agent from the Available Agents list to Enabled Agents list. Save your changes. In case of new permission sets, assign the permission set to your users."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_agent_account_summarization_provide_access.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "agentforce",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-agentforce-ind-lsc-agentforce-for-life-sciences-cloud",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Agentforce for Life Sciences",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Leverage the power of Agentforce in Life Sciences Cloud. Use the Pharmacy Benefits Reverification agent to accelerate the benefits reverification process by efficiently updating patients' personal, drug, pharmacy, and healthcare provider details. Use the Site Selection Assistance Agent to...",
+    "findings": [
+      {
+        "name": "Agentforce for Life Sciences",
+        "detail": "Leverage the power of Agentforce in Life Sciences Cloud. Use the Pharmacy Benefits Reverification agent to accelerate the benefits reverification process by efficiently updating patients' personal, drug, pharmacy, and healthcare provider details. Use the Site Selection Assistance Agent to accelerate the site selection process by quickly searching for sites and investigators and sending feasibility assessments."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Health Cloud or Life Sciences Cloud licenses and Agentforce for Life Sciences Cloud or Agentforce for Health Cloud, Flex Credits Metering, Agentforce Employee Agent, Einstein GPT Platform, Einstein GPT Copilot, and Einstein GPT Prompt Builder add-on licenses Agentforce for Pharmacy Benefits Reverification Patient services programs reps can leverage the power of Agentforce to accelerate the benefits reverification process by efficiently updating patients' personal, drug, pharmacy, and healthcare provider details. Agentforce for Site Management Study managers can use the Agentforce capabilities to search sites and investigators for running feasibility studies to conduct clinical trials. By using Agentforce, they can also summarize the sites and investigators information in the search results, add the appropriate sites to a specific research study, and send feasibility questionnaire to those sites and investigators. Agentforce helps study managers perform the site selection operations without having to update multiple objects and navigate through multiple pages."
+      },
+      {
+        "name": "See Also",
+        "detail": "Trailhead : Agentforce for Life Sciences"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_agentforce_for_life_sciences_cloud.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "agentforce"
+    ]
+  }
+]

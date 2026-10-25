@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-opt-001",
+    "category": "modules",
+    "title": "Salesforce Optimizer Health Check \u2014 Org Assessment Categories",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "The Salesforce Optimizer is a built-in org assessment tool that evaluates implementation health across three dimensions: Monitor Limits (storage, fields, rules approaching platform limits), Optimize and Maintain (unused metadata, inactive automation, stale configurations), and Increase Adoption (user login activity, browser compatibility, feature utilization). Each finding is rated on a four-level impact scale from green (compliant) through yellow (may not comply) and orange (does not comply) to red (critical \u2014 approaching limits).",
+    "findings": {
+      "monitor_limits": "Org Limits: file storage (per org), data storage (per org), static resource (250 MB per org, includes managed packages). Object Limits: custom fields (500 per object), sharing rules (300 per object), workflow rules (50 per object), validation rules (100 per object). Top field-heavy objects in LS implementations include prescription/sales data objects (270 fields), Account (125 fields), Call (89 fields), and Account Address (69 fields)",
+      "optimize_and_maintain": "Field Usage (fields completed <10% of the time), unused reports and dashboards, unassigned page layouts and record types, inactive validation and workflow rules, page layouts with excessive related lists (>14). Also evaluates custom code: formula fields with JavaScript, multiple Apex triggers per object, and code using deprecated API versions",
+      "increase_adoption": "User login frequency, browser version compliance, Chatter activity, Files adoption. Also evaluates Lightning readiness: page component density per region, workflow rules eligible for Process Builder migration. Permission hygiene: administrator count, unassigned roles, profiles, and permission sets",
+      "implementation_guidance": "Run Optimizer quarterly as part of org health reviews. Address red items immediately (approaching hard limits). Use sandbox to test changes recommended by yellow/orange findings. Track custom field growth rate to predict when objects will approach the 500-field limit"
+    },
+    "source": "Salesforce Optimizer Report V2.2 (January 2018, Enterprise Edition sandbox)",
+    "tags": [
+      "optimizer",
+      "org-health",
+      "governor-limits",
+      "field-usage",
+      "adoption",
+      "technical-debt"
+    ]
+  }
+]

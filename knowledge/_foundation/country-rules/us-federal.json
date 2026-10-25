@@ -1,0 +1,57 @@
+{
+  "id": "country-us-federal",
+  "region": "United States",
+  "countries": ["United States"],
+  "regulation": "Multiple: PDMA, Sunshine Act, HIPAA, FDA 21 CFR Part 11",
+  "modules_affected": ["Sample Management", "Events Management", "Consent Management", "Visit Management"],
+  "rules": [
+    {
+      "rule": "PDMA (Prescription Drug Marketing Act) — Sample Distribution",
+      "description": "Pharmaceutical samples must be tracked from manufacturer to HCP with full chain of custody. Requires written request from licensed practitioner.",
+      "implementation": "Sample Management must capture: (1) Written request (signature), (2) Lot tracking from distribution to delivery, (3) Reconciliation of physical inventory, (4) Loss/theft reporting.",
+      "affected_modules": ["Sample Management"],
+      "penalty": "Criminal penalties, product seizure, injunction"
+    },
+    {
+      "rule": "Sunshine Act (Open Payments) — HCP Payment Tracking",
+      "description": "Manufacturers must report payments and transfers of value to physicians/teaching hospitals to CMS annually. Covers meals, travel, consulting fees, speaker programs, research grants.",
+      "implementation": "Events Management must track: (1) Each transfer of value by type, (2) HCP NPI number linkage, (3) Aggregate spend per HCP per year, (4) CMS-format export. This is the largest gap for most migrations — source platforms often have native Sunshine Act reporting; target may require custom build or integration.",
+      "affected_modules": ["Events Management", "Visit Management"],
+      "penalty": "$10,000-$100,000 per failure to report, up to $1M for knowing failures"
+    },
+    {
+      "rule": "HIPAA — Protected Health Information",
+      "description": "If CRM stores any PHI (patient data, prescription data, health information), HIPAA Security Rule applies.",
+      "implementation": "For most life sciences CRM implementations, HIPAA is limited scope — CRM typically stores HCP data (not patient data). However: (1) Any patient support programs that store patient identifiers trigger HIPAA, (2) Analytics features pulling prescription data must be HIPAA-compliant, (3) BAA (Business Associate Agreement) required with platform provider.",
+      "affected_modules": ["All modules if patient data present"],
+      "penalty": "$100-$50,000 per violation, up to $1.5M per year per violation category"
+    },
+    {
+      "rule": "FDA 21 CFR Part 11 — Electronic Records/Signatures",
+      "description": "Electronic records and signatures used in place of paper records must meet specific requirements: audit trails, access controls, electronic signature validation.",
+      "implementation": "Affects sample management signature capture: (1) Electronic signature must be linked to unique individual, (2) Signature records must be tamper-evident, (3) Audit trail must capture creation, modification, deletion of regulated records. Target platform's Field Audit Trail + Shield Encryption can meet Part 11 requirements.",
+      "affected_modules": ["Sample Management"],
+      "penalty": "Warning letter, consent decree, criminal prosecution"
+    }
+  ],
+  "state_specific": [
+    {
+      "state": "California",
+      "rules": ["CCPA/CPRA adds data privacy rights similar to GDPR for California residents", "CalOPPA requires privacy policy disclosures"]
+    },
+    {
+      "state": "Vermont",
+      "rules": ["Prescriber Confidentiality Law restricts use of prescriber-identified data for marketing"]
+    },
+    {
+      "state": "Massachusetts",
+      "rules": ["Gift ban: no meals, gifts, or entertainment to HCPs", "Affects visit and event tracking requirements"]
+    }
+  ],
+  "migration_notes": "US migrations from source platforms typically have good Sunshine Act / PDMA coverage. Key risks during migration: (1) Sample audit trail continuity — ensure no gaps in chain of custody records, (2) Sunshine Act reporting history — transfer or maintain access to historical spend data for CMS lookback periods, (3) Electronic signature records must be preserved in a way that meets Part 11 — don't just migrate the flag, migrate the signature image/certificate.",
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Country Rules / US Federal",
+    "confidence": "High"
+  }
+}

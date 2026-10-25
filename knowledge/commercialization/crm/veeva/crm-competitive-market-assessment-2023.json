@@ -1,0 +1,111 @@
+[
+  {
+    "id": "competitive-001",
+    "category": "commercialization/crm/veeva",
+    "title": "CRM Market Assessment 2023 - Executive Summary and Methodology",
+    "products": ["Legacy CRM Personal"],
+    "summary": "A 2023 comparative analysis of two leading life sciences CRM platforms across system functionality, integration, and UI/UX dimensions. Conducted by a technology solutions team experienced with implementing both platforms across US and EMEA markets.",
+    "findings": {
+      "methodology": "Scoring uses a 1-5 relative scale. 5 = native functionality with full coverage as a market leader. 4 = most functionality present with some improvements possible. 3 = partial functionality requiring additional configuration and decreased UX. 2 = minimal functionality requiring customization, still below market requirements. 1 = very minimal native capability with lower-than-acceptable UX. 0 = cannot meet market requirements.",
+      "overall_assessment": "Considering overall functionality, the alternative CRM platform has caught up with the incumbent CRM platform. The incumbent retains advantages largely due to product maturity.",
+      "incumbent_advantages": [
+        "Content vault integration providing unified content creation and distribution across the commercial ecosystem",
+        "Effective system integrator partnerships — SIs act as intermediaries managing release issues and product implementations",
+        "Comprehensive publicly available online help with structured guides and support forums",
+        "Self-paced feature-targeted learning journeys with differentiated certification levels",
+        "Native content management solution for China market based on local messaging platform technology"
+      ],
+      "alternative_advantages": [
+        "Reference data integration and data change request process",
+        "Application marketplace with reusable and customizable functionality enhancements",
+        "Multi-channel solution integrating digital channel functionality directly into the CRM",
+        "Advanced predictive analytics and sales data integration capabilities",
+        "More functionality included without extra licensing — field email, content marketing, sample management, remote engagement, next-best-action"
+      ],
+      "scope_areas": [
+        "Core CRM",
+        "Approved Emails",
+        "Content Presentations",
+        "Medical CRM",
+        "Consent Capture",
+        "Events Management",
+        "Reporting and Analytics",
+        "Key Account Management",
+        "Fixed Reports",
+        "Remote Engagement"
+      ]
+    },
+    "source": "internal-market-assessment-2023",
+    "tags": ["competitive-analysis", "market-assessment", "crm", "methodology", "executive-summary"]
+  },
+  {
+    "id": "competitive-002",
+    "category": "commercialization/crm/veeva",
+    "title": "CRM Market Assessment 2023 - Product Feature Wins Analysis",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Detailed feature-by-feature comparison identifying specific areas where each platform holds competitive advantage, organized by functional category.",
+    "findings": {
+      "incumbent_feature_wins": {
+        "content_management": "Native vault integration for content lifecycle and approved email. More flexible multi-dimensional options within content presentations. Augmented reality capabilities in content.",
+        "reporting_and_analytics": "Integrated custom reporting and analytics pages directly within the CRM. More mature and configurable cycle planning solution.",
+        "remote_engagement": "Wider support for signature capture in remote sessions. Stronger video conferencing integration.",
+        "calendar_and_scheduling": "More flexible external calendar integration including ability to view personal calendar entries from the CRM.",
+        "call_recording": "More streamlined call recording screen with flexible configuration. Ability to capture remote signatures on medical information request forms.",
+        "reference_data": "Integrated KOL information with 360-degree view — publications, research, activities — directly connected to CRM data.",
+        "administration": "Role hierarchy simplification for approvals, data access, and reporting. Built-in compliance text monitoring for free-text fields.",
+        "sampling": "Stronger sample/inventory management UX including approvals, sample value management, and QR barcode scanning. More comprehensive promotional items functionality with tracking, inventory, lot numbers, and restrictions.",
+        "home_page": "Standard offline-capable widgets showing sync status, accounts added/removed, and other key data on the home page."
+      },
+      "alternative_feature_wins": {
+        "multichannel_timeline": "360-degree multichannel timeline displaying all interactions and marketing activity including digital journey — native integration without custom configuration.",
+        "ai_and_predictions": "Next-best-channel, next-best-message, and next-best-content suggestions with more powerful, timely, contextual, and actionable predictions based on AI/ML.",
+        "marketplace": "Application marketplace enabling the client community to build and share reusable CRM functionality enhancements.",
+        "reference_data_integration": "Reference data connector with stronger integration for account search and verification, especially for global implementations.",
+        "territory_management": "Multiple territory alignment types supported in parallel without additional modules or tools.",
+        "segmentation": "Ratings available for dynamic segmentation — metrics-based, calculated, and customer-flexible — usable for activity plans, customer rankings, and more.",
+        "remote_engagement": "Smoother UX for remote sessions — no app installation required by the customer. More tracking metrics captured.",
+        "offline_customization": "Ability to add custom objects, custom fields, and custom tabs that work offline. All validation rules including formula fields supported on mobile devices.",
+        "multi_org": "Cross-organization resource sharing (accounts, activities) across multiple country or regional solutions without additional configuration.",
+        "reports_and_dashboards": "Native integration for sales data including prescribing insights, daily dosage, payer/plan data. Adoption dashboards and CRM usage metrics provided out of the box.",
+        "data_quality": "Account-address relationships for more robust address management. Stronger affiliations visualization when address-based. Better product catalog management leveraging product levels throughout the application.",
+        "multi_device": "Broader device support — mobile, tablet, and desktop platforms."
+      }
+    },
+    "source": "internal-market-assessment-2023",
+    "tags": ["competitive-analysis", "feature-comparison", "crm", "product-wins", "gap-analysis"]
+  },
+  {
+    "id": "competitive-003",
+    "category": "commercialization/crm/veeva",
+    "title": "CRM Market Assessment 2023 - Strategic Migration Implications",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Synthesizes the competitive assessment into strategic implications for platform migration planning, identifying areas where the alternative platform can differentiate and areas requiring investment to close gaps.",
+    "findings": {
+      "differentiation_opportunities": [
+        "AI/ML-powered engagement optimization (next-best-action, next-best-channel) — incumbent has limited adoption of comparable capabilities",
+        "Multi-channel engagement from a single platform — the incumbent requires separate modules for digital channels",
+        "Application marketplace and extensibility — customers can build and share solutions rather than depending solely on vendor roadmap",
+        "Multi-device support including desktop form factors — the incumbent is primarily tablet-focused",
+        "Offline custom object/field support and full validation rule support on mobile — the incumbent has more limited offline customization",
+        "Dynamic segmentation and ratings — more flexible than the incumbent's static segmentation approach"
+      ],
+      "gap_areas_requiring_investment": [
+        "Content vault integration — the incumbent's unified content lifecycle management across the commercial ecosystem is a significant advantage",
+        "System integrator ecosystem — the incumbent has more established SI partnerships with structured certification and enablement programs",
+        "Public documentation and self-paced learning — the incumbent's online help and learning paths are more comprehensive and discoverable",
+        "Promotional items management — the incumbent has a more complete solution for non-sample promotional tracking",
+        "Sample management UX — the incumbent offers stronger sample scanning and inventory management workflows",
+        "Home page offline widgets — the incumbent provides more offline-capable summary data on initial screens"
+      ],
+      "key_battleground_areas": [
+        "Remote engagement — both platforms have competitive offerings with different strengths (incumbent has signature capture, alternative has smoother participant experience)",
+        "Call recording — the incumbent is migrating its own legacy format while the alternative has a more modern approach",
+        "Events management — both platforms have comprehensive capabilities but with different architectural approaches",
+        "Reporting and analytics — the incumbent has integrated custom pages while the alternative has stronger data integration"
+      ],
+      "market_positioning_insight": "The overall market assessment shows convergence in core CRM functionality. Competitive differentiation is shifting from basic CRM features toward AI-powered engagement, multi-channel orchestration, platform extensibility, and ecosystem breadth. The alternative platform's licensing model (more functionality included at base tier) and multi-device support represent structural advantages that compound over time as customers expand usage."
+    },
+    "source": "internal-market-assessment-2023",
+    "tags": ["competitive-analysis", "market-assessment", "crm", "migration-planning", "feature-comparison"]
+  }
+]

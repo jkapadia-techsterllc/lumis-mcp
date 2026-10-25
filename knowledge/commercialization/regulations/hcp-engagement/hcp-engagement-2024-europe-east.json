@@ -1,0 +1,54 @@
+[
+  {
+    "id": "hcp-engagement-2024-europe-east-1",
+    "category": "knowledge/commercialization/regulations/hcp-engagement",
+    "title": "HCP Engagement Regulations — Eastern Europe (Q4 2024)",
+    "products": [
+      "Life Sciences CRM",
+      "Compliance"
+    ],
+    "summary": "Regulatory requirements for HCP/HCO engagement and meeting sponsorship across Eastern European countries, current as of Q4 2024. Updated thresholds and clarified rules from 2022 edition.",
+    "findings": [
+      {
+        "name": "Bulgaria",
+        "detail": "Industry: Pharma. Competent authority: ARPharM. Code-based regulation. Engagement: Standard written contract requirements. Meetings: Companies may provide financial support to promotional and scientific conferences with appropriate venue; preliminary assessment via ARPharM events database recommended before sponsoring national events including HCPs. Meal thresholds: Lunch 80 BGN (41 EUR); Dinner 120 BGN (62 EUR); Value per day 200 BGN (102 EUR) incl. VAT (significantly increased and restructured from 100 BGN in 2022)."
+      },
+      {
+        "name": "Czech Republic",
+        "detail": "Industry: Pharma. Competent authority: AIFP. Code-based regulation. Engagement: Standard written contract with detailed requirements. Meetings: Events in appropriate venues avoiding extravagant/entertainment facilities. Mandatory reporting of every sponsorship and HCP cost contribution in AIFP public database. Meal thresholds: 6+ hours scientific activities — 3,000 CZK (119 EUR) incl. VAT total per day, 1,500 CZK (58 EUR) lunch, 1,500 CZK (58 EUR) dinner; Under 6 hours — 1,500 CZK (58 EUR) total per day (restructured from 2022)."
+      },
+      {
+        "name": "Hungary",
+        "detail": "Industry: Pharma-Generics. Competent authority: AIPM, Hungarian Association of Generic Manufacturers. Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds: AIPM members — 60 EUR incl. VAT per meal (increased from 50 EUR), 100 EUR per day (increased from 90 EUR). Promotional events by law — 13,340 HUF (34 EUR) incl. VAT (5% of minimum wage)."
+      },
+      {
+        "name": "Poland (Pharma)",
+        "detail": "Industry: Pharma. Competent authority: INFARMA. Code-based regulation. Engagement: Written contract; HCPs should be duly authorized by employer (recommended to include in contract). Pre-approval: Authorization from HCP's employer. Meetings: All scientific events must be certified by INFARMA. Two validation systems: SOWE (Educational Events Assessment System) for domestic events; CVS (Conference Verification System) for international events — new dual-system in 2024. Pre-approval: INFARMA positive assessment required. Meeting timelines: Request 2 months prior; INFARMA opinion within 5 working days (up to 10 exceptional). Meal thresholds: 200 PLN (45 EUR) incl. VAT (unchanged)."
+      },
+      {
+        "name": "Poland (Medical Devices)",
+        "detail": "Industry: Medical Devices. Competent authority: POLMED. Engagement: Written contract required. Notification: HCP employer notification for any interaction except incidental educational meetings/gifts. Pre-approval: Two centralized validation systems for physical Third Party Educational Events (SOWE domestic, CVS international). Meeting timelines: Authorization must be granted before engagement. Meal thresholds: No thresholds set but general rules provided."
+      },
+      {
+        "name": "Romania",
+        "detail": "Industry: Pharma. Competent authority: ARPIM. Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds — Domestic: Lunch/dinner (drinks included) 275 RON (55 EUR) VAT and tip included; Coffee breaks 60 RON (12 EUR) per person; 2 meals and 2 coffee breaks if duration over 6 hours. International: 150 EUR/day for lunch plus dinner where no local provisions set a limit (increased from 200 RON domestic/150 EUR international in 2022)."
+      },
+      {
+        "name": "Russia",
+        "detail": "Industry: Pharma. Competent authority: AIPM. Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds: Meals and drinks permitted only by buffet at meetings — soft drinks, tea/coffee, snacks, and/or hot dishes."
+      },
+      {
+        "name": "Ukraine",
+        "detail": "Industry: Pharma. Competent authority: APRaD. Code-based regulation. Engagement: Standard written contract requirements. Meetings: Standard sponsorship rules. Meal thresholds: 1,440 UAH (32 EUR) per meal during congresses; 1,600 UAH (36 EUR) per meal if under contract; Value per day 2,400 UAH (54 EUR) (increased and restructured from 1,200 UAH in 2022). Additional: For individual HCP engagements (contracts), maximum limit per meal is 1,600 UAH."
+      }
+    ],
+    "source": "Global Engagement Regulations Snapshot, Q4 2024",
+    "tags": [
+      "regulations",
+      "hcp-engagement",
+      "compliance",
+      "europe-east",
+      "2024"
+    ]
+  }
+]

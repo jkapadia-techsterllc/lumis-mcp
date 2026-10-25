@@ -1,0 +1,92 @@
+[
+  {
+    "id": "sq-ms-001",
+    "category": "mobile-sync-metadata",
+    "question": "How do I safely add a required field to a mobile-synced object?",
+    "answer": "Follow this multi-step process to avoid blocking users: (1) Generate metadata cache with the field marked as required, (2) Uncheck the required flag temporarily, (3) Ensure all users get the new metadata cache with the required logic, (4) Ensure all users sync all pending transactions, (5) Re-enable the required flag. Skipping steps can block field users from syncing successfully.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["mobile", "metadata", "required-field", "sync", "deployment"]
+  },
+  {
+    "id": "sq-ms-002",
+    "category": "mobile-sync-metadata",
+    "question": "What are the three configuration surfaces for the target platform?",
+    "answer": "Three distinct surfaces: (1) Setup - standard platform settings and org configuration, (2) Admin Console - life sciences-specific settings and feature enablement, (3) Metadata Cache Generation - controls what content gets delivered to mobile devices. Understanding which changes require metadata cache regeneration is essential for mobile implementations.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["configuration", "admin-console", "metadata-cache", "setup"]
+  },
+  {
+    "id": "sq-ms-003",
+    "category": "mobile-sync-metadata",
+    "question": "When do users need to be online for mobile features?",
+    "answer": "In earlier releases, LWC components required being online the first time to download JavaScript bundles. In newer releases, metadata (including LWC definitions) is delivered as part of the sync payload, eliminating the first-time online requirement. Check release notes for your specific version to confirm behavior.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["mobile", "offline", "lwc", "first-use"]
+  },
+  {
+    "id": "sq-ms-004",
+    "category": "mobile-sync-metadata",
+    "question": "How can I restrict which files are available offline on mobile?",
+    "answer": "Use the Admin Console ContentDocument download SOQL filter (Visit Management > Mobile > iPad download SOQL filter for ContentDocument). Example filter: ID IN ({{CONT.DOCS}}) AND ID IN (SELECT ContentDocumentId FROM ContentVersion WHERE Available_Offline__c = true). This lets you control which documents download to the device using a custom checkbox field.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["mobile", "offline", "content-filter", "admin-console"]
+  },
+  {
+    "id": "sq-ms-005",
+    "category": "mobile-sync-metadata",
+    "question": "Why is a feature not appearing on the mobile app?",
+    "answer": "Check that required metadata cache objects exist in the org. Many features (e.g., Medical Insights) require specific objects to be present in the metadata cache. After adding objects, you must generate and publish a new metadata cache for mobile features to appear. Also verify that the feature flag is enabled in Admin Console.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["mobile", "metadata-cache", "feature-visibility", "troubleshooting"]
+  },
+  {
+    "id": "sq-ms-006",
+    "category": "mobile-sync-metadata",
+    "question": "How does formula calculation work offline?",
+    "answer": "Formula calculations can be enabled for offline execution on save. This is controlled by a feature flag and is needed for downstream features that depend on calculated values. When enabled, formulas evaluate locally on the device during the save operation rather than waiting for server sync to compute values.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["mobile", "offline", "formula", "feature-flag"]
+  },
+  {
+    "id": "sq-ms-007",
+    "category": "mobile-sync-metadata",
+    "question": "How does Data Cloud integration work with mobile?",
+    "answer": "Virtual Entities on Data Cloud are not viable for mobile due to platform restrictions. The alternative is filtering data directly with data space-based DMOs (Data Model Objects). The web component works with this approach, but mobile requires additional adaptation for offline caching of Data Cloud data.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["mobile", "data-cloud", "virtual-entities", "offline"]
+  },
+  {
+    "id": "sq-ms-008",
+    "category": "mobile-sync-metadata",
+    "question": "Can OmniScripts work in the mobile app?",
+    "answer": "Yes. OmniScripts can be rendered in the mobile app using the Discovery Framework, including support for offline assessment use cases. Key prerequisites: correct metadata configuration, framework version compatibility, proper offline data structure, and the OmniScript must be designed for offline-capable execution.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["mobile", "omniscript", "discovery-framework", "offline"]
+  },
+  {
+    "id": "sq-ms-009",
+    "category": "mobile-sync-metadata",
+    "question": "What is background metadata processing in sync?",
+    "answer": "A capability where metadata updates are processed in the background during sync operations rather than requiring explicit regeneration and re-download by the user. This reduces the disruption of metadata updates to field users and allows configuration changes to propagate more smoothly.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["mobile", "sync", "metadata", "background-processing"]
+  },
+  {
+    "id": "sq-ms-010",
+    "category": "mobile-sync-metadata",
+    "question": "What are common sync optimization themes across releases?",
+    "answer": "Sync optimizations span multiple releases and include: background metadata processing, selective sync (only changed records), conflict resolution improvements, and reduced sync payload sizes. Each release typically includes 2-3 sync optimization work items. Implementation teams should check release notes for specific improvements available in their version.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["mobile", "sync", "optimization", "releases"]
+  }
+]

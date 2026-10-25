@@ -1,0 +1,447 @@
+[
+  {
+    "id": "faq-vm-001",
+    "category": "Visit Management",
+    "topic": "Visit Management Overview",
+    "question": "What is Visit Management and what are its key benefits?",
+    "answer": "Visit Management helps field rep users manage and track interactions with healthcare professionals. It simplifies visit scheduling, planning, engagement, and post-visit reporting, allowing reps to focus on building strong relationships rather than administrative tasks.",
+    "key_points": [
+      "Seamless interaction with accounts across all channels with intelligent content and remote capabilities",
+      "Quick access to related features (Field Emails, Medical Inquiries, Surveys)",
+      "Confident management of expense allocations, sample distribution, and shipping requests with built-in compliance controls including limits, license validation, and digital signatures"
+    ]
+  },
+  {
+    "id": "faq-vm-002",
+    "category": "Visit Management",
+    "topic": "Visit Lifecycle Stages",
+    "question": "What are the three main stages of a visit lifecycle?",
+    "answer": "The visit lifecycle has three stages: Plan, Engage, and Report.",
+    "key_points": [
+      "Plan: Schedule the visit, add attendees, confirm objectives, review last visit details, review recommended messages and presentations, add presentations and samples, add visitors",
+      "Engage: Share presentation slides, launch remote engagement sessions, share product information and messages, record sample drops or Direct to Practitioner samples, capture signatures and survey responses, capture medical inquiries, schedule next visit",
+      "Report: Add expenses and allocate to attendees, update ratings and send follow-up emails, submit the visit"
+    ]
+  },
+  {
+    "id": "faq-vm-003",
+    "category": "Visit Management",
+    "topic": "Visit Pages Comparison",
+    "question": "What are the two main visit pages and how do they differ?",
+    "answer": "There are two pages: the Visit Engagement Page (Edit Visit) and the Visit Record Page (View Visit).",
+    "key_points": [
+      "Visit Engagement Page (Edit Visit): Platform-specific page for planning, engaging, and following up on visits within a single page. Only accessible for planned visits. Focuses on important activities and information needed during a visit.",
+      "Visit Record Page (View Visit): Standard record page used to view visit details and all relevant activities. Some pre-visit or post-visit activities (visitors, expenses, ratings, assessment tasks, file attachments) can only be accessed here. Provides comprehensive access to all visit-related information."
+    ]
+  },
+  {
+    "id": "faq-vm-004",
+    "category": "Visit Management",
+    "topic": "Visit Data Model",
+    "question": "How does the Visit Management data model work?",
+    "answer": "Visit Management uses a one-to-one relationship between Visit and Provider Visit records. For each Visit record created, a corresponding Provider Visit record is automatically created. Provider Visit is a platform-specific object that extends the standard Visit object to support additional visit management functionality specific to life sciences industry needs."
+  },
+  {
+    "id": "faq-vm-005",
+    "category": "Visit Management",
+    "topic": "Compliance Controls",
+    "question": "What compliance controls are built into Visit Management?",
+    "answer": "Visit Management includes several built-in compliance controls.",
+    "key_points": [
+      "Sample distribution limits",
+      "License validation",
+      "Digital signatures for sample drops",
+      "Expense allocation controls",
+      "Remote capabilities for launching remote engagement sessions and sharing content virtually with healthcare providers"
+    ]
+  },
+  {
+    "id": "faq-vm-006",
+    "category": "Visit Management",
+    "topic": "Record Types in Visits",
+    "question": "What role do record types play in Visit Management?",
+    "answer": "Record types are optional but provide flexibility for capturing different types of visit information.",
+    "key_points": [
+      "If admins use record types, Visit and Provider Visit record types MUST have identical API names and labels — this links the two objects and allows standard and custom Provider Visit fields to appear on the Visit page layout",
+      "Provider Visit Product Discussion record types help reps capture product-specific information during interactions, making it easier to document which products were discussed during each visit"
+    ],
+    "common_mistakes": [
+      "Having mismatched API names between Visit and Provider Visit record types",
+      "Not adding the record type to the Visit page layout after creating it"
+    ]
+  },
+  {
+    "id": "faq-vm-007",
+    "category": "Visit Management",
+    "topic": "Mobile Availability",
+    "question": "Is Visit Management available on mobile?",
+    "answer": "Yes. Visit Management works on both desktop (Lightning Experience) and the mobile app. Admins need to create a metadata cache to push configuration changes to the mobile app."
+  },
+  {
+    "id": "faq-vm-008",
+    "category": "Visit Management",
+    "topic": "Visit Content and Activities",
+    "question": "What content and activities can be shared or captured during visits?",
+    "answer": "Reps can share and capture various content types during visits.",
+    "key_points": [
+      "Share: Presentation slides, product information and messages, intelligent content recommendations via Next Best Message (tailored messages dynamically generated based on real-time data)",
+      "Capture: Sample drops and Direct to Practitioner samples, digital signatures, survey responses, medical inquiries, product discussions, marketing items distributed (leave behinds)"
+    ]
+  },
+  {
+    "id": "faq-vm-009",
+    "category": "Visit Management",
+    "topic": "Visit Effectiveness Tips",
+    "question": "How can field users maximize their visit effectiveness?",
+    "answer": "Best practices for maximizing visit effectiveness.",
+    "key_points": [
+      "Review account summaries and last visit details before the visit",
+      "Leverage Next Best Message recommendations for personalized content",
+      "Capture all relevant information during the visit: Presentation Forums, Provider Visit Product Detailings, Product Disbursements, Requested Samples, Marketing Items, Attendees",
+      "Complete post-visit activities like expenses, ratings, and follow-up emails, then submit the visit",
+      "Schedule the next visit before leaving"
+    ]
+  },
+  {
+    "id": "faq-vm-010",
+    "category": "Visit Management",
+    "topic": "Metadata Cache",
+    "question": "What is a metadata cache and when is it needed?",
+    "answer": "A metadata cache takes the configuration changes admins make in the org and makes them available to rep users, especially mobile app users. It is essential for syncing desktop configuration with the mobile experience.",
+    "key_points": [
+      "Changes requiring metadata cache: Page Layout changes (mobile and web Visit Engagement page), Record Page changes (mobile), Admin Console Settings changes (mobile), Object Configuration changes like Field Sets, Record Types, or Picklist Values (mobile and web), Translation changes for Custom Labels or Object/Field Labels (mobile and web)",
+      "Best practice: Admins should create a new metadata cache every time they make changes to page layouts or any other configuration that affects the mobile app — it is better to create one more often than to have mobile reps working with outdated configurations"
+    ]
+  },
+  {
+    "id": "faq-vm-011",
+    "category": "Visit Management",
+    "topic": "Visit Engagement Page Customization",
+    "question": "What can admins customize on the Visit Engagement Page?",
+    "answer": "Admins can customize two areas: the Visit Information Section (by configuring the fields on the Provider Visit page layout) and the Sidebar menu options (by configuring the related lists on the Visit page layout)."
+  },
+  {
+    "id": "faq-vm-012",
+    "category": "Visit Management",
+    "topic": "Admin Console Settings Location",
+    "question": "Where should admins configure visit management settings?",
+    "answer": "Visit management settings are configured in the Customer Engagement Admin Console (requires the Commercial Admin permission set). Navigate from the App Launcher to the commercial app, select Admin Console, then Visit Administration, then Visit Settings.",
+    "key_points": [
+      "Settings can be configured at three levels: Org default (applies to all users unless overridden), Specific profiles (applies to users with that profile), Individual users (applies to specific users only)"
+    ]
+  },
+  {
+    "id": "faq-vm-013",
+    "category": "Visit Management",
+    "topic": "Troubleshooting: Mobile Layout Changes",
+    "question": "Why aren't mobile rep users seeing page layout changes?",
+    "answer": "Admins likely need to create a new metadata cache. Page layout changes require a metadata cache to be pushed to the mobile app."
+  },
+  {
+    "id": "faq-vm-014",
+    "category": "Visit Management",
+    "topic": "Troubleshooting: Provider Visit Fields Missing",
+    "question": "Why aren't Provider Visit fields showing on the Visit page?",
+    "answer": "Check that Visit and Provider Visit record types have identical API names and that the record type has been added to the Visit page layout. This linkage is required for the fields to display properly."
+  },
+  {
+    "id": "faq-vm-015",
+    "category": "Visit Management",
+    "topic": "Troubleshooting: Visit Creation Language Error",
+    "question": "Visit creation fails with 'Please setup and add languages in translation settings'. What should I do?",
+    "answer": "Configure the language of the rep user in the translation language settings under Setup. Ensure all DBSchema configurations are properly deployed and active."
+  },
+  {
+    "id": "faq-vm-016",
+    "category": "Visit Management",
+    "topic": "Troubleshooting: Provider Visit Not Auto-Creating",
+    "question": "Why is Provider Visit not auto-creating when Visit is created?",
+    "answer": "Complete Visit Management setup. Provider Visit auto-creation requires proper configuration as per the org readiness documentation."
+  },
+  {
+    "id": "faq-vm-017",
+    "category": "Visit Management",
+    "topic": "Signature Requirements",
+    "question": "Can rep users submit a Visit without capturing a signature?",
+    "answer": "Yes, if the product's Signature Requirement Level is 'Optional' or 'Not Required'. If the requirement level is 'Required', submission will be blocked until a signature is provided."
+  },
+  {
+    "id": "faq-vm-018",
+    "category": "Visit Management",
+    "topic": "Default Address Selection",
+    "question": "Why isn't the primary address selected by default on the Visit screen?",
+    "answer": "The Place list defaults to the Preferred Address from the Provider Account Territory Info. If no preferred address exists, the primary Contact Point Address is shown first. If neither is set, the first available Place is shown."
+  },
+  {
+    "id": "faq-vm-019",
+    "category": "Visit Management",
+    "topic": "Visit Information Section Display Order",
+    "question": "How is the Visit Information section displayed in the Visit Engagement Screen?",
+    "answer": "Fields display in a specific order: hard-coded fields (Account, Place, Planned Start Time, Planned End Time), conditionally displayed fields shown if configured in the Visit page layout (Record Type, Channel, Status), then all remaining fields pulled from the Provider Visit Page Layout."
+  },
+  {
+    "id": "faq-vm-020",
+    "category": "Visit Management",
+    "topic": "Custom Fields Placement",
+    "question": "Where should admins add custom fields to the Visit Information section?",
+    "answer": "Add custom fields to the Provider Visit Page Layout. These fields will automatically appear in the Visit Information section after the admin saves the layout and creates a metadata cache from the admin console."
+  },
+  {
+    "id": "faq-vm-021",
+    "category": "Visit Management",
+    "topic": "Troubleshooting: Account Picker Empty",
+    "question": "Why isn't the Switch Account (Account Picker) showing any accounts in the Visit Engagement Screen?",
+    "answer": "The Account Picker requires HealthCareProvider records to be properly configured. For accounts to appear, each account must have a corresponding HealthCareProvider record with the IsPrimaryProvider field value set to true. Without this configuration, the account picker will not display any accounts."
+  },
+  {
+    "id": "faq-ic-001",
+    "category": "Intelligent Content",
+    "topic": "Troubleshooting: Presentation Link Not Working",
+    "question": "Why is the link to a public website from a presentation slide not working?",
+    "answer": "It may be due to a certificate issue on the target website. Verify the target site's SSL certificate is valid and accessible."
+  },
+  {
+    "id": "faq-ic-002",
+    "category": "Intelligent Content",
+    "topic": "Troubleshooting: PDF Image Link Opens Wrong Image",
+    "question": "A link to an image added as an asset on a PDF presentation slide opens another image on macOS. Why?",
+    "answer": "This is related to Apple PDF Kit behavior with PDFs. Test the PDF in Apple Preview to ensure it renders correctly during Intelligent Content presentations."
+  },
+  {
+    "id": "faq-ic-003",
+    "category": "Intelligent Content",
+    "topic": "Slide Time Tracking Minimum Duration",
+    "question": "What is the minimum time on a slide to ensure time tracking starts in the Presentation Click Stream Entry object?",
+    "answer": "A record is saved if the slide duration is at least three seconds."
+  },
+  {
+    "id": "faq-ic-004",
+    "category": "Intelligent Content",
+    "topic": "Troubleshooting: Zoom Not Working on iPad",
+    "question": "Although Zoom is enabled for a presentation in the Admin Console, why is it still not possible to zoom in on the presentation on an iPad?",
+    "answer": "Check the presentation's HTML viewport meta tags that restrict zooming. The HTML content may have meta tags that override the Admin Console zoom setting."
+  },
+  {
+    "id": "faq-em-001",
+    "category": "Email",
+    "topic": "Troubleshooting: Templates Not Visible",
+    "question": "Why are email templates not visible for non-admin users?",
+    "answer": "Several things to check when templates are not visible to non-admin users.",
+    "key_points": [
+      "Check if the templates have a ProductId that is restricted for the Account in the user's active territory",
+      "Check if the Email Template is aligned to the territory of the rep user",
+      "Verify the user has read access to: LifeSciEmailTemplate, LifeSciEmailTmplSnapshot, ContentDocumentLink",
+      "If the Template has HasSendConsentAcknowledgement set to true, it will not appear in the wizard"
+    ]
+  },
+  {
+    "id": "faq-em-002",
+    "category": "Email",
+    "topic": "Attachment Preview Limitation",
+    "question": "Why is the Email Template attachment missing the preview option?",
+    "answer": "Only PDF attachments can be previewed in the Email template. Attachments in any other format cannot be previewed."
+  },
+  {
+    "id": "faq-em-003",
+    "category": "Email",
+    "topic": "Troubleshooting: Admin Console Settings Reverting",
+    "question": "Why do changes to Email Template settings in the Admin Console revert to previous values?",
+    "answer": "Click the 'Save' button at the bottom of the page after updating the picklist values to confirm and persist the changes. Changes are not auto-saved."
+  },
+  {
+    "id": "faq-em-004",
+    "category": "Email",
+    "topic": "Template Upload Error",
+    "question": "Admin receives an error when trying to upload a new version of an email template. What should they do?",
+    "answer": "Ensure that the content of the email template does not exceed the maximum allowed characters. Limit the contents to 131,072 characters to avoid the error."
+  },
+  {
+    "id": "faq-em-005",
+    "category": "Email",
+    "topic": "Email Job Scheduling",
+    "question": "How do admins schedule the Email job functionality to run within 20 minutes?",
+    "answer": "Go to Admin Console > Email > Jobs > Send Email Regularly. Schedule the first job with an offset of 00, the second with 20, and the third with 40."
+  },
+  {
+    "id": "faq-em-006",
+    "category": "Email",
+    "topic": "Email Deliverability Best Practices",
+    "question": "What are the best practices for email deliverability?",
+    "answer": "Follow these practices to ensure reliable email delivery.",
+    "key_points": [
+      "Keep your email list clean and up to date; handle hard bounces by updating or removing addresses",
+      "Always ensure the rep user has recipient consent before sending",
+      "Focus on engaged recipients and continuously refine your recipient list",
+      "Use a target email domain that is DMARC-compliant with DKIM and SPF records configured",
+      "Use free online tools to get a score and guidance to improve deliverability"
+    ]
+  },
+  {
+    "id": "faq-em-007",
+    "category": "Email",
+    "topic": "Email Sending Domain",
+    "question": "Which domain are emails sent from?",
+    "answer": "Emails are sent either from the user's email address or the organization-wide email address."
+  },
+  {
+    "id": "faq-em-008",
+    "category": "Email",
+    "topic": "Preventing Junk Folder Delivery",
+    "question": "How can clients ensure emails don't end up in the HCP's junk folder?",
+    "answer": "Use DMARC-compliant sending domains with DKIM and SPF records. Many clients set up these records for authentication, which is essential when sending through the platform with a custom domain as major providers may block or junk non-compliant emails."
+  },
+  {
+    "id": "faq-em-009",
+    "category": "Email",
+    "topic": "Online View Link in Templates",
+    "question": "Can we have a hyperlink in Field Email templates to view the email message online in a web browser?",
+    "answer": "Yes. Add a link in the template (href) pointing to a site managed by the agency (or another publicly available site) where the full message can be viewed. This is standard HTML functionality not specific to any platform."
+  },
+  {
+    "id": "faq-em-010",
+    "category": "Email",
+    "topic": "Troubleshooting: Templates Not Opening / Slow Loading",
+    "question": "Why are Email Templates not opening and the page loads for a long time?",
+    "answer": "The Email Template record page in the Admin Console includes the Territories selection component, which can render many elements and impact performance. If Lightning Web Security (LWS) is off, browser freezing can occur. Enable LWS in Setup > Session Settings to improve performance."
+  },
+  {
+    "id": "faq-em-011",
+    "category": "Email",
+    "topic": "Troubleshooting: Images Not Displaying",
+    "question": "Why are the images in the Email Template not displaying?",
+    "answer": "Images hosted on a third-party site won't display if the resource is unavailable. Ensure the image source is accessible and correctly linked."
+  },
+  {
+    "id": "faq-admin-001",
+    "category": "Administration",
+    "topic": "DB Schema Deployment",
+    "question": "How do I deploy DB Schema configurations?",
+    "answer": "Deploy configurations from the starter config repository. Important: Use a two-step deployment process — first load configurations as inactive, then perform a second load to activate them.",
+    "common_mistakes": [
+      "Activating DB Schema configurations in a single step instead of the required two-step process",
+      "Not verifying that all mandatory fields are included when manually creating configurations"
+    ]
+  },
+  {
+    "id": "faq-admin-002",
+    "category": "Administration",
+    "topic": "Querying LifeSciConfig Objects",
+    "question": "How do I query LifeSciConfig objects?",
+    "answer": "Use the Tooling API through Developer Console or Workbench to query these objects. Available objects: LifeSciConfigCategory, LifeSciConfigRecord, LifeSciConfigFieldValue, LifeSciConfigAssignment.",
+    "tips": [
+      "Make sure to enable the Tooling API checkbox in the Query Editor before running your queries"
+    ]
+  },
+  {
+    "id": "faq-admin-003",
+    "category": "Administration",
+    "topic": "iOS Encryption",
+    "question": "How does iOS encryption work for the mobile app?",
+    "answer": "iOS devices use multiple layers of encryption to protect data: hardware encryption built into the device, Data Protection providing strong at-rest encryption automatically enabled on password-protected devices, and database encryption where all sensitive business data is protected using AES-256 (256-bit) encryption.",
+    "key_points": [
+      "iOS supports multiple passcode types: six-digit, four-digit, or arbitrary-length alphanumeric passcodes",
+      "Enable encryption for app data backups to iCloud",
+      "Use two-factor authentication",
+      "As of iOS 13, iCloud backups are automatically encrypted"
+    ]
+  },
+  {
+    "id": "faq-admin-004",
+    "category": "Administration",
+    "topic": "Forgotten Passcode Recovery",
+    "question": "What should a user do if they forget their passcode?",
+    "answer": "If a user forgets their four-digit app passcode, they can use biometric authentication instead. As long as Face ID or Touch ID is enabled, they can log in using their biometric credentials."
+  },
+  {
+    "id": "faq-admin-005",
+    "category": "Administration",
+    "topic": "Admin Login Restriction",
+    "question": "Can admin users log in to the mobile app on iPad?",
+    "answer": "Admin users are not supported for logging into the commercial mobile app."
+  },
+  {
+    "id": "faq-sync-001",
+    "category": "Sync",
+    "topic": "Dual Device Usage",
+    "question": "Are there requirements or restrictions for using the mobile app on two iOS devices simultaneously with the same login?",
+    "answer": "While it is technically possible to use the same account on two devices, users should avoid working on identical records at the same time. Updating the same record from different devices can cause data integrity issues, including duplicates and Device Sync Transaction errors.",
+    "key_points": [
+      "Best practice: Synchronize your data before switching between devices",
+      "Never edit the same records simultaneously on two devices"
+    ]
+  },
+  {
+    "id": "faq-sync-002",
+    "category": "Sync",
+    "topic": "Dependent Offline IDs",
+    "question": "Can administrators clear the 'Dependent Offline Ids' field in Device Sync Transactions?",
+    "answer": "Device Sync Transactions may arrive at the platform in a different order than they were created. The 'Dependent Offline Ids' field ensures transactions are processed in the correct sequence. Clearing this field makes a transaction independent, meaning subsequent updates won't account for earlier changes. Use caution when modifying this field."
+  },
+  {
+    "id": "faq-sync-003",
+    "category": "Sync",
+    "topic": "One Way Sync",
+    "question": "How does One Way Sync work in DB Schema?",
+    "answer": "When One Way Sync is enabled for an object, records created on mobile devices won't sync back to the platform. This is useful for download-only data where the rep wants to view information but not create or modify records that persist in the cloud."
+  },
+  {
+    "id": "faq-sync-004",
+    "category": "Sync",
+    "topic": "DB Schema Creation Best Practice",
+    "question": "What is the recommended way to create DB Schema (Entities) to avoid failures?",
+    "answer": "Always create DB Schemas through Admin Console > Mobile > Object Metadata Cache Configuration. This method automatically adds all mandatory fields, reducing the risk of configuration errors and sync failures.",
+    "common_mistakes": [
+      "Manually creating DB Schema configurations without all mandatory fields",
+      "Not using the Admin Console wizard which auto-populates required fields"
+    ]
+  },
+  {
+    "id": "faq-sync-005",
+    "category": "Sync",
+    "topic": "PIN Sync Foreground vs Background",
+    "question": "Can we determine if a PIN sync runs in the foreground or background?",
+    "answer": "PIN Sync always runs in the background by default. The only exception is when a user manually brings it to the foreground through the app settings."
+  },
+  {
+    "id": "faq-sync-006",
+    "category": "Sync",
+    "topic": "Forced Sync vs Background Sync",
+    "question": "How can we distinguish between automatic background sync and Forced Sync?",
+    "answer": "A Forced Sync (triggered by 'Force user to sync on next login') creates a sync stat record whenever a user saves any record while online. On mobile, when triggered, it uploads all locally stored records and sends all offline-created sync transactions to the platform."
+  },
+  {
+    "id": "faq-sync-007",
+    "category": "Sync",
+    "topic": "Download Complete Flag",
+    "question": "What does 'Download Complete' mean in DeviceSyncSummary?",
+    "answer": "The IsDownloadCompleted flag in DeviceSyncSummary indicates that all available records from the platform have been successfully downloaded to the device."
+  },
+  {
+    "id": "faq-sync-008",
+    "category": "Sync",
+    "topic": "Downloaded Records Count",
+    "question": "What does DownloadedRecords calculate?",
+    "answer": "This field counts the total number of records downloaded to the device. The Download Complete flag is set to true once all records available for that user have been downloaded."
+  },
+  {
+    "id": "faq-sync-009",
+    "category": "Sync",
+    "topic": "Data Download Duration",
+    "question": "What is DataDownloadDuration in DeviceSyncSummary?",
+    "answer": "This field measures the total time required for a mobile device to download all available data from the platform during a sync operation."
+  },
+  {
+    "id": "faq-sync-010",
+    "category": "Sync",
+    "topic": "Retry Mechanisms",
+    "question": "Does the upload or download process include retry mechanisms?",
+    "answer": "Yes. Each sync operation (both upload and download) automatically retries up to three times before failing and logging an error."
+  },
+  {
+    "id": "faq-sync-011",
+    "category": "Sync",
+    "topic": "Manual Sync Process",
+    "question": "What happens during a manual sync?",
+    "answer": "When a user taps 'Begin Sync' in their profile, the app performs three actions: synchronizes unsynced data from the device to the platform (upload), downloads new or updated data from the platform to the device, and retrieves any newly available metadata cache."
+  }
+]

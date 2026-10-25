@@ -1,0 +1,137 @@
+[
+  {
+    "id": "vsm-001",
+    "category": "Object Mapping",
+    "question": "How does Veeva Sample_Transaction_vod__c map to the target platform?",
+    "answer": "Veeva Sample_Transaction_vod__c maps to the target platform's SampleTransaction object. Key field mappings: Sample_Transaction_Id_vod__c → ExternalId; Type_vod__c (Disbursement_vod, Receipt_vod, Transfer_In_vod, Transfer_Out_vod, Adjustment_vod, Return_vod) → TransactionType; Call2_vod__c (visit lookup) → VisitId; Account_vod__c → AccountId; Sample_vod__c → ProductId or SampleProductId; Quantity_vod__c → Quantity; Lot_Name_vod__c → SampleLotId lookup; Status_vod__c → Status; Disbursed_By_vod__c → DisbursedById; Ref_Transaction_Id_vod__c → ParentTransactionId (for transfer pairs). Critical difference: Veeva's Sample_Transaction_vod__c uses Call2_vod__c to link disbursements to visits, while the target platform uses a VisitId lookup. Transfer transactions exist as pairs in Veeva (Transfer_Out + Transfer_In) and must be migrated preserving the bi-directional reference.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Sample_Transaction_vod documentation",
+    "tags": ["samples", "object-mapping", "sample-transaction", "migration"]
+  },
+  {
+    "id": "vsm-002",
+    "category": "Object Mapping",
+    "question": "How does Veeva Sample_Lot_vod__c map to the target platform?",
+    "answer": "Veeva Sample_Lot_vod__c maps to the target platform's SampleLot object. Key field mappings: Lot_Id_vod__c → LotNumber (unique identifier); Sample_vod__c → ProductId (the sample product this lot belongs to); Expiration_Date_vod__c → ExpirationDate; Active_vod__c → IsActive boolean; Quantity_vod__c → OriginalQuantity; Remaining_Quantity_vod__c → RemainingQuantity. Veeva uses Lot records as the central tracking unit — every sample transaction references a specific lot, enabling full lot-level traceability from manufacturer receipt through HCP disbursement. The target platform's SampleLot serves the same purpose but the lot lifecycle management (activation, deactivation on expiry, lot recall) may require custom automation. Veeva auto-deactivates lots on expiry via a scheduled job; the target platform requires equivalent scheduled automation.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Sample_Lot_vod documentation",
+    "tags": ["samples", "object-mapping", "sample-lot", "lot-tracking", "expiration"]
+  },
+  {
+    "id": "vsm-003",
+    "category": "Object Mapping",
+    "question": "How does Veeva Sample_Inventory_vod__c map to the target platform?",
+    "answer": "Veeva Sample_Inventory_vod__c maps to the target platform's SampleInventory object. Key field mappings: Owner (rep's inventory) → OwnerId; Sample_vod__c → ProductId; Lot_Name_vod__c → SampleLotId; Quantity_On_Hand_vod__c → QuantityOnHand; Last_Reconciliation_Date_vod__c → LastReconciliationDate; Reconciliation_Status_vod__c → ReconciliationStatus; Physical_Count_vod__c → PhysicalCount (entered during reconciliation). The reconciliation workflow differs significantly: Veeva requires periodic physical inventory counts where reps enter their actual on-hand quantity, and the system flags discrepancies between calculated (expected) and physical (counted) quantities. The target platform's reconciliation may use a similar flow but the discrepancy detection threshold, escalation workflow, and corrective action tracking must be configured. Veeva generates Sample_Loss_vod__c records for unresolved discrepancies; the target platform needs an equivalent mechanism.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Sample_Inventory_vod and reconciliation documentation",
+    "tags": ["samples", "object-mapping", "inventory", "reconciliation", "discrepancy"]
+  },
+  {
+    "id": "vsm-004",
+    "category": "Object Mapping",
+    "question": "How does Veeva Sample_Limit_vod__c map to the target platform?",
+    "answer": "Veeva Sample_Limit_vod__c maps to the target platform's SampleLimit object, but the calculation model differs fundamentally. Veeva calculates limits using rollup summaries on Sample_Transaction_vod__c, evaluating per-HCP disbursement counts against configured thresholds. Fields: Account_vod__c → AccountId; Sample_vod__c → ProductId; Limit_Amount_vod__c → MaxQuantityPerPeriod; Limit_Per_Call_vod__c → MaxQuantityPerVisit; Rolling_Period_vod__c → PeriodType (Annual, Quarterly, Monthly); Current_Count_vod__c → CurrentDisbursedQuantity (calculated). The target platform uses a batch calculation framework rather than real-time rollups for limit enforcement. This means: (1) limit checks may have slight delays as the batch job runs, (2) the batch job configuration (schedule, scope) must be set up during implementation, (3) Veeva's real-time blocking at the point of disbursement when a limit is reached requires custom validation rule or trigger logic on the target platform that queries the most recent batch calculation result.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM Sample_Limit_vod documentation, target platform batch framework",
+    "tags": ["samples", "object-mapping", "sample-limit", "batch-calculation", "limit-enforcement"]
+  },
+  {
+    "id": "vsm-005",
+    "category": "Transaction Flow",
+    "question": "How does the Veeva sample disbursement flow work and how does it differ on the target platform?",
+    "answer": "Veeva's disbursement flow during a call/visit: (1) Rep opens a call on an HCP account, (2) adds sample lines (Sample_Transaction_vod__c with Type=Disbursement_vod), (3) selects product and lot, enters quantity, (4) system validates: HCP has valid license (DEA/state), lot is active and not expired, quantity does not exceed per-call limit or rolling period limit, (5) HCP signs on the device screen (captured as Signature_vod__c), (6) signature and transaction are saved together atomically, (7) inventory decrements. The target platform follows a similar conceptual flow but: the visit-embedded sample UI may differ, license validation queries different objects, limit checks use batch-calculated values (not real-time rollups), and the signature capture component is different. Key risk: if the target platform's limit check is asynchronous (batch-based), a rep could theoretically exceed a limit between batch runs — organizations must decide whether to accept this latency or implement real-time limit checking via trigger.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM sample disbursement workflow documentation",
+    "tags": ["samples", "disbursement", "transaction-flow", "validation", "signature"]
+  },
+  {
+    "id": "vsm-006",
+    "category": "Transaction Flow",
+    "question": "How do Veeva sample receipt, transfer, and return flows map to the target platform?",
+    "answer": "Beyond disbursement, Veeva supports four other transaction types: (1) Receipt (Type_vod=Receipt_vod): rep receives samples from the company — creates inventory records, often triggered by shipment confirmation. Target platform equivalent uses Receipt transaction type with similar fields. (2) Transfer Out/In (Transfer_Out_vod/Transfer_In_vod): rep-to-rep sample transfers — creates paired transactions. Target platform must maintain the paired relationship. (3) Adjustment (Adjustment_vod): inventory corrections after reconciliation — adjusts quantity without physical movement. Target platform uses an Adjustment type. (4) Return (Return_vod): rep returns samples to the company — decrements inventory, often requires lot-level detail for expiring/recalled products. Each flow has different validation rules in Veeva (e.g., returns require reason codes, transfers require both parties to confirm). The target platform needs equivalent validation logic per transaction type.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM sample transaction type documentation",
+    "tags": ["samples", "receipt", "transfer", "return", "adjustment", "transaction-types"]
+  },
+  {
+    "id": "vsm-007",
+    "category": "Compliance",
+    "question": "How does Veeva handle DEA and state license validation for sample disbursement?",
+    "answer": "Veeva validates HCP licensing before allowing sample disbursement through Account_License_vod__c records linked to the HCP's Account. Key fields: License_Type_vod__c (DEA, State, NPI), License_Number_vod__c, Expiration_Date_vod__c, State_vod__c, License_Status_vod__c (Active_vod, Expired_vod). Veeva blocks disbursement if: (1) no active DEA license exists, (2) DEA license is expired, (3) state license does not cover the disbursement state, (4) schedule of the controlled substance exceeds the DEA license schedule. The target platform requires: a license tracking object (may be custom or use a standard credential object), validation rules or triggers that check license validity at disbursement time, and scheduled jobs that flag expiring licenses. The DEA schedule cross-reference (matching product schedule to license schedule) is particularly complex and must account for state-specific scheduling differences.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM Account_License_vod and DEA compliance documentation",
+    "tags": ["samples", "DEA", "license-validation", "compliance", "controlled-substances"]
+  },
+  {
+    "id": "vsm-008",
+    "category": "Compliance",
+    "question": "How does Veeva handle electronic signature capture for 21 CFR Part 11 compliance?",
+    "answer": "Veeva captures electronic signatures on Sample_Transaction_vod__c via Signature_vod__c (base64-encoded image of the HCP's finger-drawn signature) and Signature_Date_vod__c (timestamp). For PDMA (Prescription Drug Marketing Act) and 21 CFR Part 11 compliance, Veeva ensures: (1) the signature is captured at the point of disbursement (not after the fact), (2) the signature timestamp is system-generated (not user-editable), (3) the signature record is immutable once saved (no updates allowed), (4) the signer's identity is linked to the Account record (proving who signed). The target platform's signature capture must meet the same requirements: immutable signature data, system-generated timestamps, identity linkage, and audit trail. Organizations in regulated markets should verify that the target platform's signature component has been validated for PDMA compliance. Some target platforms use a separate signature object rather than a blob field, which may offer better audit trail capabilities.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM signature capture, PDMA, 21 CFR Part 11 documentation",
+    "tags": ["samples", "signature", "21-CFR-Part-11", "PDMA", "compliance", "audit-trail"]
+  },
+  {
+    "id": "vsm-009",
+    "category": "Inventory Reconciliation",
+    "question": "How does Veeva's inventory reconciliation process differ from the target platform?",
+    "answer": "Veeva's reconciliation process: (1) Scheduled reconciliation windows open (configurable frequency — monthly, quarterly), (2) Reps enter physical counts per product per lot into Sample_Inventory_vod__c.Physical_Count_vod__c, (3) System calculates expected quantity (opening balance + receipts - disbursements - transfers - returns), (4) Discrepancy = Physical_Count minus Expected_Quantity, (5) discrepancies above threshold generate Sample_Loss_vod__c records requiring manager acknowledgment, (6) adjustments are auto-created to bring calculated inventory in line with physical count. The target platform's reconciliation may follow a similar pattern but: the reconciliation window scheduling must be implemented (potentially via custom metadata or configuration), the expected quantity calculation must replicate Veeva's algorithm exactly (important for audit), and the threshold-based loss detection requires custom logic. The target platform's batch calculation framework may handle the expected quantity computation.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM reconciliation workflow documentation",
+    "tags": ["samples", "reconciliation", "inventory", "physical-count", "sample-loss"]
+  },
+  {
+    "id": "vsm-010",
+    "category": "Lot Tracking",
+    "question": "How do Veeva lot expiry and recall handling compare to the target platform?",
+    "answer": "Veeva manages lot lifecycle through Sample_Lot_vod__c: (1) Lot activation: Active_vod__c is set to true when the lot is available for disbursement, (2) Auto-expiry: a Veeva scheduled job deactivates lots when Expiration_Date_vod__c passes, blocking further disbursement, (3) Lot recall: manufacturer recalls set Active_vod__c to false and populate Recall_Date_vod__c, triggering notifications to reps holding inventory of that lot, (4) Lot-level reporting: all transactions are lot-traceable for regulatory reporting. The target platform needs: (1) scheduled jobs or flows to deactivate expired lots, (2) a recall workflow that identifies affected reps (via Sample_Inventory records) and creates return tasks, (3) lot-level transaction traceability through the SampleLotId on every SampleTransaction. The recall notification workflow (identifying who has recalled lots and ensuring return) is often underestimated during migration — it requires querying all open inventory records for the recalled lot across all reps.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM lot management and recall documentation",
+    "tags": ["samples", "lot-tracking", "expiry", "recall", "lot-traceability"]
+  },
+  {
+    "id": "vsm-011",
+    "category": "Field Mapping",
+    "question": "What is the complete field-level mapping for Veeva Sample_Transaction_vod__c?",
+    "answer": "Complete field mapping for Sample_Transaction_vod__c: Sample_Transaction_Id_vod__c → ExternalId; Type_vod__c → TransactionType (Disbursement/Receipt/Transfer_In/Transfer_Out/Adjustment/Return); Call2_vod__c → VisitId (visit lookup); Account_vod__c → AccountId (HCP); Sample_vod__c → ProductId; Quantity_vod__c → Quantity; Lot_Name_vod__c → SampleLotId; Status_vod__c → Status (Saved_vod/Submitted_vod); Signature_vod__c → SignatureData; Signature_Date_vod__c → SignatureTimestamp; Disbursed_By_vod__c → DisbursedById; Ship_Address_Line_1_vod__c → ShippingStreet; Ship_City_vod__c → ShippingCity; Ship_State_vod__c → ShippingState; Ship_Zip_vod__c → ShippingPostalCode; Ref_Transaction_Id_vod__c → ParentTransactionId; Return_Reason_vod__c → ReturnReason; Adjustment_Reason_vod__c → AdjustmentReason; Cold_Chain_Status_vod__c → ColdChainStatus; Received_Date_vod__c → ReceivedDate; Comments_vod__c → Comments.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Sample_Transaction_vod field reference",
+    "tags": ["samples", "field-mapping", "sample-transaction", "complete-reference"]
+  },
+  {
+    "id": "vsm-012",
+    "category": "Field Mapping",
+    "question": "What is the complete field-level mapping for Veeva Sample_Limit_vod__c?",
+    "answer": "Complete field mapping for Sample_Limit_vod__c: Account_vod__c → AccountId (HCP receiving samples); Sample_vod__c → ProductId; Limit_Amount_vod__c → MaxQuantityPerPeriod; Limit_Per_Call_vod__c → MaxQuantityPerVisit; Rolling_Period_vod__c → PeriodType (Annual/Quarterly/Monthly); Start_Date_vod__c → PeriodStartDate; End_Date_vod__c → PeriodEndDate; Current_Count_vod__c → CurrentDisbursedQuantity (calculated field); Remaining_vod__c → RemainingQuantity (calculated: Limit minus Current); Limit_Type_vod__c → LimitScope (per-product vs. product-group); Group_Name_vod__c → ProductGroupId (for grouped limits across related products). Key calculation difference: Veeva computes Current_Count_vod__c via native rollup summaries with date-bounded filters, making it real-time. The target platform's batch framework calculates limits on a schedule, creating a window where the count may be stale. Organizations must define acceptable staleness for their compliance posture.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM Sample_Limit_vod field reference, batch calculation documentation",
+    "tags": ["samples", "field-mapping", "sample-limit", "batch-vs-realtime", "complete-reference"]
+  },
+  {
+    "id": "vsm-013",
+    "category": "Cold Chain",
+    "question": "How does Veeva handle cold chain tracking for temperature-sensitive samples?",
+    "answer": "Veeva supports cold chain tracking for biologics and temperature-sensitive products through fields on Sample_Transaction_vod__c: Cold_Chain_Status_vod__c (picklist: Maintained_vod, Broken_vod, Not_Applicable_vod), Temperature_Reading_vod__c (decimal field for recorded temperature at receipt), and Temperature_Unit_vod__c (Celsius/Fahrenheit). When a rep receives cold chain products, they record the temperature indicator status. If the cold chain is broken, the transaction is flagged and the lot may be quarantined. The target platform does not have native cold chain fields. Migration requires: (1) custom fields on SampleTransaction for temperature status and reading, (2) validation rules that enforce cold chain data entry for designated cold chain products, (3) workflow/flow that quarantines lots when a cold chain break is reported, (4) reporting to track cold chain integrity across the distribution chain. Products requiring cold chain should be flagged with a custom field on the product record.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM cold chain tracking documentation",
+    "tags": ["samples", "cold-chain", "biologics", "temperature", "supply-chain"]
+  },
+  {
+    "id": "vsm-014",
+    "category": "Gotcha",
+    "question": "What are the risks with sample limit calculation timing during migration?",
+    "answer": "The most critical sample management migration risk is the difference in limit calculation timing. Veeva calculates sample limits in real-time using rollup summary fields — when a rep attempts a disbursement, the current count is always accurate. The target platform's batch calculation framework runs on a schedule (e.g., nightly or every 4 hours). This creates a compliance risk window: between batch runs, a rep could exceed a sample limit because the system's count is stale. Mitigation strategies: (1) Run the batch job more frequently (hourly) — increases system load but reduces risk window, (2) Implement a real-time trigger that performs a live SOQL count at disbursement time as a secondary check — adds latency to the disbursement flow, (3) Accept the batch delay risk with a post-hoc compliance report that flags limit violations — simplest but least protective. Organizations with strict PDMA compliance requirements should choose option 2 despite the performance tradeoff.",
+    "gotcha_level": "critical",
+    "source": "Platform batch framework documentation, PDMA compliance requirements",
+    "tags": ["samples", "sample-limit", "batch-timing", "compliance-risk", "real-time-vs-batch"]
+  },
+  {
+    "id": "vsm-015",
+    "category": "Gotcha",
+    "question": "What historical data challenges exist when migrating Veeva sample transactions?",
+    "answer": "Sample transaction history migration faces several challenges: (1) Volume: sample transactions are high-volume (thousands per rep per year), making this one of the largest data migration workloads, (2) Referential integrity: every transaction references a lot, product, account, and visit — all four must exist in the target before transactions can load, requiring a specific load order, (3) Calculated fields: Current_Count_vod__c on Sample_Limit_vod__c and Remaining_Quantity_vod__c on Sample_Lot_vod__c are calculated from transaction history — after loading transactions, these calculations must be run to establish correct current state, (4) Signature data: Signature_vod__c blob data is large and may require special ETL handling for base64 encoding/decoding, (5) Regulatory retention: sample records must be retained for 3+ years per PDMA — all historical records within the retention window must migrate, not just active inventory, (6) Mid-cycle migration: if migrating mid-reconciliation-period, the opening balance for the target platform must be set from Veeva's last completed reconciliation.",
+    "gotcha_level": "critical",
+    "source": "Sample data migration best practices, PDMA retention requirements",
+    "tags": ["samples", "data-migration", "historical-data", "referential-integrity", "regulatory-retention"]
+  }
+]

@@ -1,0 +1,134 @@
+[
+  {
+    "id": "fnd-atm-index-001",
+    "category": "org-strategy",
+    "title": "Access to Medicine Index 2024 \u2014 Methodology and Scoring Framework",
+    "products": [
+      "lsc"
+    ],
+    "summary": "The 2024 Access to Medicine Index evaluates 20 large research-based pharmaceutical companies on their efforts to expand access to medicine across 113 low- and middle-income countries (LMICs) covering 81 diseases and 8 product types. Companies are scored 1-5 across three technical areas: Governance of Access (7 indicators, 3 priority topics), Research & Development (7 indicators, 3 priority topics), and Product Delivery (18 indicators, 9 priority topics). The assessment uses publicly available data, company submissions, and stakeholder consultations, with scoring guided by an independent expert review committee.",
+    "findings": {
+      "scope_and_scale": "The index covers 20 companies, 113 LMICs (classified as low-income, lower-middle-income, and select upper-middle-income per World Bank and UN IHDI), 81 diseases across communicable, non-communicable, neglected tropical diseases, and maternal/newborn health conditions, and 8 product types including medicines, vaccines, diagnostics, vector control products, contraceptives, platform technologies, microbicides, and devices.",
+      "three_technical_areas": "Governance of Access assesses board-level responsibility, access strategies, incentive structures, compliance mechanisms, IP management, and patient reach measurement. Research & Development assesses pipeline composition, priority R&D gap coverage, clinical trial diversity, access planning, and R&D capacity building. Product Delivery assesses registration breadth, pricing strategies, licensing, technology transfer, inclusive business models, product donations, health system strengthening, quality and supply.",
+      "scoring_method": "Companies receive composite scores from 1 (lowest) to 5 (highest) based on weighted indicator assessments. The 2024 edition introduced a new standalone patient reach indicator under Governance and expanded Product Delivery to emphasize outcome measurement rather than just strategy existence. Access plans are now assessed from Phase II onward (expanded from Phase III in prior editions).",
+      "ranking_distribution": "The 2024 rankings show scores ranging from 3.78 (top) to 1.61 (bottom). The top five companies scored above 3.3, while the bottom five scored below 2.1. The overall industry average sits around 2.6, indicating substantial room for improvement across all assessed companies.",
+      "period_of_analysis": "The period of analysis spans from 1 June 2022 to 31 May 2024, with some elements (like technology transfers and licensing agreements) assessed based on activity within this window. Company report cards provide individual performance snapshots.",
+      "evolution_since_2022": "Key changes from the 2022 edition include the addition of patient reach measurement as a standalone indicator, expanded access plan assessment to Phase II projects (409 vs. 334 projects), greater emphasis on outcome measurement in Product Delivery, and continued tracking of inclusive business models as a distinct evaluation dimension."
+    },
+    "source": "Access to Medicine Foundation, 2024 Access to Medicine Index",
+    "tags": [
+      "access-to-medicine",
+      "pharma-evaluation",
+      "lmic-access",
+      "scoring-framework",
+      "global-health-equity",
+      "methodology"
+    ]
+  },
+  {
+    "id": "fnd-atm-index-002",
+    "category": "org-strategy",
+    "title": "Access to Medicine Index 2024 \u2014 Key Findings: Industry Rankings and Performance Trends",
+    "products": [
+      "lsc"
+    ],
+    "summary": "The 2024 Index reveals persistent gaps in pharmaceutical company efforts to expand medicine access in LMICs. Pipeline shrinkage (808 projects vs. 1,073 in 2022), clinical trial concentration in high-income countries (only 43% of trials in any LMIC), voluntary licensing stagnation (only 2 new agreements vs. 6 in 2022), and registration gaps (87 of 179 products not registered in any highest-burden countries) highlight systemic underinvestment in equitable access despite incremental governance improvements.",
+    "findings": {
+      "overall_rankings": "Twenty companies were ranked with scores from 1.61 to 3.78. The top-ranked company scored 3.78, followed by companies at 3.57, 3.41, 3.38, and 3.33. The bottom-ranked company scored 1.61. The industry demonstrates wide performance variation, with top performers scoring more than double the laggards.",
+      "governance_improvements": "17 of 20 companies now demonstrate direct board-level responsibility for access to medicine (up from 16). More companies link CEO and in-country manager incentives to access goals. 18 of 20 companies decouple sales agent bonuses from sales volume, though none cap volume-linked pay below 20%. 19 of 20 companies report on patient reach processes, though product and geographic coverage gaps remain significant.",
+      "rd_pipeline_contraction": "The total pipeline dropped from 1,073 to 808 projects. Only 253 projects (31%) address established priority R&D gaps, with 107 of those still in discovery/pre-clinical phase. 38% of priority diseases (28 of 73) have zero projects in development. Emerging infectious disease projects collapsed from 80 to 33, with 91% still targeting COVID-19 and only 2 of 20 companies developing products for other pandemic-potential diseases.",
+      "clinical_trial_inequity": "Only 43% (297/685) of clinical trials are conducted in any of the 113 LMICs covered. Only 3.5% (24/685) occur in any low-income country. Access plans average only 6 LMICs per product. 70 of 113 countries in scope have zero active clinical trials. Upper-middle-income countries dominate trial sites, concentrated in a handful of countries.",
+      "voluntary_licensing_stall": "Only 2 new non-exclusive voluntary licensing agreements were issued during the analysis period (down from 6 in 2022), both through the Medicines Patent Pool. The number of companies with any voluntary licensing agreements dropped from 10 to 9. Ten products in companies' portfolios are on the MPP's priority list for in-licensing but remain unlicensed.",
+      "registration_gaps": "87 of 179 assessed products are not registered in any country with the highest disease burden. Low-income countries average 11 product registrations compared to 57 in upper-middle-income countries. 15 of 113 countries in scope have zero registrations from any assessed company. Companies are five times more likely to register in an upper-middle-income country than a low-income country."
+    },
+    "source": "Access to Medicine Foundation, 2024 Access to Medicine Index",
+    "tags": [
+      "access-to-medicine",
+      "pharma-rankings",
+      "clinical-trials",
+      "voluntary-licensing",
+      "lmic-registration",
+      "rd-pipeline"
+    ]
+  },
+  {
+    "id": "fnd-atm-index-003",
+    "category": "org-strategy",
+    "title": "Access to Medicine Index 2024 \u2014 Inclusive Business Models and Product Delivery Strategies",
+    "products": [
+      "lsc"
+    ],
+    "summary": "The 2024 Index identifies 5 inclusive business models (IBMs) launched between 2019-2024, covering 102 countries including all 48 low-income and least developed countries. These models primarily target non-communicable diseases (73% of products). However, 61% of products lack strategies for low-income country access, 49% are not registered in highest-burden countries, and technology transfers remain concentrated in a few upper-middle-income countries with sub-Saharan Africa largely overlooked.",
+    "findings": {
+      "five_inclusive_business_models": "Five companies operate dedicated IBMs: one global health unit focused on neglected diseases, one sub-Saharan Africa-specific business unit, one NCD access program for low-income populations, one insulin affordability initiative, and one comprehensive access program for multiple product lines. These models collectively cover 102 countries including all 48 LIC/LDC nations and span multiple therapeutic areas.",
+      "ibm_product_coverage": "73% of products within IBMs target non-communicable diseases, reflecting a shift from historically communicable-disease-focused access programs. The IBMs span cardiovascular, diabetes, oncology, and other NCD therapeutic areas. However, implementation detail and patient reach reporting vary significantly \u2014 only one company clearly reports patient reach numbers.",
+      "product_delivery_gaps": "61% of products in companies' portfolios lack access strategies specifically targeting low-income countries (marginal improvement from 65% in 2022). 49% of innovative products are not registered in the countries with the highest disease burdens. 43% of innovative products are not registered in any African country. Pricing strategies remain concentrated in upper-middle-income markets.",
+      "technology_transfer_geography": "17 of 20 companies engage in technology transfers, but efforts concentrate in India (11 initiatives), Brazil (9), and China (7). The entire African continent has only 17 initiatives across 12 companies, mostly in Algeria (5) and South Africa (5). Only 6 companies report technology transfer initiatives in sub-Saharan Africa outside South Africa. Three companies have no technology transfer activity at all.",
+      "health_system_strengthening": "Companies show stronger engagement in health system strengthening compared to previous iterations, with programs spanning supply chain capacity building, healthcare worker training, diagnostic capacity, and cold chain infrastructure. These efforts are recognized as important complements to product access strategies, particularly in settings with weak healthcare infrastructure.",
+      "donation_programs": "Long-term product donation programs continue for neglected tropical diseases and select communicable diseases. The index evaluates whether donation strategies are sustainable, include transition plans, and are accompanied by health system strengthening to avoid dependency. Some companies demonstrate shift from donation-only models toward sustainable commercial access strategies."
+    },
+    "source": "Access to Medicine Foundation, 2024 Access to Medicine Index",
+    "tags": [
+      "inclusive-business-models",
+      "product-delivery",
+      "technology-transfer",
+      "lmic-access",
+      "health-system-strengthening",
+      "pharma-access-strategies"
+    ]
+  },
+  {
+    "id": "fnd-atm-index-004",
+    "category": "org-strategy",
+    "title": "Access to Medicine Index 2024 \u2014 R&D Priority Gaps and Therapeutic Area Coverage",
+    "products": [
+      "lsc"
+    ],
+    "summary": "The 2024 Index maps pharmaceutical R&D activity across 81 diseases in scope, identifying 808 pipeline projects (down from 1,073). Two-thirds of pipeline projects target non-communicable diseases, reflecting industry's commercial orientation. Only 253 projects address established priority R&D gaps, and 197 specific product-disease R&D gaps remain unaddressed. The analysis covers communicable diseases, NCDs, neglected tropical diseases, and maternal/newborn health conditions, with particular attention to antimicrobial resistance, pandemic preparedness, and equitable clinical trial representation.",
+    "findings": {
+      "pipeline_composition": "808 total projects across 20 companies: 527 target NCDs (65%), 230 target communicable diseases (28%), 48 target neglected tropical diseases (6%), and 3 target maternal/newborn health conditions (<1%). Two-thirds of the company pipelines focus on non-communicable diseases, driven by commercial returns in high-income markets.",
+      "priority_gap_coverage": "253 projects (31%) address established priority R&D gaps identified by WHO and Impact Global Health. 107 of these (42%) are still in discovery/pre-clinical phase, with only 18% (110) of all clinical-stage projects addressing a priority gap. 16 of 20 companies have priority-gap projects. Four companies focus exclusively on NCDs with zero priority-gap projects. One company leads with the most priority-gap projects, primarily targeting HIV (17), TB (9), and malaria (7).",
+      "unaddressed_gaps": "197 specific R&D product-disease gaps remain: 28 of 73 priority diseases (38%) have zero projects in development. Diseases with no pipeline activity include several hemorrhagic fevers, neglected tropical diseases, and maternal health conditions. Most projects addressing priority gaps concentrate on HIV (39 projects) and malaria (35 projects), leaving many diseases severely under-researched.",
+      "pandemic_preparedness_decline": "Emerging infectious disease pipeline projects collapsed from 80 to 33 since 2022. 91% of remaining EID projects target COVID-19. Only 2 of 20 companies actively develop products for EIDs other than COVID-19. 12 of 17 pandemic-potential diseases have completely empty pipelines. The number of companies engaging in EID R&D has dropped, reversing momentum built during the pandemic.",
+      "antimicrobial_resistance": "8 companies are developing products targeting prioritized antibacterial-resistant infections, with 22 projects in the pipeline (down from 31 in 2022). AMR is identified as a critical global health threat requiring sustained pharmaceutical investment, particularly for novel antibiotics and alternative therapies.",
+      "clinical_trial_inclusion": "Only 20% (6/30) of clinical trials for HIV, malaria, and TB do not systematically exclude pregnant and lactating people, despite WHO frameworks recommending inclusion. Two companies lead in including these populations in HIV prevention trials, representing a positive shift toward more inclusive clinical research that could reduce vertical transmission."
+    },
+    "source": "Access to Medicine Foundation, 2024 Access to Medicine Index",
+    "tags": [
+      "rd-pipeline",
+      "priority-gaps",
+      "pandemic-preparedness",
+      "antimicrobial-resistance",
+      "clinical-trials",
+      "therapeutic-areas",
+      "global-health"
+    ]
+  },
+  {
+    "id": "fnd-atm-index-005",
+    "category": "org-strategy",
+    "title": "Access to Medicine Index 2024 \u2014 LMIC Access Patterns and Geographic Disparities",
+    "products": [
+      "lsc"
+    ],
+    "summary": "The 2024 Index documents persistent geographic disparities in pharmaceutical access across 113 LMICs. Clinical trials, product registration, technology transfers, and voluntary licensing all demonstrate concentration in a small number of upper-middle-income countries while low-income countries and sub-Saharan Africa remain systematically underserved. The index identifies mechanisms for overcoming registration barriers, frameworks for expanding clinical trial diversity, and the role of initiatives such as the African Medicines Agency in strengthening regional pharmaceutical infrastructure.",
+    "findings": {
+      "clinical_trial_geography": "Clinical trials concentrate in upper-middle-income countries with established infrastructure. Five countries (classified as upper-middle-income) account for the majority of LMIC trial activity. 70 of 113 countries in scope have zero active clinical trials. Only 24 trials (3.5% of 685) are conducted in any low-income country. All 24 low-income-country trials focus on communicable diseases and NTDs \u2014 zero NCD trials in low-income settings.",
+      "registration_disparities": "Companies collectively registered products in 98 of 113 countries, but 15 countries have zero registrations. Low-income countries average 11 registrations vs. 57 in upper-middle-income countries. The top 10 countries by registration count are predominantly upper-middle-income. Three companies demonstrate wide LMIC registration as a differentiating practice. 87 of 179 assessed products are unregistered in any highest-burden country.",
+      "technology_transfer_concentration": "47 identified technology transfer initiatives cluster in India (11), Brazil (9), and China (7). Africa has only 17 initiatives: Algeria (5), South Africa (5), and sparse coverage elsewhere. Only 6 companies have any sub-Saharan African technology transfer presence. Three companies have no technology transfer activity anywhere. The African Union's Pharmaceutical Manufacturing Plan for Africa and Partnership for African Vaccine Manufacturing (targeting 60% continental vaccine self-sufficiency by 2040) represent institutional pushes for change.",
+      "access_plan_limitations": "Access plans during R&D average coverage of only 6 LMICs per product out of 113 in scope. Plans predominantly target upper-middle-income countries and emerging markets with commercial potential. Lower-middle-income countries receive limited inclusion. The link between clinical trial location and access planning means countries excluded from trials are also excluded from post-approval access strategies.",
+      "african_medicines_agency_opportunity": "The African Medicines Agency (AMA), established under the African Union, represents a continental regulatory harmonization effort that could streamline registration across African countries. The index identifies AMA as a significant opportunity for companies to accelerate registration through collaborative regulatory pathways rather than country-by-country submissions.",
+      "voluntary_licensing_scope": "Recent licensing agreements through the Medicines Patent Pool cover 88-120 LMICs depending on the product, including all low-income and least-developed countries. However, the stagnation in new agreements (2 in the analysis period vs. 6 previously) means voluntary licensing is not keeping pace with the number of priority products identified for licensing. Some licensing agreements exclude countries with significant disease burdens."
+    },
+    "source": "Access to Medicine Foundation, 2024 Access to Medicine Index",
+    "tags": [
+      "lmic-access",
+      "geographic-disparities",
+      "registration-barriers",
+      "african-medicines-agency",
+      "technology-transfer",
+      "access-planning",
+      "global-health-equity"
+    ]
+  }
+]

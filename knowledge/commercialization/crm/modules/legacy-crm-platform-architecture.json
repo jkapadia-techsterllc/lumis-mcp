@@ -1,0 +1,34 @@
+[
+  {
+    "id": "crm-mod-041",
+    "category": "modules",
+    "title": "Legacy CRM Platform Architecture and Data Model Reference",
+    "products": [
+      "oce"
+    ],
+    "summary": "Comprehensive reference for the legacy life sciences CRM platform architecture, covering the data model spanning 2700+ pages across 30+ CRM domains, package organization, and platform capabilities as documented in July 2024.",
+    "findings": {
+      "data_model_scope": "The legacy CRM data model encompasses 2700+ pages organized across 6 primary managed packages (designated by package prefixes) plus connector packages for third-party integrations. Each package contains standard objects, custom metadata types, custom settings, platform events, custom objects, and record types. The data model serves as the single source of truth for all field operations data.",
+      "crm_domains": "Approximately 30 functional CRM domains organized into major categories: Account Management (account merge, activity history, ratings, search, HCO/HCP dashboards), Administration (user management, settings, mobile config, product catalog, territory management), Business Planning (account plans, activity plans, calendar, call plans, plan cycles), Execution (calls, compliance, eDetailing/CLM, email, inquiries, insights, medical inquiry requests, orders, pricing, remote engagement, meetings/events/FMV), Opt Management, Pharmacy Orders, Projections, Store Management, Survey, and Integration domains.",
+      "package_organization": "Primary packages handle core CRM functionality across sales, medical, and operations. Extension packages provide specialized capabilities for specific verticals or advanced features. Connector packages enable integration with external systems including expense management, reference data providers, master data management, messaging platforms, and cross-org synchronization.",
+      "integration_domains": "Integration capabilities span: approval inquiry workflows, expense management integration, cross-org synchronization for multi-tenant deployments, multi-channel messaging connectors, and reference data provider integration for HCP/HCO data enrichment.",
+      "platform_domains": "Platform-level capabilities include: app store for custom application distribution, audit handler for compliance logging, dynamic tree views for hierarchical data navigation, error logging infrastructure, feature activation framework, generic workflow engine, offline sync for iOS with metadata processing, metadata store for configuration management, notification system, reporting framework, scheduled job execution, timeline visualization, and UI configuration management.",
+      "trigger_architecture": "Triggers are organized by package with each package maintaining its own trigger set. The architecture supports trigger orchestration across packages to manage execution order and prevent conflicts in multi-package deployments.",
+      "validation_rules": "Validation rules are defined per package and per object, enforcing data integrity at the platform level. These cover field-level validations, cross-field dependencies, and business rule enforcement.",
+      "feature_activation": "The platform uses a feature activation framework that controls which CRM capabilities are enabled for each deployment. July 2024 activation flows documented for: enhanced call management, remote engagement, field email, customer ratings, cross-territory search, meeting management, account-territory-product associations, profiling questions, generic related lists, generic workflows, configuration service CI/CD, analytics engine, sales API, and iOS metadata processing.",
+      "recipe_apps_ecosystem": "Extensible application framework providing pre-built modules: Account Team management, AI-driven next-best-customer recommendations with ranking algorithms, Territory Status Dashboard, Activity Plan management with add/update/remove workflows, Plan Cycle Summary with account and weighted territory goals, Enhanced Approval Requests, Call Details with history charts and to-do management, Content Library widgets, compliance tracking, Meeting management (budgets, pulse surveys, sign-in sheets, speaker management, topic tracking), reference data accelerated insights, Orders 2.0 with delivery tracking, Quick Actions for streamlined workflows, Remote Engagement session launching, Sales Chart analytics, and comprehensive Samples Management (disbursements, inventories, lot tracking, receiving, storage conditions, timeline, reconciliation, SLA/PTA reporting)."
+    },
+    "source": "Consolidated from legacy CRM platform documentation suite (July 2024): Technical Architecture (data model), Admin Guide, Recipe Apps Guide, Upgradeability Guide",
+    "tags": [
+      "data-model",
+      "architecture",
+      "platform",
+      "packages",
+      "triggers",
+      "validation-rules",
+      "feature-activation",
+      "recipe-apps",
+      "legacy-crm"
+    ]
+  }
+]

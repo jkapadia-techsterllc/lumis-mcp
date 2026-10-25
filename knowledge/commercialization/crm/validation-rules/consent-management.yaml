@@ -1,0 +1,75 @@
+rules:
+  - id: val-cm-001
+    name: Consent Type Configuration
+    description: Validates that consent types are configured for all communication channels and meet regulatory requirements.
+    category: Consent Management
+    severity: critical
+    check:
+      type: config_review
+      items:
+        - "Consent types defined for each channel: Email, Phone, Visit, Content"
+        - "Default consent behavior configured (opt-in vs opt-out per channel)"
+        - "Consent types mapped to regulatory framework (GDPR, CCPA, PDPA, APPI)"
+        - "Double opt-in configured for channels/countries that require it"
+    symptoms:
+      - "Reps can send emails to HCPs without consent records"
+      - "All HCPs appear as opted-out despite having consent"
+      - "Consent reports show inconsistent data across channels"
+    resolution:
+      steps:
+        - "Review Consent Type records — ensure one exists per channel per regulatory framework"
+        - "Verify default behavior matches business/legal requirements"
+        - "For GDPR countries: confirm opt-in is required (not assumed)"
+        - "Test consent enforcement: attempt to send email without consent — should be blocked"
+      documentation: "Consent Management Guide > Consent Type Setup"
+    tags: [consent, compliance, gdpr, channels]
+
+  - id: val-cm-002
+    name: Consent Expiration and Renewal
+    description: Validates that consent records have expiration dates and renewal workflows are configured.
+    category: Consent Management
+    severity: high
+    check:
+      type: config_review
+      items:
+        - "Consent records have Expiration_Date populated"
+        - "Batch job or workflow flags consents approaching expiration (60-day threshold)"
+        - "Expired consents automatically revoke channel access"
+        - "Renewal notification sent to rep before expiration"
+    symptoms:
+      - "HCPs remain contactable despite consent expiration"
+      - "Reps surprised by sudden loss of communication ability (consent expired without warning)"
+      - "Compliance audit finds communications to HCPs with expired consent"
+    resolution:
+      steps:
+        - "Set Expiration_Date on all consent records (default 2 years if regulation doesn't specify)"
+        - "Configure batch job to check expiration and send rep notifications at 60/30/7 days"
+        - "Verify that expired consent records block channel communication"
+        - "Test full lifecycle: create consent → approach expiration → notification → renewal"
+      documentation: "Consent Management Guide > Consent Lifecycle"
+    tags: [consent, compliance, expiration, lifecycle]
+
+  - id: val-cm-003
+    name: Consent Data Migration Completeness
+    description: Validates that consent records were fully migrated from source platform with no gaps.
+    category: Consent Management
+    severity: critical
+    check:
+      type: data_validation
+      items:
+        - "Consent record count matches between source and target (within 1% tolerance)"
+        - "All consent statuses mapped correctly (Opted In, Opted Out, Pending)"
+        - "Consent dates preserved (original consent date, not migration date)"
+        - "Channel mappings correct (source channels map to target consent types)"
+    symptoms:
+      - "Consent count mismatch between source and target systems"
+      - "All consent records show migration date instead of original consent date"
+      - "HCPs who opted out on source appear opted in on target (or vice versa)"
+    resolution:
+      steps:
+        - "Run consent count comparison: source vs target, grouped by channel and status"
+        - "Verify date fields: Consent_Date should be original date, not migration date"
+        - "Spot-check 50 records across statuses (In/Out/Pending) for field accuracy"
+        - "Verify that no consent records were lost for HCPs in regulated markets"
+      documentation: "Migration Playbook > Consent Data Migration Validation"
+    tags: [consent, migration, data-quality, compliance]

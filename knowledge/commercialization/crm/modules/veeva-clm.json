@@ -1,0 +1,137 @@
+[
+  {
+    "id": "vcl-001",
+    "category": "Object Mapping",
+    "question": "How does Veeva CLM_Presentation_vod__c map to the target platform?",
+    "answer": "Veeva CLM_Presentation_vod__c maps to the target platform's Presentation object (or equivalent content container). Key field mappings: Presentation_Id_vod__c → ExternalId or DeveloperName (unique key); Name → Name (display title); Description_vod__c → Description; Status_vod__c → Status (Active/Inactive/Expired); Product_vod__c → ProductId lookup; Start_Date_vod__c and End_Date_vod__c → custom date fields controlling availability window; Presentation_Type_vod__c → custom Type picklist. Veeva treats presentations as containers that hold an ordered collection of Key Messages (slides), while the target platform uses a Presentation record with child PresentationPage records linked via junction or master-detail relationship.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM CLM_Presentation_vod documentation",
+    "tags": ["clm", "object-mapping", "presentation", "migration"]
+  },
+  {
+    "id": "vcl-002",
+    "category": "Object Mapping",
+    "question": "How does Veeva Key_Message_vod__c map to the target platform?",
+    "answer": "Veeva Key_Message_vod__c maps to ContentDocument or a dedicated content record on the target platform. Each Key Message represents a single slide or content unit. Key field mappings: Key_Message_Id_vod__c → ContentDocumentId or ExternalId; Name → Title; Description_vod__c → Description; Media_File_Name_vod__c → ContentVersion.PathOnClient; Display_Order_vod__c → SortOrder on the junction; Product_vod__c → ProductId lookup. The critical difference: Veeva Key Messages are standalone objects that can be shared across multiple presentations via Clm_Presentation_Slide_vod__c junction records, whereas the target platform may use ContentDocument with a sharing model or dedicated content objects with many-to-many relationships to presentations.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Key_Message_vod documentation",
+    "tags": ["clm", "object-mapping", "key-message", "content-document"]
+  },
+  {
+    "id": "vcl-003",
+    "category": "Object Mapping",
+    "question": "How does the Veeva Clm_Presentation_Slide_vod__c junction work and what is its target equivalent?",
+    "answer": "Veeva Clm_Presentation_Slide_vod__c is a junction object linking CLM_Presentation_vod__c to Key_Message_vod__c, with fields: Presentation_vod__c (lookup to presentation), Key_Message_vod__c (lookup to key message), Display_Order_vod__c (integer controlling slide sequence), and Section_vod__c (optional grouping). The target platform equivalent is PresentationPage or a custom junction object. Migration must preserve the display order because reps navigate presentations in a specific sequence. The Section_vod__c field, used for grouping slides into chapters, has no standard target equivalent and may require a custom field or a parent-child hierarchy within the target content model.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Clm_Presentation_Slide_vod documentation",
+    "tags": ["clm", "object-mapping", "junction", "slide-order", "presentation-page"]
+  },
+  {
+    "id": "vcl-004",
+    "category": "Content Packaging",
+    "question": "How does Veeva CLM content packaging differ from the target platform?",
+    "answer": "Veeva CLM content is packaged as ZIP files uploaded to Veeva Vault, containing HTML5 slides with assets (images, CSS, JavaScript, videos). Each ZIP follows a Veeva-specific structure with a manifest file (content.mcm or mc.db) that defines navigation, Key Message boundaries, and analytics hooks. The target platform uses ContentVersion for file storage, but the packaging format is fundamentally different: content is typically stored as individual files or as a structured content bundle with platform-native metadata. During migration, Veeva ZIP packages must be (1) extracted, (2) stripped of Veeva-proprietary JavaScript API calls, (3) re-packaged in the target format, and (4) re-uploaded. The Veeva manifest file has no direct equivalent — slide boundaries, navigation rules, and chapter structure must be recreated in the target platform's content metadata model.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM CLM content packaging specification",
+    "tags": ["clm", "content-packaging", "zip", "vault", "migration-transform"]
+  },
+  {
+    "id": "vcl-005",
+    "category": "JavaScript Bridge API",
+    "question": "What Veeva CLM JavaScript APIs must be replaced during migration?",
+    "answer": "Veeva CLM presentations use a proprietary JavaScript bridge API (com.veeva.clm.*) for slide navigation, data access, and analytics. Key APIs requiring replacement: (1) com.veeva.clm.gotoSlide(slideId) — navigates between slides; must be replaced with the target platform's navigation mechanism, (2) com.veeva.clm.getDataForCurrentObject(objectName, fieldName) — pulls CRM data into the presentation; requires replacement with the target platform's data access API, (3) com.veeva.clm.createRecord() / updateRecord() — CRM write operations from within presentations; requires target platform API calls, (4) com.veeva.clm.launchApprovedEmail() — opens email compose from a slide; must integrate with target email send flow, (5) com.veeva.clm.nextSlide() / prevSlide() — linear navigation; needs target platform swipe/tap handler. Every presentation containing these API calls must be re-authored.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM CLM JavaScript Library documentation",
+    "tags": ["clm", "javascript-bridge", "api-migration", "presentation-interactivity"]
+  },
+  {
+    "id": "vcl-006",
+    "category": "Content Targeting",
+    "question": "How do Veeva CLM content restrictions and targeting rules map to the target platform?",
+    "answer": "Veeva restricts CLM content access via several fields on CLM_Presentation_vod__c and Key_Message_vod__c: Product_vod__c (limits to specific products), Country_vod__c (country-level restriction), Profile_Name_vod__c (CRM profile-based access), Restriction_vod__c (picklist for audience types), and Segment_vod__c (customer segment targeting). The target platform uses a combination of record-level sharing rules, custom permissions, territory-based visibility, and product-based filtering for content access control. Migration requires mapping each Veeva restriction mechanism to the target platform's security model. The most complex mapping is Veeva's Segment_vod__c targeting, which conditionally shows content based on HCP attributes — this requires custom logic (likely a flow or Apex trigger) on the target platform to evaluate segment criteria at content retrieval time.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM content restriction documentation",
+    "tags": ["clm", "content-targeting", "restrictions", "sharing-rules", "segmentation"]
+  },
+  {
+    "id": "vcl-007",
+    "category": "Offline Content",
+    "question": "How do Veeva CLM offline capabilities compare to the target platform?",
+    "answer": "Veeva CLM supports full offline presentation delivery on iPad: content ZIP packages are downloaded during sync and stored locally, allowing reps to present without network connectivity. The Veeva iOS app includes a built-in HTML5 rendering engine optimized for offline playback. The target platform's offline content approach differs: (1) content may be cached through the mobile app's sync framework rather than Veeva's dedicated content sync, (2) the rendering engine and HTML5 feature support may differ (particularly for advanced CSS animations, embedded video, and JavaScript interactions), (3) content download priority and storage management rules differ, (4) offline content updates require a sync cycle on both platforms but the sync mechanism is different. Organizations with large content libraries (500+ presentations) should carefully test offline storage limits and sync performance on the target platform.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM CLM offline architecture documentation",
+    "tags": ["clm", "offline", "mobile-sync", "ipad", "content-delivery"]
+  },
+  {
+    "id": "vcl-008",
+    "category": "Analytics",
+    "question": "How does Veeva CLM slide-level analytics map to the target platform?",
+    "answer": "Veeva tracks detailed CLM engagement through Call_Key_Message_vod__c records, which log: which Key Message (slide) was shown, duration viewed (Reaction_vod__c), the order presented, and the associated Call_vod__c (visit). This enables slide-level engagement analytics, showing which content resonates with which HCPs. The target platform captures content interaction at the session level, but native slide-level duration tracking is not standard. Migration implications: (1) Historical Call_Key_Message_vod__c data can be migrated as read-only records mapped to the target's visit and content objects, (2) going-forward slide-level tracking requires custom instrumentation in the target platform's content player, (3) Veeva's analytics dashboard for content effectiveness must be rebuilt using the target platform's reporting tools. The loss of granular slide-level analytics is a common pain point for marketing teams during migration.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Call_Key_Message_vod analytics documentation",
+    "tags": ["clm", "analytics", "slide-tracking", "engagement", "call-key-message"]
+  },
+  {
+    "id": "vcl-009",
+    "category": "Object Mapping",
+    "question": "Does Veeva Product_Metrics_vod__c have a target platform equivalent?",
+    "answer": "Veeva Product_Metrics_vod__c captures product-level performance data aggregated from CLM and other channels (e.g., message recall, detail position, reach/frequency). Key fields include Account_vod__c, Product_vod__c, Detail_Priority_vod__c, and various metric aggregation fields. The target platform does not have a direct equivalent object. Product performance analytics must be built using: (1) custom report types joining visit, content interaction, and product data, (2) a custom analytics object if real-time aggregation is needed, or (3) external analytics tools (CRM Analytics/Tableau) consuming raw interaction data. During migration, historical Product_Metrics_vod__c data can be loaded into a custom object for trend continuity, but the ongoing aggregation logic must be re-implemented.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Product_Metrics_vod documentation",
+    "tags": ["clm", "product-metrics", "analytics", "no-equivalent", "custom-build"]
+  },
+  {
+    "id": "vcl-010",
+    "category": "Field Mapping",
+    "question": "What is the complete field-level mapping for Veeva Key_Message_vod__c?",
+    "answer": "Complete field mapping for Key_Message_vod__c: Key_Message_Id_vod__c → ExternalId or DeveloperName; Name → Title; Description_vod__c → Description; Media_File_Name_vod__c → FileName or PathOnClient; Media_File_Size_vod__c → ContentSize; Status_vod__c → Status (Active/Inactive); Product_vod__c → ProductId lookup; Category_vod__c → custom Category field; Vault_Doc_Id_vod__c → no mapping (Vault link severed); Start_Date_vod__c → AvailableFrom date; End_Date_vod__c → AvailableUntil date; Segment_vod__c → custom Segment field for targeting; Key_Message_Type_vod__c → ContentType (HTML/PDF/Video); Display_Order_vod__c → SortOrder on junction; Country_vod__c → custom Country or Region field; Language_vod__c → Locale or Language field; Shared_Resource_vod__c → IsSharedResource boolean (for shared CSS/JS assets).",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Key_Message_vod field reference",
+    "tags": ["clm", "field-mapping", "key-message", "complete-reference"]
+  },
+  {
+    "id": "vcl-011",
+    "category": "Presentation Sequence",
+    "question": "How does Veeva Presentation_Sequence_vod__c map to the target platform?",
+    "answer": "Veeva Presentation_Sequence_vod__c defines recommended presentation playbooks — ordered sequences of presentations and slides tailored to specific customer segments, call objectives, or therapeutic areas. Fields include Sequence_Name_vod__c, Product_Strategy_vod__c, and ordered junction records linking to specific Key Messages. The target platform does not have a native presentation sequence object. Equivalent functionality requires: (1) a custom object to define named sequences with metadata (segment, product, objective), (2) child records defining the ordered content items, (3) UI logic in the content player to suggest or auto-load the next recommended content based on the active sequence. This is a nice-to-have feature that many organizations choose to defer during initial migration, rebuilding it as a Phase 2 enhancement.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Presentation_Sequence_vod documentation",
+    "tags": ["clm", "presentation-sequence", "playbook", "content-strategy"]
+  },
+  {
+    "id": "vcl-012",
+    "category": "Multichannel Content",
+    "question": "How does Veeva's multichannel content strategy differ from the target platform?",
+    "answer": "Veeva supports a unified content model where Key_Message_vod__c records can be used across multiple channels: CLM (in-person detailing), Approved Email (email campaigns), and Engage Meeting (remote/virtual). The Multichannel_Strategy_vod__c field on Key_Message_vod__c controls channel eligibility. The target platform separates content by channel more distinctly: presentations for in-person detailing, email templates for email sends, and separate content objects for digital engagement. This means a single Veeva Key Message used across all three channels may need to be migrated as three separate content records on the target platform, with linkages maintained through a common external ID. Organizations should inventory how many Key Messages are truly multichannel vs. single-channel before planning the migration.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM multichannel content documentation",
+    "tags": ["clm", "multichannel", "content-reuse", "channel-strategy"]
+  },
+  {
+    "id": "vcl-013",
+    "category": "Gotcha",
+    "question": "What are the risks with Veeva CLM video content during migration?",
+    "answer": "Veeva CLM presentations frequently embed video content that plays within the HTML5 slide. Veeva's iPad app includes a native video player optimized for offline playback of large video files. Migration risks: (1) Video file format and codec requirements may differ between platforms — Veeva supports MP4/H.264; verify target platform codec support, (2) large video files (100MB+) may exceed the target platform's content storage limits per record, (3) Veeva's offline video pre-caching ensures smooth playback; the target platform's video caching behavior must be tested, (4) Veeva supports video bookmarking and analytics (tracking which segments were viewed); this requires custom instrumentation on the target platform, (5) streaming vs. downloaded playback models may differ. Organizations with video-heavy content libraries should conduct a separate video content audit before migration.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM CLM video content documentation, migration best practices",
+    "tags": ["clm", "video", "offline-playback", "content-storage", "media"]
+  },
+  {
+    "id": "vcl-014",
+    "category": "Field Mapping",
+    "question": "What is the complete field-level mapping for Veeva CLM_Presentation_vod__c?",
+    "answer": "Complete field mapping for CLM_Presentation_vod__c: Presentation_Id_vod__c → ExternalId (unique identifier); Name → Name (display title); Description_vod__c → Description; Status_vod__c → Status picklist (Active/Inactive/Expired); Product_vod__c → ProductId or custom Product lookup; Start_Date_vod__c → AvailableFrom date; End_Date_vod__c → AvailableUntil date; Presentation_Type_vod__c → custom Type picklist; Country_vod__c → custom Country/Region field; Language_vod__c → Locale field; Segment_vod__c → custom Segment field for targeting; Restriction_vod__c → custom visibility picklist; Detail_Group_vod__c → Category or therapeutic area grouping; Vault_Doc_Id_vod__c → no mapping (Vault link severed); CRM_Presentation_Id_vod__c → system-generated target platform ID; Training_vod__c → custom Training boolean (marks presentations as training-only, not for customer use).",
+    "gotcha_level": "info",
+    "source": "Veeva CRM CLM_Presentation_vod field reference",
+    "tags": ["clm", "field-mapping", "presentation", "complete-reference"]
+  },
+  {
+    "id": "vcl-015",
+    "category": "Gotcha",
+    "question": "What shared resources and cross-presentation dependencies complicate CLM migration?",
+    "answer": "Veeva CLM supports Shared_Resource_vod__c Key Messages — reusable asset bundles (CSS frameworks, JavaScript libraries, common images, fonts) referenced by multiple presentations. When one shared resource is updated, all presentations referencing it get the new version. Migration challenges: (1) The target platform may not have an equivalent shared resource model, requiring assets to be duplicated into each presentation bundle (increasing storage), (2) cross-presentation JavaScript dependencies must be audited — if Presentation A's slide calls a function defined in Shared Resource B, both must be migrated together, (3) Veeva's content sync downloads shared resources once and caches them; the target platform's equivalent caching behavior must be verified, (4) custom fonts loaded as shared resources need re-hosting. Run a dependency graph analysis before migration to identify which presentations share resources.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM Shared_Resource_vod documentation",
+    "tags": ["clm", "shared-resources", "dependencies", "migration-complexity", "content-packaging"]
+  }
+]

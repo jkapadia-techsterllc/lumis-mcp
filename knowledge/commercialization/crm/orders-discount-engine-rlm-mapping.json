@@ -1,0 +1,107 @@
+[
+  {
+    "id": "orders-discount-001",
+    "category": "commercialization/crm",
+    "title": "Legacy CRM Discount Engine - Feature Inventory",
+    "products": ["Life Sciences Cloud", "Orders"],
+    "summary": "Comprehensive inventory of the legacy CRM order discount engine capabilities, documenting the targeting, threshold, conflict resolution, product eligibility, tiering, interdependency, and messaging features that any replacement pricing architecture must address.",
+    "findings": {
+      "targeting_capabilities": "Segmentation by customer classification, direct account assignment, order type and sub-type filtering, time-bound start/end date validity periods",
+      "threshold_configuration": [
+        "Standard quantity — total items or a specific set of items",
+        "Distinct product count — number of unique product types in the order",
+        "Gross amount — monetary value before discounts are applied",
+        "Equivalence factor calculation — quantity multiplied by a normalization factor that accounts for product variation (e.g., a 20-unit product with 0.2 factor vs a 100-unit product with 1.0 factor, both targeting 1000 equivalent units)"
+      ],
+      "threshold_scope": "Entire order (all items across all deliveries) or per delivery period (independently calculated per shipping schedule — enables time-sensitive promotions like discounts for a specific month's shipment). Per-delivery scope requires delivery support infrastructure.",
+      "conflict_resolution_modes": [
+        "Replace — unconditional override of any previous discount",
+        "Replace if Better — override only if the new discount provides greater customer benefit",
+        "Linear — all applicable discounts summed together",
+        "Stack — sequential application where each discount is calculated on the price after the previous discount has been applied"
+      ],
+      "product_eligibility": "Qualifying products (purchase contributes toward threshold) and Eligible products (receive the discount once threshold is met). Both can be defined broadly — all products, all within a brand, all in a hierarchy. A single rule can target multiple eligible products.",
+      "tiered_discounts": "Multiple threshold tiers with different discount levels. Each tier stores a minimum discount (floor), recommended discount (auto-applied default), and maximum discount (ceiling). Sales representatives can manually adjust within the min/max range for the achieved tier.",
+      "interdependencies": "Multi-discount rules (single rule managing multiple discount configurations) and conditional application (Discount C applies only if Discount A AND Discount B are qualified)",
+      "discount_messaging": "Custom message per discount configuration, displayed to sales representatives for context and upsell opportunities"
+    },
+    "source": "internal-discount-engine-rlm-spike",
+    "tags": ["orders", "pricing", "discount-engine", "feature-inventory", "migration"]
+  },
+  {
+    "id": "orders-discount-002",
+    "category": "commercialization/crm",
+    "title": "Revenue Lifecycle Management Pricing Elements - Capability Inventory for Discount Migration",
+    "products": ["Life Sciences Cloud", "Orders"],
+    "summary": "Catalogs the RLM pricing elements available for replicating legacy discount engine functionality, with assessment of each element's role and applicable scenarios.",
+    "findings": {
+      "foundational_elements": [
+        "Pricing Setting — maps variables to context tags for the pricing procedure",
+        "Map Line Item — variable mapping at main and sub-line item levels",
+        "List Price — retrieves the base price from the configured price type",
+        "Assignment — sets or changes context tag variable values; indispensable for interdependencies and conditional flows"
+      ],
+      "quantity_based_elements": [
+        "Volume Discount — product price based on configured quantity discounts using Price Adjustment Schedules and Tiers",
+        "Tier Discount — quantity-based tiered discount structures",
+        "Apply Cumulative Discounts — volume and tier quantities that include past orders for cumulative calculations"
+      ],
+      "product_combination_elements": [
+        "Bundle-Based Price — discounts for products sold as a set; critical for scenarios like 'buy product A and product B, get discount on product C'",
+        "Attribute-Based Price — discounts triggered by selected price-impacting attributes"
+      ],
+      "manual_and_formula_elements": [
+        "Manual Discount — final price after external discount entry; essential for sales flexibility",
+        "Formula Based Pricing — functions and mathematical calculations for dynamic price generation",
+        "Price Adjustment Matrix — discounts derived from custom condition sets; the most flexible element for account-specific and product-specific decision-table discounts"
+      ],
+      "list_and_aggregation_elements": [
+        "List Group and List Operation — filter items by conditions; backbone for targeting rules and prerequisites",
+        "Aggregate Price — SUM, AVG, MAX, or MIN across product groups; useful for complex multi-product threshold calculations with Write Back capability to override pricing output"
+      ],
+      "distribution_and_control": [
+        "Discount Distribution Service — distributes an order-level discount across eligible line items while respecting floor prices; the primary solution for 'X% off entire order' scenarios",
+        "Rounding Values — precision rounding rules for final prices",
+        "Stop Pricing — halts the pricing procedure for a specific line item",
+        "Track Price History — min and max price tracking over time"
+      ],
+      "subscription_elements": "Subscription Pricing and Proration — subscription period pricing; not directly relevant to sample or order discounts but available in the element library"
+    },
+    "source": "internal-discount-engine-rlm-spike",
+    "tags": ["orders", "pricing", "rlm", "pricing-elements", "architecture"]
+  },
+  {
+    "id": "orders-discount-003",
+    "category": "commercialization/crm",
+    "title": "Legacy Discount Engine to RLM Mapping - Architecture and Gap Analysis",
+    "products": ["Life Sciences Cloud", "Orders"],
+    "summary": "Maps each legacy discount engine capability to specific RLM pricing elements, documents configuration patterns for common discount scenarios, and identifies gaps requiring custom logic or architectural decisions.",
+    "findings": {
+      "targeting_mapping": "List Group and List Operation filter orders and customers based on attributes (account, order type, dates). Combined with the Assignment element for flag-setting, this replicates legacy segmentation, direct account assignment, and order type/sub-type filtering.",
+      "threshold_mapping": "Volume Discount or Tier Discount for quantity and value thresholds. Bundle-Based Price for multi-product qualification. Equivalence factor calculation may need Formula Based Pricing for the quantity-times-factor normalization.",
+      "conflict_resolution_mapping": "Replace is achieved by element execution order (later overwrites earlier). Replace-if-Better requires custom logic using Assignment to store an interim best discount and Formula Based Pricing to compare. Linear and Stack are controlled by element order and discount definition basis (percentage of base vs percentage of net price).",
+      "product_eligibility_mapping": "Bundle-Based Price directly applies discounts to specific items. Volume and Tier Discount apply to their configured items. Broad applicability (all products in a brand or hierarchy) uses List Group filtering.",
+      "tiered_discount_mapping": "Tier Discount and Volume Discount natively support multiple tiers via Price Adjustment Schedules. Manual adjustment within a min/max range per tier may require custom validation if the Manual Discount element does not natively enforce strict min/max constraints.",
+      "interdependency_mapping": "Assignment sets flags based on one discount's application. List Group or subsequent elements use those flags as conditions. Aggregate Price or Formula Based Pricing combines results for complex conditional logic. Element execution order is critical for correct interdependency resolution.",
+      "scenario_configurations": {
+        "buy_n_get_x_off_same_product": "Pricing Settings → List Price → Volume Discount with Price Adjustment Schedule tiers",
+        "buy_n_of_a_and_m_of_b_get_x_off_a": "Pricing Settings → List Price → Bundle-Based Price with conceptual bundle definition",
+        "buy_n_of_a_and_m_of_b_get_x_off_entire_order": "Pricing Settings → List Price → List Group/Operation and Assignment for threshold flags → Discount Distribution Service for order-level percentage",
+        "buy_n_of_a_get_x_off_product_b": "CROSS-PRODUCT DISCOUNT — NOT SUPPORTED without bundles. Requires architecture decision or platform enhancement."
+      },
+      "identified_gaps": [
+        "Cross-product discounts (buy A, get discount on B) without a bundle definition — no RLM element supports this natively",
+        "Replace-if-Better conflict resolution requires custom logic — no single element comparison exists",
+        "Delivery-period-based threshold scoping requires delivery infrastructure that may not be available in the initial version",
+        "Location and recipient-based pricing (delivery-date splitting) is a major requirement needing further architecture work",
+        "Distinct product count thresholds may need custom Aggregate Price configuration"
+      ],
+      "scope_decisions": [
+        "Bundle pricing was dropped from release 264 GA scope per workshop decision — Price Adjustment Matrix recommended as the replacement for decision-table discount scenarios",
+        "Price Adjustment Matrix is the recommended element for account-specific and product-specific discount tables"
+      ]
+    },
+    "source": "internal-discount-engine-rlm-spike",
+    "tags": ["orders", "pricing", "discount-engine", "rlm", "migration", "architecture", "gap-analysis"]
+  }
+]

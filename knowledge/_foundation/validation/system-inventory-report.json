@@ -1,0 +1,86 @@
+[
+  {
+    "id": "val-sir-001",
+    "category": "validation-system-inventory",
+    "title": "Validated System Inventory Report — Purpose and Governance",
+    "products": ["lsc", "oce", "vault"],
+    "summary": "A Systems Report (also called a Validated System Inventory or System Register) is the master record that a quality organization maintains to demonstrate oversight of all GxP-regulated computer systems. Regulatory inspectors use this report to understand the scope of a company's validation program and to select systems for audit deep-dives. Maintaining it accurately is a prerequisite for passing a GxP inspection.",
+    "purpose": "Provides a single view of every validated system in the quality organization's portfolio — what it is, who owns it, when it was validated, how many releases have been qualified, and what documentation exists. Without this report, an organization cannot demonstrate that it knows what systems are in its regulated environment.",
+    "regulatory_drivers": [
+      "21 CFR Part 11 — requires that organizations maintain documentation of validated systems and their lifecycle state",
+      "EU Annex 11 — requires a system inventory as part of the quality management system",
+      "ICH Q10 — pharmaceutical quality system requires knowledge management across all validated systems",
+      "ISO 9001:2015 — quality management system requires controlled documentation of processes and supporting systems"
+    ],
+    "report_attributes": {
+      "system_name": "The registered name of the validated system. Each system should have a unique, unambiguous name that does not change between releases. In multi-product environments (e.g., a company using both a CRM and a content management platform), each platform is a separate system entry.",
+      "system_owner": "The individual accountable for the system's business use, validation status, and periodic review. This is a named person, not a role — auditors expect to see a specific individual who can speak to the system's validation state.",
+      "implementation_date": "The date the system was first placed into validated production use. For cloud/SaaS systems, this is the date the validated instance was provisioned, not the vendor's release date. A missing implementation date signals the system may not have completed initial validation.",
+      "periodic_review_date": "The date of the most recent periodic review. Regulatory guidance requires periodic reviews at defined intervals (commonly annual or biennial). An overdue or missing periodic review date is an inspection finding.",
+      "number_of_releases": "How many qualified releases have been deployed since initial validation. Each release that changes validated functionality requires re-qualification (IQ/OQ/PQ or risk-based subset). A system with zero releases since implementation may indicate either stability or neglected change control.",
+      "system_risk": "The risk classification assigned during the initial validation or most recent periodic review. Common scales include High/Medium/Low or GAMP 5 categories. Risk classification drives the depth of validation activities required for each release.",
+      "published_templates": "The number of approved document templates (e.g., validation plans, test protocols, summary reports) associated with the system. A higher template count indicates a more mature validation program with standardized deliverables.",
+      "approved_documents": "The total count of approved validation documents (plans, protocols, summary reports, traceability matrices, risk assessments) on file. This number grows with each release and periodic review. A system with few approved documents relative to its release count may have documentation gaps.",
+      "active_workflows": "The number of currently active approval or review workflows in the validation management system. Active workflows indicate in-progress validation activities (e.g., a release undergoing qualification).",
+      "approved_workflows": "The number of completed and approved workflows. This reflects the historical volume of validation activities that have been formally closed."
+    },
+    "maturity_indicators": {
+      "healthy_system": "Has a named owner, implementation date populated, periodic review date within the required interval, approved documents proportional to release count, and at least one approved workflow per release.",
+      "at_risk_system": "Missing periodic review date, system owner vacant or generic (e.g., a team name instead of a person), approved document count is low relative to release count, or no active workflows despite recent releases.",
+      "inspection_red_flags": [
+        "System present in the inventory with no approved documents — suggests the system is in production without validation evidence",
+        "Periodic review date older than the defined review interval — suggests the system's validated state may have drifted",
+        "Multiple releases with zero approved workflows — suggests releases were deployed without formal qualification",
+        "System owner field blank or showing a role instead of a named individual"
+      ]
+    },
+    "source": "systems-report-analysis",
+    "tags": ["system-inventory", "periodic-review", "inspection-readiness", "gxp", "quality-management", "validated-systems"]
+  },
+  {
+    "id": "val-sir-002",
+    "category": "validation-system-inventory",
+    "title": "Validated System Inventory — Product-Specific Considerations",
+    "products": ["lsc", "oce", "vault"],
+    "summary": "The three major life sciences CRM/content platforms — Life Sciences Cloud (Salesforce-native), OCE (legacy on-premise/cloud CRM), and Veeva Vault (document and quality management) — each present different challenges when maintaining a validated system inventory. Understanding these differences prevents gaps in the quality organization's oversight.",
+    "product_profiles": {
+      "lsc": {
+        "platform": "Life Sciences Cloud (Salesforce)",
+        "deployment_model": "Multi-tenant SaaS on Salesforce Platform. The vendor (Salesforce) manages infrastructure; the customer is responsible for validating their configured instance.",
+        "release_cadence": "Three major Salesforce releases per year (Spring, Summer, Winter) plus monthly Life Sciences Cloud patches. Each release requires a validation impact assessment.",
+        "validation_tooling": "No built-in validation module. Customers use external tools (Kneat, Pilgrim/Veeva Vault QMS, Qualio, MasterControl) or document-based processes to manage validation artifacts.",
+        "inventory_considerations": [
+          "A single Salesforce org may host multiple validated applications (e.g., CRM + consent management + sample management) — decide whether to register as one system or multiple entries based on functional independence",
+          "Sandbox-to-production promotion creates implicit releases that require tracking even when the vendor's platform version has not changed",
+          "Managed package upgrades (2GP) are separate from platform releases and should be tracked as distinct release events"
+        ]
+      },
+      "oce": {
+        "platform": "OCE (Legacy CRM)",
+        "deployment_model": "Varies by generation — on-premise, hosted, or cloud deployment. Mobile clients add complexity (iOS/iPad app validation is separate from server-side).",
+        "release_cadence": "Vendor-driven release schedule, historically quarterly. Customers may defer upgrades, creating version skew across deployments.",
+        "validation_tooling": "Varies by customer maturity — some use Vault QMS, others use standalone validation document management. Mobile app updates on App Store require separate qualification evidence.",
+        "inventory_considerations": [
+          "Mobile and server components should be tracked as separate inventory entries or clearly noted as a single system with two deployment surfaces",
+          "Multi-country deployments with different release versions require per-country or per-region inventory entries",
+          "Legacy customizations (JavaScript, custom objects) increase the validation scope beyond the vendor's base product"
+        ]
+      },
+      "vault": {
+        "platform": "Veeva Vault (QMS, QualityDocs, RIM, Clinical)",
+        "deployment_model": "Multi-tenant SaaS. Vault has a built-in validation management module (Vault Validation Management) that can serve as both the validation tooling and a system in the inventory.",
+        "release_cadence": "Three general releases per year plus interim releases. Vault provides release notes with validation impact assessments for each release.",
+        "validation_tooling": "Built-in. Vault Validation Management provides native requirements management, test scripting, execution, traceability, and periodic review workflows. This is a significant differentiator — the validation tool and the validated system can be the same platform.",
+        "inventory_considerations": [
+          "When Vault is both the validated system and the validation management tool, the system inventory must distinguish between Vault-as-QMS (the tool managing validation) and Vault-as-application (the system being validated)",
+          "Vault applications (QMS, QualityDocs, RIM, Clinical, CTMS) may be registered as separate systems or as a single Vault instance depending on the organization's quality policy",
+          "Vault's built-in periodic review workflows automate much of the inventory maintenance, but the quality organization must still verify the automated data is accurate"
+        ]
+      }
+    },
+    "cross_product_gotcha": "Organizations using multiple platforms (e.g., LSC for CRM + Vault for QMS + OCE in a legacy region) must ensure the system inventory covers all platforms consistently. Auditors will notice if one platform has comprehensive validation documentation and another has minimal coverage — it suggests the quality program is not uniformly applied.",
+    "gotcha_level": "high",
+    "source": "systems-report-analysis",
+    "tags": ["system-inventory", "lsc", "oce", "vault", "multi-platform", "quality-management"]
+  }
+]

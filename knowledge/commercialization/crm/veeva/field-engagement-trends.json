@@ -1,0 +1,29 @@
+[
+  {
+    "id": "veeva-field-trends-001",
+    "category": "modules",
+    "title": "Field Engagement Trends and Omnichannel KPIs in Life Sciences CRM",
+    "products": [
+      "oce",
+      "veeva"
+    ],
+    "summary": "Analysis of field engagement patterns across life sciences commercial teams, covering channel effectiveness metrics, video call adoption, and omnichannel engagement KPIs from industry tracking data.",
+    "findings": {
+      "rep_activity_tracking": "Industry tracking covers activity data for 80%+ of pharmaceutical field representatives globally. Key metrics: calls per day, reach (unique HCPs contacted), frequency (average calls per HCP), and channel mix (in-person vs. remote vs. digital).",
+      "video_call_effectiveness": "Video calls show approximately 3x the engagement effectiveness of traditional phone calls when measured by content engagement metrics (slides viewed, time spent, follow-up actions). However, video calls represent less than 15% of total remote interactions due to HCP scheduling constraints.",
+      "omnichannel_kpi_framework": "Omnichannel KPIs measure cross-channel engagement holistically: approved email open rates, content engagement scores, meeting scheduling rates, and multi-channel sequence completion. Organizations with mature omnichannel programs show 20-30% higher HCP engagement scores.",
+      "channel_mix_evolution": "Post-pandemic channel mix has stabilized at approximately 70% in-person, 20% remote (video + phone), and 10% digital (approved email + content portals). This varies significantly by geography \u2014 some markets maintain 50%+ remote engagement.",
+      "content_engagement_metrics": "Content engagement is tracked at the individual asset level: views, time-on-slide, shares, and downstream actions. High-performing content pieces show 3-5x the engagement of average content, suggesting content quality is a stronger driver than channel selection.",
+      "implications_for_crm": "CRM platforms need native omnichannel orchestration that suggests the right channel for each HCP based on engagement history, preference signals, and content affinity. Single-channel optimization is insufficient."
+    },
+    "source": "Industry field engagement trends analysis covering rep activity patterns, channel effectiveness, and omnichannel KPIs across life sciences commercial operations",
+    "tags": [
+      "field-engagement",
+      "omnichannel",
+      "video-calls",
+      "kpi",
+      "channel-mix",
+      "content-engagement"
+    ]
+  }
+]

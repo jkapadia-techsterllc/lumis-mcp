@@ -1,0 +1,297 @@
+[
+  {
+    "id": "setup-001",
+    "module": "Platform Foundation",
+    "step_title": "Enable Industry Cloud License and Core Permissions",
+    "description": "Activate the industry cloud license feature, assign the core permission set group to administrators, and verify the admin console is accessible. This is the prerequisite for all other module activation.",
+    "prerequisites": ["Enterprise Edition or higher org", "Industry Cloud license provisioned by account team", "System Administrator profile"],
+    "configuration_details": [
+      "Navigate to Setup > Feature Settings > Industries and enable the life sciences feature toggle",
+      "Assign the core admin permission set group to at least one system administrator",
+      "Verify the Admin Console app appears in the App Launcher",
+      "Confirm the core standard objects (Account, Contact, Product) have the industry-specific fields visible"
+    ],
+    "validation_steps": [
+      "Open the Admin Console — confirm it loads without errors",
+      "Check that industry-specific record types are available on Account and Contact",
+      "Verify the industry-specific page layouts are deployed",
+      "Run a basic SOQL query on the core objects to confirm field-level security is correct"
+    ],
+    "common_mistakes": [
+      "Forgetting to assign the permission set group — the admin console will show a blank page without proper permissions",
+      "Enabling the feature in production before testing in sandbox — always test in sandbox first",
+      "Confusing the industry cloud permission set with the standard platform permission set — they are separate",
+      "Not verifying that the managed package version matches the org's API version"
+    ]
+  },
+  {
+    "id": "setup-002",
+    "module": "Territory Management",
+    "step_title": "Configure Territory Hierarchy and Assignments",
+    "description": "Set up the territory model with hierarchy levels (nation > region > district > territory), assign accounts to territories, and link users to their territory assignments.",
+    "prerequisites": ["Platform Foundation enabled", "Enterprise Territory Management feature enabled in org", "Account and user data loaded"],
+    "configuration_details": [
+      "Enable Enterprise Territory Management in Setup > Territory Settings",
+      "Create a Territory Model — define the hierarchy levels matching your organization structure",
+      "Define territory types (e.g., Sales, Medical, Key Account) as separate branches if needed",
+      "Create territory records at each level and establish parent-child relationships",
+      "Assign accounts to territories using rules (geography-based) or manual assignment",
+      "Assign users to territories with appropriate roles (owner, member, viewer)"
+    ],
+    "validation_steps": [
+      "Navigate to the Territory Model and verify the hierarchy renders correctly",
+      "Check a sample account — confirm it shows the correct territory assignment",
+      "Check a sample user — confirm they can see accounts in their assigned territory",
+      "Run the territory assignment rules and verify the expected account-to-territory mapping",
+      "Verify that sharing rules derived from territory assignments are working (user can view/edit accounts in their territory)"
+    ],
+    "common_mistakes": [
+      "Building territory hierarchy before cleaning account data — duplicates and incorrect addresses cause misalignment",
+      "Not activating the territory model after building it — assignments won't take effect until the model is activated",
+      "Using a single territory model for both commercial and medical teams — consider separate models if compliance requires separation",
+      "Forgetting to set up forecast integration if territory-based forecasting is needed"
+    ]
+  },
+  {
+    "id": "setup-003",
+    "module": "Visit Management (Call Reporting)",
+    "step_title": "Configure Visit Records, Call Types, and Call Objectives",
+    "description": "Set up the Visit object with call types, visit statuses, call objectives, and the mobile-optimized page layouts that field reps use during customer visits.",
+    "prerequisites": ["Platform Foundation enabled", "Territory Management configured", "Product catalog loaded"],
+    "configuration_details": [
+      "Configure the Visit object record types for different call types (face-to-face, phone, virtual, group)",
+      "Set up visit status picklist values (Planned, In Progress, Completed, Cancelled)",
+      "Create call objective templates linked to therapeutic areas and product lines",
+      "Configure the visit page layout for mobile — prioritize key fields and related lists",
+      "Set up visit-related objects: Discussion Topics, Attendees, Visit Products",
+      "Configure auto-population rules (e.g., pre-populate products from the account's formulary)",
+      "Enable geolocation check-in if GPS-based visit verification is required"
+    ],
+    "validation_steps": [
+      "Create a test visit on mobile — verify all required fields and related lists are visible",
+      "Complete a test visit workflow: plan > check-in > add discussion topics > complete",
+      "Verify that completed visits appear in the correct reports and dashboards",
+      "Test offline visit creation and sync — create a visit offline and verify it syncs correctly",
+      "Confirm visit history is visible on the Account and Contact detail pages"
+    ],
+    "common_mistakes": [
+      "Overloading the visit page layout with too many fields — mobile performance degrades with more than 20-25 fields on a page",
+      "Not configuring offline sync scope to include visit-related objects — reps lose access to discussion topics and attendees offline",
+      "Forgetting to set up sharing rules for visit records — managers may not see their team's visits",
+      "Using custom Lightning components on the visit page without testing on the mobile app — not all components render correctly on mobile"
+    ]
+  },
+  {
+    "id": "setup-004",
+    "module": "Sample Management",
+    "step_title": "Configure Sample Products, Lots, Allocations, and Signature Capture",
+    "description": "Set up the complete sample management chain: products eligible for sampling, lot tracking, allocation limits per rep per period, signature capture for compliance, and inventory reconciliation.",
+    "prerequisites": ["Platform Foundation enabled", "Product catalog loaded with sample-eligible products", "Territory Management configured", "Visit Management configured"],
+    "configuration_details": [
+      "Mark products as sample-eligible in the product catalog",
+      "Create sample lot records with lot numbers, expiration dates, and initial quantities",
+      "Configure allocation rules: set maximum quantities per rep per product per time period",
+      "Set up sample transaction types (Drop, Transfer, Return, Adjustment, Receipt)",
+      "Configure signature capture settings: require signature for drops, set signature format (wet-ink or electronic)",
+      "Set up sample inventory reconciliation schedule (typically monthly)",
+      "Configure validation rules to enforce PDMA/local regulatory limits",
+      "Enable sample limit calculations (batch job or real-time, depending on volume)"
+    ],
+    "validation_steps": [
+      "Drop a sample on a test visit — verify lot selection, quantity validation, and signature capture work",
+      "Exceed the allocation limit — verify the system blocks the transaction with a clear error",
+      "Process a sample return — verify inventory adjusts correctly",
+      "Run the inventory reconciliation report — verify counts match expected values",
+      "Test signature capture on tablet — verify the signature image is stored and linked to the transaction",
+      "Verify sample transaction history on the HCP record"
+    ],
+    "common_mistakes": [
+      "Not setting up lot tracking from the start — retrofitting lots after go-live is extremely painful",
+      "Setting allocation limits at the wrong granularity (per quarter vs per month) — changing this later affects all historical data",
+      "Forgetting to configure the batch calculation job for sample limits — reps see stale limit data",
+      "Not testing signature capture on the actual target device — simulator behavior differs from hardware",
+      "Missing the cold chain / temperature-sensitive product configuration — some samples have special handling rules"
+    ]
+  },
+  {
+    "id": "setup-005",
+    "module": "Content Management (CLM)",
+    "step_title": "Configure Content Delivery, Approved Presentations, and Email Templates",
+    "description": "Set up the content management system for delivering approved marketing materials, interactive presentations, and email templates to field users.",
+    "prerequisites": ["Platform Foundation enabled", "Visit Management configured", "Content assets created and approved by compliance"],
+    "configuration_details": [
+      "Create content document records for each approved presentation or asset",
+      "Organize content into categories by therapeutic area, product line, and audience type",
+      "Configure content assignment rules — which content is available to which user profiles and territories",
+      "Set up the content player for interactive presentations (HTML5-based)",
+      "Configure email templates and approved email fragments",
+      "Set up content versioning — link new versions to parent documents, retire outdated versions",
+      "Configure content analytics tracking (session-level engagement metrics)"
+    ],
+    "validation_steps": [
+      "Open a presentation on tablet — verify rendering quality and navigation",
+      "Test content availability filters — verify a rep sees only content assigned to their territory/profile",
+      "Send a test approved email — verify template renders correctly with merge fields",
+      "Test content access offline — verify presentations are available when disconnected",
+      "Check content analytics — verify that viewing sessions are recorded with duration and slide data"
+    ],
+    "common_mistakes": [
+      "Uploading content in the wrong format — the mobile player supports HTML5 and PDF, but not all interactive elements translate",
+      "Not testing content offline — large presentations may exceed the mobile sync size limit",
+      "Forgetting to retire old content versions — reps continue using outdated materials",
+      "Skipping the compliance approval workflow — unreviewed content reaching the field is a regulatory risk",
+      "Not configuring content categories before uploading — restructuring categories after content is assigned is disruptive"
+    ]
+  },
+  {
+    "id": "setup-006",
+    "module": "Consent Management",
+    "step_title": "Configure Communication Consent, Opt-In/Opt-Out, and Channel Preferences",
+    "description": "Set up the consent management framework to capture, store, and enforce HCP communication preferences across all engagement channels (email, phone, visit, digital).",
+    "prerequisites": ["Platform Foundation enabled", "Understanding of applicable regulations (GDPR, PDMA, local pharma codes)"],
+    "configuration_details": [
+      "Define consent types for each communication channel (email, phone, SMS, face-to-face, digital)",
+      "Configure consent purposes (marketing, scientific, sample-related, event invitation)",
+      "Set up consent capture forms for mobile and web",
+      "Configure consent enforcement rules — block communication attempts to HCPs who have opted out",
+      "Set up consent audit trail — every consent change must be tracked with timestamp, source, and old/new values",
+      "Configure country-specific consent rules (e.g., GDPR double opt-in for EU, PDMA for US, APPI for Japan)",
+      "Define consent expiration policies if applicable (some jurisdictions require periodic re-consent)"
+    ],
+    "validation_steps": [
+      "Capture consent on a test contact — verify the consent record is created with correct attributes",
+      "Opt out a test contact from email — verify that approved email sends are blocked for that contact",
+      "Verify the audit trail — check that consent changes are logged with full history",
+      "Test the consent capture form on mobile — verify it works offline and syncs correctly",
+      "Verify country-specific rules — test that EU contacts require double opt-in while US contacts do not",
+      "Confirm there is no global unsubscribe-all capability (platform does not support this by design for compliance reasons)"
+    ],
+    "common_mistakes": [
+      "Assuming a single consent model works globally — consent rules vary dramatically by country and region",
+      "Not capturing consent source and timestamp — required for regulatory audit in most jurisdictions",
+      "Confusing consent types and consent purposes — a contact may consent to email for marketing but not for scientific communications",
+      "Building a custom unsubscribe-all feature — the platform intentionally does not have this to prevent accidental bulk opt-out",
+      "Not testing consent enforcement end-to-end — capturing consent is useless if the enforcement rules are not configured"
+    ]
+  },
+  {
+    "id": "setup-007",
+    "module": "Activity Plans (Call Plans)",
+    "step_title": "Configure Activity Plan Templates, Cycle Frequencies, and Targeting",
+    "description": "Set up structured visit plans that define how often reps should visit each account based on segmentation, priority, and business rules.",
+    "prerequisites": ["Platform Foundation enabled", "Territory Management configured", "Account segmentation data loaded"],
+    "configuration_details": [
+      "Define activity plan templates for each business unit or therapeutic area",
+      "Configure cycle plan periods (monthly, quarterly, semi-annual)",
+      "Set target call frequencies by account segment (e.g., A-tier accounts: 4 visits/quarter, B-tier: 2 visits/quarter)",
+      "Configure activity plan categories for different activity types (visit, phone, email, event)",
+      "Set up activity plan criteria to filter which accounts are included in each plan",
+      "Link activity plans to products for product-specific call objectives",
+      "Configure reach and frequency thresholds for compliance monitoring"
+    ],
+    "validation_steps": [
+      "Generate an activity plan for a test territory — verify account inclusion and target frequencies",
+      "Verify that completed visits decrement the remaining call count for the period",
+      "Check the activity plan dashboard — verify reach and frequency metrics are calculating correctly",
+      "Test plan rollover — verify that plans for a new cycle period generate correctly from templates",
+      "Confirm that account segment changes (e.g., B-tier to A-tier) update the target frequency"
+    ],
+    "common_mistakes": [
+      "Setting unrealistic call frequencies — if a rep physically cannot complete the planned calls in a cycle, compliance metrics become meaningless",
+      "Not linking activity plans to territory assignments — plans must reflect the rep's actual account list",
+      "Confusing activity plan categories with activity plan criteria — categories are the type of activity, criteria are the targeting filters",
+      "Not accounting for PTO, training days, and admin time when setting cycle frequency targets",
+      "Building overly complex criteria rules — simpler targeting with manual overrides performs better than complex automated rules"
+    ]
+  },
+  {
+    "id": "setup-008",
+    "module": "Event Management",
+    "step_title": "Configure Speaker Programs, Medical Events, and Attendee Tracking",
+    "description": "Set up event management for speaker programs, advisory boards, medical congresses, and commercial events with attendee tracking, expense management, and compliance controls.",
+    "prerequisites": ["Platform Foundation enabled", "Consent Management configured", "Product and speaker data loaded"],
+    "configuration_details": [
+      "Define event types (speaker program, advisory board, congress, lunch-and-learn, virtual event)",
+      "Configure event statuses and approval workflows",
+      "Set up attendee management — invite tracking, RSVP, attendance confirmation, no-show handling",
+      "Configure speaker management — speaker contracts, fair market value rates, payment tracking",
+      "Set up expense tracking categories (venue, catering, travel, speaker fees, materials)",
+      "Configure compliance rules — attendee caps per event type, spend limits, cooling-off periods",
+      "Enable transparency reporting integration — automatic capture of HCP spend for Sunshine Act / EFPIA"
+    ],
+    "validation_steps": [
+      "Create a test event — verify all required fields and workflows trigger correctly",
+      "Invite a test attendee — verify RSVP tracking and consent check",
+      "Record attendance — verify that HCP spend is calculated and linked to the transparency reporting data",
+      "Test the approval workflow — verify events require approval before execution",
+      "Verify expense tracking — confirm that event costs roll up correctly to the event record"
+    ],
+    "common_mistakes": [
+      "Not integrating with consent management — inviting HCPs who have opted out of event communications",
+      "Forgetting transparency reporting setup — HCP spend from events must flow to Sunshine Act reporting automatically",
+      "Under-configuring event types — a single generic event type makes compliance enforcement difficult",
+      "Not setting up speaker fair market value validation — paying above FMV is a compliance risk",
+      "Missing attendee cap enforcement — regulatory limits on attendees vary by event type and jurisdiction"
+    ]
+  },
+  {
+    "id": "setup-009",
+    "module": "Field Coaching",
+    "step_title": "Configure Coaching Assessment Forms, Scoring, and Development Plans",
+    "description": "Set up the field coaching module for managers to evaluate rep performance during ride-alongs using configurable assessment forms with scoring rubrics.",
+    "prerequisites": ["Platform Foundation enabled", "Visit Management configured", "Coaching competency framework defined by sales enablement team"],
+    "configuration_details": [
+      "Define coaching assessment templates with competency categories (product knowledge, selling skills, compliance adherence, customer engagement)",
+      "Configure scoring rubrics for each competency (1-5 scale with defined criteria for each level)",
+      "Set up coaching visit record types — link coaching assessments to visit records",
+      "Configure development action plans — template for post-coaching improvement goals",
+      "Set up coaching dashboards for manager visibility into team performance trends",
+      "Configure coaching report sharing rules — coaching data is sensitive and should follow HR data access patterns"
+    ],
+    "validation_steps": [
+      "Complete a test coaching assessment during a visit — verify form renders and scores calculate correctly",
+      "Verify that coaching scores aggregate at the rep level for trending",
+      "Test the development action plan workflow — verify goals are assigned and trackable",
+      "Confirm coaching reports are visible only to authorized managers and HR",
+      "Test coaching on mobile — verify the assessment form works during offline ride-alongs"
+    ],
+    "common_mistakes": [
+      "Making coaching forms too long — managers will skip them if they take more than 5-10 minutes to complete",
+      "Not separating coaching data access from general CRM access — coaching evaluations are HR-sensitive",
+      "Building custom coaching forms instead of using the platform's configurable assessment framework",
+      "Forgetting to test coaching offline — most ride-alongs happen in clinical settings with poor connectivity",
+      "Not linking coaching outcomes to performance metrics — coaching without measurable impact tracking is just paperwork"
+    ]
+  },
+  {
+    "id": "setup-010",
+    "module": "Mobile Administration",
+    "step_title": "Configure Mobile App Deployment, Sync Scope, and Offline Access",
+    "description": "Set up the mobile application for field users including data sync configuration, offline access scope, device management, and performance optimization.",
+    "prerequisites": ["All modules requiring mobile access are configured", "MDM (Mobile Device Management) solution in place", "Test devices available"],
+    "configuration_details": [
+      "Configure the mobile sync scope — define which objects, fields, and records sync to the device",
+      "Set up sync filters — limit data to the user's territory and relevant time window (e.g., 90 days of history)",
+      "Configure offline page layouts — ensure critical pages work without connectivity",
+      "Set up push notification configuration for sync status, new assignments, and alerts",
+      "Configure mobile security policies (passcode requirements, session timeout, data encryption at rest)",
+      "Set up mobile logging for troubleshooting sync issues",
+      "Configure mobile app branding (logo, splash screen, color theme)"
+    ],
+    "validation_steps": [
+      "Install the app on a test device — verify initial sync completes without errors",
+      "Test offline mode — enable airplane mode and verify all critical workflows function",
+      "Test sync conflict resolution — edit the same record on device and web, then sync",
+      "Verify data volume — check that sync scope produces an acceptable data size for the device",
+      "Test on multiple device types (iPad, iPhone, Android) to verify cross-platform consistency",
+      "Measure initial sync time and incremental sync time — should be under 5 minutes for incremental"
+    ],
+    "common_mistakes": [
+      "Syncing too much data — including all accounts instead of territory-filtered accounts degrades performance",
+      "Not testing on real devices — emulator testing misses performance, connectivity, and rendering issues",
+      "Forgetting to configure sync error handling — silent sync failures leave reps with stale data",
+      "Setting session timeout too aggressively — reps get locked out during customer meetings",
+      "Not planning for initial deployment sync time — first sync for a new rep can take 15-30 minutes with full data"
+    ]
+  }
+]

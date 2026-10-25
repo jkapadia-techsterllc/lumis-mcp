@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-pe-001",
+    "category": "modules",
+    "title": "Salesforce Platform Events Architecture and Patterns",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Platform Events provide an event-driven architecture on the Salesforce platform using a publish-subscribe model. Events are defined with the __e suffix, support custom fields (Checkbox, Date, DateTime, Number, Text, Text Area Long), and include a system-generated ReplayId for event replay. Events are NOT transactional \u2014 they cannot be rolled back and are not part of database transactions.",
+    "findings": {
+      "event_definition": "Platform events are defined similar to custom objects but use the __e suffix. Each event supports custom fields of types: Checkbox, Date, DateTime, Number, Text, and Text Area Long. A system field ReplayId is automatically assigned to each published event for ordering and replay.",
+      "publishing_mechanisms": "Events can be published through four mechanisms: (1) Apex using EventBus.publish(), (2) Process Builder, (3) Flow, and (4) REST/SOAP API. Apex publishing supports batch operations and returns SaveResult for error handling.",
+      "subscription_patterns": "Two primary subscription patterns: (1) Apex Triggers \u2014 fire on event receipt with support for EventBus.RetryableException for transient failure recovery, and (2) CometD streaming API \u2014 enables external system subscription using long-polling. CometD subscribers use ReplayId to resume from a specific point in the event stream.",
+      "transaction_isolation": "Platform events are explicitly outside database transactions. A published event cannot be rolled back even if the publishing transaction fails. This means event publishing should be the last operation in a transaction, or the receiving system must handle idempotency.",
+      "migration_support": "Platform event definitions can be managed through Metadata API, enabling deployment across environments via change sets or CI/CD pipelines."
+    },
+    "source": "Salesforce Platform Events Developer Guide \u2014 Summer '17 (API v40.0)",
+    "tags": [
+      "platform-events",
+      "event-driven",
+      "pub-sub",
+      "apex",
+      "cometd",
+      "integration"
+    ]
+  }
+]

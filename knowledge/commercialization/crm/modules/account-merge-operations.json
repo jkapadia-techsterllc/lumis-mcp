@@ -1,0 +1,27 @@
+[
+  {
+    "id": "mod-merge-001",
+    "category": "modules",
+    "title": "CRM Account Merge Operations and Use Cases",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Account merge handles the consolidation of duplicate HCP/HCO records across eight distinct scenarios, each with specific handling rules for child records, territory assignments, and activity history. The merge operation produces an Account Merge History record tracking the losing and winning account identifiers, and is exposed through a REST API for programmatic access.",
+    "findings": {
+      "merge_scenarios": "Eight supported scenarios: (1) Standard Account merge with child record reassignment, (2) Affiliation merge preserving organizational relationships, (3) Account Address merge with configurable inactive-flagging via a custom setting that controls whether losing addresses are inactivated, (4) Account Territory Personalization merge, (5) Account Territory Product merge, (6) Ratings merge preserving scoring history, (7) Call Plan and Call Plan Detail merge reassigning visit schedules, (8) Call Activity merge preserving interaction history.",
+      "address_handling": "Account Address merge uses an indirect move pattern. A configurable custom setting controls whether addresses from the losing account are flagged as inactive rather than deleted. This preserves address history while preventing duplicate active addresses on the winning account.",
+      "merge_history_tracking": "The Account Merge History object captures every merge event with the Losing Account identifier and Winning Account identifier. This provides full audit trail for compliance and data governance requirements.",
+      "api_exposure": "Account merge operations are exposed through a REST API endpoint, enabling integration with external MDM systems and batch merge workflows. The API supports programmatic merge initiation and status tracking."
+    },
+    "source": "Account Merge Use Cases specification document",
+    "tags": [
+      "account-merge",
+      "data-quality",
+      "mdm",
+      "hcp",
+      "hco",
+      "rest-api"
+    ]
+  }
+]

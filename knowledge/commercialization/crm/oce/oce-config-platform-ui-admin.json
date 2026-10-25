@@ -1,0 +1,446 @@
+[
+  {
+    "id": "oce-config-platform-001",
+    "category": "CRM Platform Configuration",
+    "title": "Profile Cloning and Configuration Entity Assignment",
+    "products": ["CRM Platform"],
+    "summary": "Profile management allows administrators to clone existing user profiles with related metadata type configurations and copy configuration entity assignments between profiles. The system supports standard profiles including Sales Representative, Medical Science Liaison, Key Account Manager, District Manager, Regional Manager, and National Account Manager.",
+    "findings": [
+      {
+        "name": "Profile Cloning Constraints",
+        "detail": "When cloning a profile, the profile name must not contain special characters or hyphens. Only normal letters, numbers, or spaces are allowed. Two consecutive spaces in the name are prohibited."
+      },
+      {
+        "name": "Home Page Assignment Gap",
+        "detail": "The Home page assignment is not cloned during profile cloning. Administrators must configure it separately after the clone operation completes."
+      },
+      {
+        "name": "Configuration Entity Copy Workflow",
+        "detail": "The Copy Profile Assignments feature (Admin Console > Mobile > Profiles tab) lets administrators select a source profile and preview all entities assigned to it, then selectively copy assignments to the target profile."
+      },
+      {
+        "name": "Migration Consideration",
+        "detail": "When migrating to a new platform, profile management features serve as the foundation for user segmentation and access control. Each profile determines metadata cache scope, UI schema access, and feature availability across web and mobile."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Clone Profiles, Users sections",
+    "tags": ["profiles", "cloning", "configuration-entities", "user-management", "admin-console"]
+  },
+  {
+    "id": "oce-config-platform-002",
+    "category": "CRM Platform Configuration",
+    "title": "Config Service Administration and Org Integration",
+    "products": ["CRM Platform"],
+    "summary": "The Config Service is a centralized administration hub accessible only from production environments that stores S3 bucket credentials, org configuration, and integration settings. It requires a passcode from the application delivery team and supports cloning production org information to sandbox environments.",
+    "findings": [
+      {
+        "name": "Production-Only Access Restriction",
+        "detail": "The Config Service is accessible only from production environments. Administrators must have the Config Service connected app permission, the admin profile added to the connected app, and the Config Service custom permission assigned."
+      },
+      {
+        "name": "Sandbox Cloning Behavior",
+        "detail": "When cloning a Config Service org to create a sandbox, only the instance org ID is copied from the production org to the cloned org. A known issue causes Activity History rendering problems after cloning due to invalid org ID on the sandbox. The fix requires executing an Apex script to replace invalid org IDs in the Activity History User Object Selection records."
+      },
+      {
+        "name": "Integration Methods",
+        "detail": "Two methods exist for integrating a Salesforce org with Config Service: (1) through the Admin Console Config Service tile, or (2) directly through the Config Service login page. Both methods redirect to the Config Service for Salesforce authorization."
+      },
+      {
+        "name": "Email Service Provisioning",
+        "detail": "Configuring the email service (MessageBird) requires raising a support case to provision the org with the org ID, organization name, and sandbox/production designation."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Config Service Administration section",
+    "tags": ["config-service", "production", "sandbox", "org-integration", "s3-credentials"]
+  },
+  {
+    "id": "oce-config-platform-003",
+    "category": "CRM Platform Configuration",
+    "title": "Theme Configuration and Sandbox Post-Refresh Management",
+    "products": ["CRM Platform"],
+    "summary": "General settings encompass theme configuration (Apollo Phoenix theme) and critical sandbox post-refresh management with four specialized handlers that automate cleanup tasks after sandbox refresh operations.",
+    "findings": [
+      {
+        "name": "Sandbox Post-Refresh Handlers",
+        "detail": "Four handlers execute automatically after sandbox refresh: (1) JobKiller removes all scheduled Apex jobs, (2) OrgIdFixer updates organization IDs in configuration records, (3) EmailObfuscator appends a suffix to email fields to prevent production email delivery, (4) DataCleaner performs custom settings cleanup."
+      },
+      {
+        "name": "Setup Menu Visibility Restriction",
+        "detail": "Restricting Setup menu visibility for non-admin users is a complex 7-step process involving DB Schema configuration and security permission exclusions. This prevents end users from accessing Salesforce Setup pages through the application."
+      },
+      {
+        "name": "Migration Consideration",
+        "detail": "Sandbox refresh handling is a critical operational concern during migration. The handlers ensure data isolation between production and sandbox environments. Platform migration planning must account for equivalent post-refresh automation in the target system."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — General Settings section",
+    "tags": ["sandbox", "post-refresh", "theme", "jobkiller", "emailobfuscator", "orgid-fixer"]
+  },
+  {
+    "id": "oce-config-platform-004",
+    "category": "CRM Platform Configuration",
+    "title": "Deep Linking Architecture and URL Scheme Protocol",
+    "products": ["CRM Platform"],
+    "summary": "The platform supports deep linking via a custom URL scheme that enables external systems and internal components to navigate directly to specific tabs, modals, and actions within the mobile application, including record creation and editing operations.",
+    "findings": [
+      {
+        "name": "URL Scheme Structure",
+        "detail": "Deep links use the scheme 'oce://deeplink' and support navigation to tabs, modals, and actions including view, edit, new, and upsert. Parameters include sObject-name, record-id, uid (Unique Integration ID), and product-id."
+      },
+      {
+        "name": "Field Format Requirements",
+        "detail": "Deep link parameters must follow specific formats: Date fields require yyyy-MM-dd, Checkbox fields require true/false strings, and DateTime fields require ISO 8601 format."
+      },
+      {
+        "name": "Unique Integration ID Support",
+        "detail": "The platform supports Unique Integration ID (UID) as an alternative to Salesforce record-id for deep link targeting, enabling cross-system integration without requiring knowledge of Salesforce record IDs."
+      },
+      {
+        "name": "Whitelisted and Blacklisted Fields",
+        "detail": "The system maintains whitelisted and blacklisted field lists for Call deep link insertion, controlling which fields can be pre-populated via deep link parameters."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — General Settings, Deep Linking section",
+    "tags": ["deep-linking", "url-scheme", "integration", "mobile", "record-navigation"]
+  },
+  {
+    "id": "oce-config-platform-005",
+    "category": "CRM Platform Configuration",
+    "title": "Metadata Service Architecture and Cache Generation",
+    "products": ["CRM Platform"],
+    "summary": "The Metadata Service is a SaaS solution hosted outside of Salesforce that retrieves and provides metadata to the mobile application in a unified format. It manages 10 metadata types and requires periodic cache generation for configuration changes to take effect on mobile devices.",
+    "findings": [
+      {
+        "name": "Metadata Types",
+        "detail": "The system manages 10 metadata types: static resources, Salesforce configurations, database structure, navigation, report description, SObject description, UI resources, formula description, translations, and documents."
+      },
+      {
+        "name": "Architecture Components",
+        "detail": "Four key components: (1) Salesforce Configuration and API, (2) Configuration Service, (3) Metadata Service and Storage, (4) Mobile Configuration Parser. The Metadata Service does not contain any client-related data."
+      },
+      {
+        "name": "S3 Credential Auto-Refresh",
+        "detail": "Amazon S3 bucket credentials refresh automatically every 45 days for integrated orgs. Old credentials remain valid alongside new ones for 10 days. Email notifications are sent 3 days before planned updates. Non-integrated orgs require manual retrieval via Admin Console."
+      },
+      {
+        "name": "Cache Generation Prerequisites",
+        "detail": "Metadata must be generated by a user with the admin profile and CoreAdmin permission set who has the Modify All Data system permission. The 'Lock sessions to IP address' setting must be disabled. Session Security Level Required at Login must be set to None for the generating profile."
+      },
+      {
+        "name": "Cache Statuses",
+        "detail": "Metadata cache progresses through states: Validating, Published (ready for processing), In Progress (being processed), Active (processed successfully), or Inactive (failed validation). Only Active metadata cache is available to mobile devices."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Metadata Management section",
+    "tags": ["metadata-service", "cache-generation", "s3", "saas", "mobile-configuration"]
+  },
+  {
+    "id": "oce-config-platform-006",
+    "category": "CRM Platform Configuration",
+    "title": "Custom Settings Migration Between Orgs",
+    "products": ["CRM Platform"],
+    "summary": "The platform provides a managed process for exporting custom settings from one org and importing them to another using the Custom Settings Migration object and Data Loader, with matching criteria that differentiate new records from existing ones.",
+    "findings": [
+      {
+        "name": "Migration Workflow",
+        "detail": "Five-step process: (1) Ensure Settings Migration permission, (2) Run Custom Settings Migration job to generate object records, (3) Export with Data Loader selecting only custom fields, (4) Edit CSV as needed, (5) Import to target org using Insert operation and auto-mapping."
+      },
+      {
+        "name": "Matching Criteria",
+        "detail": "Custom settings are matched by name. Hierarchical settings for user and profile are matched by user name and profile name respectively."
+      },
+      {
+        "name": "Version Compatibility Requirement",
+        "detail": "Migration can only succeed between two orgs with identical code version. If a custom setting has an extra field on the exported org not yet created on the import org, migration fails."
+      },
+      {
+        "name": "Exclusion Mechanism",
+        "detail": "To exclude a custom setting from migration, create a field named 'DoNotMigrate' of any data type on the custom setting. The field value does not matter — its existence triggers exclusion."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Migrate Custom Settings section",
+    "tags": ["custom-settings", "migration", "data-loader", "sandbox-to-production", "settings-export"]
+  },
+  {
+    "id": "oce-config-platform-007",
+    "category": "CRM Platform Configuration",
+    "title": "Mobile UI Renderer and Dynamic Layout System",
+    "products": ["CRM Platform"],
+    "summary": "The mobile UI rendering engine uses server-side metadata to dynamically render layouts, supporting density settings and formula field evaluation. The system categorizes formula fields into three processing buckets with different recalculation behaviors.",
+    "findings": [
+      {
+        "name": "Density Settings",
+        "detail": "Two density modes are supported: Comfy (default) and Compact. Density changes take effect after sync, territory switch, or forced sync operations."
+      },
+      {
+        "name": "Formula Field Bucket System",
+        "detail": "Formula fields are categorized into three buckets: Bucket 1 (no global $ parameters, no cross-formula references — updated on save when Application Settings flag enabled), Bucket 2 (one level of relations, single non-formula condition — updated on save when Relation Formulas flag enabled), Bucket 3 (everything else — always recalculated on read, never on save)."
+      },
+      {
+        "name": "Unsupported Formula Functions on Mobile",
+        "detail": "The following functions are not supported on mobile: CURRENCYRATE, DISTANCE, GETRECORDIDS, GETSESSIONID, HTMLENCODE, HYPERLINK, IMAGEPROXYURL, INCLUDE, ISCLONE, JSENCODE, JSINHTMLENCODE, JUNCTIONIDLIST, LINKTO, REQUIRESCRIPT, URLENCODE, URLFOR, VLOOKUP. Only Checkbox and Text return types are supported; nested formula fields are not supported."
+      },
+      {
+        "name": "WHERE Clause Behavior Change",
+        "detail": "WHERE clause logical operators are replaced with AND on mobile. This is a significant behavioral difference from web — OR-based filter logic will not function as expected on mobile devices."
+      },
+      {
+        "name": "Supported Global Variables",
+        "detail": "Five global variables are supported on mobile: $Label, $Organization, $Profile, $Setup, $User."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Mobile UI Renderer section",
+    "tags": ["mobile-ui", "dynamic-rendering", "formula-fields", "density-settings", "metadata-driven-ui"]
+  },
+  {
+    "id": "oce-config-platform-008",
+    "category": "CRM Platform Configuration",
+    "title": "App Store and Custom React Native Application Management",
+    "products": ["CRM Platform"],
+    "summary": "The platform includes an App Store for managing custom React Native applications with a review-and-approval workflow. Applications go through creation, versioning, review by a Super Admin, installation, and publication stages before becoming available on mobile devices.",
+    "findings": [
+      {
+        "name": "Application Lifecycle",
+        "detail": "The workflow follows: Create App > Create Version > Submit for Super Admin Review > Address Feedback > Install and Publish. New apps can only be added from Sandbox orgs — the Add App button is not available on production UI."
+      },
+      {
+        "name": "React Native Version Management",
+        "detail": "The current supported version is React Native 0.72.0. Applications built on older versions still function but display a 'Runtime Version Mismatch' warning. Version compatibility compares only major and minor versions (0.63.0 == 0.63.1 but 0.63.0 != 0.64.0)."
+      },
+      {
+        "name": "Application Types",
+        "detail": "Supported types include full-screen apps, widgets, custom tabs, web links, Salesforce apps, and native apps. Widget application type hides the app from the My Apps tab while keeping it available for custom tab or custom action use."
+      },
+      {
+        "name": "Marketplace Integration",
+        "detail": "Apps can be shared through the Marketplace service. Administrators must have the Marketplace Service connected app configured and the admin profile added. Apps support device type targeting across iPad, iPhone, Web, and Android (phone and tablet — pilot for Android)."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — OCE App Store section",
+    "tags": ["app-store", "react-native", "marketplace", "custom-applications", "mobile-extensions"]
+  },
+  {
+    "id": "oce-config-platform-009",
+    "category": "CRM Platform Configuration",
+    "title": "AI Assistant (Chatbot) Configuration with Dialogflow",
+    "products": ["CRM Platform"],
+    "summary": "The platform integrates an AI assistant powered by Google Dialogflow that supports task automation such as scheduling calls and creating medical inquiries. It can be configured for both internal sales representatives and external HCP users through Digital Experience sites.",
+    "findings": [
+      {
+        "name": "Instance Setup Requirements",
+        "detail": "Each assistant instance must be created by the support team in Google Dialogflow. Multiple instances can serve different profiles, or one instance can serve all profiles org-wide. Region changes are not supported — changing regions requires losing all existing configuration and data."
+      },
+      {
+        "name": "Environment Tiers",
+        "detail": "Three Dialogflow environments: Draft (allows create/edit/delete of intents via Task Manager), Staging (intents cannot be created or edited — for QA and UAT), Production (same restrictions as Staging). Staging and Production use the Agent version created from Draft."
+      },
+      {
+        "name": "Sales Rep Configuration",
+        "detail": "Requires the Assistant User and Dialogflow API permission sets. The assistant can be accessed via a Lightning Component tab (OCE7:oceAssistantForInternalOrg) on Salesforce and through UI Schema tab configuration on mobile."
+      },
+      {
+        "name": "HCP User Configuration",
+        "detail": "Requires a Digital Experience Site with 'Connect Theme 2.0' template (standard Build Your Own LWR template is not supported). Customer Community Plus or Customer Community Plus Login licenses must be available. The assistant is embedded as a component in the Content Footer section."
+      },
+      {
+        "name": "Feature Availability",
+        "detail": "Available in the version 7 package. Not supported for China region."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — OCE Assistant section",
+    "tags": ["ai-assistant", "dialogflow", "chatbot", "hcp-portal", "digital-experience"]
+  },
+  {
+    "id": "oce-config-platform-010",
+    "category": "CRM Platform Configuration",
+    "title": "Timeline Component and Reusable Components Framework",
+    "products": ["CRM Platform"],
+    "summary": "The platform provides reusable UI components including a Timeline Component that displays child object records on parent record pages in chronological order, and a Generic Workflow engine that manages record lifecycle with configurable phases, conditions, and actions.",
+    "findings": [
+      {
+        "name": "Timeline Component Capabilities",
+        "detail": "Displays up to 5 child related objects filtered to a parent record ID, sorted by Date/Time or Date field. Supports up to 6 different record types in a group. Requires two-way sync configuration for mobile display. Shows data only 1 level deep from parent object."
+      },
+      {
+        "name": "Supported Field Types for Timeline",
+        "detail": "Supports Checkbox, Currency, Date, DateTime, Email, Geolocation (as text), Number, Percent, Phone, Picklist (including multi-select), Text, Text Area (all variants), Time, URL, Lookup, Rollup Auto Number, and formula fields for same and cross-object references."
+      },
+      {
+        "name": "Generic Workflow Engine",
+        "detail": "A metadata-driven workflow engine with five configuration layers: Workflow Path (nodes from a controlling picklist field), Context Type (links workflow configuration to an object), Context (groups of conditions for CRUD permissions), Context Condition (conditions for granting permissions), and Context Action (actions when context is applied). Supports Platform Events."
+      },
+      {
+        "name": "Generic Workflow Gotcha",
+        "detail": "When a record update triggers a secondary record update on an object with Generic Workflow configured, the entire transaction fails if the user lacks workflow edit permissions on the secondary record. This cascading permission check can cause unexpected failures across related objects."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — OCE Personal Components, Reusable Components sections",
+    "tags": ["timeline", "reusable-components", "generic-workflow", "platform-events", "record-lifecycle"]
+  },
+  {
+    "id": "oce-config-platform-011",
+    "category": "CRM Platform Configuration",
+    "title": "Quick Actions Configuration Across Web and Mobile",
+    "products": ["CRM Platform"],
+    "summary": "Quick Actions provide dynamic action assignment on account profiles and call attendees, with distinct availability matrices between web and mobile applications depending on where actions are configured in the page layout.",
+    "findings": [
+      {
+        "name": "Page Layout Placement Impact",
+        "detail": "Actions in the Classic Publisher section are available on mobile account profiles only. Actions in the Salesforce Mobile and Lightning Experience Actions section are available on both web and mobile."
+      },
+      {
+        "name": "Action Availability Matrix",
+        "detail": "Key platform actions with availability: New Call (Account Profile on both platforms), Last Call (Account Profile and Call Attendees on both), New Order (all surfaces), MIRF (mobile only for Account/Attendees), CLM (mobile Account Profile only), Email (mobile only), View Online (mobile only), Create Account (web and mobile Account Profile), Child Call (Call Attendees only), Store Check (mobile Call Attendees only)."
+      },
+      {
+        "name": "Custom Action Support",
+        "detail": "The system supports VisualForce Page Actions on mobile, custom actions for non-standard Salesforce pages, and Quick Action Metadata Records for fine-grained control over action placement."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Quick Actions section",
+    "tags": ["quick-actions", "page-layout", "mobile-actions", "web-actions", "account-profile"]
+  },
+  {
+    "id": "oce-config-platform-012",
+    "category": "CRM Platform Configuration",
+    "title": "Job Scheduling and API-Driven Batch Execution",
+    "products": ["CRM Platform"],
+    "summary": "The platform supports both UI-based and API-driven job scheduling for batch Apex jobs. The Admin Console provides frequency-based scheduling (hourly, daily, weekly), while a REST API endpoint enables external systems to run or schedule jobs programmatically.",
+    "findings": [
+      {
+        "name": "Supported Batch Jobs",
+        "detail": "12 batch jobs available: Territory Management (4 variants — Zip, Brick, ZipBrick, Manual), Customer Alignment Rule Management, Plan Cycle Maintenance, Plan Cycle Submitting, Activity Plan (Shared Calculation, Calculation, Limit Calculation), Account Utilization Limits, Monetary Caps Recalculation, and Sample Limit Initialization."
+      },
+      {
+        "name": "API Endpoint for Job Execution",
+        "detail": "REST endpoint at /services/apexrest/jobexecutor/runJob accepts POST requests with jobName (required), batchSize (defaults to 200), optional cronExpression for scheduling, and job-specific additionalParams such as territoryName or planCycles."
+      },
+      {
+        "name": "Admin Console Scheduling",
+        "detail": "Three frequency options: Hourly (configurable interval), Daily (preferred start time), Weekly (specific days and time). Job status, cron expression, trigger count, and next/previous run times are displayed on the job pane."
+      },
+      {
+        "name": "Special Constraints",
+        "detail": "Sample Limit Initialization cannot be scheduled from Admin Console but can be scheduled via the API. The Sync Transaction Regularly job requires the admin user to have the Query All Files system permission for correct Content Document processing."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Run/Schedule Jobs, Schedule Job from Admin Console sections",
+    "tags": ["batch-jobs", "scheduling", "rest-api", "territory-management", "admin-console"]
+  },
+  {
+    "id": "oce-config-platform-013",
+    "category": "CRM Platform Configuration",
+    "title": "System Audit and Monitoring Infrastructure",
+    "products": ["CRM Platform"],
+    "summary": "The platform provides built-in system audit and logging capabilities through the Admin Console Monitoring tile, including implementation audits for configuration validation and operational audits for performance and usage tracking.",
+    "findings": [
+      {
+        "name": "Audit Types",
+        "detail": "Two audit categories: Implementation Audit (checks job scheduling, sync/metadata anomalies, security practices) and Operational Audit (checks sync delays/failures, long-running operations stats, user activities, Salesforce limits, metadata generation frequency)."
+      },
+      {
+        "name": "Error Log Configuration",
+        "detail": "Configurable at org-default or profile-specific level. Settings include Days Before Delete (retention period) and Log Level (NONE, ERROR, WARN, INFO, DEBUG). Log records are hierarchically additive — DEBUG includes all other levels."
+      },
+      {
+        "name": "Mobile Application Log Collection",
+        "detail": "Enabling the 'Is Logging Enabled' checkbox on a user record causes the device to upload a zip archive of mobile application logs to the Amazon S3 oce-metadata bucket after every successful sync. Log records are also created upon manual user logouts."
+      },
+      {
+        "name": "Mobile Database Submission",
+        "detail": "Users can submit their mobile database via a Submit DB button, which uploads a zip archive to the S3 db folder. This aids in debugging sync and data integrity issues."
+      },
+      {
+        "name": "Log Sharing Recommendation",
+        "detail": "For data protection, it is recommended to set the sharing setting for the Log object to Private via Setup > Security > Sharing Settings."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — System Audit, System Logs sections",
+    "tags": ["audit", "monitoring", "error-logs", "mobile-logs", "s3-upload", "system-health"]
+  },
+  {
+    "id": "oce-config-platform-014",
+    "category": "CRM Platform Configuration",
+    "title": "Translation Management and Localization Framework",
+    "products": ["CRM Platform"],
+    "summary": "The platform leverages native Salesforce Translation Workbench for localization of custom components, labels, and managed package elements. Metadata cache generation is required for translations to apply on both web and mobile applications.",
+    "findings": [
+      {
+        "name": "Translation Types",
+        "detail": "Three translation workflows: (1) Translate custom components created by org administrators, (2) Override translations of managed package custom components via the Override page, (3) Generate Standard Label Translations Document for mobile standard object and field labels."
+      },
+      {
+        "name": "Known Salesforce Limitations",
+        "detail": "Translation Workbench does not support translation of Global Value Sets with namespaces (creates duplicates). Global value set translations for values added on the subscriber org cannot be retrieved via API — mobile users see untranslated values while web users may see translations."
+      },
+      {
+        "name": "Page Layout Naming Requirement",
+        "detail": "Due to Salesforce limitations, different page layout names must be used between Business and Person Account record types, and between packaged and non-packaged layouts, to avoid translation conflicts."
+      },
+      {
+        "name": "Standard Filters Not Translated on Web",
+        "detail": "Standard filters are not translated on web. Administrators must create separate filter instances per component/tab for each language and share them with appropriate users."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Translation section",
+    "tags": ["translation", "localization", "i18n", "translation-workbench", "managed-package-overrides"]
+  },
+  {
+    "id": "oce-config-platform-015",
+    "category": "CRM Platform Configuration",
+    "title": "User Management and Profile-Specific Feature Enablement",
+    "products": ["CRM Platform"],
+    "summary": "The platform uses native Salesforce User functionality with platform-specific profiles. Each profile requires specific permission sets, DB Schema entity assignments, and metadata cache generation. Time zone synchronization between Salesforce and mobile devices follows specific refresh triggers.",
+    "findings": [
+      {
+        "name": "Standard Profiles",
+        "detail": "Six standard profiles supported on mobile: Sales Representative, Medical Science Liaison (MSL), Key Account Manager (KAM), District Manager, Regional Manager, and National Account Manager. Additional custom profiles can be created."
+      },
+      {
+        "name": "KAM Profile Requirement",
+        "detail": "KAM profile users require the Key Account Manager profile assigned to CalendarConfig and AccountListItem DB Schema records with metadata cache generated. Without this, the app hangs when a user taps any left navigation tab on iPad."
+      },
+      {
+        "name": "Time Zone Synchronization",
+        "detail": "Mobile app time zone inherits from the Salesforce user setting and refreshes on: Initial Sync, Manual/PIN sync with new metadata or permission changes, User-level Forced Sync, Territory switch, or app restart after a sync that downloads timezone changes."
+      },
+      {
+        "name": "Geolocation Tracking",
+        "detail": "Device geolocation at sync time can be tracked by granting read/edit access to the User Location field on the Sync Statistics object. Data is stored in the Device Last Location field on the User object and requires the UserSyncStatisticHandler trigger handler to be activated."
+      },
+      {
+        "name": "Salesforce Mobile App Warning",
+        "detail": "Salesforce Mobile app features such as Offline Access must not be enabled for platform application users. The platform mobile application is completely custom and unrelated to the standard Salesforce Mobile app."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Users section",
+    "tags": ["user-management", "profiles", "time-zone", "geolocation", "kam-profile", "permissions"]
+  },
+  {
+    "id": "oce-config-platform-016",
+    "category": "CRM Platform Configuration",
+    "title": "Menu Tab Configuration and Navigation Customization",
+    "products": ["CRM Platform"],
+    "summary": "The platform supports configurable menu tabs for both web and mobile navigation bars including standard object tabs, custom object tabs, Lightning page tabs, Lightning component tabs, and a custom Home tab. UI Schema can override Salesforce tab configuration on mobile.",
+    "findings": [
+      {
+        "name": "Tab Enablement Requirements",
+        "detail": "To add a tab to both mobile and web menus: (1) Enable the tab in profile settings with Default On, or in permission set with both Available and Visible checked, (2) Add the tab to the Lightning app navigation bar."
+      },
+      {
+        "name": "UI Schema Override Behavior",
+        "detail": "When a Lightning page tab and UI Schema share the same name, web uses the Salesforce configuration while mobile uses the UI Schema configuration. To use Salesforce configuration on both platforms, deactivate the UI Schema."
+      },
+      {
+        "name": "Mobile-Only Tabs",
+        "detail": "Certain tabs (CLM, My Teams) can only be enabled for mobile navigation. Their UI Schema resource must be activated for availability on mobile."
+      },
+      {
+        "name": "Navigation Icon Customization",
+        "detail": "Icons for menu items are configured via Custom Metadata Types (Navigation Icons). Icons can reference Apollo UI Unicode values or Static Resources. The system uses a Unicode mapping table for standard icons."
+      }
+    ],
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Mobile UI Renderer, Configure Menu Tabs section",
+    "tags": ["navigation", "menu-tabs", "ui-schema", "lightning-tabs", "mobile-navigation", "icons"]
+  }
+]

@@ -1,0 +1,225 @@
+[
+  {
+    "id": "val-opq-001",
+    "category": "validation-opq-templates",
+    "title": "OPQ Protocol Document Structure — Standard Sections",
+    "summary": "An Operational and Performance Qualification (OPQ) protocol follows a standard structure that satisfies 21 CFR Part 11 and GAMP 5 requirements. This template is applicable to any Salesforce-based life sciences application.",
+    "document_structure": {
+      "front_matter": {
+        "signature_page": "Approval signatures from QA, System Owner, Process Owner, and Validation Lead certifying the protocol is authorized for use. Minimum 3 signatories. Document status tracking (New → Revised → Retired).",
+        "table_of_contents": "Full TOC with page numbers for all sections and attachments."
+      },
+      "section_1_introduction": {
+        "1.1_objective": "State the purpose: gather and document evidence that the system has been installed and operates in accordance with URS and FDA 21 CFR Part 11.",
+        "1.2_scope": "Define which modules/features are in scope. List specific functional areas being tested (e.g., sample delivery, inventory, returns, transfers, reporting). Include sub-sections for Exclusions (what is NOT being tested and why), Assumptions (about test environment, data, training), Test Environment (which org/sandbox), and Pre-requisites (training, environment readiness, user profiles).",
+        "1.3_description": "Brief system description — what it does, SaaS/hosted model, key features."
+      },
+      "section_2_roles_and_responsibilities": "Define who writes the protocol, who executes it, who reviews results, and who approves. Typically a joint effort between the customer organization and a validation consultancy. QA must be independent.",
+      "section_3_approach": "State the testing methodology — user tests and functionality tests based on configured paths. Reference applicable regulations: 21 CFR Part 11, FDA General Principles of Software Validation, GAMP 5.",
+      "section_4_definitions": "Standardized terms: Approval, Commissioning, CRM, Equipment, FDA, Qualification, Quality, SOP, System, URS, Workflows.",
+      "section_5_references": "Cross-reference documents: URS, System Functional Specifications, User Guides for each user role.",
+      "section_6_execution_instructions": "How to execute the protocol: expected vs actual results, signature requirements, corrections protocol (single-line cross-out, initial, date), handling of critical system changes during validation.",
+      "section_7_acceptance_criteria": "Operation/performance must match design intent. All yes/no answers must be 'yes'. Actual results must match expected results or be satisfactorily explained.",
+      "section_8_exception_resolution": "How deviations are documented and resolved. Cross-reference to Corrective Action Form (appendix).",
+      "section_9_summary_report": "After testing, results feed into the Validation Summary Report (VSR). Same approvers or qualified designees sign off."
+    },
+    "test_attachments_pattern": {
+      "format": "Each functional area is a numbered attachment with: Test Objective → Test Method → Results Table → Comments → Acceptance Criteria → Sign-off",
+      "results_table_columns": ["Step #", "Operation (what to do)", "Expected Results (what should happen)", "Actual Results = Expected? (Yes/No)", "Verified By/Date"],
+      "typical_attachments_for_sample_management": [
+        "Signature Verification List — personnel executing the protocol",
+        "Test Equipment — equipment used in qualification that is not part of the system",
+        "Audit Trail Verification — print before, execute, print after, compare",
+        "Screen Navigation — verify all UI screens are designed and connected as required",
+        "Virtual Transfer Request — functional operations for VTR",
+        "Acknowledgment of Delivery (AOD) — data load verification, edit/submit workflows",
+        "Physical Inventory — submission and reconciliation workflows",
+        "Adjustment Request — submission and approval workflows",
+        "Transfer Request — inter-rep transfer workflows",
+        "Acknowledgment of Transfer (AOT) — transfer receipt and confirmation",
+        "Returns — product return submission workflows",
+        "Theft/Loss — incident reporting workflows"
+      ]
+    },
+    "appendices": [
+      "Corrective Action Report — form for documenting protocol deviations, required actions, risk assessment, and resolution",
+      "Corrective Action Log — running log of all deviation numbers, test sections, pages, and dates"
+    ],
+    "gotcha_level": "critical",
+    "source": "opq-protocol-template",
+    "tags": ["opq", "protocol-template", "document-structure", "iq-oq-pq", "test-scripts"]
+  },
+  {
+    "id": "val-opq-002",
+    "category": "validation-opq-templates",
+    "title": "OPQ Test Script Design Patterns — How to Write Effective Test Steps",
+    "summary": "OPQ test scripts follow specific patterns to ensure reproducibility, traceability, and regulatory compliance. Each step must be unambiguous enough for a trained user to execute without interpretation.",
+    "test_step_patterns": {
+      "navigation_verification": {
+        "purpose": "Verify that the user interface screens are designed and connected as required",
+        "pattern": "Access [page/view] → Verify [specific elements/sections] are displayed → Navigate to [sub-section] → Verify [expected content]",
+        "example_steps": [
+          "Access the Home Page View → The following functional sections will be displayed: Pending Items, Samples Distributed, AOT, Returns, Reports",
+          "Select the Samples Dispensed tab → Transactions for Samples Dispensed are displayed",
+          "Verify user role determines which tabs/sections are visible"
+        ],
+        "typical_step_count": "100-150 steps for a medium-complexity module"
+      },
+      "data_entry_and_submission": {
+        "purpose": "Verify that data entry, validation, and submission workflows operate correctly",
+        "pattern": "Navigate to [form] → Enter [specific test data] → Verify [field behavior/validation] → Submit → Verify [result/confirmation]",
+        "example_steps": [
+          "Select AOD tab → AOD detail page is displayed",
+          "Enter delivery quantity: 100 → Field accepts value",
+          "Submit the form → Confirmation message displayed, record saved",
+          "Verify submitted record appears in the list view with correct values"
+        ],
+        "typical_step_count": "40-80 steps per workflow"
+      },
+      "audit_trail_verification": {
+        "purpose": "Verify that the system maintains a complete, immutable audit trail",
+        "pattern": "Print audit trail BEFORE test → Execute operations → Print audit trail AFTER → Compare the two printouts → Verify new entries capture who/what/when",
+        "critical_checks": [
+          "Audit trail contains history of changes from all operations performed",
+          "Audit trail does NOT contain decrypted passwords",
+          "Old and new values are captured for modified fields",
+          "User identity is recorded for each change",
+          "Timestamps are accurate and sequential"
+        ],
+        "typical_step_count": "8-12 steps"
+      },
+      "data_load_verification": {
+        "purpose": "Verify that ETL/data load processes produce correct results",
+        "pattern": "Screenshot BEFORE load → Execute data load → Screenshot AFTER load → Verify data load information matches source → Verify record counts and field values",
+        "typical_step_count": "3-5 steps per data load"
+      },
+      "edit_and_update_workflows": {
+        "purpose": "Verify that existing records can be modified through defined workflows",
+        "pattern": "Open existing record → Modify [specific fields] → Save → Verify changes saved correctly → Verify audit trail captures the change",
+        "typical_step_count": "15-30 steps per edit workflow"
+      }
+    },
+    "test_data_conventions": [
+      "Data to be entered may be enclosed in quotation marks in the protocol (e.g., Enter 'quotes' in the Sample field)",
+      "Lengthy numeric fields may include commas for legibility (e.g., 99,999,999.9999) — commas are not entered during execution",
+      "Pre-requisite test data should be loaded via ETL or manual setup BEFORE test execution begins",
+      "Test environment must contain representative data — not production data unless anonymized"
+    ],
+    "execution_rules": [
+      "Each protocol section signed and dated by the person(s) completing it",
+      "Handwritten corrections: single line cross-out, initial, date",
+      "Critical system changes during validation must be reported in the final summary report",
+      "Changes after completion of the final report documented through formal change control"
+    ],
+    "gotcha": "Test steps must be PRESCRIPTIVE, not descriptive. 'Verify the system works correctly' is NOT a valid test step. 'Navigate to the AOD tab, enter quantity 100 in the Delivery Quantity field, click Submit, and verify the confirmation message displays the submitted quantity of 100' IS a valid test step. Each step must have an objectively verifiable expected result.",
+    "gotcha_level": "critical",
+    "source": "opq-test-script-design",
+    "tags": ["test-scripts", "opq", "test-design", "prescriptive-testing", "audit-trail-testing"]
+  },
+  {
+    "id": "val-opq-003",
+    "category": "validation-opq-templates",
+    "title": "OPQ Acceptance Criteria and Deviation Management",
+    "summary": "Every OPQ attachment must have explicit acceptance criteria, and any failure to meet those criteria triggers a deviation that must be formally documented, classified, and resolved.",
+    "acceptance_criteria_patterns": {
+      "standard_pattern": "All actual results are the same as the expected results or satisfactorily explained",
+      "signature_verification": "Signature verification is complete and signed by the individuals executing this protocol",
+      "equipment_list": "Equipment that is not part of the system being qualified but used in this qualification is listed",
+      "workflow_tests": "All actual results match expected results. Any 'No' answer must be documented as a deviation."
+    },
+    "deviation_management": {
+      "corrective_action_report_fields": [
+        "Protocol Attachment Number — which test section",
+        "Page Number — where the deviation occurred",
+        "Deviation Number — sequential numbering",
+        "Protocol Requirements — state what the protocol required",
+        "Deviation Description — state what actually happened vs. what was expected",
+        "Investigation/Corrective Action — root cause analysis and corrective steps taken",
+        "Risk Assessment — impact on system validation and GxP compliance",
+        "Disposition — resolved/deferred/accepted with rationale",
+        "Signatures — person completing, reviewer, QA approval"
+      ],
+      "corrective_action_log_fields": ["Corrective Action Report #", "Test Section #", "Test Page #", "Date Initiated"],
+      "deviation_classification": {
+        "Critical": "GxP-critical function does not work as required — blocks go-live until resolved",
+        "Major": "Function works but with significant limitation or workaround — must be resolved within defined timeline",
+        "Minor": "Cosmetic or non-GxP issue — can be resolved in future release"
+      }
+    },
+    "typical_protocol_metrics": {
+      "sample_management_system": {
+        "total_test_steps": "600-700 for a medium-complexity module with 8-10 functional workflows",
+        "test_attachments": "10-12 (one per functional area plus audit trail and navigation)",
+        "execution_time": "5-10 business days with 2-3 testers",
+        "typical_deviation_rate": "5-15% of test steps may generate deviations on first execution"
+      }
+    },
+    "gotcha": "Every deviation MUST be classified, investigated, and formally closed — even minor ones. An unresolved deviation in the protocol is a regulatory finding waiting to happen. Inspectors specifically look for open deviations in the Corrective Action Log.",
+    "gotcha_level": "critical",
+    "source": "opq-acceptance-deviation-management",
+    "tags": ["acceptance-criteria", "deviations", "corrective-action", "opq", "deviation-classification"]
+  },
+  {
+    "id": "val-opq-004",
+    "category": "validation-opq-templates",
+    "title": "Sample Management OPQ — Functional Test Categories for PDMA Compliance",
+    "summary": "A sample management system used under the Prescription Drug Marketing Act (PDMA) requires specific OPQ test categories covering the drug sample lifecycle. These test categories apply to any Salesforce-based sample management implementation.",
+    "functional_test_categories": {
+      "delivery_tracking": {
+        "description": "Track periodic sample allocation shipments by warehouse to Sales Representatives",
+        "test_areas": ["Acknowledgment of Delivery (AOD)", "Data load from warehouse/ETL system", "Edit existing AOD records", "Quantity verification", "Lot/expiration tracking"],
+        "pdma_relevance": "PDMA Section 353(d) requires manufacturers to maintain records of drug sample distributions"
+      },
+      "sample_distribution": {
+        "description": "Track samples distributed (dispensed) to healthcare practitioners",
+        "test_areas": ["Sample drop recording", "HCP signature capture", "DEA/license verification", "Sample lot and expiration validation", "Quantity limits enforcement"],
+        "pdma_relevance": "PDMA Section 353(d)(1) requires written receipt for each sample delivered"
+      },
+      "physical_inventory": {
+        "description": "Periodic physical counts and reconciliation of sample inventory",
+        "test_areas": ["Inventory count submission", "Reconciliation against system quantities", "Discrepancy identification and reporting", "Adjustment workflows"],
+        "pdma_relevance": "PDMA Section 353(d)(2) requires physical inventories and reconciliation"
+      },
+      "transfers": {
+        "description": "Rep-to-rep and warehouse-to-rep sample transfers",
+        "test_areas": ["Transfer request submission", "Virtual transfer requests", "Acknowledgment of Transfer (AOT)", "Transfer approval workflows", "Inventory adjustment on transfer"],
+        "pdma_relevance": "Transfers must maintain chain of custody and audit trail per PDMA"
+      },
+      "returns_and_losses": {
+        "description": "Sample returns to warehouse and theft/loss reporting",
+        "test_areas": ["Return submission", "Return receipt and reconciliation", "Theft/loss reporting", "Regulatory notification for significant losses"],
+        "pdma_relevance": "PDMA Section 353(d)(3) requires reporting of stolen/falsified samples"
+      },
+      "reporting": {
+        "description": "Complete and accurate reporting for drug sample exchange",
+        "test_areas": ["Sample distribution reports", "Inventory reconciliation reports", "Compliance reports by territory/rep/product", "Historical trending"],
+        "pdma_relevance": "Reporting demonstrates compliance with PDMA record-keeping requirements"
+      },
+      "audit_trail": {
+        "description": "Verify system maintains complete audit trail per 21 CFR Part 11",
+        "test_areas": ["Before/after audit trail comparison", "Password non-disclosure in audit trail", "Change capture (who/what/when)", "Immutability verification"],
+        "pdma_relevance": "Part 11 requires secure, computer-generated, time-stamped audit trails"
+      },
+      "screen_navigation_and_security": {
+        "description": "Verify UI screens are designed correctly and role-based access is enforced",
+        "test_areas": ["Home page elements by user role", "Tab and section visibility", "Field-level security", "Button and action availability by role"],
+        "pdma_relevance": "Part 11 requires limiting system access to authorized individuals"
+      }
+    },
+    "multi_product_testing": "When the same codebase serves multiple products (e.g., dermatology and aesthetics), all testing scenarios apply to each product line EXCEPT screen navigation, which may differ by product. Execute full OPQ for each product with shared test scripts where applicable.",
+    "test_environment_requirements": {
+      "environments": ["Development (no testing)", "QA/Sandbox (OPQ execution)", "Production (no testing)"],
+      "pre_requisites": [
+        "Test environment representative of production configuration",
+        "Required user profiles and role-based access set up",
+        "Test database instance with required dashboards, tables, and views",
+        "Populated with test data necessary to facilitate testing (not production data)",
+        "ETL processes configured and tested for data load scenarios"
+      ]
+    },
+    "gotcha": "For sample management specifically, PDMA compliance audits by the FDA Office of Criminal Investigations (OCI) are increasingly common. OCI investigators will request the OPQ protocol and Validation Summary Report specifically for the sample tracking system. Having a well-structured, complete OPQ is not just a regulatory checkbox — it is directly tied to enforcement risk.",
+    "gotcha_level": "critical",
+    "source": "sample-management-opq-template",
+    "tags": ["sample-management", "pdma", "opq", "functional-testing", "audit-trail", "salesforce-samples"]
+  }
+]

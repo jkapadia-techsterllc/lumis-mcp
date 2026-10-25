@@ -1,0 +1,357 @@
+[
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-setup",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Enablement Coaching",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enablement Coaching helps plan coaching activities, evaluate field employees consistently, and document feedback and development plans. Managers, designated peers, and other authorized evaluators can coach employees without associating an event with a",
+    "findings": [
+      {
+        "name": "Enablement Coaching",
+        "detail": "Enablement Coaching helps plan coaching activities, evaluate field employees consistently, and document feedback and development plans. Managers, designated peers, and other authorized evaluators can coach employees without associating an event with a visit."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Each Enablement Coaching event relates to one coach, one coachee, and one active assessment definition. The assessment definition supplies the categories, score questions, answer choices, and scoring weights used for the event. Enablement Coaching Roles Understand how coaches, coachees, and business admins participate in Enablement Coaching events. Considerations for Enablement Coaching Before you set up and use Enablement Coaching, review these feature considerations and limitations. Enablement Coaching Lifecycle Coachee's profile settings determine the lifecycle of an enablement coaching event, even when the logged-in user is a coach. Status changes control record sharing, response visibility, edit access, and when an evaluation becomes read-only. Get Your Org Ready for Enablement Coaching Before you configure Enablement Coaching, make sure that you have the required user profiles, licenses, and permission sets. Configure Access to Enablement Coaching Provide business admins, coaches, and coachees with the role-specific access required to participate in enablement coaching events. Create coach access from the standard field sales representative permission set so that only designated users can create and manage coaching events. Configure Enablement Coaching Settings Configure org-level participant labels and Omni Process mapping, then configure coach and coachee profiles. Coach profile settings control who the coach can add to a coaching, while coachee profile settings control the event lifecycle and validations. Add Enablement Coaching to Calendar Show Enablement Coaching events with other field activities in Calendar. Create an Enablement Coaching Assessment Create a reusable, score-based assessment with Discovery Framework and OmniStudio. Activate the assessment questions, OmniScript, and Assessment Definition before coaches can create events. Configure Workflow for Enablement Coaching Configure Workflow actions and paths to control the Enablement Coaching lifecycle. Include the separate active path without conditions that mobile record creation requires. Configure the Enablement Coaching Record Page Add the offline assessment component to the Enablement Coaching record page so that coaches and coachees can enter or review evaluations. Configure tabs and fields that support scheduling, development plans, and workflow status. Configure Enablement Coaching for Offline Use Verify the object metadata cache configuration entries that synchronize workflow metadata, user data, coaching records, assessments, OmniScript sessions, and attachments. Mobile App Configuration for Enablement Coaching Generate a metadata cache to package the object schema configuration that the Life Sciences Cloud mobile app uses for online and offline access. This configuration defines how the mobile app fetches and stores the necessary metadata when a network connection is unavailable to provide a seamless experience whether users are online and offline. Create and Plan an Enablement Coaching Event Schedule a coaching evaluation, select its assessment, assign one coachee, and optionally relate visits. The coach and assessment definition become read-only after creation, and the coachee becomes read-only after assignment. Complete and Share a Coach Evaluation Start the coaching workflow, record scores and response text, save drafts, and share final feedback. The applicable actions depend on the coachee's Self-Evaluation and Acknowledgement settings. Complete a Self-Evaluation Record your perspective without seeing the coach's current evaluation. Save drafts as you work, then submit the self-evaluation to make it read-only and available to the coach. Review and Acknowledge Coaching Feedback Review the coach's completed scores and comments after the evaluation reaches its lock point. When acknowledgement is enabled, you must review and acknowledge the feedback. Finalize or Cancel an Enablement Coaching Event As a coach, you can complete an acknowledged event or cancel an event. Finalizing the evaluation completes the lifecycle, while cancellation preserves a read-only record before the evaluation lock point."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_setup.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-considerations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Considerations for Enablement Coaching",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Before you set up and use Enablement Coaching, review these feature considerations and",
+    "findings": [
+      {
+        "name": "Considerations for Enablement Coaching",
+        "detail": "Before you set up and use Enablement Coaching, review these feature considerations and limitations."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Feature Limitations",
+        "detail": "Enablement Coaching doesn't support these capabilities: Adding a second coach to an event Reassigning a coach or a coachee after an enablement coaching event is created Recalling or editing feedback after it's shared Creating custom coaching statuses Customizing the coaching statuses shipped OOTB Generating AI-driven coaching comments"
+      },
+      {
+        "name": "Calendar Behavior",
+        "detail": "Calendar previews for Enablement Coaching events are read-only. You can't perform these actions from Calendar: Edit or delete an event Mass-delete events Drag and drop an Enablement Coaching event to reschedule it"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_considerations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-enable-discovery-framework",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Enable Discovery Framework for Enablement Coaching",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enable the Discovery Framework features to let business admins create questions and collect",
+    "findings": [
+      {
+        "name": "Enable Discovery Framework for Enablement Coaching",
+        "detail": "Enable the Discovery Framework features to let business admins create questions and collect responses."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. From Setup, in the Quick Find box, enter Discovery Framework , and then select General Settings . Turn on Discovery Framework . Turn on Enhanced Questions . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_enable_discovery_framework.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-object-and-field-permissions-for-coach",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Object and Field Permissions for a Coach",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Grant coaches access to the objects and fields required to create events, complete evaluations, and manage Enablement Coaching",
+    "findings": [
+      {
+        "name": "Object and Field Permissions for a Coach",
+        "detail": "Grant coaches access to the objects and fields required to create events, complete evaluations, and manage Enablement Coaching workflows."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Object | Object Permission | Field | Field Permission Assessment | Read, Create, Edit | Assessment Language Assessment Staged Data Assessment Status Completed Date Identifier Name Omni Process Owner Name Parent Assessment Response Context Score | Read, Edit Created By Created Date Effective Date Expiration Date Last Modified By Last Modified Date Saved For Later | Read Assessment Definition | Read | Active Approval Date Created By Created Date Display Type Effective From Effective To Last Modified By Last Modified Date Last Revised Date Name Omni Process Performer Type Publisher Purpose | Read Assessment Question | Read | Active Question Version Category Created By Created Date Data Type Description Developer Name Formula Response Data Type Last Modified By Last Modified Date Name Namespace Owner Name Question Text Related Question | Read Assessment Question Assignment | Read | Assessment Question Assessment Question Set Created By Created Date Last Modified By Last Modified Date Name Owner Name | Read Assessment Question Response | Read, Create | Assessment Assessment Question Version Choice Boolean Value Choice Value Currency Value Date Time Value Date Value Decimal Response Value Integer Response Value Name Owner Name Parent Assessment Question Version Question Respondent Timezone Response Comment Response Text Response Type Response Value Response Value Score Time Value | Read, Edit Created By Created Date Last Modified By Last Modified Date | Read Assessment Question Set | Read | Created By Created Date Developer Name Last Modified By Last Modified Date Namespace Name Owner Name | Read Assessment Staged Data | Read, Create, Edit | None | None Assessment Question Version | Read | Activation Date Active Assessment Question Created By Created Date Data Type Description Last Modified By Last Modified Date Name Option Source Response Value Question Text Response Values Status Version Number | Read Assessment Question Version Choice | Read | Assessment Question Version Choice Description Choice Score Created By Created Date Display Order Key Last Modified By Last Modified Date Name | Read Enablement Coaching | Read, Create, Edit, Delete | Assessment Definition Name Planned End Date Time Planned Start Date Time Previous Enablement Coaching Status | Read, Edit Acknowledgement Enabled Created By Created Date Last Modified By Last Modified Date Logged In Attendee Role Planned End Date Time Previous Enablement Coaching Self Evaluation Enabled | Read Enablement Coaching Attendee | Read, Create, Edit, Delete | Acknowledged Date Attendee Attendee Role Comments Enablement Coaching | Read, Edit Created By Created Date Last Modified By Last Modified Date Name | Read Enablement Coaching Session | Read, Create, Edit, Delete | Enablement Coaching Related Record | Read, Edit Created By Created Date Last Modified By Last Modified Date Name | Read Omni Process | Read | Active Description Designer Customization Type Discovery Framework Usage Type Embedding Payload Integration Procedure Integration Procedure Input Integration Procedure Output Integration Procedure Signature Available Language Last Preview Page Managed Using Standard Designer Name Namespace Omni Process Key Omni Process Type Override Key Owner Property Set Configuration Required Permission Response Cache Type Sub Type Type Unique Name Version Number Web Component Key | Read Omni Process Assessment Question Version | Read | Assessment Question Version Created By Created Date Last Modified By Last Modified Date Name Omni Process Omni Process Element Owner Name Prefill Question Weight | Read Omni Process Element | Read | Active API Name Description Designer Customization Type Discovery Framework Usage Type Level Omni Process Omni Process Version Number Parent Element Parent Element Name Parent Element Type Property Set Configuration Sequence Number Type | Read OmniScript Saved Session | Read, Create, Edit | Content Encoded Last Saved Date Time Name OmniScript OmniScript Locale Code OmniScript Sub Type OmniScript Type OmniScript Version Number Owner Related Record Related Type Relative Resume URL Resume URL Saved Session Key Status Status Category Web Component Enabled | Read, Edit"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_object_and_field_permissions_for_coach.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-configure-field-level-security",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Field-Level Security for Enablement Coaching",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To manage Enablement Coaching your coaches must have access to certain fields that aren't available by default. You must grant your coaches read access to these",
+    "findings": [
+      {
+        "name": "Configure Field-Level Security for Enablement Coaching",
+        "detail": "To manage Enablement Coaching your coaches must have access to certain fields that aren't available by default. You must grant your coaches read access to these fields."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Object | Field Enablement Coaching | Name Status Assessment Definition Planned Start Date Time Planned End Date Time Enablement Plan Comments Actual End Date Time For instructions on how to set Field-Level Security, see Set Field-Level Security for a Field on All Profiles ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_configure_field_level_security.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-configure-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Enablement Coaching Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure org-level participant labels and Omni Process mapping, then configure coach and coachee profiles. Coach profile settings control who the coach can add to a coaching, while coachee profile settings control the event lifecycle and",
+    "findings": [
+      {
+        "name": "Configure Enablement Coaching Settings",
+        "detail": "Configure org-level participant labels and Omni Process mapping, then configure coach and coachee profiles. Coach profile settings control who the coach can add to a coaching, while coachee profile settings control the event lifecycle and validations."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Add Omni Process Type",
+        "detail": "Add the Omni Process type and subtype values used by Enablement Coaching evaluations. From Setup, select Object Manager . In the Quick Find box, enter Omni Process, and then select Omni Process . Select Fields & Relationships . Search for and select Type . In the Type Picklist Values section, click New . Add a picklist value, such as EnablementCoaching. Save your changes. Select Fields & Relationships . Search for and select Sub Type . In the Sub Type Picklist Values section, click New . Add a picklist value. Save your changes. Note The Type value is stored in OmniProcess records and must match the org-level mapping and the type used for the coaching OmniScript."
+      },
+      {
+        "name": "Configure Role Mapping Settings",
+        "detail": "Map the coach and coachee roles for Enablement Coaching. From the App Launcher, find and select Admin Console . Select Enablement Coaching and then select Role Mapping Settings . For Coach, select a persona for the coach's role. For Coachee, select a persona for the coachee's role. For OmniProcess Type, enter the name of the Omni Process type associated with the enablement coaching. This is the Omni Process Type picklist value you created earlier. Save your changes. Note Use Translation Workbench to translate configured labels. Changing the mapping doesn't change existing coaching events."
+      },
+      {
+        "name": "Configure Coach User Profile Settings",
+        "detail": "Control which user profiles coaches can select as coachees, including profiles eligible for peer coaching. From the App Launcher, find and select Admin Console . Select Enablement Coaching and then select Coach User Profile Settings . For Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . In the Profiles Eligible for Coachee Role section, select all the profiles of users who can be added as coachees in an enablement coaching event. Note If you don't select any profiles, a coach can't add any coachees to enablement coaching events. To allow peer coaching, follow these steps. For Apply Settings To, select Profile , and then select a coach's user profile. In the Profiles Eligible for Coachee Role section, select a coach's user profile. Save your changes."
+      },
+      {
+        "name": "Configure Coachee Settings",
+        "detail": "Configure coachee engagement, evaluation score visibility, hierarchy limits, and overlapping programs in Enablement Coaching. From the App Launcher, find and select Admin Console . Select Enablement Coaching and then select Coachee Settings . For Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Configure Coachee Engagement settings. To enable self evaluation in the Enablement Coaching workflow, select Allow coachees to perform self evaluation . To enable Acknowledgement in the Enablement Coaching workflow, select Allow coachees to acknowledge the enablement coaching outcomes . Configure Evaluation Score Visibility settings. To display the total score of the current evaluation in the enablement coaching page, select Show coachees' current evaluation score. To enable the Show previous evaluation score toggle in the enablement coaching page, select Show coachees' previous evaluation score . Note When both these settings are selected, the previous total score is shown alongside the current total score. Configure Rules and Validations To restrict coaches from adding subordinate coaches beyond a specific number of reporting levels, select Limit coachee selection by hierarchy levels . Hierarchy validation relies on the Manager field on the User object. For Hierarchy Limit, select the number of reporting levels. To prevent coachees from being included in more than one active coaching program simultaneously, select Prevent overlapping coachings . Overlap validation checks active, accessible events with overlapping planned dates (excluding any marked as Completed or Cancelled). Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_configure_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-create-an-assessment",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create an Enablement Coaching Assessment",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create a reusable, score-based assessment with Discovery Framework and OmniStudio. Activate the assessment questions, OmniScript, and Assessment Definition before coaches can create",
+    "findings": [
+      {
+        "name": "Create an Enablement Coaching Assessment",
+        "detail": "Create a reusable, score-based assessment with Discovery Framework and OmniStudio. Activate the assessment questions, OmniScript, and Assessment Definition before coaches can create events."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Create and Activate Score Questions",
+        "detail": "Create score questions and answer choices for coach and coachee evaluations. From the App Launcher, find and select Assessment Questions . Click New . Enter a name. Enter a developer name. For Data Type, select Score . Select a category. Enter the question text. Select Active . Add the choice scoring options. Enter a value and assign a positive integer or decimal score. Save your changes."
+      },
+      {
+        "name": "Create an Assessment Form",
+        "detail": "Build and activate an OmniScript form that organizes the assessment questions used in Enablement Coaching. From the App Launcher, find and select Assessment Questions . Click Select Questions . For Usage Type, select Life Sciences Customer Engagement . In the OmniScript Details section, enter the name of the assessment. Select a language. For Type , select the exact value mapped for Enablement Coaching at the org level. Select a sub type. Note Make sure that the Type, Sub Type, and Language combination is unique to the Omniscript. Otherwise, the Omniscript build fails. In the New OmniScript section, edit the name of the untitled Step. Add more steps if required. Note Steps correspond to the pages in the form. You can group multiple questions in a single step. You can also create multiple steps in a single form. However, to view all questions on one page, don't use steps. Search for and select an assessment question set to see all the related questions. From the search results, select the questions and drag them to the step. Arrange the questions in required order. Click Build OmniScript . Preview the OmniScript and activate it."
+      },
+      {
+        "name": "Create the Assessment Definition and Share it with the Coach",
+        "detail": "Create an assessment definition from the activated OmniScript and give the coach access to it. From the App Launcher, find and select Assessment Definitions . Click New . For Omni Process, select an activated OmniScript associated with Enablement Coaching. Save your changes. On the newly created Assessment Definition page, from the Quick Actions menu, select Sharing . Search for and select the coach user. Select the Assessment Definition Access Level. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_create_an_assessment.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-configure-workflow",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Workflow for Enablement Coaching",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure Workflow actions and paths to control the Enablement Coaching lifecycle. Include the separate active path without conditions that mobile record creation",
+    "findings": [
+      {
+        "name": "Configure Workflow for Enablement Coaching",
+        "detail": "Configure Workflow actions and paths to control the Enablement Coaching lifecycle. Include the separate active path without conditions that mobile record creation requires."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Create Update Record Actions",
+        "detail": "Create workflow actions that move Enablement Coaching events through their lifecycle statuses. From the App Launcher, find and select Admin Console . Select Workflow Configurations , and then select Workflow Actions . Click New , and complete the required fields. Action name | Button label | Object | Field | New field value Move to Self Evaluation | Move to Self Evaluation | Enablement Coaching | Status | SelfEvaluation Move to Evaluation In Progress | Move to Evaluation In Progress | Enablement Coaching | Status | InReview Finish | Finish | Enablement Coaching | Status | Finished Cancel | Cancel | Enablement Coaching | Status | Cancelled Note For each action, select Update Record Action , enter the values exactly as shown in the table, and save the action."
+      },
+      {
+        "name": "Create Open Component Actions",
+        "detail": "Create workflow actions that open the components for finalizing and acknowledging evaluations. In Workflow Actions , select New . Select Open Component Action . Create Finalize Evaluation with button label Finalize Evaluation for Enablement Coaching. Set Component Name to industries_ls_commercial:FinalizeEvaluationModal . Save the action. Create Acknowledge with button label Acknowledge for Enablement Coaching. Set Component Name to industries_ls_commercial:acknowledgeEvaluationModal . Save the action."
+      },
+      {
+        "name": "Configure the Workflow Path",
+        "detail": "Define and activate the stages, actions, conditions, and record access for the Enablement Coaching workflow. From the App Launcher, find and select Admin Console . Select Workflow Configuration , and then select Workflow Paths . Click New , and give the workflow path a name. For Object, select Enablement Coaching . For Field API Name, select Status . Click Continue . Select the Planned stage. Under Stage Operations, click the plus icon. For Operation Name, enter Move to Self Evaluation . For Priority, enter 1 . Note When multiple stage operations apply to a record, the highest priority operation takes precedence, and users are granted those permissions. A lower value signifies a higher priority. Save your changes. Under Stage Operation Conditions, click the plus icon. Add these conditions: Field | Operator | Value IsSelfEvaluationEnabled | Equals | True LoggedInAttendeeRole | Equals | Coach Select the Stage Operation Actions tab. From the Add Actions menu, select Update Record . Select the Move to Self Evaluation and Cancel actions. Similarly add the following operations, operations conditions, and operation actions. Stage | Stage Operation Name | Priority | Stage Operation Conditions | Stage Operation Actions Planned | Move to Evaluation In Progress | 2 | Field : IsSelfEvaluationEnabled Operator : Equals Value : False | Move to Evaluation In Progress Field : LoggedInAttendeeRole Operator : Equals Value : Coach Self-Evaluation | Cancel | 1 | Field : LoggedInAttendeeRole Operator : Equals Value : Coach | Cancel Evaluation in Progress | Finalize Evaluation | 1 | Field : LoggedInAttendeeRole Operator : Equals Value : Coach | Finalize Evaluation Cancel To add the Finalize Evaluation action, from the Add Actions menu, select Open Component and then select the action. Field : IsAcknowledgementEnabled Operator : Equals Value : True Finish | 2 | Field : IsAcknowledgementEnabled Operator : Equals Value : False | Finish Field : LoggedInAttendeeRole Operator : Equals Value : Coach Feedback Review | Acknowledge | 1 | Field : LoggedInAttendeeRole Operator : Equals Value : Employee | Acknowledge To add the Acknowledge action, from the Add Actions menu, select Open Component and then select the action. Acknowledged | Finish | 1 | Field : LoggedInAttendeeRole Operator : Equals Value : Coach | Finish Completed | Complete | 1 | None | None Cancelled | None Save your changes. Activate the workflow path. Note The first action in the Planned stage shares the event with the coachee. At least one coachee is required for the action to run. For more information, see Workflows for Life Sciences ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_configure_workflow.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-offline-use-configuration",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Enablement Coaching for Offline Use",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Verify the object metadata cache configuration entries that synchronize workflow metadata, user data, coaching records, assessments, OmniScript sessions, and",
+    "findings": [
+      {
+        "name": "Configure Enablement Coaching for Offline Use",
+        "detail": "Verify the object metadata cache configuration entries that synchronize workflow metadata, user data, coaching records, assessments, OmniScript sessions, and attachments."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Turn On LSC Apps Offline Support",
+        "detail": "Turn on offline support for your Life Sciences Cloud (LSC) Apps. With offline support, your apps resolve data requests from the device's local database when a network connection is unavailable. From the App Launcher, find and select Admin Console . Select Mobile , and then select Application Settings . Select Use Mobile Apps Offline . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_offline_use_configuration.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-create-and-plan-event",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create and Plan an Enablement Coaching Event",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Schedule a coaching evaluation, select its assessment, assign one coachee, and optionally relate visits. The coach and assessment definition become read-only after creation, and the coachee becomes read-only after",
+    "findings": [
+      {
+        "name": "Create and Plan an Enablement Coaching Event",
+        "detail": "Schedule a coaching evaluation, select its assessment, assign one coachee, and optionally relate visits. The coach and assessment definition become read-only after creation, and the coachee becomes read-only after assignment."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create and manage coaching events: | Manage Enablement Coaching"
+      },
+      {
+        "name": "Create an Enablement Coaching Event",
+        "detail": "Create and schedule an Enablement Coaching event with an active assessment definition. From the App Launcher, find and select Enablement Coachings . Click New . Enter a name for the enablement coaching event. For Status, select Planned . Select an active Assessment Definition. Select a planned start date and time. By default the event is created for a 30 minute duration. Save your changes."
+      },
+      {
+        "name": "Create an Enablement Coaching Event from Calendar",
+        "detail": "Schedule an Enablement Coaching event directly from Calendar. From the App Launcher, find and select Calendar . Click the plus icon, or click an empty slot on the calendar grid. Select Enablement Coaching . On the New Enablement Coaching window, complete the required fields. Enter a name for the enablement coaching event. For Status, select Planned . Select an active Assessment Definition. Select a planned start date and time. By default the event is created for a 30 minute duration. Save your changes."
+      },
+      {
+        "name": "Add a Coachee",
+        "detail": "Assign an employee as the coachee for a planned Enablement Coaching event. From the App Launcher, find and select Enablement Coachings . Select an enablement coaching event that’s in Planned status. Select the Evaluation tab, and then click Add Coachee . For Coachee, select the employee you want to add as the coachee for the event. Click Add . Note If you can’t find the employee in the search results, ask your Salesforce admin to check the Coach User Profile settings."
+      },
+      {
+        "name": "Add Related Visits",
+        "detail": "Relate field visits to an Enablement Coaching event to provide context for the evaluation. From the App Launcher, find and select Enablement Coachings . Select an enablement coaching event that’s in Planned status. Select the Related tab. In the Enablement Coaching Sessions section, click New . For Related Record, select the related visit. Save your changes. Note Similarly, add all other visits related to the enablement coaching."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_create_and_plan_event.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  },
+  {
+    "id": "lsc-help-enablement-coaching-ind-lsc-enablement-coaching-complete-and-share-coach-evaluation",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Complete and Share a Coach Evaluation",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Start the coaching workflow, record scores and response text, save drafts, and share final feedback. The applicable actions depend on the coachee's Self-Evaluation and Acknowledgement",
+    "findings": [
+      {
+        "name": "Complete and Share a Coach Evaluation",
+        "detail": "Start the coaching workflow, record scores and response text, save drafts, and share final feedback. The applicable actions depend on the coachee's Self-Evaluation and Acknowledgement settings."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To complete a coach evaluation: | Manage Enablement Coaching Edit access to the assigned coach assessment response"
+      },
+      {
+        "name": "Start the Workflow",
+        "detail": "Move a planned event to the correct evaluation stage based on the coachee’s self-evaluation settings. From the App Launcher, find and select Enablement Coachings . Select an enablement coaching event that’s in Planned status. Verify whether a coachee is added to the enablement coaching. Move the event to the next stage of the workflow. If Self-Evaluation is off, click Move to Evaluation In Progress . If Self-Evaluation is on, click Move to Self Evaluation ."
+      },
+      {
+        "name": "Save Evaluation Progress",
+        "detail": "Record your scores and responses as a coach, and save the evaluation as a draft without advancing the event. From the App Launcher, find and select Enablement Coachings . Open an enablement coaching event that’s either in Self-Evaluation or Evaluation in Progress status. On the Assessments tab, select a score choice or enter responses for each applicable question. Save your changes. Saving preserves a draft without changing the event status. When the Total Score setting is on, the total score appears only after you submit the evaluation. During self-evaluation, you can continue your assessment without access to the coachees’ current responses. After the coachee completes the self-evaluation, the event moves to the Evaluation in Progress status"
+      },
+      {
+        "name": "Share Final Feedback with Coachees",
+        "detail": "Finalize your evaluation to lock the responses and share the completed feedback with the coachee. From the App Launcher, find and select Enablement Coachings . Open an enablement coaching event that’s in the Evaluation in Progress status. Review your scores and responses. Record development plan information on the record page, if applicable. Click Finalize Evaluation . When Acknowledgement isn’t enabled, the event moves to Completed status. When Acknowledgement is enabled, it moves to Feedback Review status."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_enablement_coaching_complete_and_share_coach_evaluation.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "enablement-coaching"
+    ]
+  }
+]

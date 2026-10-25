@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="sbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1923"/>
+      <stop offset="100%" stop-color="#1A2A3A"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="url(#sbg)"/>
+
+  <!-- Terminal chrome -->
+  <rect x="40" y="30" width="720" height="440" rx="8" fill="#1E1E1E" stroke="#333" stroke-width="1"/>
+  <circle cx="65" cy="50" r="6" fill="#FF5F57"/>
+  <circle cx="85" cy="50" r="6" fill="#FEBC2E"/>
+  <circle cx="105" cy="50" r="6" fill="#28C840"/>
+  <text x="400" y="54" font-family="monospace" font-size="12" fill="#666" text-anchor="middle">lumis — migration readiness assessment</text>
+
+  <!-- Content area -->
+  <text x="70" y="90" font-family="monospace" font-size="13" fill="#4FC3F7">$ assess_migration_readiness</text>
+
+  <text x="70" y="120" font-family="monospace" font-size="12" fill="#888">Source: Legacy CRM  |  Modules: 8  |  Countries: 12  |  Users: 3,500</text>
+
+  <!-- Complexity score -->
+  <rect x="70" y="145" width="680" height="60" rx="6" fill="#1A2A3A"/>
+  <text x="90" y="170" font-family="monospace" font-size="14" font-weight="bold" fill="#fff">Complexity Score</text>
+  <rect x="90" y="180" width="400" height="12" rx="6" fill="#333"/>
+  <rect x="90" y="180" width="280" height="12" rx="6" fill="#FF9800"/>
+  <text x="510" y="192" font-family="monospace" font-size="14" font-weight="bold" fill="#FF9800">7.2 / 10 — HIGH</text>
+
+  <!-- Module mappings -->
+  <text x="70" y="235" font-family="monospace" font-size="13" font-weight="bold" fill="#66BB6A">Module Mappings</text>
+  <text x="70" y="258" font-family="monospace" font-size="11" fill="#aaa">CLM ──────────── Engage         ██████████ 95% coverage</text>
+  <text x="70" y="278" font-family="monospace" font-size="11" fill="#aaa">Samples ─────── Sample Mgmt     █████████░ 88% coverage</text>
+  <text x="70" y="298" font-family="monospace" font-size="11" fill="#aaa">Events ──────── Events Mgmt     ████████░░ 82% coverage</text>
+  <text x="70" y="318" font-family="monospace" font-size="11" fill="#aaa">Approved Email   Email Templates ███████░░░ 75% coverage</text>
+
+  <!-- Gaps -->
+  <text x="70" y="355" font-family="monospace" font-size="13" font-weight="bold" fill="#FF5252">Known Gaps (4)</text>
+  <text x="70" y="378" font-family="monospace" font-size="11" fill="#FF8A80">⚠ Sample lot tracking — no native equivalent</text>
+  <text x="70" y="398" font-family="monospace" font-size="11" fill="#FF8A80">⚠ Multichannel activity — requires custom build</text>
+  <text x="70" y="418" font-family="monospace" font-size="11" fill="#FF8A80">⚠ Japan APPI consent — additional config needed</text>
+
+  <!-- Timeline -->
+  <text x="70" y="452" font-family="monospace" font-size="13" font-weight="bold" fill="#4FC3F7">Estimated Timeline: 14–18 months (3 waves)</text>
+</svg>

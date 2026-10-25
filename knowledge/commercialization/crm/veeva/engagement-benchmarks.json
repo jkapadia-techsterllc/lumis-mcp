@@ -1,0 +1,163 @@
+[
+  {
+    "id": "ft-hcp-001",
+    "category": "field-trends-hcp-engagement",
+    "title": "HCP Engagement Patterns — Access Restrictions and Digital Shift",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "HCP access restrictions continue to tighten across markets. Digital and remote engagement channels are growing as alternatives to in-person visits.",
+    "findings": {
+      "access_trends": "In-person HCP access declining year-over-year across most markets. No-see and restricted-access policies expanding beyond specialists to primary care.",
+      "digital_adoption": "Digital channel adoption accelerated post-pandemic. Video, approved email, and self-service content portals growing.",
+      "rep_expectations": "Field reps expected to be multi-channel — in-person, video, email, content sharing within a single customer engagement strategy.",
+      "measurement": "Engagement quality metrics (content interaction time, response rates, multi-touch attribution) gaining importance alongside visit frequency."
+    },
+    "source": "veeva-pulse-field-trends-2023",
+    "tags": [
+      "hcp-engagement",
+      "access-restrictions",
+      "digital-engagement",
+      "field-trends"
+    ]
+  },
+  {
+    "id": "ft-dig-002",
+    "category": "field-trends-digital",
+    "title": "Digital Channel Effectiveness Benchmarks",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Digital channels show varying effectiveness by therapeutic area and HCP specialty. Approved email has the broadest adoption, video engagement is growing from a smaller base.",
+    "benchmarks": {
+      "approved_email": {
+        "open_rates": "Range from 15-40% depending on specialty and content relevance. Higher for disease education than promotional content.",
+        "click_rates": "5-15% for well-targeted campaigns. Drops significantly for mass-send approaches."
+      },
+      "video_engagement": {
+        "adoption": "Growing but still a fraction of total engagement volume. Higher adoption in specialty care than primary care.",
+        "effectiveness": "Video meetings show higher content recall and engagement depth than in-person visits in some studies."
+      },
+      "content_portals": {
+        "usage": "Self-service HCP content portals see variable adoption. Most effective when integrated with other channels."
+      }
+    },
+    "source": "veeva-pulse-field-trends-2024",
+    "tags": [
+      "digital-engagement",
+      "benchmarks",
+      "approved-email",
+      "video-engagement"
+    ]
+  },
+  {
+    "id": "ft-omni-003",
+    "category": "field-trends-omnichannel",
+    "title": "Omnichannel Maturity and Field Force Evolution",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Organizations progressing toward omnichannel engagement face challenges in organizational alignment, data integration, and measurement. Most are at early stages of maturity.",
+    "maturity_assessment": {
+      "current_state": "Most organizations at stages 2-4 of omnichannel maturity. Few have achieved fully orchestrated engagement.",
+      "barriers": "Organizational silos (sales vs marketing), data fragmentation, measurement complexity, and content operations capacity.",
+      "success_factors": "Cross-functional governance, unified customer data, flexible content operations, and progressive maturity roadmap."
+    },
+    "field_force_evolution": {
+      "role_changes": "Field rep role evolving from call executor to relationship orchestrator managing multiple channels.",
+      "capability_gaps": "Many organizations lack the analytics, content operations, and change management capabilities for advanced omnichannel.",
+      "training_needs": "Reps need training in digital engagement tools, content personalization, and data-driven customer planning."
+    },
+    "source": "veeva-pulse-field-trends-2023",
+    "tags": [
+      "omnichannel",
+      "field-force",
+      "maturity-model",
+      "engagement-strategy"
+    ]
+  },
+  {
+    "id": "ft-pulse-004",
+    "category": "field-trends-pulse",
+    "title": "Veeva Pulse 2Q 2022 Field Trends — Channel Mix and Regional Variation",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Veeva Pulse 2Q 2022 report based on 600M+ annual HCP-rep interactions. In-person visits dominate globally but significant regional variation exists. The UK is a pronounced outlier with email surpassing face-to-face. Three tiers of rep engagement effectiveness (leading, average, lagging) show widening performance gaps.",
+    "findings": {
+      "global_channel_mix": "73% in-person, 18% email, 9% other (video, phone, chat). In-person recovered from pandemic lows but remains below 2019 levels.",
+      "us_channel_mix": "70% in-person, slightly below global average. Digital mix higher in specialty care than primary care.",
+      "uk_outlier": "32% in-person vs 43% email — the only major market where email exceeds face-to-face. Driven by NHS access restrictions and established digital workflows.",
+      "hcp_digital_preference": "75% of HCPs indicate they want more digital engagement options. Preference strongest in oncology and hospital-based specialties.",
+      "rep_performance_tiers": "Leading reps (top quartile) achieve 2-3x more meetings per cycle through superior digital channel integration. Lagging reps rely almost entirely on in-person and show declining access rates.",
+      "regional_variation": "APAC and Latin America show highest in-person percentages (80%+). EU varies significantly by country due to regulatory and healthcare system differences."
+    },
+    "source": "Veeva Pulse Field Trends Report v10-2 (2Q 2022, July 2022)",
+    "tags": [
+      "pulse",
+      "field-trends",
+      "channel-mix",
+      "regional-variation",
+      "uk-outlier",
+      "2022"
+    ]
+  },
+  {
+    "id": "ft-pulse-005",
+    "category": "field-trends-pulse",
+    "title": "Veeva Pulse 3Q 2022 Field Trends — Video Effectiveness and Rep Productivity",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Veeva Pulse 3Q 2022 report shows HCP accessibility at 60% and video engagement delivering 3x call response rates vs non-video interactions. Digitally-enabled reps achieve 30-40% more meetings. Half of HCPs limit engagement to three or fewer companies, making share of access a critical competitive metric.",
+    "findings": {
+      "hcp_access_rate": "60% of HCPs remain accessible to field reps. Access rate stable quarter-over-quarter but varies sharply by specialty and institution type.",
+      "video_effectiveness": "Video adds 3x call response rate vs standard in-person or phone outreach. Reps using video get significantly more follow-up engagement.",
+      "video_adoption": "50%+ of reps now use video engagement, up from under 20% pre-pandemic. Adoption uneven across companies and therapeutic areas.",
+      "company_access_limits": "50% of HCPs limit interactions to 3 or fewer companies. Share of access is now as important as share of voice.",
+      "digitally_enabled_reps": "Reps who integrate digital channels into their engagement strategy achieve 30-40% more meetings than those relying on in-person alone.",
+      "global_channel_mix_3q": "76% in-person, 15% email, 9% other. Slight in-person increase from 2Q as markets continued reopening.",
+      "crm_engage_usage": "CRM Engage video sessions growing quarter-over-quarter. Most effective when combined with content sharing during the session."
+    },
+    "source": "Veeva 3Q 2022 Pulse Field Trends Report (November 2022)",
+    "tags": [
+      "pulse",
+      "field-trends",
+      "video-engagement",
+      "rep-productivity",
+      "hcp-access",
+      "2022"
+    ]
+  },
+  {
+    "id": "ft-pulse-006",
+    "category": "field-trends-pulse",
+    "title": "Veeva Pulse — Oncology Engagement Patterns and Specialty Divergence",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Oncology engagement patterns diverge significantly from primary care. Leading oncology reps use 2.5x more video, send 2x more content, and have 67% longer meetings. Specialty-specific engagement strategies are critical — one-size-fits-all approaches underperform.",
+    "findings": {
+      "oncology_video_usage": "Leading oncology reps use 2.5x more video engagement than average reps. Oncology HCPs have higher receptivity to video due to complex data discussions.",
+      "content_intensity": "Leading oncology reps send 2x more content (clinical reprints, dosing guides, patient resources) than average. Content sharing correlates with meeting acceptance rates.",
+      "meeting_duration": "Oncology meetings are 67% longer on average than primary care interactions. Reflects complexity of oncology treatment decisions and data discussions.",
+      "specialty_divergence": "Engagement patterns in oncology, immunology, and rare disease diverge sharply from primary care. Primary care trends toward shorter, higher-frequency touchpoints while specialty moves toward fewer but deeper engagements.",
+      "implication_for_crm": "CRM platforms must support specialty-specific engagement profiles — content libraries, call planning algorithms, and performance metrics should vary by therapeutic area."
+    },
+    "source": "Veeva Pulse Field Trends Reports (2Q and 3Q 2022 combined analysis)",
+    "tags": [
+      "pulse",
+      "oncology",
+      "specialty-engagement",
+      "video",
+      "content-sharing",
+      "field-trends"
+    ]
+  }
+]

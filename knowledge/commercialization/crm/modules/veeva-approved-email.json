@@ -1,0 +1,137 @@
+[
+  {
+    "id": "vae-001",
+    "category": "Object Mapping",
+    "question": "How does Veeva Approved_Document_vod__c map to the target platform?",
+    "answer": "Veeva Approved_Document_vod__c maps to the target platform's EmailTemplate object. Key field mappings: Document_Id_vod__c maps to a unique template identifier, Template_Name_vod__c maps to the template Name field, Email_Content_vod__c maps to the template HtmlBody, and Status_vod__c maps to a status or active flag. The target platform uses a metadata-driven template model rather than Veeva's Vault-linked document approach, so templates are stored as platform records rather than pointers to an external content management system.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM documentation, platform email template architecture",
+    "tags": ["approved-email", "object-mapping", "email-template", "migration"]
+  },
+  {
+    "id": "vae-002",
+    "category": "Object Mapping",
+    "question": "How does Veeva Email_Activity_vod__c map to the target platform?",
+    "answer": "Veeva Email_Activity_vod__c maps to EmailMessage on the target platform, which tracks individual email sends and their engagement metrics. Key field mappings: Email_Activity_Type_vod__c (Sent/Opened/Clicked/Bounced) maps to Status and engagement tracking fields. Veeva stores open/click events as separate Email_Activity_vod__c records with different Type values, whereas the target platform consolidates engagement data (opens, clicks, bounces) into fields on the EmailMessage record itself or related engagement tracking objects. Migration must flatten Veeva's multi-record activity model into the target platform's consolidated model.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Email_Activity_vod documentation",
+    "tags": ["approved-email", "object-mapping", "email-activity", "engagement-tracking"]
+  },
+  {
+    "id": "vae-003",
+    "category": "Field Mapping",
+    "question": "How do Veeva approved email template content fields map to the target platform?",
+    "answer": "Veeva Email_Content_vod__c (rich text field on Approved_Document_vod__c) maps to the target platform's HtmlBody on EmailTemplate. Veeva Subject_vod__c maps to Subject. Veeva stores the email body as a single rich text field with merge tokens embedded inline, while the target platform separates the template structure (HtmlBody) from the data binding logic. Veeva's From_Name_vod__c and From_Address_vod__c map to sender configuration on the target platform, but the target platform may use org-wide email addresses rather than per-template sender fields. Veeva's Language_vod__c field maps to the target platform's locale or language variant system for multi-language template management.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Approved_Document_vod field reference",
+    "tags": ["approved-email", "field-mapping", "template-content", "html-body"]
+  },
+  {
+    "id": "vae-004",
+    "category": "Merge Field Syntax",
+    "question": "How do Veeva merge field tokens differ from the target platform's token syntax?",
+    "answer": "Veeva uses the {{Object.Field}} double-curly-brace syntax for merge fields in approved email templates (e.g., {{Account.Name}}, {{User.FirstName}}). The target platform uses {!Object.Field} syntax with an exclamation mark prefix. Every merge token must be converted during migration. Additionally, Veeva supports custom merge fields referencing vod__c custom fields (e.g., {{Account.Primary_Address_vod__c}}), which must be remapped to their target platform equivalents. Veeva also supports conditional merge fields with {{#if}} syntax for dynamic content blocks, which require conversion to the target platform's conditional rendering approach.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM merge field documentation, target platform formula syntax",
+    "tags": ["approved-email", "merge-fields", "token-syntax", "migration-transform"]
+  },
+  {
+    "id": "vae-005",
+    "category": "Consent Model",
+    "question": "How does Veeva's email consent model differ from the target platform?",
+    "answer": "Veeva uses Multichannel_Consent_vod__c to track HCP email consent, with fields like Consent_Type_vod__c (Opt_In_vod, Opt_Out_vod), Channel_vod__c, and Consent_Date_vod__c. The target platform uses a different consent architecture: CommSubscriptionConsent for subscription-level consent, ContactPointConsent for channel-level consent (tied to ContactPointEmail), and CommSubscription for managing subscription types. Migration must map Veeva's flat consent records to the target platform's hierarchical consent model. Critically, Veeva's consent is often account-level (tied to Account_vod__c), while the target platform's consent is contact-point-level (tied to a specific email address), requiring consent records to be split if an HCP has multiple email addresses.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM Multichannel_Consent_vod documentation, target platform consent management",
+    "tags": ["approved-email", "consent", "multichannel-consent", "privacy", "opt-in"]
+  },
+  {
+    "id": "vae-006",
+    "category": "Content Architecture",
+    "question": "What are the differences between Veeva Vault-linked email content and target platform templates?",
+    "answer": "Veeva Approved Email templates are linked to Veeva Vault via the Vault_Document_Id_vod__c field, enabling version control and approval workflows in Vault before templates become available in CRM. The target platform has no direct Vault integration. Templates are managed as platform records with their own approval process (potentially using workflow rules or approval processes). During migration, the Vault linkage is severed. Organizations must establish a new content lifecycle: either use the target platform's native content management, or build a custom integration to a DAM or content approval system. Historical version tracking from Vault will not carry over automatically.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Vault integration documentation",
+    "tags": ["approved-email", "vault", "content-lifecycle", "version-control"]
+  },
+  {
+    "id": "vae-007",
+    "category": "Gotcha",
+    "question": "What happens to Veeva ISILink and PILink tokens during migration?",
+    "answer": "Veeva supports ISILink (Important Safety Information) and PILink (Prescribing Information) tokens in approved email templates. These tokens automatically insert links to regulatory documents stored in Veeva Vault, with the correct version resolved at send time. The target platform has no native equivalent of Vault-linked ISI/PI auto-resolution. Migration options: (1) Replace ISILink/PILink with static URLs pointing to a hosted regulatory document repository, losing automatic version resolution. (2) Build a custom solution that queries a document management system at send time. (3) Use content fragments or referenced content blocks that are manually updated when regulatory documents change. This is a compliance-critical gap because outdated ISI/PI links can have regulatory consequences.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM ISILink/PILink documentation, regulatory compliance requirements",
+    "tags": ["approved-email", "ISILink", "PILink", "regulatory", "compliance", "vault"]
+  },
+  {
+    "id": "vae-008",
+    "category": "Gotcha",
+    "question": "Do Veeva JavaScript-based consent lookup tables work on the target platform's programmatic send path?",
+    "answer": "No. Veeva approved emails can include JavaScript consent tables that dynamically render opt-in/opt-out status when an HCP opens the email in a browser context. The target platform's programmatic email send path does not execute client-side JavaScript in the same way. Emails sent programmatically (via API or automated processes) will not render these dynamic consent tables. Migration must replace JavaScript consent lookups with either: (1) server-side merge fields that resolve consent status at send time, (2) pre-rendered HTML blocks inserted during template assembly, or (3) links to an external consent portal. This particularly affects emails that display an HCP's current consent preferences as a footer table.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM JavaScript email component documentation",
+    "tags": ["approved-email", "javascript", "consent-table", "programmatic-send"]
+  },
+  {
+    "id": "vae-009",
+    "category": "Territory Assignment",
+    "question": "How do Veeva email territory restrictions map to the target platform?",
+    "answer": "Veeva uses the Territory_vod__c field on Approved_Document_vod__c to restrict which territories can use a given email template. This integrates with Veeva's territory model (Territory_vod__c object). The target platform uses a different territory model (Territory2 or custom territory objects) and does not have a native template-to-territory restriction mechanism. Migration requires: (1) mapping Veeva Territory_vod__c values to target platform territory identifiers, (2) implementing template visibility rules, potentially through sharing rules, custom permissions, or record-level security on the template object, and (3) ensuring that territory-based filtering in the email template picker UI respects these new restrictions.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM territory management documentation",
+    "tags": ["approved-email", "territory", "template-visibility", "sharing-rules"]
+  },
+  {
+    "id": "vae-010",
+    "category": "Email Fragments",
+    "question": "How do Veeva email fragments differ from target platform content components?",
+    "answer": "Veeva supports Email_Fragment_vod__c records that are reusable content blocks (headers, footers, disclaimers, ISI sections) inserted into email templates via fragment tokens. These fragments can be shared across multiple templates and updated centrally. The target platform supports a content fragment approach, but the architecture differs: fragments may be implemented as separate template records, content blocks, or custom metadata types depending on the implementation pattern. During migration, each Veeva Email_Fragment_vod__c must be converted to the target platform's fragment model, and all template references (fragment tokens) must be updated to use the new referencing syntax. Fragment version history from Veeva will not migrate automatically.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM Email_Fragment_vod documentation",
+    "tags": ["approved-email", "email-fragment", "content-block", "reusable-content"]
+  },
+  {
+    "id": "vae-011",
+    "category": "Tracking and Analytics",
+    "question": "How does Veeva email engagement tracking compare to the target platform?",
+    "answer": "Veeva tracks email engagement through Email_Activity_vod__c records with Activity_Type values: Sent_vod, Delivered_vod, Opened_vod, Clicked_vod, Bounced_vod, and Unsubscribed_vod. Each event creates a separate record. Veeva also tracks Link_Name_vod__c for click tracking on specific links within the email. The target platform consolidates engagement into EmailMessage status fields and related engagement event records. Key differences: (1) Veeva's per-event record model creates high data volume vs. the target platform's consolidated model, (2) Veeva's link-level click tracking requires mapping to the target platform's link tracking mechanism, (3) historical engagement data migration may require summarization rather than record-for-record transfer to avoid excessive data volume.",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Email_Activity_vod tracking documentation",
+    "tags": ["approved-email", "engagement-tracking", "analytics", "email-activity"]
+  },
+  {
+    "id": "vae-012",
+    "category": "Compliance",
+    "question": "How do Veeva approved email compliance controls map to the target platform?",
+    "answer": "Veeva enforces email compliance through several mechanisms: (1) Vault approval workflow ensures only MLR-approved content reaches CRM, (2) Approved_Document_vod__c.Status_vod__c controls template availability (Approved_vod, Expired_vod), (3) Expiration_Date_vod__c auto-expires templates, (4) Product_vod__c restricts templates to specific products (critical for off-label prevention). The target platform requires custom implementation of equivalent controls: approval processes for template records, date-based validation rules or scheduled jobs for expiration, and product-based visibility rules. The Vault MLR workflow integration is the most significant gap — organizations must establish an alternative content approval pipeline that satisfies Medical, Legal, and Regulatory review requirements.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM compliance controls, MLR approval workflow documentation",
+    "tags": ["approved-email", "compliance", "MLR", "approval-workflow", "expiration"]
+  },
+  {
+    "id": "vae-013",
+    "category": "Send Configuration",
+    "question": "How does the Veeva email send experience differ from the target platform?",
+    "answer": "Veeva's approved email send flow is tightly integrated with the call/visit workflow: a rep selects an HCP during a call, picks from territory- and product-filtered templates, personalizes allowed merge fields, and sends directly from the CRM mobile app or browser. The email is logged as an Email_Activity_vod__c linked to both the Call_vod__c and the Account. The target platform separates the send mechanism from the visit workflow. Emails can be sent via quick actions, flow-triggered sends, or API. Linking an email send to a specific visit record requires custom configuration (e.g., a lookup field on EmailMessage to the visit record). The in-context template picker filtered by territory and product must be rebuilt as a custom component or configured through the platform's template selection UI.",
+    "gotcha_level": "warning",
+    "source": "Veeva CRM approved email send workflow documentation",
+    "tags": ["approved-email", "send-flow", "call-integration", "user-experience"]
+  },
+  {
+    "id": "vae-014",
+    "category": "Field Mapping",
+    "question": "What is the complete field-level mapping for Veeva Approved_Document_vod__c?",
+    "answer": "Complete field mapping: Document_Id_vod__c → DeveloperName or ExternalId (unique identifier); Template_Name_vod__c → Name (display name); Email_Content_vod__c → HtmlBody (HTML content); Subject_vod__c → Subject; Status_vod__c → IsActive or custom Status field; Expiration_Date_vod__c → custom ExpirationDate field (no native equivalent); Product_vod__c → ProductId or custom Product lookup; Language_vod__c → Locale or Language variant field; Territory_vod__c → custom Territory lookup or sharing rule; Vault_Document_Id_vod__c → no direct mapping (Vault integration severed); From_Name_vod__c → SenderDisplayName or org-wide email config; From_Address_vod__c → SenderAddress or org-wide email config; Detail_Group_vod__c → custom Category or Group field; Last_Modified_Date_vod__c → SystemModstamp (auto-populated).",
+    "gotcha_level": "info",
+    "source": "Veeva CRM Approved_Document_vod field reference",
+    "tags": ["approved-email", "field-mapping", "complete-reference", "migration-spec"]
+  },
+  {
+    "id": "vae-015",
+    "category": "Gotcha",
+    "question": "What are the risks with Veeva approved email image and attachment handling during migration?",
+    "answer": "Veeva approved emails reference images and attachments stored in Veeva Vault via Vault document IDs. These references resolve at render time through Veeva's content delivery network. During migration: (1) All Vault-hosted images must be extracted and re-hosted on the target platform (as static resources, content assets, or external CDN), (2) image URLs embedded in Email_Content_vod__c HTML must be rewritten to point to the new hosting location, (3) Veeva's dynamic image tokens (e.g., product images that change based on the recipient's market) have no direct equivalent and require custom logic, (4) file size limits may differ between platforms, (5) inline attachments (PDFs, documents) referenced via Vault links must be migrated to the target platform's file storage. Broken image references after migration is one of the most common and visible issues during email template migration.",
+    "gotcha_level": "critical",
+    "source": "Veeva CRM content delivery documentation, migration best practices",
+    "tags": ["approved-email", "images", "attachments", "vault-content", "CDN"]
+  }
+]

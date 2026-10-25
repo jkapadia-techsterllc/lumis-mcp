@@ -1,0 +1,180 @@
+[
+  {
+    "id": "vae-arch-001",
+    "category": "modules",
+    "title": "Veeva CRM Approved Email — Template Architecture and Merge Fields",
+    "products": [
+      "oce",
+      "lsc",
+      "vault"
+    ],
+    "summary": "Veeva CRM Approved Email uses a modular template system where a main HTML document contains merge fields and references numbered content fragments. This enables MLR-compliant email composition where individual content blocks can be independently approved and assembled at send time.",
+    "template_structure": {
+      "main_document": "A single HTML file containing the email skeleton, styling, header/footer, personalization merge fields, and fragment insertion points. The main document controls layout and the overall email flow.",
+      "fragments": "Numbered HTML files (fragment 1 through N) containing self-contained content blocks — promotional images, call-to-action buttons, clinical data callouts, copay/access program links, or ISI sections. Each fragment is independently versionable and approvable.",
+      "assembly": "At send time, fragments are inserted into the main document at positions defined by the insertEmailFragments merge field. The range parameter controls which fragments appear in a given email variant.",
+      "cdn_hosting": "Images and assets are hosted on Veeva CDN (e.g., cdnae1.vod309.com) with unique content-addressable paths. This ensures compliance tracking and version control for all visual assets."
+    },
+    "merge_fields": {
+      "personalization": {
+        "user_name": "Inserts the sending rep name. Used in email signatures and greeting lines.",
+        "user_email_address": "Inserts the sending rep email address for reply-to functionality.",
+        "user_mobile_phone": "Inserts the sending rep mobile phone number.",
+        "account_last_name": "Inserts the recipient HCP last name. Can include CSS class modifiers for capitalization.",
+        "account_first_name": "Inserts the recipient HCP first name."
+      },
+      "content_assembly": {
+        "insert_email_fragments": "Syntax: insertEmailFragments[start,end]. Inserts fragments numbered from start to end into the email body. Example: insertEmailFragments[1,7] inserts fragments 1 through 7.",
+        "custom_text": "Syntax: customText[option1|option2|...]. Presents the sending rep with a dropdown of pre-approved text options to personalize the message. All options must be MLR-approved."
+      },
+      "compliance": {
+        "unsubscribe_product_link": "Inserts a product-specific opt-out link. Required by regulation for commercial emails to HCPs.",
+        "prescribing_information_link": "Link to the full Prescribing Information document. Required for any email containing efficacy or safety claims."
+      }
+    },
+    "compliance_patterns": {
+      "isi_inclusion": "Important Safety Information must be included in every email that references product efficacy or clinical data. The ISI section is placed in the email body or accessible via a prominent link.",
+      "fair_balance": "Promotional claims must be balanced with risk information. The template structure ensures ISI is structurally coupled to promotional content blocks.",
+      "document_tracking": "Each email template has a unique document ID (e.g., US-48318) that ties back to the MLR approval record in the content management system.",
+      "fragment_independence": "Fragments can be updated independently when safety labeling changes, without requiring re-approval of the entire email template."
+    },
+    "source": "veeva-crm-approved-email-templates-astrazeneca-2020",
+    "source_documents": [
+      "US-48318 (BREZTRI AEROSPHERE)",
+      "US-34958 (FASENRA)"
+    ],
+    "tags": [
+      "approved-email",
+      "template-architecture",
+      "merge-fields",
+      "compliance",
+      "modular-content",
+      "mlr"
+    ]
+  },
+  {
+    "id": "vae-breztri-001",
+    "category": "modules",
+    "title": "Approved Email Example — BREZTRI AEROSPHERE (COPD Triple Therapy)",
+    "products": [
+      "oce"
+    ],
+    "summary": "Reference example of a Veeva CRM Approved Email for AstraZeneca BREZTRI AEROSPHERE (budesonide/glycopyrrolate/formoterol fumarate 320/18/9.6 mcg), a triple-combination ICS/LAMA/LABA for COPD maintenance treatment. Demonstrates real-world template patterns including clinical data presentation, fragment composition, and ISI integration.",
+    "product_context": {
+      "brand": "BREZTRI AEROSPHERE",
+      "generic": "budesonide, glycopyrrolate, and formoterol fumarate dihydrate",
+      "indication": "Maintenance treatment of COPD including chronic bronchitis and emphysema",
+      "route": "Metered dose inhaler (MDI)"
+    },
+    "clinical_data_presented": {
+      "ethos_study": {
+        "design": "52-week, randomized, double-blind, parallel-group trial (Study 1)",
+        "patients": "8,588 patients with moderate to very severe COPD",
+        "primary_result": "BREZTRI significantly reduced moderate/severe exacerbation rate vs LAMA/LABA (rate ratio 0.76, P<0.0001) and vs ICS/LABA (rate ratio 0.87, P=0.0027)"
+      },
+      "kronos_study": {
+        "design": "24-week, randomized, double-blind, parallel-group trial (Study 2)",
+        "patients": "1,896 patients with moderate to very severe COPD",
+        "primary_result": "FEV1 AUC0-4 improvement vs ICS/LABA of 116 mL (P<0.0001)"
+      }
+    },
+    "template_metrics": {
+      "fragment_count": 7,
+      "fragment_types": "Patient access/copay program CTAs, clinical data callouts, HCP resource links",
+      "merge_field_usage": [
+        "user name",
+        "user email",
+        "user mobile phone",
+        "account last name",
+        "custom text dropdown",
+        "fragment insertion",
+        "unsubscribe link"
+      ]
+    },
+    "document_id": "US-48318",
+    "source": "astrazeneca-breztri-veeva-approved-email-2020",
+    "tags": [
+      "approved-email",
+      "copd",
+      "triple-therapy",
+      "clinical-data",
+      "astrazeneca",
+      "example-template"
+    ]
+  },
+  {
+    "id": "vae-fasenra-001",
+    "category": "modules",
+    "title": "Approved Email Example — FASENRA (Severe Eosinophilic Asthma)",
+    "products": [
+      "oce"
+    ],
+    "summary": "Reference example of a Veeva CRM Approved Email for AstraZeneca FASENRA (benralizumab), a monoclonal antibody for severe eosinophilic asthma. Demonstrates the template pattern for biologic specialty products with eosinophil count threshold-based efficacy data.",
+    "product_context": {
+      "brand": "FASENRA",
+      "generic": "benralizumab",
+      "indication": "Add-on maintenance treatment of patients aged 12 years and older with severe asthma and an eosinophilic phenotype",
+      "route": "Subcutaneous injection",
+      "mechanism": "Anti-interleukin-5 receptor alpha monoclonal antibody that induces direct, rapid, and near-complete depletion of eosinophils via enhanced antibody-dependent cell-mediated cytotoxicity (ADCC)"
+    },
+    "clinical_data_presented": {
+      "sirocco_trial": {
+        "design": "48-week, randomized, double-blind, parallel-group, placebo-controlled trial",
+        "key_result": "Up to 51% reduction in annual exacerbation rates vs placebo in patients with baseline blood eosinophils >= 300 cells/uL"
+      },
+      "calima_trial": {
+        "design": "56-week, randomized, double-blind, parallel-group, placebo-controlled trial",
+        "key_result": "Consistent exacerbation rate reductions at both >= 300 cells/uL and >= 150 cells/uL eosinophil thresholds"
+      },
+      "biomarker_stratification": "Efficacy data presented by baseline blood eosinophil count thresholds (>= 150 and >= 300 cells/uL), demonstrating the importance of patient selection in biologic therapy"
+    },
+    "template_metrics": {
+      "fragment_count": 8,
+      "fragment_types": "Diagnosis awareness, clinical characteristics resources, peer discussion videos, patient identification tools",
+      "merge_field_usage": [
+        "account last name with capitalize class",
+        "custom text dropdown",
+        "fragment insertion (range 1-10)",
+        "unsubscribe link"
+      ],
+      "notable_pattern": "Uses CSS class on account last name merge field for automatic capitalization — demonstrates merge field styling capability"
+    },
+    "document_id": "US-34958",
+    "source": "astrazeneca-fasenra-veeva-approved-email-2020",
+    "tags": [
+      "approved-email",
+      "asthma",
+      "biologic",
+      "eosinophilic",
+      "clinical-data",
+      "astrazeneca",
+      "example-template"
+    ]
+  },
+  {
+    "id": "vae-patterns-001",
+    "category": "modules",
+    "title": "Veeva Approved Email — Content Customization Patterns and Fragment Architecture",
+    "products": [
+      "oce"
+    ],
+    "summary": "Analysis of customization patterns across FASENRA (US-34958) and BREZTRI (US-48318) approved email specimens. Both use a standardized section architecture (A through G) with Customizable Alternatives (CA) markup allowing rep-selected personalization within MLR-approved boundaries. Templates combine scientific and commercial CTAs in a single email, with fragment numbering enabling modular content assembly.",
+    "findings": {
+      "section_architecture": "Standardized sections labeled A through G: (A) Subject Lines, (B) Salutations, (C/D) Body Sentences with clinical and commercial variants, (E) Closing Options, (F) CTAs with icons/images, (G) Sign-Off/Close.",
+      "customizable_alternatives": "CA (Customizable Alternatives) markup throughout. BREZTRI: 23 subject line variants, 5 salutations, 7 CTA fragments, 3 closing salutations, 3 sign-offs. FASENRA: 7 subject lines, 4 salutations, 4 body text variants, 5 closing options, 9 CTAs, 9 sign-offs.",
+      "cta_diversity": "CTAs span both scientific (clinical data requests, study references, peer-reviewed content, KOL video links) and commercial (sample closet access, copay/access programs like BREZTRI Zero Pay $0 for 30-day supply). Both types coexist in a single template.",
+      "fragment_numbering": "Fragments use numbered CTA buttons linked to tracked assets. Each fragment is independently versionable and MLR-approvable.",
+      "accessibility_compliance": "Alt-tag accessibility tables provided for all images. Auto-populated fields include rep email, phone, and send date.",
+      "subject_line_spectrum": "Subject lines range from clinical tone ('New clinical data for [brand]') to commercial ('Your patients may benefit from [brand]'). Rep selects based on HCP relationship and engagement context.",
+      "auto_populated_fields": "Rep email address, phone number, and send date are auto-populated from CRM user profile. Reduces personalization errors and ensures compliance with sender identification requirements."
+    },
+    "source": "FASENRA (US-34958, Feb 2020) and BREZTRI (US-48318, Dec 2020) Veeva Approved Email specimens",
+    "tags": [
+      "approved-email",
+      "customization-patterns",
+      "fragment-architecture",
+      "cta-design",
+      "mlr-compliance"
+    ]
+  }
+]

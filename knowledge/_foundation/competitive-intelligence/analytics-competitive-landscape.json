@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ci-analytics-002",
+    "category": "competitive-intelligence",
+    "title": "Competitive HCP Data Profiling Platform \u2014 Capabilities and Scale (2023)",
+    "products": [
+      "oce"
+    ],
+    "summary": "Self-service integrated data platform for healthcare professional profiling. Pre-loads and bridges HCP attributes across reference data, audience identity management, accelerated insights, provider companion, and third-party datasets. Targets commercial operations, marketing, field sales, and IT teams with a unified data and analytics umbrella.",
+    "findings": {
+      "platform_overview": "Self-service integrated data platform that surfaces distinct HCP profile insights by preloading and bridging critical attributes across trusted data sources. Described as the only platform of its kind that combines reference data with audience identity management, accelerated insights, provider companion tools, and third-party datasets in a single interface.",
+      "data_scale": "15 million HCP profiles with 500+ personalized attributes. 5,000 crawled websites. 10 million professional articles indexed. 5,400+ medical websites sending near-real-time data. 10 disparate data sources feeding the platform. 100GB of data refreshed and validated daily. 6,000 unique columns of data. 5 teams constantly checking data and platform operability. 24.5 million social media posts and videos indexed.",
+      "data_categories": "HCP Networks (professional relationships and affiliations), Prescription Data (brand and therapeutic prescribing patterns), Patient/Payer/Claims Data (coverage and claims intelligence), OTC Recommendations (consumer health advisory patterns), CRM Integration (sales interactions, email, sample delivery, meetings), Digital and Consumer Behavior (online activity, website visits, content engagement), Scientific and Digital Influence (KOL identification, publication history), Affiliation Data (institutional and organizational ties), Third-Party Data (conference attendance, non-personal promotion), CMS Open Payments (transparency and compliance data).",
+      "key_capabilities": "Map industry and therapeutic trends. Identify and compare key influencers (KOL analysis). Build and export custom segments for targeting. Understand HCP professional networks, online behavior, and brand relationships. Create single-brand omnichannel picture including all sales interactions, email communications, sample delivery, and in-person meetings.",
+      "target_personas": "Commercial Operations and Data Strategy/Analytics teams (unified data management), Brand Marketing (HCP targeting and segmentation), Field Sales including CSOs (territory intelligence), IT Directors (simplified data validation and architecture maintenance).",
+      "competitive_implications_for_migration": "This platform represents a significant data asset that customers may rely on for HCP profiling and targeting. Migration planning should account for: (1) replacement data enrichment strategy for HCP profiles, (2) custom segment export workflows that may feed downstream CRM targeting, (3) KOL identification and influence scoring that may inform medical affairs workflows, (4) near-real-time data refresh cadences that set customer expectations for data freshness."
+    },
+    "source": "Product infographic, Infinite Dimension Profiler 2023",
+    "tags": [
+      "hcp-profiling",
+      "data-platform",
+      "competitive-analytics",
+      "kol-identification",
+      "migration-considerations"
+    ]
+  },
+  {
+    "id": "ci-analytics-003",
+    "category": "competitive-intelligence",
+    "title": "Competitive Omnichannel Marketing Optimization Platform (2022)",
+    "products": [
+      "oce"
+    ],
+    "summary": "Media optimization platform for pharmaceutical and life sciences marketing. Enables personalized, privacy-safe measurement and optimization of marketing spend across digital channels, website/paid search, and OTT streaming. Provides orchestration, optimization, and personalization capabilities with weekly audience quality reporting.",
+    "findings": {
+      "platform_overview": "Novel media optimization platform that allows informed decisions about media spend. Provides access to market-leading, privacy-safe data in a personalized user-friendly interface. Stakeholders across multiple organizations can make quick investment pivots and maximize ROI.",
+      "three_pillars": "Orchestrate: Understand enterprise value of a customer by coordinating cross-channel engagement to maximize experience. Optimize: Learn what is working and improve customer engagements for greatest impact. Personalize: Measure marketing activities at the customer level for relevant and timely engagement.",
+      "channel_support": "Digital Channels (traditional online media including display and programmatic, measured in aggregate and separately). Website and Paid Search (website tagged to track traffic sources including social, direct digital, SMS, email, and other referring sources; paid search measured standalone). Over-The-Top/OTT (streaming services tracked via traditional tags or exposure file integration).",
+      "optimization_features": "Transparency: un-projected counts with sample confidence and significant lift metrics. Weekly Audience Quality: reports for weekly optimizations with incremental lift tied to campaign elements. Granularity: data cuts within channels revealing top optimization opportunities. Trended Performance: 4-week rolling data updates to isolate trend breaks. Cost Considerations: reporting by calendar month and quarter matched to marketing financials. Customization: executive, brand, publisher, and agency views of data and insights.",
+      "privacy_approach": "Privacy-safe personalization combining increased data availability with technology for deep-dive pinpoint accuracy of media optimizations without infringing on privacy. Positions as enabling closer customer relationships while maintaining compliance.",
+      "competitive_implications_for_migration": "Customers using this platform have established omnichannel measurement workflows. Migration should account for: (1) existing campaign attribution models and historical baselines, (2) channel-specific optimization cadences (weekly audience quality reports), (3) executive and agency reporting views that stakeholders depend on, (4) privacy-safe data handling expectations that must be maintained in any replacement solution."
+    },
+    "source": "Product fact sheet, Omnichannel Navigator US&CAN 2022",
+    "tags": [
+      "omnichannel",
+      "media-optimization",
+      "marketing-analytics",
+      "competitive-analytics",
+      "privacy-safe"
+    ]
+  }
+]

@@ -1,0 +1,133 @@
+category: Data Migration Validation
+description: Validation rules for pre- and post-migration data integrity checks
+rules:
+  - id: val-dm-001
+    title: Account Referential Integrity
+    description: Every child record (Visit, Sample Transaction, Order, Consent) must reference a valid Account that exists in the target system
+    symptoms:
+      - Orphaned records after migration
+      - '"Record not found" errors in mobile app'
+      - Missing account data in rep territory view
+    prerequisites:
+      - Account migration completed
+      - External ID mapping table available
+    resolution:
+      - Run referential integrity query joining child tables to Account on External_Id
+      - Export orphaned records (no matching Account)
+      - Resolve by either migrating missing accounts or remapping to correct account IDs
+      - Re-run validation until zero orphans
+    severity: critical
+    module: All
+
+  - id: val-dm-002
+    title: Sample Transaction Audit Trail Completeness
+    description: Every sample transaction must have a complete audit chain — from receipt to disbursement to acknowledgment. Gaps in the chain indicate missing records.
+    symptoms:
+      - Inventory balance discrepancies
+      - Compliance audit failures
+      - Reconciliation job errors
+    prerequisites:
+      - All sample transaction types migrated
+      - Sample Lot records loaded
+    resolution:
+      - Query all sample lots and calculate running balance from transactions
+      - Compare calculated balance to migrated inventory snapshot
+      - Identify discrepancies greater than zero
+      - For each discrepancy, trace the transaction chain to find the gap
+      - Insert adjustment transactions to reconcile if approved by compliance
+    severity: critical
+    module: Sample Management
+
+  - id: val-dm-003
+    title: Consent Record Country-Default Validation
+    description: Every consent record must have the correct default status based on the HCP's country of practice. EU countries must not have default opt-in without explicit evidence.
+    symptoms:
+      - Regulatory violation risk
+      - Emails sent to HCPs who haven't consented (EU)
+      - Legal exposure in GDPR audits
+    prerequisites:
+      - Consent records migrated
+      - Country rules configured in target platform
+    resolution:
+      - Query all consent records grouped by country
+      - For EU countries, flag any record with OptIn status that lacks a CaptureDate (implies default, not explicit)
+      - For US, verify state-specific rules (CA CCPA, VT prescriber confidentiality)
+      - Generate exception report for legal review
+      - Update flagged records to 'Not Captured' status pending re-consent
+    severity: critical
+    module: Consent Management
+
+  - id: val-dm-004
+    title: Visit-Account Association Validation
+    description: Every Visit record must reference a valid Account. Visit-Account mismatches cause reporting errors and rep territory view gaps.
+    symptoms:
+      - Visits not appearing in account timeline
+      - Call frequency reports showing zero visits for accounts
+      - Territory-level visit counts incorrect
+    prerequisites:
+      - Accounts and Visits both migrated
+    resolution:
+      - Left outer join Visit to Account on the account reference field
+      - Export visits with null account references
+      - For each orphaned visit, look up the legacy call's account and remap
+      - If legacy account was not migrated (e.g., inactive), decide whether to migrate the account or archive the visit
+    severity: high
+    module: Visit Management
+
+  - id: val-dm-005
+    title: Email Template Merge Field Conversion
+    description: All email templates must have their merge fields converted from legacy syntax to target platform syntax. Unconverted templates will display raw merge field codes to recipients.
+    symptoms:
+      - Emails showing "{{FirstName}}" or similar raw tokens
+      - Template preview showing merge field syntax instead of data
+      - Compliance risk if personalization fails in regulated communications
+    prerequisites:
+      - Email template content migrated
+      - Field mapping table complete
+    resolution:
+      - Scan all template HTML/text for legacy merge field patterns (double curly braces, legacy token syntax)
+      - Apply regex-based conversion to target merge field syntax
+      - Generate preview for each template using test data
+      - Flag templates with unconverted fields for manual review
+      - Validate conditional blocks and loops manually (cannot be auto-converted reliably)
+    severity: medium
+    module: Email and Digital Engagement
+
+  - id: val-dm-006
+    title: User and Permission Post-Migration Validation
+    description: Every user must be able to log in, see their assigned accounts, and perform their daily workflow on Day 1. Permission misconfiguration is the number one go-live blocker.
+    symptoms:
+      - Users cannot log in
+      - Users see no data after login
+      - Users cannot create visits or sample transactions
+      - Users see data from other territories
+    prerequisites:
+      - Users provisioned with correct profiles and permission sets
+      - Territory assignments loaded
+      - Sharing rules configured
+    resolution:
+      - Create a Day 1 smoke test checklist for each user role (rep, manager, admin, compliance)
+      - Test with actual user accounts, not admin accounts
+      - Verify login, territory view, account access, visit creation, sample transaction, and report access
+      - Document and fix every permission error found
+      - Re-run smoke test after fixes
+    severity: critical
+    module: User Management
+
+  - id: val-dm-007
+    title: Lot Expiration Date Validation
+    description: Sample lots with expiration dates in the past should be marked as expired in the target system. Lots expiring within 30 days should be flagged for attention.
+    symptoms:
+      - Reps able to sample from expired lots
+      - Compliance violations for distributing expired samples
+      - Inventory showing expired product as available
+    prerequisites:
+      - Sample Lot records migrated
+    resolution:
+      - Query all sample lots where expiration_date < today
+      - Set status to 'Expired' for past-dated lots
+      - Query lots expiring within 30 days — generate alert report
+      - Verify that expired lots cannot be selected for new sample transactions
+      - Confirm reconciliation job handles expired lot calculations correctly
+    severity: critical
+    module: Sample Management

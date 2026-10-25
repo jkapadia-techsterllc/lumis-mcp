@@ -1,0 +1,17 @@
+[
+  {
+    "id": "fnd-strat-010",
+    "category": "org-strategy",
+    "title": "Orchestrated Customer Engagement Strategy and Evolution",
+    "products": ["lsc", "oce"],
+    "summary": "Strategic framework for orchestrated customer engagement (OCE) in life sciences, tracing the evolution from multi-channel marketing through omnichannel to fully orchestrated engagement models that align sales, marketing, and technology functions.",
+    "findings": {
+      "engagement_evolution": "Customer engagement in life sciences has evolved through three generations: (1) Multi-Channel Marketing (MCM) - broadcasting on multiple channels based on channel preference, (2) Omnichannel Marketing (OCM) - coordinating across channels aligned to the customer buying journey, (3) Orchestrated Customer Engagement - aligning sales AND marketing activities with data-driven precision for each customer interaction. OCE goes beyond channel coordination to orchestrate the entire customer experience across all touchpoints.",
+      "oce_value_proposition": "Orchestrated Customer Engagement enables life sciences companies to enter every meeting knowing precisely what customers need, deliver uniquely tailored information based on practice preferences, align sales, marketing, and technology teams as a unified force. Backed by analysis of up to 100,000 global data streams, OCE provides the confidence, transparency, and ROI accountability demanded across every dollar spent in sales and marketing.",
+      "connected_intelligence_vision": "Healthcare transformation requires connecting intelligence across the entire ecosystem: patients, providers, payers, and life sciences companies. Key pillars: precision (targeting the right stakeholder with the right message), speed (accelerating time to insight and action), and insight (converting data into actionable intelligence). Digital transformation enables real-time data flows that transform reactive engagement into proactive, predictive customer interactions.",
+      "implementation_framework": "Successful OCE implementation requires: unified customer data platform aggregating signals across channels, AI-driven analytics for next-best-action recommendations, compliant content management for regulatory adherence, cross-functional alignment between commercial, medical, and IT organizations, and measurement frameworks that connect engagement activities to business outcomes."
+    },
+    "source": "Consolidated from Orchestrated Customer Engagement 2015 White Paper and Connected Intelligence strategy presentation",
+    "tags": ["oce", "customer-engagement", "multichannel", "omnichannel", "orchestration", "strategy", "connected-intelligence", "digital-transformation"]
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "oce-cfg-calls-001",
+    "category": "configuration",
+    "title": "Call 2.0 Module Overview and Activation Requirements",
+    "products": ["oce"],
+    "summary": "Call 2.0 is a redesigned Lightning page that replaces the standard Log a Call page, offering improved performance, auto-save, custom Lightning Web Component support, component section dependencies, and cross-object validation through generic workflow scripts. Call 2.0 and the legacy Log a Call cannot be used simultaneously on Web due to conflicting configuration steps.",
+    "findings": {
+      "core_capabilities": "Call 2.0 supports bulk update across parent and child calls, call details, messages, items, and DTP records. Up to 10 fields are applicable for Attendees bulk update with the first always being Account Name. Up to 15 attendees can be displayed in Details/Messages/Items/DTPs edit popups. Products are filtered by Product Start Date and Product End Date relative to the Call Date.",
+      "activation_prerequisites": "Activation requires: populating the Detail Type field on Detail products with the value Brand (via a batch job), configuring workflow paths for each Call record type, overriding standard button actions for Call and related objects (Call Detail, Call Message, Call Sample, Call Sample Order, Call Item, Call Presentation), activating validation rules on related objects, and activating specific trigger handlers including ValidateSignedCallItems, CallDetailNameGenerator, and various count handlers.",
+      "lightning_page_benefits": "The new Lightning page provides better web performance, no dependency on metadata for rendering, ability to add custom Lightning Web Components, support for custom object related lists, component section dependencies on call fields, incremental save to prevent data loss during crashes, and cross-object validation using generic workflow scripts. Dynamic forms are not supported on Web for new call creation.",
+      "record_type_considerations": "If Call object has record types configured, workflow paths must be configured separately for each record type. The workflow path record type name follows the template pattern with the object API name and record type name. Metadata cache regeneration is required after adding new record types."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "call-2.0", "log-a-call", "activation", "lightning-page", "workflow-paths", "migration-critical"]
+  },
+  {
+    "id": "oce-cfg-calls-002",
+    "category": "configuration",
+    "title": "Call Attendees, Bulk Edit, and Account Association",
+    "products": ["oce"],
+    "summary": "Call 2.0 supports adding attendees via drag-and-drop and popup, with configurable bulk edit fields, affiliated account lookups by address or affiliation, and automatic parent-to-child call location copying based on address matching.",
+    "findings": {
+      "attendee_management": "Required fields for Attendee Details can only be configured at the object level and must have default values set so users can create calls using drag-and-drop in Planner. Customizing fields in list results is not supported on Mobile where fields are hardcoded. When a call attendee account has the same address as the parent call's Location field, the Account Address record ID of the attendee is copied to the child call's Location field.",
+      "bulk_edit_configuration": "Bulk edit fields are configurable using the Attendees related list on the Call page layout. Only picklist, text, checkbox, date, and datetime field types are supported. For organizations updated from versions prior to November 2022 with multiple record types, the set of available fields is defined by the related list component configuration for the respective Call page layout. This requires assigning the LAC User permission set and granting API Enabled administrative permission.",
+      "affiliated_accounts": "Two custom permissions control attendee lookup behavior: one enables the Affiliated Accounts by Address list in the Add Attendees popup, and another enables the Affiliated Accounts list by Affiliation. Both require the appropriate custom permission assignment through profiles or permission sets.",
+      "parent_child_behavior": "Custom field data is not copied from parent to child calls in Call 2.0. When sales rep users try to open a child call, the parent call always opens except when the child call is selected on the Attendees tab. Date and DateTime field population can be configured to either pre-populate system date and time (default) or leave blank via a custom permission."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "attendees", "bulk-edit", "affiliated-accounts", "parent-child-calls"]
+  },
+  {
+    "id": "oce-cfg-calls-003",
+    "category": "configuration",
+    "title": "Call Components — Details, Messages, Items, DTPs, and Samples",
+    "products": ["oce"],
+    "summary": "Call 2.0 uses modular components for product details, messages, items, DTP (Detail to Present) records, and samples, each configurable through Lightning page tabs with support for product message grouping, custom reactions, and brand/indication/therapeutic area filtering.",
+    "findings": {
+      "component_architecture": "Product-related components (details, items, DTPs) can be consolidated into a single tab by cloning the Lightning page and adding the respective Aura wrapper components and related lists under a custom tab. Each component has its own related list and button component for bulk operations.",
+      "product_message_grouping": "Product message grouping for Call 2.0 requires a custom permission assignment and metadata cache generation. Profile-based settings through the Admin Console Call Administration tile are not supported for Call 2.0 — only the custom permission approach works.",
+      "product_filtering": "Product selection supports filtering by Brands, Indications, Therapeutic Areas, and Regimens. Configuration requires the LAC User permission set, configuring the Recent Sidebar and Popup sidebar layout in the Admin Console, and assigning custom permissions for off-label detail selection and ad-hoc regimen creation.",
+      "custom_edit_components": "Standard New actions must be disabled on related lists for Call-related objects (Call Detail, Call Message, Call Discussion, Call Sample, Call Sample Order, Call Item, Call Presentation). Custom Edit Samples and Edit DTP components must be used to add these record types. Validation rules prevent changing the parent Call reference after record creation."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "call-components", "product-details", "messages", "DTP", "samples", "product-filtering"]
+  },
+  {
+    "id": "oce-cfg-calls-004",
+    "category": "configuration",
+    "title": "Call Signing, Submission, and Quick Actions",
+    "products": ["oce"],
+    "summary": "Call 2.0 supports digital signing via Document ID, submission workflows, last call viewing, medical inquiry creation, CLM presentation launching, and record type changing — all configurable through quick actions and custom permissions.",
+    "findings": {
+      "signing_and_submission": "Submit and Sign quick actions for attendees are activated through the Admin Console Quick Action Administration tile under the Call tab. Available quick actions include CallLastCall, CallInquiry, and CallSign. Signing uses Document ID for digital signature capture.",
+      "clm_integration": "Starting a CLM presentation from a call requires activating CLM for Web functionality, activating workflow paths, and optionally assigning a custom permission to allow CLM presentation after signature. The workflow path must be configured for the Call object.",
+      "medical_inquiry_integration": "Opening Medical Inquiry (MIRF 2.0) from a call requires enabling the Medical Inquiry functionality and adding the Inquiry action in the Actions section of component configuration. The mobile application reads quick actions from flexible pages when the Enable Dynamic Actions option is enabled in Application Settings.",
+      "record_type_change": "The Change Record Type quick action enables changing the record type of a Call on both Web and Mobile. Configuration involves adding the quick action to the lightning page and activating it. If Enable Dynamic Actions setting is enabled, the mobile app shows quick actions configured on the Lightning page."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "signing", "submission", "quick-actions", "CLM", "medical-inquiry", "record-types"]
+  },
+  {
+    "id": "oce-cfg-calls-005",
+    "category": "configuration",
+    "title": "Call Account Tactics, To-Dos, and Follow-Up Scheduling",
+    "products": ["oce"],
+    "summary": "Call 2.0 integrates with Account Plans through Call Account Tactics, supports Call To-Dos linked to Account Objectives, and enables follow-up call scheduling with configurable pre-call objectives and employee attendee filtering.",
+    "findings": {
+      "account_tactics": "Call Account Tactics requires adding the related list to the Call layout with the Account Tactic field, then modifying the Lightning page to add an Account Tactics custom tab with a Related List Single component. This connects call activities directly to the Account Plan management framework.",
+      "call_todos": "Call To-Dos require adding the Status field to the Call To-Do page layout and adding the CallToDos related list with Name, To-Do, and Status fields to the Call page layout. This links account objectives directly to individual calls for tracking completion.",
+      "follow_up_scheduling": "Follow-up call scheduling requires the LAC User permission set and cloning the Log a Call lightning page. The cloned page must override the View action and be assigned as an App Default for the application. Pre-call objectives require activating the PreCallObjectiveHandler trigger handler.",
+      "employee_attendees": "Adding or removing employee attendees has configurable filtering. Additional configuration for Call 2.0 includes assigning the LAC User permission set and configuring employee filtering rules to control which employees appear as selectable attendees."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "account-tactics", "to-dos", "follow-up", "pre-call-objectives", "employee-attendees"]
+  },
+  {
+    "id": "oce-cfg-calls-006",
+    "category": "configuration",
+    "title": "Call DML Events, Surveys, and Validation Rules",
+    "products": ["oce"],
+    "summary": "Call 2.0 supports Data Manipulation Language event tracking, survey integration for post-call feedback collection, and comprehensive validation rules across all call-related objects to enforce data integrity and workflow compliance.",
+    "findings": {
+      "dml_events": "Call DML Events track create, update, and delete operations on call records and related objects for audit and integration purposes. These events can be enabled to trigger downstream processes when call data changes.",
+      "survey_integration": "Call 2.0 integrates with surveys for post-call feedback. The system queries call records, survey definitions, account information, and survey invitations to validate that required surveys are completed. Survey responses are tracked per call with status monitoring for completion compliance.",
+      "validation_rules": "Validation rules prevent modification of parent call references after record creation across all call-related objects (Call Detail, Call Discussion, Call Expense, Call Item, Call Message, Call Sample Order, Call Sample, Call Study, Call Presentation, Call Sample Request, Call Employee Attendee, Call Dialogue, Call Account Tactic, Call ToDo). Additional rules include ProductFieldDetailOrBlankValidator, SampleProductHierarchyComplianceCheck, LotParentRecordValidator, ProductFieldMustContainDetail, SampleHierarchyValidator, and SampleLotOwnerMatchValidator.",
+      "trigger_handlers": "Key trigger handlers include ValidateSignedCallItems, ValidateSignedCallSampleOrders, CallDetailCallMessageCleanerHandler, CallDetailNameGenerator, and count handlers for call details, samples, sample orders, and items. These enforce business rules during call lifecycle operations."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": ["calls", "DML-events", "surveys", "validation-rules", "trigger-handlers", "data-integrity"]
+  }
+]

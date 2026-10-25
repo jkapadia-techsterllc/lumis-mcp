@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ci-sfdc-001",
+    "category": "competitive-intelligence-salesforce",
+    "title": "Salesforce Health Cloud — Platform Overview and Life Sciences Relevance",
+    "products": ["lsc"],
+    "summary": "Salesforce Health Cloud is the healthcare and life sciences industry cloud built on the Salesforce Platform. It provides a patient/member-centric data model, care plan management, provider relationship management, and healthcare-specific analytics. For life sciences organizations, Health Cloud serves as the platform foundation for patient services, patient support programs, hub services, and medical affairs CRM. Health Cloud is distinct from Life Sciences Cloud (LSC) — Health Cloud focuses on care coordination and patient management, while LSC focuses on commercial operations (field force, sampling, territory management, consent). Organizations may deploy both products in the same Salesforce org for comprehensive coverage.",
+    "platform_capabilities": {
+      "patient_data_model": "Health Cloud provides a healthcare-specific data model including Person Account, Care Plan, Care Plan Template, Clinical Assessment, Health Condition, and provider-related objects. This model supports patient 360 views, care team collaboration, and longitudinal patient tracking.",
+      "care_coordination": "Care plans, care programs, and care team management enable organizations to coordinate patient services across multiple touchpoints — field nurses, call centers, specialty pharmacies, and patient portals.",
+      "analytics": "CRM Analytics (formerly Tableau CRM) templates for Health Cloud provide healthcare KPI dashboards, patient engagement scoring, and population health analytics out of the box.",
+      "platform_integration": "Health Cloud inherits all Salesforce Platform integration capabilities — MuleSoft, Connect API, Platform Events, Change Data Capture — enabling integration with EHR systems, pharmacy platforms, and claims data sources."
+    },
+    "source": "sfdc-health-cloud-overview-oct-2022",
+    "tags": ["salesforce", "health-cloud", "platform-overview", "patient-services", "life-sciences"]
+  },
+  {
+    "id": "ci-sfdc-002",
+    "category": "competitive-intelligence-salesforce",
+    "title": "Salesforce-Veeva Partnership Dynamics and Competitive Positioning",
+    "products": ["lsc"],
+    "summary": "The Salesforce-Veeva relationship has evolved from a strategic partnership (Veeva CRM built on Salesforce Platform) to a competitive dynamic (Veeva migrating to its own Vault platform while Salesforce launches Life Sciences Cloud). This shift creates market uncertainty and customer decision complexity. Salesforce's competitive position emphasizes platform breadth (Einstein AI, MuleSoft integration, AppExchange ecosystem, multi-cloud strategy), workforce availability (large Salesforce-certified professional pool), and innovation velocity (three releases per year, Agentforce AI). Veeva's competitive position emphasizes domain depth (purpose-built for life sciences), regulatory compliance heritage (Vault's GxP pedigree), and vertical integration (CRM + content + data in one vendor).",
+    "partnership_evolution": {
+      "original_partnership": "Veeva CRM was built as a managed package on the Salesforce Platform, leveraging Salesforce infrastructure, security model, and developer ecosystem. This partnership drove Veeva's growth from startup to the dominant life sciences CRM.",
+      "competitive_divergence": "Veeva's decision to build Vault CRM on its proprietary platform signals a strategic departure from the Salesforce ecosystem. Salesforce responded by investing in Life Sciences Cloud as a first-party commercial CRM for life sciences.",
+      "customer_impact": "Customers who invested in the combined Salesforce-Veeva stack now face a platform choice that did not exist before. Existing customizations, integrations, and team skills are platform-specific assets that factor into the migration decision.",
+      "market_dynamics": "The competitive dynamic is shaping vendor pricing, innovation investment, and partnership strategies across the life sciences technology ecosystem."
+    },
+    "source": "sfdc-health-cloud-overview-oct-2022",
+    "tags": ["salesforce", "veeva", "partnership", "competitive-dynamics", "market-analysis"]
+  }
+]

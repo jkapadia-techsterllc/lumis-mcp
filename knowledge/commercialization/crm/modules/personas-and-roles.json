@@ -1,0 +1,162 @@
+[
+  {
+    "id": "persona-001",
+    "persona": "Field Sales Representative",
+    "description": "Front-line commercial rep responsible for face-to-face engagement with healthcare professionals (HCPs). Carries a territory, manages account plans, executes calls/visits, delivers approved content, and collects sample signatures.",
+    "key_workflows": [
+      "Pre-call planning — review account history, last interactions, and open objectives before each visit",
+      "Visit execution — check in at location, present CLM content, capture discussion notes, collect signatures for samples",
+      "Sample management — record sample drops, verify lot numbers, check allocation limits, capture HCP signatures on a mobile device",
+      "Activity reporting — log call reports, record next-step commitments, sync data from the field",
+      "Territory management — view alignment, manage routing, track visit frequency compliance"
+    ],
+    "common_challenges": [
+      "Offline access — reps need full functionality in hospitals/clinics with no connectivity",
+      "Signature capture — must work reliably on tablet with legal compliance (21 CFR Part 11 in regulated markets)",
+      "Data sync conflicts — edits made offline may conflict with changes pushed by operations",
+      "Content relevance — reps need the right content for each HCP specialty, not a generic library",
+      "Compliance visibility — must see real-time sample limits and call frequency caps"
+    ],
+    "relevant_modules": ["Visit Management", "Sample Management", "Content Management", "Territory Management", "Activity Plans"]
+  },
+  {
+    "id": "persona-002",
+    "persona": "Key Account Manager (KAM)",
+    "description": "Strategic account owner managing large institutional accounts (hospitals, IDNs, health systems). Focuses on account-level planning, multi-stakeholder engagement, and long-term contracting rather than individual rep-level calls.",
+    "key_workflows": [
+      "Account planning — build engagement plans spanning multiple stakeholders within an institution",
+      "Stakeholder mapping — identify decision makers, influencers, and budget holders across departments",
+      "Meeting orchestration — coordinate cross-functional visits involving medical, commercial, and market access teams",
+      "Contract management — track formulary status, pricing agreements, and procurement timelines",
+      "Performance dashboards — monitor account-level KPIs (revenue, market share, adherence, formulary wins)"
+    ],
+    "common_challenges": [
+      "Complex org hierarchies — accounts span multiple sites, subsidiaries, and affiliates with shared decision-making",
+      "Multi-team coordination — KAM must align field reps, MSLs, and market access across the same account",
+      "Long sales cycles — institutional decisions take months; tracking engagement across quarters is essential",
+      "Data aggregation — need a unified view across all contacts, interactions, and contracts at the account level",
+      "Regulatory constraints — different engagement rules for procurement vs. clinical stakeholders"
+    ],
+    "relevant_modules": ["Account Management", "Visit Management", "Activity Plans", "Content Management", "Consent Management"]
+  },
+  {
+    "id": "persona-003",
+    "persona": "Medical Science Liaison (MSL)",
+    "description": "Non-promotional scientific expert who engages key opinion leaders (KOLs) with medical and scientific information. Operates under strict compliance boundaries separating medical and commercial interactions.",
+    "key_workflows": [
+      "KOL engagement — maintain scientific relationships with thought leaders, track publication co-authorships, congress attendance",
+      "Medical inquiry response — handle unsolicited medical information requests, log responses and approved references",
+      "Congress and event management — plan booth engagement, poster sessions, and 1:1 meetings at medical congresses",
+      "Publication tracking — monitor KOL publication activity and relevant clinical trial data",
+      "Insight capture — record field medical insights to feed product development and medical strategy"
+    ],
+    "common_challenges": [
+      "Compliance firewall — strict separation between commercial and medical activities; MSLs must not engage in promotional discussions",
+      "Interaction documentation — every KOL touchpoint must be documented with compliant classification (scientific exchange vs. promotional)",
+      "Content limitations — MSLs can only share approved scientific content, not marketing materials",
+      "Cross-functional visibility — MSLs need to see commercial activity without participating in it, to avoid duplication",
+      "Publication and congress data — need integration with external publication databases and congress schedules"
+    ],
+    "relevant_modules": ["Visit Management", "Content Management", "Consent Management", "Event Management"]
+  },
+  {
+    "id": "persona-004",
+    "persona": "Commercial Operations Manager",
+    "description": "Operations leader responsible for territory alignment, data quality, field force effectiveness, and reporting. Configures and maintains the CRM for the commercial team.",
+    "key_workflows": [
+      "Territory alignment — design and maintain territory hierarchies, assign reps to geographies and accounts",
+      "Data stewardship — manage HCP/HCO master data, handle duplicates, maintain data quality metrics",
+      "Field force configuration — set up call plans, cycle frequencies, activity plan templates, and business rules",
+      "Reporting and analytics — build dashboards for call compliance, reach/frequency, sample utilization, and territory coverage",
+      "User administration — manage profiles, permission sets, feature flags, and role hierarchies"
+    ],
+    "common_challenges": [
+      "Alignment changes — territory realignments happen 1-2x per year and require careful data migration",
+      "Downstream dependencies — changes to territories cascade to call plans, sample allocations, and reporting hierarchies",
+      "Data quality — HCP/HCO data degrades rapidly; need automated deduplication and enrichment",
+      "Cross-module configuration — a single business rule change (e.g., call frequency cap) may span multiple modules",
+      "Reporting latency — leadership expects real-time dashboards but data sync from mobile introduces lag"
+    ],
+    "relevant_modules": ["Territory Management", "Activity Plans", "Sample Management", "Admin Console", "User Management"]
+  },
+  {
+    "id": "persona-005",
+    "persona": "Compliance Officer",
+    "description": "Regulatory compliance leader ensuring all field activities adhere to industry regulations (PDMA, Sunshine Act, GDPR, local pharma codes). Reviews and approves content, monitors sample inventory, and manages consent.",
+    "key_workflows": [
+      "Sample audit — review sample distribution reports, verify chain-of-custody, reconcile inventory against regulatory limits",
+      "Consent management — configure and monitor opt-in/opt-out status for all communication channels per jurisdiction",
+      "Content approval — review and approve marketing materials, emails, and CLM presentations before field deployment",
+      "Transparency reporting — generate aggregate spend reports for Sunshine Act / EFPIA disclosure requirements",
+      "Adverse event monitoring — ensure field teams capture and escalate adverse event reports within required timelines"
+    ],
+    "common_challenges": [
+      "Multi-jurisdiction rules — different countries have different consent, sample, and transparency requirements",
+      "Audit readiness — must produce complete audit trails for any field interaction on demand",
+      "Real-time enforcement — prefer proactive blocking of non-compliant actions over after-the-fact correction",
+      "Content lifecycle — balancing speed of content deployment against compliance review cycle time",
+      "Data sovereignty — ensuring personal data stays in the correct geographic region per local regulation"
+    ],
+    "relevant_modules": ["Sample Management", "Consent Management", "Content Management", "Audit Trail", "Transparency Reporting"]
+  },
+  {
+    "id": "persona-006",
+    "persona": "Field Coaching Manager",
+    "description": "First-line sales manager responsible for coaching, developing, and evaluating field representatives. Conducts ride-alongs, reviews call quality, and manages performance.",
+    "key_workflows": [
+      "Coaching visits — accompany reps on field calls, observe interactions, and provide structured feedback",
+      "Performance evaluation — score reps against competency frameworks using configurable assessment forms",
+      "Goal setting — set and track individual development goals, link coaching outcomes to performance metrics",
+      "Team dashboards — monitor team-level metrics (call volume, reach, content utilization, sample compliance)",
+      "Coaching reports — generate coaching summaries for HR and leadership review"
+    ],
+    "common_challenges": [
+      "Form flexibility — coaching assessment forms vary by business unit, country, and therapeutic area",
+      "Offline coaching — ride-alongs often occur in low-connectivity clinical environments",
+      "Rep buy-in — coaching tools must be fast and non-intrusive during live customer interactions",
+      "Objective linking — connecting coaching observations to specific KPI improvements is complex",
+      "Data privacy — coaching evaluations contain sensitive personnel data subject to local labor laws"
+    ],
+    "relevant_modules": ["Field Coaching", "Visit Management", "Activity Plans", "Analytics"]
+  },
+  {
+    "id": "persona-007",
+    "persona": "Market Access / HEOR Specialist",
+    "description": "Health economics and outcomes research specialist focused on formulary access, pricing, and value demonstration to payers and institutional decision makers.",
+    "key_workflows": [
+      "Payer engagement — track formulary status and reimbursement decisions across health plans and hospital systems",
+      "Value dossier distribution — deliver health economics data and outcomes evidence to payer audiences",
+      "Access tracking — monitor product access status (formulary tier, step therapy, prior auth requirements) by account",
+      "Contract management — support pricing and rebate negotiations with institutional purchasers",
+      "Evidence generation — coordinate real-world evidence studies and outcomes data collection"
+    ],
+    "common_challenges": [
+      "Data fragmentation — payer data, formulary status, and contract terms live in separate systems",
+      "Long decision cycles — formulary reviews happen annually; need persistent tracking across quarters",
+      "Regulatory boundaries — market access teams operate under different compliance rules than commercial reps",
+      "Evidence gap analysis — identifying which outcomes data is needed to win formulary access",
+      "Cross-functional alignment — bridging medical, commercial, and market access perspectives for a unified account strategy"
+    ],
+    "relevant_modules": ["Account Management", "Content Management", "Visit Management", "Analytics"]
+  },
+  {
+    "id": "persona-008",
+    "persona": "IT / System Administrator",
+    "description": "Technical administrator responsible for platform configuration, integration, data migration, and ongoing system maintenance. The primary technical owner of the CRM platform.",
+    "key_workflows": [
+      "Platform configuration — set up objects, fields, validation rules, permission sets, and custom metadata",
+      "Integration management — maintain connections to external systems (master data, ERP, content vault, transparency reporting)",
+      "Data migration — plan and execute data loads for HCP/HCO, products, territories, and historical interactions",
+      "Release management — test new releases in sandbox, manage feature activation, and coordinate deployments",
+      "Monitoring and support — troubleshoot sync errors, manage mobile device enrollment, resolve escalated issues"
+    ],
+    "common_challenges": [
+      "Packaging complexity — managed package dependencies, namespace conflicts, and upgrade sequencing",
+      "Mobile management — supporting multiple device types (iPad, iPhone, Android) with varying OS versions",
+      "Sync reliability — ensuring mobile data synchronization is fast, reliable, and conflict-free",
+      "Integration brittleness — external system API changes can break data flows without warning",
+      "Sandbox management — maintaining representative test environments that mirror production data volumes"
+    ],
+    "relevant_modules": ["Admin Console", "User Management", "Data Integration", "Mobile Administration", "All Modules"]
+  }
+]

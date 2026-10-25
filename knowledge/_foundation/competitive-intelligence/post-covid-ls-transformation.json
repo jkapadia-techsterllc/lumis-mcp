@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ci-covid-001",
+    "category": "competitive-intelligence",
+    "title": "Post-COVID Life Sciences Transformation — Digital Investment and Engagement Shifts",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "The COVID-19 pandemic accelerated digital transformation in life sciences by compressing years of change into months. 85.2% of companies reported higher planned digital investment post-pandemic. 69.5% of HCPs reported preference for fewer face-to-face interactions. Decentralized clinical trials gained momentum. The industry shifted from 'digital as supplement' to 'digital as default engagement model.'",
+    "findings": {
+      "digital_investment_surge": "85.2% of life sciences companies reported higher planned digital investment compared to pre-pandemic levels. Investment concentrated in HCP engagement platforms, virtual events infrastructure, and data analytics.",
+      "hcp_preference_shift": "69.5% of HCPs reported preference for fewer face-to-face rep interactions. Preference driven by time efficiency, on-demand content access, and reduced disruption to clinical workflows.",
+      "decentralized_trials": "Decentralized and hybrid clinical trial models accelerated. Remote monitoring, electronic patient-reported outcomes (ePRO/eCOA), and virtual site models moved from experimental to production.",
+      "key_transformation_themes": "Virtual engagement as the default channel; data-driven HCP targeting replacing geographic territory models; patient-centric trial design with remote participation options; digital-first commercial launch models for new products.",
+      "permanent_behavior_change": "Post-pandemic HCP digital preferences are persisting, not reverting. Organizations that treated digital as a temporary pandemic measure are falling behind those that restructured permanently."
+    },
+    "source": "PharmaVoice Article (September 2020)",
+    "tags": [
+      "covid-impact",
+      "digital-transformation",
+      "hcp-preferences",
+      "decentralized-trials",
+      "industry-trends"
+    ]
+  },
+  {
+    "id": "ci-covid-002",
+    "category": "competitive-intelligence",
+    "title": "Customer Advisory Board Insights — Clinical Persona Digital Engagement Requirements",
+    "products": [
+      "oce"
+    ],
+    "summary": "September 2022 customer advisory board with 11 pharma companies (Chiesi, Theramex, Pierre-Fabre, Zentiva, Ferring, Novo Nordisk, Roche, AstraZeneca, Vifor, Bayer, Merz) explored clinical persona requirements for digital-first engagement. COVID vaccine trial learnings informed commercial engagement strategy. Participants identified gaps in current CRM platforms for supporting medical affairs and clinical liaison workflows.",
+    "findings": {
+      "participating_companies": "Chiesi, Theramex, Pierre-Fabre, Zentiva, Ferring, Novo Nordisk, Roche, AstraZeneca, Vifor, Bayer, Merz — mix of large pharma and mid-market specialty companies.",
+      "clinical_persona_gaps": "Current CRM platforms designed primarily for commercial rep workflows. Clinical personas (MSLs, medical affairs, clinical liaisons) have different engagement patterns, compliance requirements, and content needs.",
+      "vaccine_trial_learnings": "COVID vaccine trial operations provided real-world validation of remote engagement, digital consent, and virtual monitoring capabilities at unprecedented scale.",
+      "digital_first_requirements": "Clinical personas require: integrated scientific content libraries, publication tracking, investigator meeting management, adverse event capture, and medical inquiry routing — functions that extend beyond standard CRM call reporting."
+    },
+    "source": "In-Person CAB September 27th — OCEP ClinicalPersona (September 2022)",
+    "tags": [
+      "customer-advisory-board",
+      "clinical-persona",
+      "digital-engagement",
+      "medical-affairs",
+      "pharma-companies"
+    ]
+  }
+]

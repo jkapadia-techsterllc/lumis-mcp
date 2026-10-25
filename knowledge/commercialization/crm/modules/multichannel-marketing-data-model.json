@@ -1,0 +1,29 @@
+[
+  {
+    "id": "mod-mcm-001",
+    "category": "modules",
+    "title": "Multichannel Marketing Data Model Architecture",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "The MCM (Multichannel Marketing) data model defines the entity relationships for orchestrating customer engagement across multiple channels. The model includes approximately 40+ entities organized into three layers: CRM-shared entities (territory, sales rep, product), MCM-shared entities (HCO, Contact Master), and MCM-custom entities (journey metadata, consent management, channel preferences).",
+    "findings": {
+      "customer_master_entities": "Contact Master serves as the central hub with specialized extensions: ContactHCP (profession, specialty, license, certification, practice location cross-references), Contact Consumer, and HCO (healthcare organization) with brick cross-references and address management. ContactHCO junction enables many-to-many HCP-to-organization relationships.",
+      "consent_and_preference_model": "Consent is tracked per channel per contact: Physical Address Current Consent, Email Current Consent, and Phone Current Consent \u2014 each with audit trail. Contact Channel Preference records the preferred communication channel per contact. Consent Audit maintains the full history of opt-in/opt-out events.",
+      "journey_orchestration_entities": "Journey MetaData defines the orchestration templates. Topic and Topic Communication Channel Xref control which channels are valid for each communication topic. These entities enable channel-aware message routing.",
+      "territory_and_product_model": "Territory and SalesRep entities are shared from CRM. Product Master includes therapeutic area and brand hierarchy. The model supports territory-based access control for MCM campaigns.",
+      "entity_color_coding": "The data model uses three color-coded entity categories: Orange for custom MCM entities (journey, consent, preferences), Purple for entities shared from CRM (territory, sales rep, product), and Blue for entities shared from MCM platform (HCO, contact master)."
+    },
+    "source": "MCM Data Model V12 ER diagram",
+    "tags": [
+      "mcm",
+      "data-model",
+      "multichannel",
+      "consent",
+      "journey-orchestration",
+      "hcp",
+      "hco"
+    ]
+  }
+]

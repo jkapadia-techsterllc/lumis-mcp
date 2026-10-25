@@ -1,0 +1,92 @@
+[
+  {
+    "id": "sq-ic-001",
+    "category": "content-management",
+    "question": "What is the difference between Presentation and PresentationContent?",
+    "answer": "They are NOT related objects. PresentationContent is part of the newer 'Stories' feature and stores AI-generated content assets (audio/text summaries). It has no relationship to the CLM Presentation object (no PresentationId, no parent-child link). Do not confuse them in queries, reports, or data model discussions.",
+    "gotcha_level": "critical",
+    "source": "implementation-qa",
+    "tags": ["content", "presentation", "stories", "data-model"]
+  },
+  {
+    "id": "sq-ic-002",
+    "category": "content-management",
+    "question": "What is the iOS vs Web content mismatch issue?",
+    "answer": "iOS content accordion has no tier that performs account-targeted fetch. The capability exists (targeted content fetch) and is used in the CLM Library grid view, but it is not wired to the iOS menu items API. This causes iOS and Web to show different presentation lists for the same user and account, which confuses reps.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["content", "ios", "web", "mismatch", "targeted-fetch"]
+  },
+  {
+    "id": "sq-ic-003",
+    "category": "content-management",
+    "question": "How do I handle large video files for CLM presentations?",
+    "answer": "Videos up to ~8GB exist in customer environments. Standalone video is not a supported content type for CLM. Videos must be embedded within HTML presentations (ZIP packages). Consider file size limits, offline download impact on sync times, and storage quotas when planning video content strategy.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["content", "video", "file-size", "html-embedding"]
+  },
+  {
+    "id": "sq-ic-004",
+    "category": "content-management",
+    "question": "Can dynamic presentations store user-selected customization values?",
+    "answer": "In Veeva, custom per-rep presentation selections are stored via Product_Metrics_vod__c. The target platform has no direct equivalent object for storing per-rep presentation customization state. Implementations needing this capability must evaluate custom fields or objects to replicate the functionality.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["content", "dynamic", "customization", "veeva-difference"]
+  },
+  {
+    "id": "sq-ic-005",
+    "category": "content-management",
+    "question": "Why is territory content assignment different for presentations vs email templates?",
+    "answer": "Email templates have a dedicated junction object (TerritoryContentTmplAsgnt) for territory assignments. CLM Presentations do NOT have an equivalent assignment object. This asymmetry makes territory-based presentation querying and reporting harder compared to email templates. Custom territory-presentation junction objects may be needed.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["content", "territory", "junction-object", "asymmetry"]
+  },
+  {
+    "id": "sq-ic-006",
+    "category": "content-management",
+    "question": "How does combination therapy detailing work?",
+    "answer": "The platform models detailing at individual product level. Each Provider Visit Product Detailing record links one product to one visit. There is no native grouping concept for combination therapies. Workarounds: (1) Modify product names to include combo (corrupts master data), (2) Create N detailing records per combination (inflates analytics), (3) Build a custom junction object for therapy groups.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["content", "detailing", "combination-therapy", "gap"]
+  },
+  {
+    "id": "sq-ic-007",
+    "category": "content-management",
+    "question": "How does content restriction mode work?",
+    "answer": "In Restriction mode, the web platform applies a hard client-side gate against account.targetedPresentations. iOS only applies an optional narrow-filter that is a no-op outside restriction mode. This behavioral difference between web and iOS platforms is a known architectural gap that affects content visibility consistency across devices.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["content", "restriction-mode", "ios-web-gap", "targeting"]
+  },
+  {
+    "id": "sq-ic-008",
+    "category": "content-management",
+    "question": "How does PPTX-to-HTML5 conversion work for CLM?",
+    "answer": "PowerPoint decks can be converted into CLM-compatible ZIP packages for offline mobile consumption. The conversion service handles slide rendering, asset extraction, and packaging. Complex animations, transitions, and embedded media may not convert perfectly. The output is a self-contained HTML5 package that works offline on mobile devices.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["content", "pptx", "conversion", "html5", "offline"]
+  },
+  {
+    "id": "sq-ic-009",
+    "category": "content-management",
+    "question": "What JavaScript methods are available for interactive CLM?",
+    "answer": "Surveys can be loaded by developer name and rendered on the presentation UI. On save/submit, responses are captured and passed to the visit record. Response records sync when connectivity is available. Interactive content can use the platform's JavaScript bridge API for navigation, data capture, and visit integration.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["content", "interactive", "javascript", "surveys"]
+  },
+  {
+    "id": "sq-ic-010",
+    "category": "content-management",
+    "question": "What is the relationship between presentations and territories?",
+    "answer": "Presentations use a many-to-many relationship with territories for content scoping. The 'Allow Un-Aligned Selection' setting controls whether non-aligned products can be associated with presentations in a territory. Territory-scoped content filtering depends on proper alignment configuration between products, territories, and presentations.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["content", "territory", "alignment", "many-to-many"]
+  }
+]

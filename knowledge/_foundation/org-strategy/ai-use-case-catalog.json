@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-ai-dossier-001",
+    "category": "org-strategy",
+    "title": "Life Sciences and Health Care AI Use Case Catalog",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Comprehensive catalog of top and emerging AI use cases across life sciences and health care, organized by maturity and impact potential, from a major consulting firm's AI institute research.",
+    "findings": {
+      "top_use_cases": "Most mature AI applications in life sciences: drug target identification and validation using ML on genomic data, clinical trial patient matching and recruitment optimization, manufacturing yield prediction and quality control, medical image analysis for diagnostic support, and NLP-based pharmacovigilance signal detection.",
+      "emerging_use_cases": "Emerging applications include: generative AI for molecular design, digital twin simulation for clinical trials, AI-driven real-world evidence generation from EHR data, automated medical writing, predictive supply chain management, and AI-augmented regulatory submission review.",
+      "competitive_necessity": "AI has moved from science fiction to competitive necessity. Organizations without enterprise AI strategies risk falling behind in R&D productivity, commercial effectiveness, and operational efficiency.",
+      "human_machine_collaboration": "The most successful implementations follow a human-machine collaboration model rather than full automation. AI augments expert decision-making rather than replacing it, particularly in regulated contexts where accountability chains must be maintained.",
+      "implementation_patterns": "Successful AI programs share patterns: executive sponsorship, cross-functional data governance, iterative deployment (pilot-scale-optimize), clear success metrics tied to business outcomes, and dedicated change management for workflow integration."
+    },
+    "source": "AI institute research cataloging top and emerging AI use cases across life sciences and health care",
+    "tags": [
+      "ai",
+      "use-cases",
+      "drug-discovery",
+      "clinical-trials",
+      "pharmacovigilance",
+      "generative-ai"
+    ]
+  }
+]

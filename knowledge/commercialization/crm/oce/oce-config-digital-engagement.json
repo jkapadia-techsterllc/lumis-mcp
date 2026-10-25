@@ -1,0 +1,149 @@
+[
+  {
+    "id": "oce-clm-presentations-config",
+    "category": "commercialization/crm/oce",
+    "title": "CLM Presentations — Content Delivery and Click Stream Tracking",
+    "products": ["CRM Platform"],
+    "summary": "Closed-loop marketing enables reps to present interactive content (HTML/CSS/JS zip sequences or PDF pages) during customer interactions. Presentations are stored on Amazon S3 and managed through the Admin Console CLM tile. Click Stream Metric records capture slide-level engagement data including display duration, content version, and rating feedback. Tracking pauses during dialog boxes, manual pause actions, or JavaScript-initiated pauses. A 3-second minimum duration threshold applies before a metric record is persisted.",
+    "findings": {
+      "Click Stream Metric Architecture": "Each combination of slide and call message produces a separate Click Stream Metric record. Fields include Usage Start Time, Usage End Time, Usage Duration, Presentation Version, Sequence File, and Sequence File Version. Metric Type values include Evaluation, PublicContent, OverallTracking, Tracking, Recordings, and ContentRating (with values 0 for cancelled, +1 for like, -1 for dislike).",
+      "Presenter and Participant Tracking Control": "Admins can disable tracking independently for presenters (OCE CLM Disable Presenter Tracking custom permission) and participants (OCE CLM Disable Participant Tracking custom permission). When both are disabled, Call Detail and Call Message records are created without a link to a Call Presentation record. Participant tracking captures attendee device OS, device type, and browser information — this data is only available when the video conferencing provider is the configured service provider.",
+      "S3 Storage and CSP Trusted Sites": "Sequence and PDF files reside in an S3 bucket's clm folder. Two CSP Trusted Site entries are required — one with the bucket name in the URL and one with bucket name plus region. China-region URLs follow a different format using amazonaws.com.cn. Bucket naming rules apply — no underscores, no uppercase letters, no trailing hyphens.",
+      "Sequence Management": "Sequences are managed in the Admin Console CLM tile. Sequences include Name, Creation Date, Last Updated Date, Activation Date, and status fields. Sequences activate automatically when uploaded via the Bulk Loader. Filtering and sorting capabilities are available in the sequence list view."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — CLM Presentations section (pp. 849–1048)",
+    "tags": ["clm", "presentations", "click-stream", "content-delivery", "s3-storage", "tracking"]
+  },
+  {
+    "id": "oce-field-email-config",
+    "category": "commercialization/crm/oce",
+    "title": "Field Email — Template Management, Sending, and Attachments",
+    "products": ["CRM Platform"],
+    "summary": "Field Email enables reps to send emails to HCPs from account records. Email templates are uploaded as ZIP files containing index.html and thumbnail.jpg to the Admin Console Email tile. Templates support product filtering, date-based availability windows, category classification, and territory alignment. The system supports Cyrillic and special characters in email addresses when international email addresses are enabled. A recommended limit of 100 simultaneous HCP recipients per email exists for performance reasons.",
+    "findings": {
+      "Permission Model": "Two generations of permission sets exist. Legacy uses the OCE.Email custom permission for admin console access. Current (from Mar2022 forward) uses OCE2 Email User for regular users and OCE2 Email Administration plus OCE2Admin_Email custom permission for admins. To migrate, assign the new permission sets and remove the legacy Admin_Email permission to hide the old tile.",
+      "Template Upload Requirements": "ZIP files must contain index.html and thumbnail.jpg. Attachments exceeding approximately 3MB trigger a notification. Global images cannot be added to the ZIP. Template fields include Subject, Email Template Name, Sending User, Product (Detail type only), Start Date, Description, Allow Attachments From (Account, Meeting, or both), Invitation For (Call, Meeting, None), Default Invitation, and Categories.",
+      "Secondary Email Address Support": "Admins can configure a secondary sender email address per user. Requires the configured email service provider. The Secondary Email field on the User object (or a custom Email-type field) stores the alternate address. A picklist value in the format field:Field_API_Name_with_Namespace must be added to the Sending User field of the Email Template object.",
+      "Division Support": "When Divisions are enabled, the User DB Schema entity must be cloned and the DefaultDivision field appended to the Mandatory Fields comma-separated list. The original DB Schema record must then be deactivated."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Field Email section (pp. 1114–1200+)",
+    "tags": ["email", "templates", "field-email", "attachments", "permissions", "divisions"]
+  },
+  {
+    "id": "oce-orchestration-engage-config",
+    "category": "commercialization/crm/oce",
+    "title": "Orchestration — Engage Integration for Meetings and Speaker Management",
+    "products": ["CRM Platform", "Engage Package"],
+    "summary": "The Engage package integrates with the CRM platform to provide orchestrated meeting and speaker management from a Home Office persona. Integration covers speaker/expert processing, expert contracting and approval, marketing-initiated sales-executed meetings, venue management, meeting mini plans, account utilization limits, monetary caps, eligible speakers with bureau validation, compliance statements, group sharing, search-before-create with external systems, auto expense calculation, and merged D&E/HCP sponsorship workflows. Flows have replaced Process Builders per platform recommendations.",
+    "findings": {
+      "Speaker Processing Workflow": "The Speaker OOB Generic Workflow is cloned and activated. Speaker status picklist values include Nominated (default), Pending Approval, Pending Tiering & Qualification, Nominated - Revise, Active, Inactive, and Cancelled. Nine record update actions are configured (Submit for Approval, Submit for Qualification & Tiering, Cancel, Recall, Re-Tier, Re-Nomination, Approve, Reject, Deactivate). A formula field Is Approver compares CreatedBy.ManagerId to the current User.Id.",
+      "Flow-Based Automation": "Record-Triggered Flows replace Process Builders. The speaker flow triggers on record create/update of the Speaker object. Decision elements evaluate status transitions — Pending Tiering & Qualification triggers submission to the Speaker_Approval approval process, Active status updates the ApprovalStatus field and resets the Owner to the original creator, and Nominated-Revise triggers email notification to the record creator.",
+      "Use Cases Supported": "Speaker/Expert Processing, Expert Contracting, Expert Approval, Marketing Initiated Sales Executed Meeting, Sales Adds Venue with Home Office Approval, Meeting Mini Plan, Account Utilization Limits, Monetary Caps, Account Utilization and Monetary Cap UI Component, Eligible Speakers (Speaker Bureau Validation with Restrictions), Compliance Statements/Disclaimer Text, Share Meeting by Groups, Prevent Speakers Deletion on Account Merge, Search Before Create with External System, Auto Expense Calculation, and Merged D&E and HCP Sponsorship Workflows."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Orchestration Configuration section (pp. 2021–2070+)",
+    "tags": ["orchestration", "engage", "meetings", "speaker-management", "workflows", "approvals"]
+  },
+  {
+    "id": "oce-connect-portal-config",
+    "category": "commercialization/crm/oce",
+    "title": "Connect Portal — HCP Self-Service Experience Cloud Site",
+    "products": ["CRM Platform", "Experience Cloud"],
+    "summary": "Connect is an Experience Cloud-based portal that provides HCPs with remote self-service capabilities. Logged-in users can update personal information, view scheduled calls and meetings, schedule remote calls, browse CLM content by assigned products, complete surveys, capture signatures (remote or social-distance), and manage opt preferences. Guest users can join remote calls only. The portal uses the Connect Theme 2.0 template and requires Customer Community Plus Login licenses.",
+    "findings": {
+      "Remote Call Scheduling Flow": "When an HCP creates a remote call from the portal, a trigger generates a unique room name. Email invitations containing attendee-specific access URLs and the room name are generated and sent. RSVP responses (accept, tentative, decline) are captured. Saved calls appear in the portal Home page calendar.",
+      "Signature Capture": "Supports remote signature during remote-channel calls and social-distance signature during face-to-face calls. The flow is: rep requests signature from attendee, attendee provides signature, rep reviews and approves or rejects. If the signature page is cancelled or closed, the request expires. Signatures must occupy at least 0.35% of the signature area. Sample-related information must be saved before requesting a remote signature.",
+      "Self-Detailing": "HCPs can browse and view CLM presentations in the Web CLM Player. Click stream metrics are tracked similar to standard CLM — no Pause/Play button exists, tracking is always on, Training Mode does not affect tracking state, and metrics for the last-viewed sequence are not collected on tab closure. Presentations must be uploaded after the self-detailing feature is enabled.",
+      "Site Setup Requirements": "Requires enabling Digital Experiences, configuring a domain, installing the OCE 3 package (via CSM case), enabling then disabling Chatter around site creation, and creating a site with Connect Theme 2.0 template. HCP Login profile uses Customer Community Plus Login license with specific object permissions on Account, Account Address, Address, Survey, Survey Invitation, Survey Response, and Survey Subject objects."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — OCE Connect Introduction section (pp. 2128–2196)",
+    "tags": ["connect", "portal", "hcp", "experience-cloud", "self-detailing", "signature", "remote-call"]
+  },
+  {
+    "id": "oce-wechat-mini-program-config",
+    "category": "commercialization/crm/oce",
+    "title": "WeChat Mini Program — Mobile CRM Channel for China Market",
+    "products": ["CRM Platform"],
+    "summary": "The WeChat Mini Program is a mobile-centric CRM channel that runs within WeChat and WeCom, replicating key features from the iOS application. It addresses the constraint that Salesforce domains are not registered in China ICP and cannot be accessed directly from Mini Programs. SSO uses a custom HTML page hosted on AWS that embeds the Salesforce standard login page with out-of-box SSO functionality. The SSO bridge URL supports customDomain and env parameters (mutually exclusive).",
+    "findings": {
+      "SSO Configuration": "Three URL formats are supported: default (login.salesforce.com), custom domain (opens domain-specific login directly), and environment-specific (production vs sandbox). The bridge page is hosted at ocelite.ocepersonal.iqvia.cn. Logout messages and login page SSO instructions are configured via Custom Labels (WeChat_SSO_LogOut_Msg and WeChat_SSO_Prompt_Message). Metadata cache regeneration is required after label changes.",
+      "Cross-Mini-Program Launch": "External Mini Programs can launch the CRM Mini Program using wx.navigateToMiniProgram API with the isSSOEnabled parameter in extraData. When set to 'yes', SSO instructions display on the login page. When set to 'no' or omitted, instructions are hidden.",
+      "China-Specific Constraints": "Salesforce domains are not ICP-registered in China, requiring the AWS-hosted SSO bridge. The Mini Program supports both WeChat and WeCom platforms. Azure AD is cited as an example Identity Provider for SSO integration."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — OCE for WeChat section (pp. 2197–2320)",
+    "tags": ["wechat", "mini-program", "china", "sso", "mobile", "wecom"]
+  },
+  {
+    "id": "oce-wechat-integration-config",
+    "category": "commercialization/crm/oce",
+    "title": "WeChat Integration — HCP Subscription, QR Codes, and Template Messages",
+    "products": ["CRM Platform"],
+    "summary": "The WeChat integration enables HCP subscription to the organization's official WeChat channel through QR code scanning. Reps generate subscription QR codes from the mobile app, and the HCP's WeChat Open ID is populated on their account record upon scanning. The system downloads template messages from WeChat Console and sends them to HCPs. Event triggers from WeChat (QR Subscribe, QR Scan, Unsubscribe, Template Message Send) are received and processed. Supports direct WeChat connection or third-party service (3PS) integration.",
+    "findings": {
+      "Prerequisites": "Requires a registered WeChat Official Account (service type for companies outside Mainland China), WeChat Console configuration with template messages enabled, and the WeChat Connector Admin permission set assigned to the admin performing setup.",
+      "Public Site Configuration": "A Salesforce Site with Guest type is created. The WC_SetupHome is set as the Active Site Home Page. The QIDC.WeChatReceiveEvents Apex class is enabled under Public Access Settings. Verification is done by accessing the /services/apexrest/QIDC/wechatservice endpoint.",
+      "WeChat Console Integration": "API ID and API Secret are generated in WeChat's Basic Configuration section. All Salesforce platform IP addresses must be whitelisted in WeChat. Server configuration requires a Callback URL (the Salesforce public site URL), a Token, an EncodingAESKey (randomly generated), and Plain Text Mode for message encryption. When using a third-party service, only IP whitelisting and callback URL sharing are needed on the WeChat side.",
+      "Admin Console Configuration": "Data Connector Setup WeChat Connector tile manages credentials. WeChat Server URL selection (China or International), authentication details (App Id, App Secret, URL Token for direct connection or WeChat_3PS Named Credentials for 3PS), and three Remote Site Settings entries (api.weixin.qq.com, api.wechat.com, mp.weixin.qq.com) are required. The rep who generated the subscription QR code is tracked via the WeChat Subscription Captured By field on the Account object (from July 2021 forward)."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — WeChat Integration section (pp. 3470–3536)",
+    "tags": ["wechat", "integration", "qr-code", "template-messages", "subscription", "china"]
+  },
+  {
+    "id": "oce-remote-detailing-config",
+    "category": "commercialization/crm/oce",
+    "title": "Remote Detailing — iPad CLM Presentation Sharing via iSharing Server",
+    "products": ["CRM Platform"],
+    "summary": "Remote Detailing enables reps to show CLM presentations remotely from calls on the iPad application. When a call with the Remote channel is created, a Call Event platform event triggers the iSharing server to send email invitations. Presentation Sequence Events notify iSharing to download and replicate presentations. Products and messages from remote presentations are added with a From Remote Call label. Click stream metrics are tracked identically to face-to-face calls.",
+    "findings": {
+      "Activation Steps": "Requires activating CallPlatformEventHandler, Sequence Platform Event Delete Handler, and Sequence Platform Event Handler trigger handlers. Remote channel must be added to Published Channels in Call Administration. The Remote Detailing permission set is assigned to presenting users. A Remote API User with OCE Admin profile is created for server-to-server API calls — this user's password must be set to never expire.",
+      "Session Key Generation in Platform": "Optional migration from server-side to platform-side generation of remote call parameters eliminates the need for manual/background sync before launching a call. Requires Session Token object permissions (create, read, edit — delete is prohibited), Is Remote Session Setup Done field on Call object, and three email templates per invitation method (Create, Update, Cancel) with Call value in the Invitation For field. Templates support Mustache variables for recipient, sender, call fields, and remotesession.url.",
+      "Future Call Limit Consideration": "The Future Call Limit in Call Settings must be set appropriately for both rep profiles and the Remote Detailing API user profile. If calls are created outside this limit range, the session key will not be populated and remote calls cannot be conducted.",
+      "Territory-Specific Email Templates": "Requires activating the Setting of Product Detail Priorities for Territory functionality. Territory Config object custom tab must be created and made visible for admin users."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Remote Detailing section (pp. 2803–2868)",
+    "tags": ["remote-detailing", "clm", "ipad", "isharing", "platform-events", "session-token"]
+  },
+  {
+    "id": "oce-remote-engagement-config",
+    "category": "commercialization/crm/oce",
+    "title": "Remote Engagement — Video Conferencing with HCPs via Experience Cloud",
+    "products": ["CRM Platform", "Experience Cloud"],
+    "summary": "Remote Engagement provides video conferencing capabilities for rep-to-HCP remote calls using the configured video provider. Unlike Remote Detailing which focuses on CLM presentation sharing, Remote Engagement provides the full meeting experience including CLM, email invitations, signature capture, and participant tracking. It does not require Customer Community Plus licenses unless community-login features are used. Click stream metrics are gathered for the rep and all participants including guests and phone-connected users.",
+    "findings": {
+      "Activation Requirements": "Requires a support ticket to enable the video conferencing provider. RSVP tracking is configured via ICS tracking activation. Core permission sets include Remote Engagement Admin (for admins), OCE Email Administration (for email template management), OCE Email User (for reps), and OCE Remote Detailing (for remote call functionality). The ApplicationSettings and RemoteCallSettings DB Schema entities must be activated.",
+      "Email Invitation Configuration": "Three email templates are needed — Create, Update, and Cancel — each marked as Default Invitation with Call value in Invitation For and the respective Invitation Method. Templates support Mustache variables. The Invitation Method field must be excluded from the EmailTemplate DB Schema Where clause (AND InvitationMethod = null) to prevent invitation templates from syncing to mobile. Three Send Email Regularly job slots are scheduled at 20-minute offsets (0, 20, 40 minutes).",
+      "Platform Events and Trigger Handlers": "Requires Enable Platform Events Publishing in Application Settings and Enable publishing of Call DML Events in Call Administration. Key trigger handlers include CallDmlEventCallToStdEventHandler, DeleteCallStdEventHandler, SyncEmailResponseStatusToObjectHandler, RemoteSessionInvitationHandler, ActualizeSessionTokenHandler, CallDmlEventReleaseSessionTokenHandler, and several email-related handlers.",
+      "Call Configuration": "Remote channel must be added to Published Channels in Call Administration for the rep profile. Pending must be set as default for the Invitation Status field on Call object. Tentative value must be available. Allow Activities must be enabled on the Call object. Log A Call user profiles need Read and Create access to Call DML Events platform events."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Remote Engagement section (pp. 2869–2979)",
+    "tags": ["remote-engagement", "video-conferencing", "experience-cloud", "platform-events", "email-invitations"]
+  },
+  {
+    "id": "oce-opt-management-config",
+    "category": "commercialization/crm/oce",
+    "title": "Opt Management — Consent and Communication Preferences",
+    "products": ["CRM Platform"],
+    "summary": "Opt Management controls HCP communication preferences and consent across channels (email, phone, fax, mail, and custom channels). The system supports explicit opt-in and opt-out tracking per account per channel, with territory-scoped visibility. Opt records are captured during calls, via the portal, or through bulk data operations. The consent model supports regulatory requirements for different markets including double opt-in workflows and granular product-level preferences.",
+    "findings": {
+      "Opt Record Structure": "Opt records link Account, Channel, and consent status with timestamps. Each opt record tracks the capture method (call, web, data load), the capturing user, effective dates, and product associations. Territory-based sharing ensures reps see only opts relevant to their alignment.",
+      "Channel Configuration": "Standard channels (email, phone, fax, mail) are available out of the box. Custom channels can be created for additional communication types. Each channel can be configured independently for opt-in versus opt-out default behavior. The OptUser permission set is required for email functionality to work correctly with opt capture.",
+      "Regulatory Compliance": "Supports market-specific consent requirements. Double opt-in workflows can be configured where initial consent must be confirmed through a follow-up action. Consent capture timestamps and audit trails meet regulatory requirements for demonstrating lawful basis for communication."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — Opt Management section",
+    "tags": ["opt-management", "consent", "communication-preferences", "regulatory", "channels"]
+  },
+  {
+    "id": "oce-digital-engagement-architecture-overview",
+    "category": "commercialization/crm/oce",
+    "title": "Digital Engagement Architecture — Channel Integration Overview",
+    "products": ["CRM Platform"],
+    "summary": "The CRM platform supports multiple digital engagement channels beyond traditional face-to-face calls. The architecture spans CLM content delivery (S3-hosted sequences rendered in mobile and web players), field email (template-based outbound with tracking), remote detailing (iPad CLM sharing via iSharing server and platform events), remote engagement (full video conferencing via Experience Cloud), the Connect HCP portal (self-service with self-detailing and surveys), WeChat (Mini Program for China market plus subscription/QR integration), and orchestration with the Engage package for home-office meeting management.",
+    "findings": {
+      "Shared Infrastructure Patterns": "All digital channels share common infrastructure: CSP Trusted Sites for S3 bucket access, DB Schema entities for mobile sync configuration, platform events for real-time triggers (Call DML Events, Presentation Sequence Events), email template management with Mustache variable support, and territory-based sharing and alignment. Metadata cache regeneration is required after most configuration changes.",
+      "Channel-Specific Permission Sets": "Each channel has distinct permission sets — Remote Detailing (for CLM sharing), Remote Engagement Admin (for meeting admin), OCE Email Administration and OCE Email User (for email), WeChat Connector Admin (for WeChat setup), and OCE CLM Disable Presenter/Participant Tracking (for privacy control). Permission sets cascade and must be assigned alongside corresponding object and field-level security grants.",
+      "Experience Cloud Dependency": "Both the Connect portal and Remote Engagement require Experience Cloud site configuration. The Connect Theme 2.0 template is used. Customer Community Plus Login licenses are needed for portal login access but not for Remote Engagement guest-only features. Chatter must be temporarily enabled during site creation and then disabled.",
+      "China Market Adaptations": "WeChat integration addresses China-specific constraints including ICP registration requirements (Salesforce domains are not ICP-registered), S3 bucket URL variations for China regions (amazonaws.com.cn), WeChat Official Account API integration with IP whitelisting, and third-party service support for WeChat event routing."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly Release — synthesis of CLM, Email, Remote Detailing, Remote Engagement, Connect, WeChat, and Orchestration sections",
+    "tags": ["digital-engagement", "architecture", "channels", "platform-events", "experience-cloud", "china"]
+  }
+]

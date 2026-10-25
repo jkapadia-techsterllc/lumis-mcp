@@ -1,0 +1,34 @@
+[
+  {
+    "id": "fnd-sdlc-002",
+    "category": "org-strategy",
+    "title": "Solution Architecture Review Process for Validated Systems",
+    "products": [
+      "lsc",
+      "oce",
+      "veeva_vault"
+    ],
+    "summary": "Defines the architecture review and approval process within a QMS-governed SDLC. Covers five architecture domains, the Technical Design Authority (TDA) review board, and the Architecture Review Board (ARB) escalation path for non-standard technology choices.",
+    "findings": {
+      "purpose_and_scope": "Ensures product architecture is reviewed and approved before development begins. Aligned to ISO 9001:2015. Covers five architecture domains that must be evaluated for each product initiative.",
+      "five_architecture_domains": "Business Architecture (portfolio, processes, personas), Application Architecture (software, services), Data Architecture (data, information models), Integration Architecture (shared services, APIs), and Technical Architecture (infrastructure, network) plus DevOps considerations.",
+      "key_roles": "Product Owner provides concept, boost, and proof-of-concept documents as inputs. Application Engineering reviews application-level design. Integration Architecture evaluates integration patterns. Technical Architecture assesses infrastructure. The Technical Design Authority (TDA) Board is a virtual authority of subject matter experts that approves designs against standards.",
+      "tda_review_process": "Architecture inputs (Concept Document, Boost Document, POC Document) are reviewed against established standards. A TDA submission is prepared and evaluated. If the proposed design uses only approved technologies, TDA can approve directly. If new or non-approved technology is proposed, escalation to the Architecture Review Board is required before TDA approval.",
+      "architecture_review_board": "The ARB approves technology standards and defines IT strategies for the organization. It serves as the escalation authority when proposed solutions require technologies outside the approved catalog. ARB approval is a prerequisite for TDA sign-off when non-standard technology is involved.",
+      "key_outputs": "TDA Submission document (retained for life of system plus 10 years, stored in TDA repository) and ARB Document when applicable (same retention period, stored in ARB repository).",
+      "kpis": "Average TDA approval lead time with a target of 5 or fewer business days. Percentage of TDA submissions approved at first attempt with a target of 80% or higher.",
+      "cross_references": "Follows Product Release Scope Definition SOP for upstream inputs. Feeds into Product Release Development SOP for downstream execution."
+    },
+    "source": "SOP-0018[3] Solution Architecture, ISO 9001:2015, effective Nov 2021",
+    "tags": [
+      "sdlc",
+      "architecture-review",
+      "validated-system",
+      "tda",
+      "arb",
+      "iso-9001",
+      "design-authority",
+      "technology-standards"
+    ]
+  }
+]

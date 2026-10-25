@@ -1,0 +1,27 @@
+[
+  {
+    "id": "crm-bp-006",
+    "category": "gotchas",
+    "title": "Schema Management and Field Naming Conventions for CRM",
+    "products": [
+      "oce"
+    ],
+    "summary": "Covers custom field governance, API naming conventions, metadata documentation requirements, field deprecation practices, and per-object field limits for CRM implementations on Salesforce.",
+    "findings": {
+      "field_types": "Three categories of fields exist: Salesforce standard fields (limited modification), package-managed custom fields (namespace-protected, never delete or modify except labels), and customer custom fields (fully owned by the implementing organization).",
+      "naming_conventions": "Always create base fields in English. Implement an API naming convention from project start that distinguishes package fields from customer fields using consistent prefixes or suffixes. Establish the convention before any development begins to avoid inconsistent naming across the org.",
+      "metadata_documentation": "Require metadata in field description or comment fields for any shared fields. Document: the requesting group or team, applicable ISO country codes, business units that use the field, integrations that read or write the field, and example values. This metadata is essential for impact analysis during future changes.",
+      "deprecation_practice": "Prefix deprecated or unused custom fields with a standard marker (e.g., dep underscore prefix). Since Salesforce sorts fields by label in many UI contexts, this convention groups deprecated fields together and pushes them to a predictable location in field lists.",
+      "per_object_field_limits": "800 custom fields per object, 3 external ID fields, 10 rollup summary fields, 2 master-detail relationships, 25 lookup relationships. Understand and plan against these limits before expanding any object's schema."
+    },
+    "source": "Schema Management Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "schema",
+      "field-governance",
+      "naming-conventions",
+      "metadata",
+      "field-limits",
+      "deprecation"
+    ]
+  }
+]

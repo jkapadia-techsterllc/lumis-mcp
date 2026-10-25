@@ -1,0 +1,115 @@
+[
+  {
+    "id": "oce-cfg-fem-001",
+    "category": "commercialization/crm/configuration",
+    "title": "Email Template Management and Lifecycle",
+    "products": ["CRM Platform"],
+    "summary": "Email templates are delivered as ZIP files containing HTML and a thumbnail, with versioning, territory alignment, and product restrictions controlling distribution and availability across field teams.",
+    "findings": {
+      "zip_structure": "Templates are uploaded as ZIP files that must contain an index.html file and a thumbnail.jpg image. The ZIP is processed server-side and the HTML content is stored for rendering. Multiple language versions can be included in a single ZIP by appending language suffixes to filenames.",
+      "versioning_and_activation": "Templates support a versioning lifecycle where new versions can be uploaded while preserving prior versions. Each template has an Active/Inactive status that controls visibility to field users. Only one version of a template can be active at a time. Deactivating a template removes it from the field user selection list but preserves historical send records.",
+      "territory_alignment": "Templates are shared to specific territories, controlling which field users can access them. Territory alignment determines template visibility — a user only sees templates shared to their assigned territories. When territory realignment occurs, template sharing must be refreshed to maintain correct access.",
+      "product_restrictions": "Templates can be restricted to specific products, ensuring field users only send product-related communications for products in their territory. Product restrictions are enforced at the template level and filter the template selection list based on the user's product alignment.",
+      "categories_and_topics": "Templates can be organized using topic records that serve as categories. Topics enable hierarchical classification of templates (e.g., by therapeutic area, campaign, or communication type). Categories help field users quickly locate relevant templates from large template libraries.",
+      "sharing_across_territories": "Template sharing follows a territory-based model where admin users share templates to one or more territories. When templates are updated to a new version, re-sharing may be required to propagate the update. Bulk sharing operations are available for managing large-scale distribution."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["email", "templates", "zip-upload", "versioning", "territory-alignment", "product-restrictions", "template-lifecycle"]
+  },
+  {
+    "id": "oce-cfg-fem-002",
+    "category": "commercialization/crm/configuration",
+    "title": "Email Fragments and Reusable Components",
+    "products": ["CRM Platform"],
+    "summary": "Fragments are reusable HTML code pieces that can be combined within email templates, supporting both automatic extraction from template content and manual creation for modular email composition.",
+    "findings": {
+      "fragment_concept": "Fragments are discrete HTML code blocks that can be inserted into email template bodies. They enable modular email design where common elements (headers, footers, disclaimers, product information blocks) are maintained once and reused across multiple templates.",
+      "automatic_creation": "When a template is uploaded, the system can automatically extract fragment components from the HTML structure. This enables templates to be decomposed into reusable pieces without manual intervention. Automatically created fragments inherit the template's product and territory associations.",
+      "manual_creation": "Administrators can manually create fragments by uploading HTML code snippets. Manual fragments are independent of any specific template and can be shared across the organization. This approach enables building a fragment library for consistent brand elements.",
+      "sharing_and_distribution": "Fragments follow the same territory-based sharing model as templates. They must be explicitly shared to territories for field users to access them during email composition. Fragment sharing is independent of template sharing — a template's fragments must be separately shared.",
+      "version_update_resharing": "When a fragment is updated to a new version, it must be re-shared to territories for the updated content to become available. This ensures controlled rollout of fragment changes and prevents accidental propagation of draft updates to field users."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["email", "fragments", "reusable-components", "html", "template-composition", "sharing"]
+  },
+  {
+    "id": "oce-cfg-fem-003",
+    "category": "commercialization/crm/configuration",
+    "title": "Email Attachments and Content Limits",
+    "products": ["CRM Platform"],
+    "summary": "Email attachments have a size threshold (~3MB) that determines inline vs external storage behavior, with support for mandatory attachments, a maximum of 12 per template, and defined file format restrictions.",
+    "findings": {
+      "size_threshold": "Attachments below approximately 3050KB (2.97MB) are stored inline within the email record. Attachments exceeding this threshold are stored in the Notes and Attachments related list. This distinction affects how attachments are synchronized to mobile devices and their offline availability.",
+      "mandatory_attachments": "Attachments can be marked as mandatory by prefixing the filename with 'required__'. Mandatory attachments are automatically included in every email sent using that template and cannot be removed by the field user during composition. This ensures compliance-critical documents are always distributed.",
+      "attachment_limits": "Each template supports a maximum of 12 attachments. This limit applies to the combined count of mandatory and optional attachments. Template designers must plan attachment slots to balance mandatory compliance documents with optional sales materials.",
+      "supported_formats": "Supported attachment file formats include PDF, DOCX, XLSX, PPTX, CSV, common image formats (JPG, PNG, GIF), and video files. The supported format list is configured at the platform level and determines which file types users can attach during email composition.",
+      "file_management": "Attachments are managed at the template level and version-controlled alongside the template. When a new template version is uploaded, attachments from the previous version are not automatically carried forward — they must be re-attached or included in the new ZIP upload."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["email", "attachments", "file-limits", "mandatory-attachments", "content-size", "file-formats"]
+  },
+  {
+    "id": "oce-cfg-fem-004",
+    "category": "commercialization/crm/configuration",
+    "title": "Sender Configuration and Email Processor Behavior",
+    "products": ["CRM Platform"],
+    "summary": "Sender identity is controlled by a matrix of 4 Sending User options and 2 Reply To options yielding 8 combinations, with behavior varying between the platform-native processor and the third-party message service.",
+    "findings": {
+      "sending_user_options": "Four options control the sender identity: (1) Sales Rep — uses the field user's own email, (2) Field reference — pulls sender from a specified field API on the user record, (3) Verified Org Wide Email — uses a centrally configured and verified organizational email address, (4) Custom text — displays a static text string as the sender name. Each option has different implications for deliverability and recipient trust.",
+      "reply_to_options": "Two Reply To configurations determine where recipient replies are directed: (1) Sales Rep — replies go to the sending field user's email, (2) Any email — replies are directed to a specified email address (e.g., a shared inbox or support queue). The Reply To address is independent of the Sending User identity.",
+      "processor_behavior_differences": "The platform supports two email processors with different capabilities. The platform-native processor (Force.com) handles sending through the platform's built-in email infrastructure with standard deliverability controls. The third-party message service processor routes emails through an external delivery service with additional tracking, deliverability optimization, and dedicated IP management capabilities. The sender configuration matrix behaves differently under each processor — certain Sending User and Reply To combinations may not be supported by both processors.",
+      "org_wide_email_verification": "When using the Verified Org Wide Email sender option, the email address must be verified through the platform's Org Wide Email configuration. Verification involves sending a confirmation email to the address and completing a validation step. Unverified Org Wide Emails cannot be used as sender identities.",
+      "configuration_matrix": "The 8 possible combinations (4 Sending User × 2 Reply To) create a configuration matrix where administrators must select the appropriate combination for each template or organization-wide default. Migration planning should document which combinations are in use, as the target platform may not support all 8 permutations identically."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["email", "sender-configuration", "reply-to", "email-processor", "org-wide-email", "deliverability"]
+  },
+  {
+    "id": "oce-cfg-fem-005",
+    "category": "commercialization/crm/configuration",
+    "title": "Opt Management, Consent Controls, and Subaccounts",
+    "products": ["CRM Platform"],
+    "summary": "Email consent enforcement operates at account and contact levels with configurable opt bypass per template, custom permissions for override scenarios, and a subaccount feature providing dedicated IP addresses with warm-up strategy.",
+    "findings": {
+      "account_channel_checks": "Before sending an email, the system checks the account's channel opt status. If the account has opted out of the email channel, the send is blocked unless bypass conditions are met. This check occurs at the account level and applies to all contacts associated with that account.",
+      "opt_bypass_per_template": "Individual templates can be configured to bypass opt-out checks. This is used for transactional or regulatory communications that must be delivered regardless of marketing opt-out preferences. Bypass configuration is set at the template level by an administrator.",
+      "custom_permissions_for_override": "Two custom permissions control email sending in opt-out scenarios: (1) 'Send Email When No Opt Out' — allows sending when the account has no explicit opt-out recorded (absence of opt-out is treated as implicit consent), (2) 'Show Account Emails When Explicit Opt Out' — controls whether emails are visible in the UI even when the account has explicitly opted out. These permissions are assigned to user profiles or permission sets.",
+      "subaccount_feature": "The subaccount feature enables customer-specific email sending infrastructure. Each subaccount provides a dedicated suppression list (separate from the global suppression list), dedicated IP addresses for email delivery, and independent sender reputation management. This is used by organizations that need to isolate email sending across business units or brands.",
+      "ip_warmup_strategy": "New dedicated IP addresses require a warm-up period where sending volume is gradually increased to establish sender reputation with email service providers. The warm-up strategy involves ramping up daily send volumes over several weeks. Sending too much too quickly from a new IP triggers spam filtering and deliverability degradation."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["email", "opt-management", "consent", "custom-permissions", "subaccounts", "ip-warmup", "suppression-lists"]
+  },
+  {
+    "id": "oce-cfg-fem-006",
+    "category": "commercialization/crm/configuration",
+    "title": "Email Tracking, Queue Management, and Deliverability",
+    "products": ["CRM Platform"],
+    "summary": "Email delivery is tracked through queue statuses and tracking events covering the full lifecycle from preparation through delivery, with ICS calendar integration for meeting invitation responses and DMARC/SPF/DKIM configuration for deliverability.",
+    "findings": {
+      "email_queue_statuses": "Emails progress through defined queue statuses: Preparing (initial processing), New (ready for delivery), Retry (failed delivery attempt, scheduled for retry), Success (delivered), Failed (permanently failed after retry exhaustion), Cancelled (manually cancelled by admin). Queue admin views provide visibility into email status distribution and delivery pipeline health.",
+      "tracking_events": "The system captures granular tracking events for each sent email: Click (recipient clicked a link), Bounce (delivery failed), Delivery (successfully delivered to inbox), Open (recipient opened the email), Spam (marked as spam by recipient or email provider), Unsubscribe (recipient used unsubscribe mechanism), and additional provider-specific events. Tracking data feeds into engagement analytics and compliance reporting.",
+      "ics_calendar_integration": "Email templates can include trackable ICS calendar files for meeting invitations. When recipients respond to the calendar invitation, the system captures response status (Accepted, Declined, Tentative) through CalDav integration. This enables field teams to track meeting acceptance rates directly from email campaigns.",
+      "dmarc_spf_dkim": "Email deliverability requires proper DNS configuration for authentication protocols. SPF (Sender Policy Framework) DNS TXT records authorize the platform's sending IPs. DKIM (DomainKeys Identified Mail) provides cryptographic signing of email headers. DMARC (Domain-based Message Authentication, Reporting and Conformance) policy defines how receiving servers handle authentication failures. Misconfiguration of these protocols causes emails to be rejected or routed to spam.",
+      "email_limit_handling": "The platform enforces sending limits per user and per organization. When limits are approached, the system queues excess emails for delivery in subsequent sending windows. Queue admin views surface limit utilization to help administrators manage sending volume across teams."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["email", "tracking", "queue-management", "ics-calendar", "dmarc", "spf", "dkim", "deliverability", "bounce-handling"]
+  },
+  {
+    "id": "oce-cfg-fem-007",
+    "category": "commercialization/crm/configuration",
+    "title": "Web Email, Scheduling, and Multi-Language Support",
+    "products": ["CRM Platform"],
+    "summary": "Desktop web email sending uses a quick action with different bulk limits than mobile, scheduled sends execute via hourly batch jobs, and multi-language template support uses ZIP file language suffixes with account and user language filters.",
+    "findings": {
+      "web_email_sending": "Desktop web email uses a quick action component for sending. The web interface supports bulk email sending with a recommended limit of 90 recipients per batch (compared to 100 on mobile). MSO (Microsoft Office) HTML tags are not fully supported on the web interface, which can cause rendering differences for templates designed in Microsoft tools.",
+      "bulk_email_limits": "Mobile supports up to 100 recipients per bulk email send, while web recommends 90. These limits are soft recommendations — exceeding them may cause performance degradation or partial delivery failures. Organizations with large-scale email requirements should plan sending windows and batch sizes accordingly.",
+      "scheduling_and_batch_jobs": "The Send Later feature enables scheduling emails for future delivery. Scheduled emails are processed by an hourly batch job that picks up emails due for delivery. The DateTime picker provides configurable intervals for selecting send times. Three background jobs support the email system: Send Email Regularly (processes outbound queue), Track Email Status Regularly (polls delivery status), and User Profile Photo URL batch (updates sender photo references).",
+      "language_selection_filters": "Multi-language template support uses two filter settings: Account Language Filter (determines which language version to show based on the recipient account's language) and User Language Filter (falls back to the sending user's language). These filters work together to automatically select the appropriate language version from a multi-language template ZIP.",
+      "zip_language_suffixes": "Multi-language template ZIPs contain language-specific HTML files identified by language suffixes appended to filenames (e.g., index_fr.html, index_de.html). The system matches these suffixes against the account and user language filters to select the correct version. If no matching language file exists, the default index.html is used as fallback."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["email", "web-email", "scheduling", "multi-language", "bulk-email", "batch-jobs", "language-filters"]
+  }
+]

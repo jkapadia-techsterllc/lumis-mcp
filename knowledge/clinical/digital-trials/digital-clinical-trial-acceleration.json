@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-digital-trials-001",
+    "category": "org-strategy",
+    "title": "Digital Innovation in Clinical Trials \u2014 Post-Pandemic Acceleration",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Survey findings on digital clinical trial methodology adoption, including the impact of COVID-19 on decentralized trial adoption and the sustainability of digital innovation in clinical development.",
+    "findings": {
+      "pandemic_driven_adoption": "99% of surveyed executives said the pandemic drove additional need for digital clinical trial methodologies not previously used. 100% moved some or all clinical trials to digital-based activities as a direct result of COVID-19.",
+      "top_benefits_cited": "Respondents cited top benefits as: faster patient enrollment through digital recruitment, improved patient retention via remote monitoring, reduced site burden through virtual visits, enhanced data quality from continuous digital capture, and cost reduction from fewer in-person visits.",
+      "decentralized_trial_elements": "Key digital components adopted: ePRO/eCOA for remote patient-reported outcomes, wearable devices for continuous monitoring, eConsent for remote enrollment, telemedicine for virtual visits, and direct-to-patient drug delivery.",
+      "sustainability_concerns": "While adoption accelerated, sustainability depends on regulatory acceptance of decentralized approaches, patient willingness to continue digital engagement, site capability to support hybrid models, and sponsor willingness to invest in digital infrastructure beyond pandemic necessity.",
+      "implications_for_platforms": "Clinical technology platforms must support hybrid trial designs where some visits are in-person and others are remote. This requires flexible workflow engines, multi-channel patient engagement, and integration with wearable and ePRO data sources."
+    },
+    "source": "Survey of 100 biopharma executives on digital clinical trial methodology adoption acceleration during and after COVID-19",
+    "tags": [
+      "clinical-trials",
+      "decentralized-trials",
+      "digital-innovation",
+      "epro",
+      "wearables",
+      "pandemic"
+    ]
+  }
+]

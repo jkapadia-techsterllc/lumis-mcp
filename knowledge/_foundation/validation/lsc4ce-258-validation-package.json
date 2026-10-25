@@ -1,0 +1,233 @@
+[
+  {
+    "id": "val-258-001",
+    "category": "_foundation/validation",
+    "title": "GxP Classification and ERES Assessment for Commercial CRM Platform Release 258",
+    "products": ["Life Sciences Cloud"],
+    "summary": "GxP and Electronic Records/Electronic Signatures classification assessment for a life sciences commercial CRM platform, establishing the validation scope and regulatory categorization that governs all downstream validation activities.",
+    "findings": {
+      "gxp_classification": "GxP Relevant — the system has indirect impact on GxP-regulated processes. It functions as a commercial customer engagement and information management platform where compliance-relevant data captured is secondary, supportive, or documentary in nature.",
+      "gamp_category": "GAMP Category 4 — Configured Software. The platform is a multi-tenant SaaS application where functionality is achieved through configuration rather than custom code development.",
+      "eres_determination": "ERES Required — the system processes electronic records and uses electronic signatures. Signatures are implemented via User ID, Password, and Single Sign-On mechanisms.",
+      "regulatory_scope": [
+        "FDA 21 CFR Part 11 — Electronic Records and Electronic Signatures",
+        "FDA 21 CFR Part 203 — Prescription Drug Marketing Act (PDMA) for sample management",
+        "EU Annex 11 — Computerised Systems in GMP environments",
+        "Controlled Substances Regulations (21 CFR 1300-1316) where applicable"
+      ],
+      "classification_rationale": "The platform supports commercial field operations including sample management (PDMA-regulated), electronic signature capture, and audit trail maintenance. While the system itself does not directly manufacture or control drug products, the data it manages — sample distribution records, signature attestations, and compliance documentation — feeds into regulated quality and compliance processes.",
+      "assessment_metadata": "Assessment approved January 2026. Covers platform release 258 with baseline at release 251."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["gxp", "eres", "classification", "gamp-category-4", "21-cfr-part-11", "pdma", "eu-annex-11"]
+  },
+  {
+    "id": "val-258-002",
+    "category": "_foundation/validation",
+    "title": "System Architecture and Module Inventory for Commercial CRM Platform Validation",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Architecture overview and module inventory for the validated commercial CRM platform, documenting the system boundaries, integration points, and functional modules that define the validation scope.",
+    "findings": {
+      "architecture_pattern": "Multi-tenant SaaS platform with mobile and web access channels. The architecture stack flows from Mobile App through a second-generation managed package layer, into common components and industry-common frameworks, down to the underlying platform and data/AI services.",
+      "functional_modules": [
+        "Product Management — product catalog, lot tracking, territory-product associations",
+        "Territory Management — territory hierarchies, account assignments, alignment rules",
+        "Account Management — healthcare provider and organization records, affiliations",
+        "Engagement Planning and Execution — visit planning, call recording, activity tracking",
+        "Sampling — sample inventory, distribution, signature capture, reconciliation, PDMA compliance",
+        "Data, AI, and Analytics — reporting, dashboards, predictive capabilities",
+        "Admin and Developer — configuration, customization, security administration"
+      ],
+      "integration_points": [
+        "Reference data services for provider and organization master data",
+        "Communication platform integrations for remote engagement",
+        "Mobile device management for enterprise device security",
+        "Bring-your-own-application connectors for customer-specific integrations"
+      ],
+      "security_architecture": "Authentication via SAML 2.0 and OAuth 2.0. Data segregation enforced at the organization level per the multi-tenant architecture. Role-based access controls govern feature and data visibility.",
+      "platform_characteristics": "The platform operates as a managed package deployed on a shared infrastructure. Each customer organization operates in an isolated data partition. Configuration changes are managed through administrative interfaces rather than direct code modification."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["architecture", "system-overview", "modules", "integration", "multi-tenant", "saas"]
+  },
+  {
+    "id": "val-258-003",
+    "category": "_foundation/validation",
+    "title": "Validation Strategy and Methodology for Release 258",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Validation master plan covering the methodology, scope boundaries, environment strategy, roles, acceptance criteria, and maintenance approach for the commercial CRM platform's release 258 validation package.",
+    "findings": {
+      "methodology": "Risk-based validation following ISPE GAMP 5 Second Edition guidance. The approach validates intended use rather than exhaustively testing every feature, focusing validation effort proportionally to the risk impact of each requirement.",
+      "requirements_impact_scoring": "Each business requirement is scored across Business, Regulatory, and Technical risk dimensions. Score ranges: High (30-170) — requires test evidence with formal OQ test steps; Medium (15-29) — requires test evidence; Low (0-14) — documented but does not require formal test evidence. Only High and Medium impact requirements generate mandatory test cases.",
+      "in_scope_modules": "Product and Lot Management, Compliance and Security (audit trails, electronic signatures, login, security controls, user setup), Sample Management (dashboard, inventory counting and auditing, operations, settings), and Sample Limits (country-specific templates for regulatory compliance across multiple EU jurisdictions, limit configuration and assignment).",
+      "out_of_scope": "Low-impact requirements from the impact assessment, non-GxP functionalities (cycle plans, segmentation, general reporting), exploratory and user acceptance testing, and unrelated platform functionality outside the managed package boundary.",
+      "environment_strategy": "Validation conducted in a Sandbox environment that mirrors Production configuration. Environmental equivalency is attested through an Installation Verification Protocol. Sandbox is the uncontrolled environment used for test creation and execution; Production is the controlled and validated environment.",
+      "roles_and_responsibilities": "Six defined roles across validation deliverables: Validation Lead (accountable for overall package), Validation Engineer (responsible for test execution and documentation), Quality Assurance (reviews and approves deliverables), System Owner (approves system-level decisions), Business Owner (approves business requirements), and Technical Owner (approves technical architecture decisions).",
+      "acceptance_criteria": [
+        "All test cases conform with expected outputs, signed and dated by the executor",
+        "All deviations are recorded, assessed, and addressed with documented rationale",
+        "All validation master plan activities are complete and approved",
+        "An approved Validation Summary Report confirms completion of all validation activities"
+      ],
+      "validation_maintenance": "Software quality assurance testing is performed continuously on all platform releases, with findings tracked through a project management tool. Computer system validation testing occurs with each general release per an established SOP. Each release produces a validation package containing test evidence for system functionality, compliance controls, and standard configurations. Periodic reviews are conducted per a separate SOP to ensure the system remains in a validated state.",
+      "referenced_sops": [
+        "Computer System Validation — governs the overall validation lifecycle",
+        "Change and Release Management — governs how changes are assessed and deployed",
+        "Training and Competency — governs qualification of validation personnel",
+        "Periodic Review and Continuous Improvement — governs ongoing validation state assurance"
+      ]
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["validation-strategy", "gamp-5", "risk-based", "methodology", "acceptance-criteria", "sop"]
+  },
+  {
+    "id": "val-258-004",
+    "category": "_foundation/validation",
+    "title": "Business Requirements — Compliance and Security Domain",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Validation scope for the Compliance and Security business requirements domain, covering audit trail, electronic signatures, authentication, organization administration, security controls, and user setup — the regulatory backbone of the platform.",
+    "findings": {
+      "functional_areas": [
+        "Audit Trail — Login History tracking, Identity Verification logging, Setup Audit Trail for administrative changes",
+        "Electronic Signatures — Signature capture on iPad and Windows devices, signatures become read-only after acceptance to prevent tampering, cryptographic binding of signature to record",
+        "Login and Authentication — Two authentication methods supported (username/password and SSO), account lockout policies after failed attempts, cross-platform authentication consistency (mobile and web)",
+        "Organization Administration — org-level configuration, feature enablement, system settings governance",
+        "Security Controls — network access restrictions, password complexity and rotation policies, session timeout and management settings, sharing rules for record-level access, trusted IP range configuration",
+        "User Setup — unique username and password requirement per user, user accounts are never deleted (deactivated only) to preserve audit trail integrity"
+      ],
+      "regulatory_alignment": "These requirements directly support 21 CFR Part 11 compliance (electronic records integrity, electronic signature binding, audit trails) and EU Annex 11 requirements (access controls, data integrity, system administration logging). The user-never-deleted policy ensures complete traceability of all system actions to a specific individual.",
+      "requirement_count": "56 pages of detailed requirements across the six functional areas. Requirements follow the scoring methodology where High and Medium impact items generate formal test cases."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["compliance", "security", "audit-trail", "electronic-signatures", "21-cfr-part-11", "access-control"]
+  },
+  {
+    "id": "val-258-005",
+    "category": "_foundation/validation",
+    "title": "Business Requirements — Product and Lot Management Domain",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Validation scope for the Product and Lot Management business requirements domain, covering product configuration, territory associations, lot tracking, and related commercial operations that support PDMA compliance.",
+    "findings": {
+      "functional_sections": [
+        "Product Territory Sharing — controls which products are visible and distributable within specific territories",
+        "Product Admin Console — centralized product configuration and lifecycle management",
+        "Product Guidance Sharing — distribution of product-related guidance materials to field representatives",
+        "Product and Product Alignment — product hierarchy and alignment rule configuration",
+        "Territory Product Account/Provider — associations linking products to accounts and healthcare providers within territories",
+        "Visits — product-related visit recording and detailing during customer engagements",
+        "Content Management — approved content distribution and tracking for product materials",
+        "Email Templates — product-specific email template configuration for compliant communications",
+        "Samples Management - Inventory — product-level inventory tracking for sample stock management",
+        "Inquiry - Product Association — linking product information to customer inquiries and medical information requests"
+      ],
+      "pdma_relevance": "Product and lot management underpins PDMA compliance by maintaining the chain of custody from product receipt through distribution. Lot tracking enables recall readiness, expiration management, and regulatory reporting. Territory-product associations enforce distribution boundaries aligned with sales territory structures.",
+      "requirement_count": "40 pages of detailed requirements across 10 functional sections with impact scoring per the validation methodology."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["product-management", "lot-tracking", "pdma", "territory", "content-management", "inventory"]
+  },
+  {
+    "id": "val-258-006",
+    "category": "_foundation/validation",
+    "title": "Business Requirements — Sample Management Domain",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Validation scope for the Sample Management business requirements domain, covering sample distribution dashboards, inventory counting and auditing, sample operations, and configuration settings that support pharmaceutical sample compliance.",
+    "findings": {
+      "functional_areas": [
+        "Sample Management Dashboard — Disbursement tracking (product name, quantity, duration, sales representative), batch status monitoring, storage location management, inventory level visualization, pending transaction queues, and transaction timeline views. Includes time-based filtering (3, 6, 9 month ranges) with dynamic summary updates.",
+        "Sample Inventory Counting and Auditing — Physical inventory count workflows, discrepancy detection and resolution, audit trail for count adjustments, reconciliation between physical counts and system records",
+        "Sample Operations Management — Acknowledgement of shipment, transfer in and transfer out between representatives, sample returns processing, inventory adjustments with reason codes, sample orders with product limit enforcement, and approval workflows for restricted transactions",
+        "Sample Management Settings — Organization-level and profile-level configuration for sample visibility controls, locking rules to prevent unauthorized modifications, product allocation settings, and approval requirement thresholds"
+      ],
+      "compliance_context": "Sample management is among the most heavily regulated areas of the platform due to PDMA requirements (21 CFR Part 203) and controlled substances regulations (21 CFR 1300-1316). Every sample transaction must be traceable, signed, and reconcilable. The system enforces signature capture at the point of delivery and maintains an unbroken chain of custody from receipt through final disposition.",
+      "testing_approach": "Testing validates core platform capabilities supporting GxP-relevant sample business processes. The approach structures testing through siloed functional areas — each area is independently verifiable while maintaining traceability to the originating business requirements and risk scores.",
+      "requirement_count": "47 pages of detailed requirements. High-impact requirements (particularly around signature capture, chain of custody, and reconciliation) generate formal OQ test steps."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["sample-management", "pdma", "inventory", "chain-of-custody", "reconciliation", "controlled-substances"]
+  },
+  {
+    "id": "val-258-007",
+    "category": "_foundation/validation",
+    "title": "Business Requirements — Sample Limits Domain with Country-Specific Compliance Templates",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Validation scope for the Sample Limits business requirements domain, covering predefined country-specific compliance templates, limit configuration, and regulatory rule enforcement for pharmaceutical sample distribution across multiple EU jurisdictions.",
+    "findings": {
+      "template_framework": "The platform provides preconfigured sample limit templates that encode country-specific pharmaceutical sampling regulations. Each template defines the rules, thresholds, and enforcement mechanisms required by that jurisdiction's regulatory framework.",
+      "country_specific_templates": [
+        "Turkey — country-specific sample distribution limits and reporting requirements",
+        "Netherlands — Dutch pharmaceutical sampling regulations and quantity restrictions",
+        "Italy Class C and Class A — separate templates for different Italian drug classification categories, each with distinct limit calculations and enforcement rules",
+        "Belgium — Belgian pharmaceutical sampling compliance rules",
+        "Germany AMG — limits based on the Arzneimittelgesetz (German Medicines Act) requirements",
+        "Germany AMG plus EPFIA — combined limits incorporating both the German Medicines Act and the European Federation of Pharmaceutical Industries and Associations voluntary code requirements"
+      ],
+      "configuration_capabilities": [
+        "Assign sample limits to specific products with configurable thresholds",
+        "Configure limit calculation rules (per-account, per-product, per-time-period)",
+        "Manage background processing jobs for limit recalculation and enforcement",
+        "Define account segments for targeted limit application",
+        "Manage generic templates that can be customized per customer requirements",
+        "Automatic initialization of limits when new products or accounts enter scope"
+      ],
+      "regulatory_context": "Sample limits enforcement varies significantly across jurisdictions. The EU landscape includes both statutory requirements (like Germany's AMG) and voluntary industry codes (like EPFIA). The template approach allows customers to adopt the applicable regulatory framework without custom development, while the configuration layer enables adjustment for specific organizational interpretations of the regulations.",
+      "requirement_count": "44 pages of detailed requirements across template definitions and configuration capabilities. Country-specific template requirements are classified as High impact due to direct regulatory compliance implications."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["sample-limits", "country-templates", "eu-compliance", "amg", "epfia", "pdma", "regulatory-enforcement"]
+  },
+  {
+    "id": "val-258-008",
+    "category": "_foundation/validation",
+    "title": "Test Methodology and Traceability Approach for Validation Package 258",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Test methodology covering the Operational Qualification testing approach, traceability matrix structure, and evidence collection patterns used across the release 258 validation package.",
+    "findings": {
+      "test_methodology": "Operational Qualification (OQ) testing executed by the vendor to demonstrate that the configured platform functions according to its specifications. OQ testing is not customer-specific — it validates the platform's standard capabilities and configurations that support GxP-relevant business processes.",
+      "test_plan_structure": "Each functional domain has a dedicated test plan document that defines scope (in and out), testing strategy, and functional area breakdown. Test plans reference the corresponding Business Requirements Document and the Validation Master Plan for traceability.",
+      "traceability_matrix_purpose": "Each functional domain has a traceability matrix that maps every business requirement to its corresponding test evidence. The matrix traces requirements through the full chain: Business Requirement → Impact Assessment Score → Test Plan Reference → OQ Test Step Reference. This provides auditable evidence that all requirements above the risk threshold have been verified.",
+      "impact_assessment_in_traceability": "The traceability matrix documents the Business, Regulatory, and Technical risk scores for each requirement, ensuring traceability between the risk level assigned during impact assessment and the depth of testing applied. High-impact requirements map to detailed OQ test steps; Medium-impact requirements map to verification evidence; Low-impact requirements are documented but do not require formal test evidence.",
+      "regulatory_references_in_testing": "Test evidence demonstrates compliance with PDMA (21 CFR Part 203), 21 CFR Part 11, and EU Annex 11. Each traceability matrix explicitly references these regulatory frameworks to establish the connection between platform capabilities and regulatory obligations.",
+      "deliverable_inventory": [
+        "GxP and ERES Classification Assessment — establishes validation scope",
+        "System Overview — documents architecture and boundaries",
+        "Validation Master Plan — governs methodology, roles, and acceptance criteria",
+        "Business Requirements Documents (per functional domain) — captures requirements with impact scores",
+        "Test Plans (per functional domain) — defines testing strategy and scope",
+        "Test Scripts (per functional domain) — contains executable OQ test steps",
+        "Traceability Matrices (per functional domain) — maps requirements to test evidence",
+        "Validation Summary Report — confirms all validation activities are complete and accepted"
+      ],
+      "vendor_vs_customer_responsibility": "The vendor is responsible for establishing evidence that the system is validated for its intended use. Customers are responsible for implementing change controls and maintaining the validated state per their own quality procedures. The validation package provides the vendor's evidence; customers incorporate this into their site-level validation documentation."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["test-methodology", "oq", "traceability", "evidence", "vendor-validation", "deliverables"]
+  },
+  {
+    "id": "val-258-009",
+    "category": "_foundation/validation",
+    "title": "Regulatory References and External Standards for Platform Validation",
+    "products": ["Life Sciences Cloud"],
+    "summary": "Consolidated reference list of regulatory documents, industry guidance, and external standards that govern the validation approach for the commercial CRM platform, providing the authoritative framework for validation decisions.",
+    "findings": {
+      "fda_guidance": [
+        "General Principles of Software Validation (2002) — foundational FDA guidance for software validation methodology",
+        "21 CFR Part 11 — Electronic Records and Electronic Signatures regulation",
+        "21 CFR Part 203 — Prescription Drug Marketing Act implementation (PDMA) governing sample distribution",
+        "AI Guidance for Drug and Biological Products — emerging guidance for AI/ML components in regulated systems"
+      ],
+      "eu_regulations": [
+        "EudraLex Volume 4 Annex 11 — EU GMP requirements for computerised systems",
+        "EU GMP guidelines governing manufacturing and quality systems that interface with commercial operations"
+      ],
+      "industry_standards": [
+        "ISPE GAMP 5 Second Edition — the primary validation methodology framework used for this platform. Provides the risk-based approach, GAMP categories, and validation lifecycle model.",
+        "ISPE GAMP Records and Data Integrity Guide — supplemental guidance on data integrity controls, with a Machine Learning appendix addressing AI/ML validation considerations",
+        "ICH E6(R2) — Good Clinical Practice guidelines relevant where platform data interfaces with clinical operations"
+      ],
+      "application_context": "These references establish the regulatory floor for validation activities. The validation package is designed to satisfy the most stringent applicable requirements across these frameworks, allowing customers operating under different regulatory jurisdictions to rely on a single evidence package. The inclusion of AI/ML guidance references reflects forward-looking regulatory expectations as the platform incorporates predictive and analytical capabilities."
+    },
+    "source": "internal-validation-package-258",
+    "tags": ["regulatory-references", "fda", "eu-annex-11", "gamp-5", "ich", "data-integrity", "standards"]
+  }
+]

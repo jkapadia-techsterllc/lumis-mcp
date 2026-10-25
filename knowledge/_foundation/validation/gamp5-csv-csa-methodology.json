@@ -1,0 +1,264 @@
+[
+  {
+    "id": "val-meth-001",
+    "category": "validation-methodology",
+    "title": "GAMP 5 Software Categories — Determining Validation Effort",
+    "summary": "GAMP 5 (Good Automated Manufacturing Practice, 2nd Edition 2022) classifies software into categories that determine the level of validation effort required. The category is based on how configurable/customizable the software is, not its intended use.",
+    "categories": {
+      "Category 1 — Infrastructure Software": {
+        "description": "Operating systems, database engines, middleware, network management tools, antivirus, backup tools",
+        "validation_approach": "Verify installation, configure per requirements, document version. Qualification focus on infrastructure readiness.",
+        "examples": ["Windows Server", "Oracle Database", "Linux OS", "VMware", "Active Directory"],
+        "effort": "Low — installation verification and configuration documentation"
+      },
+      "Category 3 — Non-Configured Products (COTS)": {
+        "description": "Commercial off-the-shelf software used as-is without configuration of business processes. Vendor develops and tests per their SDLC.",
+        "validation_approach": "Verify installation, confirm vendor qualification, document intended use and user acceptance testing. Leverage vendor testing documentation.",
+        "examples": ["Microsoft Office", "Adobe Acrobat", "Standard email clients", "SFTP tools"],
+        "effort": "Low to Medium — vendor assessment + user acceptance testing"
+      },
+      "Category 4 — Configured Products": {
+        "description": "Software products that are configured (not custom-coded) to meet business requirements. The vendor provides the platform; the implementer configures workflows, rules, fields, and processes.",
+        "validation_approach": "Full validation lifecycle: URS, FS, configuration specification, IQ/OQ/PQ. Focus testing on configured functionality. Leverage vendor's platform validation for core framework.",
+        "examples": ["Salesforce (configured)", "SAP (configured modules)", "Veeva CRM (configured)", "ServiceNow (configured)", "Clinical trial EDC systems", "LIMS (configured)"],
+        "effort": "Medium to High — the bulk of pharma system validation falls here"
+      },
+      "Category 5 — Custom Applications": {
+        "description": "Bespoke software developed to meet specific requirements. May include custom Apex code on Salesforce, custom integrations, or standalone applications.",
+        "validation_approach": "Full SDLC validation: requirements, design, code review, unit testing, integration testing, IQ/OQ/PQ. Source code review and static analysis recommended.",
+        "examples": ["Custom Apex triggers/classes", "Custom middleware integrations", "Bespoke laboratory data systems", "Custom mobile applications"],
+        "effort": "High — full development lifecycle validation required"
+      }
+    },
+    "note_on_category_2": "GAMP 5 Second Edition removed Category 2 (Firmware). Firmware is now treated as infrastructure software (Category 1) unless it is configurable (Category 4) or custom (Category 5).",
+    "gotcha": "A Salesforce implementation is typically Category 4 (configured), but any Apex custom code elevates those components to Category 5. Most real-world implementations are a MIX of Category 4 and 5.",
+    "gotcha_level": "critical",
+    "source": "ispe-gamp5-2nd-edition",
+    "tags": ["gamp-5", "software-categories", "risk-based", "validation-effort", "ispe"]
+  },
+  {
+    "id": "val-meth-002",
+    "category": "validation-methodology",
+    "title": "CSV vs CSA — The Industry Shift from Computer System Validation to Computer Software Assurance",
+    "summary": "The pharmaceutical industry is transitioning from traditional CSV (Computer System Validation) — heavy on scripted testing and documentation — to CSA (Computer Software Assurance), a risk-based approach that focuses testing effort where patient safety and data integrity risk is highest.",
+    "csv_traditional": {
+      "full_name": "Computer System Validation",
+      "approach": "Comprehensive scripted testing of all functionality with detailed test scripts, expected results, and formal protocols. Heavy documentation including Validation Plan, URS, FS, DS, IQ, OQ, PQ, traceability matrices, and Validation Summary Report.",
+      "strengths": [
+        "Well-understood by regulators worldwide",
+        "Provides comprehensive documented evidence",
+        "Established SOPs and templates available",
+        "Accepted by all major regulatory agencies"
+      ],
+      "weaknesses": [
+        "Extremely documentation-heavy — validation documents can exceed the system documentation itself",
+        "Scripted testing often tests the script, not the system",
+        "Focus on documentation compliance rather than actual quality assurance",
+        "Slow and expensive — delays system deployments",
+        "Change control burden discourages improvements",
+        "Does not scale well for agile/cloud/SaaS delivery models"
+      ]
+    },
+    "csa_modern": {
+      "full_name": "Computer Software Assurance",
+      "fda_guidance": "Draft Guidance: Computer Software Assurance for Production and Quality System Software (September 2022)",
+      "approach": "Risk-based assurance that focuses critical thinking and testing effort on GxP-critical functions. Uses a tiered testing approach: scripted testing for high-risk functions, unscripted (exploratory/ad-hoc) testing for medium-risk functions, and configuration verification for low-risk functions.",
+      "key_principles": [
+        "Assurance activities should be commensurate with risk to patient safety, product quality, and data integrity",
+        "Critical thinking over rote documentation — understand WHY a test matters",
+        "Unscripted testing (exploratory, error guessing, ad hoc) is ACCEPTABLE for non-critical functions",
+        "Vendor testing can be leveraged more extensively — no need to re-test what the vendor already validated",
+        "Focus on 'intended use' — validate the system for how it will actually be used, not every possible function",
+        "Continuous assurance — ongoing monitoring replaces periodic formal re-validation"
+      ],
+      "risk_tiers": {
+        "High Risk (Scripted Testing Required)": "Functions where failure directly impacts patient safety, product quality, or regulatory decision-making. Examples: sample tracking lot traceability, adverse event reporting, batch release decisions, electronic signatures on GxP records",
+        "Medium Risk (Unscripted Testing Acceptable)": "Functions that support GxP processes but whose failure has detectable, correctable impact. Examples: reporting and analytics, scheduling, territory management",
+        "Low Risk (Verification Only)": "Functions that do not impact product quality or patient safety. Examples: UI preferences, non-GxP reporting, administrative configuration"
+      }
+    },
+    "adoption_status": "CSA is increasingly accepted. FDA published draft guidance in 2022. ISPE GAMP 5 Second Edition (2022) incorporates CSA principles. Many large pharma companies are adopting CSA or hybrid CSV/CSA approaches. However, EU regulators (especially MHRA, ANSM, BfArM) still expect traditional CSV documentation for GMP systems. Japan (PMDA) currently expects traditional CSV.",
+    "recommendation": "For global implementations, use a hybrid approach: CSA risk assessment to determine testing depth, but maintain CSV-style documentation for GxP-critical functions to satisfy all regulatory expectations. This gives you CSA's efficiency for low/medium-risk functions while maintaining CSV's documentation rigor where regulators expect it.",
+    "gotcha_level": "critical",
+    "source": "fda-csa-draft-guidance-2022",
+    "tags": ["csv", "csa", "risk-based", "gamp-5", "fda-guidance", "validation-methodology"]
+  },
+  {
+    "id": "val-meth-003",
+    "category": "validation-methodology",
+    "title": "IQ/OQ/PQ — The Qualification Lifecycle",
+    "summary": "The three-stage qualification process that validates a computerized system from installation through real-world performance. Derived from equipment qualification in pharmaceutical manufacturing and adapted for computerized systems.",
+    "phases": {
+      "IQ — Installation Qualification": {
+        "purpose": "Verify that the system/software is installed correctly per specifications in the defined environment",
+        "activities": [
+          "Verify software version matches approved version",
+          "Confirm hardware/infrastructure meets specifications (servers, network, storage)",
+          "Validate environment configuration (production, staging, sandbox)",
+          "Verify database installation and configuration",
+          "Confirm integration endpoints and connectivity",
+          "Verify security configuration (SSL/TLS, encryption, authentication)",
+          "Document installed components and versions",
+          "Verify backup and recovery mechanisms are in place"
+        ],
+        "for_cloud_saas": "For SaaS platforms like Salesforce, IQ focuses on tenant configuration: org settings, connected apps, SSO integration, data storage location, and platform version. The vendor handles infrastructure IQ.",
+        "deliverable": "IQ Protocol and IQ Report"
+      },
+      "OQ — Operational Qualification": {
+        "purpose": "Verify that the system operates as intended within specified operating ranges — test that configured functionality works correctly",
+        "activities": [
+          "Execute functional test scripts for all GxP-critical workflows",
+          "Test business rules and validation rules",
+          "Verify access controls and permission enforcement",
+          "Test audit trail generation and immutability",
+          "Verify electronic signature capture, manifestation, and linking",
+          "Test data integrity during create/read/update/delete operations",
+          "Verify reporting accuracy",
+          "Test integration data flows between systems",
+          "Boundary and negative testing for critical fields",
+          "Test error handling and system behavior under error conditions"
+        ],
+        "for_cloud_saas": "OQ is the heaviest phase for SaaS implementations. Focus on configured workflows, custom code (Apex, LWC), validation rules, approval processes, and integrations. Leverage platform vendor's validation for core framework functionality.",
+        "deliverable": "OQ Protocol and OQ Report"
+      },
+      "PQ — Performance Qualification": {
+        "purpose": "Verify that the system performs consistently and reliably under real-world conditions with actual users and production-like data",
+        "activities": [
+          "End-to-end business process testing with production-representative data",
+          "Concurrent user testing at expected load levels",
+          "Mobile device testing (offline/online sync, different devices/OS versions)",
+          "Performance testing (response times, throughput)",
+          "Disaster recovery testing",
+          "User acceptance testing (UAT) with trained business users",
+          "Verify reporting with production-scale data volumes",
+          "Test backup/restore procedures"
+        ],
+        "for_cloud_saas": "PQ for SaaS includes testing mobile offline/online workflows, sync reliability under real network conditions, cross-device compatibility, and performance with expected data volumes. Include real-device testing — emulators are insufficient for PQ sign-off.",
+        "deliverable": "PQ Protocol, PQ Report, and UAT Sign-off"
+      }
+    },
+    "gotcha": "IQ/OQ/PQ are NOT always sequential for SaaS systems. Many organizations combine IQ+OQ into a single qualification protocol for cloud systems where the vendor manages infrastructure. The key is that all three qualification purposes are addressed, not that they are separate documents.",
+    "gotcha_level": "critical",
+    "source": "ispe-gamp5-qualification",
+    "tags": ["iq", "oq", "pq", "qualification", "validation-lifecycle", "uat"]
+  },
+  {
+    "id": "val-meth-004",
+    "category": "validation-methodology",
+    "title": "Risk Assessment Methods for System Validation",
+    "summary": "Risk assessment is the foundation of both CSV and CSA approaches. It determines which system functions require the most validation effort. Multiple methods can be used; GAMP 5 recommends a risk-based approach throughout the lifecycle.",
+    "methods": {
+      "FMEA — Failure Mode and Effects Analysis": {
+        "description": "Systematic identification of potential failure modes, their causes, and effects. Assigns severity, occurrence, and detectability scores to calculate a Risk Priority Number (RPN).",
+        "scoring": {
+          "severity": "1-5 scale (1=negligible, 5=critical patient safety impact)",
+          "occurrence": "1-5 scale (1=unlikely, 5=frequent/expected)",
+          "detectability": "1-5 scale (1=always detected, 5=undetectable)",
+          "RPN": "Severity x Occurrence x Detectability (range 1-125)"
+        },
+        "when_to_use": "Primary method for detailed risk assessment of individual system functions. Best for systems with clearly defined functions and failure modes."
+      },
+      "Initial Risk Assessment (IRA)": {
+        "description": "High-level risk assessment performed early in the validation lifecycle to classify the overall system and its major components. Determines GAMP category, GxP impact, and validation scope.",
+        "outputs": ["System GxP classification", "GAMP software category", "Regulatory scope (which regulations apply)", "High-level risk classification of major functions"],
+        "when_to_use": "First step in any validation project. Determines the overall approach and effort level."
+      },
+      "Functional Risk Assessment (FRA)": {
+        "description": "Detailed risk assessment of each system function/feature to determine testing depth. Maps each function to its GxP impact and assigns a risk classification.",
+        "risk_classifications": {
+          "GxP Critical (High)": "Direct impact on patient safety, product quality, or data integrity. Requires full scripted testing with documented evidence.",
+          "GxP Relevant (Medium)": "Supports GxP processes but failure is detectable and correctable. Unscripted testing acceptable under CSA; scripted under traditional CSV.",
+          "Non-GxP (Low)": "No impact on GxP data or processes. Configuration verification only."
+        },
+        "when_to_use": "After IRA, during validation planning. Produces the risk-based testing matrix that drives all subsequent qualification activities."
+      }
+    },
+    "gotcha": "Risk assessment must be performed BEFORE writing test protocols, not after. Teams that write tests first and then map them to risks are doing it backwards — the risk assessment should drive the testing strategy, not justify pre-existing tests.",
+    "gotcha_level": "critical",
+    "source": "ispe-gamp5-risk-assessment",
+    "tags": ["risk-assessment", "fmea", "gxp-classification", "testing-strategy"]
+  },
+  {
+    "id": "val-meth-005",
+    "category": "validation-methodology",
+    "title": "Vendor Assessment and Qualification for SaaS/Cloud Systems",
+    "summary": "For configured products (GAMP Category 4), a significant portion of the validation risk shifts to the vendor. Proper vendor assessment allows organizations to leverage vendor testing and reduce redundant validation effort.",
+    "vendor_assessment_scope": [
+      "Software Development Lifecycle (SDLC) — does the vendor follow a formal, documented SDLC?",
+      "Change management — how are releases managed, tested, and deployed?",
+      "Quality management system — ISO 9001, SOC 2 Type II, ISO 27001 certifications",
+      "Security practices — penetration testing, vulnerability management, incident response",
+      "Data center qualifications — physical security, redundancy, backup, disaster recovery",
+      "Release management — how are customers notified of changes? Can changes be controlled/deferred?",
+      "Audit trail capabilities — native audit trail implementation, immutability guarantees",
+      "Data integrity controls — encryption at rest and in transit, backup integrity",
+      "Regulatory experience — does the vendor understand GxP requirements?",
+      "Previous audit findings — request vendor audit results or SOC reports"
+    ],
+    "vendor_audit_types": {
+      "Paper-based audit (questionnaire)": "Minimum requirement. Send vendor qualification questionnaire and review responses.",
+      "Remote audit": "Virtual walkthrough of SDLC, change management, security, and QMS with vendor quality team.",
+      "On-site audit": "Physical audit of vendor facilities, development processes, and data centers. Required by some companies for critical GxP systems.",
+      "Third-party audit reliance": "Accept vendor's SOC 2 Type II, ISO 27001, or third-party GxP audit reports in lieu of direct audit."
+    },
+    "for_salesforce_specifically": [
+      "Salesforce publishes Trust & Compliance documentation at trust.salesforce.com",
+      "SOC 2 Type II reports available under NDA",
+      "ISO 27001 certified",
+      "FedRAMP authorized (relevant for US government life sciences)",
+      "Salesforce Shield provides additional audit trail and encryption capabilities",
+      "Field History Tracking limitations (20 fields, 18-24 months retention) are a known Part 11 gap",
+      "Setup Audit Trail retention is 180 days — insufficient for most GxP retention requirements",
+      "Salesforce does NOT provide a Part 11 compliance certification — that responsibility is on the customer/implementer"
+    ],
+    "gotcha_level": "critical",
+    "source": "ispe-gamp5-vendor-assessment",
+    "tags": ["vendor-assessment", "saas", "cloud-validation", "soc2", "supplier-qualification"]
+  },
+  {
+    "id": "val-meth-006",
+    "category": "validation-methodology",
+    "title": "Validation Lifecycle for SaaS/Cloud Platforms",
+    "summary": "The validation lifecycle for cloud/SaaS platforms differs from traditional on-premise systems because the vendor manages infrastructure, releases updates on a fixed schedule, and customers cannot control platform changes. This requires a continuous validation approach.",
+    "lifecycle_phases": {
+      "1. Planning": {
+        "deliverables": ["Validation Plan", "Initial Risk Assessment", "Vendor Assessment"],
+        "key_decisions": ["CSV vs CSA approach", "GAMP categorization", "Regulatory scope", "Validation team roles"]
+      },
+      "2. Specification": {
+        "deliverables": ["User Requirements Specification (URS)", "Functional Specification (FS)", "Configuration Specification (CS)"],
+        "key_activities": ["Map business requirements to system configuration", "Identify custom development needs", "Document integration requirements"]
+      },
+      "3. Risk Assessment": {
+        "deliverables": ["Functional Risk Assessment", "Risk-based testing matrix"],
+        "key_activities": ["Classify each function by GxP impact", "Assign testing depth per function", "Identify critical data flows"]
+      },
+      "4. Qualification": {
+        "deliverables": ["IQ/OQ/PQ protocols", "Test scripts", "Traceability Matrix"],
+        "key_activities": ["Execute IQ (installation/configuration verification)", "Execute OQ (functional testing)", "Execute PQ (performance/UAT)"]
+      },
+      "5. Go-Live": {
+        "deliverables": ["Validation Summary Report", "Deviations and resolutions", "Training records", "Go-live approval"],
+        "key_activities": ["Review all test results", "Resolve all deviations", "Confirm training completion", "Obtain QA sign-off"]
+      },
+      "6. Operational": {
+        "deliverables": ["Release assessment reports", "Periodic review reports", "Change control records"],
+        "key_activities": ["Assess vendor releases for GxP impact", "Regression testing for impacted functionality", "Periodic review (annual)", "Incident and deviation management"]
+      },
+      "7. Retirement": {
+        "deliverables": ["Retirement plan", "Data migration validation", "Archive verification"],
+        "key_activities": ["Validate data migration to new system or archive", "Verify data accessibility in archive", "Confirm retention requirements met"]
+      }
+    },
+    "saas_specific_considerations": [
+      "Vendor releases happen on a fixed schedule (e.g., Salesforce 3x/year) — you MUST have a release assessment process",
+      "Sandbox refresh strategy is critical for testing — align refresh timing with vendor releases",
+      "Multi-tenant architecture means you cannot prevent platform upgrades — plan for continuous validation",
+      "APIs and integrations may change between releases — include integration regression testing",
+      "Feature flags allow gradual rollout — leverage this for phased validation of new features"
+    ],
+    "gotcha_level": "critical",
+    "source": "ispe-gamp5-saas-lifecycle",
+    "tags": ["validation-lifecycle", "saas", "cloud", "continuous-validation", "release-management"]
+  }
+]

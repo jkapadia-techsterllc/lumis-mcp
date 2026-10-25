@@ -1,0 +1,63 @@
+[
+  {
+    "id": "persona-001",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Persona Framework — Archetype-to-Persona Mapping Methodology",
+    "products": ["Legacy CRM Personal"],
+    "summary": "A structured framework for mapping business topologies (archetypes) to role-based user profiles (personas) in life sciences CRM implementations. Six archetypes contain eight personas, enabling preset configurations that accelerate deployment and improve adoption.",
+    "findings": {
+      "framework_structure": "The framework uses a two-level hierarchy. Archetypes represent business topologies — the organizational model and commercial strategy of the customer. Personas represent role-based profiles within those archetypes — the specific job functions, goals, and CRM feature requirements of individual users.",
+      "six_archetypes": "Primary Care (high-volume physician engagement, territory-based coverage), Specialty Care (low-volume specialist engagement, hospital-based access), Biotech (focused therapeutic areas, small field forces), Consumer Health (over-the-counter and retail distribution), Clinical (clinical trial support and medical affairs), Medical Device (surgical support, equipment, and field service).",
+      "eight_personas": "Traditional Sales Representative (territory-based detailing), Specialty Sales Representative (hospital and specialist focused), OTC and RX Sales Representative (consumer health and retail), Key Account Manager (multi-stakeholder strategic accounts), OTC Key Account Manager (retail chain and distributor management), Medical Persona (medical science liaisons and medical affairs), Market Access (payer engagement and market access), Site Manager (clinical trial site coordination).",
+      "implementation_benefits": "Preset CRM configurations for each archetype-persona combination reduce implementation time and cost. Customers select their archetype and active personas, receiving pre-configured modules, page layouts, workflows, and data models tailored to their commercial model. This accelerates speed to market, improves adoption rates, and provides scalability across portfolio expansion.",
+      "archetype_persona_mapping": "Each archetype activates a subset of personas relevant to its business model. A Primary Care archetype might activate Traditional Sales, KAM, and Medical personas. A Medical Device archetype might activate Site Manager, KAM, and Specialty Sales personas. The mapping determines which CRM features, data objects, and workflows are active for each deployment."
+    },
+    "source": "internal-legacy-crm-archetypes-personas-v2-2023",
+    "tags": ["personas", "archetypes", "implementation", "configuration", "deployment-methodology"]
+  },
+  {
+    "id": "persona-002",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Sales Personas — Traditional and Specialty Representative Profiles",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Detailed role profiles for two primary sales personas in life sciences CRM: the high-volume territory-based traditional representative and the hospital-focused specialty representative, including their challenges, goals, and CRM feature requirements.",
+    "findings": {
+      "traditional_sales_profile": "Early-career representative (1-3 years experience) covering large territory panels of primary care physicians. Challenges: limited healthcare provider access windows (short interactions), device performance in the field, transitioning to remote engagement channels, managing high visit volumes with compliance requirements. Goals: meeting sales targets, building speed and efficiency, establishing trusted provider relationships, planning efficient territory coverage, maintaining regulatory compliance.",
+      "traditional_sales_crm_features": "Account Management (provider and organization profiles), Call Reporting (visit documentation and activity logging), Remote Engagement (video and digital detailing), Meetings (event and speaker program coordination), Sample Management (compliant distribution and reconciliation), Reports and Dashboards (territory performance visibility), Next Best Recommendations (AI-driven prioritization), Goals (target tracking and attainment).",
+      "specialty_sales_profile": "Experienced representative (10+ years) covering smaller segments of hospital-based specialists. Challenges: bureaucratic event planning and compliance processes, hospital access restrictions and credentialing, limited offline functionality during hospital visits, managing deep product knowledge across complex therapeutic areas. Goals: building specialist expertise and therapeutic area credibility, breaking accessibility barriers for hospital-based providers, collaboration and networking across multi-disciplinary care teams.",
+      "specialty_sales_differentiation": "The key differentiator is depth versus breadth. Traditional sales optimizes for high-volume, short interactions across large provider panels. Specialty sales optimizes for deep, relationship-driven engagement with smaller numbers of specialists where product knowledge and scientific credibility are prerequisites for meaningful access."
+    },
+    "source": "internal-legacy-crm-traditional-specialty-archetypes-2023",
+    "tags": ["personas", "sales-rep", "specialty", "primary-care", "field-force"]
+  },
+  {
+    "id": "persona-003",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Medical Science Liaison Persona — Lifecycle Activities and Value Propositions",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The Medical Science Liaison role profile spanning the full product lifecycle from Phase II clinical trials through post-launch, with four value propositions and non-promotional activity patterns.",
+    "findings": {
+      "role_definition": "Medical Science Liaisons are therapeutic area specialists who engage in non-promotional scientific exchange with key opinion leaders, researchers, and healthcare professionals. They bridge the gap between clinical development and commercial operations, operating under strict compliance guardrails that separate scientific communication from promotional activity.",
+      "lifecycle_activities": "Phase II: clinical trial site identification and investigator recruitment support. Pre-Launch: disease awareness education, advisory board facilitation, publication planning support. Launch: proactive scientific communication to opinion leaders, real-world evidence generation, formulary support through clinical data presentation. Post-Launch: ongoing opinion leader partnerships, investigator-sponsored study support, medical information response, health technology assessment and outcomes research support.",
+      "key_competencies": "Target Product Profile development and communication, Real-World Evidence study design and interpretation, Health Technology Assessment and Health Economics and Outcomes Research literacy, Mechanism of Action scientific communication. These competencies require continuous education and access to the latest clinical data through the CRM platform.",
+      "four_value_propositions": "Scientific credibility (therapeutic expertise beyond promotional messaging), clinical development support (trial site identification and investigator relationships), market access facilitation (clinical evidence for formulary decisions), and opinion leader engagement (long-term scientific partnerships that influence treatment guidelines)."
+    },
+    "source": "internal-legacy-crm-msl-persona-v3-2023",
+    "tags": ["personas", "msl", "medical-affairs", "non-promotional", "clinical", "opinion-leaders"]
+  },
+  {
+    "id": "persona-004",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Platform Overview — Market Evolution and Intelligence Capabilities",
+    "products": ["Legacy CRM Personal"],
+    "summary": "The commercial CRM platform's market positioning, product portfolio structure, and next-best-action intelligence framework, including market context for digital engagement in life sciences.",
+    "findings": {
+      "market_context": "52% of healthcare providers want a voice in deciding which promotional mix they receive. 80% of life sciences companies are investing in digital engagement channels beyond in-person visits. The commercial CRM market has evolved through four generations: paper-based (1990s), on-premise CRM (2000s), cloud SaaS (2010s), and AI-driven intelligent CRM (2020s+).",
+      "platform_portfolio": "Six product modules: Personal (core CRM for field operations), Connect (multi-stakeholder collaboration), HCP/O Engage (healthcare provider and organization digital engagement), Optimizer (territory and resource optimization), Digital (omnichannel campaign orchestration), Content (closed-loop marketing content management and delivery). Each module can be independently licensed and configured.",
+      "next_best_recommendations": "An intelligence layer that analyzes historical engagement data, provider preferences, product messaging effectiveness, and territory patterns to suggest the next best action for each field interaction. Recommendations span which provider to visit, when to visit, which products to discuss, and which messaging approach to use. The framework operates across all engagement channels — in-person, remote, email, and digital.",
+      "robotic_process_automation": "An in-app automation extension that handles repetitive CRM tasks through configurable bots. Industry context: 57% of organizations identify RPA as a major component of digital transformation, 63% report that RPA reduces errors in repetitive processes, 60% report that RPA enables more strategic focus by eliminating manual data entry. In the CRM context, bots automate call report pre-population, territory routing updates, compliance form completion, and data synchronization verification."
+    },
+    "source": "internal-legacy-crm-overview-assistant-presentations-2023",
+    "tags": ["platform", "market-evolution", "next-best-action", "rpa", "digital-engagement", "portfolio"]
+  }
+]

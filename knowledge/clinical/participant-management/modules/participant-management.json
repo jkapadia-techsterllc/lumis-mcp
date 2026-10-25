@@ -1,0 +1,117 @@
+[
+  {
+    "id": "ag-cp-003",
+    "area": "Participant Management",
+    "topic": "Participant Management Overview",
+    "content": "Streamlines recruiting and enrolling participants in clinical trials by orchestrating each stage from initial recruitment to enrollment. Provides a unified clinical trial portal experience for potential participants and coordinators. Benefits: reduce cost per eligible participant, reduce cost per consenting participant conversion, reduce average time between registration and enrollment, improve participant experience, lower attrition rate.",
+    "key_components": {
+      "recruitment": [
+        "Criteria-based search and filter for trial discovery on Experience Cloud sites",
+        "OmniStudio components for digitizing prescreening and registration",
+        "AI candidate matching to automatically match candidates to trials"
+      ],
+      "enrollment": [
+        "Enrollment journey via orchestration capabilities",
+        "Flows for digitizing consent management",
+        "Invocable actions for randomization process"
+      ]
+    },
+    "data_model": "FHIR R4 and USCDI-aligned for interoperability",
+    "permission_sets": [
+      "Clinical Trial Manager",
+      "Clinical Trial Coordinator",
+      "Clinical Trial Participant",
+      "Clinical Trial Guest",
+      "Clinical Trial Site Coordinator (Experience Cloud)"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Participant Management"
+    }
+  },
+  {
+    "id": "ag-cp-004",
+    "area": "Participant Management",
+    "topic": "Clinical Trial Recruitment",
+    "content": "During recruitment, potential participants are called Candidates. The recruitment phase supports: trial discovery via criteria-based search on self-service portals, candidate matching using AI to automatically match candidates to eligible trials, prescreening through digitized OmniStudio components, and the application process. Clinical trial managers create records for care programs (representing clinical trials) and research studies. Key records: care programs, research studies, enrollment criteria, site associations.",
+    "gotchas": [
+      "Candidates become Participants only after enrollment is complete",
+      "AI matching requires configuration of matching criteria per trial",
+      "Self-service portal requires Experience Cloud setup"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Clinical Trial Recruitment"
+    }
+  },
+  {
+    "id": "ag-cp-010",
+    "area": "Advanced Therapy Management",
+    "topic": "Advanced Therapy Management Overview",
+    "content": "Manage complex therapies including cell and gene therapies with chain of custody tracking. Key features: custody item tracking, custody chain entries with signature trails, electronic signatures for chain of custody verification, care program enrollee management, and therapy scheduling. Each custody item can have multiple custody chain entries, and each entry has a signature trail that appears on the care program enrollee's record page when ready for signing.",
+    "prerequisites": [
+      "Electronic signatures configured",
+      "Care programs set up",
+      "Person Accounts enabled"
+    ],
+    "gotchas": [
+      "Chain of custody requires electronic signatures \u2014 cannot be skipped for regulatory compliance",
+      "Each custody chain entry requires its own signature trail",
+      "Advanced therapy management is a specialized add-on \u2014 separate from standard clinical engagement"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Advanced Therapy Management"
+    }
+  },
+  {
+    "id": "cp-002",
+    "category": "clinical-engagement",
+    "topic": "Participant Management and FHIR/USCDI Alignment",
+    "description": "Participant Management supports clinical trial participant tracking. The data model aligns with FHIR R4 resources and USCDI data classes for health data interoperability. Key objects include ClinicalTrialParticipant, ClinicalEncounter, and ClinicalObservation. USCDI alignment ensures that health data captured during clinical engagement can be shared with EHR systems. Person Account is the foundation - participants are Person Accounts with additional clinical attributes.",
+    "objects": [
+      "ClinicalTrialParticipant",
+      "ClinicalEncounter",
+      "ClinicalObservation",
+      "PersonAccount"
+    ],
+    "setup_steps": [
+      "Enable Person Accounts (irreversible org-level setting)",
+      "Configure participant-specific record types",
+      "Set up FHIR R4 resource mapping for interoperability",
+      "Configure clinical encounter tracking",
+      "Set up observation recording workflows"
+    ],
+    "gotchas": [
+      "Person Account enablement is IRREVERSIBLE - once enabled, cannot be disabled",
+      "FHIR alignment is data model alignment, not a built-in FHIR API endpoint",
+      "USCDI compliance requires explicit field mapping between platform objects and USCDI data classes"
+    ],
+    "migration_relevance": "Clinical engagement is largely net-new capability. No direct Veeva equivalent for most clinical objects."
+  },
+  {
+    "id": "cp-009",
+    "category": "patient-engagement",
+    "topic": "Advanced Therapy Management",
+    "description": "Advanced Therapy Management supports complex therapies (cell and gene therapy, specialty infusions, rare disease treatments) that require coordinated multi-step workflows. Therapy scheduling, preparation tracking, administration logging, and follow-up monitoring are managed as a connected workflow. Chain of custody tracking ensures product integrity from manufacturing through administration. Cold chain management tracks temperature compliance.",
+    "objects": [
+      "TherapyOrder",
+      "TherapySchedule",
+      "ChainOfCustody",
+      "AdministrationRecord"
+    ],
+    "setup_steps": [
+      "Configure therapy types and workflow templates",
+      "Set up chain of custody tracking points",
+      "Configure temperature monitoring integration",
+      "Set up therapy scheduling with resource allocation",
+      "Configure follow-up monitoring schedules"
+    ],
+    "gotchas": [
+      "Chain of custody gaps are compliance violations - tracking must be continuous",
+      "Cold chain temperature excursions must trigger immediate alerts",
+      "Multi-step therapy workflows require strict sequencing enforcement"
+    ],
+    "migration_relevance": "Specialized capability for cell and gene therapy. Typically net-new for most migrations."
+  }
+]

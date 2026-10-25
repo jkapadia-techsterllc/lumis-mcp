@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fnd-asia-digital-health-001",
+    "category": "org-strategy",
+    "title": "Digital Health Ecosystem Development in Asia Pacific",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Analysis of digital health ecosystem evolution in Asia, including consumer expectations, government healthcare spending dynamics, and opportunities for ecosystem orchestrators in the region.",
+    "findings": {
+      "consumer_expectations": "Asian consumers are spending more on health and wellness with increasing demand for convenient, affordable digital care. In major markets, 40%+ of consumers report increased health spending. Consumers are trading up in health and safety categories.",
+      "government_spending_gap": "Asian governments spend 4.5% of GDP on healthcare versus the 12% OECD average, yet are the dominant payer (64% of health expenditures). This creates urgency to control cost growth while maintaining quality and access, driving digital health adoption.",
+      "technology_leadership": "Asia hosts half the world's internet users and leads digital innovation in many categories. Mobile-first healthcare delivery models are more advanced than in Western markets, particularly in telehealth, mobile payments for healthcare, and super-app health integrations.",
+      "ecosystem_orchestrator_opportunity": "The ecosystem model \u2014 where a platform orchestrator connects payers, providers, pharma, and consumers \u2014 is gaining traction. Successful orchestrators combine health data, payment infrastructure, and content delivery.",
+      "implications_for_global_programs": "Global CRM implementations must account for Asia's distinctive dynamics: mobile-first UX requirements, super-app integration expectations, government-as-dominant-payer workflows, and rapid digital adoption rates that outpace regulatory frameworks."
+    },
+    "source": "Analysis of digital health ecosystem development in Asia covering consumer trends, spending dynamics, and platform opportunities",
+    "tags": [
+      "digital-health",
+      "asia-pacific",
+      "ecosystem",
+      "mobile-health",
+      "consumer-health"
+    ]
+  }
+]

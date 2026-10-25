@@ -1,0 +1,621 @@
+[
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-create-lightning-apps",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create Lightning Apps for Life Sciences Cloud",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Help your field users work more efficiently by creating Lightning apps that are customized to specific user profiles in your Salesforce",
+    "findings": [
+      {
+        "name": "Create Lightning Apps for Life Sciences Cloud",
+        "detail": "Help your field users work more efficiently by creating Lightning apps that are customized to specific user profiles in your Salesforce org."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create Lightning apps: | Life Sciences Commercial Admin permission set To view apps: | View Setup and Configuration To manage apps: | Modify All Data Profiles define how users access objects and data, and determine the actions they can perform while using the app. Create user profiles for each persona and assign users accordingly. See Create Custom Profiles for Customer Engagement Users ."
+      },
+      {
+        "name": "Create a Lightning App Using the App Manager",
+        "detail": "Use App Manager to create multiple Lightning Apps for specific user profiles as needed. For example, it includes standard Salesforce profiles or custom profiles you create. From Setup, in the Quick Find box, find and select App Manager . Click New Lightning App . Move Health Cloud Starter . Enter the name of the app. The API name is automatically populated. If necessary, enter a description. The app description displays alongside the icon in the App Launcher. Make sure that the description is meaningful to your users. For the App’s branding, if necessary, set its primary color and add a logo. Click Next . In the Add Options section. Select the type of navigation as Standard. This field supports: Standard and Console. Note Standard navigation doesn’t support the Tabs component on the home page. Console navigation isn’t supported in the Life Sciences Cloud Mobile app. Select which form factors your app is available for: Desktop and Phone, Desktop, or Phone. If necessary, select which Setup experience to show as the first item in the Setup menu for this app. Disable end user personalization of nav items in this app Disable temporary tabs for items outside of this app Use Omni-Channel sidebar In the Utility Items section, give your users quick access to productivity tools and add background utility items to your app. Click Add Utility Item . Search for and select Territory Switcher , and then click Next . In the Navigation Items section, select the items you want to include in the app, then click Next . LSC4CE Accounts (mandatory for Territory Switcher) LSC4CE Calendar (recommended) Intelligent Content (recommended) Visits (recommended) Add persona-specific items (for example, Account Plans for KAMs) Select the user profile that can access this app. Save your changes. Similarly, you can create multiple Lightning apps and assign these apps to specific user profiles in your Salesforce org."
+      },
+      {
+        "name": "Configure Page Layouts Using the Lightning App Builder",
+        "detail": "Use the Lightning App Builder to customize page layouts (Home or Record Pages) that enable field-level customization for different profiles. From Setup, in the Quick Find Box, find and select Lightning App Builder . Click New . Select the page type, then click Next . For example, Home Page or Record Page. If you select Home Page, set the custom home page as both App and Profile default. Setting App default only may not cause the org default to override your selection. Enter a label, and click Next . The label can be up to 80 characters. Select a page template and click Done . Drag the components that you want onto the page. Click each component on the page to configure its properties. Save your changes. Assign and activate app pages as needed by the user profile. See Activate Your Lightning App Page . Generate a metadata cache."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_create_lightning_apps.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-create-object-metadata-cache-configuration",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create Object Metadata Cache Configuration",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Life Sciences Cloud Mobile app doesn’t automatically load all Salesforce objects and related data. Configure the object metadata cache to define which objects the mobile app stores locally and whether data syncs one-way or two-way between your Salesforce org and the mobile app. This...",
+    "findings": [
+      {
+        "name": "Create Object Metadata Cache Configuration",
+        "detail": "The Life Sciences Cloud Mobile app doesn’t automatically load all Salesforce objects and related data. Configure the object metadata cache to define which objects the mobile app stores locally and whether data syncs one-way or two-way between your Salesforce org and the mobile app. This configuration makes sure your sales reps have access to the data they need in the mobile app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create metadata cache configuration: | Life Sciences Commercial Admin permission set The LifeSciConfigCategory and LifeSciConfigRecords metadata types must have records populated in order to generate metadata. From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select Object Metadata Cache Configuration . Click New and enter the configuration details. Enter a unique name that describes the object. To make the object available for inclusion in the metadata cache, select Is Active . Note Selecting Is Active is optional. However, if you don’t select it, the object isn’t included in the metadata cache. For example, in some cases, you may leave the configuration inactive when setting up the object for the first time or when testing a cache build without the object in it. Select the object type to determine how the object data is used in the mobile app. Data: The object contains business or transactional data that sales reps directly interact with in the mobile app. Configuration: The object contains configuration data that controls the mobile app’s behavior and isn’t visible to sales reps. Data Model Object: The object contains a data model object stored in the Data Cloud. Select an object or a configuration record based on the type you selected. If you select data or configuration as the type, search for and select a value in the Object field. If you select a data model object as the type, enter details in the Data Space API Name and Data Model Object API Name fields. Note For data model objects, metadata sync supports only the Sales data DMOs: LifeScienceDrugDistributionData__dlm and LifeScienceDrugPrescriptionData__dlm. For Assignment, select one or more profiles to which this configuration applies. Note The Assignment field appears only after you select an object. Profiles with at least Read access to the object can see the assignment list. In Delta Sync Data Field, enter the field name used to determine incremental sync for the selected object. Records with a field value greater than the last recorded sync value are included in the next sync cycle. This field is only applicable when you select data as the type. To sync data only from Salesforce to the mobile app, select Allow only one-way sync from web to mobile . Select the Attachment Download Method. An internet connection is required for download. This field supports: Background: Files download in the background. This method is better suited for larger files, such as those used in Intelligent Content. Cache: Files download on demand when sales reps preview or use them. This method is better suited for smaller, more numerous files, such as Field Email templates. Enter the SOQL filter condition to generate metadata filtering data for the object using the simple editor or advanced editor . Note Enter only the conditional logic, not a full SOQL statement. The WHERE clause is implied, so don’t include the WHERE keyword or any other SOQL keywords. The SOQL filter also supports dynamic variables for dedicated data access. If you don’t enter a SOQL filter condition, metadata is generated for all rows of the selected object. Filters supplement existing record-level sharing and apply only to data sales reps already have access to. If an object’s sharing model is Private, sales reps download only the records they can access through ownership or sharing. If an object’s sharing model is Public, use filters to limit downloaded data, optionally. Save your changes. Before you generate the metadata cache, validate the object metadata configuration records to prevent failures and to make sure they’re set up correctly. Select one or more object configuration records that you want to validate. Click Validate . A notification confirms that validation is queued. Note Cancel an in-progress validation by clicking Abort, and then click Yes in the confirmation window to proceed. To monitor the validation status, click the link in the notification. To track the progress later, go to Setup, find and select Application Test Execution , and look for the latest run of lsc4ce.DbSchemaValidatorTestSuite . After the validation is complete, the configuration status changes to Valid. Assign Profiles to Object Metadata Configuration. Select one or more configuration records you want to assign to a profile. Click Assign . In the Select Assignment window, select Profile as the assignment type. Select a profile. Click Submit . To verify the assignment, click View Assignments in the object configuration record actions. You can also edit a specific object configuration record and view the selected profiles. Dynamic Variables for SOQL Filter Conditions Use dynamic variables in the SOQL filter condition field to generate metadata filtering data customized to each user. Life Sciences Cloud replaces these variables at runtime with the appropriate user or territory values, enabling dedicated data access without hardcoding values. Create SOQL Filter Condition Using Simple Editor Use the Simple Editor to build basic SOQL filter conditions for object data. The Simple Editor guides you through assembling condition logic and supports dynamic variables. Create SOQL Filter Condition Using Advanced Editor Use the Advanced Editor to create SOQL filter conditions for object data by directly typing your filter logic. The Advanced Editor also supports dynamic variables and enables you to test your SOQL condition before saving."
+      },
+      {
+        "name": "See Also",
+        "detail": "First-Generation Managed Packages: Life Science Config Category First-Generation Managed Packages: Life Science Config Record Developer Guide: LifeSciConfigCategory Developer Guide: LifeSciConfigRecord Mobile App Configuration for Ratings Mobile App Configuration for Consent Management"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_create_object_metadata_cache_configuration.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-dynamic-variables",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Dynamic Variables for SOQL Filter Conditions",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use dynamic variables in the SOQL filter condition field to generate metadata filtering data customized to each user. Life Sciences Cloud replaces these variables at runtime with the appropriate user or territory values, enabling dedicated data access without hardcoding",
+    "findings": [
+      {
+        "name": "Dynamic Variables for SOQL Filter Conditions",
+        "detail": "Use dynamic variables in the SOQL filter condition field to generate metadata filtering data customized to each user. Life Sciences Cloud replaces these variables at runtime with the appropriate user or territory values, enabling dedicated data access without hardcoding values."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Here's the list of all the supported dynamic variables. Dynamic Variable | Purpose | Where to Use | Example {USER.Territory} | Download data using the territory name. The variable is replaced by the user’s territory name dynamically. | Any object | Territory2.Name = ‘{USER.TERRITORY}’ {USER.ID} | Downloads data using the user ID. The variable is replaced by the logged-in user’s ID dynamically. | Any object | CreatedById = ‘{USER.ID}’ {USER.TERRITORYID} | Downloads data using territory ID. The variable is replaced by the user’s territory ID dynamically. | Any object | Territory2Id = ‘{USER.TERRITORYID}’ {OT2A.OBJ.IDS} | Downloads accounts based on territory. The mobile app first downloads Object Territory to OT2A records, then retrieves only the account IDs shared with the user’s territory. | Account object only | AccountId IN ({OT2A.OBJ.IDS}) {Account.IDS} | Ensures that related records are downloaded only for accounts already present in the mobile app. Use it as a combination as {Account.IDS} AND {OT2A.OBJ.IDS} for territory-based data access. Using them together guarantees that related objects are downloaded correctly, specifically ensuring that related entity downloads are limited to accounts already present on the mobile device. They can also be used independently based on the specific data synchronization requirements. | Any object related to accounts | Account IN ({ACCOUNT.IDS}) {STI.OBJ.IDS} | Makes sure the mobile app downloads the device sync transaction records to resolve offline unique IDs. | DeviceSyncTransactionRecord object only | OperationType = 'insert' AND OfflineUniqueIdentifier IN ({STI.OBJ.IDS})"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_dynamic_variables.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-create-soql-simple-editor",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create SOQL Filter Condition Using Simple Editor",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use the Simple Editor to build basic SOQL filter conditions for object data. The Simple Editor guides you through assembling condition logic and supports dynamic",
+    "findings": [
+      {
+        "name": "Create SOQL Filter Condition Using Simple Editor",
+        "detail": "Use the Simple Editor to build basic SOQL filter conditions for object data. The Simple Editor guides you through assembling condition logic and supports dynamic variables."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create filter conditions: | Life Sciences Commercial Admin permission set In the SOQL Filter Condition field of the Object Metadata Cache Configuration record, under Simple Editor, click Add Condition . Complete the fields for the condition. Select a field. Select an operator. Select the value type: string to enter a value directly, or variable to retrieve context-specific data. Enter a value for the condition. Make sure strings and IDs are enclosed in single quotes. If required, add more conditions. Select a logical operator for the condition. All of the conditions are met (AND) Any of the conditions are met (OR) Customize the logic (for example, 1 OR 2 AND 3) Click Add SOQL Expression . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_create_soql_simple_editor.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-create-soql-advanced-editor",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create SOQL Filter Condition Using Advanced Editor",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use the Advanced Editor to create SOQL filter conditions for object data by directly typing your filter logic. The Advanced Editor also supports dynamic variables and enables you to test your SOQL condition before",
+    "findings": [
+      {
+        "name": "Create SOQL Filter Condition Using Advanced Editor",
+        "detail": "Use the Advanced Editor to create SOQL filter conditions for object data by directly typing your filter logic. The Advanced Editor also supports dynamic variables and enables you to test your SOQL condition before saving."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create filter conditions: | Life Sciences Commercial Admin permission set In the SOQL Filter Condition field of the Object Metadata Cache Configuration record, under Advanced Editor, enter the SOQL query. Make sure strings and IDs are enclosed in single quotes. From the Insert dropdown, select a variable to insert in the SOQL query. To test the SOQL query, click Test SOQL . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_create_soql_advanced_editor.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-assign-profiles-permission-sets-to-configurations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Assign Profiles to Object Metadata Cache Configurations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Assign profiles to a new object metadata cache configuration to make the configuration available to users with that specific",
+    "findings": [
+      {
+        "name": "Assign Profiles to Object Metadata Cache Configurations",
+        "detail": "Assign profiles to a new object metadata cache configuration to make the configuration available to users with that specific profiles."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To assign profile and permission sets to metadata configurations: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select Mobile and then select Object Metadata Cache Configuration . Select the configuration records for which you want to assign a profile. Click Assign . In the Select Assignment window, select whether you want to assign a profile. Select a profile. Click Submit ."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Static Resources Salesforce Help : Access Static Resources Salesforce Help : Using Static Resources"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_assign_profiles_permission_sets_to_configurations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-generate-metadata-cache",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Generate Metadata Cache",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Sync your configuration changes to the Life Sciences Cloud Mobile app by generating a metadata cache. This generated metadata cache includes object schemas and metadata definitions that the mobile app stores locally to support both online and offline modes. Generate a new metadata cache whenever...",
+    "findings": [
+      {
+        "name": "Generate Metadata Cache",
+        "detail": "Sync your configuration changes to the Life Sciences Cloud Mobile app by generating a metadata cache. This generated metadata cache includes object schemas and metadata definitions that the mobile app stores locally to support both online and offline modes. Generate a new metadata cache whenever you update Lightning record pages, page layouts, object or schema changes, new or modified feature settings, or permission updates."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To generate a metadata cache: | Life Sciences Commercial Admin permission set Important Supported Orgs and Package Configurations Metadata cache generation is supported for managed (1GP/2GP) or unlocked packages installed into the target Life Sciences Cloud org. Metadata cache generation isn't supported in package-development orgs. Package-development orgs include Developer Edition or Partner Developer Edition orgs with a directly registered namespace, and scratch orgs created with a namespace in the scratch-org definition. Recommended workflow: Build and version your package in the namespace org, install it into the Life Sciences Cloud target org, and then configure and generate the metadata cache in the target org. Important If API Access Control is enabled in your org, turn it off before you generate a metadata cache. From Setup, find and select API Access Control , and turn off For admin-approved users, limit API access to only allowlisted connected apps . For more information about API Access Control, see Restrict Access to APIs with Connected Apps . Metadata cache generation calls the Salesforce REST API from the Life Sciences metadata service. Those calls don't come from a connected app, so they can't be allowlisted. If API Access Control is on, the cache remains in Published status, no metadata is written back, and the Error Log remains empty. Field users can't log in to the Life Sciences Cloud mobile app until an Active cache exists. After you turn off API Access Control, inactivate the cache record that remains in Published status, and then create a new cache. To receive notifications when a metadata cache is generated, complete these steps before generating the cache. Enable Read Access for the Metadata Generated platform event. Activate the Metadata Active trigger handler. From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select Metadata Cache . Click Create New Cache . Important If you have the Skip Validations before Metadata Generation system permission, an option to skip the validation step is available when you create a new cache. When you enable this option, the validation step for the object metadata cache is skipped. Assign this system permission only to permission sets that are assigned the Life Sciences Commercial permission set license. However, we strongly recommend you don't use this option when an org is live or in production. This option is for partners and admins to move fast in a sandbox org during the implementation phase. Select a profile for which you want to generate the metadata cache. If you don’t select a profile, the metadata is generated for all the profiles in your org. When you create a new cache, the number of records generated equals the number of profiles selected, plus one additional parent record for the entire cache with a blank profile. Important Use only letters, digits, spaces, hyphens, and underscores in profile names. Profile names that contain special characters, such as & / \\ : * ? \" < > | # % @ ! ( ) or non-ASCII glyphs, aren't supported by the metadata service and can cause metadata cache generation to fail or the bundle not to download. Today this failure surfaces as a generic \"Unknown error — please retry\" message that doesn't identify the profile name as the cause. Before you open a case, check the profile name for unsupported characters. To resolve the issue, see the profile-naming guidance in Create Custom Profiles for Customer Engagement Users . Select the date by which the mobile app users must update the metadata. Users can’t postpone the update after this date. Select the date on which the mobile app users are notified about the new metadata. Users see these alerts only if notifications for new metadata are enabled. Save your changes. An entry with the status Validating is added to the metadata cache list. You receive a notification after the metadata cache is generated. Refresh your browser to check whether the metadata cache is validated. If the validation is successful, the status progresses through Published, In Progress, and Active."
+      },
+      {
+        "name": "See Also",
+        "detail": "Mobile App Configuration for Ratings Set Up Consent Management Mobile App Configuration for Consent Management Add a Consent Management Tab to a Record Page Add a Logo to the Consent Page Set Up App Alerts for Mobile"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_generate_metadata_cache.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-configure-application-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Application Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure essential Life Sciences Cloud mobile app settings, including default browser behavior, security controls such as password type, and user access to supported features. By using these settings, you can also control notifications, search capabilities, and the overall UI to customize the app...",
+    "findings": [
+      {
+        "name": "Configure Application Settings",
+        "detail": "Configure essential Life Sciences Cloud mobile app settings, including default browser behavior, security controls such as password type, and user access to supported features. By using these settings, you can also control notifications, search capabilities, and the overall UI to customize the app to your needs."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure application settings: | Life Sciences Commercial Admin permission set From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select Application Settings . Select the default browser to use for the View Online functionality. The possible values include: Chrome, Safari, and Edge. If a field user doesn’t have the configured browser on their mobile device (iPad), it defaults to Safari. Select the password type for the mobile app. The possible values include: Numeric: Requires a 4-digit number with no additional validation. Alpha Numeric: Requires a 4-digit number with validation. Repeating digits (for example, 1111) and sequential characters (for example, 1234) aren’t allowed. Complex Numeric: Requires a password that includes letters, numbers, and symbols. The password must be from 8 through 40 characters and include at least one number, one symbol, one letter, and one uppercase letter. Repeating or sequential characters (for example, 1111, aaaa, 1234, or abcd) aren’t allowed. Select the number of times the mobile app dashboard can be refreshed in an hour to manage data usage and performance. Enter the full URL to download the latest version of the mobile app from the App Store. This URL can be your App Store or your organization’s mobile device management URL. The URL should contain an https:// or ftp:// protocol. Select the settings that apply to your configuration based on your organization’s needs. To show the View Online option in the user’s profile menu so they can log in to the Salesforce org from the device’s web browser, select Let users use View Online option on the home screen . To enable users to view the source report on Salesforce, select Let users view reports . This setting controls whether the View Report action appears when a user taps the options menu (the three dots) on a report chart or dashboard component. When it's turned on, the menu shows both Refresh and View Report , and the user can tap View Report to open the full report in a detailed view. When it's turned off, the menu shows only Refresh . In both cases, the chart or dashboard visualization renders normally with all its data; only the drill-down to the detailed report view is affected. To enable app background notifications, select Enable Background Notifications . To enable advanced search for your users, select Enable advanced search . To enable advanced search for lookups, select Use Advanced Search for lookups . To enable advanced search for account lookups, select Use Advanced Search for account lookups . To let users override the lookup search fields, select Let users override the lookup search fields . To enable dynamic actions for your users, select Enable Dynamic Actions . To let users publish platform events, select Let users publish platform events . To suppress app upgrade prompts until the matador update date is reached, select Hide app upgrade notifications . To always show help text on the screen instead of only when hovering over an info icon, select Show persistent help text always shows help text on the screen . To show all questions leading up to a branching question on a single page, select Enable Survey Branching Single Page . To show a confirmation message when a survey is submitted from the mobile app, select Enable Survey Confirmation . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_configure_application_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-profile-based-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Profile-Based App Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use profile-based application settings to configure parameters to customize Life Sciences Cloud Mobile app settings for specific",
+    "findings": [
+      {
+        "name": "Set Up Profile-Based App Settings",
+        "detail": "Use profile-based application settings to configure parameters to customize Life Sciences Cloud Mobile app settings for specific profiles."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure profile-based settings: | Life Sciences Commercial Admin permission set From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select Profile Based App Settings . For Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select Org Default . To apply the settings to a specific profile in your org, select Profile . If a Profile API name is changed, return to Admin Console > Profile Based App Settings and re-setup the app. To show tasks in the Kanban view for the selected profile, select Use kanban view for assessment tasks . To restrict the execution of batch jobs when the org is in maintenance, select Don’t allow batch job execution when the org is in maintenance mode . Enter the time interval in minutes for datetime fields in the Life Sciences Cloud Mobile app. For example, enter 10 to display 10-minute intervals in the datetime fields: 12:10, 12:20, 12:30. For Mobile App, select the Lightning App that you want to show by default for the selected profile. See Create Lightning Apps for Life Sciences Cloud . Note The Lightning app appears in the list only if the admin user has access to it. Console navigation isn’t supported in the Life Sciences Cloud Mobile app. To let users perform bulk edit operations, select Let users perform bulk edit . Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_profile_based_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-configure-ui-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure UI Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure custom UI components for the Life Sciences Cloud Mobile app. Create and manage records that define how tabs and static resources are shown in the Life Sciences Cloud Mobile",
+    "findings": [
+      {
+        "name": "Configure UI Settings",
+        "detail": "Configure custom UI components for the Life Sciences Cloud Mobile app. Create and manage records that define how tabs and static resources are shown in the Life Sciences Cloud Mobile app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure custom components: | Life Sciences Commercial Admin permission set"
+      },
+      {
+        "name": "Create a Custom Tab",
+        "detail": "From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select UI Settings . Click New . Enter a display name for the custom UI component. Enter a unique API name for the custom UI component. For Mobile UI Type, select Tab . Enter a display name for the custom tab. For Tab Order, enter a number that determines the tab’s position on the mobile navigation menu. Note The Tab Order you enter supersedes the tab order in the assigned app. For example, if Tab Order = 2, the custom tab appears as the second tab in the app, and all existing tabs shift to position 3 and beyond. Select the profile that you want to assign this custom component to. Select Is Active to make the component available on the mobile app. Save your changes."
+      },
+      {
+        "name": "Create a Static Resource Component",
+        "detail": "From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select UI Settings . Click New . Enter a display name for the static resource. Enter a unique API name for the static resource. For Mobile UI Type, select Static Resource . For Resource Name, select one of these options: To use an existing static resource, select Select Static Resource . To create a static resource, select New Static Resource . Select the profile you want to assign this custom component to. Select Is Active to make this static resource available on the mobile app. Save your changes."
+      },
+      {
+        "name": "Assign Profiles to Custom UI Components",
+        "detail": "From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select UI Settings . Select the custom components for which you want to assign a profile. Click Assign . On the Select Assignment window, select a profile. Click Submit ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_configure_ui_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-manage-translations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Manage Translations for the Life Sciences Cloud Mobile App",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Life Sciences Cloud Mobile app uses native Salesforce translation functionality. If multiple languages are enabled in your Salesforce org, configure translations so that your global users can access the app in their preferred language. Configure translations in Translation Workbench, then...",
+    "findings": [
+      {
+        "name": "Manage Translations for the Life Sciences Cloud Mobile App",
+        "detail": "The Life Sciences Cloud Mobile app uses native Salesforce translation functionality. If multiple languages are enabled in your Salesforce org, configure translations so that your global users can access the app in their preferred language. Configure translations in Translation Workbench, then generate a translation file for mobile users to download to their devices."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Before you generate the Standard Label Translations document, complete these steps. Activate the languages to translate in Translation Language Settings in Setup. Activate the records to translate in the Object Metadata Cache Configuration page. From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Select Mobile and then select Metadata Cache . Locate the Standard Label Translations area and click Create Standard Label Translations Document . If the Last Refreshed Date isn’t set, the translation file isn't generated for the first time. Wait for the system to generate the file. A success notification confirms the completion. Generate a new metadata cache for the required profiles so the translations are included in the cache. Download Standard Label Translations After you generate the Standard Label Translations document, download it from Salesforce Classic so you can review the translated labels."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Support Users in Multiple Languages Salesforce Help : Generate Metadata Cache"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_manage_translations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-setup-download-standard-label-translations",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Download Standard Label Translations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "After you generate the Standard Label Translations document, download it from Salesforce Classic so you can review the translated",
+    "findings": [
+      {
+        "name": "Download Standard Label Translations",
+        "detail": "After you generate the Standard Label Translations document, download it from Salesforce Classic so you can review the translated labels."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Generate the Standard Label Translations document. See Manage Translations for the Life Sciences Cloud Mobile App . Switch to Salesforce Classic. Click . Select Documents . Select Configurations . Select StdObjectsTranslations . Click View File ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_setup_download_standard_label_translations.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-deep-linking",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Deep Linking for the Life Sciences Cloud Mobile App",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Your sales reps rely on their mobile devices to perform complex tasks and navigate between multiple tabs, records, or actions. With deep linking, you can use supported URL schemes to send users directly to the right spot in the Life Sciences Cloud mobile app from a third-party or web app. For...",
+    "findings": [
+      {
+        "name": "Deep Linking for the Life Sciences Cloud Mobile App",
+        "detail": "Your sales reps rely on their mobile devices to perform complex tasks and navigate between multiple tabs, records, or actions. With deep linking, you can use supported URL schemes to send users directly to the right spot in the Life Sciences Cloud mobile app from a third-party or web app. For example, deep links can open specific records, create a record with prepopulated data, or perform a specific action when the app opens."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. With Salesforce-supported URL schemes, your users can open the Life Sciences Cloud mobile app and perform one of several actions. View a specific record. Create or update a record with prepopulated data. Open a specific tab in the Life Sciences Cloud mobile app. Start an action on a specific record page. Create an email with a predefined email template and recipients. Life Sciences deep links work only for users who have the right access to that action, record, or area of the app. If an unauthenticated user taps a deep link, they’re taken to the login page. When the app is locked, users are prompted to enter their PIN. After users log in or enter their PIN, they must tap the link again to view the linked page. Deep Linking Format for Life Sciences Use the predefined URL scheme for the Life Sciences Cloud mobile app on iOS. Deep Linking for Visits The Life Sciences Cloud mobile app supports more URL schemes for visits. Deep links for visits support actions such as opening the Visit Engagement page to create or edit a visit. Considerations for Life Sciences Deep Links When you create deep links to open the Life Sciences Cloud mobile app from external and third-party apps, keep these considerations in mind."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_deep_linking.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-mobile-app-deep-linking-visits",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Deep Linking for Visits",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Life Sciences Cloud mobile app supports more URL schemes for visits. Deep links for visits support actions such as opening the Visit Engagement page to create or edit a",
+    "findings": [
+      {
+        "name": "Deep Linking for Visits",
+        "detail": "The Life Sciences Cloud mobile app supports more URL schemes for visits. Deep links for visits support actions such as opening the Visit Engagement page to create or edit a visit."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "View a Visit Record",
+        "detail": "This URL scheme opens a visit record detail page without opening the Visit tab first. lsc://deeplink/lightning/r/Visit/{id}/view?modal=1 This example goes to the specified visit record detail page without opening the Visit tab first. lsc://deeplink/lightning/r/Visit/001XXXXXXXXXXXXKAG/view?modal=1"
+      },
+      {
+        "name": "Create a Visit",
+        "detail": "This URL scheme creates a visit with no parameters. lsc://deeplink/lightning/o/Visit/new"
+      },
+      {
+        "name": "Create a Visit for an Account",
+        "detail": "This URL scheme creates a visit for an account. lsc://deeplink/lightning/o/Visit/new?accountid={id} This example creates a visit for the specified account. lsc://deeplink/lightning/o/Visit/new?accountid=001XXXXXXXXXXXXYAI"
+      },
+      {
+        "name": "Create a Visit for a Product",
+        "detail": "This URL scheme creates a visit with one or more product IDs. This scheme works only for product detail item records. To validate product restrictions, pass both the account and the product detail items as parameters in the URL. lsc://deeplink/lightning/o/Visit/new?product-id={id} This example creates a visit for the specified product detail item. lsc://deeplink/lightning/o/Visit/new?product-id=1KeXXXXXXXXXXXX0AM"
+      },
+      {
+        "name": "Edit a Visit",
+        "detail": "This URL scheme opens an existing visit in edit mode. Submitted visits open on the record detail page. Planned visits open on the Visit Engagement page. lsc://deeplink/lightning/r/Visit/{id}/edit This example opens the specified visit in edit mode. lsc://deeplink/lightning/r/Visit/0Z5XXXXXXXXXXXX0AG/edit"
+      },
+      {
+        "name": "Create or Edit a Record and Its Related Record",
+        "detail": "This URL scheme upserts a visit by creating or editing a visit and its related record together. Specify records by using either Salesforce IDs or external IDs. Format the record data in JSON format, and then convert it to Base64 format. lsc://deeplink/lightning/o/{sObject}/upsert?referenceId={id}&data=JSONConvertedToBase64Format When you configure upsert deep links for visits, keep these considerations in mind. Upsert deep links can add products and attendees to the visit or edit visit fields. The visit record must exist and be editable. To reference fields and objects, use the API names. If the URL doesn’t contain a record ID, a new record is created. When you use an upsert deep link for visits, validations don't run for required fields, restricted products, or on the Visit Engagement page. On the Visit Engagement page, validations run when you submit the visit."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_mobile_app_deep_linking_visits.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-custom-lwc-apps",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Life Sciences Cloud (LSC) Apps",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "LSC Apps are custom Lightning web components (LWCs) that you can create and embed on the Life Sciences Cloud mobile app. These apps help you to design and implement complex features and integrations on Lightning pages and in the Life Sciences Cloud mobile",
+    "findings": [
+      {
+        "name": "Life Sciences Cloud (LSC) Apps",
+        "detail": "LSC Apps are custom Lightning web components (LWCs) that you can create and embed on the Life Sciences Cloud mobile app. These apps help you to design and implement complex features and integrations on Lightning pages and in the Life Sciences Cloud mobile app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Implement LSC apps for specific use cases by embedding them on either record pages or the Home Page. The embedding method determines the component’s functionality and placement. Note Make sure that your users have access to all the fields or objects used in the custom LWCs."
+      },
+      {
+        "name": "LSC Apps on Record Pages",
+        "detail": "On record pages, users can take immediate action on a specific record. LWC Quick Actions : Launch the LWC from the Quick Action menu on the record page. Inline Components : Access the component directly on the record page tabs alongside native components. On the iPad app, define a Quick Action on the object in Object Manager with a Name field that matches the component name. For example, a component named lscMobileInline_HelloWorld requires a Quick Action with the name lscMobileInline_HelloWorld . You can also nest multiple LWCs in a single inline component."
+      },
+      {
+        "name": "LSC Apps on the Home Page",
+        "detail": "On the Home Page, users get global access to the custom feature. Inline Components: Add the custom component to a section of the Home Page."
+      },
+      {
+        "name": "Using LSC Apps Offline",
+        "detail": "LWC quick actions run as web components embedded in the app and communicate directly with the Salesforce server, much like using Salesforce in a browser. When offline mode is off, data saved through an LWC quick action doesn't pass through the app's local database, so the app isn't aware of the change until the next sync pulls it down from the server. When offline mode is on, LWCs can resolve requests from the local database. See LSC Apps Offline Support . Create and Add an LWC as an Inline Component on a Record Page Make your custom Life Sciences Cloud (LSC) apps accessible to users directly from a record page alongside native components in the Life Sciences Cloud mobile app. Create a custom Lightning web component (LWC) and add it to the record page as an inline component. Create and Add an LWC Quick Action to a Record Page Make your custom functionality available from the Quick Action menu of a record page by creating and adding the custom quick action to the record page. Create and Add an LWC to the Home Page Give users global access to a custom feature from the Home page by creating and adding the custom LWC to the Home page. Multiple Components in an LSC App In the Life Sciences Cloud mobile app, the Home Page and each tab on a record page support only one Life Sciences Cloud (LSC) app as an inline component. To combine multiple views or actions in one place, nest custom Lightning web components (LWCs) inside a single inline component. The component limit applies only to the LSC app that you add directly to the page or tab, not to the nested components running inside it. Sync Changes to the Mobile App Sync your latest changes to the Life Sciences Cloud mobile app by generating a metadata cache. LSC Apps Offline Support With LSC Apps offline support, your custom Lightning Web Components (LWCs) resolve data requests from the device's local database when the device is offline. Custom Lightning Web Components in the Agentforce Chat Window Show custom Lightning Web Components as agent action responses in the Agentforce chat window on the Life Sciences Cloud mobile app. On the mobile app, components receive parameters differently than on the desktop site, so your LWC code must handle both patterns."
+      },
+      {
+        "name": "See Also",
+        "detail": "Mobile App Development with Lightning Web Components and LWC Offline Offline Considerations and Limitations Custom Lightning Page Components Base Components Support"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_custom_lwc_apps.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-custom-lwc-apps-compose-components",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Multiple Components in an LSC App",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "In the Life Sciences Cloud mobile app, the Home Page and each tab on a record page support only one Life Sciences Cloud (LSC) app as an inline component. To combine multiple views or actions in one place, nest custom Lightning web components (LWCs) inside a single inline component. The component...",
+    "findings": [
+      {
+        "name": "Multiple Components in an LSC App",
+        "detail": "In the Life Sciences Cloud mobile app, the Home Page and each tab on a record page support only one Life Sciences Cloud (LSC) app as an inline component. To combine multiple views or actions in one place, nest custom Lightning web components (LWCs) inside a single inline component. The component limit applies only to the LSC app that you add directly to the page or tab, not to the nested components running inside it."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Note Make sure that your users have access to all fields and objects that you use in nested LWCs."
+      },
+      {
+        "name": "Component Composition",
+        "detail": "An LSC app inline component is a standard LWC, so it can contain other LWCs. See Composition in the Lightning Web Components Developer Guide. Design one parent inline component . Include the lscMobileInline_ prefix for the API name of the component, and add a targets entry in its js-meta.xml configuration file. Then, nest child components inside its markup. For example: <c-menu items={items} onselect={handleSelect}></c-menu> Data flows one way, from parent to child. The parent component passes data down to each child component through the child's public properties, which the child exposes with the @api decorator. To send information back up, a child component dispatches an event, and the parent component listens for the event and updates its data. A child component doesn't change or directly access the parent component. Child components don't need the lscMobileInline_ API name prefix or a targets entry in their js-meta.xml configuration files."
+      },
+      {
+        "name": "Reuse Nested Components Across LSC Apps",
+        "detail": "Child components are reusable in LSC apps. Build a component one time, such as a list, a card, or a menu, and then nest it in more than one inline LWC. Each parent component controls its own placement, data, and layout, and the shared child component provides the common functionality."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create Lightning Web Components Configure a Component for Lightning App Builder LSC Apps Offline Support"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_custom_lwc_apps_compose_components.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-custom-lwc-apps-enable-offline-support",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Turn On LSC Apps Offline Support",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Turn on offline support so reps can use your custom Life Sciences Cloud (LSC) Apps without a network",
+    "findings": [
+      {
+        "name": "Turn On LSC Apps Offline Support",
+        "detail": "Turn on offline support so reps can use your custom Life Sciences Cloud (LSC) Apps without a network connection."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure LSC mobile app settings: | Life Sciences Commercial Admin From the Admin Console, select Mobile . Select Application Settings . Under LSC Mobile Apps , turn on Use Mobile Apps offline . When this setting is on, the app initializes the offline subsystem and enables interception. When it's off, all requests pass through to the network. Note When you turn on this setting, the app also turns on priming for LWC bundles. During each sync, the app automatically downloads components with the lscMobileInline_ prefix for inline placements and components with the lscMobileQuickAction_ prefix for quick actions. No additional configuration is needed."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_custom_lwc_apps_enable_offline_support.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-custom-lwc-apps-offline-adapters",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Supported and Unsupported LWC Adapters for Offline Use",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Review which Lightning Data Service (LDS) wire adapters support offline data resolution in the Life Sciences Cloud mobile app. Use this information to design your Lightning web components (LWCs) for offline",
+    "findings": [
+      {
+        "name": "Supported and Unsupported LWC Adapters for Offline Use",
+        "detail": "Review which Lightning Data Service (LDS) wire adapters support offline data resolution in the Life Sciences Cloud mobile app. Use this information to design your Lightning web components (LWCs) for offline use."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Supported Adapters",
+        "detail": "When you turn on offline support, these adapters have local handlers and resolve requests from the device's local database. Record Operations Adapter | Module | Offline Behavior getRecord | lightning/uiRecordApi | Returns field values for previously synced records. createRecord | lightning/uiRecordApi | Creates a record locally with a temporary offline ID and syncs on reconnect. updateRecord | lightning/uiRecordApi | Updates a record in the local database. deleteRecord | lightning/uiRecordApi | Marks a record as deleted locally and syncs on reconnect. getRecordCreateDefaults | lightning/uiRecordApi | Returns cached default field values and layout info. Metadata and Object Info Adapter | Module | Offline Behavior getObjectInfo | lightning/uiObjectInfoApi | Returns object schema including fields, relationships, CRUD access, and record types. getObjectInfos | lightning/uiObjectInfoApi | Returns batch object metadata. Partial failures are possible. Picklist Values Adapter | Module | Offline Behavior getPicklistValues | lightning/uiObjectInfoApi | Returns picklist label and value pairs for a single field. getPicklistValuesByRecordType | lightning/uiObjectInfoApi | Returns all picklist fields for an object and record type. Layout and UI Adapter | Module | Offline Behavior getLayout | lightning/uiRecordApi | Returns the record page layout from local metadata. getRecordUi | lightning/uiRecordApi | Returns combined record, layout, and object info. Lookups Adapter | Module | Offline Behavior getLookupRecords | lightning/uiRecordApi | Searches the local database for lookup field matches. Queries Adapter | Module | Offline Behavior graphql | lightning/uiGraphQLApi | Fetches data and resolves queries from the device's local database. LSC apps don't support aggregate queries. Note In LSC apps, offline support for GraphQL queries works correctly only with the graphql wire adapter in the lightning/uiGraphQLApi module. If your queries use the lightning/graphql module, results can be inaccurate. See lightning/uiGraphQLApi (v1) in the Lightning Web Components Developer Guide."
+      },
+      {
+        "name": "Unsupported Adapters",
+        "detail": "These adapters don't have offline handlers. When the device is offline, these adapters can't resolve requests locally. Adapter | Module notifyRecordUpdateAvailable | lightning/uiRecordApi getRelatedListInfo | lightning/uiRelatedListApi getRelatedListInfoBatch | lightning/uiRelatedListApi getRelatedListsInfo | lightning/uiRelatedListApi getRelatedListRecords | lightning/uiRelatedListApi getRelatedListRecordsBatch | lightning/uiRelatedListApi getRelatedListCount | lightning/uiRelatedListApi getNavItems | lightning/uiAppsApi Connect API | Any /connect/ endpoint Apex REST | Any /services/apexrest/ endpoint SOQL via REST | /services/data/{version}/query"
+      },
+      {
+        "name": "See Also",
+        "detail": "Synchronizing Offline Responses Mobile and Offline Event Execution Mobile App Configuration for Remote Engagement"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_custom_lwc_apps_offline_adapters.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-custom-lwc-apps-agentforce-chat",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Custom Lightning Web Components in the Agentforce Chat Window",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Show custom Lightning Web Components as agent action responses in the Agentforce chat window on the Life Sciences Cloud mobile app. On the mobile app, components receive parameters differently than on the desktop site, so your LWC code must handle both",
+    "findings": [
+      {
+        "name": "Custom Lightning Web Components in the Agentforce Chat Window",
+        "detail": "Show custom Lightning Web Components as agent action responses in the Agentforce chat window on the Life Sciences Cloud mobile app. On the mobile app, components receive parameters differently than on the desktop site, so your LWC code must handle both patterns."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Note Before you configure a custom LWC renderer, make sure that your Agentforce agent action output is set to an Apex class instance. The custom Lightning type wraps the Apex class schema and can't override a non-Apex output type. The Life Sciences Cloud mobile app supports rendering custom LWCs in the Agentforce chat window. To configure the custom Lightning type bundle for mobile, including the lightningMobileGenAi channel directory and required form factors, see Custom Lightning Types in the Salesforce Mobile App . For a full example of creating a custom Lightning type bundle, see Example: Create Custom UI with an Editor and Renderer Override ."
+      },
+      {
+        "name": "LWC Metadata Requirements for Mobile",
+        "detail": "To support the Agentforce chat window on the mobile app, make sure your LWC js-meta.xml file includes both of the following targets: lightning__AgentforceOutput lightning__UrlAddressable — required for Lightning Mobile Runtime navigation In the targetConfig for lightning__AgentforceOutput , include supported form factors for both desktop and mobile: <supportedFormFactors> <supportedFormFactor type=\"Large\"/> <supportedFormFactor type=\"Small\"/> </supportedFormFactors>"
+      },
+      {
+        "name": "How Parameters Are Passed on the Mobile App",
+        "detail": "On the desktop site, Agentforce passes Apex class attributes to the LWC through an @api value getter and setter. Parameter names match the Apex class attributes directly. On the Life Sciences Cloud mobile app, the component loads through Lightning Mobile Runtime by using page reference navigation. Parameters arrive through the CurrentPageReference wire adapter in the page reference state object. The mobile app prefixes each parameter name with c__ . For example, an Apex attribute named metrics arrives as c__metrics . See PageReference Types . The mobile app also passes a c__channel parameter with a value of Mobile . Use this value to determine which parameter-passing pattern to apply when you build a component that works on both the desktop site and the mobile app."
+      },
+      {
+        "name": "Example: Handle Both Desktop and Mobile Parameters",
+        "detail": "This example shows how a single component handles parameters from the desktop site and the mobile app. import { LightningElement, api, wire } from 'lwc'; import { CurrentPageReference } from 'lightning/navigation'; export default class MyAgentComponent extends LightningElement { _value; // Desktop @api get value() { return this._value; } set value(newValue) { if (!newValue) { return; } this._value = newValue; this.processData(); } // Mobile @wire(CurrentPageReference) handlePageReference(pageRef) { if (!pageRef?.state) { return; } if (pageRef.state.c__channel === 'Mobile') { this._value = pageRef.state.c__metrics; this.processData(); } } processData() { // Parse and render the data } } Activate the Custom Lightning Type for Agentforce Mobile After you deploy your custom Lightning type bundle and Lightning Web Components (LWC), update the agent action to use the custom type. This update makes sure that the component renders in the Agentforce chat window on the mobile app."
+      },
+      {
+        "name": "See Also",
+        "detail": "Example: Create Custom UI with an Editor and Renderer Override PageReference Types"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_custom_lwc_apps_agentforce_chat.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile",
+      "agentforce"
+    ]
+  },
+  {
+    "id": "lsc-help-mobile-ind-lsc-custom-lwc-apps-agentforce-chat-activate",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Activate the Custom Lightning Type for Agentforce Mobile",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "After you deploy your custom Lightning type bundle and Lightning Web Components (LWC), update the agent action to use the custom type. This update makes sure that the component renders in the Agentforce chat window on the mobile",
+    "findings": [
+      {
+        "name": "Activate the Custom Lightning Type for Agentforce Mobile",
+        "detail": "After you deploy your custom Lightning type bundle and Lightning Web Components (LWC), update the agent action to use the custom type. This update makes sure that the component renders in the Agentforce chat window on the mobile app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed Configure Agentforce actions: | Life Sciences Commercial Admin In Setup, find Agentforce Assets in the Quick Find box, then select Actions . Open the agent action that you want to customize. Change the output type from the Apex class to the custom Lightning type that you deployed. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_custom_lwc_apps_agentforce_chat_activate.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "mobile",
+      "agentforce"
+    ]
+  }
+]

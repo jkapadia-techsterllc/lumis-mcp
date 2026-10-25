@@ -1,0 +1,113 @@
+{
+  "id": "dt-org-strategy",
+  "name": "Org Strategy Decision Tree",
+  "description": "Five hard gates that determine whether a single-org recommendation can hold, or whether multi-org is required. Run this AFTER the scenario matrix returns 'Single Org' to validate feasibility.",
+  "version": "1.0",
+  "source": "Org Strategy And Design — Salesforce Life Sciences",
+  "root": "gate_1",
+  "nodes": {
+    "gate_1": {
+      "type": "question",
+      "text": "Are there data residency constraints? (e.g., country laws requiring local data storage)",
+      "guidance": "Check: China (must be separate org — hard requirement), Russia (data must be first written locally before export), Turkey (local unless individual consent), EU GDPR (export only to adequacy countries).",
+      "options": [
+        {"label": "Yes — country requires local data storage", "next": "rec_isolate_countries"},
+        {"label": "No data residency constraints", "next": "gate_2"}
+      ]
+    },
+    "gate_2": {
+      "type": "question",
+      "text": "Does the customer require localized governance? (independent change management, local administration)",
+      "guidance": "If local affiliates insist on controlling their own release calendars, configuration, and admin — a single org creates governance friction.",
+      "options": [
+        {"label": "Yes — affiliates need independent governance", "next": "rec_multi_org"},
+        {"label": "Centralized or mixed governance is acceptable", "next": "gate_3"}
+      ]
+    },
+    "gate_3": {
+      "type": "question",
+      "text": "Will data volumes exceed single-org thresholds?",
+      "guidance": "Thresholds: <5,000 users per org recommended, <10,000,000 records per entity per org. Risky modules at scale: Events Management (71 objects), Activity Plans, and Sample transactions. Objects with 200+ fields or ~10M records cause sync/bulk API/UI performance degradation.",
+      "options": [
+        {"label": "Exceeds thresholds — >5K users or >10M records per entity", "next": "rec_multi_org"},
+        {"label": "Within thresholds", "next": "gate_4"}
+      ]
+    },
+    "gate_4": {
+      "type": "question",
+      "text": "Do time zone differences require isolated maintenance windows?",
+      "guidance": "Major regions (EMEA, APAC, Americas) may need separate maintenance windows. A single org means one maintenance schedule for all. If field force in 4+ time zones needs uninterrupted access during deployments, consider regional isolation.",
+      "options": [
+        {"label": "Yes — regional isolation needed", "next": "rec_regional_orgs"},
+        {"label": "Shared maintenance window is acceptable", "next": "gate_5"}
+      ]
+    },
+    "gate_5": {
+      "type": "question",
+      "text": "Are there regulatory data sharing restrictions between business units?",
+      "guidance": "Some pharma regulatory requirements prevent data sharing between divisions (e.g., Commercial vs. Medical Affairs, different therapeutic areas). If sharing rules alone cannot enforce the required separation, org isolation is needed.",
+      "options": [
+        {"label": "Yes — regulatory restrictions require org isolation", "next": "rec_multi_org"},
+        {"label": "Sharing rules can enforce required separation", "next": "rec_single_org_confirmed"}
+      ]
+    },
+    "rec_isolate_countries": {
+      "type": "recommendation",
+      "text": "Multi-Org Required — Isolate affected countries/markets into separate orgs.",
+      "detail": "Create dedicated orgs for countries with data residency requirements. China is always a separate org. Consider regional groupings (EMEA org, APAC org) to minimize org count while meeting residency requirements.",
+      "next_step": "Proceed to org design pattern selection (Regional Orgs vs. Country Clusters)."
+    },
+    "rec_multi_org": {
+      "type": "recommendation",
+      "text": "Multi-Org Recommended.",
+      "detail": "One or more hard gates triggered. Before splitting: (1) evaluate whether splitting profiles within a single org resolves the issue (profile-first principle), (2) if true org splitting is required, choose between Regional Orgs pattern or Big Markets + Country Clusters pattern.",
+      "next_step": "Proceed to org design pattern selection."
+    },
+    "rec_regional_orgs": {
+      "type": "recommendation",
+      "text": "Regional Org Architecture Recommended.",
+      "detail": "Separate orgs by major region (EMEA, APAC, Americas, LATAM). Within each regional org, use profiles and sharing rules for country-level separation. Cross-region data needs handled by integration platform + data warehouse.",
+      "next_step": "Define regional boundaries and cross-region integration requirements."
+    },
+    "rec_single_org_confirmed": {
+      "type": "recommendation",
+      "text": "Single Org Feasible — All five gates passed.",
+      "detail": "Single org is technically viable. Implement with: (1) Multiple profiles per LOB/country, (2) Strong governance (CoE + governance committee + architectural review board), (3) Tiered administration, (4) Proactive data archiving, (5) Storage planning for 3+ years including historical loads.",
+      "next_step": "Design profile structure, governance model, and CoE charter."
+    }
+  },
+
+  "org_design_patterns": {
+    "regional_orgs": {
+      "name": "Regional Orgs",
+      "example": "EMEA / APAC / North America / LATAM",
+      "pros": [
+        "Capacity synergies across countries within region",
+        "Centralized administration per region",
+        "Cross-country collaboration by configuration — no interfaces required",
+        "Reports and dashboards across countries by configuration"
+      ],
+      "cons": [
+        "Strong governance and configuration management required",
+        "All data hosted in same instance within region",
+        "Regional admins have access to all regional data",
+        "Complex compliance and sharing rules needed"
+      ]
+    },
+    "country_clusters": {
+      "name": "Big Markets + Country Clusters",
+      "example": "US, DACH (Germany/Austria/Switzerland), France, UK, Iberia (Spain/Portugal), Small Markets pool",
+      "pros": [
+        "Independent governance per cluster",
+        "Local admin teams with full control",
+        "Configuration at market/cluster level"
+      ],
+      "cons": [
+        "Cross-cluster collaboration requires interfaces",
+        "Separate admin users per cluster",
+        "Limited capacity synergies",
+        "Higher total cost of ownership"
+      ]
+    }
+  }
+}

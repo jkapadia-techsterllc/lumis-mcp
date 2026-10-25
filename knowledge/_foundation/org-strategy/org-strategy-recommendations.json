@@ -1,0 +1,90 @@
+[
+  {
+    "id": "osr-001",
+    "recommendation_number": 1,
+    "title": "Profile-First Before Org-Split",
+    "description": "For orchestrated orgs, splitting the profile should be the FIRST consideration for resolving non-hard-limit issues. Profile splitting is cheaper, faster, and preserves data sharing, integrations, and reporting.",
+    "priority": "Critical",
+    "tags": ["first-principle", "cost-optimization"]
+  },
+  {
+    "id": "osr-002",
+    "recommendation_number": 2,
+    "title": "Hard Limits Require Org Splitting",
+    "description": "Hard platform limits (custom object count, permission set count, Apex code size) cannot be overcome by new features or workarounds — only by org splitting, which gives a fresh set of limits.",
+    "priority": "Critical",
+    "tags": ["hard-limits", "constraint"]
+  },
+  {
+    "id": "osr-003",
+    "recommendation_number": 3,
+    "title": "Set Up Edge for Multi-Country",
+    "description": "For multi-country orgs, set up Salesforce Edge to optimize network performance. Edge provides CDN and routing optimization for users in different geographies accessing a single org.",
+    "priority": "High",
+    "tags": ["performance", "multi-country", "network"]
+  },
+  {
+    "id": "osr-004",
+    "recommendation_number": 4,
+    "title": "Consider Microservices for Limit Relief",
+    "description": "When approaching platform limits, evaluate whether moving specific functionality to external microservices (e.g., complex calculations, high-volume processing, document generation) can reduce pressure on the org.",
+    "priority": "Medium",
+    "tags": ["architecture", "scalability", "microservices"]
+  },
+  {
+    "id": "osr-005",
+    "recommendation_number": 5,
+    "title": "Align with Platform Strategy",
+    "description": "Org strategy should align with the overall platform-of-platforms strategy. Consider how the CRM org fits into the broader ecosystem: Data Cloud, MuleSoft integration, Marketing Cloud, and Agentforce channels.",
+    "priority": "High",
+    "tags": ["platform-strategy", "ecosystem"]
+  },
+  {
+    "id": "osr-006",
+    "recommendation_number": 6,
+    "title": "Decouple Org Decisions from Deployment Decisions",
+    "description": "Don't link org strategy decisions with configuration/customization deployment or management decisions. The number of orgs should be driven by data, governance, and limits — not by deployment convenience.",
+    "priority": "Medium",
+    "tags": ["decision-hygiene", "architecture"]
+  },
+  {
+    "id": "osr-007",
+    "recommendation_number": 7,
+    "title": "Archive Data and Metadata Constantly",
+    "description": "Proactive data archiving extends the life of a single org by keeping record counts below performance thresholds. Implement archiving strategy before limits are hit, not after.",
+    "priority": "High",
+    "tags": ["data-management", "archiving", "preventive"]
+  },
+  {
+    "id": "osr-008",
+    "recommendation_number": 8,
+    "title": "Balance Agility with Efficiency",
+    "description": "Give equal weight to agility and effectiveness over pure efficiency for certain business groups. Some LOBs need faster innovation cycles — don't sacrifice their speed for shared-org efficiency.",
+    "priority": "Medium",
+    "tags": ["agility", "tradeoff", "lob-needs"]
+  },
+  {
+    "id": "osr-009",
+    "recommendation_number": 9,
+    "title": "Map All Stakeholders",
+    "description": "Understand the various stakeholders in the client environment before making org strategy decisions. Budget holders, IT governance, data architects, LOB leaders, and compliance officers all influence the decision.",
+    "priority": "High",
+    "tags": ["stakeholder-mapping", "discovery"]
+  },
+  {
+    "id": "osr-010",
+    "recommendation_number": 10,
+    "title": "Plan Storage for 3+ Years",
+    "description": "Map out storage requirements for the next 3 years, including historical data loads from migration. Factor in: record growth rate, file attachments, email tracking, event records, and sample transaction history.",
+    "priority": "High",
+    "tags": ["capacity-planning", "storage", "forecasting"]
+  },
+  {
+    "id": "osr-011",
+    "recommendation_number": 11,
+    "title": "China Always Gets a Separate Org",
+    "description": "Create a separate Salesforce org for China. This is a hard requirement driven by Chinese data residency laws, the Great Firewall, and network connectivity constraints. No exceptions.",
+    "priority": "Critical",
+    "tags": ["china", "data-residency", "hard-requirement"]
+  }
+]

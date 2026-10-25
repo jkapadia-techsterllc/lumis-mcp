@@ -1,0 +1,96 @@
+[
+  {
+    "id": "ci-reg-001",
+    "category": "competitive-intelligence-regulatory",
+    "title": "Regulatory Consulting Services — Competitor Profiles",
+    "products": ["lsc", "oce", "vault"],
+    "summary": "Profiles of four regulatory consulting and services firms that operate in the life sciences regulatory space. These firms influence platform decisions because they advise customers on validated system requirements and regulatory technology strategy. Understanding their positioning, partnerships, and biases helps anticipate customer platform preferences during migration conversations.",
+    "competitor_profiles": [
+      {
+        "name": "Parexel",
+        "type": "Contract Research Organization (CRO)",
+        "size": "Approximately 18,000 FTEs",
+        "capabilities": [
+          "Regulatory strategy and submissions",
+          "GxP compliance consulting",
+          "Regulatory outsourcing (full regulatory function support)",
+          "Clinical trial regulatory support"
+        ],
+        "geographic_coverage": "Global operations with strong presence in US, EU, and Asia-Pacific regulatory markets.",
+        "platform_bias": "Primarily CRO-focused — less likely to have strong platform opinions on CRM selection, but their GxP compliance consulting may influence validated system requirements that affect CRM platform evaluation criteria."
+      },
+      {
+        "name": "Accenture",
+        "type": "Global Technology and Consulting",
+        "size": "Approximately 710,000 FTEs overall, with roughly 200 regulatory professionals",
+        "capabilities": [
+          "Regulatory operations transformation",
+          "Regulatory affairs strategy",
+          "Regulatory technology and digital solutions",
+          "StartingPoint suite for accelerated regulatory implementation"
+        ],
+        "geographic_coverage": "Global operations across all major pharmaceutical markets.",
+        "platform_bias": "Accenture has an expanded partnership with Veeva for both CRM migration (Vault CRM) and regulatory operations. Accenture-led implementations may default to Veeva Vault for regulatory use cases. Their StartingPoint suite is built on Veeva technology. This is a significant platform bias to be aware of in migration conversations where Accenture is the customer's SI.",
+        "partnership_note": "Accenture also built the 'Life Science Connector' ETL for OneKey data integration — clients have expressed dissatisfaction with the additional monthly fee for this capability."
+      },
+      {
+        "name": "PharmaLex",
+        "type": "Specialized Regulatory Services",
+        "size": "3,000+ FTEs, 67 offices across 32 countries",
+        "capabilities": [
+          "Early regulatory planning through post-approval support",
+          "Full lifecycle regulatory services across 100+ countries",
+          "Regulatory intelligence and compliance monitoring"
+        ],
+        "geographic_coverage": "Extensive global coverage — 32 countries with direct presence, services in 100+ countries.",
+        "platform_bias": "Acquired by AmerisourceBergen for €1.28 billion, indicating strategic value in their regulatory services footprint. Less tied to a specific CRM platform than Accenture, but their digital regulatory capabilities may overlap with Vault quality management positioning.",
+        "acquisition_note": "The AmerisourceBergen acquisition positions PharmaLex within a pharmaceutical distribution company, adding regulatory services to a supply chain player."
+      },
+      {
+        "name": "DataRevive",
+        "type": "Boutique Regulatory Consulting",
+        "size": "40-45 FTEs",
+        "capabilities": [
+          "Regulatory pathway guidance and strategy",
+          "Breakthrough therapy and fast track designation support",
+          "Specialized regulatory consulting for complex submissions"
+        ],
+        "geographic_coverage": "Primarily US-focused with selective international engagements.",
+        "platform_bias": "As a smaller boutique firm, DataRevive is more likely to be platform-agnostic and open to evaluating alternatives including LSC. They lack the large SI partnerships that drive platform defaults."
+      }
+    ],
+    "source": "regulatory-consulting-landscape-oct-2022",
+    "tags": ["regulatory-consulting", "competitive-landscape", "system-integrators", "platform-bias", "accenture", "parexel", "pharmalex"]
+  },
+  {
+    "id": "ci-reg-002",
+    "category": "competitive-intelligence-regulatory",
+    "title": "Regulatory Services Landscape — Strategic Implications for CRM Platform Selection",
+    "products": ["lsc", "vault"],
+    "summary": "Strategic analysis of how the regulatory consulting landscape influences CRM platform decisions in life sciences. Regulatory consultancies advise on validated system requirements and often have existing technology partnerships that create platform biases. Understanding these dynamics helps anticipate and address migration objections.",
+    "findings": [
+      {
+        "area": "Consultancy Influence on Platform Decisions",
+        "detail": "Regulatory consulting firms advise pharmaceutical companies on validated system requirements, including what platforms meet GxP compliance standards. Their recommendations carry significant weight because regulatory risk is among the highest-stakes decision factors for life sciences IT leaders."
+      },
+      {
+        "area": "Accenture-Veeva Alignment",
+        "detail": "Accenture's expanded Veeva partnership means that Accenture-led technology transformations may default to Veeva Vault for regulatory and quality use cases. When a customer uses Accenture as their primary SI, expect Vault to be the presumed solution unless the customer specifically evaluates alternatives."
+      },
+      {
+        "area": "Regulatory-CRM Capability Overlap",
+        "detail": "The intersection of regulatory technology and digital capabilities (Accenture StartingPoint, PharmaLex digital services) overlaps with Life Sciences Cloud's compliance and quality management capabilities. Positioning LSC's native platform compliance features against specialized regulatory tools is a relevant migration conversation."
+      },
+      {
+        "area": "SI Bias as Migration Variable",
+        "detail": "Understanding which consultancy a customer uses can predict their platform biases and help anticipate migration objections. Customers with Accenture as their SI will likely hear Vault CRM positioning. Customers with boutique consultancies may be more open to platform evaluation."
+      },
+      {
+        "area": "Platform-Agnostic Opportunity",
+        "detail": "Smaller firms like DataRevive, lacking large SI platform partnerships, may be more receptive to LSC positioning. Engaging these firms as potential LSC implementation partners could create an alternative to the Accenture-Veeva default pathway."
+      }
+    ],
+    "source": "regulatory-consulting-landscape-oct-2022",
+    "tags": ["regulatory-strategy", "platform-selection", "si-bias", "migration-objections", "competitive-dynamics"]
+  }
+]

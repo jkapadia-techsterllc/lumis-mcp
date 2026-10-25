@@ -1,0 +1,463 @@
+[
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-org",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Get Your Org Ready for Medical Inquiries",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "​​Before you set up Medical Inquiry in Life Sciences Cloud, make sure that you have the required user profiles, licenses, and permission",
+    "findings": [
+      {
+        "name": "Get Your Org Ready for Medical Inquiries",
+        "detail": "​​Before you set up Medical Inquiry in Life Sciences Cloud, make sure that you have the required user profiles, licenses, and permission sets."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. As an admin, make sure that you have the Life Sciences Commercial Admin permission set to perform all configurations. Enable Admin Console . Create user profiles for sales representatives and medical science liaisons based on the Standard User profile and associate the profiles with the corresponding user records. Assign these permission sets to sales representatives. Life Sciences Core Life Sciences Field Sales Representative Assign these permission sets to medical science liaisons. Life Sciences Core Life Sciences Field Medical"
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Create and Submit a Medical Inquiry Salesforce Help : Review and Respond to a Medical Inquiry"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_org.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-define-case-status",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Define Statuses for Medical Inquiries",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "​​Medical inquiries move through a series of steps from creation to closure. To get a clear understanding of the progress and assignment of requests, it’s critical to track the real-time status of inquiries. Configure the Case object with appropriate status values to ensure the workflow path, path...",
+    "findings": [
+      {
+        "name": "Define Statuses for Medical Inquiries",
+        "detail": "​​Medical inquiries move through a series of steps from creation to closure. To get a clear understanding of the progress and assignment of requests, it’s critical to track the real-time status of inquiries. Configure the Case object with appropriate status values to ensure the workflow path, path conditions, and trigger handlers function correctly and your sales representatives and medical science liaisons use the workflow efficiently."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To add case status: | Life Sciences Commercial Admin permission set Case status drives the stage path and the underlying routing of inquiries, and therefore, it's recommended to use the exact status values. Avoid non-standard status values as they disrupt established path conditions and workflow logic. For more information on each case status, see Medical Inquiry Process Flow . Important The Status field in the Inquiry object is derived from the Status field in the Case object. You can't edit it from the Inquiry object. Add or remove a status from the Case object first, and then add or remove the status from the support process related to the medical inquiry record type. From Setup, open the Object Manager, and go to the Case object. Under Fields & Relationships, click Status . In the Case Status Picklist Values section, click New . Enter these exact inquiry status values, each on its own line: Draft Signed Submitted Assigned Responded Save your changes. Back on the Case Status Picklist Values section, edit these picklist values. Set Draft as the default status. Set Responded as the closed status. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Create and Submit a Medical Inquiry Salesforce Help : Review and Respond to a Medical Inquiry"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_define_case_status.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-set-record-types",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Support Process and Record Types for the Medical Inquiry Workflow",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create support process and record types for the objects used in the medical inquiry workflow. Assign profiles and page layouts to the record types to determine which one apply when users create, edit, or view",
+    "findings": [
+      {
+        "name": "Configure Support Process and Record Types for the Medical Inquiry Workflow",
+        "detail": "Create support process and record types for the objects used in the medical inquiry workflow. Assign profiles and page layouts to the record types to determine which one apply when users create, edit, or view records."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up record types and support processes: | Life Sciences Commercial Admin permission set Every medical inquiry relies on the Case and Inquiry objects working together. By creating a Medical Inquiry record type on both objects, you keep them in sync and ensure they behave as one. This alignment provides a unified flow for routing rules, path components, and analytics. Maintaining matching record types ensures a consistent context and simplifies the user experience, as the system creates both the parent Case and child Inquiry records simultaneously. Case (Parent Record): Handles routing to MSL queues and reporting. The Medical Inquiry record type on the Case object works with the support process to drive the specific status ladder: Draft, Signed, Submitted, Assigned, and Responded. Inquiry (Feature Container): Holds specific data such as the HCP digital signature and response channel preferences. The Medical Inquiry record type on the Inquiry object controls the page layouts, stage paths, and related lists visible to sales representatives and MSLs. Important To ensure that the Medical Inquiry workflows run as expected, use the same record type names for both the Case object and the Inquiry object. Prerequisite: Define case statuses for medical inquiries . To configure a tailored workflow with specific stages, create a support process for medical inquiries. From Setup, in the Quick Find box, enter and select Support Processes . Click New . From Existing Support Process, select Master . Enter a name and description for the support process, and save your changes. We recommend naming the support process Medical Inquiry . Save your changes. Select the Draft , Signed , Submitted , Assigned , and Responded case statuses. Set Draft as the default. Save your changes. For the Case object, create a record type using the following details. Enter Medical Inquiry as the name. Associate the Medical Inquiry support process that you created earlier. Select the profiles that need access to this record type. For example, Sales Representative and Medical Science Liaison. Assign the appropriate page layout for the Case record type. For the Inquiry object, create a record type using the following details. Make sure that the Inquiry object's record type name is the same as the Case object's record type name. Enter Medical Inquiry as the name. Select the same profiles that you selected earlier for the Case record type. For example, Sales Representative and Medical Science Liaison. Assign the appropriate page layout for the Inquiry record type. Make sure that the layout includes the stage path and Inquiry Question Answer related list. Assign record type to profiles . Make sure that both the Inquiry and Case objects have the master record type assigned to the proper layout. From Setup, select Object Manager . Find and select the Case object. Go to Case Page Layouts, and then click Page Layout Assignments . Click Edit Assignment . Assign the page layout to the master record type for each profile. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Create and Submit a Medical Inquiry Salesforce Help : Review and Respond to a Medical Inquiry"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_set_record_types.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-set-inquiry-page",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up the Inquiry Record Page for Medical Inquiries",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add tabs and Lightning components to the Inquiry record page so that your sales representatives can easily create and submit medical inquiry requests, and medical science liaisons can submit their response to the inquiry",
+    "findings": [
+      {
+        "name": "Set Up the Inquiry Record Page for Medical Inquiries",
+        "detail": "Add tabs and Lightning components to the Inquiry record page so that your sales representatives can easily create and submit medical inquiry requests, and medical science liaisons can submit their response to the inquiry questions."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up the Inquiry record page: | Life Sciences Commercial Admin permission set Prerequisite: Before you add an Inquiry Question Answer related list to the Inquiry page, create a field set for the Inquiry Question Answer object. Include fields such as Inquiry Question, Inquiry Question Answer ID, Response, Response Contact Point Record, and Response Date Time in your preferred order to define how they appear on the Inquiry Question Answer related list. From Setup, go to Object Manager, and select Inquiry . Under Lightning Record Pages, select LSC Inquiry , and then click Edit . Drag the LifeSciStagePathContainer component to an appropriate spot on the page. Save your changes. Replace the standard Details tab with a custom Details tab. The standard Details tab isn't supported on the iPad. In the builder, click anywhere in the Tabs section. In the Properties pane, click Details . The standard Details tab is added by default. In Tab Label, select the dropdown next to Details, scroll to the top of the list, and select Custom . In Custom Label, enter Details . Click Done . Add a tab named Inquiry Question Answer. Drag the Related List - Life Sciences component to the Inquiry Question Answer tab, and then set up these fields. Object Name: InquiryQuestionAnswer Field Set Name: Enter the API name of the Inquiry Question Answer field set that you created. Label: Inquiry Question Answer Icon Name: standard: work_plan_rule Handler for update or delete: StandardUpdateDeleteHandler Where Clause: InquiryQuestion.InquiryId = 'recordId' Component name for the New action: StandardNewAction Relationship Field API Name: Inquiry.InquiryQuestionId View All Components: StandardViewAll Show record count: true Save your changes. To view the timeline details for inquiries, drag the Timeline component to the page and configure the component details. Click Activation . Click Assign as Org Default , and select Desktop and Phone . Click Next and save your changes. After you're done setting up Lightning components and tabs, you can configure action buttons on the Inquiry record page."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Add and Customize Tabs on Lightning Pages Using the Lightning App Builder Salesforce Help : Create and Submit a Medical Inquiry Salesforce Help : Review and Respond to a Medical Inquiry"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_set_inquiry_page.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-configure-action-buttons-account-page",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Action Buttons on the Account Record Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Let users create medical inquiries directly from the Account record page rather than navigating to the Inquiry page or tab. Add a button on the Account record page and make it easier for the sales representatives to get a better context of the healthcare professional while creating the inquiry....",
+    "findings": [
+      {
+        "name": "Configure Action Buttons on the Account Record Page",
+        "detail": "Let users create medical inquiries directly from the Account record page rather than navigating to the Inquiry page or tab. Add a button on the Account record page and make it easier for the sales representatives to get a better context of the healthcare professional while creating the inquiry. This configuration allows a one-click creation of both the parent Case and the child Inquiry."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure action buttons: | Life Sciences Commercial Admin permission set From Setup, open the Object Manager, and go to the Account object. Click Buttons, Links, and Actions . Create a Lightning component action button to manage multiple objects. Click New Action . For Action Type, select Lightning Component , and then select lsc4ce:CreateNewInquiry as the Lightning component. Enter a label, name, and description for the action. We recommend naming the action button New Inquiry . Save your changes. Add the action to the page layout. From Setup, open the Object Manager, and go to the Account object. Go to Page Layouts, and select the appropriate layout for the Account record page. For example, the layout used for your healthcare professional accounts. Click Edit , and select Mobile and Lightning Experience Actions . Drag the New Inquiry action to the Salesforce Mobile and Lightning Experience Actions section. Save your changes. Depending on your business needs, you can also add a New Inquiry action button to the Visit record page using these steps. This configuration helps your users to create an inquiry directly from the Visit record page."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Create and Submit a Medical Inquiry Salesforce Help : Review and Respond to a Medical Inquiry"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_configure_action_buttons_account_page.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-create-custom-field",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create a Custom Field for Medical Inquiries",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set up a formula-derived custom field on the Inquiry object to capture your unique business data for medical inquiries. The field helps to achieve conditional display of action buttons based on the user profile or persona. This configuration promotes a seamless workflow by ensuring that sales...",
+    "findings": [
+      {
+        "name": "Create a Custom Field for Medical Inquiries",
+        "detail": "Set up a formula-derived custom field on the Inquiry object to capture your unique business data for medical inquiries. The field helps to achieve conditional display of action buttons based on the user profile or persona. This configuration promotes a seamless workflow by ensuring that sales representatives can only draft, sign, and submit medical inquiries whereas medical science liaisons can only assign and respond to the inquiries."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create a custom field: | Life Sciences Commercial Admin permission set OR Customize Application From Setup, go to Object Manager, and select Inquiry . Go to Fields & Relationships and click New . Select Formula and click Next . Enter a name for the field, such as IsCreatorOrResponder . Select Text and click Next . In the Simple formula section, enter a formula to assign text to the field based on the user profile. This example shows how to assign text for each profile. IF($Profile.Name = '<Enter the profile name of Medical Science Liaison>', '<Text1>', IF($Profile.Name = '<Enter the profile name of Sales representative>', '<Text2>', '')) You can replace “Medical Science Liaison” and “Sales Representative” for “Text1” and “Text2.” Click Next . Complete the custom field setup and save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Create and Submit a Medical Inquiry Salesforce Help : Review and Respond to a Medical Inquiry"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_create_custom_field.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-set-workflow-path",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up the Workflow Stages to Manage Medical Inquiries",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enhance efficiency, maintain compliance, and promote data integrity with configurable workflow paths. The workflow outlines the journey of an object through various stages and helps you manage the different statuses, actions, and record permissions. For the medical inquiry process, set up a...",
+    "findings": [
+      {
+        "name": "Set Up the Workflow Stages to Manage Medical Inquiries",
+        "detail": "Enhance efficiency, maintain compliance, and promote data integrity with configurable workflow paths. The workflow outlines the journey of an object through various stages and helps you manage the different statuses, actions, and record permissions. For the medical inquiry process, set up a workflow path based on the Inquiry object and its different stages."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up a workflow path: | Life Sciences Commercial Admin permission set To create the workflow, add operations for each stage and define the permissions to create, edit, or delete records based on the user’s role or context. Associate workflow actions to each operation, and set up conditions that must be met to grant permissions and enable actions. The validations help control the visibility of responses, records, and fields. Prerequisite: Configure the required workflow actions for the medical inquiry process ."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Create and Submit a Medical Inquiry Salesforce Help : Review and Respond to a Medical Inquiry"
+      },
+      {
+        "name": "Create a Workflow Path",
+        "detail": "From the App Launcher, find and select Admin Console . Select Workflow Configuration . On the Workflow Paths screen, click New , and enter a name for the medical inquiry workflow. From the Object API Name list, select Inquiry From the Field API Name list, select Status . Click Continue ."
+      },
+      {
+        "name": "Set Up the Draft Status Stage",
+        "detail": "On the workflow screen, from the workflow path, select Draft . Under Stage Operations, click and enter a name for the operation. We recommend using Medical Inquiry Draft . Select Create , Edit , and Delete . Set the priority to 1, and save your changes. Add actions to the stage operation. Under Stage Operation Actions, click Add Actions and select Open Component . Select the Add Signature and Add Response Preference actions. Save your changes. On the Stage Operation Conditions tab, add a condition with these values, if necessary. For Field, enter the name of the formula field you created earlier. For Operator, enter Equals . For Value, enter the text that you configured as Text2 in the formula field. Save your changes. Under Other Permissions, select Salesforce Files , and then select Create , Edit , and Delete . Create a child stage operation for managing inquiry questions. Next to the Medical Inquiry Draft operation, click , and enter a name for the operation. For the object, select InquiryQuestion , and select Create , Edit , and Delete . Set the priority to 1, and save your changes. Create a child stage operation for managing subject assignments. Next to the Medical Inquiry Draft operation, click , and enter a name for the operation. For the object, select SubjectAssignment , and select Create , Edit , and Delete . Set the priority to 2, and save your changes."
+      },
+      {
+        "name": "Set Up the Signed Status Stage",
+        "detail": "On the workflow screen, from the workflow path, select Signed . Under Stage Operations, click and enter a name for the operation. We recommend using Medical Inquiry Signed . Set the priority to 1, and save your changes. Add actions to the stage operation. Under Stage Operation Actions, click Add Actions and select Update Record . Select the Submit Medical Inquiry action. Save your changes. On the Stage Operation Conditions tab, add a condition with these values. For Field, enter the name of the formula field you created earlier. For Operator, enter Equals . For Value, enter the text that you configured as Text2 in the formula field. Save your changes. Under Other Permissions, select Salesforce Files . Don’t select Create , Edit , or Delete . Create a child stage operation for managing inquiry questions. Next to the Medical Inquiry Signed operation, click , and enter a name for the operation. For the object, select InquiryQuestion . Don’t select Create , Edit , or Delete . Set the priority to 1, and save your changes. Create a child stage operation for managing subject assignments. Next to the Medical Inquiry Signed operation, click , and enter a name for the operation. For the object, select SubjectAssignment . Don’t select Create , Edit , or Delete . Set the priority to 2, and save your changes."
+      },
+      {
+        "name": "Set Up the Submitted Status Stage",
+        "detail": "On the workflow screen, from the workflow path, select Submitted . Under Stage Operations, click and enter a name for the operation. We recommend using Medical Inquiry Submitted . Set the priority to 1, and save your changes. Add actions to the stage operation. Under Stage Operation Actions, click Add Actions and select Update Record . Select the Assign Medical Inquiry action. Save your changes. On the Stage Operation Conditions tab, add a condition with these values. For Field, enter the name of the formula field you created earlier. For Operator, enter Equals . For Value, enter the text that you configured as Text1 in the formula field. Save your changes. Under Other Permissions, select Salesforce Files . Don’t select Create , Edit , or Delete . Create a child stage operation for managing inquiry questions. Next to the Medical Inquiry Submitted operation, click , and enter a name for the operation. For the object, select InquiryQuestion . Don’t select Create , Edit , or Delete . Set the priority to 1, and save your changes. Create a child stage operation for managing subject assignments. Next to the Medical Inquiry Submitted operation, click , and enter a name for the operation. For the object, select SubjectAssignment . Don’t select Create , Edit , or Delete . Set the priority to 2, and save your changes."
+      },
+      {
+        "name": "Set Up the Assigned Status Stage",
+        "detail": "On the workflow screen, from the workflow path, select Assigned . Under Stage Operations, click and enter a name for the operation. We recommend using Medical Inquiry Assigned . Set the priority to 1, and save your changes. Add actions to the stage operation. Under Stage Operation Actions, click Add Actions and select Update Record . Select the Respond to Medical Inquiry action. Save your changes. Under Stage Operation Actions, click Add Actions and select Open Component . Select the Add Response action that you created earlier. Save your changes. On the Stage Operation Conditions tab, add a condition with these values. For Field, enter the name of the formula field you created earlier. For Operator, enter Equals . For Value, enter the text that you configured as Text1 in the formula field. Save your changes. Under Other Permissions, select Salesforce Files . Don’t select Create , Edit , or Delete . Create a child stage operation for managing inquiry questions. Next to the Medical Inquiry Assigned operation, click , and enter a name for the operation. For the object, select InquiryQuestion . Don’t select Create , Edit , or Delete . Set the priority to 1, and save your changes. Create a child stage operation for managing subject assignments. Next to the Medical Inquiry Assigned operation, click , and enter a name for the operation. For the object, select SubjectAssignment . Don’t select Create , Edit , or Delete . Set the priority to 2, and save your changes."
+      },
+      {
+        "name": "Set Up the Responded Status Stage",
+        "detail": "On the workflow screen, from the workflow path, select Responded . Under Stage Operations, click and enter a name for the operation. We recommend using Medical Inquiry Responded . Set the priority to 1, and save your changes. Create a child stage operation for managing inquiry questions. Next to the Medical Inquiry Responded operation, click , and enter a name for the operation. For the object, select InquiryQuestion . Don’t select Create , Edit , or Delete . Set the priority to 1, and save your changes. Create a child stage operation for managing subject assignments. Next to the Medical Inquiry Responded operation, click , and enter a name for the operation. For the object, select SubjectAssignment . Don’t select Create , Edit , or Delete . Set the priority to 2, and save your changes."
+      },
+      {
+        "name": "Activate the Workflow",
+        "detail": "On the workflow screen, click Activate . Save your changes. The medical inquiry workflow is ready for use to manage inquiries. Depending on your business needs, configure custom scripts and associate the scripts with the workflow. Set up validation scripts to run each time a user performs an action and to prevent incorrect actions or alert users about errors. Set up checklist scripts to show an information icon for users to see the next steps to take."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_set_workflow_path.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-insights-configure-admin-console",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Medical Insights",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure the settings in Admin Console to enable users to capture insights, add more details and mandate certain required fields before saving",
+    "findings": [
+      {
+        "name": "Configure Medical Insights",
+        "detail": "Configure the settings in Admin Console to enable users to capture insights, add more details and mandate certain required fields before saving them."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure medical insights: | Life Sciences Commercial Admin permission set From the App Launcher, find and select the Life Sciences Commercial app. Click Admin Console . Click Insights and then click Insight Settings . In Apply settings To, select the required profile from the drop down. In the Mobile-Specific Settings section, select the required settings for Medical Insights. Select Require users to associate an account with an insight to ensure every insight is linked to an account before it's saved. Select Let users capture insights from an account record page to let users log insights without leaving the account context. Select Let users associate a product with an insight to let users link a relevant product while capturing an insight. Select Require users to associate a product with an insight to ensure product context is always captured before an insight is saved. Select Require users to associate a tag with an insight to ensure insights are always categorized before they're saved. Select Hide the accounts field in the insights capture form to simplify the capture form when account association isn't needed. Select Hide the tags field from the insights capture form to simplify the capture form when tagging isn't required. Select Let users access standard and custom insights tab in the mobile app to enable users to switch to the new mobile insight experience."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_insights_configure_admin_console.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-insights-configure-subjects",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Subjects for Medical Insights",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Organize and categorize your Medical Insights using Subjects (Tags). Build a stable hierarchy for your tags and ensure sensitive categories are shared securely across different user",
+    "findings": [
+      {
+        "name": "Configure Subjects for Medical Insights",
+        "detail": "Organize and categorize your Medical Insights using Subjects (Tags). Build a stable hierarchy for your tags and ensure sensitive categories are shared securely across different user roles."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure medical insights: | Life Sciences Commercial Admin permission set Create a Parent Subject. From the App Launcher, find and select Subjects . On the Subjects list view, click New . For Subject Name, enter a name for the top-level category. For example, Therapeutic Areas. Leave the Parent Subject field blank for top-level categories. To make sure users see the tag in their mobile capture form, select Active . If this is unchecked, users will not see the tag in their mobile capture form. Click Save & New . Create a Child Subject. For Subject Name, enter the specific sub-category name. For example, Oncology. For Parent Subject, use the lookup icon to find and select the parent you created. For example, Therapeutic Areas. To make sure users see the tag in their mobile capture form, select Active . Save your changes. Verify the hierarchy logic. From the Subjects tab, check your list to ensure you haven't created a Circular Reference. For example, making Oncology the parent of Therapeutic Areas while Therapeutic Areas is already the parent of Oncology. Salesforce uses the TopicValidationHandler trigger handler to automatically prevent the creation of circular parent-child relationships when updating Subject records to ensure a valid single-parent hierarchy structure. Configure Subject Sharing. After your subjects are created, use standard Salesforce sharing settings to control user access to data and their experience. From Setup, in the Quick Find Box, find and select Sharing Settings . If your organization has sensitive categories, such as Off-Label, set the Subject Organization-Wide Default (OWD) to Private . From Setup, in the Quick Find Box, find and select Public Groups . Create a new Public Group specifically for your Medical users. See Create and Edit Public Group . From Setup, in the Quick Find Box, find and select Sharing Settings . Create a Subject Sharing Rule and configure the rule to share only the relevant Subjects with that Public Group so that field users don’t see restricted medical tags. For more information, see Sharing and Record Access Features . You can extensively leverage standard Salesforce platform capabilities, such as Public Groups and Sharing Rules, to further customize Subject access across your org. This flexibility allows you to control data access in line with your organization's specific data governance principles and compliance requirements."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help: Public and Personal Groups Salesforce Help: Sharing Rules"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_insights_configure_subjects.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-insights-tab-app-launcher",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add Medical Insights Tab to App Launcher",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Make Medical Insights available to users by adding a tab in the Life Sciences mobile app. This tab enables users to view their insights as well as insights captured by the same profile within their",
+    "findings": [
+      {
+        "name": "Add Medical Insights Tab to App Launcher",
+        "detail": "Make Medical Insights available to users by adding a tab in the Life Sciences mobile app. This tab enables users to view their insights as well as insights captured by the same profile within their territories."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To add medical insights tab to App Launcher: | Life Sciences Commercial Admin permission set From Setup, in the Quick Find box, find and select App Manager . Go to Life Sciences Commercial in the list. Click the icon, and select Edit. Select Navigation Items from the App Settings section. Find and select Medical Insights from Available Items and move it to Selected Items. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_insights_tab_app_launcher.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-insights-configure-objects",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Page Layouts for Medical Insights",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure Medical Insight and Medical Insight Accounts objects by customizing the record page layout and creating required field sets. This customization makes sure that users see relevant medical insights data on Account and Visit",
+    "findings": [
+      {
+        "name": "Configure Page Layouts for Medical Insights",
+        "detail": "Configure Medical Insight and Medical Insight Accounts objects by customizing the record page layout and creating required field sets. This customization makes sure that users see relevant medical insights data on Account and Visit records."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure medical insights objects: | Life Sciences Commercial Admin permission set From Setup, click Object Manager . In the Quick Find search bar, find and select Medical Insight . Control the organization and visibility of related lists by configuring page layouts. Click Page Layouts . Click Medical Insight Layout from the list. In the layout, click Related Lists , and drag these components onto the Related Lists section: Medical Insight Accounts, Medical Insight Products, Child Medical Insights, and Subject Assignments and User Reactions. Click Save . In the pop-up screen, if you want to overwrite the changes to the page layouts, select Overwrite users' personal related list customizations with my page layout changes . Save your changes. Create field sets linking visits and medical insights. See create a field set . Click Field Sets , and then click New . Enter the label as VisitInsightsRLFieldSet . Field Set name is autopopulated. If necessary, enter a description. Drag these fields to the Field Set section: Name , Source Type , and Content . Save your changes. Similarly, create a field set for the medical insight account object by updating this information. Enter the label as AccountInsightsRLFieldSet. Drag these fields to the Field Set section: Name , Medical Insight , and Reason Type . Note Use the reason type field in the medical insight account object to explain why each account is linked to an insight, such as Primary Stakeholder or Decision Maker. This field is especially useful when multiple accounts are associated with a single insight. After these field sets are created, you can reference them by adding the Related List - Life Sciences component to the Account and Visit Lightning record pages. Make sure to generate a metadata cache."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help: Generate a Metadata Cache"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_insights_configure_objects.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-insights-configure-feed-mobile",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Medical Insights Feed on Mobile",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Give your users access to Medical Insights Feed by adding the custom tab in the Life Sciences Cloud Mobile",
+    "findings": [
+      {
+        "name": "Configure Medical Insights Feed on Mobile",
+        "detail": "Give your users access to Medical Insights Feed by adding the custom tab in the Life Sciences Cloud Mobile app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage insights quick actions: | Life Sciences Commercial Admin permission set Enable mobile-specific settings for Medical Insights. From Setup, in the Quick Find Box, find and select the Life Sciences Commercial app. Click Admin Console , and then click Insights . In the Insights Setup page, click Insights Settings . In the Mobile-Specific Settings, select Let users access standard and custom insights tab in the mobile app . Make the Medical Insights Feed tab as default for relevant profiles on mobile. From Setup, in the Quick Find Box, find and select Profiles . Click Edit next to the profile you want to add the tab settings. For example, Field Sales Representative. In the Profiles Setup page, under Tab Settings, select the Medical Insights Feed as Default On . Save your changes. Add the Medical Insights Feed tab to the navigation menu list. From Setup, in the Quick Find box, find and select App Manager . Go to Life Sciences Commercial in the list. Click the icon, and click Edit . Select Navigation Items from the App Settings section. Find and select Medical Insights Feed and move it to Selected Items. Save your changes. Generate the Metadata Cache to make sure the Medical Insights Feed tab is accessible for users on the mobile app. See Generate a Metadata Cache ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_insights_configure_feed_mobile.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-create-inquiry",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create and Submit a Medical Inquiry",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "As a sales representative, use the straightforward and easy-to-navigate Medical Inquiries feature to create and submit accurate and comprehensive concerns and questions from healthcare professionals. Use the web or mobile interface to log initial inquiries, add relevant files and images for...",
+    "findings": [
+      {
+        "name": "Create and Submit a Medical Inquiry",
+        "detail": "As a sales representative, use the straightforward and easy-to-navigate Medical Inquiries feature to create and submit accurate and comprehensive concerns and questions from healthcare professionals. Use the web or mobile interface to log initial inquiries, add relevant files and images for context, and monitor case progress while on the move. Maintain compliance and adhere to your organization’s policies, regulations, and custom checks by adding mandatory signatures and attachments during inquiry submission."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create and submit a medical inquiry: | Life Sciences Core AND Life Sciences Field Sales Representative From the App Launcher, go to Inquiries . Click New . The New Inquiry window appears. On the New Inquiry window, select Type as Medical Inquiry . Specify other inquiry details. Enter the case details, such as the account of the healthcare professional, origin, and description. Save your changes. Medical Inquiries creates the inquiry record, and the Inquiry record page appears. The status and the account of the inquiry are set to the values in the associated case. Add a question to the inquiry. On the Questions tab, click New . The New Inquiry Question window appears. The case and inquiry are auto-populated. Enter the inquiry question and additional comments. Save your changes. Add your signature to the inquiry question. On the Inquiry record page, click Add Signature . On the Review & Sign window, enter your signature and click Accept . The status of the inquiry changes to Signed. Add the healthcare professional’s preferred response mode. On the Inquiry record page, click Add Response Preference . On the Select Response Preference window, select a contact point address, contact point email, or contact point phone. Save your changes. The Response Contact Point Record ID field shows the selected mode of response. Add attachments and topics, if required. Click Submit . The status of the inquiry changes to Submitted. The inquiry is moved to the medical science liaison’s queue, who then reviews and responds to the questions."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Medical Inquiries"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_create_inquiry.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-inquiries-respond-inquiry",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Review and Respond to a Medical Inquiry",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "As a medical science liaison, enhance healthcare professional satisfaction and minimize delays by providing quick, accurate, and compliant responses to medical inquiries. Review the inquiry queue, self-assign appropriate inquiries, consult the answer library to formulate your responses, and vet...",
+    "findings": [
+      {
+        "name": "Review and Respond to a Medical Inquiry",
+        "detail": "As a medical science liaison, enhance healthcare professional satisfaction and minimize delays by providing quick, accurate, and compliant responses to medical inquiries. Review the inquiry queue, self-assign appropriate inquiries, consult the answer library to formulate your responses, and vet your responses by the medical, legal, and regulatory teams. Add necessary attachments and provide multiple responses with supporting documentation. After you submit your response, the details are shared with the healthcare professional through their preferred communication channel."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To review and respond to a medical inquiry: | Life Sciences Core AND Life Sciences Field Medical From the App Launcher, go to Inquiries . Select the inquiry that you want to review. The Inquiry record page appears. On the Questions tab, review the inquiry question. To assign the inquiry to yourself, click Assign Inquiry . The status of the inquiry changes to Assigned. Click Respond . The New Answer window appears. Enter your response to the inquiry and specify the response date and time. Save your changes. On the Inquiry record page, click Move Status to Responded . The status of the inquiry changes to Responded. The sales representative can pass on the response from the medical science liaison to the healthcare professional."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Medical Inquiries"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_inquiries_respond_inquiry.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  },
+  {
+    "id": "lsc-help-medical-ind-lsc-medical-insights-view-capture",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Capture Medical Insights",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Capture and structure your observations from field interactions with HCPs and HCOs in the Life Sciences Cloud mobile app to identify opportunities and risks promptly. Organize your field observations within Medical Insights by linking them to accounts, products, and structured tags. Use this...",
+    "findings": [
+      {
+        "name": "Capture Medical Insights",
+        "detail": "Capture and structure your observations from field interactions with HCPs and HCOs in the Life Sciences Cloud mobile app to identify opportunities and risks promptly. Organize your field observations within Medical Insights by linking them to accounts, products, and structured tags. Use this structured feed to effectively identify trends, competitive signals, and sentiment shifts that can guide your strategy."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud and the Life Sciences Cloud for Customer Engagement Add-On license"
+      },
+      {
+        "name": "View Insights",
+        "detail": "View and interact with existing insights shared by other colleagues in the same role to stay informed. Find relevant insights quickly using the search bar by name or keyword. Filter and sort insights using tags to focus on what's most relevant to your context. Identify opportunities and potential risks within recent observations using Insights. Note : When you select child tags while filtering insights, the parent tags are automatically selected. However, selecting a parent tag doesn’t automatically select its child tags. Maximize the strategic value of captured insights by keeping them up to date, validating their importance, and making them accessible across related records for engagement planning: Upvote an insight using the icon to indicate that it’s important and relevant. Link insights to account and visit records to make the consolidated intelligence available on the relevant records where engagement planning occurs. Open an insight to view details, such as source type, related accounts, related products, and upvote activity. Edit or delete insights that you created if details change or are no longer relevant."
+      },
+      {
+        "name": "Capture Insights",
+        "detail": "Create a new insight from key touch points during HCP and HCO interactions including the dedicated Insights tab, app’s Home page, Accounts or Visits record page. Enrich your insights by associating it with specific products, accounts, and hierarchical tags, while supplementing details such as name, source type, and visit aids deeper analysis. Note : To create insights from the visit page, make sure you add the account in the visit information. Note If you capture insights from an account, the account in the insight record is auto populated. If you capture insights from a visit page, the visit in the insight record is auto populated."
+      },
+      {
+        "name": "See Also",
+        "detail": "Salesforce Help : Account Search"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_medical_insights_view_capture.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "medical"
+    ]
+  }
+]

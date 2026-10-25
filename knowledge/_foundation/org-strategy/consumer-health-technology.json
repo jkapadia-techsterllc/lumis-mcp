@@ -1,0 +1,28 @@
+[
+  {
+    "id": "fnd-consumer-health-tech-001",
+    "category": "org-strategy",
+    "title": "Consumer Health Technology Innovation and Platform Integration",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Assessment of consumer health technology capabilities including personal health features, wearable device integration, health research platforms, and provider collaboration models with implications for life sciences commercial and clinical platforms.",
+    "findings": {
+      "personal_health_data_ecosystem": "Consumer health platforms now aggregate: activity and exercise data, heart rate and rhythm monitoring, sleep analysis, blood oxygen measurements, fall detection, medication tracking, and health records from clinical systems (via FHIR/HL7). This creates the most comprehensive longitudinal health dataset outside of clinical systems.",
+      "wearable_sensor_capabilities": "Current wearable sensors provide clinical-grade measurements for: heart rate variability, ECG (atrial fibrillation detection), blood oxygen saturation, skin temperature, respiratory rate estimation, and gait analysis. Several have FDA clearance for specific clinical use cases.",
+      "health_research_platform": "Consumer health platforms enable population-scale research studies: participants consent through their devices, contribute sensor data passively, complete surveys, and receive study results. Studies have enrolled hundreds of thousands of participants \u2014 orders of magnitude larger than traditional clinical trials.",
+      "provider_collaboration_model": "Health data sharing between consumer devices and clinical systems uses FHIR-based health records integration. Patients can share: medication lists, immunization records, lab results, and clinical notes with providers \u2014 creating a patient-mediated interoperability layer.",
+      "implications_for_life_sciences": "Consumer health data creates opportunities for: real-world evidence generation (wearable-derived endpoints), patient engagement in clinical trials (remote monitoring), medication adherence tracking, and post-market surveillance. Life sciences platforms need integration points for consumer health data to support decentralized trial designs.",
+      "privacy_architecture": "Consumer health platforms use on-device processing and differential privacy for aggregated insights. Individual-level data sharing requires explicit user consent per data type per recipient. This privacy architecture sets expectations for how life sciences platforms should handle patient-generated data."
+    },
+    "source": "Assessment of consumer health technology capabilities covering wearable integration, health research platforms, and provider collaboration models",
+    "tags": [
+      "consumer-health",
+      "wearables",
+      "health-data",
+      "fhir",
+      "remote-monitoring",
+      "decentralized-trials"
+    ]
+  }
+]

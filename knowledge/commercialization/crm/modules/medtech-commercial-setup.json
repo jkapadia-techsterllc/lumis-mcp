@@ -1,0 +1,684 @@
+[
+  {
+    "id": "mt-001",
+    "feature": "Order Management",
+    "category": "MedTech Commercial / Order Processing",
+    "description": "Manages the complete order lifecycle for medical device and commercial product ordering, including order creation, pricing, validation, submission, and fulfillment tracking with ERP integration.",
+    "setup_steps": [
+      "Complete org readiness for order management",
+      "Configure order management settings in Admin Console",
+      "Set up product catalog with pricing and availability via PricebookEntry records",
+      "Configure order types and record types for different ordering scenarios (standard, rush, consignment)",
+      "Set up order templates for standardized ordering of common product combinations",
+      "Configure pricing rules and discount schedules",
+      "Set up inventory integration for stock validation (if required)",
+      "Configure order approval workflows based on value thresholds or product categories",
+      "Set up order submission and fulfillment tracking",
+      "Configure order-related Lightning components on account pages",
+      "Create metadata cache for order objects for mobile",
+      "Generate metadata cache",
+      "Configure mobile sync settings for offline ordering"
+    ],
+    "prerequisites": [
+      "Customer Engagement with Commercial Engagement edition installed",
+      "Product2 and PricebookEntry records configured",
+      "Account and territory management active",
+      "Inventory integration available (if stock validation required)",
+      "ERP/fulfillment middleware configured (for order submission)"
+    ],
+    "configuration_details": [
+      "Order management encompasses the full order lifecycle from creation through fulfillment",
+      "Order types categorize different ordering scenarios (standard, rush, consignment, etc.)",
+      "Pricing rules integrate with platform price books and custom discount schedules",
+      "Order templates enable standardized ordering for common product combinations",
+      "Approval workflows route orders based on value thresholds or product categories",
+      "Inventory validation checks stock availability before order submission",
+      "Fulfillment tracking monitors order status through delivery",
+      "Integration with external ERP/fulfillment systems via middleware",
+      "Order repricing path: when pricing changes, existing draft orders may need recalculation",
+      "Order splitting supports partial fulfillment scenarios"
+    ],
+    "objects_and_fields": [
+      "Order (primary)",
+      "OrderItem (line items)",
+      "Product2 (catalog)",
+      "PricebookEntry (pricing)",
+      "OrderTemplate (standardized orders)",
+      "DiscountSchedule (pricing rules)",
+      "Account (ordering account — ship-to vs bill-to distinction)",
+      "InventoryRecord (stock validation)"
+    ],
+    "permissions": [
+      "Order creation and management permissions",
+      "Product catalog read access",
+      "Pricing and discount management (admin)",
+      "Order approval permissions"
+    ],
+    "batch_jobs": [
+      "Order repricing batch — recalculates pricing on existing draft orders when price changes occur",
+      "Inventory sync batch — synchronizes stock levels with external systems"
+    ],
+    "gotchas": [
+      "Source platform real-time pricing engine does not migrate — must configure pricing rules in target platform",
+      "Order approval workflows must be rebuilt in target platform",
+      "Backorder management differs between platforms",
+      "Credit check integration with ERP must be re-established",
+      "Order splitting (partial fulfillment) logic varies between platforms",
+      "Ship-to vs bill-to account distinction may differ — verify address model",
+      "Only migrate orders from last 2 fiscal years unless regulatory requirements dictate otherwise"
+    ],
+    "mobile_considerations": [
+      "Offline ordering requires complete metadata cache for order and product objects",
+      "Order creation and submission available offline with queue sync",
+      "Product catalog cached locally for offline product selection",
+      "Pricing calculations must work offline — cached price books used"
+    ],
+    "admin_console_settings": [
+      "Order Management settings",
+      "Pricing configuration",
+      "Approval workflow configuration"
+    ]
+  },
+  {
+    "id": "mt-002",
+    "feature": "Store Check",
+    "category": "MedTech Commercial / Retail Execution",
+    "description": "Workflow-driven store/site visit execution for medical device and commercial teams. Supports configurable stages, geolocation verification, assortment checks, product image capture, AID scanning, and compliance auditing.",
+    "setup_steps": [
+      "Configure Store Check workflows using the five-step framework: (1) outline workflow, (2) define objects/permissions, (3) identify condition fields, (4) plan actions per stage, (5) add validation rules/checklists",
+      "Define Store Check stages and transitions (e.g., Check-In > Inventory Audit > Shelf Review > Compliance Check > Check-Out)",
+      "Configure geolocation capture for check-in verification",
+      "Set up assortment check lists per store type or region",
+      "Configure product image capture settings",
+      "Set up AID scanning integration for automated product identification",
+      "Configure compliance audit checklists per store type",
+      "Enable visit record type routing for Store Check visits",
+      "Create metadata cache for Store Check objects for mobile",
+      "Generate metadata cache"
+    ],
+    "prerequisites": [
+      "Customer Engagement with Commercial Engagement edition installed",
+      "Visit Management configured with Store Check record type",
+      "Product catalog configured for retail/commercial products",
+      "Geolocation services enabled in the org",
+      "Camera/image capture permissions for mobile app"
+    ],
+    "configuration_details": [
+      "Store Check uses a workflow/stage model — each stage has defined actions, validations, and transitions",
+      "Geolocation capture at check-in verifies physical presence at the store location",
+      "Assortment checks validate that correct products are stocked at each location",
+      "Product image capture provides visual documentation of shelf placement and displays",
+      "AID scanning uses device camera to automatically identify products by barcode/image",
+      "Compliance audit checklists ensure regulatory and brand compliance at point of sale",
+      "Visit record type routing directs Store Check visits to the correct workflow",
+      "Store Check workflows leverage the platform five-step workflow preparation framework"
+    ],
+    "objects_and_fields": [
+      "Visit (with Store Check record type)",
+      "VisitStage (workflow stages)",
+      "StoreCheckItem (audit items)",
+      "AssortmentCheck (assortment validation)",
+      "ProductImage (captured images)",
+      "GeolocationCapture (check-in coordinates)",
+      "Account (store/location)",
+      "Product2 (products being checked)",
+      "ContentDocument / ContentVersion (images)"
+    ],
+    "permissions": [
+      "Commercial Admin permission set (for configuration)",
+      "Store Check execution permissions for field users",
+      "Camera/photo permissions on mobile device"
+    ],
+    "batch_jobs": [
+      "Store Check compliance aggregation — summarizes compliance scores across locations"
+    ],
+    "gotchas": [
+      "Store Check workflows are highly customizable but must be designed carefully — use the five-step framework",
+      "Geolocation accuracy varies by device and environment — indoor locations may have lower accuracy",
+      "Image storage can consume significant file storage — plan capacity accordingly",
+      "AID scanning accuracy depends on product barcode/label quality",
+      "Different store types may require different workflows — use record type routing",
+      "Validation rules at each stage can prevent workflow progression if not carefully designed"
+    ],
+    "mobile_considerations": [
+      "Store Check is primarily a mobile use case — field execution on device",
+      "Offline support critical for in-store execution without reliable connectivity",
+      "Camera integration for product image capture and AID scanning",
+      "Geolocation capture at check-in — must have location permissions enabled",
+      "Large image files impact sync times — configure image compression settings",
+      "Checklist and stage progression available offline with sync on completion"
+    ],
+    "admin_console_settings": [
+      "Store Check workflow configuration",
+      "Stage management",
+      "Geolocation settings",
+      "Image capture settings"
+    ]
+  },
+  {
+    "id": "mt-003",
+    "feature": "Visit Record Type Routing",
+    "category": "MedTech Commercial / Engagement",
+    "description": "Configures different visit experiences based on record type, routing visits to appropriate workflows (standard visit, store check, remote engagement) with type-specific fields, validations, and page layouts.",
+    "setup_steps": [
+      "Define visit record types for each visit scenario (Standard, Store Check, Remote, Group)",
+      "Configure page layouts per record type",
+      "Set up field-level visibility per record type",
+      "Configure validation rules per record type",
+      "Map record type to workflow (stage progression, required actions)",
+      "Assign record type availability to profiles"
+    ],
+    "prerequisites": [
+      "Visit Management configured",
+      "Record types defined in Object Manager",
+      "Page layouts created for each visit type"
+    ],
+    "configuration_details": [
+      "Record type routing provides different user experiences per visit type",
+      "Page layouts show/hide fields relevant to the visit type",
+      "Validation rules enforce type-specific requirements",
+      "Workflow routing directs visits to appropriate stage progressions",
+      "Profile-based record type availability controls which users can create which visit types"
+    ],
+    "objects_and_fields": [
+      "Visit (RecordType field)",
+      "RecordType (type definitions)",
+      "PageLayout (per-type layouts)",
+      "ValidationRule (per-type rules)"
+    ],
+    "permissions": ["Record type creation access per profile", "Page layout assignment"],
+    "batch_jobs": [],
+    "gotchas": [
+      "Source platform call types are more granular than target visit record types — consolidation mapping needed",
+      "Record type assignment to profiles must be verified after migration",
+      "Page layout differences between record types can confuse users if not clearly communicated"
+    ],
+    "mobile_considerations": ["Record type selection available on mobile visit creation", "Layout adapts to record type on mobile"],
+    "admin_console_settings": ["Visit Management > Record Type configuration"]
+  },
+  {
+    "id": "mt-004",
+    "feature": "Mobile Setup and Sync (MedTech)",
+    "category": "MedTech Commercial / Mobile",
+    "description": "MedTech-specific mobile configuration extending the base mobile setup with order management, store check, and inventory-specific objects in the metadata cache.",
+    "setup_steps": [
+      "Follow base mobile setup steps (create > validate > assign > generate > schedule sync)",
+      "Add MedTech-specific object metadata cache configurations: Order, OrderItem, InventoryRecord, StoreCheckItem, AssortmentCheck, ProductImage",
+      "Configure offline ordering capability with cached price books",
+      "Set up image capture and storage for store check workflows",
+      "Configure offline inventory management",
+      "Generate metadata cache including all MedTech objects",
+      "Schedule sync processor with MedTech data volumes in mind"
+    ],
+    "prerequisites": [
+      "Base mobile setup completed (see pe-021 in patient engagement setup)",
+      "Order Management configured",
+      "Store Check configured (if applicable)",
+      "Product catalog configured for commercial products"
+    ],
+    "configuration_details": [
+      "MedTech mobile extends base mobile with additional objects for ordering and retail execution",
+      "Offline ordering requires cached product catalog and price books",
+      "Store check image capture requires offline storage allocation",
+      "Inventory data synced for stock-level validation during offline ordering",
+      "Sync processor must handle larger data volumes typical of MedTech deployments"
+    ],
+    "objects_and_fields": [
+      "All base mobile objects (see pe-021)",
+      "Order (offline ordering)",
+      "OrderItem (line items)",
+      "PricebookEntry (cached pricing)",
+      "InventoryRecord (stock levels)",
+      "Store Check related objects"
+    ],
+    "permissions": ["Commercial Admin permission set (for configuration)"],
+    "batch_jobs": ["Metadata cache generation", "Sync processor (scheduled)"],
+    "gotchas": [
+      "MedTech deployments typically have larger data volumes than pharma — sync processor scheduling must account for this",
+      "Image files from store checks can significantly increase sync payload sizes",
+      "Offline ordering with cached price books means reps may not see the latest pricing until next sync",
+      "Product catalog changes require metadata cache regeneration"
+    ],
+    "mobile_considerations": [
+      "Order creation is a primary mobile workflow for MedTech",
+      "Store check execution is mobile-first",
+      "Larger sync payloads than pharma due to order and inventory data",
+      "Image capture and storage management critical for store checks"
+    ],
+    "admin_console_settings": ["Mobile Setup", "Metadata Cache Management", "Sync Processor Scheduling"]
+  },
+  {
+    "id": "mt-005",
+    "feature": "Account Management (MedTech)",
+    "category": "MedTech Commercial / Account",
+    "description": "MedTech-adapted account management with record types for hospitals, clinics, pharmacies, and distributor accounts, including account hierarchies and buying group relationships.",
+    "setup_steps": [
+      "Configure account record types for MedTech segments (Hospital, Clinic, Pharmacy, Distributor, GPO)",
+      "Set up account hierarchies (parent-child relationships)",
+      "Configure buying group / GPO associations",
+      "Set up account-level product authorization (which products can be sold to which accounts)",
+      "Configure account team roles specific to MedTech (sales rep, clinical specialist, service engineer)",
+      "Add MedTech-specific components to account pages"
+    ],
+    "prerequisites": ["Customer Engagement with Commercial Engagement edition", "Account hierarchy design completed"],
+    "configuration_details": [
+      "MedTech accounts include institutional accounts (hospitals, clinics) not just individual HCPs",
+      "Account hierarchies represent organizational buying structures",
+      "GPO/buying group associations affect pricing and contract terms",
+      "Product authorization controls which products are available for each account",
+      "Account team composition differs from pharma — includes clinical and service roles"
+    ],
+    "objects_and_fields": [
+      "Account (with MedTech record types)",
+      "Account Hierarchy (parent-child)",
+      "AccountTeamMember (MedTech roles)",
+      "ProductAuthorization (product access)",
+      "BuyingGroupAssociation (GPO linkage)"
+    ],
+    "permissions": ["Account management permissions", "Product authorization management"],
+    "batch_jobs": [],
+    "gotchas": [
+      "MedTech account structures are typically more hierarchical than pharma — plan hierarchy depth carefully",
+      "GPO/buying group relationships affect pricing — must be configured before order management",
+      "Product authorization rules must be in place before reps can create orders"
+    ],
+    "mobile_considerations": ["Account hierarchy navigation on mobile", "Product authorization visible when creating orders offline"],
+    "admin_console_settings": ["Account Management settings"]
+  },
+  {
+    "id": "mt-006",
+    "feature": "Visit Management (MedTech)",
+    "category": "MedTech Commercial / Engagement",
+    "description": "MedTech-adapted visit management supporting multiple visit types including sales calls, clinical support visits, service/repair visits, and store checks with type-specific workflows.",
+    "setup_steps": [
+      "Configure visit record types: Sales Call, Clinical Support, Service Visit, Store Check, Training",
+      "Set up type-specific page layouts and field sets",
+      "Configure visit workflows per type with appropriate stages",
+      "Enable type-specific trigger handlers",
+      "Configure visit-related quick actions per record type",
+      "Set up metadata cache for all visit types for mobile"
+    ],
+    "prerequisites": ["Base Visit Management configured", "Record types defined", "Product catalog configured"],
+    "configuration_details": [
+      "MedTech visits serve broader purposes than pharma — not just detailing but clinical support and service",
+      "Each visit type has its own workflow stages and required actions",
+      "Clinical support visits may include equipment training or procedure support",
+      "Service visits track equipment maintenance and repair activities",
+      "Store check visits follow the retail execution workflow"
+    ],
+    "objects_and_fields": [
+      "Visit (with MedTech-specific record types)",
+      "ProviderVisit (managed package)",
+      "All visit child objects from pe-005",
+      "ServiceRecord (for service visits)",
+      "Equipment/Asset (for service tracking)"
+    ],
+    "permissions": ["Visit management permissions per record type", "Clinical support access", "Service visit access"],
+    "batch_jobs": [],
+    "gotchas": [
+      "MedTech visit types are broader than pharma — source platform call types must be mapped to appropriate target record types",
+      "Service visits may require integration with external service management systems",
+      "Clinical support visits have different compliance requirements than sales calls"
+    ],
+    "mobile_considerations": ["All visit types available on mobile", "Type-specific workflows guide mobile execution"],
+    "admin_console_settings": ["Visit Management", "Record Type routing", "Trigger Handler Administration"],
+    "trigger_handlers": [
+      "PVLockHandler",
+      "VisitLockHandler",
+      "PVUpdateChildFieldsHandler",
+      "VisitSignOrSubmitInTransactionHandler"
+    ]
+  },
+  {
+    "id": "mt-007",
+    "feature": "Sample and Inventory Management (MedTech)",
+    "category": "MedTech Commercial / Compliance",
+    "description": "MedTech-adapted sample and demo inventory management supporting device samples, demo units, loaner equipment, and consignment inventory with different tracking requirements than pharmaceutical samples.",
+    "setup_steps": [
+      "Configure product types: Device Sample, Demo Unit, Loaner, Consignment",
+      "Set up inventory tracking per product type",
+      "Configure check-out/check-in workflows for loaner equipment",
+      "Set up consignment inventory management",
+      "Configure device-specific lot and serial number tracking",
+      "Enable sample limit templates adapted for device distribution",
+      "Create metadata cache for inventory objects for mobile"
+    ],
+    "prerequisites": [
+      "Base Sample Management configured (see pe-006)",
+      "Product catalog with device-specific attributes",
+      "Serial number tracking enabled for applicable products"
+    ],
+    "configuration_details": [
+      "MedTech inventory includes device samples, demo units, and loaner equipment — not just pharmaceutical samples",
+      "Loaner equipment requires check-out/check-in tracking with return dates",
+      "Consignment inventory tracks product at customer locations owned by manufacturer",
+      "Serial number tracking required for high-value devices and regulatory traceability",
+      "Device samples may not require the same PDMA compliance as pharmaceutical samples"
+    ],
+    "objects_and_fields": [
+      "SampleInventory (base inventory)",
+      "Product2 (device products with serial tracking)",
+      "LoanerEquipment (check-out/check-in)",
+      "ConsignmentInventory (at-customer inventory)",
+      "SerialNumber (device tracking)",
+      "SampleTransaction (distribution tracking)"
+    ],
+    "permissions": ["Inventory management permissions", "Loaner equipment management", "Consignment tracking"],
+    "batch_jobs": [
+      "Inventory reconciliation batch",
+      "Loaner overdue alert batch",
+      "Consignment inventory sync batch"
+    ],
+    "gotchas": [
+      "MedTech inventory tracking requirements differ from pharma — not all pharmaceutical compliance rules apply",
+      "Serial number tracking adds complexity to inventory management and sync",
+      "Loaner equipment return tracking is critical — overdue equipment represents financial risk",
+      "Consignment inventory valuation and ownership transitions require careful configuration"
+    ],
+    "mobile_considerations": [
+      "Device sample distribution via mobile",
+      "Loaner check-out/check-in on mobile",
+      "Serial number scanning via device camera",
+      "Consignment inventory counts on mobile"
+    ],
+    "admin_console_settings": ["Sample Management", "Inventory settings"]
+  },
+  {
+    "id": "mt-008",
+    "feature": "Presentations and CLM (MedTech)",
+    "category": "MedTech Commercial / Content",
+    "description": "MedTech-adapted content management for device demonstrations, surgical technique presentations, product comparison materials, and training content with compliance tracking.",
+    "setup_steps": [
+      "Configure content types for MedTech: Device Demo, Surgical Technique, Product Comparison, Training",
+      "Upload approved content via content management system",
+      "Configure content assignment by product line and territory",
+      "Set up usage tracking for compliance documentation",
+      "Create metadata cache for content objects for mobile"
+    ],
+    "prerequisites": ["Base content management configured (see pe-009)", "Content approved through MLR/regulatory process"],
+    "configuration_details": [
+      "MedTech content includes technical demonstrations and surgical technique videos — not just marketing slides",
+      "Product comparison materials require careful compliance review",
+      "Training content delivery tracked for regulatory compliance (e.g., device training requirements)",
+      "Content versioning critical for device IFU (Instructions for Use) materials"
+    ],
+    "objects_and_fields": ["Same as pe-009 plus MedTech-specific content types and tracking records"],
+    "permissions": ["Content management permissions", "Training content access"],
+    "batch_jobs": [],
+    "gotchas": [
+      "Device demonstration content often includes video — larger file sizes than pharma slides",
+      "Surgical technique content may have restricted access requirements",
+      "IFU content versioning is regulatory-critical — must always present current approved version"
+    ],
+    "mobile_considerations": [
+      "Video content requires more storage and bandwidth than slide presentations",
+      "Offline caching of large device demonstration videos impacts mobile storage",
+      "Training completion tracking should work offline"
+    ],
+    "admin_console_settings": ["Content Management settings"]
+  },
+  {
+    "id": "mt-009",
+    "feature": "Activity Plans (MedTech)",
+    "category": "MedTech Commercial / Planning",
+    "description": "MedTech-adapted activity planning supporting multi-stakeholder engagement plans for institutional accounts, including clinical, sales, and service visit targets.",
+    "setup_steps": [
+      "Configure activity plan templates for MedTech visit types",
+      "Define categories for MedTech segments (Orthopedics, Cardiology, etc.)",
+      "Set up multi-stakeholder goals per institutional account",
+      "Configure criteria for institutional account filtering",
+      "Enable activity plan assignment batch jobs"
+    ],
+    "prerequisites": ["Base Activity Plans configured (see pe-003)", "MedTech account hierarchy configured"],
+    "configuration_details": [
+      "MedTech activity plans target institutional accounts rather than individual HCPs",
+      "Plans include goals across multiple visit types (sales, clinical, service)",
+      "Multi-stakeholder engagement addresses different decision-makers within an institution",
+      "Criteria-based filtering uses institutional attributes (bed count, procedure volume, etc.)"
+    ],
+    "objects_and_fields": ["Same as pe-003 plus MedTech-specific templates and categories"],
+    "permissions": ["Activity Plan management permissions"],
+    "batch_jobs": ["Activity plan assignment batch"],
+    "gotchas": ["MedTech plans are typically per-institution rather than per-HCP — plan design must account for this difference"],
+    "mobile_considerations": ["Plans visible on mobile with institutional account context"],
+    "admin_console_settings": ["Activity Plans"]
+  },
+  {
+    "id": "mt-010",
+    "feature": "Email Templates (MedTech)",
+    "category": "MedTech Commercial / Communication",
+    "description": "MedTech-adapted email templates for product updates, service notifications, training invitations, and clinical support communications.",
+    "setup_steps": [
+      "Configure email templates for MedTech communication types",
+      "Set up template categories: Product Update, Service Notification, Training, Clinical Support",
+      "Configure consent integration for MedTech communications",
+      "Set up email tracking and analytics"
+    ],
+    "prerequisites": ["Base email feature configured (see pe-008)", "Consent management configured"],
+    "configuration_details": [
+      "MedTech emails include service notifications and training invitations not typical in pharma",
+      "Product update emails may include regulatory-required communications (recalls, safety notices)",
+      "Template merge fields must reference MedTech-specific objects (Equipment, ServiceCase)",
+      "Consent integration respects communication preferences per channel"
+    ],
+    "objects_and_fields": ["Same as pe-008 plus MedTech-specific template content and merge fields"],
+    "permissions": ["Email management permissions"],
+    "batch_jobs": [],
+    "gotchas": [
+      "Regulatory-required communications (product recalls, safety notices) may override opt-out preferences — configure exceptions",
+      "Service notification templates require different approval workflows than marketing emails"
+    ],
+    "mobile_considerations": ["Email send available on mobile", "Templates cached for offline access"],
+    "admin_console_settings": ["Email > Email Settings"]
+  },
+  {
+    "id": "mt-011",
+    "feature": "Consent Management (MedTech)",
+    "category": "MedTech Commercial / Compliance",
+    "description": "MedTech-adapted consent management with institutional consent models, procurement contact preferences, and device-specific communication channels.",
+    "setup_steps": [
+      "Follow base consent management setup (see pe-004)",
+      "Add MedTech-specific subscription types (Product Updates, Service Notifications, Training)",
+      "Configure institutional consent models (organization-level vs individual)",
+      "Set up procurement contact communication preferences"
+    ],
+    "prerequisites": ["Base consent management configured (see pe-004)"],
+    "configuration_details": [
+      "MedTech consent includes institutional-level preferences not typical in pharma",
+      "Procurement contacts may have different consent requirements than clinical contacts",
+      "Device-specific communications (recalls, updates) may be mandatory regardless of consent status",
+      "Multi-level consent: organization-level + individual-level preferences"
+    ],
+    "objects_and_fields": ["Same as pe-004 plus MedTech-specific subscription types"],
+    "permissions": ["Consent management permissions"],
+    "batch_jobs": ["Same as pe-004"],
+    "gotchas": ["Mandatory safety communications override consent preferences — configure exception rules for recalls and safety notices"],
+    "mobile_considerations": ["Consent capture during institutional visits"],
+    "admin_console_settings": ["Consent Management settings"]
+  },
+  {
+    "id": "mt-012",
+    "feature": "Surveys (MedTech)",
+    "category": "MedTech Commercial / Data Collection",
+    "description": "MedTech-adapted surveys for product satisfaction, clinical outcomes, service quality, and training effectiveness measurement.",
+    "setup_steps": [
+      "Follow base survey setup (see pe-012)",
+      "Configure MedTech-specific survey types",
+      "Set up clinical outcome surveys with appropriate data collection fields",
+      "Configure service satisfaction surveys linked to service visits"
+    ],
+    "prerequisites": ["Base survey feature configured (see pe-012)", "MedTech visit types configured"],
+    "configuration_details": [
+      "MedTech surveys include clinical outcome and device satisfaction surveys not typical in pharma",
+      "Service quality surveys linked to service visit completion",
+      "Training effectiveness surveys measure post-training competency",
+      "Clinical outcome data collection may have additional regulatory requirements"
+    ],
+    "objects_and_fields": ["Same as pe-012 plus MedTech-specific survey templates"],
+    "permissions": ["Survey management permissions"],
+    "batch_jobs": [],
+    "gotchas": ["Clinical outcome surveys may be subject to additional regulatory review and data protection requirements"],
+    "mobile_considerations": ["Survey completion during and after visits on mobile"],
+    "admin_console_settings": ["Survey settings"]
+  },
+  {
+    "id": "mt-013",
+    "feature": "Key Account Management (MedTech)",
+    "category": "MedTech Commercial / Strategic",
+    "description": "MedTech-adapted KAM for institutional accounts with buying committee mapping, contract management integration, and multi-year strategic planning.",
+    "setup_steps": [
+      "Follow base KAM setup (see pe-011)",
+      "Configure buying committee stakeholder roles",
+      "Set up contract tracking integration",
+      "Configure multi-year strategic plan templates",
+      "Enable competitive landscape tracking"
+    ],
+    "prerequisites": ["Base KAM configured (see pe-011)", "MedTech account hierarchy configured"],
+    "configuration_details": [
+      "MedTech KAM focuses on institutional buying committees rather than individual prescribers",
+      "Contract management integration tracks GPO and IDN agreements",
+      "Strategic plans span multiple years aligned with capital equipment purchase cycles",
+      "Competitive landscape tracking monitors competitor product placements",
+      "Value analysis committee (VAC) engagement tracking"
+    ],
+    "objects_and_fields": ["Same as pe-011 plus MedTech-specific stakeholder roles and contract objects"],
+    "permissions": ["KAM access permissions for key account managers"],
+    "batch_jobs": [],
+    "gotchas": ["MedTech capital equipment purchase cycles are longer than pharma — strategic plans must span multi-year periods"],
+    "mobile_considerations": ["Strategic plan access on mobile for institutional visit preparation"],
+    "admin_console_settings": ["Key Account Management settings"]
+  },
+  {
+    "id": "mt-014",
+    "feature": "Territory Planning (MedTech)",
+    "category": "MedTech Commercial / Territory",
+    "description": "MedTech-adapted territory management supporting multi-specialty territories, procedure-volume-based alignment, and capital equipment territory coverage.",
+    "setup_steps": [
+      "Follow base territory planning setup (see pe-014)",
+      "Configure MedTech territory types (procedure-based, equipment-based, geographic)",
+      "Set up multi-specialty territory rules",
+      "Configure territory assignment based on procedure volumes and equipment installed base",
+      "Set up territory coverage analytics"
+    ],
+    "prerequisites": ["Base territory management configured (see pe-014)"],
+    "configuration_details": [
+      "MedTech territories may be defined by procedure volume rather than geography alone",
+      "Equipment installed base tracking influences territory assignment",
+      "Multi-specialty territories serve different product lines across the same institutions",
+      "Territory coverage analysis considers equipment service contracts and replacement cycles"
+    ],
+    "objects_and_fields": ["Same as pe-014 plus MedTech-specific territory attributes"],
+    "permissions": ["Territory management permissions"],
+    "batch_jobs": ["Territory realignment batch", "Sharing recalculation batch"],
+    "gotchas": ["MedTech territory models are often more complex than pharma — multiple overlapping territories for different product lines"],
+    "mobile_considerations": ["Territory-based account filtering on mobile", "Territory data cached for offline"],
+    "admin_console_settings": ["Territory alignment configuration"]
+  },
+  {
+    "id": "mt-015",
+    "feature": "Lists and Filters (MedTech)",
+    "category": "MedTech Commercial / Navigation",
+    "description": "MedTech-adapted list views with filtering by equipment type, procedure volume, contract status, and institutional attributes.",
+    "setup_steps": [
+      "Configure MedTech-specific list views with institutional filters",
+      "Set up equipment and procedure-based filters",
+      "Configure contract status filtering",
+      "Enable mobile list view access for MedTech objects"
+    ],
+    "prerequisites": ["Base list view configuration (see pe-025)", "MedTech account attributes configured"],
+    "configuration_details": [
+      "MedTech list views include institutional-specific filters",
+      "Equipment installed base and contract expiry dates as filter criteria",
+      "Procedure volume ranges for account prioritization",
+      "Service history and upcoming service dates for service rep views"
+    ],
+    "objects_and_fields": ["ListView with MedTech-specific filter criteria"],
+    "permissions": ["List view permissions"],
+    "batch_jobs": [],
+    "gotchas": ["Complex institutional filters may impact list view performance"],
+    "mobile_considerations": ["MedTech-specific list views on mobile with adapted filters"],
+    "admin_console_settings": []
+  },
+  {
+    "id": "mt-016",
+    "feature": "Home Page (MedTech)",
+    "category": "MedTech Commercial / UI",
+    "description": "MedTech-adapted home page with order status dashboard, service alerts, equipment refresh reminders, and territory coverage metrics.",
+    "setup_steps": [
+      "Configure MedTech-specific home page components",
+      "Add order status dashboard component",
+      "Configure service alert display",
+      "Set up equipment refresh and contract renewal reminders",
+      "Configure territory coverage metrics display"
+    ],
+    "prerequisites": ["Base home page configured (see pe-031)", "MedTech features configured"],
+    "configuration_details": [
+      "MedTech home page emphasizes order status and service activity over pharma detailing metrics",
+      "Equipment refresh reminders alert reps to upcoming replacement cycles",
+      "Contract renewal tracking shows upcoming GPO/IDN renewals",
+      "Service alerts highlight overdue or upcoming maintenance"
+    ],
+    "objects_and_fields": ["HomePage layout with MedTech dashboard components"],
+    "permissions": ["Home page access"],
+    "batch_jobs": [],
+    "gotchas": ["Too many dashboard components on home page impacts load time — prioritize most actionable data"],
+    "mobile_considerations": ["Mobile home page optimized for MedTech daily workflow"],
+    "admin_console_settings": []
+  },
+  {
+    "id": "mt-017",
+    "feature": "Calendar and Time Off (MedTech)",
+    "category": "MedTech Commercial / Planning",
+    "description": "MedTech-adapted calendar supporting multi-visit-type scheduling (sales, clinical, service) with equipment delivery coordination.",
+    "setup_steps": [
+      "Follow base calendar setup (see pe-022 and pe-023)",
+      "Configure visit type color coding in calendar",
+      "Set up equipment delivery scheduling integration",
+      "Configure multi-team calendar views (sales + clinical + service)"
+    ],
+    "prerequisites": ["Base calendar configured", "MedTech visit types defined"],
+    "configuration_details": [
+      "Calendar shows multiple visit types with visual differentiation",
+      "Equipment delivery dates and service windows visible on schedule",
+      "Team calendar view shows combined sales, clinical, and service activities",
+      "Case-based service scheduling integration"
+    ],
+    "objects_and_fields": ["Same as pe-022 and pe-023 plus MedTech-specific event types"],
+    "permissions": ["Calendar access permissions"],
+    "batch_jobs": [],
+    "gotchas": ["Multi-team calendars can become complex — configure thoughtful default views"],
+    "mobile_considerations": ["Calendar is primary daily navigation on mobile", "Multi-type schedule view"],
+    "admin_console_settings": ["Calendar settings"]
+  },
+  {
+    "id": "mt-018",
+    "feature": "Ratings and Next Best Customer (MedTech)",
+    "category": "MedTech Commercial / Intelligence",
+    "description": "MedTech-adapted scoring and recommendations using procedure volumes, equipment installed base, contract timing, and institutional buying signals for customer prioritization.",
+    "setup_steps": [
+      "Follow base NBC/NBA setup (see pe-020 and pe-027)",
+      "Configure MedTech-specific scoring models using institutional attributes",
+      "Set up procedure-volume-based prioritization",
+      "Configure contract renewal timing in scoring models",
+      "Enable competitive displacement opportunity scoring"
+    ],
+    "prerequisites": ["Base AI/analytics configured (see pe-020)", "MedTech account data with institutional attributes"],
+    "configuration_details": [
+      "MedTech scoring uses institutional signals (procedure volume, installed base, contract timing)",
+      "Capital equipment replacement cycles create time-sensitive opportunities",
+      "Competitive displacement scoring identifies accounts with competitor equipment nearing end-of-life",
+      "Contract renewal timing creates predictable engagement windows",
+      "Multi-factor scoring combines volume, timing, and competitive intelligence"
+    ],
+    "objects_and_fields": ["Same as pe-020 plus MedTech-specific scoring inputs"],
+    "permissions": ["AI feature permissions", "Analytics access"],
+    "batch_jobs": ["MedTech scoring recalculation batch"],
+    "gotchas": [
+      "MedTech purchase cycles are longer and more complex than pharma — scoring models must account for longer decision windows",
+      "Institutional buying decisions involve committees — individual contact scoring is less relevant",
+      "Equipment replacement cycles vary significantly by product category"
+    ],
+    "mobile_considerations": ["Scoring and recommendations on mobile account and home pages"],
+    "admin_console_settings": ["Ratings settings", "AI/Analytics configuration"]
+  }
+]

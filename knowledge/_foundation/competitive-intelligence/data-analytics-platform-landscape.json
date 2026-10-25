@@ -1,0 +1,27 @@
+[
+  {
+    "id": "ci-data-platform-001",
+    "category": "competitive-intelligence",
+    "title": "Data Analytics and Integration Platform Landscape",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Assessment of enterprise data integration and analytics platform capabilities relevant to life sciences, covering data ontology, operational analytics, and AI/ML integration approaches.",
+    "findings": {
+      "platform_architecture": "Enterprise data platforms in this space use an ontology-based approach where data objects are mapped with semantic relationships. This enables cross-system queries without physical data movement, supporting regulatory traceability requirements.",
+      "data_integration_model": "RESTful API integration with source systems (ERP, LIMS, CTMS, CRM) using change-data-capture patterns. The integration layer maintains lineage metadata for audit purposes. Typical deployments connect 15-50 data sources in a large pharma environment.",
+      "operational_analytics": "Unlike traditional BI platforms focused on historical reporting, operational analytics platforms embed decision support directly into workflows \u2014 providing real-time recommendations for supply chain, clinical trial enrollment, and commercial field operations.",
+      "ml_ai_integration": "ML models are deployed as pipeline components rather than standalone services. This allows model outputs (predictions, classifications, anomaly scores) to flow directly into operational workflows without manual handoff.",
+      "life_sciences_use_cases": "Primary use cases: clinical trial site selection and enrollment prediction, drug supply chain optimization, pharmacovigilance signal detection, and commercial territory optimization. Each requires cross-domain data joining that single-purpose systems cannot provide.",
+      "competitive_positioning": "These platforms compete with CRM analytics by offering deeper data integration but weaker field user experience. The strategic response is platform-level data integration capabilities that match the analytical depth while maintaining the field-user-centric design."
+    },
+    "source": "Assessment of enterprise data integration and analytics platform architecture, capabilities, and life sciences use cases",
+    "tags": [
+      "data-platform",
+      "analytics",
+      "data-integration",
+      "ontology",
+      "operational-analytics"
+    ]
+  }
+]

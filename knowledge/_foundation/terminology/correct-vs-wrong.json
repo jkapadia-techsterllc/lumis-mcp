@@ -1,0 +1,72 @@
+{
+  "id": "terminology-guardrails",
+  "name": "Terminology Guardrails",
+  "description": "Anti-hallucination reference: correct vs incorrect terminology for life sciences CRM. Every agent must use target-platform terms when describing target-platform features.",
+  "rules": [
+    {
+      "context": "Module Names",
+      "correct": "Content Management",
+      "wrong": ["CLM", "Closed Loop Marketing"],
+      "note": "CLM is source-platform branding. Use 'Content Management' for the target platform. When discussing migration, qualify: 'migrating from CLM to Content Management'."
+    },
+    {
+      "context": "Module Names",
+      "correct": "Field Email",
+      "wrong": ["Approved Email"],
+      "note": "Approved Email is source-platform branding. Target module is 'Field Email'."
+    },
+    {
+      "context": "Module Names",
+      "correct": "Visit Management",
+      "wrong": ["Call Management", "Call Reporting"],
+      "note": "Source platform uses 'Calls'; target platform uses 'Visits'. This also affects data model: Call2_vod__c → Visit object."
+    },
+    {
+      "context": "Module Names",
+      "correct": "Territory Alignment",
+      "wrong": ["Territory Management 2.0"],
+      "note": "Target platform uses 'Territory Alignment'. 'Enterprise Territory Management' is the underlying platform feature it's built on."
+    },
+    {
+      "context": "Data Model",
+      "correct": "Visit (target object)",
+      "wrong": ["Call2_vod__c"],
+      "note": "Call2_vod__c is a source-platform object. Target uses Visit standard object."
+    },
+    {
+      "context": "Data Model",
+      "correct": "Sample Transaction → Visit lookup",
+      "wrong": ["Sample Transaction → Call2_vod__c"],
+      "note": "Source links samples to Calls. Target links samples to Visits. Migration MUST remap this relationship."
+    },
+    {
+      "context": "Template Syntax",
+      "correct": "{!Account.Name} (merge fields)",
+      "wrong": ["{{Account.Name}} (Handlebars)"],
+      "note": "Source templates use Handlebars-like tokens. Target uses standard merge field syntax."
+    },
+    {
+      "context": "Architecture",
+      "correct": "Batch Limit Calculation Framework",
+      "wrong": ["Product-level sample caps"],
+      "note": "Target uses a hierarchical batch framework (Brand → Molecule → SKU). Source uses flat product-level caps."
+    },
+    {
+      "context": "Feature",
+      "correct": "Next Best (NBC/NBA/NBM)",
+      "wrong": ["Suggestions", "MyInsights"],
+      "note": "Source-platform AI features have different branding. Target uses 'Next Best' umbrella: Next Best Channel, Next Best Action, Next Best Message."
+    },
+    {
+      "context": "Platform",
+      "correct": "target platform",
+      "wrong": ["vendor-specific cloud names", "vendor abbreviations", "platform vendor name"],
+      "note": "In customer-facing Lumis content, use generic 'target platform' to stay vendor-neutral. Module names are specific enough for implementation guidance."
+    }
+  ],
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Platform / Terminology Guardrails",
+    "confidence": "High"
+  }
+}

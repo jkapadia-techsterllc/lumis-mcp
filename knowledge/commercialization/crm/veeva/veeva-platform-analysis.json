@@ -1,0 +1,108 @@
+[
+  {
+    "id": "ci-veeva-001",
+    "category": "competitive-intelligence",
+    "title": "Veeva Vault CRM Platform Transition \u2014 Strategic Analysis",
+    "products": [
+      "oce",
+      "lsc",
+      "vault"
+    ],
+    "summary": "Veeva announced a multi-year transition from its Salesforce-based CRM to Vault CRM, a proprietary platform. This creates both competitive opportunity and customer migration complexity.",
+    "transition_timeline": {
+      "announcement": "Veeva positioned Vault CRM as a move toward a purpose-built life sciences platform.",
+      "migration_window": "Multi-year migration window during which customers must move from Salesforce-based CRM to Vault CRM.",
+      "feature_parity": "Vault CRM must achieve functional parity across all modules before customers can migrate without regression.",
+      "customer_impact": "Significant effort: data migration, customization re-implementation, integration re-architecture, user retraining."
+    },
+    "competitive_implications": {
+      "for_salesforce": "Creates a natural re-evaluation window. Customers who must migrate may consider alternative platforms.",
+      "for_customers": "Must weigh Vault CRM migration cost vs alternative platform migration cost. Differentiator is long-term platform value.",
+      "market_dynamic": "Disrupts Veeva lock-in advantage. Mandatory migration costs reduce incremental switching cost."
+    },
+    "source": "veeva-commercial-summit-may-2023",
+    "tags": [
+      "veeva",
+      "vault-crm",
+      "platform-transition",
+      "competitive-intelligence",
+      "migration"
+    ]
+  },
+  {
+    "id": "ci-competitive-001",
+    "category": "competitive-intelligence",
+    "title": "Life Sciences CRM Competitive Landscape",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "The life sciences CRM market is dominated by a few platforms with distinct positioning shaped by regulatory requirements, industry-specific functionality, and data integration.",
+    "major_players": {
+      "veeva_crm": {
+        "positioning": "Market leader. Deep domain functionality. Transitioning to Vault CRM.",
+        "strengths": "Deepest domain functionality, largest market share, HCP data network (OpenData), compliance.",
+        "vulnerabilities": "Platform transition uncertainty, proprietary platform limits flexibility, single-vendor risk."
+      },
+      "salesforce_health_cloud": {
+        "positioning": "Salesforce healthcare/LS platform. Life Sciences Cloud adds industry-specific functionality.",
+        "strengths": "Ecosystem breadth, AI (Einstein), developer ecosystem, AppExchange, open APIs.",
+        "vulnerabilities": "Narrower LS domain functionality, more implementation effort for industry-specific workflows."
+      },
+      "iqvia_oce": {
+        "positioning": "Data-driven CRM leveraging IQVIA healthcare data assets.",
+        "strengths": "Unmatched data assets (prescribing, claims, HCP profiling), strong analytics.",
+        "vulnerabilities": "Smaller CRM market share, less mature commercial operations, complex data-tied pricing."
+      }
+    },
+    "source": "iqvia-vs-veeva-deep-dive-oct-2022",
+    "tags": [
+      "competitive-intelligence",
+      "market-landscape",
+      "life-sciences-crm"
+    ]
+  },
+  {
+    "id": "ci-veeva-002",
+    "category": "competitive-intelligence",
+    "title": "Veeva Product Suite Maturity Assessment",
+    "products": [
+      "oce",
+      "lsc",
+      "vault"
+    ],
+    "summary": "Veeva spans CRM, content management (Vault), data (OpenData, Compass), and analytics. Assessing maturity identifies defensible advantages vs areas where alternatives can compete.",
+    "product_maturity": {
+      "veeva_crm": {
+        "maturity": "Very mature \u2014 15+ years of life sciences CRM development.",
+        "transition_risk": "Vault CRM is less mature than existing Salesforce-based CRM."
+      },
+      "veeva_vault": {
+        "maturity": "Mature \u2014 purpose-built content management for life sciences regulatory, quality, and commercial content.",
+        "competitive_gap": "Few direct competitors match Vault regulatory document management depth."
+      },
+      "veeva_opendata": {
+        "maturity": "Mature \u2014 comprehensive HCP/HCO reference data covering multiple countries.",
+        "integration_value": "Tight CRM integration creates bundled value harder to replicate on alternative platforms."
+      },
+      "veeva_compass": {
+        "maturity": "Growing \u2014 field intelligence and prescribing data competing with IQVIA.",
+        "strategic_role": "Reduces customer dependency on IQVIA data, building full Veeva ecosystem."
+      }
+    },
+    "ecosystem_assessment": {
+      "veeva_strength": "CRM + Vault + OpenData + Compass = single-vendor solution difficult to unbundle.",
+      "vulnerability": "Extreme vendor lock-in. Vault CRM transition amplifies concern.",
+      "competitive_strategy": "Compete on platform openness, AI capabilities, ecosystem flexibility, or total cost of ownership."
+    },
+    "source": "veeva-commercial-summit-may-2023",
+    "tags": [
+      "veeva",
+      "product-suite",
+      "competitive-intelligence",
+      "vault",
+      "opendata",
+      "compass"
+    ]
+  }
+]

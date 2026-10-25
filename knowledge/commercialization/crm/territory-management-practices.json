@@ -1,0 +1,23 @@
+[
+  {
+    "id": "crm-bp-007",
+    "category": "gotchas",
+    "title": "Territory and Role Hierarchy Management for CRM",
+    "products": [
+      "oce"
+    ],
+    "summary": "Covers territory hierarchy limits, the relationship between territory and role hierarchies, and batch job concurrency constraints for CRM territory management on Salesforce.",
+    "findings": {
+      "territory_limits": "Default territory limit is 500 per org. Increases are available through Salesforce support but affect system performance. Plan territory hierarchy expansion carefully and request increases only when justified by business requirements.",
+      "hierarchy_relationship": "Build the territory hierarchy before the role hierarchy. The role hierarchy must mirror the territory hierarchy at upper levels, though additional roles can exist at the lowest levels that do not correspond to territories.",
+      "batch_concurrency": "The zip/brick-to-territory alignment batch job and the account-to-territory alignment batch job cannot run concurrently. Schedule these jobs sequentially to avoid conflicts and data integrity issues."
+    },
+    "source": "Territory Management Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "territory-management",
+      "role-hierarchy",
+      "batch-jobs",
+      "alignment"
+    ]
+  }
+]

@@ -1,0 +1,890 @@
+[
+  {
+    "id": "ts-001",
+    "category": "Mobile App Login",
+    "problem": "Users cannot log into the mobile iPad app and receive 'Device sync transaction record was not found' error",
+    "error_message": "Error while trying to access the platform. Invalid Configuration: Device sync transaction record was not found.",
+    "common_causes": [
+      "Metadata cache not generated successfully",
+      "DBSchema records not active",
+      "Sync Processor Scheduler flow not activated"
+    ],
+    "resolution_steps": [
+      "Verify metadata cache has been generated successfully for the user's profile",
+      "Check that all Object Metadata Cache Configuration records are active",
+      "Clone and activate the Sync Processor Scheduler flow template",
+      "Ensure user has required permission sets (Field Sales Representative or appropriate role-based permission set)"
+    ],
+    "gotchas": [
+      "The Sync Processor Scheduler flow must be cloned from the template before activation"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-002",
+    "category": "Mobile App Login",
+    "problem": "Non-admin users receive errors 400 or 403 when attempting to log into the iPad app",
+    "error_message": "Unknown Error. The operation couldn't be completed. (com.platform.RestAPI.ErrorDomain error 400/403)",
+    "common_causes": [
+      "Missing or incorrect permission set assignments",
+      "API access not enabled for user",
+      "Incorrect Application Version Number in mobile metadata record",
+      "Translation Workbench not configured",
+      "User not added to Translation Workbench"
+    ],
+    "resolution_steps": [
+      "Verify user has Field Sales Representative permission set assigned",
+      "Enable API access for the user profile",
+      "Enable 'View Developer Name' permission",
+      "Update Application Version Number to match org version (e.g., 65.0) in mobile metadata record",
+      "Add user to Translation Workbench",
+      "Verify SOQL filter conditions on DeviceSyncTransactionRecord"
+    ],
+    "gotchas": [
+      "Application Version Number must exactly match the org version number",
+      "Translation Workbench setup is a commonly missed prerequisite"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-003",
+    "category": "Mobile App Login",
+    "problem": "Users see INVALID_FIELD errors for entities like ContentAsset when logging into iPad app",
+    "error_message": "No such column 'name' on entity 'ContentAsset'",
+    "common_causes": [
+      "DBSchema SOQL queries reference incorrect field API names",
+      "Custom fields missing '__c' suffix",
+      "Retrieve Related Record option creating invalid queries"
+    ],
+    "resolution_steps": [
+      "In Admin Console > Sync > Uncheck 'Retrieve Related Record' until patched",
+      "Review and correct SOQL queries in DBSchema records",
+      "Ensure field names match the actual field API names in the org",
+      "Verify that custom fields include '__c' suffix",
+      "Regenerate metadata cache after correcting field references"
+    ],
+    "gotchas": [
+      "The 'Retrieve Related Record' option can cause invalid queries across multiple entities"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-004",
+    "category": "Mobile App Stability",
+    "problem": "iPad app crashes every time users open the calendar",
+    "error_message": "",
+    "common_causes": [
+      "Known issue in specific app versions during field testing"
+    ],
+    "resolution_steps": [
+      "Use previous TestFlight build version",
+      "Wait for bug fix in subsequent release",
+      "Report issue to engineering team with device model and OS version"
+    ],
+    "gotchas": [
+      "Calendar crashes may be version-specific; check release notes before upgrading"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-005",
+    "category": "Metadata Cache",
+    "problem": "Metadata cache generation fails with storage limit exceeded error",
+    "error_message": "STORAGE_LIMIT_EXCEEDED",
+    "common_causes": [
+      "Internal storage limit hit even when Data Storage metrics show low usage",
+      "Particularly common on demo org instances"
+    ],
+    "resolution_steps": [
+      "Navigate to Setup > Data Management > Mass Delete Records",
+      "Delete old test data, sample records, and unused Device Sync Transactions",
+      "Empty Recycle Bin",
+      "Retry metadata cache generation"
+    ],
+    "gotchas": [
+      "Data Storage metrics in Setup may show low usage but internal limits can still be hit",
+      "Demo orgs are particularly susceptible to this issue"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-006",
+    "category": "Metadata Cache",
+    "problem": "Metadata cache generation remains stuck in 'New' or 'Validating' status indefinitely",
+    "error_message": "",
+    "common_causes": [
+      "Backend processing queue delays",
+      "Invalid DBSchema configurations",
+      "System load issues"
+    ],
+    "resolution_steps": [
+      "Wait for validation to complete (can take 15-30 minutes)",
+      "Monitor validation status via Setup > Application Test Execution > look for latest run of DbSchemaValidatorTestSuite",
+      "If stuck for extended period, abort and retry",
+      "Verify all DBSchema records are valid before regenerating",
+      "If issue persists, contact support with org ID and timestamp"
+    ],
+    "gotchas": [
+      "Validation can legitimately take up to 30 minutes; do not abort prematurely"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-007",
+    "category": "Metadata Cache",
+    "problem": "Error when initiating metadata cache for the first time in a new sandbox",
+    "error_message": "Default MobileAppName is not configured in the org",
+    "common_causes": [
+      "Mobile App Name not configured in Admin Console Application Settings"
+    ],
+    "resolution_steps": [
+      "Navigate to Admin Console from App Launcher",
+      "Click on the Mobile tile",
+      "Select Application Settings in left navigation",
+      "Enter Mobile App Name (e.g., 'Customer Engagement')",
+      "Save configuration",
+      "Return to Metadata Cache section and retry generation"
+    ],
+    "gotchas": [
+      "This is a mandatory first-time setup step for new sandboxes that is easily overlooked"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-008",
+    "category": "Device Sync",
+    "problem": "Device sync transactions fail, preventing data from syncing between iPad app and the platform",
+    "error_message": "",
+    "common_causes": [
+      "Record locking",
+      "Processing timeouts",
+      "Heap size exceptions",
+      "CPU time limit exceptions",
+      "Insufficient user access",
+      "Territory realignment",
+      "System maintenance"
+    ],
+    "resolution_steps": [
+      "Review Transactions queue daily in Admin Console",
+      "Ensure no transactions remain in 'New' status for more than one day",
+      "Instruct users to do full manual sync by selecting 'Sync Database' from gear icon",
+      "Schedule a flow to execute batch job at end of day to process failed transactions",
+      "For insufficient access failures: grant permissions then retry from Admin Console",
+      "Use 'Simulate' option to test without committing actions"
+    ],
+    "gotchas": [
+      "Many initially failed transactions will succeed during a batch retry run",
+      "Always check transaction failure reason before attempting resolution"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-009",
+    "category": "Device Sync",
+    "problem": "Configured objects not syncing to iPad application, sync status does not update to Valid",
+    "error_message": "",
+    "common_causes": [
+      "Object Metadata Cache Configuration missing for the objects",
+      "DBSchema records not active",
+      "Validation not completed",
+      "Profile not assigned to Object Metadata Cache Configurations"
+    ],
+    "resolution_steps": [
+      "Verify Object Metadata Cache Configuration exists for the objects",
+      "Check that DBSchema records are created and marked as 'Is Active = true'",
+      "Ensure validation has completed successfully (status = 'Valid')",
+      "Assign profiles to Object Metadata Cache Configurations",
+      "Generate new metadata cache for affected user profiles",
+      "Check Admin Console > Mobile > Error Log Management for any sync errors",
+      "Review Admin Console > Mobile > Synchronization > Transactions for specific entity sync details"
+    ],
+    "gotchas": [
+      "Custom objects require the full API name including namespace prefix in DBSchema"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-010",
+    "category": "Package Installation",
+    "problem": "Customer Engagement package installation fails with Apex recompilation errors",
+    "error_message": "ApexClass Dependent class is invalid and needs recompilation",
+    "common_causes": [
+      "Pre-existing Apex compilation issues in the target org"
+    ],
+    "resolution_steps": [
+      "Before installing package, navigate to Setup > Apex Classes",
+      "Click 'Compile All Classes' and wait for completion",
+      "Retry package installation",
+      "If error persists, contact support with Organization ID, User ID, and Package ID"
+    ],
+    "gotchas": [
+      "Always compile all Apex classes before any managed package installation",
+      "This applies to upgrades as well as fresh installs"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-011",
+    "category": "Package Installation",
+    "problem": "RSVP Email Address configuration cannot be deployed between environments",
+    "error_message": "An Apex Class must be specified when creating an Email Service",
+    "common_causes": [
+      "EmailServiceFunction metadata has dependencies that cannot be easily packaged"
+    ],
+    "resolution_steps": [
+      "Manually configure RSVP Email Address in each environment through the UI",
+      "This is a known limitation requiring manual setup per environment"
+    ],
+    "gotchas": [
+      "There is no automated deployment path for this configuration; it must be done manually in each org"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-012",
+    "category": "Package Installation",
+    "problem": "2GP unlocked package creation fails when depending on the Customer Engagement managed package",
+    "error_message": "An error occurred while trying to install a package dependency: null",
+    "common_causes": [
+      "Missing or incorrect dependency configuration in sfdx-project.json",
+      "Missing required features in project-scratch-def.json"
+    ],
+    "resolution_steps": [
+      "Verify sfdx-project.json includes correct dependencies with proper version notation",
+      "Ensure project-scratch-def.json includes required features (e.g., the platform-specific feature flag for your CRM edition)",
+      "Reference the managed package dependency using correct subscriber package version ID (04t)",
+      "Contact engineering team if issues persist"
+    ],
+    "gotchas": [
+      "The scratch-def features array must include the specific feature flag for the platform edition"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-013",
+    "category": "Package Installation",
+    "problem": "Certain standard objects (e.g., ProgramEnrollment) not available for 2GP packages",
+    "error_message": "UpdatePackage2VersionBuildStatusCommand: An unexpected error occurred",
+    "common_causes": [
+      "Industry Cloud standard objects not all supported in Second-Generation Managed Packages"
+    ],
+    "resolution_steps": [
+      "Remove unsupported Industry Cloud standard objects from package.xml",
+      "Contact Product Management for guidance on which objects are supported in 2GP",
+      "Consider alternative approaches for packaging related functionality"
+    ],
+    "gotchas": [
+      "No official documentation currently lists which objects are supported in 2GP"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-014",
+    "category": "Offline Sync",
+    "problem": "When iPad goes offline mid-sync, the sync does not resume automatically at next interval",
+    "error_message": "",
+    "common_causes": [
+      "Sync operations require continuous connectivity; interruption is expected to cause failure"
+    ],
+    "resolution_steps": [
+      "Ensure user is back online for sync to resume",
+      "Delta sync will automatically resume at next 5-minute interval once connectivity is restored",
+      "Manual sync: User can trigger sync from gear icon > 'Sync Database'"
+    ],
+    "gotchas": [
+      "This is expected behavior, not a bug. All sync operations must complete while online.",
+      "Delta sync runs every 5 minutes but only when the device has connectivity"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-015",
+    "category": "Offline Sync",
+    "problem": "LWC updates pushed by admins do not automatically appear on mobile devices",
+    "error_message": "",
+    "common_causes": [
+      "Automatic LWC updates are disabled in current versions"
+    ],
+    "resolution_steps": [
+      "Users must clear cached metadata from app settings, OR",
+      "Perform a fresh login to the app"
+    ],
+    "gotchas": [
+      "Automatic LWC updates may be enabled in future releases; check release notes"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-016",
+    "category": "Offline Sync",
+    "problem": "Complex visit records do not sync consistently between iPad app and online database",
+    "error_message": "",
+    "common_causes": [
+      "Known limitation with complex multi-attendee visit scenarios"
+    ],
+    "resolution_steps": [
+      "Simplify visit creation workflow",
+      "Avoid complex multi-attendee scenarios until resolved",
+      "Monitor Admin Console > Synchronization > Transactions for failed visit syncs"
+    ],
+    "gotchas": [
+      "Multi-attendee visit scenarios are a known source of sync issues"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-017",
+    "category": "Configuration",
+    "problem": "Account tab shows unexpected error in mobile app, no Object Metadata Cache Config records",
+    "error_message": "An unexpected error has occurred. Please contact your system administrator.",
+    "common_causes": [
+      "Missing Life Science Configuration Records (DBSchema entities) in the environment"
+    ],
+    "resolution_steps": [
+      "Deploy the DBSchema metadata from the starter config repository",
+      "Run the data_load.sh script to load and activate records",
+      "Verify Object Metadata Cache Configuration records are created for Account object",
+      "Generate new metadata cache"
+    ],
+    "gotchas": [
+      "New sandboxes require DBSchema records to be deployed; they are not automatically present"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-018",
+    "category": "Configuration",
+    "problem": "Error when attempting to create a new Visit requiring translation setup",
+    "error_message": "Please setup and add languages in translation settings before generating translations.",
+    "common_causes": [
+      "Translation Settings not configured in org",
+      "Required languages not added or activated"
+    ],
+    "resolution_steps": [
+      "Navigate to Setup > Translation Settings",
+      "Add required languages (at minimum, English)",
+      "Ensure languages are enabled and active",
+      "Verify user has access to Translation Workbench",
+      "Confirm DBSchema records related to translations are Active",
+      "Verify user is assigned to proper profile with translation access"
+    ],
+    "gotchas": [
+      "Translation Workbench must have at least one language configured even for English-only orgs"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-019",
+    "category": "Configuration",
+    "problem": "Inconsistent issues when mobile app is upgraded vs. fresh install",
+    "error_message": "",
+    "common_causes": [
+      "Upgrade path may not cleanly migrate local database and cached metadata"
+    ],
+    "resolution_steps": [
+      "Delete existing app from iPad",
+      "Perform fresh install of new app from TestFlight",
+      "Do NOT delete the TestFlight application itself"
+    ],
+    "gotchas": [
+      "Best practice: Always do fresh install rather than upgrade for testing builds"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-020",
+    "category": "Territory Alignment",
+    "problem": "Zip-to-Territory alignment job not creating ObjectTerritory2Association or ProviderAccountTerritoryInfo records",
+    "error_message": "",
+    "common_causes": [
+      "TerritoryGeoAssignmentRule.IsActive defaults to false with no UI method to activate",
+      "ContactPointAddress missing valid PostalCode",
+      "IsTerrAssignmentExcluded set to true",
+      "Required permission sets not assigned directly to user"
+    ],
+    "resolution_steps": [
+      "Verify Healthcare Provider record is created and active",
+      "Ensure ContactPointAddress has valid PostalCode",
+      "Set IsTerrAssignmentExcluded = false",
+      "Assign required permission sets directly to user",
+      "Verify TerritoryGeoAssignmentRule is created with correct GeoCode",
+      "Manually activate rule through API/developer console if needed"
+    ],
+    "gotchas": [
+      "TerritoryGeoAssignmentRule defaults to inactive and has no standard UI toggle",
+      "Person Account record type must be assigned to the user's profile"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-021",
+    "category": "Territory Alignment",
+    "problem": "Accounts not showing for rep on mobile after territory assignment",
+    "error_message": "",
+    "common_causes": [
+      "ProviderAcctTerritoryInfo records missing for the rep's territory"
+    ],
+    "resolution_steps": [
+      "Run 'Align Account to Territory' batch job from Territory Management Jobs tab",
+      "Verify ObjectTerritory2Association records exist for the accounts"
+    ],
+    "gotchas": [
+      "Territory batch jobs must be run after any territory changes for records to appear on mobile"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-022",
+    "category": "Territory Alignment",
+    "problem": "Territory alignment batch job fails due to duplicate records",
+    "error_message": "",
+    "common_causes": [
+      "Duplicate ObjectTerritory2Association records",
+      "Invalid territory IDs"
+    ],
+    "resolution_steps": [
+      "Query for duplicates: SELECT ObjectId, Territory2Id, COUNT(Id) FROM ObjectTerritory2Association GROUP BY ObjectId, Territory2Id HAVING COUNT(Id) > 1",
+      "Remove duplicate records",
+      "Re-run alignment batch job"
+    ],
+    "gotchas": [
+      "Duplicate OT2A records are a common source of batch job failures"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-023",
+    "category": "Territory Alignment",
+    "problem": "Affiliation alignment rules not applying correctly",
+    "error_message": "",
+    "common_causes": [
+      "Affiliation role picklist values don't match between TerritoryProviderAffiliationAlignmentRule and ProviderAffiliation"
+    ],
+    "resolution_steps": [
+      "In Setup > Object Manager, ensure affiliation role values exist on both objects with identical names"
+    ],
+    "gotchas": [
+      "Picklist values must be exact string matches between the two objects"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-024",
+    "category": "Territory Alignment",
+    "problem": "Territory model not active, preventing alignment operations",
+    "error_message": "",
+    "common_causes": [
+      "Territory model in Draft or Planning state"
+    ],
+    "resolution_steps": [
+      "In Setup > Territory Models, activate the model",
+      "Only one model can be active at a time"
+    ],
+    "gotchas": [
+      "Only one territory model can be active at a time"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-025",
+    "category": "Territory Alignment",
+    "problem": "Rep sees wrong accounts after territory change",
+    "error_message": "",
+    "common_causes": [
+      "Alignment batch jobs haven't run after territory reassignment"
+    ],
+    "resolution_steps": [
+      "Run all three alignment jobs (Account, Zip, Brick) for the affected territories",
+      "Schedule jobs to run daily during off-hours (e.g., 2 AM)"
+    ],
+    "gotchas": [
+      "Territory changes are not immediately reflected; batch jobs must run first",
+      "Schedule alignment jobs daily to prevent stale ProviderAcctTerritoryInfo records"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-026",
+    "category": "Visit Management",
+    "problem": "Visit not saving on mobile due to record type mismatch",
+    "error_message": "",
+    "common_causes": [
+      "Record type mismatch between Visit and ProviderVisit objects"
+    ],
+    "resolution_steps": [
+      "Ensure record type names are identical on both Visit and ProviderVisit objects",
+      "Check in Setup > Object Manager"
+    ],
+    "gotchas": [
+      "Record type names must be exact string matches between Visit and ProviderVisit"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-027",
+    "category": "Visit Management",
+    "problem": "Product detailing section missing from visit engagement page",
+    "error_message": "",
+    "common_causes": [
+      "Product Detailing not enabled in Admin Console"
+    ],
+    "resolution_steps": [
+      "Admin Console > Visit Settings > Product Detailing > Enable Product Detailing Enabled = true",
+      "Regenerate metadata cache after enabling"
+    ],
+    "gotchas": [
+      "Metadata cache must be regenerated after enabling Product Detailing"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-028",
+    "category": "Visit Management",
+    "problem": "Signature page not appearing during visit completion",
+    "error_message": "",
+    "common_causes": [
+      "No ComplianceStatementDefinition records for the Visit module"
+    ],
+    "resolution_steps": [
+      "Create at least one ComplianceStatementDefinition with Module = 'Visit' and IsActive = true"
+    ],
+    "gotchas": [
+      "At least one active ComplianceStatementDefinition record is required for signatures to work"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-029",
+    "category": "Visit Management",
+    "problem": "Visit not appearing in rep's calendar despite being created",
+    "error_message": "",
+    "common_causes": [
+      "Missing Event record linked to the Visit",
+      "Rep not assigned to the account's territory"
+    ],
+    "resolution_steps": [
+      "Check Visit.WhatId links to an Event record",
+      "Verify rep's UserTerritory2Association includes the account's territory"
+    ],
+    "gotchas": [
+      "Visits must be linked to Event records to appear in the calendar"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-030",
+    "category": "Visit Management",
+    "problem": "Cannot create visit on mobile, visit not appearing as option",
+    "error_message": "",
+    "common_causes": [
+      "Visit object not in DB Schema",
+      "Quick Action not configured for visit creation"
+    ],
+    "resolution_steps": [
+      "Check DB Schema for Visit object and ensure it is active",
+      "Check Quick Actions for NewVisit action",
+      "Regenerate metadata cache"
+    ],
+    "gotchas": [
+      "Both DB Schema and Quick Action configuration are required for mobile visit creation"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-031",
+    "category": "Visit Management",
+    "problem": "Visit sync error on iPad, visits fail to sync",
+    "error_message": "",
+    "common_causes": [
+      "DB Schema SOQL filter on Visit is invalid",
+      "Visit trigger handler is inactive"
+    ],
+    "resolution_steps": [
+      "Check DB Schema for Visit WhereSoql filter validity",
+      "Check trigger handlers for VisitTriggerHandler and ensure it is active"
+    ],
+    "gotchas": [
+      "Invalid SOQL filters in DB Schema can silently prevent sync"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-032",
+    "category": "Sample Management",
+    "problem": "Sample limit shows exceeded but should not be",
+    "error_message": "",
+    "common_causes": [
+      "ProviderSampleLimit QuantityDisbursed not reset for new time period",
+      "Wrong TimePeriod associated with the limit"
+    ],
+    "resolution_steps": [
+      "Check TimePeriod dates and ensure correct period is associated",
+      "Run Sample Limits batch job to regenerate limits for the current period"
+    ],
+    "gotchas": [
+      "TimePeriod records must exist for each active period; limits do not auto-reset"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-033",
+    "category": "Sample Management",
+    "problem": "Product not appearing in sample drop during visit",
+    "error_message": "",
+    "common_causes": [
+      "Product not active (Product2.IsActive = false)",
+      "Product not assigned to rep's territory",
+      "Product not in DB Schema"
+    ],
+    "resolution_steps": [
+      "Check Product2.IsActive = true",
+      "Verify product-to-territory assignment",
+      "Check DB Schema for Product2 and InventoryOperation objects"
+    ],
+    "gotchas": [
+      "All three conditions must be met for a product to appear in the sample drop"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-034",
+    "category": "Sample Management",
+    "problem": "Inventory count mismatch between system and physical inventory",
+    "error_message": "",
+    "common_causes": [
+      "ProductItem records out of sync after manual adjustments"
+    ],
+    "resolution_steps": [
+      "Run inventory reconciliation",
+      "Query ProductItem for the location and verify counts match physical inventory"
+    ],
+    "gotchas": [
+      "Manual adjustments outside the standard workflow can cause persistent mismatches"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-035",
+    "category": "Sample Management",
+    "problem": "Cannot disburse samples on mobile device",
+    "error_message": "",
+    "common_causes": [
+      "Sample-related objects missing from DB Schema",
+      "SampleTriggerHandler inactive"
+    ],
+    "resolution_steps": [
+      "Check DB Schema for ProductDisbursement, ProviderSampleLimit, ProductItem",
+      "Check trigger handler status for SampleTriggerHandler"
+    ],
+    "gotchas": [
+      "Multiple DB Schema records and trigger handlers must all be active for sample disbursement"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-036",
+    "category": "Sample Management",
+    "problem": "Sample limit batch job not generating limits for current period",
+    "error_message": "",
+    "common_causes": [
+      "Missing TimePeriod records for the current period",
+      "Products not associated with limit templates"
+    ],
+    "resolution_steps": [
+      "Verify TimePeriod records exist for the current period",
+      "Check sample limit template product assignments in Admin Console"
+    ],
+    "gotchas": [
+      "TimePeriod records must be created manually for each period before the batch job will work"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-037",
+    "category": "iPad Configuration",
+    "problem": "System Administrator cannot log into the iPad app while Sales Reps can",
+    "error_message": "",
+    "common_causes": [
+      "System Admin profiles are not designed for the mobile sync model, which has a local database that cannot fit an entire org's data"
+    ],
+    "resolution_steps": [
+      "This is by design - System Admin profiles are not configured for the mobile sync model",
+      "Configure appropriate field sales profiles with the correct metadata cache configuration"
+    ],
+    "gotchas": [
+      "This is an architectural design choice, not a bug. The iPad app's local database cannot hold an entire org."
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-038",
+    "category": "iPad Configuration",
+    "problem": "Calendar and Planner tabs not appearing on iPad despite working on desktop",
+    "error_message": "",
+    "common_causes": [
+      "Missing permission set assignments",
+      "Metadata cache not synchronized with mobile device",
+      "Missing profile options in configuration records"
+    ],
+    "resolution_steps": [
+      "Verify all recommended permission sets are assigned",
+      "Create and synchronize metadata cache with the mobile device",
+      "Check for any missing profile options in configuration records",
+      "Validate that required licenses and feature flags are enabled"
+    ],
+    "gotchas": [
+      "Features working on desktop do not automatically appear on mobile; separate configuration is needed"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-039",
+    "category": "iPad Configuration",
+    "problem": "Open Activities Related List renders on web but not on iPad",
+    "error_message": "",
+    "common_causes": [
+      "Standard Open Activities related list is not supported on iPad; requires platform-specific component"
+    ],
+    "resolution_steps": [
+      "Use the platform-specific 'Related List' component with proper field sets and metadata cache",
+      "Create field set on Task object",
+      "Add component to Lightning page using Tabs component",
+      "Configure Object Metadata Cache Configuration for Tasks",
+      "Generate and activate new cache, then sync iPad"
+    ],
+    "gotchas": [
+      "Standard related lists may not work on mobile; use the platform-specific related list component"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-040",
+    "category": "iPad Configuration",
+    "problem": "Visit dates showing incorrectly (e.g., Jan 23 showing as Jan 24)",
+    "error_message": "",
+    "common_causes": [
+      "Timezone mismatch between demo environment and iPad settings"
+    ],
+    "resolution_steps": [
+      "Set iPad timezone to match the org timezone",
+      "May need to force resync by deleting and reinstalling the app"
+    ],
+    "gotchas": [
+      "Timezone mismatches can cause dates to appear off by one day"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-041",
+    "category": "Configuration",
+    "problem": "Account creation and search failures with HCO filters",
+    "error_message": "",
+    "common_causes": [
+      "Record Type mapping configuration issues",
+      "Field-level security settings incorrect",
+      "Address Type picklist showing all values instead of respecting Record Type mapping"
+    ],
+    "resolution_steps": [
+      "Verify Record Type mapping configuration",
+      "Check field-level security settings",
+      "Review picklist value dependencies on Record Types"
+    ],
+    "gotchas": [
+      "Address Type picklist values are controlled by Record Type mapping, not just field-level security"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-042",
+    "category": "iPad Configuration",
+    "problem": "Creating Staff records via Advanced Search on iPad fails silently",
+    "error_message": "",
+    "common_causes": [
+      "Desktop validation rules (e.g., Provider Specialty) not firing or displaying errors on iPad"
+    ],
+    "resolution_steps": [
+      "Review validation rules and ensure they are properly configured for mobile context"
+    ],
+    "gotchas": [
+      "Validation rules may behave differently on mobile vs. desktop; test on both platforms"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-043",
+    "category": "Configuration",
+    "problem": "Blank screen when testing Visit Type Mapping on desktop",
+    "error_message": "403 Forbidden in browser console",
+    "common_causes": [
+      "Permission or caching issue"
+    ],
+    "resolution_steps": [
+      "Upload HAR files for investigation",
+      "Clear browser cache",
+      "Try a different browser"
+    ],
+    "gotchas": [
+      "Check browser console for 403 errors which indicate permission issues rather than configuration problems"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-044",
+    "category": "Device Requirements",
+    "problem": "iPad device compatibility and requirements",
+    "error_message": "",
+    "common_causes": [
+      "Older iPads or unsupported OS versions"
+    ],
+    "resolution_steps": [
+      "Use 8th Gen iPad or later",
+      "Update device to iPadOS 18.x",
+      "For macOS: Must be Apple Silicon, not Intel",
+      "iPad Pro 11-inch M3/M4 processor with 8GB RAM recommended for demos"
+    ],
+    "gotchas": [
+      "Intel-based Macs are not supported for the macOS version of the mobile app"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-045",
+    "category": "iPad Configuration",
+    "problem": "Login issues on iPad via Safari browser, redirected to 'It's better in the app' page",
+    "error_message": "",
+    "common_causes": [
+      "Safari not configured for desktop website mode"
+    ],
+    "resolution_steps": [
+      "Open Settings > Safari > Request Desktop Website > Edit",
+      "Clear all existing sites that were manually entered",
+      "Enable for 'All Websites'",
+      "Turn off: Block All Cookies, Prevent Cross-Site Tracking, Private Browsing, Block Pop-ups",
+      "Use latest stable version of iPadOS"
+    ],
+    "gotchas": [
+      "Lightning Experience on iPad Safari is only supported in desktop websites mode"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  },
+  {
+    "id": "ts-046",
+    "category": "Integration",
+    "problem": "Remote Engagement with Microsoft Teams setup is complex and time-consuming",
+    "error_message": "",
+    "common_causes": [
+      "Requires Azure App Registration and External Auth Identity Provider configuration",
+      "Special org permission must be enabled"
+    ],
+    "resolution_steps": [
+      "Ensure org permission for MS Teams Pilot is added (not a standard license setting)",
+      "Obtain Microsoft license",
+      "Complete Azure App Registration setup",
+      "Configure External Auth Identity Provider"
+    ],
+    "gotchas": [
+      "The org permission must be specifically requested and enabled; it is not part of standard licensing"
+    ],
+    "citation": {"source": "Lumis Knowledge Base", "section": "Troubleshooting"}
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "id": "lsc-help-surveys-ind-lsc-surveys",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Surveys",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Design and distribute structured questionnaires to gather feedback from healthcare professionals. Use the collected data to analyze behavioral trends, monitor patient-related outcomes, and strengthen provider relationships. The survey workflow begins by creating a survey that uses the Survey...",
+    "findings": [
+      {
+        "name": "Surveys",
+        "detail": "Design and distribute structured questionnaires to gather feedback from healthcare professionals. Use the collected data to analyze behavioral trends, monitor patient-related outcomes, and strengthen provider relationships. The survey workflow begins by creating a survey that uses the Survey Builder and generating a survey invitation to create a distribution record for the survey. Next, you configure survey access and availability that use Survey Subject and Survey Engagement Context records. Finally, after capturing survey responses through supported entry points in the application, offline responses are synchronized to Salesforce standard objects for reporting and analysis. How Surveys Work in Life Sciences Cloud Use surveys to collect feedback from healthcare professionals. Generate invitations and determine who can participate. Survey Capture Entry Points Set up survey entry points based on how users interact with accounts, visits, or other records. With entry points, users can start a survey without leaving their current task. Sync Survey Responses to Salesforce Objects Sync survey responses to Salesforce objects by creating a schedule-triggered flow. Mobile App Configuration for Surveys Define the database schema for supported Surveys objects in the Life Sciences for Customer Engagement mobile app. Generate a metadata cache to package the database schema configuration into a downloadable metadata cache that the mobile app can use for offline access. Create a Survey to Collect Feedback Collect feedback and information from healthcare professionals. Update an Existing Survey After you activate a survey, you can’t edit it. Instead, to modify a survey, create a version. Distribute a Survey in Life Sciences Cloud Generate a survey invitation and define who can take the survey and where they can start it. Refresh Survey Sharing Data Recalculate the survey sharing logic and generate survey invitation share records for a specified territory. Run this batch job to make sure that the right users have access when territory alignments change."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_surveys.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "surveys"
+    ]
+  },
+  {
+    "id": "lsc-help-surveys-ind-lsc-surveys-collect-feedback",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Collect Feedback from Your Customers",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Capture insights from your interactions with healthcare professionals (HCPs) to support business decisions. Review the summary questions before your visit so you can prepare and focus on the topics most relevant to the HCP, helping you collect accurate and meaningful",
+    "findings": [
+      {
+        "name": "Collect Feedback from Your Customers",
+        "detail": "Capture insights from your interactions with healthcare professionals (HCPs) to support business decisions. Review the summary questions before your visit so you can prepare and focus on the topics most relevant to the HCP, helping you collect accurate and meaningful responses."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To view and edit consents on the web and mobile app: | Life Sciences Field Sales Representative OR Life Sciences Field Medical OR Life Sciences Key Account Management From the App Launcher, find and select Accounts . From the list of Accounts, select the account that you want to take the survey for. Click Surveys . Review the list of assigned surveys, and select a survey and answer the questions on behalf of the healthcare professional. Review your responses and submit the survey. To retake the survey, click Retake , update your responses, and submit them again."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_surveys_collect_feedback.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "surveys"
+    ]
+  }
+]

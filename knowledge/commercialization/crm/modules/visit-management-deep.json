@@ -1,0 +1,200 @@
+[
+  {
+    "id": "vm-001",
+    "category": "visit-management",
+    "topic": "Visit Lifecycle Architecture",
+    "description": "Visits follow a three-phase lifecycle: Plan, Engage, Report. Planning involves scheduling, reviewing account summaries, confirming objectives, and preparing materials/samples/presentations. Engagement captures the actual interaction - product detailing, key messages, sample disbursement, signature capture. Reporting updates visit information, adds discussions, captures medical inquiries, expenses, and aligns next steps in the account plan.",
+    "objects": [
+      "ProviderVisit",
+      "ProviderVisitProductDetailing",
+      "ProviderVisitRequestedSample",
+      "ProviderVisitMarketingItem",
+      "ProviderVisitPresentationSlide"
+    ],
+    "setup_steps": [
+      "Define visit record types for each visit type (In-Person, Phone, Video, Group)",
+      "Configure field sets for each visit type to control visible fields",
+      "Set up visit page layouts per record type",
+      "Configure visit submission validation rules",
+      "Enable sample limit validation if samples are disbursed",
+      "Configure signature capture requirements per visit channel",
+      "Set up metadata cache regeneration after visit configuration changes"
+    ],
+    "gotchas": [
+      "Record type mismatch is the most common source of field visibility issues",
+      "Signature should NOT be required for phone/remote visits",
+      "Metadata cache must be regenerated after visit configuration changes",
+      "Account filter may not show expected accounts due to territory alignment gaps",
+      "A single visit cannot have both Detail and Touchpoint values simultaneously"
+    ],
+    "migration_relevance": "Veeva Call2_vod maps to ProviderVisit. Call Detail maps to ProviderVisitProductDetailing. Call Sample maps to sample disbursement records. The three-phase lifecycle is conceptually similar but object names and relationships differ significantly."
+  },
+  {
+    "id": "vm-002",
+    "category": "visit-management",
+    "topic": "Visit Record Type Routing",
+    "description": "Visit record types control form layout, available fields, and validation rules. Record type assignment is driven by visit type (In-Person, Remote/Phone, Group) combined with channel. Record types include Detail Call (In-Person), Phone Call (Remote), Video Call (Remote), Group Visit, Medical Visit, and custom types. The channel field is separate from visit type and drives different validation and analytics rules.",
+    "objects": [
+      "ProviderVisit"
+    ],
+    "fields": [
+      "RecordTypeId",
+      "VisitType",
+      "Channel"
+    ],
+    "setup_steps": [
+      "Create record types for each visit type (Detail, Phone, Video, Group, Medical)",
+      "Assign record types to profiles",
+      "Configure page layouts per record type",
+      "Map channel picklist values to visit types",
+      "Configure field-level security per record type"
+    ],
+    "gotchas": [
+      "Missing record type assignments cause wrong form layouts",
+      "Channel field is SEPARATE from visit type - map legacy call types to BOTH",
+      "Field sets not configured for the visit type cause missing fields"
+    ],
+    "migration_relevance": "Veeva Call_Type_vod maps to both VisitType and Channel fields. Must map each legacy call type to the correct combination."
+  },
+  {
+    "id": "vm-003",
+    "category": "visit-management",
+    "topic": "Group Visit Attendee Management",
+    "description": "Group visits use visit attendee junction records to track multiple HCPs in a single visit. Each attendee gets their own detailing, sample, and signature records. The platform supports pre-planned attendees (added during scheduling) and walk-in attendees (added during the visit). Attendee-level analytics aggregate separately from the parent visit. During a lunch-and-learn with three HCPs, the Visit object tracks overall information while ProviderVisitAttendee tracks per-HCP details.",
+    "objects": [
+      "ProviderVisit",
+      "ProviderVisitAttendee",
+      "ProviderVisitProductDetailing"
+    ],
+    "setup_steps": [
+      "Configure group visit record type",
+      "Set up attendee junction object layout",
+      "Configure per-attendee detailing and sample records",
+      "Set up pre-planned vs walk-in attendee workflows"
+    ],
+    "gotchas": [
+      "Each attendee needs separate detailing records - a common oversight",
+      "Attendee-level analytics aggregate separately from parent visit"
+    ],
+    "migration_relevance": "Veeva Group Call maps to group visit with attendee junction records. The junction pattern differs from Veeva flat structure."
+  },
+  {
+    "id": "vm-004",
+    "category": "visit-management",
+    "topic": "Visit Planner and Calendar",
+    "description": "The visit planner provides calendar views (day, week, month). Visits can be created by selecting a time slot and account. The planner integrates with territory alignment to show only accessible accounts. Filter options include account type, visit status, and territory. Suggested visits from Next Best Customer recommendations appear in the planner. Routines enable reps to save reusable visit schedules for recurring weekly routes or multi-day loops.",
+    "objects": [
+      "ProviderVisit",
+      "Routine"
+    ],
+    "setup_steps": [
+      "Configure visit planner calendar views",
+      "Set up territory alignment for account filtering",
+      "Enable Next Best Customer recommendations in planner",
+      "Configure routine templates for recurring schedules"
+    ],
+    "gotchas": [
+      "Account filter depends on territory alignment - misalignment hides accounts",
+      "Routines are the correct feature for reusable visit schedules, not custom objects"
+    ],
+    "migration_relevance": "Veeva Scheduler maps to visit planner. Route plans map to Routines feature."
+  },
+  {
+    "id": "vm-005",
+    "category": "visit-management",
+    "topic": "Visit Submission Flow",
+    "description": "Visit submission triggers a validation chain: (1) Required field checks, (2) Sample limit validation if samples are disbursed, (3) Signature capture if required by configuration, (4) Offline queue if no connectivity. Upon submission, ProviderVisitProductDetailing, sample transaction, and signature records are created as child records. Visit status changes to Submitted/Completed.",
+    "objects": [
+      "ProviderVisit",
+      "ProviderVisitProductDetailing",
+      "ProductDisbursement",
+      "ElectronicSignature"
+    ],
+    "setup_steps": [
+      "Configure required fields per visit record type",
+      "Set up sample limit validation rules",
+      "Configure signature requirements per channel type",
+      "Set up offline queue behavior"
+    ],
+    "gotchas": [
+      "Sample limit blocking visits when limits are not fully configured",
+      "Signature requirements must match visit channel - no signature for phone visits",
+      "Offline submission queues if no connectivity - monitor sync after"
+    ],
+    "migration_relevance": "Veeva Submit Call maps to visit submission. Validation chain is configurable unlike Veeva hardcoded validation order."
+  },
+  {
+    "id": "vm-006",
+    "category": "visit-management",
+    "topic": "Remote Engagement",
+    "description": "Remote Engagement enables virtual interactions via video, voice, and digital channels. Teams can share interactive compliant content, collect information, capture digital signatures, and track activities. Remote visits support screen sharing, activity tracking, and feedback collection. Twilio endpoints must be trusted by the org for video traffic. Email notification templates must be configured for virtual visit invitations.",
+    "objects": [
+      "ProviderVisit",
+      "RemoteEngagementSession"
+    ],
+    "setup_steps": [
+      "Add Twilio endpoints to trusted sites in the org",
+      "Configure email templates for remote engagement invitations",
+      "Set up remote visit record types",
+      "Configure screen sharing and content sharing permissions",
+      "Enable digital signature capture for remote visits"
+    ],
+    "gotchas": [
+      "Twilio CSP trusted sites must be configured - video will not work without this",
+      "Email notification templates must be configured or invitations will not send",
+      "GDPR privacy requirements apply to remote engagement recordings"
+    ],
+    "migration_relevance": "Veeva Engage maps to Remote Engagement. Twilio is the video provider. Configuration is significantly different."
+  },
+  {
+    "id": "vm-007",
+    "category": "visit-management",
+    "topic": "Homepage Visit Widgets",
+    "description": "Homepage supports multiple visit-related widgets: Top 10 Next Best Customers (AI-driven recommendations), Up Next (upcoming scheduled visits), Activity Plan attainment dashboard, and custom dashboards. Quick actions from homepage can launch visit creation, insights review, email composition, and inquiry submission. Widget configuration is per-persona (sales vs medical users may see different widgets).",
+    "objects": [
+      "ProviderVisit",
+      "NextBestCustomer"
+    ],
+    "setup_steps": [
+      "Configure homepage layouts per persona (sales vs medical)",
+      "Enable Next Best Customer component",
+      "Configure Up Next widget settings",
+      "Set up Activity Plan attainment dashboard",
+      "Configure quick actions for visit creation"
+    ],
+    "gotchas": [
+      "Next Best Customer requires geolocation data on account address for distance-based sorting",
+      "Standard dashboards may not render correctly on mobile - this is a known platform limitation",
+      "Widget configuration is per-persona, not global"
+    ],
+    "migration_relevance": "Maps to Veeva homepage widgets but with significantly more configuration options and AI-driven recommendations."
+  },
+  {
+    "id": "vm-008",
+    "category": "visit-management",
+    "topic": "MedTech Visit Management",
+    "description": "MedTech visits differ from pharma visits. They support surgical case visits, inventory cycle counts, product-related activities, and blind cycle counts. Work Types define visit behavior. Visitors represent the sales rep, Visited Party represents the surgeon/contact. Action Plans provide structured task templates for visits. Assessment Tasks must be completed in sequence defined by Assessment Task Order.",
+    "objects": [
+      "Visit",
+      "Visitor",
+      "VisitedParty",
+      "WorkType",
+      "ActionPlan",
+      "ActionPlanItem",
+      "AssessmentTask",
+      "AssessmentTaskOrder"
+    ],
+    "setup_steps": [
+      "Define Work Types for each visit category (Surgical Case, Cycle Count, etc.)",
+      "Create Action Plan Templates for standardized visit workflows",
+      "Configure Assessment Task sequences",
+      "Set up Visitor and Visited Party relationships"
+    ],
+    "gotchas": [
+      "MedTech uses different visit objects than pharma Customer Engagement",
+      "Work Type determines available business behavior - must be set correctly",
+      "Assessment Task Order must be defined for proper sequence"
+    ],
+    "migration_relevance": "MedTech visit patterns are unique to the platform - no direct Veeva equivalent for surgical case management."
+  }
+]

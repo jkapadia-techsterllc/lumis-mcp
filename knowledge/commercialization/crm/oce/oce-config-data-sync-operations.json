@@ -1,0 +1,217 @@
+[
+  {
+    "id": "oce-cfg-ops-004",
+    "category": "crm-configuration",
+    "title": "Data Change Request and Validation Workflows",
+    "products": [
+      "oce"
+    ],
+    "summary": "Data Change Request (DCR) allows field users to submit corrections to account data. Two validation modes exist: internal validation (changes reviewed and applied within the CRM org) and external validation (changes routed to a master data management system for approval). The Apply Changes Immediately setting controls whether approved changes update records automatically.",
+    "findings": {
+      "dcr-workflow": "Field users submit DCRs through the mobile app or web UI. Each DCR captures the proposed field-level changes and routes them through the configured validation workflow.",
+      "internal-validation": "In internal mode, the DCR is reviewed by an admin within the CRM org. The admin can approve, reject, or modify the proposed changes before they are applied to the account record.",
+      "external-validation": "External validation routes DCRs to a master data management system via named credentials. Supported MDM integrations include data services for healthcare professional and organization data. The DCR payload is sent to the external system, which returns an approval or rejection.",
+      "named-credentials": "External validation endpoints are configured through Named Credentials in the platform setup. This includes the authentication method, endpoint URL, and any required certificates.",
+      "apply-changes-immediately": "When the Apply Changes Immediately custom setting is enabled, approved DCR changes are automatically applied to the target record without additional manual intervention.",
+      "monitoring-jobs": "Validation Request monitoring jobs track the status of pending and completed DCRs, providing visibility into processing queues and error rates."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Data Change Validation section",
+    "tags": [
+      "dcr",
+      "data-quality",
+      "mdm",
+      "validation",
+      "account-management"
+    ]
+  },
+  {
+    "id": "oce-cfg-ops-006",
+    "category": "crm-configuration",
+    "title": "Next Best Customer / Message (AI-Powered Scoring)",
+    "products": [
+      "oce"
+    ],
+    "summary": "The AI scoring module uses a cloud compute platform to calculate next-best-customer (NBC) and next-best-message recommendations. Metrics are configured per territory with three types: Boolean (yes/no flag), Variable Days (numeric value within a date range), and Percentage (ratio-based calculation). Each metric has a configurable strength/weighting that contributes to the composite score.",
+    "findings": {
+      "platform-dependency": "The NBC module requires a cloud compute platform for score calculation. Provisioning is handled separately from the core CRM setup and involves dedicated infrastructure configuration.",
+      "metric-types": "Three metric types drive scoring: Boolean metrics evaluate a true/false condition, Variable Days metrics measure a numeric value within a configurable date window, and Percentage metrics calculate a ratio between two values.",
+      "territory-customization": "NBC metrics can be customized at the territory level, allowing different scoring models for different sales territories. This enables regional variations in what constitutes an optimal customer or message.",
+      "score-breakdown": "The score breakdown preview shows field users the individual metric contributions to the composite NBC score, providing transparency into why a particular customer or message was recommended.",
+      "deploy-workflow": "After configuring metrics and weights, administrators must execute a deploy workflow that pushes the scoring model to the compute platform. Changes do not take effect until the deploy is complete."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Next Best Customer/Message section",
+    "tags": [
+      "ai",
+      "nbc",
+      "scoring",
+      "analytics",
+      "recommendations"
+    ]
+  },
+  {
+    "id": "oce-cfg-ops-008",
+    "category": "crm-configuration",
+    "title": "Document Management and Signature Capture",
+    "products": [
+      "oce"
+    ],
+    "summary": "Document templates are stored on cloud object storage (S3) and distributed to devices via the metadata service. Templates are packaged as ZIP files containing page1.html and thumbnail.jpg. The platform supports both electronic and physical signature capture with optional geolocation tracking.",
+    "findings": {
+      "template-storage": "Document templates reside in an S3 bucket managed by the Config Service. Each template is a ZIP archive containing at minimum page1.html (the rendered content) and thumbnail.jpg (the preview image).",
+      "signature-types": "Two signature modes are supported: electronic signature (captured on the device screen) and physical signature (a printed signature sheet that is photographed). Both modes produce a signature record linked to the parent call or meeting.",
+      "geolocation-tracking": "When enabled, the platform captures the device's GPS coordinates at the time of signature capture. This provides proof-of-presence for compliance-sensitive interactions.",
+      "cluster-attributes": "Document targeting uses cluster attributes to control which documents are available to which user segments. This allows region-specific or role-specific content distribution without maintaining separate template sets.",
+      "pdf-generation": "The platform can generate PDFs from document templates with a 72-point padding applied to ensure printable margins. PDF generation is used for creating shareable versions of completed documents."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Document Management section",
+    "tags": [
+      "documents",
+      "clm",
+      "signatures",
+      "compliance",
+      "s3"
+    ]
+  },
+  {
+    "id": "oce-cfg-ops-011",
+    "category": "crm-configuration",
+    "title": "Cross-Border Configuration (Multi-Org)",
+    "products": [
+      "oce"
+    ],
+    "summary": "The cross-border module enables global users to view and log activities across multiple CRM org instances. Each cross-border deployment groups a set of orgs (all sandbox or all production). The module must not be combined with similar cross-border capabilities from other products. China-region orgs cannot be included in deployments with non-China orgs due to data residency requirements.",
+    "findings": {
+      "architecture": "Each cross-border instance connects a group of CRM orgs. Users with cross-border permissions can access accounts and activity history from other orgs within the same instance.",
+      "data-residency": "China-hosted orgs use a separate cloud region that does not support integration with services hosted outside China. This creates a hard boundary preventing China orgs from participating in global cross-border deployments.",
+      "is-global-field": "The IsGlobal field on account records flags accounts that should be propagated across orgs. The SetRelatedRecordsPublisherBatch Apex job handles global account propagation to connected orgs.",
+      "super-admin": "The cross-border SuperAdmin permission provides full administrative access across all connected orgs. This permission should be tightly controlled.",
+      "product-exclusivity": "Using cross-border capabilities from multiple products simultaneously on the same customer deployment is explicitly prohibited. Customers must choose one cross-border solution.",
+      "retired-global-use-cases": "Earlier versions included global MSL use cases allowing Medical Science Liaisons to view and log activities on global accounts across orgs in a common language. Translations were limited to one language per deployment."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Cross-Border Setup / Global Use Cases sections",
+    "tags": [
+      "cross-border",
+      "multi-org",
+      "global",
+      "data-residency",
+      "retired"
+    ]
+  },
+  {
+    "id": "oce-cfg-ops-023",
+    "category": "crm-configuration",
+    "title": "Profile Cloning and Configuration Entity Assignment",
+    "products": [
+      "oce"
+    ],
+    "summary": "The platform provides a streamlined profile cloning mechanism through the Admin Console. After cloning, administrators can selectively copy configuration entity assignments from a source profile. Profile names must not contain special characters, hyphens, or consecutive spaces.",
+    "findings": {
+      "clone-process": "Cloning is initiated from Admin Console > Mobile > Profiles tab. The clone creates a new profile with identical permissions to the source. The standard platform Clone Profile page handles the actual profile creation.",
+      "naming-constraints": "Profile names must use only letters, numbers, and single spaces. Special characters, hyphens (-), and consecutive spaces are not allowed and may cause configuration issues.",
+      "configuration-entity-copy": "After cloning, the Apply to Configuration action on the new profile opens a dialog to select a source profile. The dialog previews all configuration entities assigned to the source, allowing selective checkbox-based inclusion/exclusion before copying.",
+      "section-level-control": "The copy dialog organizes entities by section, with section-level checkboxes for bulk select/deselect within each group."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Clone Profiles section",
+    "tags": [
+      "profiles",
+      "cloning",
+      "configuration",
+      "admin"
+    ]
+  },
+  {
+    "id": "oce-cfg-ops-024",
+    "category": "crm-configuration",
+    "title": "Config Service Administration",
+    "products": [
+      "oce"
+    ],
+    "summary": "The Config Service is a connected app accessible only from production environments. It manages org identity, S3 bucket mapping, and parent-child org relationships. Access requires a passcode provided by the application delivery team. Production orgs can be cloned to create sandbox org configurations.",
+    "findings": {
+      "access-requirements": "Accessing the Config Service requires: the Config Service app permission in the user's profile or permission set, Admin approved users pre-authorization on the connected app, the Admin profile added to Manage Profiles, and the Config Service custom permission for the Admin Console tile.",
+      "org-information": "The Config Service displays: OrgId, sandbox/production indicator, parent org reference, org name, S3 bucket name and region, active status, last requested date, and creation/update timestamps.",
+      "active-status-check": "The system validates whether the Config Service org is active every time the metadata cache is generated. Metadata cache generation is blocked for inactive orgs.",
+      "sandbox-cloning": "Production Config Service orgs can be cloned to create sandbox configurations. The clone copies the instance org ID and creates the parent-child relationship.",
+      "email-service-provisioning": "Configuring email service integration requires raising a support case with the org ID, organization name, and sandbox/production indicator."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Config Service Administration section",
+    "tags": [
+      "config-service",
+      "admin",
+      "org-management",
+      "s3",
+      "production"
+    ]
+  },
+  {
+    "id": "oce-cfg-ops-025",
+    "category": "crm-configuration",
+    "title": "Ask a Question (Feedback Collection Object)",
+    "products": [
+      "oce"
+    ],
+    "summary": "The Ask a Question module provides a simple feedback and support ticket mechanism for field users. It uses a dedicated custom object with fields for description (mandatory), subject, status, type, and resolution. The object can be connected to email automation for routing questions to support systems.",
+    "findings": {
+      "object-structure": "The custom object includes: Description (mandatory free-text for the question/comment), Name (subject line), Status (tracks resolution progress), Type (categorizes the request), and Resolution (response from the support team).",
+      "setup-requirements": "Administrators must add required fields to page layouts per profile, grant appropriate permissions, expose the object as a Lightning tab, and add it to DB Schema for mobile availability.",
+      "email-integration": "The platform's standard email functionality can be used to automatically forward questions by email, enabling automatic case generation in external support systems or user notifications.",
+      "field-limitation": "Number-type fields on this object cannot exceed 16 digits to the left of the decimal point, due to a platform limitation."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Ask a Question section",
+    "tags": [
+      "feedback",
+      "support",
+      "field-users",
+      "communication"
+    ]
+  },
+  {
+    "id": "oce-cfg-ops-026",
+    "category": "crm-configuration",
+    "title": "Projections Module (Retired)",
+    "products": [
+      "oce"
+    ],
+    "summary": "The Projections module (now retired from the managed package) allowed field users to record product quantity/sales projections per account, per market, for defined periods. It used Projection Assortments to define available products and Projection Value Definitions to configure the data entry structure. The retirement means this is no longer in the active package, though existing implementations may still be running.",
+    "findings": {
+      "object-model": "Five objects formed the projections data model: Projection (parent record linking account to a time period), ProjectionItem (individual product projections), ProjectionAssortment (product groupings available for projection), ProjectionAssortmentProduct (products within an assortment), and Period (time periods for projection cycles).",
+      "permission-sets": "Two permission sets controlled access: Projection_User (field users creating projections) and Projection_Admin (administrators configuring assortments and settings).",
+      "lightning-overrides": "Standard New, Edit, View, and Delete buttons on projection objects were overridden with Lightning components and Visualforce pages to provide the custom projection UI experience.",
+      "retired-status": "This module was retired from the managed package. Migration considerations include data archival for existing projection records and replacement with alternative forecasting approaches."
+    },
+    "source": "CRM Personal Configuration Guide, March 2025 \u2014 Projections (Retired) section",
+    "tags": [
+      "projections",
+      "forecasting",
+      "retired",
+      "migration-consideration"
+    ]
+  },
+  {
+    "id": "oce-cfg-opt-002",
+    "category": "configuration",
+    "title": "Data Change Request (DCR) Module \u2014 Internal and External Validation Patterns",
+    "products": [
+      "oce"
+    ],
+    "summary": "The Data Change Request module manages account modification workflows through configurable validation paths \u2014 internal validation with immediate apply/revert behavior, and external validation through MDM connectors (OneKey, Reltio, Lexi) with named credentials and platform event integration.",
+    "findings": {
+      "internal_validation": "Internal DCR validation applies changes immediately upon submission. If a reviewer rejects the change, the system automatically reverts the account to its previous state. The DataChangeHandler trigger manages the state machine transitions. The Apply Changes Immediately setting controls whether changes take effect before or after approval.",
+      "external_onekey": "OneKey Validation Request (VR) integration sends DCR data to the OneKey MDM system for verification against the master data repository. Configuration requires connector setup with named credentials, field mapping between the local DataChange object and OneKey's VR format, and callback handling for asynchronous approval or rejection responses.",
+      "external_mdm_and_lexi": "Reltio MDM DCR integration uses named credentials for REST API communication with the Reltio master data platform. Lexi integration uses platform events (DataChangeEvent__e) for asynchronous processing, enabling decoupled communication between the CRM and the Lexi validation engine. Both integrations support field-level change tracking through ExternallyManagedFields__c.",
+      "field_level_tracking": "ExternallyManagedFields__c stores the list of fields managed by the external MDM system. When a representative modifies an externally managed field, the system routes the change through the appropriate external validation path rather than applying it internally. The DataChangeEditOverride Lightning component provides button overrides for the edit experience on DCR-managed records."
+    },
+    "source": "CRM configuration guide, March 2025 edition",
+    "tags": [
+      "DCR",
+      "data-change-request",
+      "MDM",
+      "OneKey",
+      "Reltio",
+      "Lexi",
+      "platform-events",
+      "named-credentials",
+      "validation"
+    ]
+  }
+]

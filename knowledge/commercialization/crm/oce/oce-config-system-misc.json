@@ -1,0 +1,406 @@
+[
+  {
+    "id": "oce-cfg-sysmsc-001",
+    "category": "configuration",
+    "title": "Data Change Events Configuration",
+    "products": ["oce"],
+    "summary": "Platform events that fire on record changes, carrying changed field values as payload. Administrators define which objects participate via configuration entities specifying object, DML operations (create/update/delete/undelete), filter criteria in SOQL format, and additional parent fields to include. Multiple configuration entities can exist for the same object, each firing independently when filter criteria match.",
+    "findings": {
+      "mechanism": "A platform event (DataChangeEvent) is published on record change, containing changed record field values as payload. Configuration entities define which objects trigger events and under what conditions.",
+      "out_of_box_entities": "Pre-configured entities include: Virtual Meeting Attendees (MeetingMember object), Account Deactivation Handler (Account), Survey Response Record-Based Sharing (SurveyResponse), Survey Invitation Record-Based Sharing (SurveyInvitation), Sample Transaction Submission Broadcast (SampleTransaction), New Accounts (Account), Meeting Expense Budget Allocation Create Handler (MeetingExpense), Manual Territory Alignment (CustomerAlignmentRule), Form Response Sharing Handler (FormResponse), Data Change Request (DataChange), Coaching Form Template Sharing Handler (FieldCoachingFormTemplate), Calls (Call), Budget Sharing New Handler (Budget), Budget Sharing Handler (Budget), Account Merge Status (MergeHistory).",
+      "activation": "Enable the DataChangeEventHandler trigger handler. Assign the Data Change Event Administration custom permission to admin users.",
+      "configuration_fields": "Label (display name), Developer Name (auto-populated unique identifier), Description, SObject (target object), DML operation checkboxes (create/update/delete/undelete - at least one required), Additional Fields to Include in Event (comma-separated parent fields beyond record fields), Filter Criteria (SOQL-format condition to filter records), Update Options (every edit vs. subsequently meet criteria), IsActive toggle.",
+      "update_options": "Two behaviors for filter criteria on update: 'Every time it is edited' validates against filter criteria on each update; 'Any time it is edited to subsequently meet criteria' requires at least one filter field to have changed AND the record to match the filter criteria.",
+      "multiple_entities": "Multiple configuration entities can exist on the same object. A data change event fires for each configuration entity whose filter criteria match."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "data-change-events", "platform-events", "trigger-handlers", "record-changes"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-002",
+    "category": "configuration",
+    "title": "Input Lookups Configuration",
+    "products": ["oce"],
+    "summary": "Custom metadata records that configure lookup search popups for fields on pages such as Search Before Create, Order Rules, and Signature Audit. Affects both web and mobile platforms. Custom Lookup Name records take precedence over Input Lookup records when both exist for a field. New Input Lookup records apply only to mobile when the Enable Lookup Search Override setting is enabled.",
+    "findings": {
+      "scope": "Input Lookup metadata records configure lookup search popups for specific fields on pages including Search Before Create, Order Rules, and Signature Audit. These records affect both the CRM platform web and mobile applications.",
+      "precedence": "If a Custom Lookup Name metadata record is already configured for a field, it takes precedence over Input Lookup configuration. The mobile app falls back to Input Lookup only when no Custom Lookup Name record exists for the field.",
+      "packaged_records": "Pre-packaged records cover: Account.ParentAccount, AccountAddress.Account, AccountAddress.Address (impacting Search Before Create); OrderRule.AppliesToProduct, OrderRule.ComparisonProduct, OrderRule.PriceListAffiliation (impacting Order Rules); SignatureAudit.Account, SignatureAudit.Product, SignatureAudit.SITerritory, SignatureAudit.Territory (impacting Signature Audit).",
+      "editable_fields_on_packaged": "Title Field (displayed in lookup results), Subtitle Fields (comma-separated additional fields on second line), Filter Criteria (criteria to filter results).",
+      "creating_new_records": "New records require: Label, Input Lookup Name, SObject (object API name), Field (lookup field API name), Related SObject, Title Field, Subtitle Fields, Filter Criteria. Only String data type supported for Title and Subtitle fields. Namespace placeholder $NS used for all fields/objects.",
+      "account_lookup_behavior": "For Account lookups with Input Lookup configured and Enable Lookup Search Override enabled: if Default Account Lookups Advanced Search is enabled, the lookup popup opens with Advanced Search option leading to Account Advanced Search modal. If only Default Advanced Search for Lookups is enabled, Advanced Search opens regular search.",
+      "limitations": "Territory2 objects are not supported. Search on lookup popover is performed by Title field only. Relations are supported in Filter Criteria, Title, and Subtitle (e.g., RecordType.Name, ParentAccount relationship name and Name). Admins must ensure users have access to fields used in configuration."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "input-lookups", "lookup-search", "mobile", "search-before-create"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-003",
+    "category": "configuration",
+    "title": "Insights - Core Functionality and Activation",
+    "products": ["oce"],
+    "summary": "Insights capture informal or formal conversation intelligence (expert opinions, market observations, product feedback) from multiple capture points (Home page, Insights tab, Account, Meeting, Call). Insights support product linking, account linking, tag-based channels, upvoting, ranking, and hierarchical parent-child relationships for trend consolidation.",
+    "findings": {
+      "purpose": "Insights log valuable information received during formal or informal conversations, including expert opinions about future development of processes, technologies, unofficial product considerations, and similar intelligence.",
+      "capture_points": "Insights can be captured from: Home page, Insights tab, Account, Meeting, and Call. The source of the insight is tracked.",
+      "mandatory_fields": "Insight Title and Insight text are mandatory on capture. Custom fields can be added by administrators. Link Account and Link Tag options appear after custom fields.",
+      "field_types": "The Insight text field defaults to 255 characters (Text Area). Admin can enable Long Text Area type supporting up to 1000 characters by assigning the Insight User permission set from an extended package and swapping the field on the page layout. Only one type of Insight field should be on the layout at a time.",
+      "product_linking": "Products can be linked to insights, supporting selection of product brand/regimen, therapeutic area, indication, or combinations. Only on-label detailing products are supported. Products must be shared to user territory. Competitor product selection can be enabled via Product Selector Configuration metadata.",
+      "account_linking": "Multiple accounts can be linked during insight creation. Account search supports KanaName for Japanese locale, Account Territory field if extended search is enabled, and Account Name formula field. Users with read-only access can still link accounts.",
+      "tags_and_channels": "Tags represent insight channels. Users select from available tags (Topic records of Tag record type) but cannot create new ones. Tags display as hierarchies from parent through all levels to the selected tag. Users need read and edit access to Topic records to add them.",
+      "ranking_and_grouping": "Insights are grouped into tabs: Latest (created in last 30 days), Trending (updated or upvoted in last 30 days), All Channels (filtered by tags), My Insights (created by current user). Default rank is sum of upvotes and linked accounts. Admin can create custom formula fields for ranking logic and update the Insight Rank Field setting.",
+      "read_only_access": "Users with read-only access can view insights, upvote them, view linked account lists, and add/remove their own linked accounts. They cannot link insights to similar insights by default.",
+      "activation_steps": "Requires: granting object permissions for Insights and Insight Topic; field-level security for both objects; assigning Insight User permission set; activating trigger handlers (RecalculateLinkedInsightsHandler, RecalculateInsightTagNamesHandler); activating InsightTopic DB Schema; configuring quick actions and custom permissions per capture point; creating Source picklist values; overriding New/Edit actions with InsightCaptureContainer component; layout configuration; metadata cache generation."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "insights", "knowledge-capture", "collaboration", "account-intelligence"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-004",
+    "category": "configuration",
+    "title": "Insights - Voting, Linking, Colleagues, and Objectives",
+    "products": ["oce"],
+    "summary": "Advanced insights features including upvoting for prioritization, parent-child linking for trend consolidation, colleague collaboration across divisions, business objectives integration with hierarchical tree view, workflow-controlled access, and report configuration for unique (non-child) insights.",
+    "findings": {
+      "voting": "Voting allows sales reps to indicate insight priority. Requires: Insight User permission set, custom tab for Insight object (visibility Default Off to avoid duplicate tabs), Vote Insight Calculation trigger handler, Vote and InsightSetting DB Schema entities. Voting from the edit screen requires the extended package permission set and adding InsightUpvoteContainer component to the Lightning page with a visibility filter (Is Parented = False).",
+      "parent_child_linking": "Insights can be organized into parent-child hierarchies for trend consolidation. Child records disappear from the insights list after linking. Counters (upvotes, links) aggregate on the parent. Requires: extended permission sets, Similar Insights related list, LinkInsightsButton component with Is Parented = False visibility, trigger handlers (ParentInsightSharingHandler, RecalculateParentLinkedInsightsHandler, UpvoteInsightHandler), validation rules on multiple objects to prevent unauthorized modifications to child records. Optional: enable linking to read-only insights via dedicated custom permission.",
+      "global_insights": "Global insights come from other orgs when cross-org transactions are configured. They display a distinct icon, have lower color density for externally-added products and tags, and contain denormalized non-editable fields (DateTime, Insight Title, Insight, Tag, Product). Custom fields are not supported. Requires cross-org functionality configuration and activation of editing validation rules and denormalization trigger handlers.",
+      "colleagues": "Colleagues from the User object can be linked to insights for cross-team collaboration. Filtered by current user division. Requires: Insight Colleague related list, InsightColleagueButton component with Is Parented = False filter, permission sets, InsightColleagueSharingHandler trigger handler, Divisions functionality setup, User DB Schema update with DefaultDivision in Mandatory Fields, InsightColleague DB Schema entity.",
+      "business_objectives": "Business Objectives can be linked to insights showing territory objectives, tactics, and to-dos in a hierarchy using the Dynamic Tree View component. Only Territory Business Objective records with Approved status can be linked. Requires extensive metadata configuration for DTVComponentConfig and DTVObjectConfig records defining the hierarchy (Business Objectives > Business Tactics > Business To-Do), permission sets, trigger handlers, and DB Schema entities.",
+      "workflow_control": "Access to Insight records can be controlled via workflow paths. Requires creating a workflow context type for the Insight object and configuring child contexts for each parent context (e.g., Draft status allows create/edit/delete; Submitted status locks all operations).",
+      "unique_insights_report": "Reports showing only unique insights (parents and stand-alone, excluding children) require: a custom Formula field checking both parent-linked and parent insight lookup fields are blank, a field set with Insight Title, a ListView component on Account page with WHERE clause filtering by the formula field, and standard report configuration with the formula field filter set to True."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "insights", "voting", "collaboration", "business-objectives", "workflow", "reporting"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-005",
+    "category": "configuration",
+    "title": "Insights for Call Configuration",
+    "products": ["oce"],
+    "summary": "Detailed activation steps for capturing insights from within calls, including account/attendee selection, tag sharing, and call discussion integration. Insights captured during calls track which accounts and attendees provided the information.",
+    "findings": {
+      "call_insights": "Sales reps can log insights during calls with account and attendee selection to track the source of information. Tags used for tracking must be shared on the territory. Insights can be added from the Insights related list or from Call Discussion.",
+      "activation_steps": "Requires: object permissions (Read, Create, Edit, Delete) for Insights and Insight Topic; field-level security for Insights and InsightTopic objects; Frontend LAC Id field access on Call Discussion; Parent Topic field access on Topic object; Tag record type configuration; tag hierarchy creation; Insights related list on Call layouts with specific fields; optional Call Discussion related list with Enable Insights on Call Discussions setting; platform events activation; CallInsightHandler trigger handler; Insight and Topic DB Schema activation; metadata cache generation and sync.",
+      "call_discussion_integration": "To enable insights from Call Discussions: add Call Discussion related list to the call page layout, then enable the Insights on Call Discussions checkbox in the Call Administration tile's Call Details section.",
+      "account_insight_related_list": "An optional Account Insight related list on Account layouts populates with records after the CallInsightHandler trigger handler processes parent insights. Accounts and Tags fields contain JSON format data and are not recommended for display."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "insights", "calls", "call-discussion", "account-intelligence"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-006",
+    "category": "configuration",
+    "title": "Managed Markets and Formulary Configuration",
+    "products": ["oce"],
+    "summary": "Basic managed markets configuration with Account Record Types for Payer, Plan, and Pharmacy Benefits Manager. Includes Formulary and Formulary Product custom objects for creating formulary records at the Plan level. Mobile display enabled through DB Schema activation.",
+    "findings": {
+      "account_record_types": "Three new Account Record Types available: Payer, Plan, and Pharmacy Benefits Manager, supporting basic managed markets functionality.",
+      "formulary_objects": "Two custom objects: Formulary and Formulary Product. Formularies link to a Plan account (not Payer level). Each Formulary Product record tracks Product, Tier, Copay, Lives, and related attributes.",
+      "formulary_creation": "When creating a Formulary, enter a Formulary Name and select the desired Plan in the Account field. Formulary Products are added via the Formulary Related List.",
+      "mobile_display": "To display formularies on the mobile device, enable the Formulary and FormularyProduct DB Schema records."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "managed-markets", "formulary", "payer", "plan"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-007",
+    "category": "configuration",
+    "title": "Metadata Management - Architecture and Cache Generation",
+    "products": ["oce"],
+    "summary": "The Metadata Service retrieves configuration from the CRM platform and provides it to mobile applications in a unified format. Operates as a SaaS solution hosted externally, containing no client data. Covers metadata types (static resources, database structure, navigation, translations, formulas), cache generation, validation, and lifecycle management.",
+    "findings": {
+      "architecture": "Key components: CRM platform configuration and API, Configuration Service, Metadata Service and Storage, Mobile Configuration Parser. The service retrieves metadata types including: static resources, CRM configurations, database structure, navigation, report descriptions, object descriptions, UI resources, formula descriptions, translations, and documents.",
+      "config_retrieval": "Metadata configuration includes access URLs and credentials for email delivery services, S3, analytics servers, and other product features. After installation or credential changes, configuration must be retrieved from the Config Service via the Admin Console Mobile tile using a delivery-team-provided passcode.",
+      "s3_credential_refresh": "Cloud storage bucket credentials refresh automatically every 45 days. Integrated orgs update automatically; non-integrated orgs require manual retrieval. Email notifications sent 3 days before planned update and daily after update date (manual flow only) until retrieval is performed. Old credentials remain valid alongside new ones for 10 days.",
+      "cache_statuses": "Metadata cache lifecycle: Validating (system validates), Published (ready for processing), In progress (being processed), Active (successfully processed, available to devices), Inactive (failed validation). Error logs are written to the ErrorLog field; logs exceeding 13KB are truncated with complete logs attached to the metadata record.",
+      "generation_requirements": "Cache generation should be performed by a user with admin profile and admin permission set with Modify All Data permission. The session IP lock setting must be disabled and Session Security Level Required at Login set to None for the generating profile. The user must not log out during generation. After adding new fields, ensure the generating profile has read and edit access.",
+      "profile_selection": "Metadata can be generated for specific profiles or all profiles. After initial installation or major update, first generation must be for all profiles. Using permission set assignments for metadata entities where possible is recommended to reduce processing time.",
+      "surveys_standalone": "Surveys metadata can be generated independently of full metadata cache via the Standalone Metadata tab, saving time. Requires Standalone MD Admin custom permission for the admin tile and Standalone MD Survey User permission for mobile users.",
+      "background_processing": "Metadata can be downloaded and processed during background sync. When enabled, alert notifications for new metadata are suppressed. Unsaved data may be lost during background application. Requires adding MetadataInBackground picklist value to Sync Trigger field and enabling the background processing checkbox."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "metadata-management", "metadata-cache", "mobile", "synchronization"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-008",
+    "category": "configuration",
+    "title": "Metadata Management - DB Schema and UI Schema Entities",
+    "products": ["oce"],
+    "summary": "Configuration of database schema entities that define which objects and fields are included in the mobile metadata cache, and UI schema resources that define mobile interface components. Covers entity creation, validation, profile/permission set assignment, SOQL filtering, and standard field management.",
+    "findings": {
+      "db_schema_entity_types": "Two types: Data (database template for mobile app) and Configuration (database template with queried records containing configuration data that should not be synchronized or queried on mobile).",
+      "entity_parameters": "Name (unique identifier), Search SObject (target object), Type (Data/Configuration), Assignments (profiles and/or permission sets), OneWaySync (data retrieval only, no sync back), DeltaDateField (field for delta sync, usually LastModifiedDate), SF Files Support (None/Background/Cache), Is WeChat Compatible, Enable Data Upload Notification, Is Active, Where SOQL (filtering condition).",
+      "permission_set_assignment": "Permission set assignment is available only for Data type entities. When both profile and permission set are configured for the same entity, permission set overrides profile configuration. Users should have a one-to-one relation with DB Schema by profile or permission set; multiple permission sets on the same entity leads to unpredictable behavior.",
+      "where_soql": "Supports simple and advanced editors. Dynamic variables: {USER.ID}, {USER.TERRITORY}, {USER.PROFILE}, {CONT.DOCS}, {RELATED.ENTITIES}. OR conditions must be enclosed in parentheses. New line characters should be avoided.",
+      "validation": "DB Schema validation can run independently from cache generation. Statuses: Empty (needs validation), Checking, Valid, Warning (non-critical), Error (critical), Cancelled. Entities with Error status cause metadata cache to become Inactive; Warning status still allows Active status.",
+      "standard_fields": "Standard fields automatically included: Id, Name, DeveloperName, RecordTypeId, IsDeleted, CurrencyIsoCode, OwnerId, CreatedById, CreatedDate, LastModifiedById, LastModifiedDate, and UserRecordAccess fields. If standard fields are added or removed from an object, the DB Schema entity must be cloned to refresh the field list.",
+      "ui_schema": "UI resources define mobile interface components. Types include Static Resource, LAC App, Affiliations App, and Tab. Tab type requires Tab Name and Tab Order. Static resources can reference existing or new static resources with optional Gulp Ready flag for JSCustomization integration.",
+      "data_upload_notification": "Supported for specific objects only: Inquiry, Opt, Order2, Call, CallSample, CallSampleOrder (DTP), CallDetail, CallItem, MeetingMember, Document. Notifies users to keep the app in foreground until data upload completes.",
+      "china_alternate_upload": "For China region, if S3 upload issues occur, metadata cache can be saved to the CRM platform and manually uploaded to the storage bucket. Requires a support case to enable."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "metadata-management", "db-schema", "ui-schema", "mobile", "entity-management"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-009",
+    "category": "configuration",
+    "title": "Migrate Custom Settings Between Orgs",
+    "products": ["oce"],
+    "summary": "Process for exporting custom settings from one org and importing them to another (e.g., sandbox to production). Uses a dedicated Custom Settings Migration object, Data Loader for export/import, and matching criteria based on setting name or user/profile name.",
+    "findings": {
+      "process": "Assign Setting Migration custom permission, run the Custom Settings Migration job from Admin Console Mobile tile to generate migration records, export records using Data Loader (select only custom fields), edit the CSV if needed, import into target org using Data Loader with Insert operation and auto-mapping.",
+      "matching_criteria": "Custom settings are matched by name. Hierarchical settings for user and profile are matched by user name and profile name respectively.",
+      "constraints": "Migration succeeds only between orgs with identical code versions. If a custom setting has an extra field on the exported org that does not exist on the imported org, migration fails.",
+      "exclusion": "To exclude a custom setting from migration, create a DoNotMigrate field of any data type on the custom setting. The field value does not matter.",
+      "permissions": "Requires the Mobile - Setting Migration custom permission. After upgrade, Read/Create/Edit/Delete access to the Custom Settings Migration object must be granted to users performing migration.",
+      "job_behavior": "Running the Custom Settings Migration job wipes the previous migration records before inserting new ones. Only packaged custom settings are saved. An email notification is sent upon completion."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "custom-settings", "migration", "data-loader", "sandbox-to-production"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-010",
+    "category": "configuration",
+    "title": "Mobile Messaging Platform Integration (WeChat Mini Program)",
+    "products": ["oce"],
+    "summary": "Configuration for a mobile messaging platform mini program channel that provides a mobile-centric subset of CRM features. Covers Single Sign-On configuration with custom HTML bridging for restricted domains, login URL formats, logout messaging, and cross-mini-program launching.",
+    "findings": {
+      "architecture": "The mini program runs on a messaging platform (WeChat/WeCom), providing a mobile-centric user experience as a channel of the CRM ecosystem that mirrors key features from the iOS application.",
+      "sso_mechanism": "SSO uses a custom HTML page hosted on cloud infrastructure to embed the standard CRM login page with SSO functionality. This approach is necessary because the CRM domain is not registered in the required ICP registration, preventing direct access from the mini program.",
+      "url_formats": "Three URL formats: (1) Default URL without parameters opens production login; (2) URL with customDomain parameter opens domain-specific login directly; (3) URL with env parameter (production/sandbox) opens the corresponding environment login. The customDomain and env parameters cannot be used simultaneously.",
+      "logout_configuration": "Custom labels control the logout and login page messages. The SSO logout message custom label informs users about redirect behavior. The SSO prompt message custom label provides instructions to return to the SSO login URL. If SSO is not enabled, delete all translations and leave only the default message in the custom label.",
+      "cross_program_launching": "The mini program can be launched from another mini program with a parameter indicating whether SSO instructions should display on the login page. Uses the platform navigateToMiniProgram API with an isSSOEnabled flag in extraData.",
+      "metadata_cache": "Metadata cache generation is required after configuring SSO messages or custom labels."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "wechat", "mini-program", "sso", "china", "mobile-messaging"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-011",
+    "category": "configuration",
+    "title": "Cross-Org Data Exchange (OCE-X) - Overview and Retired Global Use Cases",
+    "products": ["oce"],
+    "summary": "Cross-org service supporting global MSL use cases for organizations with multiple CRM instances. Enables viewing and logging activities across global accounts in a common language. Supports specified objects including Account, Address, Speaker, Insight, Account Plan hierarchy, and related objects. China-region orgs cannot participate in cross-region deployments.",
+    "findings": {
+      "purpose": "Cross-org data exchange allows Global MSLs in organizations with multiple CRM instances to view activities on global accounts and log activities for those accounts in other orgs using a common global language.",
+      "constraints": "Translations support one language only; the system does not provide translations. Organizations are responsible for data consistency across reference objects in different orgs. China-region orgs cannot be included in deployments with orgs from other regions due to cloud infrastructure isolation.",
+      "supported_objects": "Account, Address, Speaker, AccountEventX, Account Address, Insight, Account Plan, Account Plan Member, Account Plan Product, Situational Analysis, Account Objective, Account Tactic, To-Do.",
+      "instance_model": "Each cross-org instance contains a group of orgs that are either all Sandbox or all Production. For the initial release, organizations can request one instance for sandboxes and one for production.",
+      "personas": "Global account viewing and activity logging can be enabled via permissions on any profile. No out-of-box profiles are delivered specifically for this feature.",
+      "exclusivity": "This cross-org capability must not be confused with or combined with a separate cross-border product. Using both simultaneously for the same customer across all CRM orgs is prohibited."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "cross-org", "global-accounts", "multi-org", "data-exchange"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-012",
+    "category": "configuration",
+    "title": "Cross-Org Data Exchange (OCE-X) - Setup, Sync, and Configuration",
+    "products": ["oce"],
+    "summary": "Detailed setup and configuration for cross-org data exchange including activation, external ID setup, field sync configuration, account publishing with translations, synchronization scheduling and monitoring, search/download of global accounts, global account request creation, and validation rules for data integrity.",
+    "findings": {
+      "activation": "Requires: support ticket for instance configuration, user access to connected app, Admin approved users pre-authorization, SuperAdmin and Admin permissions on each org, record type normalization, sync user access to needed record types. For encrypted type fields, the integrated user must have View Encrypted Data permission.",
+      "external_ids": "External ID fields must be the same across all orgs in an instance, marked as Unique and External ID, and not null. Changing external IDs after successful sync can cause issues requiring data cleanup. Setup via Admin Console settings tab.",
+      "field_sync": "Administrators configure which fields to include per object for sync. Supported field types include Checkbox, Currency, Date, DateTime, Email, Geolocation, Number, Percent, Phone, Picklist, Multi-select Picklist, Text, Text Area variants, External ID, Time, URL. Rich Text fields with images are not supported (images are skipped). Fields must be available in all orgs and accessible to the sync user.",
+      "account_publishing": "Admins search for accounts and publish them with translations. Copy Data button applies existing field values to translated field values when languages match. Published accounts are marked as Global. Updates to previously published accounts can be managed through the Global Accounts tab.",
+      "synchronization": "Sync executes on admin-defined schedules, fetching org settings before each sync. Failed records are retried up to 3 times; remaining failures are picked up in the next scheduled sync. Sync statistics track Data Pull, Logs, and Data Push with detailed status information per org and object.",
+      "sync_error_handling": "Common errors: duplicate external IDs across orgs (both with non-subscribed records), unpopulated external IDs, insufficient field permissions. If Account pull fails from an org, all object push to that org is skipped. If non-account pull fails, only Accounts from other orgs are pushed.",
+      "search_and_download": "Users can search global accounts across orgs. Requires AllowSearchAndDownloadOfGlobalAccounts permission and read access to IsGlobal and IsSubscribed fields. Downloaded accounts follow standard territory alignment process.",
+      "global_account_requests": "Users can create Global Account Requests when accounts are not found. Requires AllowCrossOrgRequestForAccount permission and Confirm Before Create setting. Disabled when app is offline. Not available from Search Online.",
+      "validation_rules": "Packaged validation rules include: preventing global parent account selection, disabling subscribed account editing, restricting global address/workplace assignment to non-global accounts, blocking affiliation creation with global subscribed accounts.",
+      "recommendations": "Activate subscribed edit disable rules, exclude sync user from duplicate rules (filter by IsSubscribed=false), locally-required validation rules, locally-required trigger handlers, and Data Change Request settings. Normalize picklists between orgs. Enable multi-currency across all orgs."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "cross-org", "synchronization", "global-accounts", "external-ids", "data-exchange"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-013",
+    "category": "configuration",
+    "title": "Quick Actions - Account Actions and Platform Configuration",
+    "products": ["oce"],
+    "summary": "Configuration of quick actions available from account profiles and call attendees on both mobile and web applications. Actions are assigned dynamically via account page layout sections (Classic Publisher and Mobile/Lightning Actions) with different availability matrices for mobile and web platforms.",
+    "findings": {
+      "layout_sections": "Actions in Quick Actions in the Classic Publisher section appear on account profiles in the mobile app. Actions in the Mobile and Lightning Experience Actions section appear for both web and mobile. Order on account profiles shows Classic Publisher actions first, then Mobile/Lightning actions.",
+      "mobile_actions": "Supported on mobile: New Call, Last Call, New Order, MIRF (record-type dependent), NBC, CLM, Email (CustomEmail action, not standard), View Online, Create Account, Store Check, Survey, Generate Document, Search PubMed, Search Clinical Trials, Child Call (call form only, requires attendee-level samples or items enabled).",
+      "web_actions": "Supported on web: New Call, Last Call, New Order, NBC, Create Account, Child Call (call form only).",
+      "call_form_restrictions": "On the mobile call form, only specific actions are available: Last Call, MIRF, NBC, New Order, Email, View Online, Store Check, Survey, Generate Document, Child Call. On the web call form: Last Call, New Order, NBC, Child Call. Other configured actions are ignored.",
+      "child_call_configuration": "Child Call must be in the Classic Publisher section but NOT the Mobile/Lightning Actions section to appear only on the call form. Requires Enable attendee-level samples or Enable attendee-level items in Call Administration. Configuration works only for Log a Call (Call 1.0)."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "quick-actions", "account-actions", "mobile", "web", "call-form"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-014",
+    "category": "configuration",
+    "title": "Quick Actions - Custom Actions, Non-Standard Pages, and Metadata Records",
+    "products": ["oce"],
+    "summary": "Configuration of custom URL/app actions, actions for non-standard CRM pages (Calendar, NBC, Search, Home Page, Meetings), quick action metadata record creation with profile and permission set targeting, View Online for custom objects, and VisualForce page actions on mobile.",
+    "findings": {
+      "custom_actions": "Custom actions open internal/external URLs or other apps with parameter passing. Configuration requires: custom metadata record in Admin Console (Action Type, Color hex, Entity Name, Entity Type, Hide View in Browser, Icon unicode, Quick Action API name, Target Parameters, Target Type), corresponding quick action on the object, page layout assignment, CustomAction DB Schema activation, and metadata cache generation.",
+      "target_parameters": "Support Account and User object fields plus session ID and endpoint parameters. Format: parametername={ObjectName.FieldName}. Multiple parameters supported but multiple database values in a single parameter criteria are not. Not supported on Home page.",
+      "non_standard_page_actions": "Actions configurable for: Calendar (New Call, New Order, CLM, MIRF, View Online), NBC (New Call, Last Call, CLM, MIRF, New Order, View Online), Search (New Call, NBC, New Order, CLM, MIRF, View Online), Home Page (Call, Order 2, MIRF, Share Content, Email - maximum 5 visible), Meetings (Email for attendees).",
+      "home_page_actions": "Only 5 quick actions display on the Home Page on mobile. Actions sort by Order field number, then alphabetically. Custom actions appear after quick actions. Vertically stacked display available via Profile Based App Settings custom setting.",
+      "quick_action_metadata_creation": "Metadata records require: Profiles (255 char limit), Permission Sets (255 char limit, requires Enable Permission Sets for Quick Actions setting), SObject (Account for Calendar/Meetings/NBC/Search, Call for Call location), Record Type, Action picklist, Order, Mobile only flag, Color hex, Icon unicode.",
+      "view_online_custom_objects": "Add View Online to custom objects by creating a VisualForce page with the object's standard controller, creating a ViewOnline custom action (no spaces in name), and adding to the Classic Publisher section of the page layout.",
+      "visualforce_actions": "VisualForce page actions on mobile dynamically render fields based on picklist values. Requires: creating the VF page with Lightning Experience availability selected, enabling for desired profiles, creating a Custom Visualforce action type, adding to the Mobile and Lightning Actions section of the page layout."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "quick-actions", "custom-actions", "home-page", "visualforce", "mobile"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-015",
+    "category": "configuration",
+    "title": "Calendar Integration via Third-Party Sync Service - Setup and Configuration",
+    "products": ["oce"],
+    "summary": "Integration of CRM calendar with email platforms (Exchange/Office 365/Gmail) via a third-party cloud sync service. Covers discovery, account creation, synchronization modes (Single-User/Company/Corporate), CRM and email connection setup, sync policy configuration, and testing procedures.",
+    "findings": {
+      "discovery_process": "Gather: company and contact info, email platform and version, CRM user count and sync user count, trial user selection, existing sync tool status, appointment sync preference (require category vs. sync all new).",
+      "email_server_preparation": "The sync service requires an admin-level account that can impersonate or access target email user accounts. Exchange Application Impersonation is recommended for Exchange 2013/2010. The Exchange Access Mode (Delegate Full Access vs. Impersonation) must be noted for account setup.",
+      "cloud_account_creation": "Registration via the sync service website with geographic data residency selection (US/Europe/Canada/Australia). Username should be a generic admin format. Free trial accounts are created and converted to subscriptions. Corporate mode is recommended for CRM sync.",
+      "synchronization_modes": "Single-User: individual connections and policy per user. Company: individual connections and policies, suitable for fewer than 10 users with different policy needs. Corporate (recommended): one shared email connection, one CRM connection, one sync policy for all users via service account impersonation.",
+      "crm_connection": "Connect using admin credentials as the service account. Redirect-based authentication flow with the CRM platform.",
+      "policy_configuration": "General tab: disable policy until configured, set historic item filtering start date to policy creation date, configure error email notifications. Schedule tab: 5-minute sync during peak, 30-minute during off-peak, blackout times configurable. Configuration tab: set category name and color for identifying synced items, configure auto-synchronize behavior.",
+      "calendar_modules": "Calendar Appointments (required), sync direction is unidirectional email-to-CRM, Calendar Tasks not required, disable Reminder Synchronization, enable recurring appointment synchronization (translates series to individual appointments), option to skip private appointments.",
+      "field_mapping": "Exchange Subject maps to Name, Body to Description, Attendee List appended to Description, Start/End DateTime, All Day Event flag, syncing user's territory setting, Owner from syncing user."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "calendar-integration", "third-party-sync", "exchange", "office-365", "synchronization"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-016",
+    "category": "configuration",
+    "title": "Calendar Integration via Third-Party Sync Service - Administration and Troubleshooting",
+    "products": ["oce"],
+    "summary": "Administration of the calendar sync service including user management, subscription lifecycle, sync monitoring, delete safety, connection password management, and troubleshooting common errors for Exchange connections, CRM connections, and synchronization failures.",
+    "findings": {
+      "subscription_management": "Trial provides 14-day temporary access for configuration. Subscription activation via billing team request with technical contact, billing contact, account username, start/renewal dates, license count, and customer information. Additional users can be added post-subscription with pro-rated billing.",
+      "user_management": "Users can be added individually or in bulk via CSV (LastName, FirstName, EmailAddress). Users can be enabled/disabled individually or in bulk. Disabled users cannot log in and their sync policies are disabled.",
+      "sync_monitoring": "Sync logs viewable per user with normal and detailed views. Audit summary tracks security events (logon, logout, password changes, user modifications), configuration changes (policy/connection create/modify/delete), and subscription changes (purchases, amendments, cancellations). Audit data retains up to 6 months.",
+      "delete_safety": "Prevents accidental mass deletions when the number queued exceeds a configurable threshold. Administrators review and allow or disallow deletion requests.",
+      "exchange_errors": "Common: unable to connect with given credentials (update service account credentials), cannot resolve target mailbox (verify mailbox setup, primary SMTP match, Global Access List visibility).",
+      "crm_errors": "Common: unable to connect with given credentials (update CRM connection password), unable to match user to impersonate (ensure unique active CRM user with matching primary SMTP email).",
+      "sync_errors": "CRM ID conflict (user renamed, requires Clear Mailbox ID Conflict by support team), appointments not syncing without errors (check policy settings, error categories, auto-sync configuration), appointments syncing incorrectly (engage support team with user details, appointment creator, attendees, reproduction steps).",
+      "troubleshooting_approach": "Determine severity (all users vs. specific), identify connection vs. sync error, check logs for affected users, verify connection tests, compare permissions between working and non-working users."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "calendar-integration", "third-party-sync", "troubleshooting", "administration", "sync-errors"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-017",
+    "category": "configuration",
+    "title": "Job Execution API - Run, Schedule, and Delete Jobs",
+    "products": ["oce"],
+    "summary": "RESTful API for running and scheduling Apex batch jobs from external systems without CRM login. Supports territory management, plan cycle, activity plan, sample limit, and other batch jobs with job-specific parameters, cron expression scheduling, and job lifecycle management.",
+    "findings": {
+      "supported_jobs": "TerritoryManagementZipBatch, TerritoryZipBrickBatchJob, TerritoryManagementBrickBatch, TerritoryManualBatchJob, CustomerAlignmentRuleManagementBatch, PlanCycleMaintenanceBatch, PlanCycleSubmittingJob, ActivityPlanSharedCalculationBatch, AccountUtilizationLimitsBatch, MonetaryCapsRecalculationJob, ActivityPlanCalculationBatch, ActivityPlanLimitCalculationBatch, SampleLimitInitialization.",
+      "run_schedule_endpoint": "POST to /services/apexrest/jobexecutor/runJob. Required: jobName. Optional: batchSize (default 200), cronExpression (if provided, job is scheduled; if absent, job runs immediately), additionalParams (job-specific parameters).",
+      "job_specific_params": "TerritoryZipBrickBatchJob: jobName (Zip to Territory or Brick to Territory) and territoryName. TerritoryManualBatchJob, TerritoryManagementZipBatch, TerritoryManagementBrickBatch, CustomerAlignmentRuleManagementBatch, ActivityPlanLimitCalculationBatch: territoryName. SampleLimitInitialization: template (JSON format) and accountIds (array). ActivityPlanCalculationBatch: planCycles (array of PlanCycle records in JSON) and activityPlanConfigNames (array of strings).",
+      "retrieve_endpoint": "POST to /services/apexrest/jobexecutor?jobId=XXX. Returns AsyncApexJob record for batch/queue jobs or CronTrigger record for scheduled jobs.",
+      "delete_endpoint": "DELETE to /services/apexrest/jobexecutor?jobId=XXX. Only scheduled jobs can be removed. Returns success confirmation or error.",
+      "error_responses": "400 for missing required fields, invalid batch size, or already-scheduled jobs. 404 for invalid endpoints. 500 for all other platform errors.",
+      "sample_limit_note": "SampleLimitInitialization cannot be scheduled from the admin console but is not restricted by the API."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "job-execution", "api", "batch-jobs", "scheduling", "territory-management"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-018",
+    "category": "configuration",
+    "title": "Schedule Job Run from Admin Console",
+    "products": ["oce"],
+    "summary": "Admin console interface for scheduling recurring jobs with frequency options (Hourly, Daily, Weekly) and monitoring scheduled job status including cron expression, trigger count, and next/previous run times. Includes Call Event platform event configuration for integration use cases.",
+    "findings": {
+      "scheduling_options": "Frequency options: Hourly (specify interval), Daily (specify preferred start time), Weekly (specify days and preferred start time).",
+      "job_monitoring": "Scheduled job pane shows: Status, Cron Expression, Times Triggered, Created Date, Next Run Time, Previous Run Time.",
+      "call_event_integration": "Submit settings section allows configuring which call channels create Call Event platform events. A new event is created on call creation and each edit. Published events are used by external integration platforms.",
+      "sync_transaction_notes": "If Sync Transaction for record insert is processed by the Sync Transaction Regularly job, the CreatedById field is populated with system context user Id. The scheduling admin must have Query All Files system permission for correct Content Document processing."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "job-scheduling", "admin-console", "platform-events", "monitoring"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-019",
+    "category": "configuration",
+    "title": "Specialty Management with Healthcare Provider Data Integration",
+    "products": ["oce"],
+    "summary": "Automated management of Specialty picklist values sourced from a healthcare data provider for multi-country setup. Handles picklist value creation with standardized naming, country-specific language translations, healthcare provider code insertion, and code mapping maintenance.",
+    "findings": {
+      "picklist_management": "Specialty picklist values are sourced from a healthcare data provider and maintained centrally. API Name format: keyword prefix + international specialty code + optional local code. Label format: international label + optional local code. Managed values use a specific keyword prefix; custom values without the prefix are not affected.",
+      "naming_formats": "Four formats: (1) International code only (e.g., keyword.code = Cardiology), (2) Same international code with different labels across countries (appends code to label), (3) International code with local specialty code (appends local code to both API name and label), (4) Grouped classification for country-specific local specialties.",
+      "country_dependency": "Dependency maintained between Country Code and Specialty picklist fields. Prerequisite: dependency must already exist between the picklist fields.",
+      "translations": "Translations updated for all countries with their spoken languages using standard CRM platform language codes (e.g., fr_BE, de_BE, nl_BE for Belgium). Translations are maintained centrally and verifiable in the translation workbench.",
+      "healthcare_codes": "Codes sourced from centralized healthcare data repository and inserted for all enabled countries. Performs the same function as code download under the healthcare data connector setup but limited to specialty (SP) values.",
+      "code_mapping": "Code mappings inserted only for enabled countries and mapped out-of-box specialty picklists. Obsolete mappings are deleted based on logic: managed picklist values belonging to a non-enabled country. No duplicate mapping records are created.",
+      "process": "Initiated from Admin Console Specialty Management tile (requires All admin permission set). Follows guided steps with prerequisites, validation check, and process initiation. Monitor via summary section. Post-completion: update existing customer master data with new values, assign new picklist values to needed record types, generate metadata cache."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "specialty-management", "healthcare-data", "picklist", "multi-country", "translations"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-020",
+    "category": "configuration",
+    "title": "Sprints for Account Tactics",
+    "products": ["oce"],
+    "summary": "Sprint-based organization of Account Tactic execution. Sales reps access a Sprints tab and can associate tactics with sprints from account plans. A tactic can be associated with only one active sprint at a time, while sprints can hold multiple tactics.",
+    "findings": {
+      "functionality": "Sprints organize Account Tactic execution into time-boxed iterations. Sales reps view sprints linked to account tactics via a dedicated Sprints tab and can add/remove sprints from tactics while browsing account plan assignments.",
+      "constraints": "A tactic can be associated with only one active sprint at a time. One sprint can be associated with multiple tactics. Sprints are shared with record owners only by default; manual sharing setup is required. Object and field-level security checks apply to all Sprint-related layouts.",
+      "activation": "Requires: KAMAdmin or SprintUser permission set plus Dynamic Tree View User; trigger handlers (SetSprintPercentCompleteHandler, SetAccountPlanOnAccountTacticHandler); Sprints tab visibility set to Default ON; Sprints tab added to OCE app navigation; Account Tactic related list on Account Plan layout; Account Plan Lightning page configured with DynamicTreeViewContainer (Account Plan Sprints View) and Related List - Single (Account Tactics); DB Schema entities (Sprint, DTVComponentConfig, DTVObjectConfig); metadata cache generation.",
+      "bulk_update": "Bulk update can be configured on Tactics Backlog tab (on Account Plan page) and Tactics tab (on Sprint page) using dedicated parameters specifying parent object, related object, and relation field names."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "sprints", "account-tactics", "account-plans", "agile-execution"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-021",
+    "category": "configuration",
+    "title": "Studies, Sites, and Staff - Clinical Trial Management",
+    "products": ["oce"],
+    "summary": "Configuration of clinical study management objects (Study, Site, Staff, Milestone) with Gantt chart visualization, related list configuration, timeline component for activity tracking, and business objectives integration. Supports both web and mobile platforms.",
+    "findings": {
+      "data_model": "Study (experiments/observations in clinical research), Site (locations/HCOs for patient recruitment, stored as Study Site/Staff with Site record type), Staff (people/HCPs helping execute at sites, stored as Study Site/Staff with Staff record type), Milestone (tracks trial phases with patient recruitment targets, linkable to Study or Study Site but not both).",
+      "basic_setup": "Enable Study, Study Site/Staff, and Milestone DB Schema entities. Assign Study User permission set to reps and Study Admin to admins. Provide access to Study Account record types (Study and Site). Objects are private; use standard sharing rules.",
+      "gantt_chart": "Milestones displayed as Gantt charts for 3 consecutive years with monthly time units and bidirectional scrolling. Configure via GanttChartConfig custom metadata type specifying Title, SObject, RelationshipField, Status, Start Date, End Date, and Missed/Achieved status values. Available at both Study and Study Site levels with different metadata configuration names.",
+      "related_lists": "Study object configured with separate related lists for Sites and Staff. View All Components field must be set to Site or Staff accordingly. Handler for update/delete must be specified (StandardUpdateDeleteHandler).",
+      "timeline_component": "Generic timeline displays related child object records on parent object in chronological order. Supports lookup and master-detail relationships. Configurable via Timeline custom metadata type with fields for parent object, activity group, child object, parent reference, field set, date field, name field, icons, colors, and filtering. Supports extensive field types including formulas. Requires Timeline Admin/User permission sets, metadata configuration, Lightning page setup, field sets, and DB Schema activation.",
+      "business_objectives": "Territory objectives can be linked to studies with hierarchical display (Business Objective > Tactics > To-Dos) using the Dynamic Tree View component. Top 5 records shown per level with Load More. Picklist filters apply across all levels; search matches Name on at least one level. Requires multiple permission sets, DB Schema entities, and quick action configuration."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "studies", "clinical-trials", "sites", "staff", "milestones", "gantt-chart", "timeline"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-022",
+    "category": "configuration",
+    "title": "System Audit and System Logs",
+    "products": ["oce"],
+    "summary": "System monitoring capabilities including Implementation Audit (configuration completeness, scheduled jobs, security practices) and Operational Audit (sync delays, long-running operations, user activities, platform limits). System logs management with configurable log levels, retention, scheduled cleanup, mobile log collection, and database submission.",
+    "findings": {
+      "audit_types": "Implementation Audit: checks whether necessary jobs are scheduled, identifies sync or metadata anomalies, verifies security practices. Operational Audit: checks for sync delays and failures, gathers long-running operation statistics, user activities, platform limits, metadata generation frequency.",
+      "audit_access": "Requires Audit custom permission for the Monitoring tile's Audit tab in Admin Console. Run via Run Now button; results delivered as a link on the audit record and emailed to the running admin. Not supported for trial orgs.",
+      "log_management": "Logs accessible from Admin Console Monitoring tile, Logs tab. Logs have Open or Closed status. Origin field indicates error source. Log sharing should be set to Private for data protection.",
+      "log_configuration": "Custom setting Error Log supports org default and profile-specific settings. Days Before Delete sets retention period. Log Level options: NONE (no logs), ERROR, WARN, INFO, DEBUG (cumulative).",
+      "log_cleanup": "Scheduled deletion job configured via Admin Console Monitoring tile, Manage Clean Up section. Deletes logs according to Days Before Delete setting. Job pane shows Status, Cron Expression, Times Triggered, Created Date, Next Run Time, Previous Run Time.",
+      "mobile_log_collection": "Enable Is Logging Enabled checkbox on user records. Device uploads .zip archive of mobile application logs to cloud storage after every successful sync until the checkbox is cleared. Logout log records created on manual logout (not automatic logout or after 3 failed push attempts).",
+      "database_submission": "Mobile database .zip archive uploaded to cloud storage when a user clicks the Submit DB button in the mobile application."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "system-audit", "system-logs", "monitoring", "log-management", "mobile-logs"]
+  },
+  {
+    "id": "oce-cfg-sysmsc-023",
+    "category": "configuration",
+    "title": "Document Metadata - Introduction, References, Publication Record, and Approvals",
+    "products": ["oce"],
+    "summary": "Document metadata for the CRM Platform Configuration Guide including scope (covers both mobile and web application settings), minimum mobile platform requirements (iOS 18 on iPad), China-region login options, referenced companion documents, and publication governance.",
+    "findings": {
+      "scope": "The configuration guide covers system configuration options and procedures for administrators. Settings apply to both mobile and web versions unless specified otherwise.",
+      "mobile_requirements": "Mobile application works only on iPad devices with minimum iOS version 18.",
+      "login_options": "Default login presents Production or Sandbox connections. China-region devices additionally show Alibaba Production and Alibaba Sandbox options, which can be hidden via MDM configuration (OnlyShowAuthorizedHosts setting).",
+      "companion_documents": "Referenced documents: Healthcare Data Connector Configuration Guide, Engagement Configuration Guide.",
+      "publication_governance": "Document version 1.0, published March 20, 2025. Updates covered: Allow Manual Allocation of Expenses with 0 Amount, Enable Email Sending from Web."
+    },
+    "source": "CRM Platform Configuration Guide, March 2025",
+    "tags": ["configuration", "document-metadata", "introduction", "references", "publication-record"]
+  }
+]

@@ -1,0 +1,325 @@
+{
+  "id": "dt-regulatory",
+  "title": "Regulatory Compliance Decision Tree",
+  "description": "Decision tree for navigating regulatory requirements during life sciences CRM migration",
+  "nodes": [
+    {
+      "id": "start",
+      "question": "Which regulatory domains apply to this migration?",
+      "guidance": "Select all that apply. Most life sciences organizations fall under multiple regulatory domains.",
+      "options": [
+        {"label": "Sample Management (PDMA/FDA)", "next": "pdma_assessment"},
+        {"label": "Transparency/Sunshine Act", "next": "sunshine_assessment"},
+        {"label": "Data Privacy (GDPR/CCPA)", "next": "privacy_assessment"},
+        {"label": "Electronic Records (21 CFR Part 11)", "next": "cfr11_assessment"},
+        {"label": "Medical Device Regulations", "next": "medtech_assessment"},
+        {"label": "Country-Specific Pharma Regulations", "next": "country_assessment"}
+      ]
+    },
+    {
+      "id": "pdma_assessment",
+      "question": "Does the organization distribute product samples to healthcare professionals?",
+      "guidance": "PDMA (Prescription Drug Marketing Act) requires complete audit trail for all sample transactions from manufacturer to HCP.",
+      "options": [
+        {"label": "Yes — active sample distribution program", "next": "pdma_full"},
+        {"label": "Yes — but phasing out physical samples", "next": "pdma_transitional"},
+        {"label": "No — digital-only engagement model", "next": "pdma_skip"}
+      ]
+    },
+    {
+      "id": "pdma_full",
+      "requirements": [
+        "Complete sample transaction history must be migrated — no selective migration allowed",
+        "Every transaction must be traceable from receipt through disbursement to acknowledgment",
+        "HCP signature on sample receipt must be preserved as a digital record",
+        "Sample lot expiration dates must be validated and enforced",
+        "Representative inventory reconciliation must balance after migration",
+        "Sample limit enforcement must be configured and tested before go-live",
+        "Annual inventory reconciliation reporting must work in new platform"
+      ],
+      "validation_rules": ["val-dm-002", "val-dm-007"],
+      "risk_level": "critical",
+      "next": "start"
+    },
+    {
+      "id": "pdma_transitional",
+      "requirements": [
+        "Historical sample transactions must still be migrated for audit purposes",
+        "Active lot management may be simplified but lot tracking is still required",
+        "Transition to digital-only must be documented and sample program closure date recorded",
+        "Remaining sample inventory must be accounted for and reconciled"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "pdma_skip",
+      "requirements": [
+        "No sample management migration required",
+        "Verify no sample-related data exists in legacy system before skipping"
+      ],
+      "risk_level": "low",
+      "next": "start"
+    },
+    {
+      "id": "sunshine_assessment",
+      "question": "Does the organization operate in the US and provide anything of value to HCPs?",
+      "guidance": "The Physician Payments Sunshine Act (Open Payments) requires reporting of all transfers of value to covered recipients.",
+      "options": [
+        {"label": "Yes — active Sunshine Act reporting", "next": "sunshine_full"},
+        {"label": "Yes — but only through third-party aggregator", "next": "sunshine_partial"},
+        {"label": "No — non-US operations only", "next": "sunshine_international"}
+      ]
+    },
+    {
+      "id": "sunshine_full",
+      "requirements": [
+        "All HCP spend data for the current and prior reporting period must be migrated completely",
+        "Event attendee data with meal/travel costs must be preserved",
+        "Speaker program payments must be traceable",
+        "Consulting and advisory board fees must be linked to the correct HCP",
+        "Research payments must be categorized correctly (direct vs. indirect)",
+        "The reporting period cannot have gaps — migration cutover must be planned around Sunshine Act deadlines",
+        "Aggregate spend reporting must produce identical results in new platform"
+      ],
+      "risk_level": "critical",
+      "next": "start"
+    },
+    {
+      "id": "sunshine_partial",
+      "requirements": [
+        "Verify third-party aggregator data feed will work with new platform",
+        "Ensure data export format is compatible or transformation is in place",
+        "Historical data may still need migration for internal analytics"
+      ],
+      "risk_level": "medium",
+      "next": "start"
+    },
+    {
+      "id": "sunshine_international",
+      "requirements": [
+        "Check for country-specific transparency requirements (e.g., EFPIA in EU, JPMA in Japan)",
+        "Many countries have their own HCP payment disclosure requirements",
+        "Data migration must support country-specific reporting formats"
+      ],
+      "risk_level": "medium",
+      "next": "country_assessment"
+    },
+    {
+      "id": "privacy_assessment",
+      "question": "Which data privacy regulations apply?",
+      "guidance": "Select the primary regulatory framework. Many organizations must comply with multiple frameworks.",
+      "options": [
+        {"label": "GDPR (EU/EEA)", "next": "gdpr_requirements"},
+        {"label": "CCPA/CPRA (California)", "next": "ccpa_requirements"},
+        {"label": "LGPD (Brazil)", "next": "lgpd_requirements"},
+        {"label": "APPI (Japan)", "next": "appi_requirements"},
+        {"label": "Multiple jurisdictions", "next": "multi_privacy_requirements"}
+      ]
+    },
+    {
+      "id": "gdpr_requirements",
+      "requirements": [
+        "Explicit opt-in consent required — no default opt-in during migration",
+        "If legacy consent records lack explicit evidence of opt-in, set to 'Not Captured' status",
+        "Right to erasure (Art. 17) must be implementable in new platform",
+        "Data portability (Art. 20) must be supported",
+        "Consent expiration tracking must be configured (renewal periods vary by use case)",
+        "Data processing agreements with new platform vendor must be in place",
+        "Cross-border data transfer mechanisms (SCCs, BCRs) must be established",
+        "Data Protection Impact Assessment (DPIA) should be conducted before migration",
+        "Privacy by Design principles must be followed in platform configuration",
+        "Data retention policies must be configured per data category"
+      ],
+      "validation_rules": ["val-dm-003"],
+      "risk_level": "critical",
+      "next": "start"
+    },
+    {
+      "id": "ccpa_requirements",
+      "requirements": [
+        "Right to know — HCPs can request what data is stored about them",
+        "Right to delete — deletion requests must be fulfillable in new platform",
+        "Right to opt-out of sale — if data is shared with third parties, opt-out must be tracked",
+        "Vermont prescriber confidentiality laws may apply to certain data",
+        "Do Not Sell flag must be migrated if it exists in legacy system"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "appi_requirements",
+      "requirements": [
+        "Consent must be obtained for cross-border data transfers to countries without adequate protections",
+        "Purpose of use must be specified and migrated consent must align with stated purposes",
+        "Personal Information Protection Commission (PPC) guidelines must be followed",
+        "Anonymization requirements differ from GDPR — verify approach"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "lgpd_requirements",
+      "requirements": [
+        "Legal basis for processing must be documented (consent, legitimate interest, etc.)",
+        "Data subjects must be able to access, correct, and delete their data",
+        "Data Protection Officer (DPO) must be appointed",
+        "International data transfers require adequate safeguards"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "multi_privacy_requirements",
+      "requirements": [
+        "Apply the most restrictive requirement across all applicable jurisdictions",
+        "GDPR is typically the most restrictive baseline — start there",
+        "Country-specific consent defaults must be configured per market",
+        "Data residency requirements may require regional deployment",
+        "Build a privacy requirements matrix mapping each regulation to platform capabilities",
+        "Engage legal counsel in each jurisdiction before finalizing consent migration approach"
+      ],
+      "risk_level": "critical",
+      "next": "start"
+    },
+    {
+      "id": "cfr11_assessment",
+      "question": "Does the organization need electronic signature compliance?",
+      "guidance": "21 CFR Part 11 governs electronic records and electronic signatures in FDA-regulated industries.",
+      "options": [
+        {"label": "Yes — full Part 11 compliance required", "next": "cfr11_full"},
+        {"label": "Partial — audit trail required but not full e-signature", "next": "cfr11_partial"},
+        {"label": "Not applicable", "next": "start"}
+      ]
+    },
+    {
+      "id": "cfr11_full",
+      "requirements": [
+        "Complete audit trail for all record changes (who, what, when, why)",
+        "Electronic signatures must be linked to unique individual credentials",
+        "Signature records must be tamper-evident and time-stamped",
+        "System access controls must enforce individual accountability",
+        "Backup and recovery procedures must ensure record integrity",
+        "Training documentation for system users must be maintained",
+        "Validation documentation (IQ/OQ/PQ) for the new platform must be completed",
+        "Standard Operating Procedures must be updated for the new platform"
+      ],
+      "risk_level": "critical",
+      "next": "start"
+    },
+    {
+      "id": "cfr11_partial",
+      "requirements": [
+        "Audit trail must capture record creation, modification, and deletion with timestamps",
+        "User authentication must be enforced",
+        "Field-level audit history must be enabled for regulated objects",
+        "Data backup and recovery procedures must be documented and tested"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "medtech_assessment",
+      "question": "Does the organization sell or distribute medical devices?",
+      "guidance": "Medical device companies have additional regulatory requirements around Unique Device Identification (UDI), post-market surveillance, and adverse event reporting.",
+      "options": [
+        {"label": "Yes — regulated medical devices", "next": "medtech_full"},
+        {"label": "Combination products (drug + device)", "next": "medtech_combo"},
+        {"label": "No", "next": "start"}
+      ]
+    },
+    {
+      "id": "medtech_full",
+      "requirements": [
+        "UDI (Unique Device Identification) data must be migrated and maintained",
+        "Complaint and adverse event data must be traceable",
+        "Post-market surveillance data collection must continue through migration",
+        "Device-specific regulatory requirements vary by classification (I, II, III)",
+        "Notified Body audit trails must be preserved",
+        "Care program and assessment data for medical devices requires special handling"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "medtech_combo",
+      "requirements": [
+        "Both pharmaceutical and medical device regulations apply",
+        "Combination product tracking requires both drug lot and device UDI data",
+        "FDA Center jurisdiction (CDER vs CDRH) determines primary regulatory framework",
+        "Supply chain tracking must cover both components"
+      ],
+      "risk_level": "critical",
+      "next": "start"
+    },
+    {
+      "id": "country_assessment",
+      "question": "Which country-specific pharma regulations apply?",
+      "guidance": "Beyond global frameworks, many countries have specific pharmaceutical industry regulations.",
+      "options": [
+        {"label": "Japan (JPMA Code)", "next": "japan_reqs"},
+        {"label": "France (Anti-Gifts Law / Transparence-Santé)", "next": "france_reqs"},
+        {"label": "Germany (FSA-Kodex)", "next": "germany_reqs"},
+        {"label": "UK (ABPI Code)", "next": "uk_reqs"},
+        {"label": "Multiple countries", "next": "multi_country_reqs"}
+      ]
+    },
+    {
+      "id": "japan_reqs",
+      "requirements": [
+        "JPMA Fair Competition Code compliance for HCP interactions",
+        "Japanese Personal Information Protection Act (APPI) consent requirements",
+        "MR (Medical Representative) activity reporting requirements",
+        "Japanese language support and double-byte character handling in all migrated data"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "france_reqs",
+      "requirements": [
+        "Transparence-Santé reporting of all HCP/HCO payments and benefits",
+        "Anti-Gifts Law caps on meal values and gift values",
+        "CNIL (French data protection authority) requirements for data processing",
+        "French language support for all user-facing content"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "germany_reqs",
+      "requirements": [
+        "FSA-Kodex (Voluntary Self-Regulation for the Pharmaceutical Industry) compliance",
+        "Transparency reporting of HCP payments",
+        "Federal Data Protection Act (BDSG) requirements in addition to GDPR",
+        "German language support for all user-facing content"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "uk_reqs",
+      "requirements": [
+        "ABPI Code of Practice for pharmaceutical marketing",
+        "MHRA reporting requirements",
+        "UK GDPR (post-Brexit) consent requirements",
+        "NHS engagement and contracting requirements if applicable"
+      ],
+      "risk_level": "high",
+      "next": "start"
+    },
+    {
+      "id": "multi_country_reqs",
+      "requirements": [
+        "Build a country-by-country regulatory matrix",
+        "Configure consent defaults per country in the target platform",
+        "Transparency reporting requirements vary — map each country's requirements",
+        "Language and locale support must cover all operating countries",
+        "Data residency requirements may restrict where data can be stored",
+        "Consider a phased regional rollout rather than a simultaneous global go-live"
+      ],
+      "risk_level": "critical",
+      "next": "start"
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+[
+  {
+    "id": "ci-comp-001",
+    "category": "competitive-intelligence",
+    "title": "IQVIA OCE — Competitive Strengths Profile",
+    "products": [
+      "oce"
+    ],
+    "summary": "IQVIA OCE positions itself as a molecule-to-market ecosystem built on the Salesforce platform. Competitive strengths: OneKey native data integration, AI/analytics maturity (Next Best platform with ADA/Apollo/Lexi), rapid deployment (OCE Accelerate ~6 weeks), and strategic Salesforce partnership. October 2022 analysis.",
+    "strengths": [
+      {
+        "area": "Data Integration",
+        "detail": "OneKey HCP/HCO reference data natively integrated — eliminates third-party integrator dependency for master data"
+      },
+      {
+        "area": "Analytics and AI",
+        "detail": "Orchestrated Analytics with HCP 360, ADA/Apollo/Lexi AI, Next Best platform for engagement recommendations"
+      },
+      {
+        "area": "Deployment Speed",
+        "detail": "OCE Accelerate delivers CRM deployment in approximately 6 weeks using pre-configured templates"
+      },
+      {
+        "area": "Platform Architecture",
+        "detail": "Platform of platforms: Snowflake (data), Reltio (MDM), Salesforce (CRM). Persona-based, full offline, device-agnostic"
+      },
+      {
+        "area": "Engagement Capabilities",
+        "detail": "HCP Engage, HCP Connect, OCE Digital (SFMC), consent management, sample management"
+      },
+      {
+        "area": "Strategic Partnership",
+        "detail": "Salesforce partnership strengthening as Veeva migrates away — positions OCE as Salesforce-native alternative"
+      }
+    ],
+    "migration_relevance": "OCE's native OneKey integration and AI/Next Best capabilities represent functional gaps that must be mapped when migrating to or from this platform.",
+    "source": "iqvia-strengths-deep-dive-vs-veeva-oct2022",
+    "tags": [
+      "iqvia",
+      "oce",
+      "onekey",
+      "next-best",
+      "analytics",
+      "competitive-strengths"
+    ]
+  },
+  {
+    "id": "ci-comp-002",
+    "category": "competitive-intelligence",
+    "title": "IQVIA OCE — Known Limitations",
+    "products": [
+      "oce"
+    ],
+    "summary": "IQVIA OCE limitations: brand recognition weaker than Veeva, sample management immaturity, high cost structure, support operations maturity, content management lacks DAM/MLR, and systems integrator partnerships less developed. October 2022 analysis.",
+    "limitations": [
+      {
+        "area": "Brand Recognition",
+        "detail": "IQVIA primarily known for data/analytics, not CRM. Veeva has held brand equity since 2007"
+      },
+      {
+        "area": "Sample Management",
+        "detail": "Sample management immaturity vs Veeva — may require customization for complex compliance"
+      },
+      {
+        "area": "Cost Structure",
+        "detail": "High TCO from platform-of-platforms licensing (Salesforce + analytics + data layers)"
+      },
+      {
+        "area": "Support Operations",
+        "detail": "Support infrastructure scaled for data/analytics customers, not high-touch CRM support expectations"
+      },
+      {
+        "area": "Content Management",
+        "detail": "Lacks integrated DAM and MLR review workflows — CLM-heavy organizations need third-party solutions"
+      },
+      {
+        "area": "SI Partnerships",
+        "detail": "Fewer implementation partners than Veeva — longer selection cycles and less competitive pricing"
+      }
+    ],
+    "migration_relevance": "Organizations considering OCE as migration target should validate sample management regulatory compliance, cost model, and available SI partners.",
+    "source": "iqvia-strengths-deep-dive-vs-veeva-oct2022",
+    "tags": [
+      "iqvia",
+      "oce",
+      "limitations",
+      "sample-management",
+      "cost",
+      "content-management"
+    ]
+  },
+  {
+    "id": "ci-comp-003",
+    "category": "competitive-intelligence",
+    "title": "Veeva CRM — Competitive Strengths Profile",
+    "products": [
+      "oce"
+    ],
+    "summary": "Veeva CRM dominant market position since 2007. Strengths: brand recognition, comprehensive ecosystem (CRM+Vault+Network+OpenData+Link), strong customer community, VSPA configurable deployment, extensive SI partner network. 1,200+ customers as of 2022.",
+    "strengths": [
+      {
+        "area": "Industry Brand Dominance",
+        "detail": "De facto life sciences CRM since 2007 — 'CRM' and 'Veeva' nearly synonymous in pharma commercial ops"
+      },
+      {
+        "area": "Ecosystem Breadth",
+        "detail": "CRM + Vault + Network + OpenData + Link — cross-product integration deepens lock-in"
+      },
+      {
+        "area": "Customer Community",
+        "detail": "Strong user community, industry events, user groups — network effect for hiring Veeva-experienced talent"
+      },
+      {
+        "area": "Configuration Framework",
+        "detail": "VSPA (Veeva System Pre-configured Accelerator) reduces implementation time and risk"
+      },
+      {
+        "area": "Implementation Partners",
+        "detail": "Extensive SI partner network with competitive pricing for professional services"
+      }
+    ],
+    "migration_relevance": "Veeva ecosystem breadth means migration is rarely just CRM — Vault, Network, OpenData must be assessed. Strong community/talent pool means staffing the target platform may be challenging.",
+    "source": "iqvia-strengths-deep-dive-vs-veeva-oct2022",
+    "tags": [
+      "veeva",
+      "competitive-strengths",
+      "ecosystem",
+      "brand",
+      "vspa",
+      "community"
+    ]
+  },
+  {
+    "id": "ci-comp-004",
+    "category": "competitive-intelligence",
+    "title": "Veeva CRM — Known Limitations",
+    "products": [
+      "oce"
+    ],
+    "summary": "Veeva CRM limitations: forced migration to Vault platform (off Salesforce), costly licensing, third-party AI dependency, consent/sample gaps in some configs, integration complexity, iRep UI friction. October 2022 analysis.",
+    "limitations": [
+      {
+        "area": "Platform Migration Risk",
+        "detail": "Forced migration to Vault CRM eliminates access to Salesforce ecosystem, AppExchange, and third-party tools post-2025"
+      },
+      {
+        "area": "Licensing Costs",
+        "detail": "Cumulative cost of CRM+Vault+Network+OpenData+Compass creates significant annual spend"
+      },
+      {
+        "area": "AI and Analytics Dependency",
+        "detail": "AI/Next Best capabilities relied on third-party providers including IQVIA — native AI maturity lagged"
+      },
+      {
+        "area": "Consent and Sample Management",
+        "detail": "Depth varies by implementation — some configurations limited for complex global consent frameworks"
+      },
+      {
+        "area": "Integration Complexity",
+        "detail": "Vendor-specific object model and API patterns create overhead for non-Veeva system integration"
+      },
+      {
+        "area": "Mobile User Interface",
+        "detail": "iRep interface friction in high-volume call reporting and multi-product detailing"
+      }
+    ],
+    "migration_relevance": "Veeva's forced Vault migration creates a natural evaluation window. Customers face migration disruption regardless — making it the optimal time to assess Salesforce-native and IQVIA alternatives.",
+    "source": "iqvia-strengths-deep-dive-vs-veeva-oct2022",
+    "tags": [
+      "veeva",
+      "limitations",
+      "vault-migration",
+      "licensing",
+      "ai-gap",
+      "integration"
+    ]
+  },
+  {
+    "id": "ci-comp-005",
+    "category": "competitive-intelligence",
+    "title": "IQVIA vs Veeva — Detailed Feature Comparison Matrix (October 2022)",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Comprehensive feature-by-feature comparison across 15+ dimensions from the October 2022 deep-dive analysis. Covers business operations, data, functionality, and technical capabilities. IQVIA leads in platform-of-platforms approach, embedded AI/Next Best, OneKey data integration, cross-organization collaboration, and competitive pricing. Veeva leads in content management ecosystem (Vault PromoMats), market branding, customer success maturity, and benchmark data (Pulse).",
+    "findings": {
+      "business_ops_comparison": "IQVIA stronger on: ecosystem breadth (Salesforce + Snowflake + Reltio), competitive pricing, AI/ML maturity (ADA/Apollo/Lexi), cross-org collaboration tools. Veeva stronger on: brand recognition, customer success maturity, benchmark data (Pulse Field Trends).",
+      "data_comparison": "IQVIA: OneKey HCP/HCO reference data with real-time API integration — eliminates third-party master data dependency. Veeva: OpenData + Network + Link provide comparable master data but less tightly integrated with CRM.",
+      "functionality_iqvia_advantages": "Stronger out-of-the-box functionality, persona-based UI approach, admin console for configuration, field coaching module, full offline capability. OCE Accelerate delivers deployment in approximately 6 weeks.",
+      "functionality_veeva_advantages": "CLM (Closed-Loop Marketing) tightly integrated with Vault PromoMats content management. Territory alignment via Align and Align+ products. Broader SI partner network for implementation.",
+      "technical_comparison": "Both offer mobile-first design and offline capability. IQVIA deployment model is cloud-native with Salesforce infrastructure. Veeva transitioning to Vault platform (own infrastructure).",
+      "ui_and_cost": "IQVIA offers more modern persona-based interface design. IQVIA pricing structured to be competitive against Veeva's cumulative multi-product licensing (CRM + Vault + Network + OpenData).",
+      "ai_ml_gap": "IQVIA has mature embedded AI with Next Best platform. Veeva historically relied on third-party AI capabilities — native AI investment accelerating with Vault CRM Bot.",
+      "key_differentiator_summary": "The fundamental strategic difference: IQVIA's value is data-to-insight-to-action (analytics-led CRM), while Veeva's value is workflow-to-content-to-compliance (operations-led CRM). Migration decisions should evaluate which orientation fits the organization's commercial model."
+    },
+    "source": "Key IQVIA Strengths and Deep Dive vs Veeva V1.0 (October 2022)",
+    "tags": [
+      "iqvia",
+      "veeva",
+      "feature-comparison",
+      "competitive-matrix",
+      "ai-ml",
+      "onekey",
+      "clm",
+      "pricing"
+    ]
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sq-ip-001",
+    "category": "implementation-patterns",
+    "question": "What does a typical homepage configuration look like for a large pharma?",
+    "answer": "Typical homepage setup includes separate layouts for sales and medical personas. Common widgets: Top 10 Next Best Customers (AI-driven), Up Next (upcoming visits), Activity Plan attainment dashboard, custom dashboards, rich text links for quick references, announcements widget. Quick actions: create visit, view insights, compose email, submit inquiry. Agentic AI panel may be present but not active at Day 1.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["homepage", "configuration", "personas", "widgets"]
+  },
+  {
+    "id": "sq-ip-002",
+    "category": "implementation-patterns",
+    "question": "What is the typical release enablement process for large customers?",
+    "answer": "Large customers expect: (1) Complete enablement guides provided on or before sandbox push date (ideally 3 days prior), (2) Step-by-step setup documentation for each new feature, (3) Release notes covering functional changes and configuration requirements. These should be delivered for both monthly releases and major releases. Feature activations require coordination between product management and services teams.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["release", "enablement", "documentation", "process"]
+  },
+  {
+    "id": "sq-ip-003",
+    "category": "implementation-patterns",
+    "question": "What is a typical go-live timeline for a global pharma deployment?",
+    "answer": "Typical phased approach: Region 1 (e.g., EMEA) goes live first, followed by remaining countries 3 months later, with additional regions (e.g., US) going live 6-8 months after the first region. The first region serves as a proving ground. Critical milestone: final product drop approximately 2-3 months before go-live for sandbox validation. Performance and scale testing should be aligned with end-to-end test cycles.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["go-live", "timeline", "global", "phased-deployment"]
+  },
+  {
+    "id": "sq-ip-004",
+    "category": "implementation-patterns",
+    "question": "What are common configurability misalignment patterns with large customers?",
+    "answer": "Key misalignment patterns: (1) UI doesn't match approved design mocks — labels cut off, fields misaligned, slow loading, (2) Features not configurable enough for customer-specific branding or workflow needs, (3) Customizations promised in design authority reviews not delivered on time, (4) SLA expectations mismatch between customer intake and engineering delivery capacity. Proactively understanding where customers need to configure or override is critical.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["configurability", "misalignment", "customer-expectations", "qa"]
+  },
+  {
+    "id": "sq-ip-005",
+    "category": "implementation-patterns",
+    "question": "What is the recommended case and investigation escalation process?",
+    "answer": "For enterprise customers: (1) Cases first go to dedicated support contacts for triage, (2) Customer-centric engineering performs analysis and enrichment, (3) Only after analysis should an investigation be sent to engineering. This escalation chain should not be bypassed. Engineering does not see raw cases — they see enriched investigations with reproduction steps and analysis.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["escalation", "cases", "investigations", "process"]
+  },
+  {
+    "id": "sq-ip-006",
+    "category": "implementation-patterns",
+    "question": "What is FDE engagement and feature enablement?",
+    "answer": "Field Delivery Engineering (FDE) engagement involves in-person or virtual sessions where engineering and services teams walk through new feature enablement with the customer. The FDE charter documents the scope, timeline, and deliverables. Feature enablement involves toggling features in sandboxes first, validating with the customer, then enabling in production. A formal process with documented test cases is needed.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["fde", "feature-enablement", "engagement", "process"]
+  },
+  {
+    "id": "sq-ip-007",
+    "category": "implementation-patterns",
+    "question": "What is the extensibility model for customizations?",
+    "answer": "The platform supports customizations through: (1) Admin Console configuration (no-code), (2) Flow-based automation (low-code), (3) LWC custom components (pro-code), (4) Apex triggers and classes (pro-code). Large customers typically need a mix. A 'Design Authority' review process is recommended where customization requests are evaluated for feasibility, prioritized, and scheduled into releases.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["extensibility", "customization", "design-authority", "governance"]
+  },
+  {
+    "id": "sq-ip-008",
+    "category": "implementation-patterns",
+    "question": "How should investigation configuration issues be distinguished from bugs?",
+    "answer": "When an investigation is received: (1) Determine if it is a bug (code defect), a configuration issue (misconfigured settings), or expected behavior (working as designed). Configuration issues are the most common category. These should be resolved with setup guidance, not code changes. Track the ratio of bugs vs config issues vs expected behavior to improve customer self-service and documentation.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["investigation", "triage", "configuration-vs-bug", "process"]
+  }
+]

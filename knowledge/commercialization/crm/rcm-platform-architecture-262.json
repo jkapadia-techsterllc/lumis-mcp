@@ -1,0 +1,120 @@
+[
+  {
+    "id": "rcm-arch-001",
+    "category": "commercialization/crm",
+    "title": "Regulated Content Management Platform — Vision and CORS Engine",
+    "products": ["Life Sciences Cloud", "Regulated Content Management"],
+    "summary": "A multi-industry regulated content management platform built on a Claims, Obligations, References, and Substantiations (CORS) engine. Targets life sciences (MLR review), financial services (disclosure compliance), supply chain (regulatory documentation), and net zero (sustainability reporting). First delivery in release 262.",
+    "findings": {
+      "cors_engine_concept": "CORS stands for Claims, Obligations, References, and Substantiations — the four pillars of regulated content governance. Claims are verifiable assertions made in promotional or regulatory material. Obligations are regulatory requirements that content must satisfy. References are source citations supporting claims. Substantiations are evidence packages linking claims to references through obligations.",
+      "five_layer_architecture": "Layer 1: Content Storage and GxP-compliant data management. Layer 2: Content Definition including metadata, types, and lifecycle configuration. Layer 3: Content Authoring, Review, and Approval workflows. Layer 4: CORS Intelligence for automated claim detection, obligation enforcement, and substantiation validation. Layer 5: Analytics, Audit, and Compliance reporting.",
+      "six_architecture_pillars": "Discover (search and find content), Define (create and classify content with metadata), View (render and annotate content), Review (collaborative review with e-signatures), Approve (workflow-driven approval with digital verification), Audit (lifecycle tracking with full traceability).",
+      "multi_industry_examples": "Life sciences: MLR review of promotional materials with claim-to-reference validation. Financial services: disclosure compliance for marketing collateral. Supply chain: regulatory documentation for import/export. Net zero: sustainability reporting with verifiable environmental claims.",
+      "release_targeting": "Release 262 delivers content storage, types, metadata, lifecycle, workflows, approvals, annotation, and claims library. Release 264 adds version control, audit trails, content import, check-out/check-in, and obligation enforcement. Post-264 targets visual and in-context authoring."
+    },
+    "source": "internal-rcm-prd-architecture-2026",
+    "tags": ["rcm", "cors", "regulated-content", "multi-industry", "architecture", "release-262"]
+  },
+  {
+    "id": "rcm-arch-002",
+    "category": "commercialization/crm",
+    "title": "Regulated Content Management — Content Storage and GxP Architecture Decisions",
+    "products": ["Life Sciences Cloud", "Regulated Content Management"],
+    "summary": "Key architecture decisions for GxP-compliant content storage, including the storage model, rendition engine, audit approach, and entity design for the regulated content platform.",
+    "findings": {
+      "storage_decision": "Content documents are stored using the platform's native content document infrastructure rather than a custom storage solution. This provides built-in versioning, sharing, and permission enforcement while meeting GxP data integrity requirements.",
+      "content_type_design": "Content types use a self-referencing hierarchy enabling parent-child relationships between content items. Each content type defines its own lifecycle rules, CORS validation requirements, and metadata schema. Industry-specific templates provide preconfigured content types with appropriate CORS rules.",
+      "rendition_engine": "PDF renditions are generated using a server-side document conversion library. The rendition engine supports conversion from multiple source formats to PDF for consistent viewing. Renditions are linked to source documents through a platform event binding pattern using a service-provider-routing mechanism.",
+      "audit_architecture": "Dual audit strategy: platform-level audit trail logging captures system events automatically, while field audit trail provides granular field-change tracking for regulatory evidence. This combination satisfies 21 CFR Part 11 and EU Annex 11 audit trail requirements without custom logging infrastructure.",
+      "gxp_data_models": "Four data model layers: base content document storage, content type metadata overlay, lifecycle state machine, and CORS relationship graph. The content type metadata overlay enables industry-specific field definitions without schema modifications.",
+      "workflow_decision": "Workflows use the platform's native flow orchestrator rather than a custom workflow engine. This enables configurable sequential and parallel review paths, conditional routing, and notification triggers through standard administration interfaces."
+    },
+    "source": "internal-rcm-architecture-key-decisions-2026",
+    "tags": ["rcm", "gxp", "storage", "architecture-decisions", "audit-trail", "renditions"]
+  },
+  {
+    "id": "rcm-arch-003",
+    "category": "commercialization/crm",
+    "title": "Regulated Content Management — Content Viewer and Annotation Architecture",
+    "products": ["Life Sciences Cloud", "Regulated Content Management"],
+    "summary": "Architecture for the content viewing and annotation subsystem, using an abstraction layer with adapter pattern to support pluggable rendering engines, and SVG-based annotation overlays.",
+    "findings": {
+      "viewer_abstraction_pattern": "The content viewer uses an Abstraction Layer plus Adapter Pattern. The abstraction layer defines a standard interface for content rendering operations. Adapters implement the interface for specific rendering engines, allowing the engine to be swapped without changing the consuming application.",
+      "initial_rendering_engine": "The initial implementation uses an open-source PDF rendering library that provides client-side PDF display with text selection, search, and zoom capabilities. The library runs entirely in the browser without server-side dependencies.",
+      "annotation_overlay": "Annotations are rendered as SVG overlays on top of the PDF view. This separates annotation data from the source document, preserving document integrity while enabling collaborative markup. Annotations include comments, highlights, stamps, and freeform drawing.",
+      "engine_swappability": "The adapter pattern allows future replacement of the rendering engine with a commercial SDK that provides richer annotation features (ink signatures, form filling, redaction) without architectural changes. The annotation data model is engine-agnostic.",
+      "content_discovery": "Content search combines platform-level full-text search with semantic search capabilities using vector embeddings stored in a data cloud. This enables both keyword matching and conceptual similarity search across the content library.",
+      "file_upload_limits": "Content upload supports files up to 2 GB. Upload triggers asynchronous PDF rendition generation through a platform event binding, with status tracking available to the uploading user."
+    },
+    "source": "internal-rcm-architecture-concept-2026",
+    "tags": ["rcm", "content-viewer", "annotations", "adapter-pattern", "search", "pdf-rendering"]
+  },
+  {
+    "id": "rcm-arch-004",
+    "category": "commercialization/crm",
+    "title": "Regulated Content Management — Content Lifecycle, Roles, and Actions Framework",
+    "products": ["Life Sciences Cloud", "Regulated Content Management"],
+    "summary": "The content lifecycle state machine, role-based access model, and configurable actions framework that governs how regulated content moves through creation, review, approval, and retirement.",
+    "findings": {
+      "lifecycle_states": "Six standard lifecycle states: Draft, Planned, In Review, Approved, Cancelled, and Superseded. Each content type defines its Starting Status (entry state for new content) and Steady State Status (default state after lifecycle resets). Custom lifecycle templates can extend or modify these states per industry requirements.",
+      "lifecycle_inheritance": "Parent-child content relationships support lifecycle inheritance where a parent content item's lifecycle transitions can cascade to child items. This enables scenarios where approving a parent promotional piece automatically advances its component modules.",
+      "role_model": "Six content roles govern access: Owner (full control), Editor (modify content and metadata), Viewer (read-only access), Reviewer (annotate and comment during review), Approver (make approval decisions), and Auditor (read-only access to all versions and audit data). Roles are enforced through the platform's state governance framework.",
+      "actions_framework": "Content actions include: Create, Update Version, Update Fields, Delete, Update Relationships, Update Sharing, Annotate (release 264), Change Owner, Check-Out, Check-In, Unlock, Start Workflow, Download Source, and Custom Actions. Each action can be gated by lifecycle state, role, and conditional business rules.",
+      "approval_architecture": "Approvals use an advanced approval framework with digital verification (not simple e-signatures) that satisfies GxP requirements. The framework supports both sequential and parallel approval paths with configurable escalation rules.",
+      "version_control": "Content versioning starts at 0.1 and increments by 0.1 for each minor revision (check-out/check-in cycle). Major version promotion (1.0, 2.0) occurs through explicit lifecycle transitions. Version history includes a content diff capability for comparing claims, obligations, and references between versions (release 264)."
+    },
+    "source": "internal-rcm-prd-architecture-2026",
+    "tags": ["rcm", "lifecycle", "roles", "actions", "approvals", "version-control", "state-governance"]
+  },
+  {
+    "id": "rcm-arch-005",
+    "category": "commercialization/crm",
+    "title": "Regulated Content Management — CORS Claims and Obligations Engine",
+    "products": ["Life Sciences Cloud", "Regulated Content Management"],
+    "summary": "The claims library, obligation rules engine, and automated validation capabilities that form the intelligence layer of the regulated content platform.",
+    "findings": {
+      "claims_library": "A centralized repository of pre-approved claims with associated metadata: claim text, approval status, validity period, associated products, regulatory jurisdiction, supporting references, and confidence level. Claims can be reused across content items, ensuring consistency and reducing review burden.",
+      "claim_validation": "Automated validation compares claims found in content against the claims library. The system generates a risk score based on: whether a claim matches an approved library entry (low risk), partially matches (medium risk), or has no library match (high risk). A pre-validation report summarizes all claims with their risk levels before content enters formal review.",
+      "obligation_rules": "Obligation rules define regulatory requirements that content must satisfy. Rules are configured per jurisdiction, industry, and content type. Examples include mandatory disclosure statements, required fair balance language, and prohibited comparative claims. Rules are enforced against claims detected in the content viewer.",
+      "content_import_intelligence": "An AI-powered content analysis capability (priority 1) that auto-detects products, intended audience, distribution channels, and regulatory jurisdiction from uploaded content. A CORS agent scans imported content to identify claims, match them against obligations, locate references, and assess substantiation completeness — producing confidence scores for each finding.",
+      "multi_industry_cors_application": "Life sciences: claims validated against clinical references with regulatory obligation enforcement. Financial services: disclosure obligations mapped to marketing claims. Supply chain: compliance claims traced to certification references. Each industry configures its own CORS rule templates.",
+      "content_modules": "Pre-approved content modules can be inserted into new content items during authoring (release 264). Modules carry their CORS metadata forward, so claims, obligations, and references are automatically inherited by the consuming content item."
+    },
+    "source": "internal-rcm-prd-architecture-2026",
+    "tags": ["rcm", "cors", "claims", "obligations", "validation", "ai-intelligence", "risk-scoring"]
+  },
+  {
+    "id": "rcm-arch-006",
+    "category": "commercialization/crm",
+    "title": "Regulated Content Management — Content Ingestion Connector Architecture",
+    "products": ["Life Sciences Cloud", "Regulated Content Management"],
+    "summary": "A source-agnostic integration connector for loading promotional content from external systems into the regulated content platform. Supports presentation packages, PDF documents, and email templates through a three-flow architecture.",
+    "findings": {
+      "connector_purpose": "Enables customers to ingest content from external digital asset management systems, content management systems, and creative tools into the regulated content platform. Targeted for release 264 as a connector available through an integration marketplace.",
+      "three_flow_architecture": "Flow 1: Synchronous upload endpoint that accepts content payloads and returns a job identifier. Flow 2: A scheduled job running every three minutes that processes territory assignments and activation rules for ingested content. Flow 3: A status polling endpoint that returns job progress, completion status, and any error details.",
+      "supported_content_types": "Presentation packages (ZIP archives containing slides and assets for closed-loop marketing), PDF documents (regulatory and promotional materials), and email templates (HTML-based approved email content with merge field support).",
+      "rate_limits_and_constraints": "200 API calls per organization per hour. 1 GB maximum ingress payload per upload. Job state persisted in an object store with 30-day retention. These limits are designed for batch content loading rather than real-time streaming.",
+      "integration_pattern": "The connector acts as a translation layer between external content formats and the platform's content document model. Ingested content is automatically registered as draft items in the regulated content lifecycle, triggering metadata extraction and CORS analysis.",
+      "territory_and_activation": "The scheduled flow handles post-upload operations: associating ingested content with sales territories, applying activation rules that control when and where content becomes available to field users, and updating content availability indices."
+    },
+    "source": "internal-rcm-ingestion-connector-design-2026",
+    "tags": ["rcm", "content-ingestion", "connector", "integration", "rate-limits", "territory-activation"]
+  },
+  {
+    "id": "rcm-arch-007",
+    "category": "commercialization/crm",
+    "title": "Regulated Content Management — Personas and Use Case Targeting",
+    "products": ["Life Sciences Cloud", "Regulated Content Management"],
+    "summary": "The persona model and use case targeting for the regulated content platform, covering foundational internal users, MLR review participants, governance roles, agency collaborators, and industry-specific extensions.",
+    "findings": {
+      "foundational_internal_personas": "Compliance Operations Manager (configures content types, lifecycle templates, and CORS rules), Brand Manager (oversees content creation and brand consistency), Content Creator (authors and assembles regulated content using templates and pre-approved modules).",
+      "mlr_review_personas": "Medical Reviewer (evaluates clinical accuracy of claims and references), Legal Reviewer (assesses regulatory compliance and risk), Regulatory Reviewer (validates against jurisdiction-specific obligations), Final Approver (makes the approval decision with digital verification signature).",
+      "governance_personas": "Auditor (read-only access to complete content history, version comparisons, and audit trails for regulatory inspections), Compliance Officer (monitors content lifecycle metrics, reviews exception reports, and manages obligation rule updates).",
+      "agency_and_external_personas": "Agency content creators and reviewers who interact through controlled external access, with limited visibility scoped to their assigned content items and review tasks.",
+      "industry_specific_extensions": "Each industry vertical defines additional personas through its CORS rule templates. Life sciences adds the Medical Information Specialist. Financial services adds the Disclosure Compliance Analyst. The persona model is extensible through content role configuration.",
+      "agentic_personas": "An AI-driven content definition agent (priority 1) suggests templates, pre-populates metadata, and recommends content structures based on natural language descriptions of the intended content. An agentic summary capability produces seven-point analysis of content items including claim inventory, obligation coverage, reference completeness, risk assessment, audience alignment, channel suitability, and regulatory jurisdiction mapping."
+    },
+    "source": "internal-rcm-prd-architecture-2026",
+    "tags": ["rcm", "personas", "mlr-review", "governance", "agency", "ai-agent", "use-cases"]
+  }
+]

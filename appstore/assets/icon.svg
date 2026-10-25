@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A2F51"/>
+      <stop offset="100%" stop-color="#14694B"/>
+    </linearGradient>
+    <linearGradient id="helix1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#29B6F6"/>
+    </linearGradient>
+    <linearGradient id="helix2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#66BB6A"/>
+      <stop offset="100%" stop-color="#43A047"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <!-- Subtle radial highlight -->
+  <circle cx="256" cy="200" r="200" fill="#ffffff" opacity="0.03"/>
+
+  <!-- DNA double helix -->
+  <g filter="url(#glow)" transform="translate(256, 256)">
+    <!-- Strand 1 -->
+    <path d="M -60 -170 C -20 -130, 40 -120, 30 -85 C 20 -50, -40 -40, -30 -5 C -20 30, 40 40, 30 75 C 20 110, -40 120, -30 155 C -20 190, 20 195, 30 210"
+          stroke="url(#helix1)" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <!-- Strand 2 -->
+    <path d="M 60 -170 C 20 -130, -40 -120, -30 -85 C -20 -50, 40 -40, 30 -5 C 20 30, -40 40, -30 75 C -20 110, 40 120, 30 155 C 20 190, -20 195, -30 210"
+          stroke="url(#helix2)" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+    <!-- Connecting rungs (base pairs) -->
+    <line x1="-40" y1="-130" x2="40" y2="-130" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+    <line x1="-35" y1="-85" x2="35" y2="-85" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+    <line x1="-30" y1="-40" x2="30" y2="-40" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+    <line x1="-30" y1="5" x2="30" y2="5" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+    <line x1="-30" y1="50" x2="30" y2="50" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+    <line x1="-35" y1="95" x2="35" y2="95" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+    <line x1="-40" y1="140" x2="40" y2="140" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+    <line x1="-30" y1="185" x2="30" y2="185" stroke="#ffffff" stroke-width="2.5" opacity="0.35" stroke-linecap="round"/>
+
+    <!-- Data nodes on helix -->
+    <circle cx="-45" cy="-130" r="5" fill="#4FC3F7"/>
+    <circle cx="45" cy="-130" r="5" fill="#66BB6A"/>
+    <circle cx="35" cy="-85" r="5" fill="#4FC3F7"/>
+    <circle cx="-35" cy="-85" r="5" fill="#66BB6A"/>
+    <circle cx="-30" cy="-40" r="5" fill="#4FC3F7"/>
+    <circle cx="30" cy="-40" r="5" fill="#66BB6A"/>
+    <circle cx="30" cy="5" r="5" fill="#66BB6A"/>
+    <circle cx="-30" cy="5" r="5" fill="#4FC3F7"/>
+    <circle cx="-30" cy="50" r="5" fill="#66BB6A"/>
+    <circle cx="30" cy="50" r="5" fill="#4FC3F7"/>
+    <circle cx="35" cy="95" r="5" fill="#66BB6A"/>
+    <circle cx="-35" cy="95" r="5" fill="#4FC3F7"/>
+    <circle cx="-40" cy="140" r="5" fill="#4FC3F7"/>
+    <circle cx="40" cy="140" r="5" fill="#66BB6A"/>
+    <circle cx="30" cy="185" r="5" fill="#4FC3F7"/>
+    <circle cx="-30" cy="185" r="5" fill="#66BB6A"/>
+  </g>
+
+  <!-- Circuit traces (top-right) -->
+  <g opacity="0.5">
+    <path d="M 370 100 L 410 100 L 410 70 L 445 70" stroke="#4FC3F7" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 380 125 L 420 125 L 420 95 L 450 95" stroke="#66BB6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="445" cy="70" r="3.5" fill="#4FC3F7"/>
+    <circle cx="450" cy="95" r="3.5" fill="#66BB6A"/>
+  </g>
+
+  <!-- Circuit traces (bottom-left) -->
+  <g opacity="0.5">
+    <path d="M 140 410 L 100 410 L 100 440 L 65 440" stroke="#66BB6A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 130 385 L 90 385 L 90 415 L 60 415" stroke="#4FC3F7" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="65" cy="440" r="3.5" fill="#66BB6A"/>
+    <circle cx="60" cy="415" r="3.5" fill="#4FC3F7"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="256" y="486" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="30" font-weight="700"
+        fill="#ffffff" text-anchor="middle" opacity="0.2" letter-spacing="10">LUMIS</text>
+</svg>

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "oce-admin-001",
+    "category": "modules",
+    "title": "CRM Administration and Configuration Architecture",
+    "products": [
+      "oce"
+    ],
+    "summary": "The CRM platform provides two configuration surfaces: a custom Admin Console for CRM-specific settings, and standard Salesforce Setup tools (Lightning App Builder, Custom Settings, Custom Metadata Types, Custom Labels, Page Layouts, Object Manager). Configuration applies across both mobile and web applications unless specified otherwise.",
+    "findings": {
+      "admin_console": "Custom administrative tool accessible via a dedicated tab. Consolidates CRM-specific configuration tasks including menu item management, action configuration, call parameter settings, and module toggles into a single interface. Requires OCE Admin profile.",
+      "menu_configuration": "Primary navigation bar tabs are configurable per application profile. Mobile and web applications can have different tab sets. Available modules include Customers, Planner, Orders, Next Best Customer, Medical Inquiry, Account Plans, and Reports.",
+      "action_configuration": "Quick actions are configurable from both page layouts and the Admin Console. Mobile and web applications support different action sets. Mobile actions include New Call, New Event, Log a Call. Web actions add MIRF creation, Account Plan management, and Business Objective tools.",
+      "home_dashboard": "Configurable dashboard with three sections: Next Best Customer Top 5 (ADA-scored account recommendations), Today Plan (calendar snapshot), and Charts Dashboard (administrator-configured reports). Auto-refresh interval is configurable."
+    },
+    "source": "OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "admin-console",
+      "configuration",
+      "page-layout",
+      "custom-settings"
+    ]
+  },
+  {
+    "id": "oce-admin-002",
+    "category": "modules",
+    "title": "CRM Metadata Service and Mobile Database Schema Management",
+    "products": [
+      "oce"
+    ],
+    "summary": "The metadata service manages the mobile application database schema and UI resource definitions. Administrators define which Salesforce entities and fields are available on mobile devices through DB Schema management, and configure UI resources that control how entities are displayed. A metadata cache accelerates initial sync by pre-computing the schema payload.",
+    "findings": {
+      "metadata_configuration": "Metadata defines which Salesforce objects and fields are synced to the mobile device local database. Changes to metadata require cache regeneration and a full device re-sync.",
+      "db_schema_management": "Administrators add or remove entities from the mobile database schema, controlling which objects are available offline. Each entity configuration specifies included fields, filter criteria for record selection, and sync priority.",
+      "ui_schema_management": "UI resources define how entities render on mobile screens: list views, detail layouts, search configurations, and picklist value sets. UI schema is separate from DB schema, allowing display customization without changing the underlying data model.",
+      "metadata_cache": "A pre-computed cache of the metadata payload avoids expensive real-time schema computation during device sync. Cache must be regenerated when schema changes are deployed. Stale cache causes sync failures or missing data."
+    },
+    "source": "OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "metadata",
+      "mobile-database",
+      "schema",
+      "sync",
+      "offline"
+    ]
+  },
+  {
+    "id": "oce-admin-003",
+    "category": "modules",
+    "title": "CRM Synchronization Architecture and Transaction Processing",
+    "products": [
+      "oce"
+    ],
+    "summary": "Mobile-to-server synchronization uses a transaction-based architecture where field changes are queued as transactions, uploaded during sync, and processed through triggers and scheduled batch jobs. Transactions flow through defined statuses with configurable error handling, retry logic, and failure notification.",
+    "findings": {
+      "sync_process": "Synchronization has two directions: download (server to mobile, pulling updated records matching metadata filter criteria) and upload (mobile to server, pushing locally created or modified records as transactions).",
+      "transaction_processing": "Uploaded transactions are processed through two mechanisms: a real-time trigger that fires on insert (for immediate processing of simple changes) and a scheduled batch job (for complex operations requiring cross-object validation or governor limit management).",
+      "transaction_statuses": "Transactions progress through statuses: Pending (awaiting processing), Processing (in-flight), Completed (successfully applied), Failed (error encountered, may be retried), and Rejected (permanently failed, requires manual intervention).",
+      "transaction_management": "Administrators can filter, inspect, retry, or reject transactions through the admin interface. Transaction records contain the full payload, error details, and processing history for troubleshooting.",
+      "failure_notifications": "Configurable email notifications alert administrators when sync failures exceed thresholds. Notifications include transaction details, error messages, and affected user/territory information.",
+      "manual_sync": "Users can trigger manual synchronization from the mobile app. Automatic background sync runs on configurable intervals. A sync progress indicator shows upload and download status."
+    },
+    "source": "OCE CRM iPad User Guide v1.0, OCE CRM Configuration Guide v1.0 (2017)",
+    "tags": [
+      "synchronization",
+      "transactions",
+      "offline-sync",
+      "mobile",
+      "error-handling"
+    ]
+  }
+]

@@ -1,0 +1,227 @@
+[
+  {
+    "id": "sync-001",
+    "category": "sync-architecture",
+    "question": "What are the different sync types and when does each trigger?",
+    "answer": "The platform supports three primary sync types: (1) Full Sync — triggered on first login, after a metadata cache update, or when an admin resets a user's sync state. Downloads all records in scope based on territory alignment, sharing rules, and object configuration. Can take minutes to hours for large orgs. (2) Delta Sync (also called incremental or background sync) — runs automatically on a configurable interval (typically every 15-20 minutes when the app is active). Only transfers records that changed since the last successful sync checkpoint. Uses server-side change tracking (SystemModstamp or similar) to identify deltas. (3) Manual Sync — user-initiated pull-to-refresh or explicit sync button tap. Behaves like a delta sync but is user-triggered, and the app may apply different transaction retention rules (e.g., dropping completed transactions). Understanding which sync type is running matters because transaction retention behavior differs across types.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "full-sync", "delta-sync", "manual-sync", "lifecycle"]
+  },
+  {
+    "id": "sync-002",
+    "category": "sync-architecture",
+    "question": "How does background (Pin) sync work and what are its transaction retention rules?",
+    "answer": "Background sync (sometimes called Pin sync) runs automatically at a set interval while the app is active or backgrounded. It pushes any pending local transactions (creates, updates, deletes) to the server, then pulls down changes from the server. Key behavior: background sync should retain Success-status transactions across cycles rather than dropping them immediately. If Success transactions are dropped prematurely during a non-manual sync, the server may not have fully processed the record's offlineUniqueIdentifier writeback, leading to duplicate record creation on the next cycle. The correct retention rule is: only drop transactions with status 'canceled' or those explicitly cleared by a manual sync. Background sync also respects a transaction queue — pending transactions are sent in order, and if one fails, subsequent dependent transactions may be held.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["sync", "background-sync", "pin-sync", "transaction-retention", "duplicate-prevention"]
+  },
+  {
+    "id": "sync-003",
+    "category": "sync-architecture",
+    "question": "How does manual sync differ from background sync in transaction handling?",
+    "answer": "Manual sync (user-initiated refresh) is the only sync type where it is safe to drop completed (Success) transactions from the local queue. The reasoning: when a user explicitly triggers sync, the assumption is they want a clean state and are willing to wait for the full round-trip. The app can safely clear Success and Canceled transactions after manual sync completes. In contrast, background/delta sync must retain Success transactions because the offlineUniqueIdentifier writeback from the server may not yet be reflected locally. Dropping Success transactions during background sync is the root cause of the duplicate record creation bug — the app loses track of which records it already created, and the next sync cycle creates them again.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["sync", "manual-sync", "transaction-cleanup", "duplicate-prevention", "offline"]
+  },
+  {
+    "id": "sync-004",
+    "category": "sync-architecture",
+    "question": "When does metadata sync trigger and what does it include?",
+    "answer": "Metadata sync (metadata cache regeneration) triggers when: (1) An admin generates and publishes a new metadata cache from the Admin Console, (2) Permission set or profile changes affect object/field-level security, (3) Page layout changes are saved, (4) Record type assignments change, (5) Custom metadata type records are modified, (6) Picklist values are added/removed. The metadata cache includes: object schemas, field definitions, page layouts, record types, picklist values, validation rules (that can evaluate client-side), formula field definitions, lookup filter configurations, and LWC component bundles (in newer releases). After metadata cache publication, mobile users receive the new cache on their next sync. Large metadata caches (orgs with many custom objects and layouts) can significantly increase initial sync time. Admins should monitor metadata cache size and avoid unnecessary object inclusion.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "metadata", "metadata-cache", "admin-console", "configuration"]
+  },
+  {
+    "id": "sync-005",
+    "category": "sync-architecture",
+    "question": "What happens during initial sync on first login and what is the order of operations?",
+    "answer": "Initial sync on first login follows this sequence: (1) Authentication and session establishment, (2) User configuration download — permissions, feature flags, user preferences, (3) Metadata cache download — the full metadata bundle including schemas, layouts, picklists, formula definitions, and LWC bundles, (4) Reference data sync — picklist labels, record types, global value sets, (5) Core object data sync — accounts, contacts, and other high-priority objects based on territory alignment, (6) Related object data sync — activities, visits, orders, samples, and child records, (7) Content/file download — CLM presentations, attached documents (often the slowest phase), (8) Local database indexing and formula pre-computation. For large orgs (10,000+ accounts, extensive CLM libraries), initial sync can take 30-60+ minutes on a good network. Best practice: schedule initial syncs during off-hours on strong Wi-Fi. Some implementations use a 'sync profile' to stage content delivery — essential data first, CLM content deferred.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "initial-sync", "first-login", "onboarding", "performance"]
+  },
+  {
+    "id": "sync-006",
+    "category": "sync-architecture",
+    "question": "How does the offline-first architecture work with local database as source of truth?",
+    "answer": "The mobile CRM platform follows an offline-first paradigm where the local SQLite database is the primary source of truth while the device is disconnected. All user actions (creating visits, logging calls, capturing signatures, placing orders) write to the local database immediately, providing instant responsiveness regardless of network state. The sync engine then reconciles local changes with the server when connectivity is available. Key principles: (1) Every user action succeeds locally first — no spinners waiting for server response, (2) The local database schema mirrors the server object model (fields, relationships, record types), (3) A transaction log captures every local mutation with timestamps and operation type (insert/update/delete), (4) Sync processes the transaction log in order, sending changes to the server via platform APIs, (5) Server responses update local records with server-assigned IDs and computed fields. This architecture enables field reps to work a full day without connectivity, syncing everything when they return to coverage.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "offline", "sqlite", "offline-first", "architecture"]
+  },
+  {
+    "id": "sync-007",
+    "category": "sync-architecture",
+    "question": "How does offline record creation work with offlineUniqueIdentifier?",
+    "answer": "When a record is created offline, the app generates a locally unique identifier (offlineUniqueIdentifier or offline UUID) and stores it alongside the record in the local database. This identifier serves as a deduplication key during sync. The sync process: (1) App creates record locally with a generated offlineUniqueIdentifier, (2) On next sync, the transaction is sent to the server as a create operation, (3) Server creates the record and stores the offlineUniqueIdentifier value on the record, (4) Server returns the new record's server-side ID, (5) App updates the local record with the server ID, (6) On subsequent syncs, the offlineUniqueIdentifier prevents re-creation. Race condition risk: if the app drops the Success transaction before the server writes back the offlineUniqueIdentifier, the next sync sees a local record without a server ID and creates a duplicate. This is the single most common cause of duplicate records in mobile CRM deployments. The fix: retain Success transactions across background sync cycles; only clear them on manual sync.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["sync", "offline", "duplicate-records", "offlineUniqueIdentifier", "race-condition"]
+  },
+  {
+    "id": "sync-008",
+    "category": "sync-architecture",
+    "question": "Which formula fields evaluate offline and which require server data?",
+    "answer": "Formula fields fall into three categories for offline evaluation: (1) Fully offline-capable — formulas using only fields present on the local record or its directly-related parent records (e.g., TEXT, IF, CASE, date math, string concatenation on local fields). These evaluate immediately in the local formula engine. (2) Partially offline — formulas referencing related records that may not be in the local database scope. These show stale or blank values until sync refreshes the related data. (3) Server-only — formulas using functions that require server context: $User.IsOwner (requires ownership evaluation against the running user), $Permission (requires server-side permission checks), cross-object rollup summaries (DLRS or standard rollup fields on master objects), SOQL-based formulas, and any formula referencing objects not in the sync scope. Important: on first sync after record creation, server-computed formula values replace any local approximations. Implementations should document which formula-driven UI elements may show different values offline vs. online.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "offline", "formula-fields", "local-evaluation", "server-computed"]
+  },
+  {
+    "id": "sync-009",
+    "category": "sync-architecture",
+    "question": "How do visibility and sharing rules behave offline?",
+    "answer": "Visibility rules and sharing have nuanced offline behavior: (1) Record-level access — the sync engine only downloads records the user has access to per server-side sharing rules, so offline visibility is inherently constrained to the user's access scope. However, if sharing rules change server-side between syncs, the local database may contain records the user should no longer see (or be missing records they should now see) until the next sync. (2) Field-level security (FLS) — enforced by the metadata cache. If FLS changes between metadata cache generations, the local app may still display fields the user should not see until the new cache is delivered. (3) Territory-based filtering — determines which accounts (and their children) sync to the device. Territory realignment requires a full re-sync to add/remove accounts. (4) Dynamic visibility rules (e.g., 'show this section if field X = Y') — evaluate locally against cached data and work offline. (5) Org-wide defaults and role hierarchy — baked into the sync scope at query time; the server only returns records passing these checks.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "offline", "sharing-rules", "visibility", "fls", "territory"]
+  },
+  {
+    "id": "sync-010",
+    "category": "sync-architecture",
+    "question": "How does conflict resolution work — server wins vs last-write-wins?",
+    "answer": "The platform uses a server-wins conflict resolution strategy by default: if the same record is modified both locally (offline) and on the server (by another user or integration) between sync cycles, the server version takes precedence. The conflict resolution flow: (1) App sends local changes to the server, (2) Server detects version conflict (the record's version stamp has changed since the app's last sync), (3) Server rejects the local update with a conflict error, (4) App marks the transaction as failed and pulls the server's current version, (5) The user's local changes are lost unless the app implements a conflict queue showing the user both versions. Some implementations add a conflict notification UI that surfaces 'your changes to [Record Name] were overridden — tap to review.' Field-level conflict resolution (merging non-overlapping field changes) is not natively supported — it's all-or-nothing at the record level. Best practice for migrations: document the conflict resolution behavior clearly for users accustomed to Veeva's last-write-wins model, as behavior may differ.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "conflict-resolution", "server-wins", "offline", "data-integrity"]
+  },
+  {
+    "id": "sync-011",
+    "category": "sync-architecture",
+    "question": "What causes duplicate record creation during sync and how is it fixed?",
+    "answer": "Duplicate record creation is the most impactful sync bug in mobile CRM deployments. Root cause: during background (non-manual) sync, the app drops Success-status transactions from its queue before the server has written the offlineUniqueIdentifier back to the record. On the next sync cycle, the app sees a local record without a server-side ID, treats it as a new record, and creates a duplicate. The fix has three parts: (1) Change transaction retention rules — retain Success transactions across background/delta sync cycles. Only drop transactions with status 'canceled' or during explicit manual sync. (2) Add offlineUniqueIdentifier checking — before sending a create transaction, query the server for existing records with the same offlineUniqueIdentifier. If found, skip the create and update the local record with the server ID. (3) Add a deduplication batch job — for orgs already affected, run a server-side batch job that identifies records sharing the same offlineUniqueIdentifier value and merges or deletes duplicates. Prevention is always better than cleanup — the transaction retention fix eliminates the root cause.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["sync", "duplicate-records", "troubleshooting", "offlineUniqueIdentifier", "transaction-retention", "bug-fix"]
+  },
+  {
+    "id": "sync-012",
+    "category": "sync-architecture",
+    "question": "What are the most common causes of sync failures and how do you diagnose them?",
+    "answer": "Common sync failure causes and diagnostics: (1) Network timeout — large payloads or slow connections cause API calls to time out. Check sync logs for timeout errors; reduce sync scope or enable chunked sync. (2) Payload too large — individual records with large text fields or too many records in a single batch exceed API limits. Look for 'REQUEST_ENTITY_TOO_LARGE' or similar errors. (3) Server-side validation errors — triggers, validation rules, or process builders reject the submitted data. The sync log shows the specific validation message. Fix: ensure validation rules account for mobile-created data patterns. (4) Required field missing — a field was made required after the metadata cache was generated. The mobile app doesn't enforce the new requirement until the next metadata sync. (5) Duplicate value on unique field — another user or integration created a record with the same unique field value. (6) Governor limits — bulk sync operations hitting platform API or DML limits. (7) Session expiration — long-running sync operations exceeding the session timeout. Diagnostic steps: check the app's sync log (usually accessible from settings), review server-side debug logs filtered by the user, and check platform API usage limits.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "troubleshooting", "failures", "validation", "timeout", "diagnostics"]
+  },
+  {
+    "id": "sync-013",
+    "category": "sync-architecture",
+    "question": "Why are records missing after sync and what should be checked?",
+    "answer": "Missing records after sync is a common support issue with multiple potential causes: (1) Territory alignment — the user's territory assignment doesn't include the account (and its child records). Check the territory model and user-to-territory assignments. (2) Sharing rules — org-wide defaults, role hierarchy, or sharing rules exclude the record from the user's visibility. Verify with a 'Login As' the user on the web to confirm they can see the record. (3) Field-level security (FLS) — the object is visible but specific fields are hidden, making the record appear incomplete. Check the user's profile and permission sets. (4) Object not in sync scope — the object isn't configured in the Admin Console for mobile sync. Verify the object is included in the metadata cache configuration. (5) Sync scope limits — some implementations cap the number of records per object to control device storage. Check if the record falls outside the configured limit (e.g., 'last 90 days of activities'). (6) Record type filtering — sync may be configured to exclude certain record types. (7) Sync error on specific record — a validation error on that record prevented it from syncing. Check the individual record's sync status in the server-side sync log.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "troubleshooting", "missing-records", "territory", "sharing", "fls"]
+  },
+  {
+    "id": "sync-014",
+    "category": "sync-architecture",
+    "question": "What causes slow sync and how can it be optimized?",
+    "answer": "Slow sync has several common causes: (1) Large CLM content libraries — PDF and HTML presentations are the heaviest sync payload. A rep with 200+ CLM pieces can spend 30+ minutes downloading content. Fix: use content filters to limit offline availability, stagger content rollouts. (2) Too many records in scope — orgs with broad territory assignments or permissive sharing rules may sync thousands of accounts and hundreds of thousands of child records. Fix: tighten territory alignment, use sync scope filters in Admin Console. (3) Metadata cache bloat — orgs with many custom objects, page layouts, and record types generate large metadata caches. Fix: audit and remove unused objects from the metadata configuration. (4) Many pending transactions — a large backlog of unsent local changes (common after extended offline periods) takes time to upload. (5) Complex server-side triggers — triggers firing on synced records slow down server processing. (6) Network quality — sync over cellular vs. Wi-Fi can differ by 10x. Fix: encourage Wi-Fi sync for initial and large syncs. (7) API concurrency limits — hitting concurrent API call limits slows all API operations. Optimization: implement sync analytics to identify which objects and content contribute most to sync duration.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "performance", "troubleshooting", "slow-sync", "optimization", "clm"]
+  },
+  {
+    "id": "sync-015",
+    "category": "sync-architecture",
+    "question": "What do you do when sync is stuck or hanging?",
+    "answer": "When sync appears stuck: (1) Check if the app is actually syncing — look for the sync progress indicator. Some 'stuck' reports are actually very slow syncs processing large content downloads. (2) Force-close and restart the app — this clears any in-memory deadlocks or hung network connections. The sync engine should resume from its last checkpoint, not restart from scratch. (3) Check network connectivity — sync requires a stable connection. Switching from cellular to Wi-Fi (or vice versa) mid-sync can cause hangs. (4) Check server health — verify the platform instance isn't experiencing degradation or maintenance. (5) Clear local sync state (with caution) — if the sync checkpoint is corrupted, clearing the local sync state forces a re-sync from the server. This is safe for data (server is source of truth) but loses any unsynced local changes. Only do this after confirming no pending transactions exist. (6) Check for blocking transactions — a single failed transaction at the front of the queue can block all subsequent syncs. Identify and resolve or skip the blocking transaction. (7) Check device storage — if the device is near full, database writes may fail silently. Free up space and retry.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "troubleshooting", "stuck-sync", "hanging", "recovery"]
+  },
+  {
+    "id": "sync-016",
+    "category": "sync-architecture",
+    "question": "What is the difference between enhanced sync and standard sync, and what are the known limitations?",
+    "answer": "Enhanced sync is an optimized sync mode available in newer platform releases that reduces sync time and bandwidth usage: Standard sync — pulls all records in scope using bulk SOQL queries, compares locally, and applies changes. Simple but bandwidth-heavy for large datasets. Enhanced sync (delta sync optimization) — uses server-side change tracking to send only modified records and fields. Reduces payload size by 60-80% for typical delta syncs. Known limitations of enhanced sync: (1) The delta sync mechanism may not write back the offlineUniqueIdentifier to the server immediately, creating a window for duplicate creation if transaction retention is not handled correctly. (2) Certain complex field types (rich text, multi-select picklists with many values) may not delta-track efficiently. (3) Record deletions may have delayed propagation — a record deleted on the server may persist locally for one additional sync cycle. (4) Enhanced sync requires specific API version support — older orgs may need API version upgrades. (5) Some custom triggers that modify records during after-insert/after-update may not be captured in the same delta window. Always test enhanced sync behavior thoroughly during UAT before rollout.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "enhanced-sync", "delta-sync", "limitations", "performance"]
+  },
+  {
+    "id": "sync-017",
+    "category": "sync-architecture",
+    "question": "What scenarios cause data loss during sync and how can they be prevented?",
+    "answer": "Data loss during sync is rare but catastrophic when it occurs. Scenarios and prevention: (1) Clearing local cache with pending transactions — if a user or admin clears the app's local data while unsynced changes exist, those changes are permanently lost. Prevention: always check for pending transactions before clearing cache; show a warning dialog. (2) Conflict resolution discarding local edits — server-wins resolution silently overwrites local changes without notification. Prevention: implement a conflict queue UI that lets users review and re-apply their changes. (3) Reinstalling the app — uninstalling and reinstalling loses all local-only data. Prevention: ensure users sync before uninstalling; educate users during onboarding. (4) Device loss or failure — if the device is lost/broken with unsynced data, that data is gone. Prevention: encourage frequent sync habits; consider more aggressive background sync intervals for critical data. (5) Sync scope reduction — if territory alignment changes remove accounts from a user's scope, the associated local records are deleted on next sync. Prevention: communicate territory changes in advance; verify sync completion before reassignment. (6) Metadata cache mismatch — a new metadata cache removing required validations can cause previously valid local records to fail sync. Prevention: coordinate metadata changes with sync windows.",
+    "gotcha_level": "critical",
+    "source": "platform-knowledge",
+    "tags": ["sync", "data-loss", "prevention", "troubleshooting", "conflict-resolution", "backup"]
+  },
+  {
+    "id": "sync-018",
+    "category": "sync-architecture",
+    "question": "How is sync scope configured and which objects should be included?",
+    "answer": "Sync scope configuration determines which objects and records download to the device. Configuration is done through the Admin Console under the mobile sync settings: (1) Object inclusion — select which standard and custom objects sync to the device. Only include objects the mobile user actually needs. Every additional object increases sync time and device storage. (2) SOQL filters per object — add WHERE clauses to limit which records of each object sync. Common filters: date range (last 90 days of activities), status (only active accounts), record type (only specific record types relevant to mobile). (3) Related object filters — control which child records sync relative to their parent (e.g., only contacts for synced accounts). (4) Content/file filters — limit which CLM presentations and documents download offline. Use custom fields like 'Available_Offline__c' to give admins granular control. Best practices: start with a minimal sync scope and expand based on user feedback. Monitor average sync time per user population. A good target is under 5 minutes for delta sync and under 30 minutes for initial sync. Document the sync scope configuration as part of the implementation runbook.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "configuration", "sync-scope", "admin-console", "optimization"]
+  },
+  {
+    "id": "sync-019",
+    "category": "sync-architecture",
+    "question": "What bandwidth optimization strategies exist for sync?",
+    "answer": "Bandwidth optimization is critical for field users on cellular connections: (1) Content pre-loading — download CLM presentations and large files only on Wi-Fi. Flag content for 'Wi-Fi only download' in the Admin Console. (2) Sync scheduling — configure sync windows to avoid peak cellular usage times. Some implementations restrict background sync to Wi-Fi only. (3) Compression — enable gzip/deflate compression on API responses. Modern platform APIs support this by default. (4) Selective field sync — only sync fields that are used in mobile layouts. Exclude large text fields, formula fields that are server-only, and fields not displayed on any mobile layout. (5) Image/thumbnail optimization — sync thumbnails for CLM content rather than full-resolution files. Download full files on-demand when the user opens the content. (6) Batching strategy — tune batch sizes for optimal throughput. Smaller batches work better on unreliable connections (less data to re-send on failure); larger batches are more efficient on stable connections. (7) Delta content sync — for CLM presentations that update frequently, implement versioned content delivery so only changed slides/pages re-download rather than the entire presentation.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "bandwidth", "optimization", "wifi", "cellular", "content"]
+  },
+  {
+    "id": "sync-020",
+    "category": "sync-architecture",
+    "question": "How does multi-device sync work when the same user uses multiple devices?",
+    "answer": "Multi-device sync (same user on iPad and iPhone, or tablet and phone) introduces additional complexity: (1) Each device maintains its own independent local database and transaction queue. There is no direct device-to-device sync — all synchronization goes through the server. (2) Conflict scenario: User edits a record on Device A (offline), then edits the same record on Device B (also offline). When both devices sync, the second device to sync will encounter a conflict. Standard server-wins resolution means the first device's changes persist and the second device's changes are overwritten. (3) Transaction ordering: The server processes transactions in the order they arrive, not the order they were created. This can lead to unexpected results if both devices create related records. (4) Pending transaction awareness: Neither device knows about the other's pending transactions until both have synced. (5) Best practices: discourage users from actively editing on multiple devices simultaneously. If multi-device is required, implement shorter sync intervals (5 minutes) to minimize the conflict window. Some implementations designate a 'primary device' that gets priority for offline work while the secondary device is online-only.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "multi-device", "conflict", "ipad", "iphone", "concurrent"]
+  },
+  {
+    "id": "sync-021",
+    "category": "sync-architecture",
+    "question": "How should metadata cache size be managed for large orgs?",
+    "answer": "Metadata cache size directly impacts sync performance and device storage. Management strategies: (1) Audit included objects — review the metadata cache configuration quarterly. Remove objects that were added for testing or POC but aren't used in production. (2) Minimize page layouts — each layout variant (by record type, profile) adds to the cache. Consolidate layouts where possible. Use dynamic forms instead of multiple layout assignments. (3) Limit record types — only include record types that mobile users actually encounter. Server-only record types don't need to be in the mobile cache. (4) Picklist optimization — large global value sets (1000+ values) significantly inflate the cache. Consider filtering picklist values by record type to reduce the set sent to mobile. (5) Monitor cache size — track metadata cache file size across releases. Set an alerting threshold (e.g., warn if cache exceeds 50MB). (6) LWC bundle size — in releases where LWC bundles are included in the metadata cache, ensure components are optimized and don't include unnecessary dependencies. (7) Translation volumes — multilingual orgs with many translated labels increase cache size proportionally. Only include languages that mobile users actually need.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "metadata-cache", "performance", "storage", "optimization"]
+  },
+  {
+    "id": "sync-022",
+    "category": "sync-architecture",
+    "question": "How do you monitor sync health and what logs should be examined?",
+    "answer": "Sync health monitoring operates at multiple levels: (1) Client-side sync log — accessible from the mobile app's settings screen. Shows each sync cycle's start time, duration, records sent/received, errors, and status. This is the first place to check for individual user issues. (2) Server-side API logs — platform API usage logs showing all API calls from the mobile app. Filter by username and connected app to see sync traffic patterns. Look for elevated error rates or unusual call volumes. (3) Sync analytics dashboard — if implemented, provides aggregate metrics across the user population: average sync time, sync success rate, most common error types, users with consistently failing syncs. (4) Transaction queue depth — monitor the number of pending transactions per user. A growing queue indicates sync is falling behind or transactions are failing. (5) Content sync metrics — track CLM content download times separately from data sync. Content is often the bottleneck. (6) Key health indicators: delta sync completing in under 5 minutes, zero pending transactions after manual sync, sync error rate below 1%, no users with sync failures lasting more than 24 hours. (7) Alerting: set up notifications for users who haven't successfully synced in 48+ hours — they may be accumulating data loss risk.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "monitoring", "health", "logs", "diagnostics", "analytics"]
+  },
+  {
+    "id": "sync-023",
+    "category": "sync-architecture",
+    "question": "What are the key architectural differences between Veeva CRM sync and the target platform sync?",
+    "answer": "Veeva CRM and the target mobile CRM platform have fundamentally different sync architectures: (1) Sync protocol — Veeva uses a proprietary sync protocol built on top of platform APIs with custom sync endpoints. The target platform uses native platform APIs (REST/SOAP) with a sync framework that leverages standard SOQL queries and DML operations. (2) Offline ID handling — Veeva uses its own offline UUID scheme (zvod_ExternalId__c on many objects). The target platform uses offlineUniqueIdentifier fields. Migration must account for this mapping. (3) Conflict resolution — Veeva defaults to last-write-wins at the field level (individual field changes merge). The target platform uses server-wins at the record level (entire record overwrites). This behavioral difference must be clearly communicated to users during migration. (4) Content delivery — Veeva bundles CLM content through its Vault integration with specialized content sync. The target platform downloads content through standard ContentVersion/ContentDocument APIs. (5) Metadata handling — Veeva uses its own metadata framework (Veeva Settings, Admin pages). The target platform uses a generated metadata cache that bundles configuration into a downloadable payload. (6) Sync scope — Veeva uses a combination of territory-based account filtering and object-level configuration. The target platform uses similar concepts but with different Admin Console configuration surfaces.",
+    "gotcha_level": "warning",
+    "source": "platform-knowledge",
+    "tags": ["sync", "migration", "veeva", "architecture-comparison", "differences"]
+  },
+  {
+    "id": "sync-024",
+    "category": "sync-architecture",
+    "question": "How should data volume be planned for offline storage during migration?",
+    "answer": "Data volume planning for offline storage requires careful analysis: (1) Per-user data footprint — calculate the average data volume per user by examining: number of accounts in territory (typically 200-500 for pharma reps), child records per account (contacts, addresses, affiliations — typically 5-20x the account count), activity records (calls, visits — can be 50-100x accounts if historical data syncs), and CLM content (often the largest component at 500MB-2GB per rep). (2) Device storage budget — modern iPads have 64-256GB storage. Budget 2-5GB for app + data for a typical deployment, up to 10GB for content-heavy implementations. (3) Growth projection — estimate 10-20% annual data growth for established territories. New territory expansions can spike data volume immediately. (4) Migration-specific planning — during migration from Veeva, historical data volumes may be larger than steady-state because migrated activity history inflates the initial sync. Consider a data archival strategy for pre-migration historical records. (5) Storage monitoring — implement device storage checks before sync. Warn users when available storage drops below the estimated sync payload size. (6) Benchmarking — during UAT, measure actual sync payload sizes for representative user profiles (urban rep with 500 accounts vs. rural rep with 100 accounts). Use these benchmarks to set realistic expectations.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "migration", "data-volume", "storage", "planning", "capacity"]
+  },
+  {
+    "id": "sync-025",
+    "category": "sync-architecture",
+    "question": "How should sync behavior be validated during UAT testing?",
+    "answer": "Sync UAT testing should cover these critical scenarios: (1) Initial sync baseline — measure time for a new user to complete first sync. Record the duration and data volume. Compare against acceptance criteria. (2) Delta sync performance — make 5-10 record changes on the server, trigger sync, verify changes appear on device within the expected sync interval. Measure delta sync duration. (3) Offline create → sync → verify — create records offline (visit, call, order), sync, verify records appear on the server with correct field values and relationships. Check that offlineUniqueIdentifier is populated. (4) Offline edit → conflict — edit the same record on both the device (offline) and the server. Sync and verify conflict resolution behavior matches documentation. (5) Bulk sync stress test — create 50+ records offline across multiple objects. Sync and verify all records are created without duplicates or missing data. (6) Territory change sync — reassign the test user to a different territory. Verify old accounts are removed and new accounts appear after sync. (7) Metadata cache update — change a page layout or add a field. Generate new metadata cache. Verify the change appears on the device after sync. (8) Network interruption — start a sync, kill the network mid-way. Verify the app recovers gracefully and completes sync on reconnection without data corruption. (9) Multi-day offline — use the device offline for 2-3 days with active data entry. Sync and verify everything arrives intact. (10) Content sync — add a new CLM presentation, verify it downloads and renders correctly on the device. Run each scenario for each user profile (rep, manager, medical) to catch profile-specific sync scope issues.",
+    "gotcha_level": "info",
+    "source": "platform-knowledge",
+    "tags": ["sync", "testing", "uat", "validation", "migration", "test-scenarios"]
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "lumis": {
+      "command": "lumis-mcp"
+    }
+  }
+}

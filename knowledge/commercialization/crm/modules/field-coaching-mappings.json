@@ -1,0 +1,323 @@
+{
+  "module": "field-coaching",
+  "description": "Field coaching data model mapping from legacy CRM to target platform — covers coaching events, assessment forms, scoring, compliance signatures, calendar sync, and multi-call ride-along patterns.",
+  "coverage_estimate": "70%",
+  "coverage_notes": "Coaching event header and assessment detail map well. Calendar sync ecosystem and multi-call association require custom architecture on target platform.",
+  "mappings": [
+    {
+      "id": "fc-map-001",
+      "area": "coaching-event-header",
+      "source_object": "FieldCoachingEvent (Custom)",
+      "target_object": "Visit",
+      "field_mappings": [
+        {
+          "source_field": "ID",
+          "target_field": "Legacy_Source_ID__c (Custom External ID)",
+          "transformation": "direct_map",
+          "notes": "Essential for upsert operations and maintaining historical lineage across migration batches"
+        },
+        {
+          "source_field": "Name",
+          "target_field": "Name",
+          "transformation": "prefix_concat",
+          "notes": "Prepend 'Coaching Session - ' to preserve context in target platform"
+        },
+        {
+          "source_field": "StartDateTime",
+          "target_field": "PlannedVisitStartTime",
+          "transformation": "direct_map",
+          "notes": "Source uses strict temporal definition for 'Days in Field' HR reporting; preserve timezone"
+        },
+        {
+          "source_field": "EndDateTime",
+          "target_field": "PlannedVisitEndTime",
+          "transformation": "direct_map",
+          "notes": "Used to calculate session duration metrics"
+        },
+        {
+          "source_field": "OwnerId (Manager/Coach)",
+          "target_field": "VisitorId",
+          "transformation": "user_lookup",
+          "notes": "VisitorId defines who performed the visit; maps to the manager conducting the coaching"
+        },
+        {
+          "source_field": "Employee/User (Rep/Coachee)",
+          "target_field": "Related_Rep_User__c (Custom Lookup to User)",
+          "transformation": "custom_field_required",
+          "notes": "CRITICAL: Target platform Visit does not have a native 'coachee' field. Must create a custom lookup to User object to define the person being coached."
+        },
+        {
+          "source_field": "Status",
+          "target_field": "Status",
+          "transformation": "picklist_map",
+          "notes": "Map: Draft → Planned, Submitted → Completed. Source often uses rigid state machine enforced by triggers for compliance (electronic signatures)."
+        },
+        {
+          "source_field": "Location",
+          "target_field": "PlaceId",
+          "transformation": "account_lookup",
+          "notes": "Map to territory Account or rep's assigned Account record"
+        },
+        {
+          "source_field": "Description",
+          "target_field": "Description",
+          "transformation": "direct_map",
+          "notes": "General coaching notes"
+        }
+      ],
+      "gaps": [
+        "Target Visit does not have native 'coachee' field — requires custom lookup to User",
+        "Source status workflow (Draft → Submitted → Employee Acknowledged → Closed) has more states than target — 'Employee Acknowledged' state must be modeled via custom field or Digital Verification"
+      ],
+      "migration_notes": "Load ALL historical coaching data into Visit objects (not Enablement Programs). Visits handle volume well and preserve the 'System of Record' for audits. Use Enablement Programs only for new coaching cycles going forward."
+    },
+    {
+      "id": "fc-map-002",
+      "area": "coaching-assessment-detail",
+      "source_object": "CoachingResponse (Custom — Long Skinny Table)",
+      "target_object": "AssessmentTask",
+      "field_mappings": [
+        {
+          "source_field": "Question_Text",
+          "target_field": "Name",
+          "transformation": "direct_map",
+          "notes": "The name of the AssessmentTask is the question text"
+        },
+        {
+          "source_field": "Answer_Value",
+          "target_field": "AssessmentIndValue",
+          "transformation": "type_cast",
+          "notes": "Map numeric/text answers to the generic AssessmentIndicator value holder"
+        },
+        {
+          "source_field": "Comments",
+          "target_field": "Description",
+          "transformation": "direct_map",
+          "notes": "Specific feedback per question"
+        },
+        {
+          "source_field": "Weight",
+          "target_field": "Weight__c (Custom on AssessmentTask)",
+          "transformation": "custom_field_required",
+          "notes": "If using weighted scoring, add custom field to AssessmentTask. Not available natively."
+        },
+        {
+          "source_field": "Parent_Event_ID",
+          "target_field": "ParentId (Link to Visit)",
+          "transformation": "lookup_reparent",
+          "notes": "Link to the new Visit record created from the coaching event header"
+        }
+      ],
+      "gaps": [
+        "Source uses 'Long Skinny Table' design (one row per answer) — cannot simply map fields; must pivot data or map to child-object structure to preserve granularity",
+        "Weighted scoring requires custom field on AssessmentTask",
+        "Source CoachingForm (template) metadata-driven approach must be mapped to AssessmentIndicatorDefinition + ActionPlanTemplate"
+      ],
+      "migration_notes": "The intellectual property of coaching forms (questions, scoring weights, guidance text) can be directly ported into AssessmentIndicatorDefinitions and ActionPlanTemplates. The structure is compatible. Scoring logic (often custom code or formula fields in source) should be rebuilt as declarative Flows that trigger on AssessmentTask completion."
+    },
+    {
+      "id": "fc-map-003",
+      "area": "coaching-form-template",
+      "source_object": "CoachingForm (Custom — Template Definition)",
+      "target_object": "EnablementProgram + ActionPlanTemplate",
+      "field_mappings": [
+        {
+          "source_field": "Form Name (e.g., '2024 Primary Care Coaching Form')",
+          "target_field": "EnablementProgram.Name (e.g., '2024 Primary Care Field Skills Certification')",
+          "transformation": "rename_reframe",
+          "notes": "Shift from 'event' mindset to 'program' mindset — coaching form becomes enablement program"
+        },
+        {
+          "source_field": "Questions and Scoring Weights",
+          "target_field": "AssessmentIndicatorDefinition records",
+          "transformation": "decompose_to_records",
+          "notes": "Each question with its weight becomes an AssessmentIndicatorDefinition record"
+        },
+        {
+          "source_field": "Allowable Picklist Values",
+          "target_field": "AssessmentIndicatorDefinition value constraints",
+          "transformation": "picklist_to_constraint",
+          "notes": "Map source picklist values to target assessment indicator allowed values"
+        }
+      ],
+      "gaps": [
+        "Source form templates are purely data-capture; target Enablement Programs are outcome-based engines with milestones and measures",
+        "Target EnablementMeasure can auto-calculate criteria against the database — fundamentally different from manual scoring in source",
+        "Loading history into Enablement Programs is ill-advised — triggers notifications and skews completion metrics"
+      ],
+      "migration_notes": "Use Enablement Programs only for NEW coaching cycles. Historical form data goes into Visit + AssessmentTask objects. The Enablement 'Task' is not a platform Task; it is a requirement/milestone (e.g., 'Listen to 3 Calls', 'Complete Assessment', 'Achieve 10% Pipeline Growth')."
+    },
+    {
+      "id": "fc-map-004",
+      "area": "compliance-signatures",
+      "source_object": "Custom Signature Capture (varies by implementation)",
+      "target_object": "DigitalVerification",
+      "field_mappings": [
+        {
+          "source_field": "Signature Image / E-Signature",
+          "target_field": "DigitalVerification (credential re-authentication + timestamp)",
+          "transformation": "upgrade_mechanism",
+          "notes": "Target platform's DigitalVerification is a superior, standardized version — captures user re-authentication and timestamp for non-repudiation"
+        }
+      ],
+      "gaps": [],
+      "migration_notes": "High reuse. Implement via Flow: on status change to 'Review', trigger a DigitalVerification request to the rep. This captures credential re-authentication and timestamp, satisfying the non-repudiation requirement of 21 CFR Part 11. Significant upgrade from simple signature images in legacy systems."
+    },
+    {
+      "id": "fc-map-005",
+      "area": "call-observation-linkage",
+      "source_object": "Junction/Stamp on Call record (Coaching_Event_ID on Call)",
+      "target_object": "Custom Junction Object: Coaching_Observation__c",
+      "field_mappings": [
+        {
+          "source_field": "Coaching Event ID → Call records (1:many)",
+          "target_field": "Coaching_Observation__c with two master-detail relationships",
+          "transformation": "custom_junction_required",
+          "notes": "One master-detail to Visit (Manager's Coaching Session), one master-detail to Visit (Rep's Sales Call)"
+        }
+      ],
+      "gaps": [
+        "CRITICAL GAP: Target platform Visit is designed for single interaction at single place — does NOT natively support being a 'header' for other Visits",
+        "Source model 'One Coaching Day covers Ten Sales Calls' has no direct equivalent",
+        "This is the MOST DIFFICULT relationship to preserve in migration"
+      ],
+      "migration_notes": "Requires custom architecture: Create Coaching_Observation__c junction object sitting between Manager's Visit (coaching session) and Rep's Visit (sales call). This is architectural divergence, not a simple field mapping. Budget significant design and testing effort for this pattern."
+    },
+    {
+      "id": "fc-map-006",
+      "area": "calendar-sync-ecosystem",
+      "source_object": "FieldCoachingEvent → Middleware (calendar sync) → Outlook",
+      "target_object": "Visit → Record-Triggered Flow → Standard Event → Einstein Activity Capture → Outlook",
+      "field_mappings": [
+        {
+          "source_field": "StartDate, Description, User (hard-coded into sync logic)",
+          "target_field": "Event.StartDateTime, Event.Description, Event.WhoId",
+          "transformation": "shadow_record_pattern",
+          "notes": "Build a Record-Triggered Flow: whenever a Visit of type 'Field Coaching' is created, auto-create a standard Event as a 'shadow record' for calendar sync"
+        }
+      ],
+      "gaps": [
+        "SIGNIFICANT GAP: Target Enablement Programs are tasks, not events — they do NOT appear on a calendar",
+        "Target Visit can appear on calendar but standard Outlook integration (Einstein Activity Capture) syncs Event objects, not Visit objects directly",
+        "Out-of-the-box, target platform does not automatically push 'Coaching Visits' to Outlook the way the legacy middleware did",
+        "Removing legacy middleware from the equation changes the sync architecture fundamentally"
+      ],
+      "migration_notes": "Must configure Einstein Activity Capture to sync standard Events to Outlook, then build a Record-Triggered Flow creating shadow Event records from coaching Visits. This is a new architectural pattern — not present in legacy system. Ensure managers understand the two-record model (Visit for data, Event for calendar)."
+    },
+    {
+      "id": "fc-map-007",
+      "area": "team-coaching",
+      "source_object": "GeneralEvent / Group Coaching Module",
+      "target_object": "EnablementProgram assigned to User Group / Territory",
+      "field_mappings": [],
+      "gaps": [
+        "Target platform has 'Team Coaching' but it may be optimized for retail supervisors, not pharma field coaching",
+        "May require distinct configuration or licensing (Retail Execution licenses) not in standard Life Sciences base",
+        "Must verify license availability for Team Coaching objects in target platform"
+      ],
+      "migration_notes": "If Team Coaching license unavailable, model as EnablementProgram assigned to a User Group or Territory. Verify during implementation planning whether the retail-derived Team Coaching objects are appropriate for pharma field coaching workflows."
+    },
+    {
+      "id": "fc-map-008",
+      "area": "attachments-unstructured-data",
+      "source_object": "Attachment on Coaching Event",
+      "target_object": "ContentDocumentLink on Visit",
+      "field_mappings": [
+        {
+          "source_field": "Attachment (photos of displays, PDF summaries)",
+          "target_field": "ContentDocumentLink → ContentVersion",
+          "transformation": "standard_file_migration",
+          "notes": "Link attachments to new Visit ID. Using standard ContentVersion makes data accessible to Data Cloud for future AI capabilities."
+        }
+      ],
+      "gaps": [],
+      "migration_notes": "Standard attachment migration pattern. Key second-order opportunity: attachments in standard ContentVersion become accessible to Data Cloud and AI agents, enabling automated summarization of historical coaching reports — impossible in siloed legacy architecture."
+    },
+    {
+      "id": "fc-map-009",
+      "area": "compliance-audit-trail",
+      "source_object": "Standard Field History Tracking (20 fields/object, 18 months) or Custom Audit objects",
+      "target_object": "Shield Field Audit Trail on Visit and AssessmentTask",
+      "field_mappings": [],
+      "gaps": [
+        "Source typically limited to 20 tracked fields and 18 months retention",
+        "Target requires Shield Field Audit Trail license (additional cost)"
+      ],
+      "migration_notes": "For GxP compliance (21 CFR Part 11), enable Shield Field Audit Trail on Visit and AssessmentTask objects. Define retention policy of 10+ years (or as required by Corporate Integrity Agreements). Critical for regulated industries where coaching report score changes may be subject to legal discovery."
+    }
+  ],
+  "reuse_matrix": [
+    {
+      "feature": "Coaching Form Questions and Structure",
+      "reuse_degree": "high",
+      "target_equivalent": "ActionPlanTemplate + AssessmentIndicatorDefinition",
+      "notes": "IP of forms (questions, scoring weights, guidance) ports directly; structure is compatible"
+    },
+    {
+      "feature": "Scoring Logic",
+      "reuse_degree": "medium",
+      "target_equivalent": "Declarative Flows + AssessmentTask",
+      "notes": "Logic itself (weighted formulas) is reusable; implementation must shift from custom code to declarative Flows"
+    },
+    {
+      "feature": "Compliance Signatures",
+      "reuse_degree": "high",
+      "target_equivalent": "DigitalVerification",
+      "notes": "Target is a superior standardized version; reuse the requirement, implement with standard feature"
+    },
+    {
+      "feature": "Mobile Offline Access",
+      "reuse_degree": "high",
+      "target_equivalent": "Target Platform Offline Mobile",
+      "notes": "Operational workflow (manager at clinic with no signal completing coaching report) fully supported"
+    },
+    {
+      "feature": "Calendar Sync to Outlook",
+      "reuse_degree": "low",
+      "target_equivalent": "Einstein Activity Capture + Shadow Event Flow",
+      "notes": "Requires entirely new architecture; legacy middleware removed from equation"
+    },
+    {
+      "feature": "Multi-Call Ride-Along Association",
+      "reuse_degree": "low",
+      "target_equivalent": "Custom Junction Object",
+      "notes": "Most difficult relationship to preserve; requires custom architecture"
+    },
+    {
+      "feature": "Team Coaching",
+      "reuse_degree": "medium",
+      "target_equivalent": "EnablementProgram on User Group or Team Coaching objects",
+      "notes": "Requires license verification; retail-derived feature may need pharma adaptation"
+    }
+  ],
+  "historical_data_strategy": {
+    "approach": "split_history",
+    "transactional_data_target": "Visit + AssessmentTask",
+    "program_data_target": "EnablementProgram (new cycles only)",
+    "analytics_unification": "CRM Analytics (Tableau) to join legacy data in Visits with new data in Enablement",
+    "rationale": "Loading 5-10 years of history into Enablement Programs triggers program assignment notifications and skews completion metrics. Visits are data containers that handle volume well.",
+    "warning": "Do NOT try to unify historical and current data at the transactional object level — use analytics layer instead"
+  },
+  "ai_readiness_opportunities": [
+    {
+      "capability": "Automated Coaching Assessment",
+      "description": "EnablementMeasure can auto-calculate criteria against the database, replacing manual scoring",
+      "prerequisite": "Data must be in Enablement data model (not legacy custom objects)"
+    },
+    {
+      "capability": "AI Sales Coach (Role-Play Agent)",
+      "description": "Autonomous agent for role-playing with reps; relies on Enablement data model to know pitch standards and measures",
+      "prerequisite": "Coaching programs defined as EnablementPrograms with clear measures and milestones"
+    },
+    {
+      "capability": "Predictive Coaching",
+      "description": "Combine prescription/sales data (ERP) with coaching scores to predict rep performance drops and auto-assign remedial programs",
+      "prerequisite": "Data in Visit (Intelligent Sales) + Data Cloud integration + ERP data ingestion"
+    },
+    {
+      "capability": "Historical Report Summarization",
+      "description": "AI agents can read legacy coaching PDF attachments in standard ContentVersion and summarize rep's historical strengths",
+      "prerequisite": "Attachments migrated to standard ContentDocumentLink/ContentVersion (not custom attachment objects)"
+    }
+  ]
+}

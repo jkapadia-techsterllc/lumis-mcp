@@ -1,0 +1,611 @@
+[
+  {
+    "id": "ext-001",
+    "feature": "Industry-Specific Data Model Extensibility",
+    "description": "The platform provides a purpose-built data model for life sciences with objects for healthcare providers, healthcare organizations, visits, samples, consent, territories, products, clinical trials, and patient services. This data model can be extended with custom fields, custom objects, record types, and validation rules while preserving the industry-standard foundation.",
+    "setup_steps": [
+      "Review the standard life sciences data model objects and their relationships",
+      "Identify gaps between standard model and business requirements",
+      "Add custom fields to standard objects where the standard model is close but incomplete",
+      "Create custom objects only when no standard object serves the purpose",
+      "Configure record types for different business process variations",
+      "Add validation rules respecting offline behavior (deferred validation, not skipped)"
+    ],
+    "prerequisites": [
+      "Industry cloud licenses assigned",
+      "Understanding of the four data categories: master data, reference data, transactional/engagement data, clinical data",
+      "Clear system-of-record ownership decisions per data type",
+      "Understanding of which data the platform owns vs. what is federated from external systems"
+    ],
+    "configuration_details": [
+      "Master data (healthcare provider/organization identity, products): typically owned by external MDM — the platform holds a synchronized or federated view, not a second master",
+      "Reference data (specialty codes, territory hierarchies, formulary codes): slow-changing, loaded from external code systems — version it, do not hardcode picklists",
+      "Transactional/engagement data (visits, interactions, sample drops, consent captures): owned by the platform, high volume — needs an archiving strategy from day one",
+      "Clinical data (studies, study sites, enrollment status): the platform orchestrates and tracks status, but EDC/CTMS remains system of record",
+      "Healthcare Provider affiliations must be modeled as a separate object, not a lookup — healthcare providers move between institutions and hold multiple concurrent affiliations",
+      "Do not combine healthcare provider and patient data into one hierarchy — different consent regimes, retention rules, and owning teams"
+    ],
+    "objects_and_fields": [
+      "Account (Healthcare Provider and Healthcare Organization types)",
+      "Contact",
+      "Affiliation (junction object, not a lookup)",
+      "Visit / Interaction",
+      "Sample / SampleDrop",
+      "Consent records",
+      "Territory alignment records",
+      "Product / ProductItem",
+      "ResearchStudy / ResearchStudySite",
+      "CareProgram / CareProgramEnrollee",
+      "VerificationRequest / BenefitInformation",
+      "ActionablePlan / ActionablePlanStep"
+    ],
+    "integration_patterns": [
+      "External MDM sync for master data — batch/CDC, or Data 360 federation if the platform does not need local edit",
+      "Scheduled batch or event-driven status updates for clinical trial status from CTMS/EDC",
+      "Bulk API for high-volume data loads (prescribing/market data feeds) into Data 360, not core objects",
+      "API-based content retrieval (CLM content stored in CMS, metadata only in the platform)"
+    ],
+    "gotchas": [
+      "ANTI-PATTERN: Treating the platform as generic CRM — the industry data model exists for a reason, use it",
+      "ANTI-PATTERN: Over-customizing industry-specific functionality — heavy customization creates technical debt and upgrade friction",
+      "ANTI-PATTERN: Making the platform the master for external data — if MDM owns healthcare provider identity, do not create a second master",
+      "ANTI-PATTERN: Mixing clinical status fields onto commercial objects — an organization can be both a customer and a study site, but not all users should see both",
+      "ANTI-PATTERN: Using territory alignment as security — alignment is a business attribute, sharing is access control, they are separate",
+      "ANTI-PATTERN: Designing for one country when global rollout is expected — identifiers, consent, privacy, and regulatory processes vary by country",
+      "Validation rules deferred during offline use — design them to tolerate same-session ordering"
+    ],
+    "migration_relevance": "Veeva CRM uses a custom data model built on top of the platform with Veeva-specific objects (Account_vod, Call2_vod, Sample_Transaction_vod, etc.). Migration requires mapping Veeva custom objects to the platform's standard industry objects. The standard data model covers most Veeva objects natively, reducing custom object overhead. Key mapping: Veeva Call2_vod -> Visit/Interaction, Veeva Sample_Transaction_vod -> Sample/SampleDrop, Veeva Approved_Document_vod -> CLM content model."
+  },
+  {
+    "id": "ext-002",
+    "feature": "Flow-Based Automation Extensibility",
+    "description": "Declarative automation using Flows for business rules, process automation, and orchestration. Flows are the recommended approach for business logic that changes often and is owned by admins. Supports record-triggered flows, scheduled flows, autolaunched flows, and screen flows.",
+    "setup_steps": [
+      "Identify business processes requiring automation",
+      "Determine if Flow or Apex is the right tool (Flow for admin-owned business rules; Apex for complex logic, bulk processing, or tight performance requirements)",
+      "Build flows following the platform's automation patterns",
+      "Test flows with offline sync scenarios — automation timing shifts when devices are offline",
+      "Implement error handling for governor limits under volume"
+    ],
+    "prerequisites": [
+      "Understanding of platform Flow architecture",
+      "Life sciences data model familiarity",
+      "Knowledge of governor limits and bulk processing constraints",
+      "Understanding of offline behavior impact on flow execution"
+    ],
+    "configuration_details": [
+      "Flow for business-rule logic that changes often and is admin-owned",
+      "Apex for complex logic, bulk processing, or tight performance requirements",
+      "Flow proliferation without governance becomes as hard to maintain as spaghetti code",
+      "Record-triggered flows can serve as the automation backbone for visit workflows, sample tracking, consent management",
+      "Screen flows for guided user experiences (visit logging, benefits verification)",
+      "Use asynchronous processing (Queueable Apex, Platform Events) for anything triggered by large data loads",
+      "Agent actions can invoke Flows — the same governed automation a human user would trigger"
+    ],
+    "objects_and_fields": [
+      "Flow definitions",
+      "Process Builder (deprecated — migrate to Flow)",
+      "Platform Events for event-driven automation",
+      "Queueable Apex for asynchronous processing"
+    ],
+    "integration_patterns": [
+      "Flows can call external services via HTTP callouts or invocable actions",
+      "Platform Events for cross-system event-driven processing",
+      "Agent actions map to Flows for AI-triggered automation",
+      "Integration middleware for cross-system orchestration (do not route purely internal automation through external integration layer)"
+    ],
+    "gotchas": [
+      "Automation timing shifts when device is offline — Platform Events fire when device reconnects, not in real-time",
+      "A Platform Event meant to trigger a same-day follow-up email fires hours later when device reconnects",
+      "Flow proliferation without governance becomes unmaintainable",
+      "Do not route purely internal automation through an external integration layer for consistency",
+      "Use asynchronous processing for large data loads to avoid governor limits",
+      "Test all flows with offline scenarios before production deployment"
+    ],
+    "migration_relevance": "Veeva CRM automation relies heavily on Apex triggers, Process Builder (deprecated), and Veeva-specific workflows. Migration should convert Veeva trigger logic to platform Flows where possible (admin-owned, declarative) and retain Apex only for complex/bulk operations. Veeva's MyInsights flows will need to be rebuilt using platform Flow + AI agent actions. This is often the most labor-intensive part of a Veeva migration."
+  },
+  {
+    "id": "ext-003",
+    "feature": "Apex Development Extensibility",
+    "description": "Server-side development using Apex for complex business logic, bulk processing, tight performance requirements, and custom API endpoints. Apex classes and triggers extend the platform with capabilities that cannot be achieved declaratively.",
+    "setup_steps": [
+      "Identify requirements that exceed Flow capabilities (complex logic, bulk processing, performance-critical paths)",
+      "Design Apex classes following platform patterns and governor limit awareness",
+      "Implement triggers using thin-trigger pattern (delegate to handler classes)",
+      "Build test classes with sufficient coverage",
+      "Consider 2GP packaging for distributable components"
+    ],
+    "prerequisites": [
+      "Developer permission sets assigned",
+      "Sandbox environment for development and testing",
+      "Understanding of governor limits (especially for bulk operations)",
+      "Knowledge of sharing model (with sharing keyword on classes)"
+    ],
+    "configuration_details": [
+      "Use Apex for complex logic, bulk processing, or tight performance requirements",
+      "Triggers should follow thin-trigger pattern — delegate to handler classes",
+      "All Apex must include 'with sharing' unless there is a specific, documented reason not to",
+      "Use Queueable Apex and Platform Events for asynchronous processing",
+      "Custom Apex REST endpoints for external system integration",
+      "Connect API (REST) for lifecycle management operations",
+      "Managed package (2GP) distribution for ISV or cross-org deployment"
+    ],
+    "objects_and_fields": [
+      "Apex Classes",
+      "Apex Triggers",
+      "Apex Test Classes",
+      "Custom REST endpoints",
+      "Connect API endpoints",
+      "Platform Events (custom)",
+      "Queueable Apex jobs"
+    ],
+    "integration_patterns": [
+      "Custom REST API endpoints for external system integration",
+      "Connect API for programmatic access to platform features",
+      "Platform Events for event-driven architecture",
+      "Asynchronous Apex (Queueable, Batch, Future) for large data operations",
+      "Callouts to external services from Apex"
+    ],
+    "gotchas": [
+      "Governor limits apply — design for bulk processing from the start",
+      "Never use synchronous transaction-time processing for large data loads — use async",
+      "Integration users should have least-privilege access — specific fields only, not system admin",
+      "Conflict handling for offline sync needs explicit policy — last-write-wins may be wrong for compliance fields",
+      "Test with realistic data volumes to identify governor limit issues early",
+      "Managed package (2GP) deployment has specific packaging and namespace considerations"
+    ],
+    "migration_relevance": "Veeva CRM has extensive custom Apex code (Veeva's managed package and customer customizations). Migration requires analyzing all Veeva Apex triggers and classes to determine what maps to standard platform functionality (eliminate), what converts to Flow (simplify), and what needs Apex rewrite (retain). Veeva's VOD (Veeva Object Data) API calls need to be mapped to platform Connect API endpoints."
+  },
+  {
+    "id": "ext-004",
+    "feature": "Lightning Web Components (LWC) Extensibility",
+    "description": "Client-side UI development using Lightning Web Components for custom user interfaces, record page customization, and mobile-optimized experiences. LWC is the modern UI framework for building platform-native components.",
+    "setup_steps": [
+      "Set up development environment with platform CLI tools",
+      "Design components following platform design system (SLDS) patterns",
+      "Build LWC components for custom record page layouts, dashboards, or utility features",
+      "Configure Lightning App Builder pages to include custom components",
+      "Test on mobile devices — mobile is the primary form factor for field users",
+      "Validate offline behavior for components used by field teams"
+    ],
+    "prerequisites": [
+      "Developer tools and CLI configured",
+      "Understanding of platform design system (SLDS) tokens and patterns",
+      "Knowledge of Lightning Data Service for data access",
+      "Sandbox environment for development and testing"
+    ],
+    "configuration_details": [
+      "LWC components can be placed on record pages, app pages, home pages, and Experience Cloud pages",
+      "Use Lightning Data Service (LDS) for efficient, cached data access",
+      "Design for mobile-first — field reps work primarily on mobile devices",
+      "Platform design system (SLDS) tokens provide consistent styling",
+      "Components can surface AI-generated content (summaries, recommendations) inline on record pages",
+      "Support phone, tablet, and desktop form factors",
+      "Content presentation player for CLM content with slide thumbnails and reaction overlays"
+    ],
+    "objects_and_fields": [
+      "LWC component bundles (HTML, JS, CSS, meta XML)",
+      "Lightning App Builder page configurations",
+      "Lightning Data Service wire adapters",
+      "Custom metadata types for component configuration"
+    ],
+    "integration_patterns": [
+      "Lightning Data Service for reactive data access with caching",
+      "Wire service for declarative data fetching",
+      "Imperative Apex calls for complex server operations",
+      "Experience Cloud portal components for external users (healthcare providers, patients, investigators)"
+    ],
+    "gotchas": [
+      "Field reps work on mobile devices — all custom UI must be mobile-optimized",
+      "Offline behavior must be considered — components may render with cached data",
+      "Large binary content (CLM content) should be stored in CMS, not the platform — metadata only in the platform",
+      "Do not over-customize industry-specific UI when standard components exist",
+      "Test on actual mobile devices — emulator-only testing is insufficient for sign-off"
+    ],
+    "migration_relevance": "Veeva CRM uses a mix of Visualforce pages, CLM HTML presentations, and custom UI components. Migration requires converting Visualforce to LWC, rebuilding CLM content presentation in the platform's content model, and redesigning MyInsights dashboards as LWC components. The platform's mobile-first approach with Lightning App Builder replaces Veeva's iPad-specific UI patterns with responsive, multi-device components."
+  },
+  {
+    "id": "ext-005",
+    "feature": "Integration Architecture Extensibility",
+    "description": "Comprehensive integration framework supporting REST APIs, Connect API, Platform Events, Change Data Capture, MuleSoft middleware, and Data 360 federation. Enables connection to EHR/EMR, CTMS, ERP, MDM, content management, and regulatory systems.",
+    "setup_steps": [
+      "Map integration requirements to recommended patterns (see pattern table below)",
+      "Configure integration middleware for cross-system orchestration",
+      "Set up Platform Events for event-driven processing",
+      "Configure Data 360 federation for zero-copy data access",
+      "Implement API security with least-privilege integration users",
+      "Set up monitoring, error handling, and retry logic for each integration"
+    ],
+    "prerequisites": [
+      "Integration architecture design completed",
+      "System-of-record ownership decided for each data type",
+      "Integration middleware configured (if applicable)",
+      "API limits and volume planning completed",
+      "Security model for integration users designed"
+    ],
+    "configuration_details": [
+      "Healthcare provider identity sync from MDM: Batch/CDC via middleware, or Data 360 federation",
+      "Clinical trial status from CTMS/EDC: Scheduled batch or event-driven status updates via Platform Events",
+      "EHR/EMR data for patient programs: Synchronous REST call at point of need, narrowly scoped (PHI-sensitive)",
+      "Sample/inventory transactions to ERP: Asynchronous, guaranteed delivery via middleware (financial/compliance data)",
+      "Prescribing/market data feeds: Bulk API batch load into Data 360, not core objects (high volume, analytical)",
+      "CLM content/documents: API-based retrieval, content in CMS, metadata only in platform",
+      "Regulatory/adverse-event reporting: Synchronous transactional API with confirmed receipt and audit log",
+      "Real-time formulary/benefits check: Synchronous external service call, cached briefly with TTL",
+      "Design API volume against limits deliberately — bulk API for large loads, not high-frequency REST"
+    ],
+    "objects_and_fields": [
+      "Platform Events (standard and custom)",
+      "Change Data Capture events",
+      "Named Credentials for secure external service access",
+      "External Services for declarative API integration",
+      "Connected App configurations",
+      "Data 360 Data Streams",
+      "Bulk API configurations"
+    ],
+    "integration_patterns": [
+      "Synchronous API for request/response when user is waiting on the answer",
+      "Platform Events for event-driven 'something happened, react if you care' patterns",
+      "Batch processing for large data volumes",
+      "Data 360 federation for data needed for reasoning/grounding but not editing",
+      "Middleware for cross-system orchestration and protocol translation",
+      "Cache with TTL for expensive, short-lived lookups (formulary checks)"
+    ],
+    "gotchas": [
+      "ANTI-PATTERN: Building point-to-point integrations everywhere — creates dependency web as more systems are added",
+      "ANTI-PATTERN: Giving integration users system admin access — design least-privilege permission model",
+      "Real-time integrations need monitoring and failure handling that batch does not",
+      "Events decouple systems but hide delivery guarantees unless explicitly designed",
+      "Every replicated field is a future sync-conflict and drift risk — prefer federation",
+      "Regulatory submissions require confirmed, timestamped delivery — fire-and-forget events are insufficient",
+      "Do not assume all integrations need real-time — batch is cheaper and simpler to operate when delay is tolerable",
+      "Timeout and retry behavior must be explicitly designed for synchronous integrations"
+    ],
+    "migration_relevance": "Veeva CRM integrates via Veeva Vault (content management), Veeva Network/Compass (master data), Veeva CRM Connectors (ERP/SAP), and custom APIs. Migration requires remapping all integration touchpoints: Veeva Vault -> platform CMS/content model + Data 360, Veeva Network -> Data 360 identity resolution + MDM sync, Veeva Connectors -> middleware or platform-native integration patterns. The platform's Data 360 federation eliminates the need to replicate many datasets that Veeva required local copies of."
+  },
+  {
+    "id": "ext-006",
+    "feature": "Security Model Extensibility",
+    "description": "Multi-layered security framework providing object/field-level security, record-level access and sharing, Permission Set Groups, Shield Platform Encryption, Event Monitoring, data masking, and consent management. Designed for regulated life sciences environments requiring GxP, GDPR, HIPAA, and 21 CFR Part 11 compliance.",
+    "setup_steps": [
+      "Design object and field-level security model for each user role",
+      "Configure Permission Set Groups for composable, role-based access bundles",
+      "Set up record-level sharing rules matching territory alignment and business requirements",
+      "Enable Shield Platform Encryption for patient-identifiable and sensitive data fields",
+      "Configure Event Monitoring for access auditing",
+      "Set up data masking for non-production environments",
+      "Implement consent management for channel-specific and country-specific permissions"
+    ],
+    "prerequisites": [
+      "Security requirements documented per role and data type",
+      "Regulatory requirements identified (GxP, GDPR, HIPAA, 21 CFR Part 11 applicability)",
+      "Territory alignment model designed",
+      "Consent management requirements defined per country/channel",
+      "Legal and quality team input on compliance requirements"
+    ],
+    "configuration_details": [
+      "Permission Set Groups define composable role-based access: Field Rep - Oncology, Medical Science Liaison, Patient Services Agent",
+      "Object/field-level security: Hide clinical trial financial fields from commercial field reps",
+      "Record-level access: Rep sees only healthcare providers in their territory; medical affairs user sees healthcare providers regardless of territory but not commercial engagement detail",
+      "Shield Platform Encryption for fields holding patient-identifiable or sensitive data",
+      "Event Monitoring detects bulk export of sensitive data outside normal patterns",
+      "Data masking ensures sandboxes do not contain real patient data",
+      "Consent management blocks outreach when a healthcare provider withdrew consent (per country/channel)",
+      "Integration user accounts must have least-privilege access to specific fields only"
+    ],
+    "objects_and_fields": [
+      "PermissionSet",
+      "PermissionSetGroup",
+      "SharingRule",
+      "EncryptedField configurations",
+      "EventMonitoring logs",
+      "DataMask configurations",
+      "ConsentRecord / ConsentCapture",
+      "TerritoryAlignment"
+    ],
+    "integration_patterns": [
+      "All automation and AI agent actions run in user context — same security as manual actions",
+      "Integration users follow least-privilege principle",
+      "Cross-system security requires consistent identity and access across the platform and external systems",
+      "Audit logging spans both platform and integration actions"
+    ],
+    "gotchas": [
+      "A perfectly configured permission model does not make an implementation GxP-compliant — also need validation documentation, change control, training records",
+      "Do not assume every life sciences implementation has the same regulatory requirements",
+      "Territory alignment is NOT security — use both but do not assume one implements the other",
+      "Clinical and commercial data MUST be separately secured — sharing a record does not mean sharing all data on it",
+      "A former territory owner can still see historical records if sharing rules are not re-evaluated on realignment",
+      "Consent requirements and privacy rules vary significantly between countries — design for configurability, not hardcoding"
+    ],
+    "migration_relevance": "Veeva CRM uses Veeva's own security model built on the platform (profiles, permission sets, sharing rules) plus Veeva-specific access controls (Territory-based sharing, Veeva CRM content access). Migration requires remapping all Veeva security configurations to platform-native Permission Set Groups and sharing rules. The platform's industry-specific security model (pre-built permission set bundles) reduces the custom security configuration overhead compared to Veeva's approach."
+  },
+  {
+    "id": "ext-007",
+    "feature": "Mobile and Offline Extensibility",
+    "description": "Mobile-first architecture for field representatives working without connectivity — inside hospitals, rural territories, and on flights. Supports offline data creation, validation deferral, sync conflict handling, encrypted local storage, and remote device management.",
+    "setup_steps": [
+      "Configure mobile app for field user profiles",
+      "Define which data sets sync to devices (scope deliberately — do not sync entire territory history)",
+      "Set up offline data policies and conflict resolution rules",
+      "Configure device encryption at rest",
+      "Implement remote wipe and session timeout policies",
+      "Test validation rules and automation with offline scenarios",
+      "Validate on real devices — emulator testing is insufficient"
+    ],
+    "prerequisites": [
+      "Mobile licenses assigned",
+      "Offline sync framework configured",
+      "Device management (MDM) policies defined",
+      "Conflict resolution policy decided for compliance-sensitive fields",
+      "Understanding of deferred validation and automation timing"
+    ],
+    "configuration_details": [
+      "Validation rules are deferred during offline use, not skipped — a rep can save a visit that would fail a validation rule if related records have not synced yet",
+      "Automation timing shifts offline — Platform Events fire when device reconnects, not in real-time",
+      "Conflict handling needs explicit policy — last-write-wins may be wrong for consent or compliance fields",
+      "Local data footprint must be limited — syncing too much data multiplies loss exposure if device is lost",
+      "Local storage encrypted at rest on the device",
+      "Remote wipe and short session timeout are part of the architecture",
+      "Mobile presentation player supports CLM content with slide thumbnails and reaction overlays",
+      "During visits, reps log insights, launch samples, share approved content from mobile device"
+    ],
+    "objects_and_fields": [
+      "Offline sync configuration",
+      "Conflict resolution policies",
+      "Device encryption settings",
+      "Mobile app configuration profiles",
+      "Priming/briefcase rules for offline data sets"
+    ],
+    "integration_patterns": [
+      "Sync engine handles bi-directional data exchange between device and server",
+      "Platform Events and automation fire on reconnect after offline work",
+      "Deferred validation runs server-side after sync completes",
+      "Background sync with configurable conflict resolution"
+    ],
+    "gotchas": [
+      "A Platform Event meant to trigger same-day follow-up fires hours later on reconnect — if the business process assumes real-time, it breaks",
+      "Validation rules that depend on records created in the same offline session may fail on sync if ordering is not tolerated",
+      "Do not sync an entire territory's data to every device — limits data loss exposure and meets data residency requirements",
+      "Security still applies offline — encrypted local storage and remote wipe are mandatory, not optional",
+      "Last-write-wins is default in many sync frameworks but wrong for compliance-sensitive fields like consent",
+      "Test on real devices in actual field conditions — do not rely on emulator testing"
+    ],
+    "migration_relevance": "Veeva CRM is iPad-first with Veeva's own offline sync engine. Migration requires mapping Veeva's offline data sets (priming rules) to the target platform's offline configuration, converting Veeva's conflict resolution approach, and validating that all field workflows work offline on the new platform. Key differences: the target platform supports multiple form factors (phone, tablet, desktop) vs. Veeva's iPad focus, and has different sync timing and conflict resolution behavior."
+  },
+  {
+    "id": "ext-008",
+    "feature": "Experience Cloud Portal Extensibility",
+    "description": "External-facing portal framework for building healthcare provider portals, patient support communities, and investigator portals. Enables self-service capabilities, secure document sharing, and external user engagement within the platform's security model.",
+    "setup_steps": [
+      "Design portal experience for target user type (healthcare provider, patient, investigator)",
+      "Configure Experience Cloud site with appropriate template",
+      "Set up external user authentication and access controls",
+      "Build or configure portal components (LWC, standard components)",
+      "Enable self-service capabilities (self-registration, pre-screening, document access)",
+      "Configure sharing and security for external users"
+    ],
+    "prerequisites": [
+      "Experience Cloud licenses",
+      "External user identity management configured",
+      "Portal content and documentation prepared",
+      "Security model extended for external user access",
+      "Consent management for external user interactions"
+    ],
+    "configuration_details": [
+      "Healthcare provider portals for self-service account management, content access, and engagement",
+      "Patient portals for self-registration, pre-screening instructions, and program enrollment",
+      "Investigator portals for clinical trial site communication and document exchange",
+      "External users subject to the platform's sharing and security model",
+      "Portal components can leverage AI-generated content where appropriate",
+      "Self-service reduces bottlenecks in enrollment and onboarding processes"
+    ],
+    "objects_and_fields": [
+      "Experience Cloud Site configurations",
+      "External User profiles",
+      "Community User licenses",
+      "Sharing Sets for external users",
+      "Portal-specific page layouts"
+    ],
+    "integration_patterns": [
+      "External-facing REST APIs for third-party integration with portals",
+      "SSO/SAML/OAuth for external user authentication",
+      "Content delivery from CMS to portal components",
+      "AI agent integration for portal-based patient support"
+    ],
+    "gotchas": [
+      "External user security model differs from internal — use Sharing Sets, not sharing rules",
+      "Patient data on portals requires strict consent and privacy controls",
+      "Do not expose clinical data to commercial portal users or vice versa",
+      "Portal performance must be tested with realistic user volumes",
+      "External-facing AI agents need especially strict grounding boundaries and human escalation"
+    ],
+    "migration_relevance": "Veeva CRM has limited portal capabilities and relies on separate tools (Veeva Vault for document portals, custom portals for healthcare providers). Migration consolidates these into a single Experience Cloud framework with industry-specific portal templates. This reduces the number of separate systems and provides a unified external user experience."
+  },
+  {
+    "id": "ext-009",
+    "feature": "Analytics and Reporting Extensibility",
+    "description": "Multi-layer analytics framework combining platform-native reports and dashboards, the analytics platform (Tableau), and Data 360 calculated insights. Supports operational reporting for field teams, strategic analytics for leadership, and compliance reporting for regulatory requirements.",
+    "setup_steps": [
+      "Configure standard reports and dashboards for operational use cases",
+      "Set up analytics platform (Tableau) for cross-system strategic analytics",
+      "Configure Data 360 calculated insights for AI-powered analytics",
+      "Build custom report types for industry-specific objects",
+      "Set up compliance reporting dashboards with audit trail data"
+    ],
+    "prerequisites": [
+      "Analytics platform licenses (if using Tableau)",
+      "Data 360 configured with relevant data streams",
+      "Report and dashboard folder structure designed",
+      "User permissions for analytics access configured"
+    ],
+    "configuration_details": [
+      "Platform-native reports for operational visibility (visit activity, sample tracking, territory performance)",
+      "Analytics platform for cross-system strategic analysis (combining platform data with external datasets)",
+      "Data 360 calculated insights for AI-ready analytics (segmentation, propensity scoring)",
+      "Custom report types needed for industry-specific objects and relationships",
+      "Compliance reporting requires full audit trail data (agent actions, user access, data changes)"
+    ],
+    "objects_and_fields": [
+      "Report and Dashboard metadata",
+      "Custom Report Types",
+      "Data 360 Calculated Insights",
+      "Analytics platform (Tableau) datasets",
+      "Audit Trail records"
+    ],
+    "integration_patterns": [
+      "Data 360 unifies platform and external data for analytics without duplication",
+      "Analytics platform connects to platform and external data sources",
+      "Real-time dashboards via platform-native reporting",
+      "Batch analytics via Data 360 datasets"
+    ],
+    "gotchas": [
+      "Route high-volume analytical data (prescribing feeds, market data) into Data 360, not core objects",
+      "Archive engagement history on a defined retention schedule — regulated retention may require keeping data, not just deleting it",
+      "Do not build dashboards that cross clinical/commercial security boundaries without proper access controls",
+      "Large data volume impacts report performance — use Data 360 for analytical queries on large datasets"
+    ],
+    "migration_relevance": "Veeva CRM uses Veeva CRM Reports, Veeva MyInsights (embedded analytics), and external BI tools. Migration requires converting Veeva reports to platform-native reports, rebuilding MyInsights dashboards as LWC components or Tableau dashboards, and potentially consolidating Veeva's analytics stack into the platform's unified analytics framework. Data 360 provides a more powerful analytics foundation than Veeva's embedded analytics."
+  },
+  {
+    "id": "ext-010",
+    "feature": "Content Management (CLM) Extensibility",
+    "description": "Content lifecycle management for approved content delivery to healthcare providers. Supports slide presentations with reaction tracking, content approval workflows, and mobile content delivery. Content is stored in a CMS with metadata only in the platform, avoiding storage bloat.",
+    "setup_steps": [
+      "Configure content management system integration",
+      "Set up content types and approval workflows",
+      "Configure mobile content presentation player",
+      "Enable reaction/engagement tracking for content slides",
+      "Set up content access permissions aligned with territory and role",
+      "Configure offline content caching for field use"
+    ],
+    "prerequisites": [
+      "Content management system (CMS) configured",
+      "Content approval workflow defined",
+      "Field user mobile app configured",
+      "Content access permissions designed"
+    ],
+    "configuration_details": [
+      "Content stored in CMS, metadata only in the platform — large binary content bloats storage for no architectural benefit",
+      "Mobile presentation player with slide thumbnails and reactions overlay (positive/negative taps)",
+      "Content engagement tracking captures which slides were shown, engagement duration, and healthcare provider reactions",
+      "API-based content retrieval from CMS at point of use",
+      "Approved content only — regulatory requirement for promotional materials",
+      "Content access scoped by territory, product, and healthcare provider segmentation"
+    ],
+    "objects_and_fields": [
+      "ContentDocument / ContentVersion (metadata)",
+      "Content engagement tracking records",
+      "Content approval records",
+      "Presentation session records",
+      "Slide reaction records"
+    ],
+    "integration_patterns": [
+      "API-based content retrieval from external CMS",
+      "Metadata-only storage in platform — binary content stays in CMS",
+      "Offline caching of approved content for field use",
+      "Engagement data synced back to platform from mobile devices"
+    ],
+    "gotchas": [
+      "Never store large binary content directly in the platform — use CMS with API retrieval",
+      "Content must go through approval workflow before field deployment — regulatory requirement",
+      "Offline content caching needs explicit data management (stale content removal, version updates)",
+      "Content engagement tracking creates high-volume transactional data — plan archiving strategy"
+    ],
+    "migration_relevance": "Veeva CRM uses Veeva CLM (Closed Loop Marketing) with content stored in Veeva Vault and presented via the Veeva CRM iPad app. Migration requires moving CLM content from Veeva Vault to the target CMS, converting Veeva CLM presentation formats to the platform's content model, and remapping content engagement tracking from Veeva's CLM_Presentation_vod/Slide_vod objects to platform equivalents. The platform's multi-device content delivery (phone, tablet, desktop) is a significant upgrade over Veeva's iPad-only CLM."
+  },
+  {
+    "id": "ext-011",
+    "feature": "Territory Management Extensibility",
+    "description": "Industry-specific territory management for field team alignment, including territory hierarchies, assignment rules, alignment logic, and batch jobs for territory processing. Territories reflect real-world alignment logic and drive account-to-rep relationships.",
+    "setup_steps": [
+      "Design territory hierarchy reflecting organizational structure",
+      "Configure territory assignment rules",
+      "Set up alignment logic (who calls on whom)",
+      "Configure territory management batch jobs",
+      "Separate territory alignment from security/sharing — they are distinct",
+      "Plan for realignment scenarios (what happens when territories change)"
+    ],
+    "prerequisites": [
+      "Territory hierarchy design completed",
+      "Assignment rule logic defined",
+      "Understanding of distinction between alignment (business attribute) and sharing (access control)",
+      "Batch job scheduling configured"
+    ],
+    "configuration_details": [
+      "Territory hierarchies reflect real-world alignment logic",
+      "Product definitions include formulation, status, and supply considerations",
+      "Territory alignment drives who engages which healthcare providers, with what content",
+      "Territory management batch jobs handle bulk alignment processing",
+      "Realignment must trigger sharing rule re-evaluation — former territory owner may retain access to historical records if not handled",
+      "Global implementations need country-specific territory logic"
+    ],
+    "objects_and_fields": [
+      "Territory2 / Territory2Model",
+      "Territory2Type",
+      "UserTerritory2Association",
+      "ObjectTerritory2Association",
+      "Territory management batch jobs"
+    ],
+    "integration_patterns": [
+      "Batch processing for large-scale territory realignments",
+      "Integration with external alignment tools (if applicable)",
+      "Data feeds from external territory planning systems"
+    ],
+    "gotchas": [
+      "CRITICAL: Territory alignment is NOT security — do not use alignment as a substitute for sharing rules",
+      "Former territory owner can still see historical records if sharing rules are not re-evaluated on realignment",
+      "Territory management batch jobs can be resource-intensive — plan execution windows carefully",
+      "Global rollout requires configurable territory logic — do not hardcode country-specific rules"
+    ],
+    "migration_relevance": "Veeva CRM uses Veeva Territory Management with Veeva-specific alignment objects (Territory_vod, TSF_vod). Migration requires mapping Veeva territory structures to the platform's Enterprise Territory Management. Key difference: the platform separates alignment from security more explicitly than Veeva, which is architecturally cleaner but requires conscious security model design during migration."
+  },
+  {
+    "id": "ext-012",
+    "feature": "Sample Management Extensibility",
+    "description": "Regulated sample tracking and management for pharmaceutical field teams. Covers sample inventory, sample drops to healthcare providers, signature capture, lot tracking, and compliance reporting. Supports both physical samples and voucher/coupon programs.",
+    "setup_steps": [
+      "Configure sample product catalog with lot tracking",
+      "Set up sample inventory management for field users",
+      "Configure sample drop workflows with signature capture",
+      "Enable compliance reporting for sample transactions",
+      "Set up integration with ERP for inventory reconciliation",
+      "Configure mobile sample management for offline field use"
+    ],
+    "prerequisites": [
+      "Sample products defined in product catalog",
+      "Field user permission sets configured",
+      "ERP integration planned for inventory/financial reconciliation",
+      "Compliance reporting requirements documented",
+      "Mobile app configured for field use"
+    ],
+    "configuration_details": [
+      "Sample transactions are transactional/engagement data — high volume, owned by the platform",
+      "Archiving strategy needed from day one for sample transaction history",
+      "Signature capture for healthcare provider acknowledgment",
+      "Lot-level tracking for compliance and recall management",
+      "Sample limits and eligibility rules enforcement",
+      "ERP integration uses asynchronous, guaranteed delivery — financial/compliance data cannot be silently dropped"
+    ],
+    "objects_and_fields": [
+      "SampleTransaction / SampleDrop",
+      "SampleInventory",
+      "SampleLot",
+      "SampleLimit / SampleEligibility",
+      "Signature records",
+      "Product / ProductItem"
+    ],
+    "integration_patterns": [
+      "Asynchronous guaranteed delivery to ERP for financial reconciliation",
+      "Offline sample drops with deferred sync",
+      "Batch reconciliation between platform inventory and ERP",
+      "Signature data sync with encryption"
+    ],
+    "gotchas": [
+      "Sample transaction data to ERP must use guaranteed delivery — fire-and-forget is unacceptable for financial/compliance data",
+      "Offline sample drops create sync timing issues — signature and transaction must be atomic",
+      "Sample limit calculations must account for offline transactions not yet synced",
+      "High-volume sample data needs archiving strategy from day one"
+    ],
+    "migration_relevance": "Veeva CRM has extensive sample management (Sample_Transaction_vod, Sample_Inventory_vod, Sample_Lot_vod). Migration requires mapping Veeva sample objects to platform equivalents, converting Veeva sample limit logic, and validating offline sample workflows. The platform's sample management is architecturally similar to Veeva's but uses standard objects instead of Veeva's custom managed package objects, reducing dependency on a single vendor's package."
+  }
+]

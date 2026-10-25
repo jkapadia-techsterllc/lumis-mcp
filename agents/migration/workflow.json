@@ -1,0 +1,74 @@
+{
+  "id": "agent-migration",
+  "name": "Migration Advisor",
+  "persona_prompt": "prompts/strategic-advisor.md",
+  "description": "Guides customers through the end-to-end migration journey: assessment, planning, module selection, timeline, risk identification, and go-live readiness.",
+  "platform_knowledge": ["modules", "gotchas", "country-rules", "decision-trees", "validation-rules", "terminology"],
+  "workflow": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Discovery & Assessment",
+        "description": "Understand the customer's current state, modules in use, and migration drivers.",
+        "tools": ["assess_migration_readiness", "get_module_mapping", "get_country_rules"],
+        "outputs": ["Migration readiness score", "Module coverage matrix", "Country-specific risk flags"],
+        "checklist": [
+          "Source platform identified (Veeva CRM or other legacy life sciences CRM)",
+          "All modules currently in use catalogued",
+          "Countries in deployment scope identified",
+          "User count and user types documented",
+          "Contract timeline / migration driver confirmed",
+          "Current integrations inventoried (ERP, Vault, data warehouse, etc.)",
+          "Compliance requirements by country identified"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "Module Selection & Sequencing",
+        "description": "Map source modules to target, identify gaps, and determine deployment sequence.",
+        "tools": ["traverse_decision_tree", "get_module_mapping", "get_gotchas"],
+        "outputs": ["Module mapping document", "Gap analysis", "Deployment sequence recommendation"],
+        "checklist": [
+          "Each source module mapped to target equivalent",
+          "Coverage percentage documented per module",
+          "Gaps categorized: native gap vs. custom build vs. partner solution",
+          "Module dependencies mapped (e.g., Samples requires Visits)",
+          "Deployment wave plan created",
+          "Critical path identified"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "Risk & Timeline Planning",
+        "description": "Build the migration timeline, identify risks, and plan mitigations.",
+        "tools": ["traverse_decision_tree", "get_gotchas", "get_country_rules"],
+        "outputs": ["Migration timeline", "Risk register", "Mitigation plan"],
+        "checklist": [
+          "Migration approach selected (Big Bang / Wave / Phased)",
+          "Timeline mapped against contract milestones",
+          "Top 10 risks identified with mitigations",
+          "Country-specific risks flagged (GDPR, PDMA, APPI, etc.)",
+          "Data migration approach defined",
+          "Parallel run period planned",
+          "Rollback strategy documented"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "Go-Live Readiness",
+        "description": "Validate configuration, run final checks, confirm readiness.",
+        "tools": ["run_validation", "get_gotchas", "search_knowledge"],
+        "outputs": ["Validation report", "Go-live checklist", "Hypercare plan"],
+        "checklist": [
+          "All validation rules pass",
+          "Data migration complete and verified",
+          "User acceptance testing passed",
+          "Training completed for all user groups",
+          "Consent records migrated and verified (compliance-critical)",
+          "Mobile metadata cache published and tested",
+          "Support team briefed on known issues and escalation paths"
+        ]
+      }
+    ]
+  }
+}

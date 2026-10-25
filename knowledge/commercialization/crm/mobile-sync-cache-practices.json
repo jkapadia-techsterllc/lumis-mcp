@@ -1,0 +1,28 @@
+[
+  {
+    "id": "crm-bp-002",
+    "category": "gotchas",
+    "title": "Mobile Sync and Cache Management Practices for CRM",
+    "products": [
+      "oce"
+    ],
+    "summary": "Covers mobile cache generation timing, sync monitoring techniques, and common pitfalls for CRM mobile applications. Addresses cache version tracking, stuck sync transactions, and the importance of minimizing sync scope.",
+    "findings": {
+      "cache_generation_timing": "Plan and batch all mobile feature configuration updates before generating a new cache. Avoid frequent mid-week cache regeneration which causes field users to download stale or partial caches. Generate new caches during user downtime (after hours or weekends) and notify users to perform manual sync.",
+      "cache_monitoring": "Monitor cache adoption through sync statistics records (cache refreshed date, cache version number) and mobile profile configuration records. Use queries to identify users who have not downloaded the latest cache version. Since sync statistics may contain multiple records per user, use pivot table analysis for accurate counts.",
+      "sync_scope_minimization": "Only push objects to mobile devices if they are needed for the field user's workflow. All mobile feature queries must include WHERE clause filters. Triggers on synced objects should avoid long-running queries that can cause sync timeouts or hangs.",
+      "sync_transaction_monitoring": "Monitor the data sync transaction queue regularly, similar to monitoring an ETL job. Watch for transactions where the processable flag is set to false, and where record counts do not match between the request and actual sync records. Transactions stuck in new status require investigation.",
+      "session_timeout_setting": "The application timeout custom setting should either be set to negative one (disabled) or to 30 minutes minimum. Values below 30 minutes can cause sync interruptions.",
+      "escalation_trigger": "If a user performs manual sync and the cache still does not update to the latest version, escalate to tier 3 support immediately rather than attempting additional sync cycles."
+    },
+    "source": "Sync Best Practices + Caching Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "mobile-sync",
+      "cache",
+      "ipad",
+      "offline",
+      "monitoring",
+      "field-force"
+    ]
+  }
+]

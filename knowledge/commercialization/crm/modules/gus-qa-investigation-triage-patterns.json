@@ -1,0 +1,182 @@
+[
+  {
+    "id": "gus-it-001",
+    "category": "investigation-triage",
+    "question": "Content presentations shown during visit do not match the account's targeted presentations. Is this a bug?",
+    "answer": "This is a known gap with a documented fix. The mobile visit content accordion passes the account ID to filterRestrictedPresentations, but that function is a no-op outside Restriction mode. The fix applies a prioritized display: (1) already-selected presentations always show first, (2) recently-played presentations on that device, (3) library presentations sorted alphabetically — up to 5 shown. Expired presentations are excluded from non-selected slots. In Restriction mode, non-selected presentations must be targeted for the primary account AND every attendee. Two remaining iPad/Web gaps persist: (a) territory alignment — PresentationShare records are not synced to iPad so territory-based filtering is impossible on mobile, (b) recent presentations — Web uses server-side PresentationForum records while iPad uses a local device-only list.",
+    "classification": "known-gap",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["visit", "content", "targeted-presentations", "mobile", "account-filter", "restriction-mode", "territory"]
+  },
+  {
+    "id": "gus-it-002",
+    "category": "investigation-triage",
+    "question": "Email template dynamic capabilities (merge fields, conditional content) stop working when consent management is enabled. Is this a bug or configuration issue?",
+    "answer": "This is both a configuration issue AND an architecture limitation. The programmatic send path supports relationship/indexed merge fields using syntax 'recipient.<collection>.<index>.<field>' for the recipient (Account) scalar fields plus 6 flattened child collections: healthcareproviders, healthcareproviderspecialties, contactpointemails, contactpointaddresses, contactpointphones, contactpointsocials. Arbitrary dot-walk paths (like recipient.Account.Owner.Name, Parent, Territory) and presentation tokens render as BLANK — they are not in the allowlist. CRITICAL: Client-side JavaScript constructs like consent tables (renderConsentRows()) do NOT execute on programmatic/trigger send paths because there is no JS runtime on the server. These tables only render through the interactive web UI. For programmatic sends, consent data must be resolved in Apex/Flow before template evaluation.",
+    "classification": "mixed",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["email", "consent", "dynamic-templates", "merge-fields", "configuration", "programmatic-send", "javascript-limitation"]
+  },
+  {
+    "id": "gus-it-003",
+    "category": "investigation-triage",
+    "question": "PDF presentation page thumbnails are blank after upload in Intelligent Content. Is this a bug?",
+    "answer": "This can be either a bug or configuration issue depending on the symptoms. Known scenarios: (1) If thumbnails are blank only for specific PDF files, it's likely a content format issue — the PDF may use unsupported fonts, encryption, or compression. (2) If thumbnails are blank across all uploads, check the Intelligent Content service configuration and ensure the thumbnail generation service is running. (3) Mixing 'New Page' additions with updated pages in createNewVersionFromExistingDocument can cause System Errors — this is a known bug in certain releases.",
+    "classification": "mixed",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["content", "pdf", "thumbnails", "intelligent-content", "upload"]
+  },
+  {
+    "id": "gus-it-004",
+    "category": "investigation-triage",
+    "question": "Territory email template assignment records (TerritoryContentTmplAsgnt) are not being created when assigning territory to email templates. Is this a bug?",
+    "answer": "This is a known bug that has been patched in specific releases. The TerritoryContentTmplAsgnt junction records should be automatically created when a territory is assigned to an email template. If they are not being created: (1) Verify the release version includes the fix, (2) Check if the assignment was done via the UI (supported) vs API (may have different behavior), (3) As a workaround, create the junction records directly via API/Data Loader.",
+    "classification": "bug",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["email", "territory", "junction-object", "assignment", "bug"]
+  },
+  {
+    "id": "gus-it-005",
+    "category": "investigation-triage",
+    "question": "'Send unless recipient opted out' checkbox causes emails to be cancelled for HCPs without any consent record. Is this expected?",
+    "answer": "This was a BUG, now fixed. Prior to the fix, the behavior was inverted — emails were cancelled for HCPs without consent records, which blocked legitimate outreach. The corrected behavior: (1) No consent record + SendEmailWhenNoOptOut ON = email SENDS (Status=Success, IsConsentIgnored=true), (2) Explicit OptIn consent = email SENDS (normal), (3) Explicit OptOut consent = email CANCELLED. The fix was classified as [RCA][SUB] Edge case not handled, [RCA][CAT] Missing / incomplete logic (edge case). Shipped via patch release. Testing verification: insert CommSubscriptionConsent, schedule queue processor or call sendImmediately(recordId), confirm email record flips from New/Scheduled to Sent/Success with SentDateTime populated.",
+    "classification": "bug",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["email", "consent", "opt-out", "send-behavior", "bug-fixed", "SendEmailWhenNoOptOut"]
+  },
+  {
+    "id": "gus-it-006",
+    "category": "investigation-triage",
+    "question": "Activity Plan Product records fail when the Account lookup uses a parent object (polymorphic relationship). Is this a bug?",
+    "answer": "This is a known bug in certain releases. The Activity Product records query has a syntax issue with datetime conversion when the Account lookup traverses a parent object relationship. The SOQL query generation uses incorrect syntax for the datetime filter when the account field references a parent object. Check the specific release notes for whether this has been fixed in your version.",
+    "classification": "bug",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["activity-plan", "product-records", "query-syntax", "parent-object", "datetime"]
+  },
+  {
+    "id": "gus-it-007",
+    "category": "investigation-triage",
+    "question": "Provider Visit records are not sharing correctly when a user creates both a Visit and Provider Visit simultaneously. Is this a bug?",
+    "answer": "This is a known bug related to record sharing rules. When a user creates a Visit and a Provider Visit in the same transaction, the sharing rules for Provider Visit may not properly inherit from the parent Visit's sharing context. The Provider Visit should share with the same users/groups as the parent Visit. Workaround: ensure sharing rules are explicitly configured for Provider Visit objects, not just relying on parent Visit sharing inheritance.",
+    "classification": "bug",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["visit", "provider-visit", "sharing", "record-sharing", "permissions"]
+  },
+  {
+    "id": "gus-it-008",
+    "category": "investigation-triage",
+    "question": "Visit submission on mobile shows product restriction not enforced during bulk visit submit. Is this a bug?",
+    "answer": "This is a bug found during release testing. Product restriction validation should be enforced at visit submission time regardless of whether it's a single or bulk submit. In affected releases, the bulk visit submit path may skip the product restriction check that runs during individual visit submission. Verify the release includes the fix. This is critical for compliance — product restriction bypasses in the field can lead to regulatory violations.",
+    "classification": "bug",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["visit", "bulk-submit", "product-restriction", "compliance", "mobile"]
+  },
+  {
+    "id": "gus-it-009",
+    "category": "investigation-triage",
+    "question": "iPad shows '--None--' on a required standard picklist field in Edit view, but Web does not. Is this a bug?",
+    "answer": "This is a known mobile/web parity issue. On iPad, required standard picklist fields (like Inquiry.Type) may show '--None--' as an option in Edit view, even though the field is required. Web correctly hides the blank option for required picklists. The mobile rendering engine handles required picklist validation differently. If a user selects '--None--' and tries to save, they should get a validation error, but the UX is confusing. This is tracked as a mobile parity bug.",
+    "classification": "bug",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["mobile", "ipad", "picklist", "required-field", "web-parity"]
+  },
+  {
+    "id": "gus-it-010",
+    "category": "investigation-triage",
+    "question": "Duplicate records are being created when background sync runs while a record is open for editing. Is this a bug?",
+    "answer": "This was a bug, now fixed. The root cause: background (Pin) sync was dropping Success transactions prematurely, losing track of offline unique IDs. The fix ensures sync transactions are NOT dropped until a manual sync runs. Background sync pulls records down but retains Success transactions across sync cycles. The drop set during non-manual sync is limited to [canceled, manual] — Success transactions are excluded. During manual sync, the UI is refreshed so in-memory state and database stay in sync, making it safe to drop completed transactions. RCA themes: Offline/sync, Timing/race condition, Sync/transaction/timing/reliability. Verified on physical device — no duplicate created after fix.",
+    "classification": "bug",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["sync", "offline", "duplicate", "race-condition", "background-sync", "transaction-retention", "bug-fixed"]
+  },
+  {
+    "id": "gus-it-011",
+    "category": "investigation-triage",
+    "question": "Visibility rules using formula fields with isOwner condition hide field sections until the first sync on newly created records. Is this a bug?",
+    "answer": "This is a known behavior with offline formula evaluation. Visibility rules that depend on formula fields (like isOwner) cannot evaluate correctly on newly created records before the first sync because the formula depends on server-side data (like the record owner) that hasn't been synced yet. After the first sync, the formula evaluates correctly and the sections become visible. This is as-designed for the offline engine but confusing for users. Workaround: avoid using owner-based formula fields in visibility rules for create flows, or use a different visibility approach for new records.",
+    "classification": "as-designed",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["visibility-rules", "formula", "offline", "new-record", "sync"]
+  },
+  {
+    "id": "gus-it-012",
+    "category": "investigation-triage",
+    "question": "Mobile create-only forms cannot distinguish between object-level CRUD permissions and field-level security (FLS). Is this a bug?",
+    "answer": "This is a known architectural limitation. On mobile create-only forms, the permission check conflates object CRUD (Create, Read, Update, Delete) with field-level security. A user may have Create permission on the object but not Edit permission on specific fields, and the mobile form may incorrectly show or hide fields based on object-level permissions rather than field-level security. Web correctly distinguishes these two permission layers. This affects implementations where field-level security is used to control field visibility on create forms.",
+    "classification": "known-gap",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["mobile", "fls", "crud", "permissions", "create-form"]
+  },
+  {
+    "id": "gus-it-013",
+    "category": "investigation-triage",
+    "question": "HCPs created from Person Account related list stamp Account ID into a Contact-typed field (PractitionerId) instead of the Contact ID. Is this a bug?",
+    "answer": "This is a bug in the DynamicUI form framework. When creating an HCP record from a Person Account's related list, the framework incorrectly passes the Account ID into the PractitionerId field, which expects a Contact ID. Person Accounts have both an Account ID and a Contact ID — the form should use the Contact ID for Contact-typed lookup fields. This requires a fix in the DynamicUI record creation logic to detect Person Account contexts and map to the correct ID type.",
+    "classification": "bug",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["dynamicui", "person-account", "contact", "practitioner", "lookup-field"]
+  },
+  {
+    "id": "gus-it-014",
+    "category": "investigation-triage",
+    "question": "Enhanced Sync does not write back offlineUniqueIdentifier on delta/manual sync because DeviceSyncTransactionRecords are never downloaded. Is this a bug?",
+    "answer": "This is a bug in the Enhanced Sync implementation. The offlineUniqueIdentifier field should be populated during delta and manual sync operations to maintain record identity across offline/online states. The issue is that DeviceSyncTransactionRecords are not included in the delta/manual sync download payload, which means the offline identifier is never written back. This can lead to duplicate record creation and sync conflicts. Full sync works correctly because it downloads all transaction records.",
+    "classification": "bug",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["sync", "enhanced-sync", "offline-identifier", "delta-sync", "manual-sync"]
+  },
+  {
+    "id": "gus-it-015",
+    "category": "investigation-triage",
+    "question": "Presentation player Cancel from Account quick action does not return to the Account record on web. Is this a bug?",
+    "answer": "This is a bug in the web presentation player navigation. When launching the CLM presentation player from an Account quick action and clicking Cancel, the user should be returned to the Account record page. Instead, the navigation may go to an unexpected location or fail to navigate at all. This is a web-specific issue — the mobile player correctly returns to the launching context. The root cause is typically in the navigation stack handling for the quick action context.",
+    "classification": "bug",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["content", "presentation-player", "navigation", "quick-action", "web"]
+  },
+  {
+    "id": "gus-it-016",
+    "category": "investigation-triage",
+    "question": "Related list lookup column headers show different labels between Web and iPad (e.g., 'Activity Plan ID' vs 'Activity Plan'). Is this a bug?",
+    "answer": "This is a known web/mobile label parity issue. The related list column headers may show the field's API label on one platform and the relationship label on another. This is generally cosmetic and does not affect functionality. However, it can cause confusion during user acceptance testing. The root cause is that the web and mobile platforms resolve lookup field labels using different label resolution paths. This is typically classified as 'Never' (won't fix) unless it causes functional confusion.",
+    "classification": "as-designed",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["related-list", "labels", "web-mobile-parity", "cosmetic"]
+  },
+  {
+    "id": "gus-it-017",
+    "category": "investigation-triage",
+    "question": "How should investigation triage classify incoming issues?",
+    "answer": "Use a three-tier classification: (1) BUG — code defect requiring a fix, usually manifests as incorrect data, crashes, or behavior that contradicts documented specifications. Examples: duplicate records from sync race conditions, wrong IDs stamped in lookup fields, validation bypassed during bulk operations. (2) CONFIGURATION ISSUE — correct behavior that requires setup changes. Examples: consent records missing, territory assignments incomplete, field-level security not configured, visibility rules depending on server-side data. (3) AS-DESIGNED — behavior that works as intended but may not match customer expectations. Examples: '--None--' on mobile picklists, label differences between platforms, formula fields not evaluating offline. Track the ratio: if >40% of investigations are configuration issues, improve documentation and enablement.",
+    "classification": "process",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["investigation", "triage", "classification", "process", "methodology"]
+  },
+  {
+    "id": "gus-it-018",
+    "category": "investigation-triage",
+    "question": "What are the most common categories of customer-reported issues that turn out to be configuration issues rather than bugs?",
+    "answer": "Top configuration-as-bug categories: (1) CONSENT MANAGEMENT — missing consent records, misunderstanding 'Send unless opted out' semantics, email cancelled without apparent reason. (2) TERRITORY ALIGNMENT — accounts not showing in visit planner, content not filtered correctly, missing territory-object junction records. (3) OFFLINE/SYNC — visibility rules depending on server data before first sync, formula fields not evaluating offline, metadata cache not regenerated after config changes. (4) FIELD-LEVEL SECURITY — fields visible on web but hidden on mobile (FLS vs CRUD confusion), required fields showing blank options. (5) RECORD TYPE ROUTING — wrong form layout displayed, missing fields on visit/email forms. Solution: build a self-service configuration checklist that addresses these five categories before any investigation is filed.",
+    "classification": "process",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["investigation", "configuration", "common-patterns", "self-service", "enablement"]
+  }
+]

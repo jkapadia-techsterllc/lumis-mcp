@@ -1,0 +1,217 @@
+[
+  {
+    "id": "ec-001",
+    "category": "field-email",
+    "topic": "Field Email Architecture",
+    "description": "Field Email helps teams create and send professional, personalized, compliant emails. Predefined templates enforce brand guidelines and regulatory requirements (GDPR, CAN-SPAM). Dynamic fields and reusable content fragments allow message personalization. Built-in engagement tracking (opens, clicks) provides interaction insights. Merge field syntax uses {!Object.Field} format (e.g., {!Account.Name}, {!Contact.Email}).",
+    "objects": [
+      "EmailTemplate",
+      "EmailTemplateFragment",
+      "TerritoryContentTmplAsgnt"
+    ],
+    "setup_steps": [
+      "Create email templates with merge fields using {!Object.Field} syntax",
+      "Configure reusable content fragments",
+      "Set up territory-based template assignments via TerritoryContentTmplAsgnt junction object",
+      "Configure sender email addresses using SenderEmailFieldApiName (not default Sender Type)",
+      "Enable engagement tracking",
+      "Set up Edit Subject Line flag for subject flexibility"
+    ],
+    "gotchas": [
+      "Use SenderEmailFieldApiName for custom sender addresses, NOT default Sender Type option",
+      "Email Queue does NOT respect SenderEmailFieldApiName - FROM address reflects logged-in user instead of configured field",
+      "BCC is NOT supported in Send Email functionality",
+      "No built-in email open/click tracking on the email template object - requires third-party integration",
+      "Custom picklist fields on email template do NOT surface as filter options in Send Email picker",
+      "Edit Subject Line flag combined with org-level AllowEditSubject shows predefined options PLUS free-text Other option - cannot show predefined without Other"
+    ],
+    "migration_relevance": "Veeva Approved_Email maps to EmailTemplate. Veeva tokens (ISILink, PILink, PieceLink) have NO direct equivalent - must create custom fields/objects for regulatory document URLs. Veeva {{token}} syntax maps to {!Object.Field} syntax."
+  },
+  {
+    "id": "ec-002",
+    "category": "field-email",
+    "topic": "Email Template Territory Assignment",
+    "description": "Email templates have a dedicated junction object (TerritoryContentTmplAsgnt) for territory assignments. CLM Presentations do NOT have an equivalent assignment object. This asymmetry makes territory-based presentation querying harder compared to email templates. Custom territory-presentation junction objects may be needed for parity.",
+    "objects": [
+      "TerritoryContentTmplAsgnt",
+      "EmailTemplate"
+    ],
+    "setup_steps": [
+      "Create territory-template assignment records",
+      "Configure territory-based template filtering",
+      "Understand the asymmetry: presentations lack this junction object"
+    ],
+    "gotchas": [
+      "Presentations do NOT have an equivalent territory assignment junction object",
+      "This asymmetry affects reporting and territory-based content filtering",
+      "Custom junction objects may be needed for territory-presentation assignments"
+    ],
+    "migration_relevance": "Veeva territory-email mapping maps directly. Veeva territory-CLM mapping requires custom solution on the target platform."
+  },
+  {
+    "id": "ec-003",
+    "category": "intelligent-content",
+    "topic": "Intelligent Content and CLM Architecture",
+    "description": "Intelligent Content helps teams deliver relevant content during HCP interactions. Presentations use a many-to-many relationship with territories for content scoping. PresentationContent is part of Stories feature (AI-generated content) and has NO relationship to the CLM Presentation object. iOS content accordion has no tier that performs account-targeted fetch, causing iOS and Web to show different presentation lists for the same user/account.",
+    "objects": [
+      "Presentation",
+      "PresentationContent",
+      "PresentationPageProduct"
+    ],
+    "setup_steps": [
+      "Configure CLM Presentation objects",
+      "Set up Presentation Page Product links to connect content to products",
+      "Configure territory-presentation alignment",
+      "Set up content restriction mode behavior",
+      "Configure PPTX-to-HTML5 conversion for offline mobile consumption"
+    ],
+    "gotchas": [
+      "PresentationContent (Stories) is NOT related to CLM Presentation object - they share no relationship",
+      "iOS and Web show DIFFERENT presentation lists due to missing account-targeted fetch on iOS",
+      "Standalone video is NOT a supported content type for CLM - must embed in HTML presentations (ZIP packages)",
+      "Videos up to 8GB exist in customer environments - consider sync time and storage impact",
+      "In Restriction mode, web applies hard client-side gate but iOS only applies optional narrow-filter",
+      "Presentation Page Product is the standard object for linking presentation content to products"
+    ],
+    "migration_relevance": "Veeva CLM maps to Presentation/Intelligent Content. Veeva Media object maps to embedded content in HTML5 packages. Key Messaging maps to presentation slide tracking."
+  },
+  {
+    "id": "ec-004",
+    "category": "event-management",
+    "topic": "Event Management Architecture",
+    "description": "Event Management supports planning, managing, and closing regulated events (speaker programs, HCP meetings, sponsorship activities). Configurable workflows validate HCP eligibility, enforce subject and spending rules, and capture compliance acknowledgments. Event lifecycle covers creation, participant coordination, topic assignment, resource management, expense tracking, and closeout.",
+    "objects": [
+      "Event",
+      "EventParticipant",
+      "EventTopic",
+      "EventExpense"
+    ],
+    "setup_steps": [
+      "Configure event types and record types",
+      "Set up HCP eligibility validation rules",
+      "Configure spending rules and limits",
+      "Set up compliance acknowledgment capture",
+      "Configure event closeout workflows",
+      "Enable expense tracking and reporting"
+    ],
+    "gotchas": [
+      "HCP eligibility must be validated before event participation is confirmed",
+      "Spending rules must be enforced during event lifecycle, not just at closeout",
+      "Compliance acknowledgments must be captured before event progression"
+    ],
+    "migration_relevance": "Veeva Events Management maps to Event Management. Speaker program tracking, spend tracking, and compliance workflows have platform equivalents but configuration differs."
+  },
+  {
+    "id": "ec-005",
+    "category": "general-events",
+    "topic": "General Events and Calendar",
+    "description": "General Events help users schedule and track non-customer activities (internal meetings, team activities, training). Uses the standard Event object for calendar entries. The Planner shows general events alongside customer visits. Employees can be added to General Events for coordination. When logging internal activities like Quarterly Sales Training, the standard Event object with appropriate record type should be used.",
+    "objects": [
+      "Event"
+    ],
+    "setup_steps": [
+      "Configure General Event record types on the standard Event object",
+      "Set up event calendar display in Planner",
+      "Configure employee attendee capabilities",
+      "Separate general events from customer engagement events in reporting"
+    ],
+    "gotchas": [
+      "General Events use the standard Event object, NOT a custom object",
+      "Calendar configuration represents General Event entries using standard Event",
+      "Must differentiate general events from customer engagement events for analytics"
+    ],
+    "migration_relevance": "Veeva general call types map to General Event record types on the standard Event object."
+  },
+  {
+    "id": "ec-006",
+    "category": "surveys",
+    "topic": "Survey Architecture",
+    "description": "Surveys enable structured feedback collection. Support consistent data collection, regulatory requirements, and actionable insights. Mobile app supports offline surveys - responses collected offline are automatically synchronized when connectivity is restored. Surveys can be loaded by developer name and rendered on presentation UI. Response records sync when connectivity is available.",
+    "objects": [
+      "Survey",
+      "SurveyResponse",
+      "SurveyInvitation"
+    ],
+    "setup_steps": [
+      "Create survey forms with appropriate question types",
+      "Configure survey invitations and distribution",
+      "Enable offline survey capability for mobile",
+      "Set up survey response analytics",
+      "Configure survey integration with presentation UI"
+    ],
+    "gotchas": [
+      "Offline survey responses sync automatically when connectivity restores",
+      "Survey developer names must be unique and properly configured for presentation integration",
+      "Response records may have a sync delay in offline scenarios"
+    ],
+    "migration_relevance": "Veeva Survey_vod maps to Survey. Offline survey capability is similar but sync behavior differs."
+  },
+  {
+    "id": "ec-007",
+    "category": "field-insights",
+    "topic": "Field Insights and Audio Briefings",
+    "description": "Field Insights transforms complex HCP and account information into concise actionable briefings before visits. Role-tailored insights help preparation. Insights can be converted to daily audio briefings as podcasts through the mobile app. Supports offline playback, playback continuity, and background playback for on-the-go consumption.",
+    "objects": [
+      "FieldInsight",
+      "AudioBriefing"
+    ],
+    "setup_steps": [
+      "Configure Field Insights data sources",
+      "Set up role-based insight filtering",
+      "Enable audio briefing generation",
+      "Configure offline and background playback settings"
+    ],
+    "gotchas": [
+      "Audio briefings require platform AI licenses",
+      "Offline playback must be configured for mobile users",
+      "Background playback continues when users navigate away from the app"
+    ],
+    "migration_relevance": "No direct Veeva equivalent - Field Insights and audio briefings are net-new AI capabilities."
+  },
+  {
+    "id": "ec-008",
+    "category": "app-alerts",
+    "topic": "App Alerts Architecture",
+    "description": "App Alerts provide timely notifications about updates, events, recommendations, and required actions. Generated by admins/managers, triggered by system, or provided through external recommendations. Users can respond directly, take recommended action, or dismiss with feedback. Centralized real-time communication channel across the application.",
+    "objects": [
+      "AppAlert"
+    ],
+    "setup_steps": [
+      "Configure alert types and triggers",
+      "Set up admin/manager alert creation workflows",
+      "Configure system-triggered alert rules",
+      "Enable external recommendation alert integration",
+      "Set up alert dismissal and feedback capture"
+    ],
+    "gotchas": [
+      "Alert dismissal feedback should be captured for improvement",
+      "System-triggered alerts need proper rule configuration to avoid alert fatigue"
+    ],
+    "migration_relevance": "Maps partially to Veeva alerts but with more sophisticated triggering and feedback capabilities."
+  },
+  {
+    "id": "ec-009",
+    "category": "order-management",
+    "topic": "Order Management and Store Check",
+    "description": "Order Management combines store assessment, quoting, and pricing in a single workflow. Store Check shows products available/relevant at a location. Quoting uses price books, pricing rules, and transaction types. Field reps can evaluate a retail location and create a priced order during the same visit, moving seamlessly from store check to order creation.",
+    "objects": [
+      "Order",
+      "OrderItem",
+      "PriceBook2",
+      "PricingRule",
+      "StoreCheck"
+    ],
+    "setup_steps": [
+      "Configure price books and pricing rules",
+      "Set up Store Check templates",
+      "Configure quoting workflow integration with visits",
+      "Enable transaction type configuration"
+    ],
+    "gotchas": [
+      "Store Check and order creation must be on the same visit for seamless workflow",
+      "Pricing rules and transaction types interact - test thoroughly",
+      "Account and visit must be connected for the full workflow"
+    ],
+    "migration_relevance": "Veeva Order_vod maps to Order. Store Check is a newer capability specific to retail/consumer goods scenarios within life sciences."
+  }
+]

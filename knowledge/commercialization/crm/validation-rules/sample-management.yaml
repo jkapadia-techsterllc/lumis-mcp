@@ -1,0 +1,101 @@
+rules:
+  - id: val-sm-001
+    name: Sample Lot Expiration Configuration
+    description: Validates that sample lots have expiration dates configured and that expired lots are properly excluded from transaction eligibility.
+    category: Sample Management
+    severity: high
+    check:
+      type: config_review
+      items:
+        - "Sample Lot records have Expiration_Date field populated"
+        - "Validation rule or trigger prevents transactions against expired lots"
+        - "Batch job configured to flag lots approaching expiration (30-day threshold recommended)"
+    symptoms:
+      - "Reps can drop samples from expired lots"
+      - "Sample reconciliation shows negative inventory for expired products"
+      - "Compliance report flags transactions against expired lots"
+    resolution:
+      steps:
+        - "Review Sample Lot records — ensure Expiration_Date is populated for all active lots"
+        - "Create or verify validation rule: Expiration_Date >= TODAY() on Sample Transaction create"
+        - "Configure batch job to update lot status to 'Expired' when Expiration_Date < TODAY()"
+        - "Test with sample lot expiring today — verify transaction is blocked"
+      documentation: "Sample Management Configuration Guide > Sample Lot Lifecycle"
+    tags: [sample, compliance, expiration]
+
+  - id: val-sm-002
+    name: Sample Limit Batch Job Schedule
+    description: Validates that the sample limit calculation batch job is scheduled and running successfully.
+    category: Sample Management
+    severity: high
+    check:
+      type: config_review
+      items:
+        - "Sample Limit Calculation batch job is scheduled (Apex Scheduler or Setup > Scheduled Jobs)"
+        - "Job runs at appropriate frequency (daily recommended for active orgs)"
+        - "Last run completed without errors"
+        - "Limit records are being created/updated as expected"
+    symptoms:
+      - "Reps see no sample limits in mobile app"
+      - "Sample limits show stale data (e.g., last month's calculations)"
+      - "New products have zero limits despite configuration"
+    resolution:
+      steps:
+        - "Navigate to Setup > Scheduled Jobs and verify batch job exists"
+        - "Check Apex Jobs for recent execution history and errors"
+        - "If job is missing, schedule using the Sample Limit batch class"
+        - "Verify limit hierarchy: Brand → Molecule → SKU mappings are correct"
+        - "Run job manually and verify limits populate in target records"
+      documentation: "Sample Management Configuration Guide > Limit Calculation Framework"
+    tags: [sample, batch, limits]
+
+  - id: val-sm-003
+    name: Sample Transaction Signature Capture
+    description: Validates that signature capture is properly configured for sample drops, meeting regulatory requirements.
+    category: Sample Management
+    severity: critical
+    check:
+      type: config_review
+      items:
+        - "Signature capture enabled in Sample Management settings"
+        - "Signature is required (not optional) for regulated sample types"
+        - "Signature image storage configured (ContentDocument or custom attachment)"
+        - "Offline signature capture works on mobile devices"
+    symptoms:
+      - "Sample transactions saved without signatures"
+      - "Signature images appear blank or corrupted after sync"
+      - "Compliance audit finds unsigned sample transactions"
+    resolution:
+      steps:
+        - "Verify Sample Management settings require signature for sample drop transactions"
+        - "Test signature capture on mobile device in offline mode"
+        - "Verify signature syncs correctly and is visible in web after device sync"
+        - "Configure validation rule to prevent sample transactions without signature attachment"
+      documentation: "Sample Management Configuration Guide > Signature Requirements"
+    tags: [sample, compliance, signature, mobile]
+
+  - id: val-sm-004
+    name: Sample Inventory Reconciliation Setup
+    description: Validates that sample inventory reconciliation is configured for periodic physical counts.
+    category: Sample Management
+    severity: medium
+    check:
+      type: config_review
+      items:
+        - "Reconciliation record type and page layout configured"
+        - "Reconciliation frequency defined (monthly/quarterly per regulatory requirement)"
+        - "Discrepancy threshold configured (alerts when physical count differs from system count)"
+        - "Reconciliation workflow includes manager approval for discrepancies"
+    symptoms:
+      - "No reconciliation records exist despite active sample distribution"
+      - "Discrepancies between physical inventory and system inventory go undetected"
+      - "Regulatory audit finds gaps in reconciliation schedule"
+    resolution:
+      steps:
+        - "Configure Reconciliation record type with required fields"
+        - "Set up reconciliation schedule matching regulatory requirements"
+        - "Define discrepancy threshold (typically 5% or configurable per product)"
+        - "Create approval process for discrepancies exceeding threshold"
+        - "Test end-to-end: create reconciliation, enter counts, verify discrepancy detection"
+      documentation: "Sample Management Configuration Guide > Inventory Reconciliation"
+    tags: [sample, compliance, reconciliation, inventory]

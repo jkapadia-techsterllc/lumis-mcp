@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-offline-001",
+    "category": "modules",
+    "title": "Offline-First Native Mobile App Architecture on Salesforce Platform",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Architecture patterns for building fully offline-capable native mobile applications on the Salesforce platform, addressing disconnected field force scenarios where HCP visits occur in locations without reliable connectivity. The architecture targets zero data loss with full offline functionality, multi-language support (20+ languages), multi-country deployment (35+ countries), configurable UI, electronic signature capture, and CFR 21 Part 11 compliance \u2014 all from a single codebase.",
+    "findings": {
+      "problem_statement": "Life sciences field teams operate across disconnected channels \u2014 reps, medical science liaisons, KAMs, and patient support coordinators \u2014 each with separate tools and data silos. This fragmentation results in confused HCP and patient experiences, duplicated effort, and lost engagement data.",
+      "architecture_layers": "A layered architecture organizes concerns into: data infrastructure (local SQLite with sync), platform services (authentication, configuration, metadata), business logic (visit management, sampling, consent), and presentation (configurable UI components). The key principle is that every layer must function without network connectivity.",
+      "offline_requirements": "Core offline capabilities include: local data persistence with conflict resolution, queue-based sync when connectivity returns, configurable metadata driving UI without app updates, electronic signature capture meeting regulatory standards, and full audit trail maintained locally until sync.",
+      "compliance_framework": "CFR 21 Part 11 compliance requires electronic signature attribution, tamper-evident audit trails, system access controls, and data integrity verification. These requirements must be satisfied at the local device level, not deferred to server-side validation.",
+      "deployment_model": "Single codebase targeting multiple mobile platforms, with configuration-driven behavior differences per country, therapeutic area, and user role. Language packs and regulatory configurations are synchronized as metadata rather than compiled into the application."
+    },
+    "source": "TrailheadDX 2018 \u2014 Develop an Offline Native Mobile App using the Salesforce Platform",
+    "tags": [
+      "offline-first",
+      "mobile",
+      "architecture",
+      "cfr-21-part-11",
+      "sync",
+      "configurable-ui"
+    ]
+  }
+]

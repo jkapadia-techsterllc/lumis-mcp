@@ -1,0 +1,31 @@
+[
+  {
+    "id": "fnd-ce-strategy-001",
+    "category": "org-strategy",
+    "title": "Customer Engagement Vision and Strategic Trends in Life Sciences",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Consolidated strategic analysis of customer engagement evolution in life sciences, drawn from 2022-era vision documents and industry point-of-view analyses. Covers the shift from traditional field-only engagement to omnichannel models, digital-first strategies, and the role of data, AI/ML, and platform consolidation.",
+    "findings": {
+      "macro_trends_reshaping_engagement": "Four forces are reshaping pharma customer engagement: (1) HCP preference for digital and hybrid interaction over in-person-only; (2) rise of wearable and sensor data creating continuous patient monitoring loops; (3) AI/ML enabling next-best-action recommendations at scale; (4) regulatory shifts accelerating real-world evidence requirements.",
+      "omnichannel_maturity_model": "Organizations progress through levels: (1) channel proliferation with disconnected touchpoints, (2) coordinated multi-channel with shared customer data, (3) true omnichannel with journey orchestration and real-time content personalization, (4) autonomous engagement with AI-driven next-best-action across all channels.",
+      "customer_360_imperative": "A unified customer 360 view remains the foundational prerequisite. Industry surveys indicate fewer than 10-15% of pharma companies believe they have an adequate 360-degree customer view. Without it, personalization and omnichannel orchestration remain aspirational.",
+      "digital_channel_effectiveness": "Video-based remote engagement delivers approximately 3x greater promotional response from HCPs versus in-person meetings alone. Leaders using video calls 3+ times weekly gain measurable competitive advantage in share-of-voice metrics.",
+      "platform_consolidation_trend": "The industry is moving from fragmented point solutions toward platform-based approaches. Two strategic mindsets observed among IT leaders: (a) build on a single platform ecosystem for integration benefits, or (b) pursue multi-vendor with integration middleware. Both have trade-offs around vendor lock-in vs. integration complexity.",
+      "saas_crm_for_life_sciences": "SaaS CRM in life sciences faces unique challenges: managed package complexity (550+ objects, 5M+ lines of code in mature implementations), ISV pricing conflicts in platform ecosystems, and the need for composite APIs to manage data flows across multi-package architectures.",
+      "novel_channels_and_modalities": "Emerging engagement channels include AR/VR for medical education, in-app messaging for clinical trial recruitment, wearable-triggered alerts, and AI-driven chatbots for medical information requests. Most organizations are in pilot or evaluation phase with these.",
+      "implications_for_implementation": "Implementation teams should design architectures that support channel extensibility, invest in customer data platforms or MDM for unified HCP/HCO records, and build content management workflows that can deliver approved content across channels with compliance guardrails."
+    },
+    "source": "Consolidated from 2022-era industry presentations and strategic analyses on customer engagement vision, SaaS CRM dynamics, and omnichannel field engagement trends",
+    "tags": [
+      "customer-engagement",
+      "omnichannel",
+      "strategy",
+      "digital-transformation",
+      "next-best-action",
+      "customer-360"
+    ]
+  }
+]

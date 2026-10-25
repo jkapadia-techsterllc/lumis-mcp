@@ -1,0 +1,38 @@
+[
+  {
+    "id": "vhcp-covid-001",
+    "category": "field-trends-hcp-engagement",
+    "title": "COVID-19 Impact on HCP-Pharma Engagement \u2014 Veeva/Abelson Taylor Survey 2020",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "The COVID-19 pandemic fundamentally disrupted HCP-pharma engagement dynamics. A July 2020 survey by Abelson Taylor and Veeva found that 50% of physicians had not seen any sales reps, received tele-details, or e-details in the past week, and 52% stated they would not allow in-person sales rep visits that summer. This catalyzed a permanent shift toward digital and remote engagement channels.",
+    "survey_findings": {
+      "source": "Abelson Taylor and Veeva joint survey, July 2020",
+      "no_rep_contact": "50% of surveyed physicians had zero sales rep interaction (in-person, telephone, or electronic) in the preceding week",
+      "in_person_refusal": "52% of physicians stated they would not allow in-person sales rep visits during the survey period",
+      "implications": "Demonstrated that traditional in-person detailing was no longer the dominant engagement channel, even temporarily"
+    },
+    "engagement_shift": {
+      "pre_covid": "In-person detailing was the primary HCP engagement channel. Digital channels were supplementary.",
+      "during_covid": "Complete disruption of in-person access. Rapid adoption of video calls, approved email, and digital content sharing.",
+      "post_covid_prediction": "Veeva predicted a hybrid model would emerge \u2014 reduced but targeted in-person visits combined with sustained digital channel usage. In-person access restrictions expected to persist beyond the pandemic."
+    },
+    "my_veeva_for_doctors": {
+      "description": "Veeva launched MyVeeva for Doctors as a unified HCP engagement platform during this period. Intended to give physicians a single portal for managing pharma communications, scheduling, and content access.",
+      "strategic_intent": "Positioned as the HCP-facing complement to Veeva CRM \u2014 if physicians adopt MyVeeva for Doctors as their preferred interface, it deepens Veeva platform lock-in by owning both the rep-side and HCP-side of the engagement.",
+      "competitive_relevance": "Creates a potential competitive moat. If HCPs prefer receiving communications through MyVeeva for Doctors, switching CRM platforms becomes more disruptive because the HCP-facing channel would need to change."
+    },
+    "speaker": "David Logue, SVP Commercial Strategy, Veeva Systems",
+    "source": "pharmaexec-virtual-conference-veeva-presentation-august-2020",
+    "tags": [
+      "covid-19",
+      "hcp-engagement",
+      "digital-shift",
+      "my-veeva-for-doctors",
+      "survey-data",
+      "field-trends"
+    ]
+  }
+]

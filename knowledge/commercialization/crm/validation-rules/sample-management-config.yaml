@@ -1,0 +1,103 @@
+schema_version: "1.0"
+category_name: "Sample Management Configuration"
+description: |
+  Validation rules for CRM Sample Management configuration.
+  Covers product setup, inventory locations, production batches,
+  inventory initialization, sample limits, and mobile cache.
+
+rules:
+  - id: sample-001
+    name: Sample products exist
+    description: |
+      Verifies that Product2 records exist with an active status.
+      Products are the foundation of all sample management operations.
+      Without products, no inventory or sample drops can be configured.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM Product2
+        WHERE IsActive = true
+      expect: "count > 0"
+    symptoms:
+      - "No products available for sample drops"
+      - "Cannot create inventory operations"
+      - "Product list is empty"
+    resolution:
+      steps:
+        - "Navigate to Setup > Object Manager > Product2"
+        - "Create Product records with appropriate record type"
+        - "Ensure products are set to Active"
+        - "Create corresponding marketable product records"
+
+  - id: sample-002
+    name: Marketable product records exist
+    description: |
+      Verifies that marketable product wrapper records exist.
+      These define distribution methods (Drop, Drop and Ship) and
+      are required for products to appear in sample management UIs.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM MarketableProduct
+      expect: "count > 0"
+    symptoms:
+      - "Products not appearing in sample drop"
+      - "Cannot configure distribution method"
+    resolution:
+      steps:
+        - "Create marketable product records for each sample product"
+        - "Set distribution method (Drop or Drop and Ship)"
+        - "Associate with the parent Product2 record"
+
+  - id: sample-003
+    name: Inventory locations exist
+    description: |
+      Verifies that Location records exist for sample inventory storage.
+      Locations represent physical storage (warehouses, rep trunk stock).
+      Without locations, inventory operations cannot be performed.
+    category: configuration
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM Location
+      expect: "count > 0"
+    symptoms:
+      - "Cannot perform inventory operations"
+      - "No inventory location found"
+    resolution:
+      steps:
+        - "Create Location records for each inventory storage point"
+        - "Associate locations with users or territories"
+
+  - id: sample-004
+    name: Sample limit templates are configured
+    description: |
+      Verifies that sample limit records exist. Limits control
+      how many samples a rep can distribute per product per time period.
+      Without limits, sample compliance tracking is not enforced.
+    category: compliance
+    severity: warning
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM ProviderSampleLimit
+      expect: "count > 0"
+    symptoms:
+      - "Sample limits not enforced"
+      - "Rep can disburse unlimited samples"
+      - "Sample limit batch job not generating limits"
+    resolution:
+      steps:
+        - "Configure sample limit templates in Admin Console"
+        - "Associate products with limit templates"
+        - "Create TimePeriod records for the current period"
+        - "Run Sample Limits batch job to generate limits"

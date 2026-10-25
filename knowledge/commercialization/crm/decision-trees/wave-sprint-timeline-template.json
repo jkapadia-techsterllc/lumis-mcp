@@ -1,0 +1,350 @@
+{
+  "id": "dt-wave-timeline",
+  "name": "Wave Sprint Timeline Template",
+  "description": "Per-wave program activity sequence and sprint timeline templates based on proven global pharma CRM deployment patterns. Use alongside the Multi-Country Rollout Planner to build detailed wave-level execution plans.",
+  "version": "1.0",
+  "templates": {
+    "standard_wave": {
+      "name": "Standard Wave (16-20 weeks)",
+      "description": "Standard timeline for a single wave deploying to one region. Suitable for most waves in a multi-wave program.",
+      "total_weeks": 20,
+      "phases": [
+        {
+          "phase": "Discovery & Requirements",
+          "weeks": "1-4",
+          "duration_weeks": 4,
+          "activities": [
+            "Scope alignment with country stakeholders",
+            "Country-specific regulatory requirements gathering",
+            "Data model delta analysis (what differs from prior waves)",
+            "Custom solution gap identification",
+            "User persona and role mapping",
+            "Integration touchpoint inventory (MDM, SAP, transparency reporting)"
+          ],
+          "gate": "Requirements sign-off — no new scope after this gate",
+          "gotcha": "Discovery scope creep is the #1 wave delay. Hard-close requirements at week 4 — late additions go to the next wave or a post-go-live sprint."
+        },
+        {
+          "phase": "Design & Configuration",
+          "weeks": "3-7",
+          "duration_weeks": 5,
+          "overlap_note": "Overlaps with late Discovery — start platform configuration for known-scope items in week 3",
+          "activities": [
+            "Platform configuration (profiles, permission sets, page layouts, record types)",
+            "Sample limit rules per country",
+            "Consent model configuration (opt-in vs opt-out defaults by jurisdiction)",
+            "Territory alignment setup",
+            "Email template localization and merge field mapping",
+            "Content management library structure and restriction rules",
+            "Custom solution build for gap items identified in Discovery"
+          ],
+          "gate": "Configuration complete — sandbox frozen for testing"
+        },
+        {
+          "phase": "Data Migration",
+          "weeks": "5-10",
+          "duration_weeks": 6,
+          "activities": [
+            "Extract from source system (historical data cutoff decision)",
+            "Transform and cleanse (field mapping, de-duplication, format normalization)",
+            "Dry run load #1 — identify referential integrity issues",
+            "Fix data quality issues in source or transform layer",
+            "Dry run load #2 — validate all modules",
+            "Sample transaction audit trail verification",
+            "Consent record validation (country-default compliance check)"
+          ],
+          "gate": "Migration validation passes — zero critical errors in dry run #2",
+          "gotcha": "Plan for 3 dry runs minimum, not 2. The first one always surfaces issues you didn't anticipate. Budget the time upfront rather than scrambling."
+        },
+        {
+          "phase": "End-to-End Testing",
+          "weeks": "9-14",
+          "duration_weeks": 6,
+          "activities": [
+            "E2E Cycle 1: Core workflows (visit creation, sample drop, CLM presentation, email send)",
+            "E2E Cycle 2: Integration flows (MDM sync, transparency reporting, adverse event capture)",
+            "E2E Cycle 3: Edge cases and regression (offline sync, cross-border scenarios, territory realignment)",
+            "Performance testing at target data volumes",
+            "Mobile device testing (iPad + iPhone for field reps, web for managers)",
+            "Defect triage and resolution between cycles"
+          ],
+          "gate": "E2E exit criteria met — all P1/P2 defects resolved, P3 deferred with workarounds documented",
+          "gotcha": "Never skip E2E Cycle 3. The offline sync and cross-border edge cases are where you find the compliance-impacting bugs that would hit production."
+        },
+        {
+          "phase": "Business Acceptance Testing",
+          "weeks": "13-16",
+          "duration_weeks": 4,
+          "activities": [
+            "BAT preparation (test scripts, test data, user account provisioning)",
+            "BAT execution with business stakeholders from each country",
+            "Country-specific regulatory scenario validation",
+            "Business process sign-off by country leads",
+            "Defect resolution for BAT-found issues",
+            "Go/No-Go decision checkpoint"
+          ],
+          "gate": "Business sign-off — country leads confirm readiness",
+          "gotcha": "BAT is not optional. SI teams that skip BAT and go straight from E2E to deployment face 3x the post-go-live support tickets."
+        },
+        {
+          "phase": "Deployment & Training",
+          "weeks": "16-20",
+          "duration_weeks": 5,
+          "activities": [
+            "Production environment preparation",
+            "Final data migration (delta load from cutover date)",
+            "Smoke test in production (Day 1 checklist per user role)",
+            "Train-the-trainer sessions (2 weeks before end-user training)",
+            "End-user training by country (virtual + in-person for first wave)",
+            "Hypercare support setup (dedicated support team for 4-6 weeks post-go-live)",
+            "Knowledge transfer to BAU support team"
+          ],
+          "gate": "Go-live confirmed — hypercare begins",
+          "gotcha": "Train-the-trainer MUST happen before end-user training. Sending untrained trainers to deliver sessions is the fastest way to erode field rep confidence in the new platform."
+        }
+      ]
+    },
+    "pilot_wave": {
+      "name": "Pilot Wave (12-14 weeks)",
+      "description": "Accelerated timeline for a 2-3 country pilot that validates the platform before the full wave program begins. Recommended as Wave 0 for enterprise deployments.",
+      "total_weeks": 14,
+      "phases": [
+        {
+          "phase": "Pilot Scoping",
+          "weeks": "1-2",
+          "duration_weeks": 2,
+          "activities": [
+            "Select 2-3 pilot countries (include one complex regulatory market)",
+            "Define success criteria (Day 1 smoke test pass rate, sync performance, user adoption target)",
+            "Baseline platform configuration from prior implementation or reference architecture",
+            "Identify pilot champions in each country"
+          ]
+        },
+        {
+          "phase": "Build & Configure",
+          "weeks": "2-6",
+          "duration_weeks": 5,
+          "activities": [
+            "Platform configuration for pilot countries",
+            "Data migration dry run with pilot country data subset",
+            "Integration setup for pilot scope (MDM, transparency if applicable)",
+            "Custom solution build for pilot-specific gaps"
+          ]
+        },
+        {
+          "phase": "Test & Validate",
+          "weeks": "6-10",
+          "duration_weeks": 5,
+          "activities": [
+            "Combined E2E + BAT (smaller scope allows combining)",
+            "Pilot user acceptance with country champions",
+            "Sync performance benchmarking with realistic data volumes",
+            "Defect resolution"
+          ]
+        },
+        {
+          "phase": "Deploy & Learn",
+          "weeks": "10-14",
+          "duration_weeks": 4,
+          "activities": [
+            "Pilot go-live",
+            "Intensive hypercare (daily standups with pilot users)",
+            "Lessons learned documentation (what to change for full waves)",
+            "Platform optimization based on pilot feedback",
+            "Decision: proceed to Wave 1 or iterate pilot"
+          ],
+          "gate": "Pilot success criteria met — program proceeds to Wave 1",
+          "gotcha": "The pilot's real purpose is to find what you got wrong in configuration and data migration. If the pilot surfaces zero surprises, you're not looking hard enough."
+        }
+      ]
+    },
+    "us_compliance_wave": {
+      "name": "US Compliance Wave (20-24 weeks)",
+      "description": "Extended timeline specifically for US deployments due to state-by-state regulatory complexity. Should never be combined with other countries except Canada.",
+      "total_weeks": 24,
+      "phases": [
+        {
+          "phase": "US Regulatory Discovery",
+          "weeks": "1-6",
+          "duration_weeks": 6,
+          "activities": [
+            "50-state sample distribution licensing inventory",
+            "DEA registration validation requirements",
+            "State-specific NP/PA prescriptive authority rules",
+            "California furnishing number requirements",
+            "Vermont prescriber confidentiality rules",
+            "Sunshine Act transparency reporting configuration",
+            "State gift and meals regulations mapping",
+            "PDMA audit trail requirements finalization"
+          ],
+          "gate": "Regulatory matrix signed off by compliance team"
+        },
+        {
+          "phase": "Configuration & Compliance Build",
+          "weeks": "5-10",
+          "duration_weeks": 6,
+          "activities": [
+            "License validation rules per state",
+            "Sample limit framework configuration (federal + state overlays)",
+            "Transparency reporting integration (aggregate spend, meal tracking)",
+            "Custom license expiration alert thresholds (90/60/30 day)",
+            "Controlled substance workflows (Schedule II-V handling)",
+            "Platform configuration (profiles, layouts, territory alignment)"
+          ]
+        },
+        {
+          "phase": "Data Migration",
+          "weeks": "9-14",
+          "duration_weeks": 6,
+          "activities": [
+            "Account and HCP data migration with NPI validation",
+            "Historical sample transaction migration with PDMA audit trail preservation",
+            "License and credential data migration with expiration date validation",
+            "Transparency reporting historical data (if mid-year migration — requires split-year handling)",
+            "3 dry run cycles minimum"
+          ],
+          "gotcha": "Mid-year US migrations require split-year transparency reporting. Both source and target systems must contribute to the annual Sunshine Act filing. Plan for this or schedule the cutover for January."
+        },
+        {
+          "phase": "E2E + Compliance Testing",
+          "weeks": "13-18",
+          "duration_weeks": 6,
+          "activities": [
+            "Standard E2E testing (3 cycles)",
+            "Compliance scenario testing (sampling across state boundaries, DEA validation, license expiration blocking)",
+            "Sunshine Act report generation and validation",
+            "Cross-border Canada scenarios (if Canada is in scope)"
+          ]
+        },
+        {
+          "phase": "BAT & Deployment",
+          "weeks": "18-24",
+          "duration_weeks": 6,
+          "activities": [
+            "BAT with US compliance team and field leadership",
+            "Regulatory sign-off (legal, compliance, medical affairs)",
+            "Production deployment",
+            "Extended hypercare (6-8 weeks for US due to complexity)",
+            "First Sunshine Act reporting cycle validation in production"
+          ],
+          "gate": "US go-live with regulatory sign-off"
+        }
+      ]
+    },
+    "japan_standalone_wave": {
+      "name": "Japan Standalone Wave (20-24 weeks)",
+      "description": "Dedicated timeline for Japan deployments. Japan is always standalone due to APPI, PMDA, and full CJK localization requirements.",
+      "total_weeks": 24,
+      "phases": [
+        {
+          "phase": "Japan Discovery & Localization Planning",
+          "weeks": "1-6",
+          "duration_weeks": 6,
+          "activities": [
+            "APPI data handling requirements mapping",
+            "PMDA pharmaceutical regulations review",
+            "Full Japanese localization scope (kanji, hiragana, katakana across all UI elements)",
+            "Japan-specific business process mapping (HQ-driven vs field-driven differences)",
+            "Local stakeholder alignment (Japan country lead, local IT, compliance)",
+            "Identify Japan-specific integrations (local MDM, Japan-specific transparency requirements)"
+          ]
+        },
+        {
+          "phase": "Localization & Configuration",
+          "weeks": "5-12",
+          "duration_weeks": 8,
+          "activities": [
+            "Full UI string translation and review (professional translation + in-context review)",
+            "CJK character validation across all form fields, reports, and PDF exports",
+            "Japan-specific sample rules and limit configuration",
+            "APPI consent model implementation",
+            "Custom solution build for Japan-specific workflows",
+            "Platform configuration with Japan-specific layouts and record types"
+          ],
+          "gotcha": "Machine translation is not sufficient for Japan. Budget for professional translators with pharma domain expertise, plus a review cycle with local business users. Mistranslated pharmaceutical terms are a compliance risk."
+        },
+        {
+          "phase": "Data Migration & Testing",
+          "weeks": "11-18",
+          "duration_weeks": 8,
+          "activities": [
+            "Data migration with CJK character integrity validation",
+            "3 dry run cycles with full localization verification",
+            "E2E testing with Japanese-language test scripts",
+            "Device testing on Japan-standard iPad models",
+            "Compliance scenario testing (APPI, PMDA)"
+          ]
+        },
+        {
+          "phase": "BAT & Deployment",
+          "weeks": "18-24",
+          "duration_weeks": 6,
+          "activities": [
+            "BAT with Japan stakeholders (in-person preferred)",
+            "Training material localization and train-the-trainer (local trainers required)",
+            "End-user training in Japanese",
+            "Production deployment",
+            "Extended hypercare with Japan-timezone support coverage"
+          ],
+          "gate": "Japan go-live with local stakeholder sign-off",
+          "gotcha": "Train-the-trainer won't work for Japan without local cultural context. Plan for local trainers, not fly-in trainers from other regions."
+        }
+      ]
+    }
+  },
+  "cross_wave_activities": {
+    "description": "Activities that span across waves and must be managed at the program level, not the wave level.",
+    "activities": [
+      {
+        "name": "Parallel Discovery",
+        "rule": "Start the next wave's Discovery phase during the current wave's E2E Testing. This keeps the program pipeline flowing without dead time between waves."
+      },
+      {
+        "name": "Global Design Authority",
+        "rule": "Maintain a central configuration governance board that reviews wave-specific customizations against the global template. Prevent configuration drift between waves that makes future upgrades painful."
+      },
+      {
+        "name": "Stabilization Window",
+        "rule": "Minimum 3-month gap between wave go-lives. This is non-negotiable — it provides time for hypercare, lessons learned, and platform optimization before the next wave adds load."
+      },
+      {
+        "name": "Regression Testing",
+        "rule": "Every wave must include regression testing of prior-wave countries. A Wave 3 change should never break Wave 1 users. Budget for automated regression suite maintenance starting from Wave 2."
+      },
+      {
+        "name": "Release Alignment",
+        "rule": "Align wave go-lives with the platform's release calendar. Going live the week before a major platform release is a recipe for compounded risk. Target mid-release-cycle go-lives."
+      },
+      {
+        "name": "SI Bench Rotation",
+        "rule": "Retain at least 30% of the SI team across waves to preserve institutional knowledge. Full team rotation between waves loses hard-won configuration and data migration expertise."
+      }
+    ]
+  },
+  "anti_patterns": [
+    {
+      "name": "Big Bang Global",
+      "description": "Attempting to deploy to all countries simultaneously. This approach has a near-100% failure rate for deployments over 10 countries. Every global pharma that tried this in the last decade has either rolled back or spent 2x the budget on post-go-live remediation."
+    },
+    {
+      "name": "US First",
+      "description": "Making the US the first wave. US regulatory complexity (50-state licensing, Sunshine Act, PDMA, DEA) makes it the worst possible pilot market. Always deploy to simpler markets first to stabilize the platform."
+    },
+    {
+      "name": "Japan Bundled",
+      "description": "Bundling Japan with other APAC countries. APPI compliance, PMDA requirements, and full CJK localization demand dedicated resources. When bundled, either Japan gets shortchanged or the other APAC countries slip."
+    },
+    {
+      "name": "Skip the Pilot",
+      "description": "Going straight to full Wave 1 without a pilot. The pilot finds configuration and data migration issues at manageable scale. Skipping it means finding these issues at full production scale."
+    },
+    {
+      "name": "Zero Stabilization Gap",
+      "description": "Scheduling the next wave immediately after go-live with no stabilization period. Hypercare issues from Wave N bleed into Wave N+1 preparation, degrading both."
+    },
+    {
+      "name": "Single-Language BAT",
+      "description": "Running BAT only in English for non-English markets. Localization bugs are invisible in English BAT scripts. Run BAT in the local language for every country."
+    }
+  ]
+}

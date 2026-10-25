@@ -1,0 +1,59 @@
+[
+  {
+    "id": "oce-cfg-orders-001",
+    "category": "crm-configuration",
+    "title": "Orders Module — Package Selection and Migration Path",
+    "products": ["CRM Platform"],
+    "summary": "The Orders module supports product ordering from the field with two implementation paths. The legacy package uses the original namespace and is deprecated. The recommended CHC/OCE8 package uses CHC-prefixed permission sets, handlers, and custom permissions. Both packages share the same functional footprint and data model — only the namespace and handler routing differs.",
+    "findings": {
+      "package_selection": "Organizations should implement the CHC/OCE8 package (recommended). The original package is deprecated and will not receive new features. There is no configuration change required to enable Orders on iPad when using the CHC package — only the 'Is OCE 8 Extension' custom setting must be activated.",
+      "deprecated_package_permission_sets": "The deprecated package uses: Order Management 2 User (field reps), Order Management 2 Admin (administrators), Order Management 2 QuotaUser (quota management). These grant access to Order2, OrderLineItem2, Discount, Pricelist, and Rule objects.",
+      "chc_package_permission_sets": "The recommended CHC package uses: CHC OrderManagement2 Admin, CHC Core Admin, CHC OrderManagement2 User, CHC Core, CHCOrderManagement2_QuotaUser. These provide identical functional access through the CHC namespace.",
+      "custom_permissions": "Both packages use: 'Unlock Submitted Order' (allows reopening submitted orders for editing) and 'Order Boundless Discounts' (removes discount ceiling validation). These custom permissions are namespace-independent."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Orders 2.0 Sections",
+    "tags": ["orders", "package-selection", "migration", "permission-sets", "CHC", "deprecated"]
+  },
+  {
+    "id": "oce-cfg-orders-002",
+    "category": "crm-configuration",
+    "title": "Orders 2.0 — Record Types and Data Model Structure",
+    "products": ["CRM Platform"],
+    "summary": "Orders 2.0 uses a structured data model with specific record types controlling behavior across different object hierarchies. The record type configuration determines discount behavior, order grouping, product allocation, and business rule routing.",
+    "findings": {
+      "record_types": "Hierarchy (Product object) — controls product tree navigation. Discount and Validation (Rule2 object) — separates discount rules from validation rules. Group and Regular (Order2 object) — Group orders aggregate multiple Regular orders from different territories. Weighted Goal (ActivityPlan object) — links order targets to activity planning. Product Territory Allocation Order Quota (ProductTerritoryAllocation object) — manages territory-level product quotas.",
+      "db_schemas_to_activate": "10 DB Schema entities must be activated: Order2, OrderDelivery2, OrderLineItem2, OrderDetail2, OrderDiscount2, Pricelist2, PricelistItem2, Rule2, OrderConfiguration2Settings, and PriceListRule. Each entity requires the Active checkbox set in Custom Metadata Types > DB Schema.",
+      "object_relationships": "Order2 is the parent containing OrderLineItem2 children (products). OrderDetail2 provides additional line-level metadata. OrderDiscount2 tracks applied discounts. Pricelist2 and PricelistItem2 define product pricing. Rule2 contains both discount rules (percentage/amount) and validation rules (field-level constraints)."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Orders 2.0 Data Model",
+    "tags": ["orders", "data-model", "record-types", "db-schema", "objects"]
+  },
+  {
+    "id": "oce-cfg-orders-003",
+    "category": "crm-configuration",
+    "title": "Orders 2.0 — Trigger Handlers and Processing Pipeline",
+    "products": ["CRM Platform"],
+    "summary": "The Orders module relies on a set of trigger handlers for business logic execution. The deprecated package and CHC package use different handler class names but implement identical logic. All handlers must be activated in Custom Metadata Types > Trigger Handler.",
+    "findings": {
+      "deprecated_handlers": "AccountSegmentationHandler — assigns segmentation rules to accounts. Rule2DeleteHandler — cascade cleanup when rules are removed. AccountChangeAddSegmentationHandler — adds segmentation when account territory changes. PriceList2DeleteHandler — cascade cleanup for price list removal. AssignProductParentBrandHandler — maps products to parent brand hierarchies. Order2SharingHandler — territory-based sharing rules for orders. PriceList2Handler and PriceListItem2Handler — price list validation and calculation triggers.",
+      "chc_handlers": "AccountChangeAddSegmentationCHCHandler, AccountSegmentationCHCHandler, AssignProductParentBrandCHCHandler — CHC-namespace equivalents of the deprecated handlers. These must be activated instead of (not in addition to) the deprecated versions.",
+      "handler_activation_path": "Setup > Custom Code > Custom Metadata Types > Trigger Handler > Manage Trigger Handlers. Each handler has an Active checkbox. Ensure only one namespace's handlers are active — running both deprecated and CHC handlers simultaneously causes duplicate processing."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Orders 2.0 Trigger Handlers",
+    "tags": ["orders", "trigger-handlers", "CHC", "activation", "processing"]
+  },
+  {
+    "id": "oce-cfg-orders-004",
+    "category": "crm-configuration",
+    "title": "Orders 2.0 — iPad Configuration and CHC Extension Activation",
+    "products": ["CRM Platform"],
+    "summary": "iPad ordering requires specific configuration depending on the package. The CHC package requires the 'Is OCE 8 Extension' custom setting to be activated. The deprecated package requires no additional iPad-specific setup beyond standard DB Schema and permission set configuration.",
+    "findings": {
+      "chc_ipad_activation": "For the CHC/OCE8 package, the only iPad-specific requirement is activating 'Is OCE 8 Extension' in custom settings. No other configuration change is needed. This setting routes the mobile client to use CHC-namespace handlers and components.",
+      "order_workflow_on_mobile": "Orders on iPad follow: browse products via territory-filtered catalog > add to order with quantities > apply discounts (if permitted) > submit order. Submitted orders trigger OrderDelivery2 records for fulfillment tracking.",
+      "discount_behavior": "Discount rules (Rule2 with Discount record type) are evaluated during order line item creation. Validation rules (Rule2 with Validation record type) are evaluated on order submission. The 'Order Boundless Discounts' custom permission bypasses discount ceiling rules for authorized users."
+    },
+    "source": "CRM Configuration Guide, March 2025 Monthly — Orders 2.0 iPad Configuration",
+    "tags": ["orders", "ipad", "mobile", "CHC", "discounts", "custom-settings"]
+  }
+]

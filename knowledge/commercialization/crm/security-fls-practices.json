@@ -1,0 +1,27 @@
+[
+  {
+    "id": "crm-bp-005",
+    "category": "gotchas",
+    "title": "Security Profile and Field-Level Security Practices for CRM",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Covers profile management, field-level security versus page layout visibility, label governance, and strategies for minimizing security maintenance overhead in Salesforce CRM implementations.",
+    "findings": {
+      "fls_over_page_layouts": "Use field-level security rather than page layouts to control field visibility. FLS blocks access at all levels including reports, API access, and SOQL queries. Page layout removal only hides fields from the UI but leaves them accessible through reports and the API.",
+      "profile_minimization": "Minimize the number of security profiles and page layouts. Fewer profiles means less maintenance overhead when adding new fields or objects. Clone and rename out-of-box profiles using naming conventions aligned to the organization's group structure.",
+      "page_layout_reuse": "Reuse page layouts across record types wherever possible. Control field visibility differences between record types through field-level security rather than creating duplicate page layouts. This reduces the number of layouts to maintain.",
+      "label_governance": "Never change out-of-box labels for record types, picklist values, tabs, or other standard components. Label changes can cause unexpected system behavior in areas that reference the original label value. Use Translation Workbench for display-name customization instead of modifying the base label."
+    },
+    "source": "Security Best Practices, CRM Help Center, circa 2017",
+    "tags": [
+      "security",
+      "fls",
+      "profiles",
+      "page-layouts",
+      "field-level-security",
+      "labels"
+    ]
+  }
+]

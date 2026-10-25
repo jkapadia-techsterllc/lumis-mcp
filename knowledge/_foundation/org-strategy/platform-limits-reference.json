@@ -1,0 +1,83 @@
+{
+  "id": "org-limits-001",
+  "name": "Salesforce Platform Limits Reference for Org Strategy",
+  "description": "Comprehensive Salesforce platform limits that inform org strategy decisions. Use during capacity planning and when evaluating whether a single org can support the customer's scale.",
+  "version": "1.0",
+  "source": "Org Strategy And Design — Salesforce Life Sciences",
+
+  "org_strategy_thresholds": {
+    "description": "Key thresholds that should trigger multi-org evaluation when exceeded.",
+    "users_per_org": {"recommended_max": 5000, "note": "Above 5K users, evaluate multi-org. Performance, governance, and change management all degrade."},
+    "records_per_entity": {"recommended_max": 10000000, "note": "Above 10M records per entity per org. High-volume modules at risk: Events Management, Activity Plans, Sample transactions."},
+    "risky_modules_at_scale": ["Events Management", "Activity Plans", "Sales/Order Management"],
+    "field_count_risk": {"threshold": 200, "note": "Objects with 200+ fields cause sync/bulk API/UI performance degradation."},
+    "mobile_record_types": {"threshold": 100, "note": "100+ record types in a single profile hits mobile metadata limits."}
+  },
+
+  "platform_limits": {
+    "objects": {
+      "custom_objects_total": {"limit": 3000, "detail": "2,000 custom + packages combined"},
+      "fields_per_object": {"limit": 800},
+      "relationships_per_object": {"limit": 40, "detail": "Lookups + master-details combined"},
+      "spanning_relationships": {"limit": 15, "max": 20}
+    },
+    "storage": {
+      "data_storage": {"base": "10 GB", "per_user": "200 MB"},
+      "file_storage": {"base": "10 GB", "per_user": "2 GB"},
+      "record_size": "2 KB per record"
+    },
+    "apex": {
+      "total_code_per_org": "6 MB",
+      "heap_sync": "6 MB",
+      "heap_async": "12 MB",
+      "cpu_sync": "10,000 ms",
+      "cpu_async": "60,000 ms",
+      "soql_timeout": "120 seconds"
+    },
+    "api": {
+      "calls_per_24h": "(Licenses × 15,000) + 100,000",
+      "bulk_api_batches_per_24h": 15000,
+      "bulk_api_records_per_24h": 150000000
+    },
+    "async_processing": {
+      "batch_jobs_active": 5,
+      "batch_jobs_flex_queue": 100,
+      "scheduled_classes": 100,
+      "async_apex_per_24h": "250,000 or (licenses × 200), whichever greater",
+      "long_running_sync_concurrent": 10
+    },
+    "security": {
+      "permission_sets": 1500,
+      "field_history_tracking_fields_per_object": 20,
+      "field_history_retention": "24 months",
+      "field_audit_trail_fields_per_object": 60,
+      "field_audit_trail_retention": "10 years"
+    },
+    "metadata": {
+      "custom_metadata_characters": 10000000,
+      "platform_event_definitions": 100,
+      "platform_event_delivery_per_24h": 50000,
+      "platform_event_publish_per_hour": 250000
+    },
+    "sandbox": {
+      "full_refresh": "1 per month",
+      "full_sandboxes": "1 per production environment"
+    }
+  },
+
+  "limit_types": {
+    "description": "Three categories of limits for org strategy evaluation.",
+    "soft_limits": {
+      "description": "Can be worked around with architecture or process changes.",
+      "examples": ["API call volume (batch instead of real-time)", "Storage (archiving strategy)", "SOQL query optimization"]
+    },
+    "hard_limits": {
+      "description": "Cannot be overcome by features — only by org splitting, which gives a fresh set of limits.",
+      "examples": ["Custom object count (3,000 max)", "Permission set count (1,500 max)", "Apex code size (6 MB)", "Record type count in mobile profiles"]
+    },
+    "purchasable_limits": {
+      "description": "Can be increased by purchasing additional capacity.",
+      "examples": ["Data and file storage", "API call volume", "Sandbox count"]
+    }
+  }
+}

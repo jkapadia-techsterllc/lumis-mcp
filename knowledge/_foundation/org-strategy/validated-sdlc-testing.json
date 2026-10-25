@@ -1,0 +1,43 @@
+[
+  {
+    "id": "fnd-sdlc-004",
+    "category": "org-strategy",
+    "title": "Product Testing Process for Validated Systems",
+    "products": [
+      "lsc",
+      "oce",
+      "veeva_vault"
+    ],
+    "summary": "Defines the testing lifecycle from test requirements through release readiness determination within a QMS-governed SDLC. Covers test strategy, risk-based test classification (MAT/CORE/AUX), stabilization testing (interop, security, performance), regression testing, and continuous improvement. Includes detailed KPIs and quality gate thresholds.",
+    "findings": {
+      "purpose_and_scope": "Outlines tasks to ensure product quality delivered to customers meets company standards. Spans from test requirements (user stories) to determination of release readiness. Aligned to ISO 9001:2015, SOC 2 Trust Services Principles (Common Criteria 7.0-7.4), and company quality policy.",
+      "key_roles": "Test Manager owns master test plans, strategy, quality standards, and quantitative measurements. Test Engineers create test plans and scripts from functional requirements. Product Management provides user stories and leads UAT. DevOps manages infrastructure alignment and automation. Engineering handles unit, integration, and regression testing. Product Operations provides monitoring, backup/restore, and disaster recovery. Delivery implements and delivers to business units. Product Support Tier 3 handles defect troubleshooting and knowledge base.",
+      "test_classification": "Three risk-based tiers: MAT (Minimum Acceptance Tests) covers primary-path critical priority scenarios. CORE (Core Regression Tests) covers high-priority paths plus feature-specific scenarios. AUX (Functional Auxiliary Tests) covers lower-priority alternate paths. Risk assessment drives which tier each test case falls into.",
+      "six_phase_lifecycle": "Concept, Feasibility and Plan, Develop, Launch, Customer Success, Retirement. Test activities initiate at Feasibility and Plan (strategy creation), are driven during Develop (MAT/CORE/AUX execution), and maintained during Customer Success (patch regression testing).",
+      "feasibility_and_plan_phase": "Kickoff triggers creation of integration test strategy, functional test strategy, and non-functional test strategy. Multi-stakeholder approval gates validate each strategy. Outputs include test strategy document, cost estimates, and resource staffing plan.",
+      "development_testing": "User stories drive risk assessment. High-risk items require automated MAT and CORE tests. Lower-risk items use manual AUX testing. Execution produces traceability matrix, test results, defect records, zero-bug-bounce tracking, and summary reports.",
+      "stabilization_testing": "Covers interoperability, security, and performance testing. Interop and security user stories undergo risk-based decisions for automated or manual execution in staging and customer pre-production environments. Performance testing validates acceptance criteria through automated performance tests or functional tests.",
+      "customer_success_regression": "New patches trigger code change analysis, MAT execution, upgrade comparison, and patch acceptance evaluation. Goal is reducing customer issues without introducing regression.",
+      "customer_success_improvement": "Multi-source issue collection (core issues, internal findings, production monitoring, customer baseline comparisons) feeds diagnostic analysis. Issues are classified as enhancement candidates or baseline updates, then processed through risk analysis into automation backlog or test plan updates.",
+      "quality_gate_thresholds": "MAT pass rate must equal 100%. CORE pass rate must be 85% or higher. AUX pass rate must be 80% or higher. These thresholds determine go/no-go for release shipment.",
+      "kpis_and_metrics": "Test Coverage: percentage of approved requirements linked to executed test cases (target: closer to 100%). Risk Coverage by tier: MAT 1-20%, CORE 5-25%, AUX 75-94%. Quality Gate Go/No-Go: percentage of successful tests by risk category. Defect Detection Rate: confirmed defects versus test case execution count (higher is better in construction, closer to zero in stabilization). Other metrics: test reports, defect reports, zero-bug backlog trend, quality scorecard.",
+      "key_outputs": "Macro cost estimates, resource staffing plan, test strategy document, traceability matrix, test execution results, defect records, test summary report, test plans (automated or manual), test results and reports, and zero-bug backlog (acceptance criteria: trend toward zero)."
+    },
+    "source": "SOP-0012[3] Products Testing, ISO 9001:2015 sections 8.6/8.7, SOC 2, effective Apr 2019",
+    "tags": [
+      "sdlc",
+      "testing",
+      "validated-system",
+      "gxp",
+      "qms",
+      "iso-9001",
+      "soc2",
+      "mat",
+      "core",
+      "aux",
+      "quality-gates",
+      "regression",
+      "performance-testing"
+    ]
+  }
+]

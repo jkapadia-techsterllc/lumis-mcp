@@ -1,0 +1,33 @@
+[
+  {
+    "id": "ci-comp-006",
+    "category": "competitive-intelligence",
+    "title": "CRM Platform Competitive Assessment \u2014 Quantitative SME Scoring (June 2023)",
+    "products": [
+      "oce"
+    ],
+    "summary": "Comprehensive competitive assessment comparing two major life sciences CRM platforms across system functionality, integration, and UI/UX dimensions. Based on structured subject matter expert feedback using a 1-5 relative scoring scale across US and EMEA markets. Covers 25+ functional areas with individual feature scores, pros/cons, and platform-level strengths.",
+    "findings": {
+      "methodology": "SME-based structured assessment using 1-5 relative scoring scale (1=poor, 5=excellent) across three analysis areas: System Functionality, Integration Capabilities, and UI/User Experience. Feedback gathered from approximately 20 subject matter experts across US, FR, ES, NL, IN, GB, CH markets. Assessment date: June 2023.",
+      "system_functionality_scores": "Platform A scored 60 total vs Platform B scored 47. Platform A led in: Territory Alignment (4 vs 3), Product Management (5 vs 3), Custom Objects available offline (5 vs 0), Validation Rules on mobile (5 vs 3), AI/ML Analytics and Next Best Action (5 vs 2), Modern UI Framework (5 vs 3), Multi-device Support (4 vs 2). Platform B led in: User Management (3 vs 4), Content Management Integration (3 vs 5), Social Channel (2 vs 5), Transaction Sync (3 vs 4).",
+      "ui_ux_scores": "Platform A scored 113 total vs Platform B scored 121, indicating Platform B had a stronger overall user experience. Platform A won in: 360 Timeline (5 vs 4), Address Management (5 vs 3), HCP Ratings (5 vs 3), Data Change Requests (4 vs 3), Field Coaching (4 vs 3), Reporting/Dashboards (4 vs 2), Key Account Management (4 vs 3), Affiliations (4 vs 3). Platform B won in: Home Page (4 vs 5), Call Recording (3 vs 4), Sampling (3 vs 4), Promotional Items (1 vs 4), Remote Detailing (3 vs 4), Content Lifecycle Management (3 vs 5), Medical Information Requests (3 vs 4), Custom Reporting (2 vs 5), Calendar/Planner (3 vs 4), Time Off Territory (3 vs 4), Medical/MSL workflows (3 vs 4).",
+      "platform_a_key_advantages": "Reference data integration with global healthcare professional database providing comprehensive HCP profiles. App marketplace for extensibility. Multi-channel solution with native digital channels including email, social, and video. AI/ML analytics with predictive scoring and next-best-action recommendations. Ability to add custom objects, fields, and tabs that work offline on mobile. All validation rules supported on mobile devices including iPad. 360-degree multichannel timeline showing interactions across all channels natively. Multi-device support across iOS, Android, and Windows platforms. Cross-organization data sharing capabilities.",
+      "platform_b_key_advantages": "Content management vault integration providing seamless content lifecycle management (CLM) and approved email workflows. Stronger system integrator partnership ecosystem and support network. Comprehensive online help documentation and knowledge base. Custom reporting and insights engine more flexible with multi-dimensional analysis. Content presentation more flexible with broader format support. Role hierarchy for approval workflows and data access more granular. Sample management with more detailed controls for signature capture and compliance. Promotional items tracking and distribution management. Native social channel integration for specific regional markets.",
+      "feature_detail_call_recording": "Platform A: Territory-based rules, multi-channel timeline, configurable question sets. Platform B: HCP consent management, product discussions with topic tagging, KPI tracking per call, more granular call activity types. Both support attendees, products discussed, and follow-up tasks.",
+      "feature_detail_sampling": "Platform A: Electronic signature, inventory tracking, territory alignment, compliance rules. Platform B: More granular lot tracking and expiration management, receipt printing, signature with geolocation, allotment rules with hierarchical limits. Both support sample allocation, compliance tracking, and electronic signature capture.",
+      "feature_detail_territory_management": "Platform A: Flexible territory hierarchies, zip code and brick-level alignment, multi-territory assignment, integrated data source enrichment. Platform B: Pre-built territory management with rigid hierarchy, integration with external alignment tools required for complex scenarios.",
+      "feature_detail_clm_content": "Platform A: HTML5 content with call flow integration, multi-channel distribution including remote detail, email, and chat. Platform B: Content vault integration, more content types supported (HTML, PDF, video, slide decks), richer CLM analytics with HCP engagement scoring, offline content availability with version management.",
+      "feature_detail_remote_detailing": "Platform A: Native video integration with screen share, content presentation during calls, CRM data available during call. Platform B: Dedicated remote engagement platform, pre-call scheduling, waiting room, content presentation with analytics, post-call survey capabilities.",
+      "feature_detail_ai_analytics": "Platform A: Next-best-action engine with ML models, predictive scoring, channel optimization recommendations, integrated analytics dashboards. Platform B: Custom insights and reports engine, lower AI/ML maturity at assessment date, relies more on third-party analytics integrations.",
+      "strategic_implications": "Platform A demonstrates technical superiority in infrastructure and AI/ML capabilities, while Platform B leads in content management integration and user experience polish. For migration planning, teams should focus on content vault replacement strategy, custom reporting migration path, and sample management workflow mapping as these represent the largest functional gaps."
+    },
+    "source": "Internal competitive analysis, BvO Market Assessment June 2023, SME structured feedback",
+    "tags": [
+      "competitive-analysis",
+      "crm-comparison",
+      "sme-scoring",
+      "migration-planning",
+      "feature-matrix"
+    ]
+  }
+]

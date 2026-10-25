@@ -1,0 +1,93 @@
+[
+  {
+    "id": "roadmap-strategic-001",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Personal Suite - 3-Year Strategic Roadmap Overview (2024-2027)",
+    "products": ["Legacy CRM Personal"],
+    "summary": "High-level strategic direction for the incumbent mobile CRM personal suite spanning 2024-2027, organized around five investment pillars that guide product development priorities.",
+    "findings": {
+      "strategic_pillars": [
+        "Orchestration - Coordinating multi-channel customer engagement workflows across field, digital, and remote touchpoints",
+        "Compliance - Strengthening regulatory adherence for sample management, HCP transparency reporting, and consent tracking",
+        "Future of Work - Supporting hybrid engagement models combining in-person visits with virtual interactions",
+        "Connected Intelligence - Embedding AI-driven insights and next-best-action recommendations into field workflows",
+        "Platform - Foundational infrastructure improvements including performance, scalability, and integration capabilities"
+      ],
+      "release_cadence": "Three major releases per year on a roughly 4-month cycle. Reference releases: R19 (March 2024), R20 (July 2024), R21 (November 2024)",
+      "roadmap_categorization": [
+        "Technical Improvements - Infrastructure and performance enhancements",
+        "Enhancements and Contractual - Feature improvements and client-committed deliverables",
+        "Market Differentiator and Innovation - Competitive advantage and forward-looking capabilities",
+        "Interoperability, Integration, and Configurability - Ecosystem connectivity and customization flexibility"
+      ],
+      "migration_relevance": "Understanding the incumbent roadmap helps identify gaps between current capabilities and what customers expect in a migration target. Items marked as stand-by or retired signal strategic de-investment areas that may create migration urgency for customers relying on those capabilities.",
+      "standby_and_retired_components": [
+        "Cross-platform extension framework (stand-by) - reduced investment signals potential sunsetting",
+        "Third-party messaging integration (stand-by) - limited continued development",
+        "Regional messaging platform connector (stand-by) - minimal active roadmap items",
+        "Legacy call recording format (Call 1.0) - marked for retirement with migration path to Call 2.0"
+      ]
+    },
+    "source": "internal-roadmap-presentation-2024",
+    "tags": ["roadmap", "strategy", "crm", "migration-planning", "competitive-intelligence"]
+  },
+  {
+    "id": "roadmap-strategic-002",
+    "category": "commercialization/crm/veeva",
+    "title": "Legacy CRM Personal Suite - Component Roadmap Details by Functional Area",
+    "products": ["Legacy CRM Personal"],
+    "summary": "Detailed per-component roadmap items across approximately 40 functional modules, organized by functional area. This granular view reveals where the incumbent platform is investing versus divesting.",
+    "findings": {
+      "account_and_territory_management": {
+        "accounts": "Account merge improvements, enhanced affiliation views, territory-based filtering refinements",
+        "addresses": "Address validation enhancements, geocoding accuracy improvements",
+        "affiliations": "Parent-child relationship visualization, affiliation type expansion",
+        "account_plan": "Goal tracking improvements, plan template configurability, executive-level planning views"
+      },
+      "field_activity_and_engagement": {
+        "activity_history": "Timeline visualization improvements, cross-channel activity aggregation",
+        "activity_plan": "Goal-based planning enhancements, automated plan suggestions based on customer segmentation",
+        "call_recording": "Call 2.0 migration path with enhanced attendee management, multi-product detailing, and real-time CLM integration. Call 1.0 flagged for retirement.",
+        "coaching_events": "Field coaching workflow improvements, scoring template configurability",
+        "closed_loop_marketing": "Content lifecycle management, engagement analytics, offline content caching improvements"
+      },
+      "compliance_and_samples": {
+        "samples_management": "Signature capture improvements, lot tracking, reconciliation workflow enhancements",
+        "consent_and_opt": "Multi-channel consent management, GDPR and privacy framework expansion, consent inheritance for affiliations",
+        "data_change_request": "Workflow approval enhancements, bulk DCR processing, integration with external master data sources"
+      },
+      "communication_and_outreach": {
+        "field_email": "Extensive roadmap with 30+ items including template management improvements, approved email analytics, personalization tokens, email scheduling, delivery tracking, fragment-based template composition, multi-language support, attachment handling, and integration with marketing automation platforms",
+        "meetings": "Virtual meeting integration, hybrid engagement support, meeting preparation workflows",
+        "remote_engagement": "Video conferencing integration, screen sharing for CLM content, virtual sampling workflows"
+      },
+      "intelligence_and_insights": {
+        "insights": "AI-driven recommendations for call planning, customer segmentation insights, engagement scoring",
+        "next_best_action": "Machine learning model integration, multi-channel recommendation engine, suggestion prioritization",
+        "ai_assistant": "Natural language query support, automated call reporting, intelligent scheduling suggestions"
+      },
+      "platform_and_infrastructure": {
+        "home_page": "Configurable dashboard widgets, role-based landing pages",
+        "lists_and_filters": "Advanced filtering capabilities, saved filter sharing, performance optimization for large datasets",
+        "search": "Global search improvements, search outside territory, fuzzy matching",
+        "reports_and_dashboards": "Interactive chart improvements, export capabilities, real-time data refresh",
+        "notifications": "Multi-channel notification delivery, priority-based filtering, actionable notifications",
+        "planner": "Route optimization enhancements, calendar integration improvements, multi-day trip planning",
+        "document_management": "Version control improvements, offline document access, annotation capabilities"
+      },
+      "specialized_modules": {
+        "order_management": "Order workflow improvements, pricing integration, order status tracking",
+        "surveys": "Survey template library expansion, branching logic improvements, offline survey completion",
+        "store_check": "Retail execution improvements, planogram compliance, photo verification",
+        "generic_workflow": "Configurable workflow engine improvements, approval chain flexibility",
+        "wearable_integration": "Smart watch quick actions, voice command support, car integration for driving mode"
+      },
+      "data_connectivity": {
+        "master_data_connector": "Synchronization improvements, data quality scoring, matching algorithm refinements",
+        "booking_services": "Meeting room and resource booking, calendar synchronization"
+      }
+    },
+    "source": "internal-roadmap-presentation-2024",
+    "tags": ["roadmap", "modules", "crm", "feature-planning", "competitive-intelligence"]
+  }
+]

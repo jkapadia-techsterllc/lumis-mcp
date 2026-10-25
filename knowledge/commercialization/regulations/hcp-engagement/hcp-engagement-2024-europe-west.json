@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcp-engagement-2024-europe-west-1",
+    "category": "knowledge/commercialization/regulations/hcp-engagement",
+    "title": "HCP Engagement Regulations — Western Europe (Q4 2024)",
+    "products": [
+      "Life Sciences CRM",
+      "Compliance"
+    ],
+    "summary": "Regulatory requirements for HCP/HCO engagement and meeting sponsorship across Western European countries, current as of Q4 2024. Updated thresholds and clarified rules from 2022 edition. Many Western European countries maintain strict pre-approval or notification requirements.",
+    "findings": [
+      {
+        "name": "Austria",
+        "detail": "Industry: Pharma, Medical Devices. Competent authority: Pharmig. Code-based regulation. Engagement: Written contract clearly defining service, remuneration, scope, type, and purpose. Notification/pre-approval: Not applicable. Meetings: Companies may sponsor or organize meetings in suitable venue; documentation required. Notification: Event can be held even if confirmation from congress organizer has not been obtained. Meal thresholds: Lower than 85 EUR incl. VAT and/or charges and gratuities (unchanged from 2022)."
+      },
+      {
+        "name": "Belgium",
+        "detail": "Industry: Pharma, Medical Devices. Competent authority: FAMHP, MDEON. Law and Code regulation. Engagement: Written contract with reasonable fees and legitimate need. Pre-approval: Visa (V) required — V1 to sponsor HCPs, V2 to provide financial support to organizer — for physical and virtual meetings (when event lasts several consecutive calendar days). Submission: Digital-manual via MDEON website. Timelines — Ordinary: Submit 15 working days prior, decision within 5 working days. Urgency: Submit by noon second working day before event, decision by midnight before start. Meal thresholds: Lunch 45 EUR incl. VAT for multi-day events (subject to visa procedure), 23 EUR/hr with maximum 45 EUR for stand-alone events; Dinner 90 EUR incl. VAT for multi-day events, 23 EUR/hr with maximum 90 EUR for stand-alone events (increased from 40/80 EUR in 2022). Additional: Value per day maximum of 45 EUR (lunch) and 90 EUR (dinner) only if programme includes at least 6 hours of scientific activities."
+      },
+      {
+        "name": "Denmark (Pharma — Government)",
+        "detail": "Industry: Pharma-Generics. Competent authority: Danish Medicines Agency/Ministry of Health, ENLI. Engagement: Written contract required; companies must inform HCPs of duty to notify or seek permission. Engagements limited to teaching/training or research. Notification (Declaration): HCPs notifying Danish Medicines Agency of financial support for professional activities abroad. Pre-approval (Authorization): Required for doctors, dentists, pharmacists. Submission: Electronic. Meetings: Notify ENLI of events organized directly or through third party, including exhibition stands. Notification: Event can proceed without ENLI answer. Meeting timelines — Pharma organized: 10 working days prior. Third party: 10 working days after binding promise. Meal thresholds: Lunch 450 DKK (60 EUR); Dinner 850 DKK (114 EUR); Value per day 1,400 DKK (188 EUR) incl. VAT (increased from 830 DKK dinner/1,600 DKK per day in 2022)."
+      },
+      {
+        "name": "Denmark (Medical Devices)",
+        "detail": "Industry: Medical Devices. Competent authority: Danish Medicines Agency, Medicoindustrien. Same engagement rules as Pharma. HCP employer notification required. Pre-approval (Authorization): Third Party Organized Educational Events via Conference Vetting System (CVS). Submission: Electronic (Online platform). Meeting timelines: Authorization must be granted before engagement. Meal thresholds: Lunch 450 DKK (60 EUR); Dinner 850 DKK (114 EUR); Value per day 1,400 DKK (188 EUR) incl. VAT."
+      },
+      {
+        "name": "France",
+        "detail": "Industry: Pharma, Medical Devices, Generics, Animal Health. Competent authority: Ministere des Affaires Sociales et de la Sante. Law-based regulation. Engagement: Companies must notify or request authorization before providing benefits to HCPs/Students/Associations. Notification (Declaration): Required for agreements at or below legal thresholds; authority (CNO/ARS) may issue non-binding recommendations. Pre-approval (Authorization): Required above thresholds; two months to respond, deemed granted if no response. Submission: Electronic. Employer authorization: Required for public entity HCPs. Meetings: Same notification/authorization required for sponsoring HCPs. Meeting notification timelines: Declaration must be submitted eight (8) working days prior (reduced from 28 working days in 2022). Pre-approval: Two months from receipt. Meal thresholds: 60 EUR incl. VAT (increased from 50 EUR excl. VAT in 2022)."
+      },
+      {
+        "name": "Germany",
+        "detail": "Industry: Pharma-Generics. Competent authority: FSA. Code-based regulation. Engagement: Written contract required; hospital HCPs require written approval from supervisor/hospital administrator. Pre-approval: Authorization required for hospital HCPs. Meetings: International events must be notified by FSA members to affiliated company in host country. Notification: Required. Meeting timelines: No deadline set. Meal thresholds: 75 EUR incl. VAT (increased from 60 EUR in 2022)."
+      },
+      {
+        "name": "Greece",
+        "detail": "Industry: Pharma, Medical Devices, Generics, Animal Health. Competent authority: EOF, SFEE. Law and Code regulation. Engagement: Written contract; advisory board HCPs in public entity need authorization. Application to EOF for registration-fee events. Pre-approval: Required for public entity HCP advisory boards. Employer authorization: Required. Timelines: Two months prior. Meetings: Must request EOF authorization. Pre-approval: Event must be approved by EOF. Meeting submission: Digital-manual on EOF. Meeting timelines: Two months prior. Meal thresholds: 70 EUR incl. VAT per day (domestic); 150 EUR incl. VAT per day (meetings outside Greece) — international threshold is new in 2024. Additional: SFEE provides maximum fees per year per type of engagement. Limits on HCPs sponsored (number per event, quantity per year per HCP, per type of event) for virtual scientific meetings."
+      },
+      {
+        "name": "Iceland",
+        "detail": "Industry: Pharma. Competent authority: Frumtok. Code-based regulation. Engagement: Written contract required. Meetings: Written agreement required for events requiring travel abroad. Meal thresholds: Lunch/light refreshments ISK 7,500 (50 EUR); Dinner ISK 20,000 (135 EUR) incl. VAT. Breakfast threshold removed in 2024 edition."
+      },
+      {
+        "name": "Ireland",
+        "detail": "Industry: Pharma. Competent authority: IPHA. Code-based regulation. Standard engagement rules with written contract. Meetings: Standard sponsorship rules. Meal thresholds: 80 EUR incl. VAT excl. gratuities (unchanged from 2022)."
+      },
+      {
+        "name": "Italy (Government — Pharma-Generics)",
+        "detail": "Industry: Pharma-Generics. Competent authority: AIFA, Farmindustria. Law and Code regulation. Engagement: Written contract required; public HCP supervisor authorization required (30-day deemed-negative rule). Pre-approval: Required for public entity HCPs. Meetings: AIFA authorization required. Meeting submission: Digital-manual on AIFA website. Meeting timelines: Request 60 days prior; AIFA has 45 days. Meal thresholds: 70 EUR (unchanged). Additional: 10% of annual HCP participants should be under 40. CME events for public HCPs require request to public employer 60 days prior (30-day deemed-consent if no response). Companies must communicate amounts paid to public HCP employer within 15 days."
+      },
+      {
+        "name": "Italy (Medical Devices)",
+        "detail": "Industry: Medical Devices. Competent authority: Confindustria Dispositivi Medici (CDM). Engagement: Written contract; public HCP supervisor authorization required (30-day rule). Meetings: Companies may sponsor national third-party educational events via CDM Conference Evaluation System (SVC). Cannot sponsor HCPs directly — support goes to entity or third-party organizer. Pre-approval: SVC positive evaluation required. Meeting submission: Digital-manual on SVC platform (CDM website). Meeting timelines: Request by third-party organizer 60 days prior; SVC decision within 20 days. Meal thresholds: 70 EUR (new explicit threshold in 2024)."
+      },
+      {
+        "name": "Netherlands",
+        "detail": "Industry: Pharma. Competent authority: CGR. Code-based regulation. Engagement: Written contract clearly defining object, execution, payment (hours and fee); maximum rates for hospitalities provided by Code. Sponsorship of hospitality: per HCP not exceeding 500 EUR per event or 1,500 EUR per year. Meetings: International events require preliminary opinion from CGR (not binding). Exceptions: international events organized by independent scientific bodies, or content qualified as scientific by independent body. Meeting submission: Email to CGR. Meeting timelines: CGR provides opinion within approximately 6 weeks. Meal thresholds: 75 EUR incl. VAT (unchanged from 2022)."
+      },
+      {
+        "name": "Norway",
+        "detail": "Industry: Pharma. Competent authority: LMI. Code-based regulation. Engagement: Written contract required. Pre-approval: Advisory board HCPs require employer authorization (responsibility lies on the HCP). Meetings: Companies may organize or support events. Hospitality expenses only for company-organized events or consultancy arrangements. Meal thresholds: 299 NOK (25 EUR) for shorter meetings (min 45 min or at workplace); 1,298 NOK (111 EUR) for meetings over 90 min/typical dinner (increased from 250/400 NOK in 2022)."
+      },
+      {
+        "name": "Portugal",
+        "detail": "Industry: Pharma. Competent authority: APIFARMA, INFARMED. Law and Code regulation. Engagement: Written contract required; NHS hospital support requires MOH authorization. Pre-approval: Required for NHS hospitals; engagement only if no doubt regarding impartiality/neutrality. Submission: Electronic via INFARMED. Meetings: APIFARMA members may organize or support events; cannot sponsor events in NHS establishments. Meal thresholds: 60 EUR incl. VAT (unchanged)."
+      },
+      {
+        "name": "Spain",
+        "detail": "Industry: Pharma. Competent authority: Farmaindustria. Code-based regulation. Engagement: Written contract; agreements must be approved by company's scientific department or Compliance Officer appointee. Meetings — Domestic: Events with overnight stay involving 20+ Spanish HCPs must be communicated to Surveillance Unit. Notification: 10 working days prior; if no answer within 5 working days, deemed approved. International: Must be authorized by Surveillance Unit if justified to be held abroad. Submission: Email and Electronic via Farmaindustria website. Meal thresholds: 70 EUR incl. VAT (increased from 60 EUR excl. VAT in 2022)."
+      },
+      {
+        "name": "Sweden",
+        "detail": "Industry: Pharma-Generics. Competent authority: LIF. Code-based regulation. Engagement: Written contract; HCPs employed by HCO require tripartite contract (Company, HCP, HCO/employer). Expenses must follow HCO's internal rules. Pre-approval: Employer authorization required via written contract. Meetings: Companies may organize or sponsor events; may finance venue, speaker costs, meals, training materials. Companies NOT allowed to pay registration fees, travel, or accommodation for participating HCPs (stricter than 2022). Meal thresholds: Lunch 350 SEK (30 EUR); Dinner 950 SEK (80 EUR) incl. VAT (increased from 300/800 SEK in 2022). Additional: LIF ethical rules also followed by FGL (Generic/Biosimilar association)."
+      },
+      {
+        "name": "Switzerland",
+        "detail": "Industry: Pharma-Generics. Competent authority: Scienceindustries, FOPH. Code-based regulation. Engagement: Written contract ensuring legitimate need, qualified HCPs, appropriate number, records maintained. Meetings: HCP contribution requirements — Fully qualified: at least 1/3 total cost; Post-graduate training: at least 1/5; No contribution for events under half working day without overnight stay (unchanged from 2022). Meal thresholds: 100 CHF incl. VAT (unchanged)."
+      },
+      {
+        "name": "United Kingdom",
+        "detail": "Industry: Pharma. Competent authority: ABPI. Code-based regulation. Engagement: Written contract required. Meetings: All meetings involving travel outside UK (unless company only supports a speaker) must be certified in advance. Events must have clear educational content, appropriate venue; companies must not sponsor entertainment. International events must be notified to relevant local subsidiary. Meal thresholds: 75 GBP (84 EUR) plus VAT and gratuities, appropriate only in exceptional circumstances (unchanged from 2022)."
+      }
+    ],
+    "source": "Global Engagement Regulations Snapshot, Q4 2024",
+    "tags": [
+      "regulations",
+      "hcp-engagement",
+      "compliance",
+      "europe-west",
+      "2024"
+    ]
+  }
+]

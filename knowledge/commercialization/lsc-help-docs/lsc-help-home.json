@@ -1,0 +1,212 @@
+[
+  {
+    "id": "lsc-help-home-ind-lsc-home-page",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up the Life Sciences Customer Engagement Home Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The home page in Life Sciences Cloud for Customer Engagement provides a centralized view of critical information and tasks so your users can prioritize their work. Customize the home page to show announcements, upcoming activities, visits to submit, prioritized accounts, and more. To show each user...",
+    "findings": [
+      {
+        "name": "Set Up the Life Sciences Customer Engagement Home Page",
+        "detail": "The home page in Life Sciences Cloud for Customer Engagement provides a centralized view of critical information and tasks so your users can prioritize their work. Customize the home page to show announcements, upcoming activities, visits to submit, prioritized accounts, and more. To show each user what matters most to them, tailor the home page for different profiles. Customize the Home Page Add your company logo to your Salesforce org. Customize the components on the home page in Life Sciences by using Lightning App Builder. Home Page Components The Life Sciences Cloud for Customer Engagement home page supports various Lightning components that help your users through their daily work. Localize Predefined Prompts in the Agentforce Welcome Component Show the predefined prompts (utterances) in the Agentforce Welcome component in each user's language on the Life Sciences Cloud mobile app home page. Reference a custom label from the Utterance field so that localized users see the prompt in their preferred language instead of English-only text."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_home_page.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "home"
+    ]
+  },
+  {
+    "id": "lsc-help-home-ind-lsc-home-page-components",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Home Page Components",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Life Sciences Cloud for Customer Engagement home page supports various Lightning components that help your users through their daily",
+    "findings": [
+      {
+        "name": "Home Page Components",
+        "detail": "The Life Sciences Cloud for Customer Engagement home page supports various Lightning components that help your users through their daily work."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Note Life Sciences supports only the Standard Home Page template. The Life Sciences Cloud mobile app shows only the components in the main region and doesn't show components in the sidebar. Most components fill the entire page in the mobile app, but some components take up only 50% of the page."
+      },
+      {
+        "name": "Activity Plan by Product",
+        "detail": "To show each user’s specific goals so that they can align their work with the overall company strategy, use the Activity Plan By Product component. Select a plan cycle type, such as AccountGoal or WeightedTerritoryGoal. See Add the Activity Plan Lightning Component to the Home Page in Activity Plan Home Page . In the Life Sciences Cloud mobile app, the Activity Plan By Product component fills only 50 percent of the page."
+      },
+      {
+        "name": "Agentforce Welcome",
+        "detail": "Show an Agentforce search bar and up to 5 predefined utterances by using the lsAgentforceWelcome component. For example, to help your users work efficiently, define utterances such as “Show me declining prescribers” and “HCPs to meet with next.” When users select an utterance, it’s entered as an Agentforce prompt. See Agentforce and Einstein Generative AI . You can provide localized utterances rather than English-only text. To localize a predefined utterance, create a custom label and reference it in the Utterance property by wrapping the custom label name in braces: {LabelName}. At runtime, the Life Sciences Cloud mobile app resolves the braces reference to the label's translated value for the user's language instead of showing the literal text. For example, create a custom label named ShowDecliningPrescribers, and then set the utterance to {ShowDecliningPrescribers}. See Localize Predefined Prompts in the Agentforce Welcome Component . This component is supported only in the Life Sciences Cloud mobile app. Lightning App Builder shows a placeholder instead of previewing the component."
+      },
+      {
+        "name": "Home Office Announcements",
+        "detail": "To show important communications from headquarters or the home office so that users are up to date on the latest news, use the LSC Home Announcements component. To populate the announcements in the component, create app alerts that use the Announcement type. If needed, customize the app alert with extra HTML. We recommend that you add a trusted image URL to each announcement. Expired alerts are removed from the Home Announcements component automatically. See Create an App Alert and Additional Message for App Alerts on Mobile ."
+      },
+      {
+        "name": "Next Best Customer",
+        "detail": "Note If your org uses the NbcTopResults component, we recommend replacing it with the updated Life Sciences Next Best Customers component for the best experience. To show a ranked list of the top prioritized accounts in the territory each day so that users can maximize the impact of each interaction, use the Life Sciences Next Best Customers component. In the component properties, choose how many accounts to show. See Next Best Customer . When you configure quick actions, users can also start engagement activities such as creating a visit or sending an email directly from their workflow. Quick actions are supported only in the Life Sciences Cloud mobile app in the rationale view. To calculate distances to the physician's address accurately, activate data integration rules on the Contact Point Address object. Data integration rules use Google Maps API to calculate the address's geolocation data: latitude, longitude, and location accuracy. Salesforce calculates the distance from an account's preferred contact point address to the user's location. If there’s no preferred address, the distance is calculated by using the account's primary contact point address instead. Users can also update geolocation data manually by selecting Check for New Data from the contact point address record's action menu. In the Data Status window, the Update button refreshes the data."
+      },
+      {
+        "name": "Notifications and Recommendations",
+        "detail": "To show users important alerts, notifications, and recommendations directly on the home page, use the Notifications List component. In the component's properties, choose how many notifications to show. To populate the alerts in the component, create App Alerts that use the Notification and Recommendation types. See Create an App Alert . To show an app alert in the Home page, set the app alert's Display Context Type field to None . This component is supported only on the desktop site. In the Life Sciences Cloud mobile app, notifications appear in the message pane."
+      },
+      {
+        "name": "Up Next Agenda",
+        "detail": "On the desktop site, use the UpcomingAgenda component to show users a list of their upcoming visits, times off territory, and general events."
+      },
+      {
+        "name": "Up Next Map",
+        "detail": "Use the UpNextMapDisplay component to show users a list of their upcoming visits, times off territory, and general events. Users also see their upcoming visits on a map. Users who turn on location services can also see their distance from the upcoming visits on the map and their estimated time of arrival. A visit appears in the Up Next Map component only when the visit meets all of these conditions: The visit is in the currently selected territory. The visit's end time is in the future. The visit isn't submitted or completed. The visit isn't a child visit. The component is scoped by territory, not by the logged-in user. Users see all the visits that meet these conditions in the selected territory, including visits that other users own. In the component’s properties, set the timing for visit reminders on the device's lock screen. Do Not Disturb reminders open the iPad settings so that users can turn on Do Not Disturb before the visit. Event reminders open the Life Sciences Cloud mobile app. This component is supported only in the Life Sciences Cloud mobile app. Lightning App Builder shows a placeholder instead of previewing the component. In the mobile app, the component shows only the first 5 distinct days that have visits. How the Life Sciences Cloud mobile app determines the map pin location The map pin for a visit is placed at the visit account's contact point address (CPA). To resolve the pin's coordinates, the app uses the first available source in this order: The latitude and longitude on the contact point address record, when both values are present and non-zero. A previously cached geocode result for the same address text, stored on the device. On-device forward geocoding of the CPA address text (the full address: street, city, state, and ZIP or postal code) through the device's geocoding service. This step happens only when the device is online. If there's no address text, or geocoding isn't possible (for example, the device is offline and no cached result exists), no pin appears for the visit. Note The contact point address latitude and longitude are calculated in the org, not on the device. The Life Sciences Cloud mobile app downloads whatever latitude and longitude values are on the CPA record during sync, so a device sync is required to pull the latest coordinates after the record is updated in the org. To populate these values in the org, activate data integration rules on the Contact Point Address object, as described in the Next Best Customer section. Because the app falls back to geocoding the address text, a pin can still appear after the latitude and longitude are cleared from the CPA record, as long as the street, city, state, and ZIP or postal code are still present. Clearing the address text as well removes the pin, because there's nothing left to geocode."
+      },
+      {
+        "name": "Visits to Submit",
+        "detail": "Use the UnsubmittedVisits component to help users quickly identify the visits that they submit to stay compliant. Users see the visits that they created, that are aligned to their current active territory, and that remain in the planned state after their planned end time has passed. The component orders visits by date from oldest to newest, and child visits aren't included in the list. Users can also see details about each visit, including the planned start and end times, the primary account, the place ID, the channel, and whether it was a group visit. See Visit Management . In the Life Sciences Cloud mobile app, the UnsubmittedVisits component fills only 50 percent of the page."
+      },
+      {
+        "name": "Standard Salesforce Components",
+        "detail": "The Life Sciences Cloud for Customer Engagement home page also supports standard Lightning components. To show lists of important records directly on the home page, add a List View component. In the Life Sciences Cloud mobile app, users see up to 5 records in each list. To add other relevant content or messages to the home page, use a Rich Text component. To help users visualize important data, use the standard Dashboard and Report Chart components. To show reports and dashboards on the home page in the Life Sciences Cloud mobile app, turn on report settings from the Admin Console. See Reports and Dashboards Administration . For information about these and other components, see Standard Lightning Page Components ."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_home_page_components.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "home"
+    ]
+  },
+  {
+    "id": "lsc-help-home-ind-lsc-home-page-localize-agentforce-utterances",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Localize Predefined Prompts in the Agentforce Welcome Component",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Show the predefined prompts (utterances) in the Agentforce Welcome component in each user's language on the Life Sciences Cloud mobile app home page. Reference a custom label from the Utterance field so that localized users see the prompt in their preferred language instead of English-only",
+    "findings": [
+      {
+        "name": "Localize Predefined Prompts in the Agentforce Welcome Component",
+        "detail": "Show the predefined prompts (utterances) in the Agentforce Welcome component in each user's language on the Life Sciences Cloud mobile app home page. Reference a custom label from the Utterance field so that localized users see the prompt in their preferred language instead of English-only text."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. To localize a predefined prompt, reference a custom label in the Utterance field by wrapping the custom label name in curly braces, for example, {ABC} for a custom label named ABC. Note Use the {LabelName} format. The Life Sciences Cloud mobile app doesn't resolve the {!$Label.customLabelName} format that the Agentforce Welcome component help text describes. From Setup, in the Quick Find box, enter Custom Labels , and then select Custom Labels . Create a custom label and add a translation for each language that you want to support. From the App Launcher, find and select Admin Console , and then select Mobile . Click Standard Label Translations to generate the standard label translations. See Manage Translations for the Life Sciences Cloud Mobile App . After the standard label translations are generated, create a metadata cache. See Generate Metadata Cache . Edit the home page. In the Utterance property of the Agentforce Welcome component, enter the custom label name in curly braces, and then save your changes. For example, if the custom label is named ABC, enter {ABC} in the Utterance field. When a localized user logs in to the Life Sciences Cloud mobile app on an iPad, the predefined prompt in the Agentforce Welcome component appears in the user's language."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_home_page_localize_agentforce_utterances.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "home",
+      "agentforce"
+    ]
+  },
+  {
+    "id": "lsc-help-home-ind-lsc-home-page-navigate",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Life Sciences Customer Engagement Home Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Life Sciences Customer Engagement home page is the starting point for your day. Learn how to navigate the page and find the most important information to get you",
+    "findings": [
+      {
+        "name": "Life Sciences Customer Engagement Home Page",
+        "detail": "The Life Sciences Customer Engagement home page is the starting point for your day. Learn how to navigate the page and find the most important information to get you started."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. What you see on your home page can vary based on your role, your environment, and your Salesforce admin’s configuration. Your homepage can also include custom components built by your organization. To see nearby accounts or the locations of your upcoming visits in the Life Sciences Cloud mobile app, turn on location services on your device."
+      },
+      {
+        "name": "Activity Plan",
+        "detail": "See activity plan goals across all accounts, and visualize your progress so that you can align your work with the overall company strategy. Filter goals by activity or product."
+      },
+      {
+        "name": "Agentforce Welcome",
+        "detail": "Use an Agentforce search bar and predefined utterances to get started with your daily tasks. Enter a prompt manually, or click an utterance to use it as a prompt."
+      },
+      {
+        "name": "Home Office Announcements",
+        "detail": "See important communications from the home office to make sure that you’re up to date on the latest news. Scroll or use the arrows to see the date and overview of each announcement, or click an announcement to open it."
+      },
+      {
+        "name": "List Views",
+        "detail": "View, edit, and create records from a list of important records, such as accounts. List views are a great way to sort, prioritize, and analyze the records that are most important to you. See Work with List Views in Lightning Experience ."
+      },
+      {
+        "name": "Next Best Customers",
+        "detail": "See the top recommended next best customers to identify the prioritized accounts in your territory each day, sorted by rank and score. Depending on your admin’s configuration, if you turn on location services on your device, you can also see the distance to each account from your location. From the Next Best Customers list, you can: Open an account's details and see intelligent insights about its score. Take actions for each account, depending on your admin’s configuration. For example, you can create visits, see the last visit, open the content library, or raise inquiries directly from the list. These actions are available only in the Life Sciences Cloud mobile app. Refresh the page to see the latest data."
+      },
+      {
+        "name": "Notifications and Recommendations",
+        "detail": "On your desktop, you can see the latest alerts and unread messages directly on the home page. Click between the Notifications and Recommendations tabs to see the latest updates, and mark messages as read after you’ve seen them. See Stay Informed with App Alerts . In the Life Sciences Cloud mobile app, you can see alerts, recommendations, and guided actions in the Notifications pane by clicking the bell icon."
+      },
+      {
+        "name": "Quick Actions and Agentforce Chat",
+        "detail": "In the Life Sciences Cloud mobile app, the home page includes a floating actions menu and an Agentforce icon at the bottom of the page. Tap the actions menu to see the quick actions you can take, such as sending an email or logging an expense. Tap the Agent icon to start a conversation with Agentforce."
+      },
+      {
+        "name": "Salesforce Reports and Dashboards",
+        "detail": "Standard Salesforce report charts and dashboards help you visually understand changing business conditions so that you can make decisions based on ‌real-time data. Use dashboards to identify trends, sort out quantities, and measure the impact of activities. You can also view source reports, expand charts to see them more clearly, and refresh each chart to get the latest data."
+      },
+      {
+        "name": "Up Next",
+        "detail": "See a list of your daily upcoming visits, times off territory, and general events. Swipe left and right to see previous or upcoming activities. To sync changes, click the refresh icon. In the Life Sciences Cloud mobile app, you can also see where visits are on the map. Scrolling on the map shows you more information about upcoming visits based on your location. The actions that you can take depend on the activity type. Open a visit, get details about a visit’s related account, or get directions if the visit is in person. For group visits, you see only the primary account’s location and details. See and update the details of times off territory. See the details for upcoming general events. Depending on your admin’s configuration, you can get reminders about upcoming visits or to turn on Do Not Disturb before a visit starts."
+      },
+      {
+        "name": "Visits to Submit",
+        "detail": "See a list of the visits that you created in your current active territory that remain in the Planned state after their planned start time has passed. Only parent visits are included in the list. The list doesn't show child visits, but group visits include a visual indicator. Your oldest visits are at the top of the list so that you can quickly identify the ones that you must submit to stay compliant. Swipe or scroll to see more recent visits, or open a visit record to see its details and submit it. After you submit visits, the list refreshes automatically so that you see the latest data."
+      },
+      {
+        "name": "See Also",
+        "detail": "Set Up the Life Sciences Customer Engagement Home Page"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_home_page_navigate.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "home"
+    ]
+  },
+  {
+    "id": "lsc-help-home-ind-lsc-home-health",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Home Health for Life Sciences Cloud",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use Home Health in Life Sciences Cloud to efficiently schedule and manage visits for your organization’s home healthcare services. Help your users automate large parts of their operations, such as scheduling recurring visits and managing field resource assignments using Home",
+    "findings": [
+      {
+        "name": "Home Health for Life Sciences Cloud",
+        "detail": "Use Home Health in Life Sciences Cloud to efficiently schedule and manage visits for your organization’s home healthcare services. Help your users automate large parts of their operations, such as scheduling recurring visits and managing field resource assignments using Home Health."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with the Life Sciences Cloud license and the Health Cloud Starter Add-On license."
+      },
+      {
+        "name": "User Personas and Permission Sets",
+        "detail": "This table lists the permission sets available in Life Sciences Cloud. Assign these permissions to users according to their roles. User Persona | Permission Set Scheduler | Field Service Call Center Rep Permissions Field Service Dispatcher Permissions Health Cloud Utilization Management (Optional) Manage Home Health Field worker with access to clinical data | Field Service Resource Permissions FieldServiceMobileStandardPermSet (Optional) Home Health Clinician Field worker without access to clinical data | Field Service Resource Permissions FieldServiceMobileStandardPermSet (Optional) Home Health Caregiver"
+      },
+      {
+        "name": "Home Health Configuration",
+        "detail": "Home Health is available in Health Cloud and Life Sciences Cloud. While the required editions differ in Life Sciences Cloud, the configuration steps are the same across both platforms. You can use the links below to Health Cloud documentation to complete the setup for Home Health for Life Sciences Cloud. Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with the Life Sciences Cloud license and the Health Cloud Starter Add-On license. The topics that are applicable for setting up Home Health for Life Sciences Cloud include: Learn About Home Health Home Health Data Model and Permissions Enable FHIR-Aligned Clinical Data Model. See The Clinical Data Model and FHIR . Enable Home Health A dedicated Home Health Settings page is available in Life Sciences Cloud. To access it, navigate to Setup and find Home Health settings under Life Sciences. The page shows the guided setup for Home Health. Get Your Org Ready to Use Home Health These tasks apply to Life Sciences Cloud: Create Profiles for Home Health Users Assign Permission Sets for Home Health Users Update the Field-Level Security Permissions for Clinicians and Caregivers Update the Field-Level Security Permissions for Patients Configure the Work Order Object Home Health Default Scheduling Policy Create a Bundle Policy for Group Visits Set Up Dependent Home Visits Clone and Activate the Create Home Visit Dependency Flow Create a Custom Notification for Dependent Home Visits Enable the Most Recent Reschedule Home Healthcare Visit Flow Enable the Schedule Home Healthcare Visit Flow Note Update the Field-Level Security Permissions for Care Coordinators isn't applicable to Life Sciences Cloud. Note Customer Service Request picklist values (Status, Type) and CSR Detail Type picklist values are not rendering for LSC users. These are dynamic enum values seeded via an Upgrade Action (HealthCloudUpgradeActionsProvider230.java, csrProvider = \"LS\") rather than standard static picklists, so users might have to trigger this Upgrade Action or create the values manually. Set Up Field Resources, Regions, and Times Define Service Report Templates Define Skills, Preferences, Objectives, and Work Types Define Work Plan Templates for Home Health Visits The Home Health User Interface Handle Field Resource Absences in Home Health Enhanced Scheduling and Optimization for Home Health Set Up Home Visit Broadcasting Set Up Electronic Visit Verification Set Up Briefcase Records Customize Multi-Address Scheduling Set Up Home Health for Patients Note These Health Cloud setup topics aren't applicable to Life Sciences Cloud: Set Up Quoting and Budgeting for Home Visits Set Up Assessments for Home Health Integrate Home Health with Integrated Care Management Set Up Medication Administration and Management for Home Visits Agentforce for Home Health Artificial Intelligence for Home Health Use Home Health Manage your home healthcare visits, preferences, and authorizations. Use these links to learn how to perform these tasks to manage field services. Manage Users and Field Operations The Care Coordinator persona isn't applicable in Life Sciences Cloud. Manage Patient Preferences Manage Home Visits and Authorizations Manage Electronic Verification of Home Visits Home Health Portal for Patients Note These topics aren’t applicable to the Life Sciences Cloud users: Manage Quoting and Budgeting of Home Visits Complete Assessments During Home Healthcare Visits Manage Patient Medications During Home Visits Manage Patient's Care Plans During Home Visits Agentforce for Home Health Artificial Intelligence for Home Health"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_home_health.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "home"
+    ]
+  }
+]

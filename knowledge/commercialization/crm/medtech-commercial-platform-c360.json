@@ -1,0 +1,45 @@
+[
+  {
+    "id": "crm-mt-001",
+    "category": "modules",
+    "title": "MedTech Commercial Platform — Customer 360 and Operating Applications",
+    "products": ["LSC"],
+    "summary": "MedTech-focused commercial platform architecture covering the Customer 360 model, three operating application pillars (Field Inventory Management, Intelligent Sales, Commercial Operations), and the sales professional journey from opportunity identification through order optimization.",
+    "findings": [
+      {
+        "area": "medtech_value_chain_challenge",
+        "detail": "The MedTech value chain runs as a linear, often disconnected process: strategic opportunity identification, product development, research, clinical testing, quality and approvals, manufacturing, logistics, commercial execution, and patient services. Siloed systems across this chain are estimated to cause approximately $22 billion in revenue leakage."
+      },
+      {
+        "area": "customer_360_systems",
+        "detail": "The MedTech Customer 360 model comprises five interconnected systems: Engagement (multi-channel customer interactions), Interoperability (cross-system data exchange), Productivity (operational efficiency tools), Intelligence (analytics and AI-driven insights), and Trust (security and compliance). These systems provide a single source of truth across the value chain."
+      },
+      {
+        "area": "three_operating_pillars",
+        "detail": "MedTech commercial operations are organized into three operating application pillars: Field Inventory Management (cycle counting, product expiration, rep-to-rep transfer), Intelligent Sales (provider relationship management, visit management), and Commercial Operations (sales agreements, advanced forecasting, rebate management, CPQ, CLM)."
+      },
+      {
+        "area": "sales_professional_journey",
+        "detail": "The MedTech sales professional journey follows seven stages: identify opportunities, forecast sales, negotiate agreements, plan and execute case visits, manage field inventory, create orders, and optimize future visits. Technology must support this end-to-end workflow with mobile-first capabilities."
+      },
+      {
+        "area": "provider_360_capabilities",
+        "detail": "Provider 360 delivers a comprehensive view through provider directory management, affiliations and relationship mapping, business APIs for third-party integration, multi-attribute search (distance, specialty, name), third-party repository integration, and AI-powered automated relationship discovery that enriches CRM data."
+      },
+      {
+        "area": "surgical_case_visit_management",
+        "detail": "Surgical case visits require specialized capabilities: creating visits with product availability planning, executing visits via mobile at the point of care, product shortfall projection for upcoming cases, transfer request management between reps, micro-calendar scheduling, and virtual visit support with accessibility features like closed captions."
+      },
+      {
+        "area": "field_inventory_management",
+        "detail": "MedTech field inventory management must support: trunk and consignment inventory locations, shortfall calculations based on upcoming case needs, easy ordering workflows, serialized inventory tracking, inventory cycle counting with barcode scanning, and product expiration visibility. This capability can drive 2-3x productivity improvements."
+      },
+      {
+        "area": "commercial_operations_capabilities",
+        "detail": "Commercial operations features include: sales agreement management, advanced forecasting with account-based models, rebate management programs, configure-price-quote (CPQ) for complex device pricing, contract lifecycle management (CLM), and B2B e-commerce for self-service ordering."
+      }
+    ],
+    "source": "health_cloud_medtech_c360_commercial_platform",
+    "tags": ["medtech", "customer-360", "field-inventory", "intelligent-sales", "commercial-operations", "surgical-visits", "provider-360"]
+  }
+]

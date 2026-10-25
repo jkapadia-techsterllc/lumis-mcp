@@ -1,0 +1,541 @@
+[
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Remote engagement facilitates virtual meetings by providing tools to start and manage remote visits with healthcare professionals (HCPS) and healthcare organizations (HCOs). When users schedule remote visits, healthcare professionals receive invitations with the necessary details such as the...",
+    "findings": [
+      {
+        "name": "Remote Engagement",
+        "detail": "Remote engagement facilitates virtual meetings by providing tools to start and manage remote visits with healthcare professionals (HCPS) and healthcare organizations (HCOs). When users schedule remote visits, healthcare professionals receive invitations with the necessary details such as the meeting link and passcode. During the meeting, users can manage participants, share screens, and capture signatures, streamlining virtual interactions and eliminating the need for in-person visits."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Service Providers for Remote Engagement Review the benefits of Twilio and Microsoft Teams to select the right collaboration platform for remote engagement sessions. Make an informed decision based on your compliance requirements, tracking needs, and collaboration preferences. To provide flexibility for your field teams, use both Twilio and Microsoft Teams as service providers. Get Your Org Ready for Remote Engagement Before you get started with remote engagement, complete a few tasks to prepare your org. Mobile App Configuration for Remote Engagement Set up object metadata cache configurations for Life Sciences remote engagement objects. Generate a metadata cache to package the object schema configuration that the Life Sciences Cloud mobile app uses for online and offline access. This configuration defines how the mobile app fetches and stores the necessary metadata when a network connection is unavailable. Set Up Twilio for Remote Engagement Use Twilio as a service provider for remote sessions. Finish setting up the Twilio account by updating the named and external credentials included in the Life Sciences Customer Engagement managed package. Set up an Experience Cloud site so that healthcare professionals (HCPs) can join remote sessions. Make sure that participants can connect to video calls by adding Twilio WSS endpoints as trusted URLs in your Salesforce org. Use the Admin Console to define video call settings and add phone numbers. Set Up Microsoft Teams for Remote Engagement Use Microsoft Teams as the collaboration platform for remote engagement sessions. Sales reps planned visits in Life Sciences Customer Engagement to generate Microsoft Teams meeting links and send email invitations and calendar events. To reduce friction and align with organizational requirements, healthcare professionals (HCPs) join remote sessions by using their existing Microsoft Teams accounts. Set Up Invitation Emails for Remote Engagement Set up email templates to send invitation emails to attendees automatically when field users create planned visits. Send follow-up emails notifying attendees of any changes to the visit. Set Up Remote Signatures for Remote Engagement Enable your field reps to capture signatures from healthcare professionals (HCPs) during remote visits. Hosts can trigger requests to capture signatures for direct-to-practitioner products, samples, product discussions, or consent."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-service-providers-comparison",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Service Providers for Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Review the benefits of Twilio and Microsoft Teams to select the right collaboration platform for remote engagement sessions. Make an informed decision based on your compliance requirements, tracking needs, and collaboration preferences. To provide flexibility for your field teams, use both Twilio...",
+    "findings": [
+      {
+        "name": "Service Providers for Remote Engagement",
+        "detail": "Review the benefits of Twilio and Microsoft Teams to select the right collaboration platform for remote engagement sessions. Make an informed decision based on your compliance requirements, tracking needs, and collaboration preferences. To provide flexibility for your field teams, use both Twilio and Microsoft Teams as service providers."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Service Provider Selection",
+        "detail": "Life Sciences Customer Engagement supports using multiple service providers for video calls, such as Twilio and Microsoft Teams. For each service provider that you plan to use, create separate visit channels and define the unique meeting invitations and settings. When planning a visit, your sales reps can select the appropriate channel depending on the visit objectives and the needs of the HCP or HCO. Having different service providers is useful when your organization: Uses different providers across regions or institutions Manages phased transitions between platforms Accommodates diverse IT policies across environments Supports hybrid engagement strategies with HCPs"
+      },
+      {
+        "name": "Common Features",
+        "detail": "Twilio and Microsoft Teams share these common features as service providers for remote sessions. You provide your own license for the platform. You can use Life Sciences email templates to send invitation emails for remote sessions. Sales reps schedule, manage, and start remote sessions directly from Life Sciences Customer Engagement. With Twilio, remote sessions are supported in the Life Sciences Cloud mobile app and on the desktop site. With Microsoft Teams, remote sessions are supported only in the mobile app on iPad."
+      },
+      {
+        "name": "Service Provider Capabilities",
+        "detail": "Each service provider offers different capabilities for remote interactions. Feature | Twilio | Microsoft Teams Field User Experience | Field users conduct the remote session and share content entirely in the Life Sciences Cloud mobile app or the desktop site. | Field users navigate between the Life Sciences Cloud mobile app and Microsoft Teams to conduct remote sessions and share approved content. HCP Experience | HCPs join remote sessions by using a secure link to access an Experience Cloud portal in their web browser. They don't need to install an app. | HCPs join remote sessions in Microsoft Teams from the app or from their web browser. On their mobile devices, they often download the Microsoft Teams app. Microsoft Teams provides familiar collaboration tools, such as chat and raise hand. Content Control and Screen Sharing | Field users can share only approved content by using the presentation player. On the Chrome and Edge browsers, participants can see only the presentation. Other windows, such as the Visit Engagement page, signature page, and device notifications, aren't shared. On the Safari and Firefox browsers, participants can see the host's full browser. | Field users have unrestricted access to share their entire screen. They can present any content on their device. Tracking and Analytics | Life Sciences Customer Engagement captures presentation metrics and device data for each participant who joins the remote session. | Life Sciences Customer Engagement captures presentation metrics only for the parent account, similar to face-to-face visits. Remote Signatures | Field users request signatures for consent, products, and samples from the remote session window. HCPs review requests and provide signatures immediately. | Remote signatures aren't supported for Microsoft Teams."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_service_providers_comparison.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-get-ready",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Get Your Org Ready for Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Before you get started with remote engagement, complete a few tasks to prepare your",
+    "findings": [
+      {
+        "name": "Get Your Org Ready for Remote Engagement",
+        "detail": "Before you get started with remote engagement, complete a few tasks to prepare your org."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create field picklist values and manage quick actions: | Customize Application To grant Life Sciences permissions and manage trigger handlers: | Life Sciences Commercial Admin permission set"
+      },
+      {
+        "name": "Remote Engagement Permissions",
+        "detail": "Discover the permissions used to provide access to remote engagement capabilities within Life Sciences Cloud for Customer Engagement."
+      },
+      {
+        "name": "Org Permissions",
+        "detail": "Permission | Type | Description Life Sciences: Remote engagement | Permission | Makes the Remote Engagement feature and its objects available."
+      },
+      {
+        "name": "User Permissions",
+        "detail": "Permission | Type | Purpose Use Life Sciences Remote Engagement | Permission | Provides access to the Remote Engagement feature and its objects. Life Sciences Commercial Admin | Permission set | Admin users can create and manage settings for remote engagement. Access Remote Engagement for Digital Experience | Permission set | Provides access to remote engagement features so that healthcare professionals (HCPs) and healthcare organizations (HCOs) can join video calls in your Digital Experience site."
+      },
+      {
+        "name": "Create Remote Engagement Channel Values",
+        "detail": "To represent remote visits conducted via video calls, add new values to the channel field on the visit object. The channel picklist field determines the communication type for visits, and you use the channel values to configure video call settings. Note Create separate channel values for each service provider that you plan to use for remote visits. In Object Manager, find and select Visit . Select Fields & Relationships , and then select Channel . In the Channel Picklist Values section, select New . Enter a value for the remote visit channel. For example, Video Call or Remote. Save your changes."
+      },
+      {
+        "name": "Set Up Remote Engagement Trigger Handlers",
+        "detail": "To generate session keys and passcodes and send invitation emails to attendees, ‌use remote engagement trigger handlers. From the App Launcher, find and select Life Sciences Commercial . Select Admin Console , and then select Trigger Handler Administration . Turn on these trigger handlers. Trigger Handler Name | Object RemoteSessionInvitationPVHandler | Provider Visit RemoteSessionInvitationVisitHandler | Visit"
+      },
+      {
+        "name": "Add Actions to Start Remote Sessions",
+        "detail": "Set up actions so that users can start remote sessions from account records. Enable users to start remote sessions from the account list. From the Admin Console, configure a quick action . Select the Start Remote Session action. In the Location field, select Search . Assign the action to the correct permission sets or profiles. In the SObject field, select Account . If you use account record types in your org, select the record types that can use the quick action. Save your changes. Enable users to start ad hoc remote sessions from account records. Ad hoc remote sessions are supported only in the Life Sciences Cloud mobile app and only with the Twilio service provider. From Object Manager, update the Person Account HCP Layout for the Person Account object. In the page layout editor palette, select Mobile & Lightning Actions . Find the Start Remote Session action and add it to the page. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Quick and Custom Action Management Trigger Handler Administration Trigger Handlers by Object"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_get_ready.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-dbschema-metadata",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Mobile App Configuration for Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set up object metadata cache configurations for Life Sciences remote engagement objects. Generate a metadata cache to package the object schema configuration that the Life Sciences Cloud mobile app uses for online and offline access. This configuration defines how the mobile app fetches and stores...",
+    "findings": [
+      {
+        "name": "Mobile App Configuration for Remote Engagement",
+        "detail": "Set up object metadata cache configurations for Life Sciences remote engagement objects. Generate a metadata cache to package the object schema configuration that the Life Sciences Cloud mobile app uses for online and offline access. This configuration defines how the mobile app fetches and stores the necessary metadata when a network connection is unavailable."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To set up Life Sciences Customer Engagement data: | Life Sciences Commercial Admin permission set To set up offline access for the objects that support remote engagement in the Life Sciences Cloud mobile app, create these object metadata cache configurations. Make sure that you also set up offline access for other areas of the app, such as visits , presentations , emails , and consent . Object | Type VideoCall | Data VideoCallParticipant | Data VideoCallPtcpSession | Data VideoCallRecording | Data Important After you create these configurations, you must generate a metadata cache. This step is important because it makes sure that the mobile app accesses the latest metadata definitions, including any schema changes for supported objects."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create Object Metadata Cache Configuration Generate Metadata Cache"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_dbschema_metadata.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-twilio",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Twilio for Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use Twilio as a service provider for remote sessions. Finish setting up the Twilio account by updating the named and external credentials included in the Life Sciences Customer Engagement managed package. Set up an Experience Cloud site so that healthcare professionals (HCPs) can join remote...",
+    "findings": [
+      {
+        "name": "Set Up Twilio for Remote Engagement",
+        "detail": "Use Twilio as a service provider for remote sessions. Finish setting up the Twilio account by updating the named and external credentials included in the Life Sciences Customer Engagement managed package. Set up an Experience Cloud site so that healthcare professionals (HCPs) can join remote sessions. Make sure that participants can connect to video calls by adding Twilio WSS endpoints as trusted URLs in your Salesforce org. Use the Admin Console to define video call settings and add phone numbers."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Configure Twilio Credentials The Life Sciences Customer Engagement managed package includes the named and external credentials for Twilio. To finalize the setup, add authentication parameters such as the Twilio account ID, authorization token, API key, and secrets. Set Up an Experience Cloud Site for Remote Engagement Set up a customer portal for your Salesforce org so that healthcare professionals (HCPs) can join remote sessions and provide remote signatures. Grant the Access Remote Engagement for Digital Experience permission set to the site's guest user profile so that HCPs can join video calls without logging in. Optionally, create a profile and add it as a member to the portal to support portal access for other users. Add the Video Call Recordings List to the Visit Page To make video call recordings for visits available to your users, add a related list to the visit record page. Set Up Trusted Twilio URLs To support video calls, add Twilio WSS endpoints as trusted URLs in your Salesforce org. These trusted URLs allow attendees to join video calls and reps to start video calls from Salesforce. Configure Video Call Settings with Twilio To support remote sessions with Twilio, configure video call settings in the Admin Console. These settings help you define and manage specific details about how your users can access and interact with remote sessions. Add Video Call Phone Numbers for Twilio To allow users to join remote sessions from their phones, define dial-in options for Twilio. Configure Video Call Terms and Conditions Add terms and conditions that participants must review and accept upon joining a video call."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_twilio.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-configure-twilio-credentials",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Twilio Credentials",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "The Life Sciences Customer Engagement managed package includes the named and external credentials for Twilio. To finalize the setup, add authentication parameters such as the Twilio account ID, authorization token, API key, and",
+    "findings": [
+      {
+        "name": "Configure Twilio Credentials",
+        "detail": "The Life Sciences Customer Engagement managed package includes the named and external credentials for Twilio. To finalize the setup, add authentication parameters such as the Twilio account ID, authorization token, API key, and secrets."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create, edit, or delete external credentials: | Manage Named Credentials or Customize Application From Setup, in the Quick Find box, search for and select Named Credentials . Select External Credentials , and then select Twilio External Credentials . In the Principals section, edit the Twilio credentials. In the Authentication Parameters section, add these parameters. Parameter Name | Parameter Value accountId | Enter the Twilio account ID (Account SID). authToken | Enter the Twilio authorization token (Auth Token). apiKey | Enter the Twilio API key. secret | Enter the Twilio API secret. awsAccessKeyId | Enter the AWS S3 access key for reading the recording files. awsSecret | Enter the AWS S3 secret for reading the recording files. Note The awsAccessKeyId and awsSecret are required only if Twilio compositions are configured for storage on an external s3 bucket. If you use the s3 bucket, the policy for the access key requires read access to recording files. Save your changes. Create a permission set that provides access to Twilio credentials. Create a permission set. Select External Credential Principal Access , and then select Edit . Move twilioExternalCredential - Twilio Credentials from Available External Credential Principals to Enabled External Credential Principals, and then select Save . Select Permission Set Overview , and then select Object Settings . Select User External Credentials , and then select Edit . Turn on Read permissions, and then save your changes. Assign the permission set to users who work with video calls."
+      },
+      {
+        "name": "See Also",
+        "detail": "Named Credentials Create Permission Sets"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_configure_twilio_credentials.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-create-experience-cloud-site",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Create an Experience Cloud Site for Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enable attendees to join video call remote sessions by creating an Experience Cloud",
+    "findings": [
+      {
+        "name": "Create an Experience Cloud Site for Remote Engagement",
+        "detail": "Enable attendees to join video call remote sessions by creating an Experience Cloud site."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create an Experience Cloud site: | Create and Set Up Experiences AND Setup and Configuration To customize or publish an Experience Cloud site: | Create and Set Up Experiences AND View Setup and Configuration AND be a member of the site OR View Setup and Configuration AND be a member of the site AND have appropriate role-based site access To assign Permission sets: | Manage Profiles and Permission Sets Before you create an Experience Cloud site, configure Twilio credentials and enable digital experiences . Create an Experience Cloud site by using an Aura Template, or add a new page to your existing Experience Cloud site for the presentation player. In the current release, only Aura sites are supported. From Builder, create a page for the video call. Select Components , and then drag the HCP Remote Platform Conference component to the page. The HCP Remote Platform Conference component is under Custom Components. You can also find it through the search bar. For language support, select Components and drag the Language Selector component to the page. Support viewing video call recordings. Create a video call player page. Select Components and then drag the recordingPlayer component to the page. Add a trusted URL for video calls. From Setup, in the Quick Find box, search for and select Trusted URLs . Select New Trusted URL . Enter an API name, and in the URL field, enter https://*.amazonaws.com . Select Active . Set the CSP Context to All , and then select media-src (audio and video) . Save your changes. Return to Builder, and in the page's Properties, set Page Access to Public . Publish the site. Assign these permission sets to the guest user profile associated with your Experience Cloud site . These permission sets allow attendees to join remote sessions without logging in. Access Remote Engagement for Digital Experience The permission set created in Configure Twilio Credentials If needed, grant specific permission sets or profiles access to your Experience Cloud site . These optional steps grant access to your sites to additional permission sets or profiles. If you skip these steps, healthcare professionals (HCPs) can still join remote sessions and view presentations as guest users without logging in. In the Builder's general settings for the page, find and save the video call page URL. You need it when you configure video call settings . Activate the site."
+      },
+      {
+        "name": "See Also",
+        "detail": "Customize Sites with Experience Builder Manage Your Site's Pages and Their Properties in Experience Builder"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_create_experience_cloud_site.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-experience-cloud-site-account-access",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Grant Accounts Access to Your Experience Cloud Site",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "If needed, grant access to your Experience Cloud sites for specific permission sets or profiles in your Salesforce org. If you skip these steps, healthcare professionals (HCPs) can still join remote sessions and view presentations as guest users without logging",
+    "findings": [
+      {
+        "name": "Grant Accounts Access to Your Experience Cloud Site",
+        "detail": "If needed, grant access to your Experience Cloud sites for specific permission sets or profiles in your Salesforce org. If you skip these steps, healthcare professionals (HCPs) can still join remote sessions and view presentations as guest users without logging in."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create of edit profiles: | Manage Profiles and Permission Sets To create an Experience Cloud Site | Create and Set Up Experiences AND Setup and Configuration These steps are optional. If you have one Experience Cloud site for remote engagements and for HCPs to view presentations, you only need to perform these steps one time. Create a profile. Clone a standard external profile like Customer Community Plus User or Customer Community Plus Login User. Name the new profile HCP User . Save the profile. Add the profile to the Experience Cloud site. From Setup, in the Quick Find box, search for and select Feature Settings . Go to Digital Experiences and select All Sites . For your site, select Workspaces . Select the Administration tile, then select Members . In Select Profiles, use Customer in search to narrow results. Add the profile that you created earlier to Selected Profiles. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_experience_cloud_site_account_access.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement",
+      "accounts"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-add-visit-page-video-call-recordings-list",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add the Video Call Recordings List to the Visit Page",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To make video call recordings for visits available to your users, add a related list to the visit record",
+    "findings": [
+      {
+        "name": "Add the Video Call Recordings List to the Visit Page",
+        "detail": "To make video call recordings for visits available to your users, add a related list to the visit record page."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To edit page layouts: | Life Sciences Commercial Admin permission set AND Customize Application Note Video call recordings aren't supported for Microsoft Teams. Your users can review recordings only when you use Twilio as the service provider for remote engagement sessions. From the setup menu on a visit record page, select Edit Page . Drag the Video Call Recording List component to the related lists section of the page. Configure the page properties. Enable Play Recording Action : Makes the Play button available for users. Enable Refresh Recording Link Action : Supports generating a new link if the current video call link expires. Enable Copy Recording Link Action : Makes the Copy Link button available to users. Enable Toggle Access Action : Makes the Change Recording Access button available to users. Save your changes and activate the page."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_add_visit_page_video_call_recordings_list.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement",
+      "visits"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-assign-trusted-twilio-urls",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Trusted Twilio URLs",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To support video calls, add Twilio WSS endpoints as trusted URLs in your Salesforce org. These trusted URLs allow attendees to join video calls and reps to start video calls from",
+    "findings": [
+      {
+        "name": "Set Up Trusted Twilio URLs",
+        "detail": "To support video calls, add Twilio WSS endpoints as trusted URLs in your Salesforce org. These trusted URLs allow attendees to join video calls and reps to start video calls from Salesforce."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create, read, update, and delete trusted URLs: | Customize Application AND Modify All Data Note If your org already has trusted URLs for Twilio with CSP Context set to Experience Builder Sites , don't delete them. To add support for starting video calls, either update the CSP Context on those entries to All , or create entries for both endpoints with CSP Context set to Lightning Experience Pages . Create a trusted URL entry for each of the following combinations. Trusted URLs with the CSP Context set to Experience Builder Sites allow attendees to join video calls. Trusted URLs with the CSP Context set to Lightning Experience Pages allow sales reps to start video calls from Salesforce. URL | CSP Context wss://global.vss.twilio.com | Experience Builder Sites wss://global.vss.twilio.com | Lightning Experience Pages wss://sdkgw.us1.twilio.com | Experience Builder Sites wss://sdkgw.us1.twilio.com | Lightning Experience Pages From Setup, in the Quick Find box, search for and select Trusted URLs . Select New Trusted URL . Enter an API name. Set the URL to the appropriate Twilio endpoint. Verify that the URL is active. Select the appropriate CSP Context. Set the CSP Directive to connect-src (scripts) . Select Save & New . Repeat these steps for each remaining trusted URL in the list. Save your changes."
+      },
+      {
+        "name": "See Also",
+        "detail": "Manage Trusted URLs"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_assign_trusted_twilio_urls.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-configure-video-call-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Video Call Settings with Twilio",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To support remote sessions with Twilio, configure video call settings in the Admin Console. These settings help you define and manage specific details about how your users can access and interact with remote",
+    "findings": [
+      {
+        "name": "Configure Video Call Settings with Twilio",
+        "detail": "To support remote sessions with Twilio, configure video call settings in the Admin Console. These settings help you define and manage specific details about how your users can access and interact with remote sessions."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage video call settings | Life Sciences Commercial Admin permission set From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Remote Engagement , and then select Twilio Settings . Set the remote visit settings. Field | Value Remote Visit Channel | Select the channel that you created for remote sessions . Video Call Link | Enter the URL of the Experience Cloud site page for accessing video calls. See Create an Experience Cloud Site for Remote Engagement . Customer Video Call Link | If needed, enter a link to your organization's general video call scheduling location. Configure the settings for meeting invitations and messaging to meet your business needs. Sales reps can use Copy Link in the remote player to share meeting details with attendees through other channels. This option is available on both the mobile app and the desktop site, regardless of invitation settings. Send invitations with WhatsApp : The host can send invitations with links to join remote sessions through their WhatsApp account from the remote player. Sending invitations with WhatsApp or email is available only in the Life Sciences Cloud mobile app. If WhatsApp is installed on the iPad, the invitation link opens in the WhatsApp app. If WhatsApp isn't installed, users can send the message through WhatsApp Web instead. Because WhatsApp Business isn't available as an iPad app, users log into WhatsApp Web to send invitations from their WhatsApp Business account. WhatsApp manages message delivery and account selection. The message is sent from the WhatsApp account that the user is signed into. Don’t send invitations for ad-hoc visits : Prevent sending invitations for spontaneous, ad hoc visits. Ad hoc visits are available only in the Life Sciences Cloud mobile app. Don’t send invitations for past visits : Prevent sending invitations for visits scheduled in the past. Visits are past when the current time is at least one minute after the scheduled end time, or if no end time exists, after its scheduled start time. The current time is the time when Salesforce processes the visit and prepares invitations, not when field users create visits in the Life Sciences Cloud mobile app. Visits created in the mobile app sync to Salesforce first. Configure the settings for the video call experience based on your business needs. Note You can set these attendee settings only at the org level or guest user profile level. Attendees can share their screens Hosts can record video calls : Recording is available only in the Life Sciences Cloud mobile app. Attendees’ microphone on by default : Automatically turn on attendees' microphones when they join remote sessions. Attendees’ cameras on by default : Automatically turn on attendees' cameras when they join remote sessions. Use unsupported browsers : HCPs and other attendees can join remote sessions from browsers that aren't fully supported, including some mobile browsers. Configure the settings to capture signatures or consent from attendees during the session. If needed, set up confirmation emails to send personalized follow-ups after capturing consent preferences or signatures from attendees. Remote signatures : Hosts can trigger remote requests during the session to capture signatures for direct-to-practitioner products, samples, or product discussions. Remote consent : Capture consent remotely during video calls. See Set Up Remote Signatures for Remote Engagement . Save the video call settings."
+      },
+      {
+        "name": "See Also",
+        "detail": "Configure a Custom Domain for Your Experience Cloud Site"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_configure_video_call_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-add-video-call-phone-numbers",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add Video Call Phone Numbers for Twilio",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To allow users to join remote sessions from their phones, define dial-in options for",
+    "findings": [
+      {
+        "name": "Add Video Call Phone Numbers for Twilio",
+        "detail": "To allow users to join remote sessions from their phones, define dial-in options for Twilio."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage video call phone numbers: | Life Sciences Commercial Admin permission set From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Remote Engagement , and then select Twilio Dial-In Settings . Select New . Enter the name, country, and phone number for dial-in users. Note Make sure that you enter the phone number exactly as it appears in Twilio, including the country code. For example, for a phone number with the country code \"1,\" format it as: +17775555454. If applicable, select Toll Free . If needed, enter messages to show to participants. All messages support speech-to-text. Welcome Message Error Message Timeout Message Room Not Started Message Save your changes. Select Activate from the dropdown for the dial-in setting."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_add_video_call_phone_numbers.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-configure-video-call-terms",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Video Call Terms and Conditions",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Add terms and conditions that participants must review and accept upon joining a video",
+    "findings": [
+      {
+        "name": "Configure Video Call Terms and Conditions",
+        "detail": "Add terms and conditions that participants must review and accept upon joining a video call."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage video call settings: | Life Sciences Commercial Admin permission set To create, edit, or delete library permissions: | Manage Content OR Manage Salesforce CRM Content To create libraries: | Create Libraries OR Manage Salesforce CRM Content Before you configure the video call terms and conditions, create a remote engagement Experience Cloud site . From Setup, in the Quick Find box, search for and select Salesforce CRM Content . Enable Salesforce CRM. From the App Launcher, find and select Files , and then select Libraries . Create a library called Terms and Conditions . Open the Terms and Conditions library, and then select Add Files . Upload a file that contains your terms and conditions. To use the file for the correct user language, make sure that the file is an .html file and that the file name has the language code appended. For example, for US terms and conditions in English, use Terms_en_us.html . Tip To support terms and conditions in multiple languages, make sure that the Language Selector component is added to the Experience Cloud site and that the additional terms and conditions files are uploaded to the library. On the Terms and Conditions library page, select Manage Members . Grant viewer access to Experience Cloud site users and guest users. Open your Experience Cloud site in Builder, and then edit the video call page. Select the HCP Remote Platform Conference component, and in the Enter the Terms and Conditions Base Name field, enter Terms . Save and activate the page."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_configure_video_call_terms.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-microsoft-teams",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Microsoft Teams for Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Use Microsoft Teams as the collaboration platform for remote engagement sessions. Sales reps planned visits in Life Sciences Customer Engagement to generate Microsoft Teams meeting links and send email invitations and calendar events. To reduce friction and align with organizational requirements,...",
+    "findings": [
+      {
+        "name": "Set Up Microsoft Teams for Remote Engagement",
+        "detail": "Use Microsoft Teams as the collaboration platform for remote engagement sessions. Sales reps planned visits in Life Sciences Customer Engagement to generate Microsoft Teams meeting links and send email invitations and calendar events. To reduce friction and align with organizational requirements, healthcare professionals (HCPs) join remote sessions by using their existing Microsoft Teams accounts."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. You use your own Microsoft Teams tenant and licenses for remote engagement to keep governance and security policies under your control. From Setup, configure named and external credentials so that field users can connect Microsoft Teams and Life Sciences Customer Engagement. In the Admin Console, manage access to Microsoft Teams for remote engagement and define how HCPs receive email invitations. To conduct remote visits, field users download the Microsoft Teams mobile app and authenticate to Microsoft Teams. Starting a session from the Visit Engagement page opens the meeting directly in Microsoft Teams. During remote sessions, field users can share their screens in Microsoft Teams and then return to Life Sciences Customer Engagement to present approved content from the presentation player. Life Sciences Customer Engagement captures account-level visit details and presentation metrics about the content shared. System logs help you troubleshoot issues with link generation, authentication, and so on. Configure Credentials for Remote Engagement with Microsoft Teams The Life Sciences Customer Engagement managed package includes the named and external credentials that support remote engagement with Microsoft Teams. To complete the setup, register an application in Microsoft Azure. Then, use the Microsoft Azure app details to update the named credential configuration in your Salesforce org. The named credential configuration enables secure authentication between Salesforce and Microsoft Teams and allows Life Sciences Customer Engagement to create and start Microsoft Teams meetings on behalf of users. Configure Remote Engagement Settings for Microsoft Teams To enable field users to conduct remote engagement sessions with Microsoft Teams, configure settings in the Admin Console. Remote visit settings define how users schedule sessions. Invitation settings control how healthcare professionals (HCPs) receive meeting invitations and calendar events. Meeting Invitations for Remote Engagement with Microsoft Teams When you use Microsoft Teams as the service provider for remote engagement sessions, healthcare professionals (HCPs) receive meeting invitations and calendar events based on the visit lifecycle and the invitation delivery method. Review how different scenarios can impact email delivery and calendar events to make sure that HCPs have the correct meeting information."
+      },
+      {
+        "name": "See Also",
+        "detail": "Host Virtual Meetings with Your Customers Authenticate to Microsoft Teams to Conduct Remote Visits"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_microsoft_teams.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-set-up-invitation-emails",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up Invitation Emails for Remote Engagement",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set up email templates to send invitation emails to attendees automatically when field users create planned visits. Send follow-up emails notifying attendees of any changes to the",
+    "findings": [
+      {
+        "name": "Set Up Invitation Emails for Remote Engagement",
+        "detail": "Set up email templates to send invitation emails to attendees automatically when field users create planned visits. Send follow-up emails notifying attendees of any changes to the visit."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To create, edit, and delete email templates: | Life Sciences Commercial Admin permission set Important To send email from Salesforce, Life Sciences Emails requires domain-level and user-level email verification. Email delivery fails if either the user's email address or the email-sending domain is unverified. See Requirements to Send Email from Salesforce . Life Sciences Customer Engagement sends remote engagement invitation emails automatically when users create, update, or cancel a planned visit. Standard Life Sciences emails wait in the queue until the next scheduled Send Email job runs. Each invitation goes to the email address marked as primary in the attendee's contact point email records. If there's no primary email, the invitation goes to the email with the lowest preference rank value. If neither field is set on the contact point email record has either field set, the recipient address can vary. To make sure that invitations go to the correct address, set the Is Primary field or the Preference Rank field. Note Invitation emails fail if your setup is incomplete. Errors occur when you don't set required fields, align email templates to your users' territories, or create templates for all three automated email invitation action types. When you use Twilio, your users see an error on the desktop site. In the mobile app, the sync fails, and the error appears in the Admin Console. When you use Microsoft Teams, the error appears in the Admin Console's error log."
+      },
+      {
+        "name": "Turn On the RSVP Email Address",
+        "detail": "Make sure that your org uses the Life Sciences RSVP email address so that recipients can respond to invitation emails. When you attach iCalendar files to email templates, the email invitations use the Life Sciences email address for RSVPs. After recipients accept or reject invitations, responses are sent to the RSVP address, and the response status is updated on the related Life Sciences Email records. From Setup, in the Quick Find box, search for and select Life Sciences for Customer Engagement Setup . Verify that the RSVP email address is turned on."
+      },
+      {
+        "name": "Create an Email Template ZIP File",
+        "detail": "Create a ZIP file for your invitation email template. In the email body, you can add variables to include information about the video call. Create an email template ZIP file . In the email body, add variables to include information about the video call, such as: Invitation URL: {{remotesession.url}} Phone access number: {{remotesession.phoneNumbersForEmail}} If needed, include the phone access number in the iCalendar description by using the {{remotesession.phoneNumbersForICS}} variable. Example Here's an example invitation email template that includes the video call URL and phone number. Dear {{recipient.firstname}} {{recipient.lastname}}, {{sender.name}} scheduled a call with you on {{visit.PlannedVisitStartTime}}. You can access it using the link: {{remotesession.url}} Alternatively, you can dial in to the call: {{remotesession.phoneNumbersForEmail}}. Thank you, {{sender.name}}"
+      },
+      {
+        "name": "Upload and Configure an Email Template",
+        "detail": "Upload the email template ZIP file and configure it for remote engagement invitations. Follow these steps to create an invitation email for the Create automated email invitation action type. Then, create the templates for the Update and Delete automated email invitation action types. Note Each territory requires separate email templates for each of the three automated email invitation action types: Create, Update, and Cancel. From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Email , and then select Email Templates . Select New Email Template . Upload the ZIP file for the email template that you created. Enter these values. While most of these fields are required for invitation emails to send correctly, most aren't required on the email template itself. Field | Value | Required for Remote Engagement Email Subject | Enter the subject of the email. | Yes Email Template Name | Enter the email template's name. | Yes Start Date | Select the first day that sales reps can use the template. | Yes End Date | Select the last day that sales reps can use the template. | Yes Automated Email Invitation Context | Provider Visit | Yes Automated Email Invitation Action | Create | Yes Default template for automated emails | Selected | Yes Attach iCalendar file | Selected | Yes iCalendar Description | Enter a description to include in the iCalendar attachment. | No Select Upload and Save . In the list view, select the template you created, and then select Edit . Align the email template to the territories of the users associated with the template. Save and activate the template. Similarly, follow these steps to create two more templates for the Update and Cancel automated email invitation action types. In the Automated Email Invitation Action field, select the appropriate action type."
+      },
+      {
+        "name": "See Also",
+        "detail": "Upload and Create Email Templates"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_set_up_invitation_emails.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-conduct-twilio",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Conduct Remote Visits with Twilio",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "With Twilio as the service provider, you schedule and conduct remote sessions directly in Life Sciences Customer",
+    "findings": [
+      {
+        "name": "Conduct Remote Visits with Twilio",
+        "detail": "With Twilio as the service provider, you schedule and conduct remote sessions directly in Life Sciences Customer Engagement."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Manage Settings and Share Meeting Details",
+        "detail": "During the remote session, monitor participants and observe states, such as Waiting for attendees to join or Online. Manage audio with options to mute or unmute all participants. View meeting details, such as the remote meeting URL, meeting ID, passcode, and dial-in information. Use Copy Link to copy the meeting information to your clipboard so that you can share it with attendees through other channels. Sending invitations in Life Sciences emails or through WhatsApp is supported only in the Life Sciences Cloud mobile app. You can also conduct interactive presentations and share approved content with attendees during the session."
+      },
+      {
+        "name": "Manage Visits During Sessions",
+        "detail": "During a remote session, you can navigate to the Visit Engagement page without ending the session or disconnecting participants. From the Visit Engagement page, you can add samples or direct-to-practitioner products, update visit details, add notes, and add or preview presentation content. Some actions aren't available during a live session, such as saving or submitting the visit, changing the main account or attendees, and changing the channel or visit date. To return to the remote session, select the minimized remote player on the desktop site or the banner at the top of the Visit Engagement page in the mobile app."
+      },
+      {
+        "name": "Request Signatures",
+        "detail": "You can request product or consent signatures directly from the remote session. When you send a product signature request, the HCP reviews and signs for all products on the visit that require a signature. After the HCP signs, the product and sample details are locked, and you can't send another product signature request for that visit. For consent signatures, the consent page stays private until you send the request. After you send the request, it locks until the participant signs or declines, and unsigned requests expire automatically when the session ends. You can send additional consent requests during the same session."
+      },
+      {
+        "name": "Record Sessions",
+        "detail": "If recording is enabled, you can record the session in the Life Sciences Cloud mobile app. After the session, view the recording in the Video Call Recordings related list on the visit record on the mobile app or the desktop site."
+      },
+      {
+        "name": "End Sessions",
+        "detail": "After the visit is complete, select End Meeting to conclude the remote session."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_conduct_twilio.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  },
+  {
+    "id": "lsc-help-remote-engagement-ind-lsc-remote-engagement-conduct-microsoft-teams",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Conduct Remote Visits with Microsoft Teams",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "With Microsoft Teams as the service provider, you schedule remote visits in Life Sciences Customer Engagement and conduct sessions in the Microsoft Teams mobile",
+    "findings": [
+      {
+        "name": "Conduct Remote Visits with Microsoft Teams",
+        "detail": "With Microsoft Teams as the service provider, you schedule remote visits in Life Sciences Customer Engagement and conduct sessions in the Microsoft Teams mobile app."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Before you plan and conduct remote engagement sessions with Microsoft Teams, install the Microsoft Teams mobile app on your iPad. Then authenticate to connect Salesforce and Microsoft Teams. See Authenticate to Microsoft Teams to Conduct Remote Visits ."
+      },
+      {
+        "name": "Schedule Sessions",
+        "detail": "Scheduling a remote visit in Life Sciences Customer Engagement generates a Microsoft Teams meeting link and sends an email invitation to the visit's attendees. Recipients can also receive calendar events that can update automatically when you change the time or visit channel, update the account or the attendees, or cancel the meeting. Don't modify the body of Microsoft Teams calendar events. Life Sciences Customer Engagement overwrites your changes when sending updated invitation emails."
+      },
+      {
+        "name": "Conduct Sessions",
+        "detail": "Starting a remote session from the Visit Engagement page opens the meeting in the Microsoft Teams mobile app. Manage all video call functionality—such as video and audio settings, screen sharing, and participant management—in Microsoft Teams. To present content, share your screen in Microsoft Teams, and then return to Life Sciences Customer Engagement to start a presentation and track engagement metrics."
+      },
+      {
+        "name": "End Sessions",
+        "detail": "To conclude the remote session, end the meeting in Microsoft Teams. Then return to Life Sciences Customer Engagement to save or submit the visit."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_remote_engagement_conduct_microsoft_teams.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "remote-engagement"
+    ]
+  }
+]

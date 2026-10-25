@@ -1,0 +1,917 @@
+[
+  {
+    "id": "impl-001",
+    "category": "Project Planning",
+    "topic": "Customization Minimization",
+    "description": "Guidance on minimizing development customizations during implementation projects",
+    "best_practices": [
+      "Avoid development customizations as much as possible to reduce risks, shorten timelines, and minimize maintenance costs",
+      "Design changes can impact requirements, and requirement changes can impact time needed for technical resources",
+      "Evaluate out-of-the-box capabilities before building custom solutions",
+      "Document any unavoidable customizations with clear business justification"
+    ],
+    "common_mistakes": [
+      "Building custom solutions when standard platform features would suffice",
+      "Not accounting for the maintenance cost of customizations over time",
+      "Making design changes without evaluating downstream impact on requirements and timelines"
+    ],
+    "checklist": [
+      "Review out-of-the-box features before designing customizations",
+      "Document business justification for any custom development",
+      "Assess maintenance cost and upgrade impact of each customization"
+    ],
+    "tips": [
+      "Customizations create long-term maintenance burden and can break during platform upgrades"
+    ],
+    "success_criteria": [
+      "Customization count is minimized and each one has documented justification",
+      "Standard platform features are used wherever they meet requirements"
+    ]
+  },
+  {
+    "id": "impl-002",
+    "category": "Project Planning",
+    "topic": "Roles and Responsibilities",
+    "description": "Establishing clear project roles, responsibilities, and governance from day one",
+    "best_practices": [
+      "Agree from the beginning what project roles and responsibilities are",
+      "Define how the implementation will be conducted",
+      "Identify procedures for escalating project risks and problems",
+      "Decide on communication methods and frequency early in the project",
+      "Establish the function of the Architect role: governs changes to the data model and coordinates various logic pieces such as triggers, scheduled jobs, and technical design"
+    ],
+    "common_mistakes": [
+      "Not defining escalation procedures before problems arise",
+      "Unclear ownership of data model governance",
+      "No designated architect to coordinate cross-cutting technical decisions"
+    ],
+    "checklist": [
+      "Define all project roles and document responsibilities",
+      "Create escalation procedures document",
+      "Establish communication cadence and channels",
+      "Assign architect role for data model and technical design governance",
+      "Document decision-making authority for technical and business choices"
+    ],
+    "tips": [
+      "The architect role is critical for coordinating triggers, scheduled jobs, and technical design decisions across the project"
+    ],
+    "success_criteria": [
+      "All team members understand their roles and responsibilities",
+      "Escalation paths are documented and tested",
+      "Technical decisions flow through the designated architect"
+    ]
+  },
+  {
+    "id": "impl-003",
+    "category": "Project Planning",
+    "topic": "Documentation and Compliance",
+    "description": "Planning for documentation requirements including compliance and regulatory needs",
+    "best_practices": [
+      "Discuss documentation processes and requirements upfront",
+      "Request compliance documentation at the launch of a project to ensure you meet local industry regulations and standards",
+      "Account for the fact that some companies require heavy amounts of documentation to meet compliance regulations"
+    ],
+    "common_mistakes": [
+      "Discovering compliance documentation requirements late in the project",
+      "Not budgeting time for regulatory documentation",
+      "Assuming documentation requirements are the same across regions"
+    ],
+    "checklist": [
+      "Identify all compliance and regulatory documentation requirements",
+      "Determine documentation standards and templates",
+      "Request existing compliance documentation from the customer",
+      "Build documentation effort into the project timeline"
+    ],
+    "tips": [
+      "Life sciences implementations often have stricter documentation requirements than other industries due to regulatory compliance"
+    ],
+    "success_criteria": [
+      "All regulatory documentation requirements are identified before development begins",
+      "Documentation processes are agreed upon by all parties"
+    ]
+  },
+  {
+    "id": "impl-004",
+    "category": "Project Planning",
+    "topic": "Timeline and Release Planning",
+    "description": "Aligning implementation timelines with platform release schedules and holidays",
+    "best_practices": [
+      "Consider the platform release schedule and holidays while planning the implementation timeline",
+      "Decide on object naming and documentation standards before building anything",
+      "Plan ahead to conduct integration tests well before client UAT",
+      "Allow sufficient time between integration testing and UAT to resolve challenges"
+    ],
+    "common_mistakes": [
+      "Performing integration testing too close to UAT, leaving insufficient time to resolve issues",
+      "Not accounting for platform release windows that may affect sandbox or production environments",
+      "Starting development without agreed naming conventions"
+    ],
+    "checklist": [
+      "Map implementation timeline against platform release schedule",
+      "Identify holiday periods that may affect team availability",
+      "Schedule integration testing with buffer time before UAT",
+      "Agree on naming conventions and documentation standards before development starts"
+    ],
+    "tips": [
+      "Integration tests should involve both the mobile app and web interfaces",
+      "Increase API limits during regression and UAT to avoid governor limit issues during testing"
+    ],
+    "success_criteria": [
+      "Timeline accounts for platform release windows and holidays",
+      "Integration testing completes with buffer time before UAT begins"
+    ]
+  },
+  {
+    "id": "impl-005",
+    "category": "Testing",
+    "topic": "Performance and Device Testing",
+    "description": "Best practices for performance testing and device consistency during implementation",
+    "best_practices": [
+      "Conduct performance tests from within the customer network on a representative's machine from the start for the best real-world experience",
+      "Maintain device consistency during unit, regression, and UAT testing phases",
+      "Consider bandwidth, outdated browser versions, and network latency impacts on user experience",
+      "Validate with tests before every code deployment",
+      "Consider validation of all tests upon every push of code to a development branch"
+    ],
+    "common_mistakes": [
+      "Testing with a Mac and Chrome during regression, then switching to Windows and Chrome for UAT",
+      "Doing regression testing with one iPad version and UAT with a different iPad version",
+      "Not testing from the actual customer network environment",
+      "Discovering performance issues only at go-live because tests were run in optimal conditions"
+    ],
+    "checklist": [
+      "Define target devices and browsers for all testing phases",
+      "Ensure device consistency across regression, UAT, and production testing",
+      "Set up performance testing from within the customer's actual network",
+      "Create test validation gate for every code deployment",
+      "Document minimum bandwidth and browser version requirements"
+    ],
+    "tips": [
+      "Behavior and test criteria will differ across different devices, browsers, and OS versions, so keep testing environments consistent",
+      "Do not wait until go-live to discover network latency issues"
+    ],
+    "success_criteria": [
+      "All testing phases use consistent devices and browser versions",
+      "Performance tests are run from real customer network conditions",
+      "No surprises on go-live day due to untested environments"
+    ]
+  },
+  {
+    "id": "impl-006",
+    "category": "Schema Management",
+    "topic": "Field Naming Conventions",
+    "description": "Standards for naming and organizing custom fields on platform objects",
+    "best_practices": [
+      "Always implement the API naming convention agreed upon at the onset of the project",
+      "Keep field naming universal by adding either a prefix or suffix of the organization to distinguish between platform standard custom fields and customer-built custom fields",
+      "Identify in the description section: group that requested the field, ISO codes of the countries, business units, and integrations using the field",
+      "Organize deprecated fields by prefixing labels with 'dep_[fieldname]'"
+    ],
+    "common_mistakes": [
+      "Not establishing naming conventions before development begins",
+      "Mixing platform-delivered custom fields with customer-created fields without clear distinction",
+      "Not documenting field purpose and requesting team in the description",
+      "Leaving deprecated fields cluttering the field list"
+    ],
+    "checklist": [
+      "Define and document API naming convention before development",
+      "Choose prefix or suffix strategy for distinguishing field origins",
+      "Create field description template including: requesting group, ISO codes, business units, integrations",
+      "Implement 'dep_' prefix convention for deprecated fields"
+    ],
+    "tips": [
+      "Examples of naming: 'OneEducation_<client>__c' or 'License_<client>__c'",
+      "The platform sorts fields by label name, so prefixing deprecated fields with 'dep_' moves them to the bottom of the list, making the environment easier to manage"
+    ],
+    "success_criteria": [
+      "All fields follow the agreed naming convention",
+      "Every custom field has a complete description documenting its purpose and consumers"
+    ]
+  },
+  {
+    "id": "impl-007",
+    "category": "Schema Management",
+    "topic": "Field and Object Limits",
+    "description": "Understanding and planning around platform field and object limitations",
+    "best_practices": [
+      "Understand field limitations per object before design begins",
+      "Plan for field allocation across current and future needs",
+      "Track field usage to avoid hitting limits mid-project"
+    ],
+    "common_mistakes": [
+      "Not accounting for field limits in the initial data model design",
+      "Hitting field limits mid-implementation and needing to redesign"
+    ],
+    "checklist": [
+      "Review field limits: 800 custom fields per object",
+      "Review external ID limits per object",
+      "Review rollup summary field limit: 25 per object",
+      "Review master-detail relationship limit: 2 per object",
+      "Review total relationship field limit: 40 per object (master-detail plus lookup combined)"
+    ],
+    "tips": [
+      "Document current field counts per object at the start of the project to plan allocation"
+    ],
+    "success_criteria": [
+      "Field usage stays well within platform limits",
+      "Data model design accounts for future expansion within limit constraints"
+    ]
+  },
+  {
+    "id": "impl-008",
+    "category": "Security and Access",
+    "topic": "Profile and Layout Management",
+    "description": "Best practices for managing profiles, page layouts, and field-level security",
+    "best_practices": [
+      "Keep the number of profiles to a minimum",
+      "Rename unused profiles to include 'dep_' prefix to organize them",
+      "Use field-level security to hide fields from users instead of page layouts for compliance",
+      "Minimize the number of page layouts to decrease the likelihood of inconsistencies for different record types",
+      "Consider using Dynamic Forms for ease of maintenance as an alternative to many page layouts",
+      "Evaluate very carefully before adding security exclusions to bypass user access permissions in triggers"
+    ],
+    "common_mistakes": [
+      "Using page layouts to restrict field access instead of field-level security, which leaves data visible in reports",
+      "Creating too many profiles and page layouts leading to maintenance burden and inconsistencies",
+      "Bypassing user permission enforcement in triggers without understanding audit implications",
+      "Not recognizing that the CRM is a point-in-time system and audits can lead to inaccurate assessments if permissions are bypassed"
+    ],
+    "checklist": [
+      "Audit existing profiles and consolidate where possible",
+      "Implement field-level security for all compliance-sensitive fields",
+      "Document justification for any permission bypass in trigger code",
+      "Evaluate Dynamic Forms as an alternative to multiple page layouts",
+      "Ensure page layout count is minimized per record type"
+    ],
+    "tips": [
+      "Page layouts prevent users from seeing fields on the form, but do NOT prevent them from seeing data in reports. Only field-level security provides complete access restriction.",
+      "Dynamic Forms can significantly reduce the number of page layouts needed"
+    ],
+    "success_criteria": [
+      "Field-level security is used for all compliance-restricted fields",
+      "Profile count is minimized and documented",
+      "No unauthorized permission bypasses exist in trigger code"
+    ]
+  },
+  {
+    "id": "impl-009",
+    "category": "Data Migration",
+    "topic": "Data Migration Planning and Execution",
+    "description": "Best practices for migrating data into the platform safely and efficiently",
+    "best_practices": [
+      "Create unique external ID fields on objects to move data between environments, since the 18-character record ID is system-generated and unique only within the org",
+      "Take extra care to protect data integrity of the production environment since the platform does not have a database rollback feature during data loads",
+      "Review trigger handler documentation and understand the purpose of each trigger handler before data migration",
+      "Consider using an integration user with the 'SkipTriggerHandlers' permission to bypass all trigger handlers during data migration for better performance",
+      "Alternatively, disable handlers selectively from the admin console for a more targeted approach"
+    ],
+    "common_mistakes": [
+      "Using record IDs to move data between environments (they are org-specific)",
+      "Keeping all trigger handlers enabled during data migration, causing slow performance or governor limit issues",
+      "Not having a rollback plan since the platform lacks database rollback during data loads",
+      "Not running post-migration jobs after disabling trigger handlers"
+    ],
+    "checklist": [
+      "Create external ID fields on all migrated objects",
+      "Document data migration rollback strategy",
+      "Review all trigger handlers and determine which to disable during migration",
+      "Choose trigger bypass strategy: integration user permission vs. admin console selective disable",
+      "Plan post-migration job execution for all disabled handlers",
+      "Validate data integrity after migration completes"
+    ],
+    "tips": [
+      "Using an integration user to bypass triggers only affects that user; other users still have handlers enforced. This is suitable for systems with live users.",
+      "Selectively disabling handlers from the admin console affects all users. This is more suitable for systems without live users."
+    ],
+    "success_criteria": [
+      "Data migrates without hitting governor limits",
+      "All post-migration jobs run successfully",
+      "Data integrity is validated after migration"
+    ]
+  },
+  {
+    "id": "impl-010",
+    "category": "Data Migration",
+    "topic": "Trigger Handler Bypass During Data Loads",
+    "description": "Detailed guidance on which trigger handlers can be safely disabled during data migration and the equivalent jobs to run afterward",
+    "best_practices": [
+      "Identify handlers that have equivalent batch jobs that can be run post-migration",
+      "Run the equivalent batch jobs immediately after data loads complete",
+      "For historical data loads, consider disabling additional lock handlers and validation handlers"
+    ],
+    "common_mistakes": [
+      "Disabling handlers without running equivalent post-load jobs",
+      "Not re-enabling handlers after data migration completes",
+      "Forgetting to disable lock handlers for historical data loads"
+    ],
+    "checklist": [
+      "Disable sample limit initialization handlers during account data loads; run 'Assign Sample Limit Templates to Accounts' job afterward",
+      "Disable contact point handlers (email, phone, social) during data loads; run 'Search Before Create Jobs' afterward",
+      "Disable healthcare provider handler during data loads; run 'Search Before Create Jobs' afterward",
+      "Disable NPI and specialty handlers during data loads; run corresponding jobs afterward",
+      "Disable visit changed event handlers during data loads; run 'Visit Share Management Jobs' and 'Provider Account Territory Information Job' afterward",
+      "For historical data loads: consider disabling lock handlers (visit, document, expense, disbursement), validation handlers (time-off, holiday, conflict, business hours), and workflow permission handlers"
+    ],
+    "tips": [
+      "Maintain a checklist of disabled handlers and their corresponding post-load jobs to ensure nothing is missed",
+      "Lock handlers prevent modifications to records in submitted or signed states, so disabling them is appropriate for historical data but risky for live systems"
+    ],
+    "success_criteria": [
+      "All disabled handlers have their post-load equivalent jobs executed",
+      "All handlers are re-enabled after migration",
+      "Data integrity is maintained for locked and submitted records"
+    ]
+  },
+  {
+    "id": "impl-011",
+    "category": "Territory Management",
+    "topic": "Territory Model Setup",
+    "description": "Best practices for configuring territory models and hierarchies",
+    "best_practices": [
+      "Understand territory limitations: up to 1000 territories are allowed out-of-the-box",
+      "If the org will be expanded to new business units or countries, understand what platform limitations will affect the expansion",
+      "Build the territory hierarchy before building the role hierarchy since the role hierarchy needs to mirror the territory hierarchy",
+      "Ensure users are always assigned to a territory; they will have limited access to the application without one"
+    ],
+    "common_mistakes": [
+      "Building the role hierarchy before the territory hierarchy, leading to mismatches",
+      "Assigning one territory to multiple users (avoid this)",
+      "Not requesting territory limit extensions before hitting the 1000-territory cap",
+      "Leaving users unassigned to territories, causing access issues"
+    ],
+    "checklist": [
+      "Assess total territory count needed and request extensions if over 1000",
+      "Build territory hierarchy first",
+      "Build role hierarchy to mirror territory hierarchy",
+      "Verify all users are assigned to at least one territory",
+      "Confirm no territory is assigned to multiple users",
+      "Plan for future business unit or country expansion within territory limits"
+    ],
+    "tips": [
+      "Territory limit extensions are available by request but will affect system performance",
+      "Users can be assigned to multiple territories, but do NOT assign one territory to multiple users"
+    ],
+    "success_criteria": [
+      "Territory hierarchy is built before role hierarchy",
+      "All users have territory assignments",
+      "Territory count is within limits or extensions are approved"
+    ]
+  },
+  {
+    "id": "impl-012",
+    "category": "Account Management",
+    "topic": "Account Tab and App Version Management",
+    "description": "Using the correct account interface and keeping mobile app versions current",
+    "best_practices": [
+      "Always use the custom Accounts tab shipped with the life sciences app instead of the standard platform Accounts tab",
+      "Keep mobile OS version and app version up to date",
+      "Review the certified and supported devices and OS versions published every release"
+    ],
+    "common_mistakes": [
+      "Using the standard platform Accounts tab, which causes Search Before Create to not work",
+      "Running outdated mobile app or OS versions",
+      "Not checking certified device lists for each release"
+    ],
+    "checklist": [
+      "Configure users to use the custom Accounts tab",
+      "Verify mobile app and OS are on supported versions",
+      "Review certified device list for each platform release"
+    ],
+    "tips": [
+      "The Search Before Create feature only works on the custom Accounts tab, not the standard one"
+    ],
+    "success_criteria": [
+      "All users access accounts through the custom tab",
+      "Mobile devices are on certified and supported versions"
+    ]
+  },
+  {
+    "id": "impl-013",
+    "category": "Mobile Sync",
+    "topic": "DB Schema Configuration",
+    "description": "Optimizing entity schema configuration for mobile sync performance",
+    "best_practices": [
+      "Each new entity schema record means more time required to sync; deactivate records not needed for mobile push using the Active flag",
+      "For each entity schema record, ensure the 'Permitted Profiles' field is configured with ONLY required profiles",
+      "Apply filter criteria to account-related object schema records to ensure downloading only records for accounts present on the device",
+      "Enable attachments only for schema records of objects that require attachment downloads on mobile",
+      "All entity schema settings must have a 'where' clause to limit records returned",
+      "Remove access to objects and fields that the user does not need functionally, especially long text area fields"
+    ],
+    "common_mistakes": [
+      "Leaving all entity schema records active when many are not needed for mobile",
+      "Not applying filter criteria, causing excessive data download",
+      "Enabling attachments for all objects instead of only those that need them",
+      "Missing 'where' clauses on schema records, leading to full table downloads",
+      "Including unnecessary long text area fields that slow sync"
+    ],
+    "checklist": [
+      "Audit all entity schema records and deactivate unnecessary ones",
+      "Configure 'Permitted Profiles' for each active schema record",
+      "Add territory-based filter criteria to account-related schema records",
+      "Verify attachment enablement is limited to required objects",
+      "Ensure every schema record has a 'where' clause",
+      "Remove access to unnecessary objects and long text area fields"
+    ],
+    "tips": [
+      "Use territory-based filtering: 'ParentId IN (SELECT AccountId FROM ProviderAcctTerritoryInfo WHERE IsAvailableOffline = true AND Territory2.Name = '{USER.TERRITORY}')' pattern for account-related objects",
+      "Update attachment schema where clause to limit by parent type and recent modification dates to avoid exceeding 100K records"
+    ],
+    "success_criteria": [
+      "Sync times are acceptable for end users",
+      "Only required data is downloaded to devices",
+      "No unnecessary objects or fields are included in sync"
+    ]
+  },
+  {
+    "id": "impl-014",
+    "category": "Mobile Sync",
+    "topic": "Account Volume and Offline Availability",
+    "description": "Recommendations for targeting the right volume of accounts for mobile sync",
+    "best_practices": [
+      "Target accounts for mobile use by adding appropriate filter conditions to entity schemas",
+      "Limit to either 5000 accounts with 3 months of related activity OR under 3000 accounts with up to 6 months of related activity",
+      "Use the IsAvailableOffline field on territory info records to define which accounts are available for the mobile app",
+      "Create a custom process to set IsAvailableOffline to false for accounts not needed on mobile"
+    ],
+    "common_mistakes": [
+      "Syncing all accounts to mobile devices without filtering",
+      "Not using the IsAvailableOffline flag to control mobile account scope",
+      "Exceeding recommended account volumes, causing slow sync times"
+    ],
+    "checklist": [
+      "Define account volume target (under 5000 with 3 months activity or under 3000 with 6 months)",
+      "Implement IsAvailableOffline flag management process",
+      "Apply territory-based filter to the Account entity schema",
+      "Test sync times with the target account volume"
+    ],
+    "tips": [
+      "By default, when a territory info record is created, IsAvailableOffline is set to true. Build a process to manage this proactively.",
+      "Make sure you use the SOQL where clause provided in the out-of-the-box entity schema for Account"
+    ],
+    "success_criteria": [
+      "Account count on devices stays within recommended limits",
+      "Sync times are acceptable for field users",
+      "IsAvailableOffline is actively managed"
+    ]
+  },
+  {
+    "id": "impl-015",
+    "category": "Mobile Sync",
+    "topic": "Sync Monitoring and Error Handling",
+    "description": "How to monitor sync transactions and handle errors effectively",
+    "best_practices": [
+      "Monitor the sync transactions queue in the admin console every day",
+      "Check if there are transactions stuck in 'New' status for more than a day",
+      "Check the 'Ready to Process' flag and related fields: Missing Items, Excess Items, Pending",
+      "When transactions error out, analyze each error individually",
+      "Fix the issue and retry the transaction from the admin console"
+    ],
+    "common_mistakes": [
+      "Not monitoring sync transactions daily",
+      "Ignoring stuck transactions in 'New' status",
+      "Not analyzing individual sync errors to find root causes",
+      "Leaving errored transactions unresolved, causing dependent transactions to stay in 'Waiting' status"
+    ],
+    "checklist": [
+      "Set up daily monitoring of sync transaction queue",
+      "Define alert threshold for transactions in 'New' status (recommend: more than 1 day)",
+      "Check 'Ready to Process' flag status",
+      "If Ready to Process is NO: check Missing Items, Excess Items, and Pending flags",
+      "For stuck transactions: contact the user and request a full manual sync",
+      "Analyze and resolve errored transactions promptly"
+    ],
+    "tips": [
+      "Until errored transactions are successfully processed or cancelled, any dependent transactions will stay in 'Waiting' status",
+      "If a user's transactions stay in 'New' for a long time, have them perform a full manual sync by tapping the gear icon and tapping 'Sync Database'",
+      "Monitor the sync queue the same way you would monitor any other ETL job"
+    ],
+    "success_criteria": [
+      "Sync transactions are monitored daily",
+      "Stuck or errored transactions are resolved within 24 hours",
+      "No long-running chains of waiting transactions"
+    ]
+  },
+  {
+    "id": "impl-016",
+    "category": "Mobile Sync",
+    "topic": "Common Sync Errors",
+    "description": "Understanding and resolving common sync transaction errors",
+    "best_practices": [
+      "Categorize sync errors to identify patterns and systemic issues",
+      "Address root causes rather than just retrying failed transactions"
+    ],
+    "common_mistakes": [
+      "Retrying transactions without fixing the underlying cause",
+      "Not recognizing patterns in sync errors that indicate systemic issues"
+    ],
+    "checklist": [
+      "Check for record locking issues",
+      "Check for timeout errors",
+      "Check for heap size exceptions",
+      "Check for CPU time limit exceptions",
+      "Check for governor limit violations from high load or non-bulkified code",
+      "Check for validation rule conflicts",
+      "Check for database-level rules that do not match UI logic",
+      "Check for field-level uniqueness or non-null constraint violations",
+      "Check for trigger, flow, workflow, or process builder failures causing insert/update failures"
+    ],
+    "tips": [
+      "Governor limit issues during sync often indicate non-bulkified code or high-load scenarios",
+      "Validation rules and database constraints that differ from UI logic are a common source of sync errors"
+    ],
+    "success_criteria": [
+      "Sync error root causes are identified and resolved",
+      "Error patterns are tracked and systemic issues are addressed"
+    ]
+  },
+  {
+    "id": "impl-017",
+    "category": "Mobile Sync",
+    "topic": "Mobile Sync Settings Configuration",
+    "description": "Recommended values for mobile sync configuration settings",
+    "best_practices": [
+      "Configure sync settings based on recommended values and adjust based on customer needs",
+      "Set Number of Items per Transaction to 10 (note: this includes the transaction itself, so 10 means 9 transaction items)",
+      "Set Mobile Non-WiFi Data Limit to 25 MB",
+      "Set Mobile Timeout Period to 60 minutes (reduce if more frequent PIN entry is needed)",
+      "Set Number of Retry Attempts to 3",
+      "Enable 'Optimize performance by grouping Items' to reduce SOQL queries",
+      "Enable 'Cancel sync for deleted records' to auto-cancel transactions deleting already-deleted records",
+      "Enable 'Cancel sync when record isn't found' to auto-cancel transactions for missing records",
+      "Enable 'Retry sync for locked rows' to auto-retry on lock row errors"
+    ],
+    "common_mistakes": [
+      "Setting items per transaction too high (max is 25, but 10 is recommended)",
+      "Not enabling the grouping optimization, leading to excessive SOQL queries",
+      "Not enabling auto-cancel for deleted records, causing unnecessary retry cycles"
+    ],
+    "checklist": [
+      "Set Number of Items per Transaction: 10",
+      "Set Mobile Non-WiFi Data Limit: 25 MB",
+      "Set Mobile Timeout Period: 60 minutes",
+      "Set Number of Retry Attempts: 3",
+      "Enable Optimize performance by grouping Items: true",
+      "Enable Cancel sync for deleted records: true",
+      "Enable Cancel sync when record isn't found: true",
+      "Enable Retry sync for locked rows: true"
+    ],
+    "tips": [
+      "The items per transaction field includes the transaction itself. So entering 9 means 8 transaction items will be included.",
+      "The maximum items per transaction is 25. Even if you enter more, the system caps at 25 (24 items + 1 transaction).",
+      "Grouping items by operation and entity type reduces SOQL queries by processing items with the same order value as a single batch"
+    ],
+    "success_criteria": [
+      "All sync settings match recommended values or have documented justification for deviation",
+      "Auto-cancel and retry mechanisms are enabled"
+    ]
+  },
+  {
+    "id": "impl-018",
+    "category": "Mobile Sync",
+    "topic": "Sharing Settings and Trigger Performance for Sync",
+    "description": "Optimizing sharing settings and triggers for mobile sync performance",
+    "best_practices": [
+      "In org-wide defaults, sharing settings for objects synced regularly from mobile to the platform should be Private instead of Public",
+      "For objects being synced to mobile, avoid long-running queries in triggers",
+      "Use platform events for post-trigger calculations and functions instead of inline processing"
+    ],
+    "common_mistakes": [
+      "Setting sharing to Public Read Only for synced objects, which slows queries",
+      "Having complex, long-running queries in triggers for synced objects",
+      "Performing all post-trigger work inline instead of using platform events"
+    ],
+    "checklist": [
+      "Review sharing settings for all synced objects",
+      "Set synced objects to Private sharing where possible",
+      "Audit trigger queries on synced objects for performance",
+      "Refactor long-running trigger logic to use platform events"
+    ],
+    "tips": [
+      "Private sharing helps queries run faster and completes sync quicker than Public sharing",
+      "Out-of-the-box options are available for configuring platform events for post-trigger processing"
+    ],
+    "success_criteria": [
+      "Synced objects use Private sharing settings",
+      "No long-running trigger queries exist on synced objects",
+      "Platform events are used for post-trigger async processing"
+    ]
+  },
+  {
+    "id": "impl-019",
+    "category": "Offline Mobile",
+    "topic": "Offline-Capable Lightning Web Components",
+    "description": "Considerations for building components that work offline in mobile runtime",
+    "best_practices": [
+      "Understand the impact of offline mode on the lightning mobile runtime",
+      "Ensure components use base components that are supported for offline rendering",
+      "Fetch data through supported wire adapters only",
+      "Verify entities are supported through the UI API for offline use"
+    ],
+    "common_mistakes": [
+      "Using unsupported base components in offline-capable LWCs",
+      "Using unsupported wire adapters for data fetching",
+      "Not verifying UI API support for entities used offline"
+    ],
+    "checklist": [
+      "Review supported base components for offline rendering",
+      "Verify all wire adapters used are supported for offline",
+      "Check entity UI API support for any custom objects used offline",
+      "Test component behavior in offline mode on real devices"
+    ],
+    "tips": [
+      "Base component support, wire adapter support, and UI API entity support are the three critical compatibility checks for offline LWCs"
+    ],
+    "success_criteria": [
+      "All offline LWCs use supported base components and wire adapters",
+      "Offline functionality is validated on real devices"
+    ]
+  },
+  {
+    "id": "impl-020",
+    "category": "Platform Development",
+    "topic": "Browser and Environment Best Practices",
+    "description": "Web browser session management and environment separation",
+    "best_practices": [
+      "Work in separate browser contexts when accessing multiple platform environments such as sandboxes or production instances",
+      "Use different Chrome Users/People, Firefox Profiles, or browser extensions that create separate contexts",
+      "Understand that all incognito/private windows share a common set of cookies"
+    ],
+    "common_mistakes": [
+      "Accessing multiple environments from the same browser context, causing cookie and session cross-contamination",
+      "Using multiple incognito windows for different org logins (they share cookies)",
+      "Not recognizing that session corruption can affect platform functionality"
+    ],
+    "checklist": [
+      "Use separate browser profiles for each environment",
+      "Educate team on incognito window cookie sharing limitation",
+      "Document browser context requirements for the team"
+    ],
+    "tips": [
+      "An incognito window can separate from a non-incognito window, but multiple incognito windows for multiple org logins can cross cookies",
+      "Chrome Users/People feature is the most reliable way to maintain separate browser contexts"
+    ],
+    "success_criteria": [
+      "No session cross-contamination issues during development",
+      "All team members use separate browser contexts per environment"
+    ]
+  },
+  {
+    "id": "impl-021",
+    "category": "Platform Development",
+    "topic": "SOQL, Apex, and Code Deployment",
+    "description": "Best practices for query optimization, code quality, and safe deployments",
+    "best_practices": [
+      "Follow SOQL best practices for query optimization",
+      "Follow Apex code best practices",
+      "Validate with tests before every code deployment",
+      "Consider validation of all tests upon every push of code to a development branch"
+    ],
+    "common_mistakes": [
+      "Not validating tests before deployment, leading to go-live surprises",
+      "Writing non-optimized SOQL queries that hit governor limits",
+      "Deploying code without running the full test suite"
+    ],
+    "checklist": [
+      "Review SOQL queries for optimization",
+      "Follow Apex code best practices",
+      "Run all tests before every code deployment",
+      "Automate test validation on every push to dev branch"
+    ],
+    "tips": [
+      "Consistent test validation on every code push prevents surprises on go-live day"
+    ],
+    "success_criteria": [
+      "All code deployments pass test validation",
+      "SOQL queries are optimized and within governor limits"
+    ]
+  },
+  {
+    "id": "impl-022",
+    "category": "Platform Development",
+    "topic": "Database Indexing and Performance",
+    "description": "Understanding indexes, skinny tables, and query optimization thresholds",
+    "best_practices": [
+      "Ensure proper indexes and external IDs exist for fields used in 'where' clauses to make queries faster",
+      "Understand index selectivity thresholds to ensure indexes are useful",
+      "Consider skinny tables for high-volume objects",
+      "Plan for data archiving in the initial design",
+      "Use report filters, pre-aggregate data, de-normalize data, or use a data warehouse for reporting"
+    ],
+    "common_mistakes": [
+      "Not creating indexes for frequently queried fields",
+      "Not understanding that indexes must be below selectivity thresholds to be useful",
+      "Using NOT or != operators which will not use indexes",
+      "Not planning for data archiving from the start"
+    ],
+    "checklist": [
+      "Create custom indexes for fields in where clauses: threshold is lower of (10% of first 1M + 5% over 1M) or 333,333 records",
+      "Standard indexes threshold: lower of (30% of first 1M + 15% over 1M) or 1M records",
+      "AND conditions: below 20% of total records or 666K for custom index",
+      "OR conditions: below 10% of total records or 333K in summation of all indexes",
+      "Avoid predicates that won't use indexes: != (not equal to) and NOT IN",
+      "Evaluate skinny tables for high-volume objects (requires platform support to enable)",
+      "Design archiving strategy as part of initial data model"
+    ],
+    "tips": [
+      "Skinny tables provide better cache utilization, reduced joins, and are invisible to end users. They support reports, list views, and SOQL queries.",
+      "Data archiving should be considered in the initial design, not as an afterthought"
+    ],
+    "success_criteria": [
+      "All frequently queried fields have appropriate indexes",
+      "Index selectivity is within required thresholds",
+      "Archiving strategy is documented and planned"
+    ]
+  },
+  {
+    "id": "impl-023",
+    "category": "Platform Development",
+    "topic": "API Best Practices",
+    "description": "Guidelines for API integration design and performance",
+    "best_practices": [
+      "Avoid Apex triggers or workflows firing on API REST reads and inserts",
+      "Choose the fastest operation available: Insert is fastest, then Update, then Upsert",
+      "Keep record sizes within the 3 MB limit",
+      "Optimize sharing models for API performance (use fewer sharing models)"
+    ],
+    "common_mistakes": [
+      "Triggering expensive Apex logic on API operations",
+      "Using Upsert when Insert would suffice",
+      "Not monitoring record sizes in API operations",
+      "Complex sharing models degrading API performance"
+    ],
+    "checklist": [
+      "Review triggers and workflows that fire on API operations",
+      "Choose optimal operation type for each integration",
+      "Verify record sizes are under 3 MB",
+      "Evaluate sharing model complexity and simplify where possible"
+    ],
+    "tips": [
+      "Operation speed ranking: Insert (fastest) > Update > Upsert",
+      "Simpler sharing models lead to better API performance"
+    ],
+    "success_criteria": [
+      "API integrations use the fastest viable operation type",
+      "No unnecessary triggers fire on API operations",
+      "Record sizes stay within limits"
+    ]
+  },
+  {
+    "id": "impl-024",
+    "category": "Platform Development",
+    "topic": "Sharing and Security Best Practices",
+    "description": "Guidelines for configuring sharing rules and security models",
+    "best_practices": [
+      "Follow a pattern of least-privilege access",
+      "Avoid over-protection that adds unnecessary complexity",
+      "Do not nest groups deeply"
+    ],
+    "common_mistakes": [
+      "Over-protecting with unnecessarily complex sharing rules",
+      "Creating deeply nested groups that degrade performance",
+      "Not following least-privilege principle"
+    ],
+    "checklist": [
+      "Audit sharing rules for unnecessary complexity",
+      "Verify group nesting depth is minimal",
+      "Confirm least-privilege access pattern is followed",
+      "Document sharing model decisions and justifications"
+    ],
+    "tips": [
+      "Deeply nested groups cause performance degradation. Keep the hierarchy as flat as possible."
+    ],
+    "success_criteria": [
+      "Sharing model follows least-privilege principle",
+      "Group nesting is minimal",
+      "No unnecessary sharing rule complexity"
+    ]
+  },
+  {
+    "id": "impl-025",
+    "category": "Platform Development",
+    "topic": "Page Layout Section Header Translations",
+    "description": "Handling custom translations for page layout section headers",
+    "best_practices": [
+      "Avoid using standard section headers in layouts; always use custom sections",
+      "Standard section headers cannot be custom translated; they auto-translate based on user language settings",
+      "If custom translation is needed, hide the standard section header and create a new custom section header",
+      "Custom section headers can be translated using the Translation Workbench"
+    ],
+    "common_mistakes": [
+      "Relying on standard section headers when custom translations are needed",
+      "Not realizing standard section translations are not configurable via Translation Workbench",
+      "Mixing standard and custom section headers inconsistently"
+    ],
+    "checklist": [
+      "Use custom section headers for all layouts requiring translated headers",
+      "Configure translations via Translation Workbench for custom sections",
+      "Verify translations render correctly for all target languages"
+    ],
+    "tips": [
+      "Standard section headers auto-translate based on user language and are NOT configurable. Always use custom sections if you need custom translations."
+    ],
+    "success_criteria": [
+      "All page layout section headers that need custom translations use custom sections",
+      "Translations are verified across all supported languages"
+    ]
+  },
+  {
+    "id": "impl-026",
+    "category": "Testing",
+    "topic": "Integration and UAT Testing",
+    "description": "Planning and executing integration testing and user acceptance testing",
+    "best_practices": [
+      "Plan integration tests well before client UAT to allow time for issue resolution",
+      "Integration tests should cover both mobile app and web interfaces",
+      "Increase API limits during regression and UAT to avoid governor limit issues",
+      "Raise support cases early for any questions that need platform support answers"
+    ],
+    "common_mistakes": [
+      "Scheduling integration testing too close to UAT",
+      "Only testing one interface (web or mobile) during integration testing",
+      "Not increasing API limits for test phases, causing false failures",
+      "Waiting too long to raise support cases for blocking questions"
+    ],
+    "checklist": [
+      "Schedule integration testing with sufficient buffer before UAT",
+      "Include both mobile and web interfaces in integration test scope",
+      "Request API limit increases for regression and UAT phases",
+      "Identify and raise support cases for any blocking questions early"
+    ],
+    "tips": [
+      "Integration testing challenges discovered too close to UAT create project risk and timeline pressure"
+    ],
+    "success_criteria": [
+      "Integration testing completes with time to resolve issues before UAT",
+      "Both mobile and web interfaces are validated",
+      "No governor limit failures during testing due to API limits"
+    ]
+  },
+  {
+    "id": "impl-027",
+    "category": "Data Migration",
+    "topic": "Trigger Handlers Reference for Data Loads",
+    "description": "Reference catalog of handlers with equivalent post-load jobs that can be safely disabled during migration",
+    "best_practices": [
+      "Use this reference to identify which handlers to disable during data loads",
+      "Always run the equivalent job after re-enabling or after completing data loads"
+    ],
+    "common_mistakes": [
+      "Disabling handlers without knowing which post-load job to run",
+      "Forgetting to run post-load jobs for handlers that maintain denormalized data"
+    ],
+    "checklist": [
+      "Account sample limit handlers: run 'Assign Sample Limit Templates to Accounts' job post-load",
+      "Contact point email handler: run 'Search Before Create Jobs' post-load",
+      "Contact point phone handler: run 'Search Before Create Jobs' post-load",
+      "Contact point social handler: run 'Search Before Create Jobs' post-load",
+      "Healthcare provider handler: run 'Search Before Create Jobs' post-load",
+      "Healthcare provider NPI handler: run 'Search Before Create Jobs' post-load",
+      "Healthcare provider specialty handler: run 'Search Before Create Jobs' post-load",
+      "Visit changed event share handler: run 'Visit Share Management Jobs' post-load",
+      "Visit changed event territory handler: run 'Provider Account Territory Information Job' post-load"
+    ],
+    "tips": [
+      "These handlers maintain denormalized data (email IDs, phone numbers, social identifiers, specialties, NPI) on healthcare provider records. The corresponding jobs recalculate this data after bulk loads."
+    ],
+    "success_criteria": [
+      "All handler/job pairs are tracked and executed",
+      "Denormalized data is accurate after migration completes"
+    ]
+  },
+  {
+    "id": "impl-028",
+    "category": "Data Migration",
+    "topic": "Historical Data Load Handler Considerations",
+    "description": "Additional handlers to consider disabling for historical data loads beyond the standard data migration handlers",
+    "best_practices": [
+      "For historical data loads, evaluate disabling additional categories of handlers beyond the standard migration set",
+      "Disable workflow permission handlers to allow historical records through without stage-path validation",
+      "Disable content document lock handlers for loading historical attached documents",
+      "Disable visit lock handlers for loading historical visit records in various states",
+      "Disable scheduling validation handlers for loading historical visits that may conflict with time-off or holidays"
+    ],
+    "common_mistakes": [
+      "Not recognizing that historical data may violate current business rules (e.g., visits on holidays, conflicting schedules)",
+      "Applying current validation rules to historical data that was valid at the time it was created",
+      "Forgetting that lock handlers prevent modifications to submitted or signed records"
+    ],
+    "checklist": [
+      "Review stage path permission handlers for workflow states in historical data",
+      "Review document lock handlers if loading historical document links",
+      "Review visit lock handlers if loading historical visits in submitted/signed states",
+      "Review scheduling validation handlers (time-off, holiday, conflict, business hours, future limit)",
+      "Review expense and disbursement lock handlers for historical financial records",
+      "Re-enable all handlers after historical data load completes"
+    ],
+    "tips": [
+      "Historical data loads require a different handler disable strategy than ongoing data migration because the data may not conform to current business rules",
+      "Lock handlers are the most commonly needed disablements for historical loads since submitted/signed records cannot be modified otherwise"
+    ],
+    "success_criteria": [
+      "Historical data loads complete without validation or lock errors",
+      "All handlers are re-enabled after load",
+      "Data integrity is maintained for both historical and current records"
+    ]
+  }
+]

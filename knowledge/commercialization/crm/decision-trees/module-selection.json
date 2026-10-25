@@ -1,0 +1,78 @@
+{
+  "id": "dt-001",
+  "name": "Module Selection Decision Tree",
+  "description": "Determines which target platform modules a customer needs based on their use case and requirements.",
+  "nodes": [
+    {
+      "id": "start",
+      "question": "What is the primary use case?",
+      "branches": [
+        {"value": "Field Force Automation", "next": "field-force"},
+        {"value": "Key Account Management", "next": "kam"},
+        {"value": "Digital Engagement", "next": "digital"},
+        {"value": "AI-Driven Engagement", "next": "ai"},
+        {"value": "Full Implementation", "next": "full"}
+      ]
+    },
+    {
+      "id": "field-force",
+      "recommendation": "Core: Account Management + User Management + Territory Alignment + Visit Management",
+      "follow_up": "Do reps detail products during visits?",
+      "branches": [
+        {"value": "Yes", "add": "Product Management"},
+        {"value": "No", "add": null}
+      ],
+      "additional_checks": [
+        {"question": "Distributing pharmaceutical samples?", "add": "Sample Management + Sample Limits"},
+        {"question": "Tracking call goals and targets?", "add": "Activity Plan"},
+        {"question": "Reps need filtered account lists?", "add": "Lists & Filters"},
+        {"question": "Mobile deployment required?", "add": "DB Schema + Mobile Metadata Cache configuration"}
+      ]
+    },
+    {
+      "id": "kam",
+      "recommendation": "Core: Account Management + User Management + Territory Alignment + Key Account Management",
+      "additional_checks": [
+        {"question": "Account-level goal tracking?", "add": "Activity Plan"},
+        {"question": "Account segmentation needed?", "add": "Lists & Filters"},
+        {"question": "KAMs also make field visits?", "add": "Visit Management"}
+      ]
+    },
+    {
+      "id": "digital",
+      "recommendation": "Core: Account Management + User Management + Consent Management (required for compliance)",
+      "additional_checks": [
+        {"question": "Email communications?", "add": "Field Email"},
+        {"question": "Presentation/CLM distribution?", "add": "Content Management"},
+        {"question": "Video visits?", "add": "Remote Engagement"},
+        {"question": "HCP feedback collection?", "add": "Surveys"}
+      ]
+    },
+    {
+      "id": "ai",
+      "recommendation": "Core: Account Management + User Management + Territory Alignment + Next Best (NBC/NBA/NBM)",
+      "additional_checks": [
+        {"question": "Predictive scoring?", "add": "Data Cloud / Singularity"},
+        {"question": "AI agent capabilities?", "add": "Agentforce"},
+        {"question": "Scoring data source?", "add": "Activity Plan"}
+      ]
+    },
+    {
+      "id": "full",
+      "recommendation": "Deploy in sequence: (1) Foundation: User → Territory → Account, (2) Core: Visit → Sample → Product, (3) Planning: Activity Plan → Lists, (4) Digital: Field Email → Content → Consent, (5) Advanced: Next Best → KAM → Agentforce, (6) Mobile: DB Schema → Metadata Cache → Deploy"
+    }
+  ],
+  "common_combinations": [
+    {"scenario": "Basic Field Force", "modules": "Account + Territory + Visit + User"},
+    {"scenario": "Field Force + Samples", "modules": "Above + Sample + Product"},
+    {"scenario": "Full Field Force", "modules": "All core + Activity Plan + Product + Sample + Lists"},
+    {"scenario": "KAM Only", "modules": "Account + Territory + KAM + User"},
+    {"scenario": "Digital Only", "modules": "Account + Field Email + Content + Consent + User"},
+    {"scenario": "AI-Enhanced", "modules": "Full Field Force + Next Best + Data Cloud + Agentforce"}
+  ],
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Decision Trees / Module Selection",
+    "confidence": "High"
+  }
+}

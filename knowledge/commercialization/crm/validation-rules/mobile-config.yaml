@@ -1,0 +1,104 @@
+schema_version: "1.0"
+category_name: "Mobile Configuration"
+description: |
+  Validation rules for CRM mobile app configuration.
+  Covers login/auth, metadata cache, sync, and device requirements.
+
+rules:
+  - id: mobile-001
+    name: Active metadata cache exists
+    description: |
+      Verifies that at least one Object Metadata Cache Configuration exists
+      and is in Active or Published status. Without active metadata cache,
+      mobile users cannot sync data and will see "Device sync transaction
+      record was not found" errors.
+    category: metadata-cache
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM MobileMetadataRecord
+        WHERE Status IN ('Active', 'Published')
+      expect: "count > 0"
+    symptoms:
+      - "Device sync transaction record was not found"
+      - "Error while trying to access the platform"
+      - "Invalid Configuration"
+    resolution:
+      steps:
+        - "Navigate to Admin Console > Mobile > Object Metadata Cache Configuration"
+        - "Verify metadata cache records exist"
+        - "If records exist but are not Active, regenerate the cache"
+        - "If no records exist, create new configuration and generate cache"
+
+  - id: mobile-002
+    name: Sync Processor Scheduler flow is active
+    description: |
+      Verifies the Sync Processor Scheduler flow template is cloned and activated.
+      This flow processes device sync transactions. Without it, mobile sync
+      operations may queue up but never process.
+    category: sync
+    severity: warning
+    check:
+      type: soql
+      query: >
+        SELECT Id, ApiName, ActiveVersionId
+        FROM FlowDefinitionView
+        WHERE ApiName LIKE '%Sync%'
+        OR ApiName LIKE '%ProcessSyncData%'
+      expect: "records.length > 0 && records.some(r => r.ActiveVersionId != null)"
+    symptoms:
+      - "Device sync transaction record was not found"
+      - "Sync transactions stuck in New status"
+      - "Mobile data not updating"
+    resolution:
+      steps:
+        - "Navigate to Setup > Flows"
+        - "Clone the Sync Processor Scheduler flow template"
+        - "Activate the cloned flow"
+        - "Schedule the flow to run at appropriate intervals"
+
+  - id: mobile-003
+    name: Field Sales Representative permission set exists
+    description: |
+      Verifies that the Field Sales Representative permission set is assigned to at
+      least one active user. This permission set is required for non-admin users to
+      access the mobile app successfully.
+    category: permissions
+    severity: error
+    check:
+      type: soql_count
+      query: >
+        SELECT COUNT()
+        FROM PermissionSetAssignment
+        WHERE PermissionSet.Name = 'FieldSalesRepresentative'
+        AND Assignee.IsActive = true
+      expect: "count > 0"
+    symptoms:
+      - "Error 400 or 403 on mobile login"
+      - "Configuration Error: Failed to load app configuration"
+    resolution:
+      steps:
+        - "Navigate to Setup > Permission Sets"
+        - "Find the Field Sales Representative permission set"
+        - "Assign it to all mobile users"
+
+  - id: mobile-004
+    name: Mobile App Name is configured
+    description: |
+      Verifies that a Mobile App Name is set in Admin Console Application Settings.
+      Without this, metadata cache generation fails with "Default MobileAppName is
+      not configured in the org" error. Especially common in new sandboxes.
+    category: metadata-cache
+    severity: error
+    symptoms:
+      - "Default MobileAppName is not configured in the org"
+      - "Metadata cache generation fails"
+    resolution:
+      steps:
+        - "Open Admin Console from App Launcher"
+        - "Click on the Mobile tile"
+        - "Select Application Settings"
+        - "Enter Mobile App Name"
+        - "Save and retry metadata cache generation"

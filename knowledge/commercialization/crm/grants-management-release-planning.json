@@ -1,0 +1,41 @@
+[
+  {
+    "id": "crm-gfms-001",
+    "category": "modules",
+    "title": "Grants and Funding Management System (GFMS) Release Planning and Feature Prioritization",
+    "products": ["LSC"],
+    "summary": "Release planning framework for a grants and funding management solution built on a CRM platform, covering roadmap themes, feature prioritization categories, and key capabilities for life sciences grant operations.",
+    "findings": [
+      {
+        "area": "roadmap_themes",
+        "detail": "A mature grants management release roadmap should address six themes in priority order: performance improvements, platform refinement and ecosystem enablement (orchestration, connectors, APIs), complete baselined product configuration with documented guidance, stakeholder enhancement priorities, functional gap closure with legacy systems, and UX consistency with simplified implementation and upgrade paths."
+      },
+      {
+        "area": "priority_categories",
+        "detail": "Feature prioritization uses a tiered system: Critical (platform and ecosystem enablement, performance), High (out-of-the-box configuration, stakeholder needs), Medium (legacy system gap closure, user experience), and Low (individual features). Categories include Platform/Ecosystem, Performance, OOTB Configuration, Stakeholder, Legacy Gap, UX, Client TCO, and Feature."
+      },
+      {
+        "area": "multi_product_coexistence",
+        "detail": "A key architectural decision for grants management on a shared platform is enabling a separate application within an existing org vs. requiring separate orgs. The inability to coexist with other products on the same org (e.g., commercial engagement alongside grants) has been cited as a competitive disadvantage that drives customer decisions."
+      },
+      {
+        "area": "base_configuration_migration",
+        "detail": "Migrating post-implementation configurations (workflow paths, dynamic forms, flows) back into the managed product is essential for reducing total cost of ownership. Without product-embedded base configuration, downstream teams (implementations, upgrades, demos) face 2+ month delays post-release and may be forced to use older versions."
+      },
+      {
+        "area": "portal_capabilities",
+        "detail": "Key portal capabilities for grants management include: performance targets (sub-5-second load times), transfer of ownership between requestors, change requests for approved grants without affecting original records, smart cloning of grant requests, and self-service data entry for external requestors."
+      },
+      {
+        "area": "data_migration_for_grants",
+        "detail": "Legacy grants system migration requires automated data migration solutions covering both historical data (for auditing and decision-making) and in-flight requests (to avoid re-entry). Manual migration significantly increases implementation cost, and lack of automated migration tools is a competitive disadvantage in RFP processes."
+      },
+      {
+        "area": "capacity_allocation",
+        "detail": "Release capacity should be allocated proportionally across themes, with performance and platform/ecosystem receiving higher allocation than individual features. This ensures the product foundation improves while still addressing customer-facing requirements."
+      }
+    ],
+    "source": "gfms_release_planning_document",
+    "tags": ["grants-management", "release-planning", "feature-prioritization", "portal", "configuration-management", "data-migration"]
+  }
+]

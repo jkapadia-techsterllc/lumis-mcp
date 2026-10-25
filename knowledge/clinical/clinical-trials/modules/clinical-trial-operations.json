@@ -1,0 +1,106 @@
+[
+  {
+    "id": "ag-cp-001",
+    "area": "Clinical Engagement",
+    "topic": "Clinical Trial Platform Overview",
+    "content": "Accelerate clinical trials across patients, sponsors, sites, and more on a flexible and compliant platform. Clinical engagement helps clinical research organizations raise trial awareness with candidates, speed up onboarding, and mitigate attrition. Empower candidates to discover trials, evaluate eligibility, and sign up for eligible trials with self-service portals. Streamline participant enrollment with optimized auto-matching and consent management features.",
+    "capabilities": [
+      "Trial discovery with criteria-based search",
+      "Candidate matching with AI",
+      "Digital consent management",
+      "Participant randomization",
+      "Site management",
+      "Advanced therapy management"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Clinical Engagement"
+    }
+  },
+  {
+    "id": "ag-cp-002",
+    "area": "Clinical Engagement",
+    "topic": "Clinical Engagement Setup Basics",
+    "content": "Before setting up specific clinical engagement features, perform foundational tasks: (1) Enable person accounts \u2014 all patients/members must be modeled as person accounts. (2) Install OmniStudio for guided interactions and rich user experiences without code. (3) Set up healthcare providers \u2014 practitioners (doctors, nurses, therapists) and facilities (hospitals, clinics, labs). (4) Create profiles and assign permission sets. (5) Verify data protection details are available in records. (6) Use Data Loader for bulk import of code data (diagnosis codes, procedure codes). After loading, restrict user access to code objects to Read-Only to prevent unauthorized modifications that could interfere with automated approval processes.",
+    "prerequisites": [
+      "Person Accounts enabled",
+      "OmniStudio installed",
+      "Healthcare provider records configured"
+    ],
+    "gotchas": [
+      "Data integrity in code database is critical \u2014 restrict code objects to Read-Only after initial load",
+      "Code changes by users can interfere with automated approval processes",
+      "OmniStudio is web-only \u2014 not available on mobile/iPad app"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Clinical Basics"
+    }
+  },
+  {
+    "id": "ag-cp-009",
+    "area": "Site Management",
+    "topic": "Clinical Trial Site Management",
+    "content": "Manage clinical trial sites \u2014 the physical locations where trials are conducted. Site management includes: site setup and configuration, site-participant associations, site coordinator roles, device registration per site, and multi-site trial coordination. Agentic AI capabilities are available for site management automation, including prebuilt flows and agent topics for streamlining site-related workflows.",
+    "prerequisites": [
+      "Clinical engagement basics configured",
+      "Care programs created"
+    ],
+    "gotchas": [
+      "Site management has separate agentic AI capabilities requiring additional licenses",
+      "Site coordinators use Experience Cloud \u2014 separate from the clinical trial manager web interface"
+    ],
+    "citation": {
+      "source": "Lumis Knowledge Base",
+      "section": "Admin Guide / Site Management"
+    }
+  },
+  {
+    "id": "cp-001",
+    "category": "clinical-engagement",
+    "topic": "Adverse Event Reporting Architecture",
+    "description": "Adverse Event (AE) objects capture safety reports during clinical interactions. AE records link to the contact/patient who experienced the event, the product involved, and the healthcare provider who reported it. AE severity classification (Mild, Moderate, Severe, Life-Threatening, Fatal) drives regulatory reporting timelines. Serious AE auto-escalation rules trigger compliance workflows. Integration with safety databases (e.g., ARGUS) requires outbound event-driven patterns.",
+    "objects": [
+      "AdverseEvent",
+      "AdverseEventProduct",
+      "AdverseEventReporter"
+    ],
+    "setup_steps": [
+      "Configure AE record types aligned to regulatory classification",
+      "Set up severity-based auto-escalation rules",
+      "Configure outbound integration to safety databases",
+      "Set up reporting timeline validation rules",
+      "Configure follow-up action tracking"
+    ],
+    "gotchas": [
+      "Regulatory reporting timelines vary by severity and jurisdiction",
+      "AE records must capture the reporter, patient, product, AND event - all four are required for a valid report",
+      "Integration with safety databases must be event-driven, not batch, for serious AEs"
+    ],
+    "migration_relevance": "Veeva AE reporting maps to Adverse Event objects. Safety database integration patterns differ."
+  },
+  {
+    "id": "cp-003",
+    "category": "clinical-engagement",
+    "topic": "Site Management and Criteria-Based Search",
+    "description": "Site Management supports clinical trial site identification, selection, and management. Criteria-based search allows filtering sites by geography, therapeutic area, patient population, investigator experience, and performance metrics. Site records link to accounts (healthcare facilities), contacts (investigators), and clinical trials. Site feasibility assessments capture structured evaluation data.",
+    "objects": [
+      "ClinicalTrialSite",
+      "SiteFeasibilityAssessment",
+      "SiteInvestigator"
+    ],
+    "setup_steps": [
+      "Configure site record types and evaluation criteria",
+      "Set up criteria-based search filters",
+      "Configure site-investigator relationships",
+      "Set up feasibility assessment templates",
+      "Configure geolocation data for proximity search"
+    ],
+    "gotchas": [
+      "Geolocation fields must be populated for proximity-based site search",
+      "Site-investigator relationships are many-to-many via junction objects",
+      "Feasibility assessment criteria should be configurable per therapeutic area"
+    ],
+    "migration_relevance": "Net-new capability for most migrations. May overlap with custom CTMS implementations."
+  }
+]

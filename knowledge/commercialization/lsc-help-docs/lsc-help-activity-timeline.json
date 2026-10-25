@@ -1,0 +1,388 @@
+[
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-get-your-org-ready-configure-supported-activities",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Supported Activities",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "To ensure that your engagement activities are shown in the Activity Timeline, make sure that the corresponding activity features are enabled and are set up correctly. Activity Timeline supports the display of both standard and custom activities configured in your",
+    "findings": [
+      {
+        "name": "Configure Supported Activities",
+        "detail": "To ensure that your engagement activities are shown in the Activity Timeline, make sure that the corresponding activity features are enabled and are set up correctly. Activity Timeline supports the display of both standard and custom activities configured in your org."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Standard Activites: Assessment Task Inquiry Life Science Email Survey Response Visit Note Depending on your organization’s data access and compliance requirements, activities can be displayed either through standard Salesforce sharing or through a controlled visibility approach using a container object. For more information, see Control Activity Visibility in the Activity Timeline ."
+      },
+      {
+        "name": "Assessment Task",
+        "detail": "Assessment tasks facilitate strategic account planning as part of key account management. Complete the following steps to ensure that assessment tasks associated with an account appear in the Activity Timeline. Assign users the Life Sciences Key Account Management permission set or grant them access to the Assessment Task object. Configure Assessment Tasks and create assessment task records. Ensure the Due Date field is populated in all records, as the Activity Timeline uses this field as the timestamp for Assessment Task entries."
+      },
+      {
+        "name": "Inquiry",
+        "detail": "Inquiries are medical or product-related questions submitted by healthcare professionals and tracked by medical or commercial teams. Complete the following steps to ensure your users can view customer questions and responses associated with an account in the Activity Timeline. Configure Inquiry Management and create inquiry records. Ensure the Submitted Date Time field is populated in all records, as the Activity Timeline uses this field as the timestamp for Inquiry entries."
+      },
+      {
+        "name": "Life Sciences Email",
+        "detail": "Life Sciences Email represents customer email communications sent to healthcare professionals or organizations and tracked in Agentforce Life Sciences. Complete the following steps to ensure that emails associated with an account appear in the Activity Timeline. Configure Life Sciences Email and create email records. Configure email actions to allow users to resend emails and reschedule or cancel scheduled emails directly from the Activity Timeline. Ensure the Last Event Date field is populated in all records, as the Activity Timeline uses this field as the timestamp for email entries. Note For the Last Event Date to update correctly, the Person Account must have an Email value and a corresponding Contact Point Email record with the same email address. When an email is sent to that address using the account, the email status is updated accordingly."
+      },
+      {
+        "name": "Survey Response",
+        "detail": "Survey responses capture the feedback and profiling data collected from healthcare professionals through completed surveys. Complete the following steps to ensure that survey responses associated with an account appear in the Activity Timeline. Configure surveys and collection of survey responses. Ensure the Completion Date Time field is populated in all records, as the Activity Timeline uses this field as the timestamp for survey response entries. Sync survey responses to Survey Response records to ensure that survey responses collected across web and mobile are consistent in the Activity Timeline."
+      },
+      {
+        "name": "Visit",
+        "detail": "Complete the following steps to ensure that visits associated with an account appear in the Activity Timeline. Configure Visit Management and create visit records. Ensure the Planned Start Time field is populated in all records, as the Activity Timeline uses this field as the timestamp for visit entries."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_get_your_org_ready_configure_supported_activities.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-configure-standard-activities",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Standard Activities for Activity Timeline",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Specify which standard activities appear in the Activity Timeline and Calendar views, and define the fields that appear when a user expands these",
+    "findings": [
+      {
+        "name": "Configure Standard Activities for Activity Timeline",
+        "detail": "Specify which standard activities appear in the Activity Timeline and Calendar views, and define the fields that appear when a user expands these activities."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access activity timeline settings | Life Sciences Commercial Admin permission set To show additional details when users expand an activity, create a field set for each supported standard activity object and include the preferred fields. For instructions, see Create and Edit Field Sets . Activity timeline supports these standard activities. Assessment Task Visit Life Science Email Inquiry Survey Response Note The email template thumbnail appears in a dedicated section of the expanded activity view. It always appears after the Life Sciences Email baseline fields. The placement is fixed and can't be customized using the field set configuration. The Survey Response object doesn't support field set configuration because it isn't available in Object Manager. Consequently, expanding a survey response in the timeline displays only the response name. From the App Launcher, find and select Admin Console . Select Activity Timeline , and then select Activity Timeline Visibility Settings . In Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Under Standard Activities Settings, select the field sets corresponding to each object present in Activity Objects list. Note The timeline shows a maximum of 6 fields from the selected field set. If you don't select a field set for an object, the expanded view shows only the Name field. In the expanded view of a visit activity, the Product,Sample, and Intelligent Content thumbnail sections appear in addition to the six fields from the field set. Deselect Active, if you don’t want to include activities related to the selected object. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_configure_standard_activities.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-custom-activities-configuration",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Custom Activities for Activity Timeline",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Show custom activities in the Activity Timeline by using a container object to link standard or custom object records to an account. To display these activities in the timeline, configure a container object, implement automation to link the records, and enable the custom activity in your Activity...",
+    "findings": [
+      {
+        "name": "Configure Custom Activities for Activity Timeline",
+        "detail": "Show custom activities in the Activity Timeline by using a container object to link standard or custom object records to an account. To display these activities in the timeline, configure a container object, implement automation to link the records, and enable the custom activity in your Activity Timeline settings."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Set Up the Custom Activity Container Object Create a container object to link custom activity records to their associated accounts and display them in the Activity Timeline. Use the Entity Type picklist field to define and represent the specific custom activity types you want to display for your users. Automate Custom Activity Record Creation Automate container record creation and maintenance to keep them in sync and visible on the activity timeline whenever users create, update, or delete custom activity records. While you can implement this automation for using Flow, Apex, or other supported automation tools, this topic provides instructions for implementing it by using Apex. Add Custom Activities to the Activity Timeline Show custom activities in the Activity Timeline by adding the container object to the Activity Timeline settings."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_custom_activities_configuration.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-configure-custom-activities",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Set Up the Custom Activity Container Object",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Create a container object to link custom activity records to their associated accounts and display them in the Activity Timeline. Use the Entity Type picklist field to define and represent the specific custom activity types you want to display for your",
+    "findings": [
+      {
+        "name": "Set Up the Custom Activity Container Object",
+        "detail": "Create a container object to link custom activity records to their associated accounts and display them in the Activity Timeline. Use the Entity Type picklist field to define and represent the specific custom activity types you want to display for your users."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To configure custom activity container object: | Life Sciences Commercial Admin permission set Note You must create only one custom object to represent the container for all individual custom activities. Considerations for creating custom activity container object: Custom activity container fields don’t require strict data types. Activity Timeline renders data based on values provided in the Event Data field. You can use various field types (such as Text, Formula, or Lookup) as long as their values can be generated and included in the Event Data JSON structure. Note The field configurations outlined in this procedure serve as recommendations. Adapt them according to your organization's data model and specific use cases. Create a custom Salesforce object . From the object management settings of the custom object, select Fields & Relationships , and then click New . Create custom fields to represent data in the container topics. First, create a lookup to the Account object. For Data Type, select Lookup Relationship , and click Next . Note You can use a master-detail relationship instead of a lookup relationship, depending on how you want to control access to container records. Master-detail inherits sharing from the account, while lookup allows you to define sharing independently using sharing rules or Apex. For Related To, select Account , and click Next . For Field Label, enter Account . This action automatically adds Account as the field name. After you save the field, confirm that the final field name is Account__c . (Optional) For Description, enter Represents the account that's related to the activity. . Select Required and select Delete this record also . Select the profiles that can access the custom field, and then click New . Click Save & New . Create text field for Entity ID. For Data Type, select Text , and then click Next . For Field Label, enter Entity ID . This action automatically adds Entity_Id as the field name. After you save the field, confirm that the final field name is Entity_Id__c . (Optional) For Description, enter Represents the ID of the record to track on the timeline. . For Length, enter 255 . Select External ID . Select the profiles that can access the custom field. Click Next , and then click Save & New . Create a picklist type field for Entity Type and add the names of the objects that you want to show on the timeline as the picklist values. For Data Type, select Picklist , and then click Next . For Field Label, enter Entity Type . This action automatically adds Entity_Type as the field name. After you save the field, confirm that the final field name is Entity_Type__c . (Optional) For Description, enter Represents the list of standard or custom objects to track. . Select Enter values, with each value separated by a new line , and enter picklist values of your choice. Make sure the API names of the picklist values match the API names of the custom activity objects. Select the profiles that can access the custom field. Click Next , and then click Save & New . Create text field for Entity Subtype. For Data Type, select Text , and then click Next . For Field Label, enter Entity Subtype . This action automatically adds Entity_Subtype as the field name. After you save the field, confirm that the final field name is Entity_Subtype__c . (Optional) For Description, enter Represents additional grouping of an object by criteria, such as object type or record type name. . For Length, enter 255 . Select External ID . Select the profiles that can access the custom field. Click Next , and then click Save & New . Create text field for Event Data. For Data Type, select Text (Long Area) , and then click Next . For Field Label, enter Entity Data . This action automatically adds Event_Data as the field name. After you save the field, confirm that the final field name is Event_Data__c . (Optional) For Description, enter Represents data related to the event in JSON format. . For Length, enter 131,072 . For Visible Lines, enter 10 , and then click Next . Select the profiles that can access the custom field. Click Next , and then click Save & New . Create a Date/Time field for Event Date Time. For Data Type, select Date/Time , and then click Next . For Field Label, enter Event Date Time . This action automatically adds Event_Date_Time as the field name. After you save the field, confirm that the final field name is Event_Date_Time__c . (Optional) For Description, enter Represents the date and time of the event's occurrence. . Select Required , and click Next . Select the profiles that can access the custom field. Click Next , and then click Save & New . Create a text field for Event Title. For Data Type, select Text , and click Next . For Field Label, enter Event Title . This action automatically adds Entity_Title as the field name. After you save the field, confirm that the final field name is Entity_Title__c . (Optional) For Description, enter Represents the title of the event. . For Length, enter 255 . Select External ID , and click Next . Select the profiles that can access the custom field. Click Next , and then click Save & New . Create a checkbox type field to give users an option to hide records from the activity history. For Data Type, select Checkbox , and click Next . For Field Label, enter Hide From Activity History . This action automatically adds Hide_From_Activity_History as the field name. After you save the field, confirm that the final field name is Hide_From_Activity_History__c . (Optional) For Description, enter Determines whether a record must be excluded from the account's activity history. . For Default Value, select Unchecked , and then click Next . Select the profiles that can access the custom field. Click Next , and then click Save . Create a text field for Title. For Data Type, select Text , and click Next . For Field Label, enter Title . This action automatically adds Title as the field name. After you save the field, confirm that the final field name is Title__c . (Optional) For Description, enter Represents the title of the event. . For Length, enter 255 . Select External ID , and click Next . Select the profiles that can access the custom field. Click Next , and then click Save & New . Create a text field for Subtitle. For Data Type, select Text , and click Next . For Field Label, enter Subtitle . This action automatically adds Subtitle as the field name. After you save the field, confirm that the final field name is Subtitle__c . (Optional) For Description, enter Represents the subtitle of the event. . For Length, enter 255 . Select External ID , and click Next . Select the profiles that can access the custom field. Click Next , and then click Save & New . To make the container object available from the App Launcher, create a custom object tab . To save time and ensure data consistency, use Apex automation to generate container records automatically when custom activity records are created. This automation creates a corresponding container record for each activity, allowing it to appear in the Activity Timeline."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_configure_custom_activities.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-custom-activities-setup-apex",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Automate Custom Activity Record Creation",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Automate container record creation and maintenance to keep them in sync and visible on the activity timeline whenever users create, update, or delete custom activity records. While you can implement this automation for using Flow, Apex, or other supported automation tools, this topic provides...",
+    "findings": [
+      {
+        "name": "Automate Custom Activity Record Creation",
+        "detail": "Automate container record creation and maintenance to keep them in sync and visible on the activity timeline whenever users create, update, or delete custom activity records. While you can implement this automation for using Flow, Apex, or other supported automation tools, this topic provides instructions for implementing it by using Apex."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To automate container record creation: | Life Sciences Commercial Admin permission set"
+      },
+      {
+        "name": "Customize the Sample Code",
+        "detail": "Update the sample code to match your requirements. Important Keep the variable names in the FieldDTO class ( fieldAPIName , fieldValue , and relatedRecordName ) exactly as written, including their capitalization. These names are case-sensitive. If you change them, you prevent activity details from showing correctly in the Life Sciences Cloud mobile app. You can modify the other logic as needed. Replace Custom_Activity__c with the API name of your custom child object. For example, if you created a custom object to represent congress meetings, replace Custom_Activity__c with Congress_Meeting__c wherever applicable. Replace Account_Activity__c with the API name of your container custom object. Replace the sample fields (Status__c and Start_Time__c) with existing fields from your org that you want to appear in the timeline. Make sure that all required fields are available in the container object and the validation rules are met. If not, container record creation can fail during trigger execution."
+      },
+      {
+        "name": "Create the Trigger Service Apex Class",
+        "detail": "Create a trigger service apex class to generate records for the parent custom object that each corresponds to the child custom objects. From Setup, select Developer Console . Click File | New | Apex Class . For Name, enter CustomActivityTriggerService . For sObject, select the custom activity. In the CustomActivityTriggerService.aptx file, enter the sample code. Customize the code as needed. public class CustomActivityTriggerService { // INSERT: create container rows public static void onAfterInsert(List<Custom_Activity__c> newList) { List<Account_Activity__c> toInsert = new List<Account_Activity__c>(); for (Custom_Activity__c r : newList) { toInsert.add(buildActivity(r)); } insert toInsert; } // UPDATE: update existing container rows (match by Entity_Id__c + Entity_Type__c) public static void onAfterUpdate(Map<Id, Custom_Activity__c> newMap) { List<Account_Activity__c> existing = [ SELECT Id, Entity_Id__c FROM Account_Activity__c WHERE Entity_Type__c = :SObjectType.Custom_Activity__c.name AND Entity_Id__c IN :newMap.keySet() ]; List<Account_Activity__c> toUpdate = new List<Account_Activity__c>(); for (Account_Activity__c a : existing) { Custom_Activity__c r = newMap.get((Id)a.Entity_Id__c); Account_Activity__c updated = buildActivity(r); updated.Id = a.Id; // important: turns it into an update toUpdate.add(updated); } if (!toUpdate.isEmpty()) update toUpdate; } // DELETE: delete container rows public static void onAfterDelete(Set<Id> deletedIds) { List<Account_Activity__c> toDelete = [ SELECT Id FROM Account_Activity__c WHERE Entity_Type__c = :SObjectType.Custom_Activity__c.name AND Entity_Id__c IN :deletedIds ]; if (!toDelete.isEmpty()) delete toDelete; } // Helper to build the container record consistently private static Account_Activity__c buildActivity(Custom_Activity__c r) { return new Account_Activity__c( Account__c = r.Account__c, Event_Date_Time__c = System.now(), // stored in UTC internally Title__c = r.Name, // safer default than hardcoded text Subtitle__c = null, Entity_Id__c = r.Id, //ensure that the custom activity name is also added to the 'Entity Type' picklist of Account Activity Entity_Type__c = SObjectType.Custom_Activity__c.name, Entity_Subtype__c = null, Event_Data__c = JSON.serialize(new ObjectEventData(r)) ); } private class ObjectEventData { public List<FieldDTO> fields; public ObjectEventData(Custom_Activity__c record) { fields = new List<FieldDTO>(); // Please note - the fields added here should EXIST on the custom object. These are the //fields that will show up on activity timeline. //Format should be (fieldAPIName, fieldValue) -> relatedRecordName is optional fields.add(new FieldDTO('Name', record.Name)); // OPTIONAL (doc should tell users to replace with real fields in their org): // fields.add(new FieldDTO('Status__c', String.valueOf(record.get('Status__c')))); } } private class FieldDTO { public String fieldAPIName; public String fieldValue; public String relatedRecordName; public FieldDTO(String fieldAPIName, String fieldValue) { this.fieldAPIName = fieldAPIName; this.fieldValue = fieldValue; } public FieldDTO(String fieldAPIName, String fieldValue, String relatedRecordName) { this(fieldAPIName, fieldValue); this.relatedRecordName = relatedRecordName; } } } Save your changes."
+      },
+      {
+        "name": "Create the Apex Trigger",
+        "detail": "Create the Apex trigger that makes sure that after you create a record for a custom activity, the related parent custom activity record is automatically created. From Setup, select Developer Console . Click File | New | Apex Trigger . For Name, enter CustomActivityTrigger . In the CustomActivityTrigger.aptx file, enter the sample code and customize it as needed. trigger CustomActivityTrigger on Custom_Activity__c (after insert, after update, after delete) { if (Trigger.isAfter && Trigger.isInsert) { CustomActivityTriggerService.onAfterInsert(Trigger.new); } if (Trigger.isAfter && Trigger.isUpdate) { CustomActivityTriggerService.onAfterUpdate(Trigger.newMap); } if (Trigger.isAfter && Trigger.isDelete) { CustomActivityTriggerService.onAfterDelete(Trigger.oldMap.keySet()); } } Save your changes. The sample Apex implementation creates container records for new source activity events but doesn't manage updates or deletions for existing records. To support these scenarios, extend the logic to match your business requirements. This implementation maintains a 1:1 relationship between each activity and container record by using the Entity_Type__c and Entity_Id__c fields."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_custom_activities_setup_apex.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-add-custom-activities",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Add Custom Activities to the Activity Timeline",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Show custom activities in the Activity Timeline by adding the container object to the Activity Timeline",
+    "findings": [
+      {
+        "name": "Add Custom Activities to the Activity Timeline",
+        "detail": "Show custom activities in the Activity Timeline by adding the container object to the Activity Timeline settings."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access activity timeline settings | Life Sciences Commercial Admin permission set Before you add the container object to the timeline, complete the steps in Prerequisites to Configure Custom Activities and Automate Custom Activity Record Creation . From the App Launcher, find and select Admin Console . Select Activity Timeline , and then select Activity Timeline Visibility Settings . In Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Under Custom Activity Setting, for activity objects, select the custom container object. If you don’t want to include this custom activity on the timeline, deselect Active . Save your changes. Note You can’t configure the text shown in the Activity Timeline for custom activities. After you’ve set up custom activities, verify if they are listed under the Type filter in the Activity Timeline and Calendar Views."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_add_custom_activities.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-configure-timeline-display-text",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Activity Timeline Display Text",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Customize how activity headers and bodies appear in the Activity Timeline by mapping custom labels and fields to specific activity types and",
+    "findings": [
+      {
+        "name": "Configure Activity Timeline Display Text",
+        "detail": "Customize how activity headers and bodies appear in the Activity Timeline by mapping custom labels and fields to specific activity types and statuses."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access activity timeline settings | Life Sciences Commercial Admin permission set Before you configure the display text, complete the steps in Create Custom Labels for Activity Timeline . From the App Launcher, find and select Admin Console . Select Activity Timeline , and then select Activity Timeline Display Text Settings . In Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Click New . Enter a name. In Activity Header Custom Label, enter the name of your activity header custom label. (Optional) In Prefix Text for Body, enter the name of your prefix text for body custom label. In Activity Type Object, enter the name of the object to customize. (Optional) In Assessment Task Type to Exclude, enter the value of the task type field on the Assessment Task object to exclude the assessment task activities. This setting applies only to the Assessment Task activity type. (Optional) In Field to Display in Header, enter the field API name of the selected object. This field is used in the parameters of the custom label created for the activity header. For more information, see How Dynamic Text in Custom Labels Works . (Optional) In Link Text for Body, enter the name of your link text for body custom label . If this field is left blank, no link text is displayed, and users can’t navigate directly to the activity record from the timeline. In Rolled-Up Activity Header Custom Label, enter the name of your rolled-up activity header custom label. Note In the case of rolled-up activities, Rolled-Up Activity Header Custom Label takes precedence over Activity Header Custom Label. In Status, enter the API names of the Status field values for the selected object to filter activities based on their status. For Visit, Inquiry, and Assessment Task objects, use the API names of the Status field values. For Life Sciences Email object, use the API value of Email Status field. For the predefined status values, see Predefined Status Values . Note Activities with status values not defined here won't appear in the activity timeline. To ensure all activities display correctly, create display text configurations for each status value. (Optional) In Body Text Field, enter the field API name to be shown in the activity body. For more information, see How Dynamic Text in Custom Labels Works . Object | Status Values (API Names) Visit | Planned Completed Assessment Task | InProgress Completed Skipped NotStarted Survey Response | NotStarted Started Paused PartiallyCompleted Completed Only Survey Response records with a Completed status are displayed on the timeline. The Status field can be left blank. Inquiry | Use the picklist values configured in your org. For more information, see Define Statuses for Medical Inquiries . Life Science Email | Sent Scheduled Cancelled Opened Bounced After you complete these configurations, generate the metadata cache to complete the setup."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_configure_timeline_display_text.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-how-dynamic-text-in-custom-labels-works",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "How Dynamic Text in Custom Labels Works",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Configure placeholder fields in your custom labels to determine what information appears for each activity in the Activity Timeline. Use a combination of custom labels, activity settings, and specific field values to control the dynamic text displayed in activity headers and",
+    "findings": [
+      {
+        "name": "How Dynamic Text in Custom Labels Works",
+        "detail": "Configure placeholder fields in your custom labels to determine what information appears for each activity in the Activity Timeline. Use a combination of custom labels, activity settings, and specific field values to control the dynamic text displayed in activity headers and bodies"
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. To customize the display text, understand how the activity rollup setting affects your labels. This section explains the logic for how placeholder values are replaced in your custom labels."
+      },
+      {
+        "name": "How Activity Rollup Affects Placeholders",
+        "detail": "The number of available placeholders in a custom label depends on whether you roll up Healthcare Professional (HCP) activities to the Healthcare Organization (HCO) account. When activity rollup is enabled: Custom labels can have up to two placeholders ({0} and {1}) for all standard activities. When activity rollup is disabled: Custom labels for Inquiry, Life Science Email, Assessment Task, and Survey Response activities can have only one placeholder ({0}). To learn more about Activity Rollup, see Understanding Activity Rollup for HCOs ."
+      },
+      {
+        "name": "How Placeholder Fields Are Populated",
+        "detail": "The custom label used and the value that replaces its first parameter vary based on the activity type and the rollup configuration. Activity Type | Rollup Status | custom label used | first parameter is replaced with Inquiry, Life Science Email, and Assessment Task | Roll up HCP activities to the HCO account is enabled. | Rolled-Up Activity Header | The value of this field: Field to Display in Header. Roll up HCP activities to the HCO account is disabled. | Activity Header Survey Response | Roll up HCP activities to the HCO account is enabled. Roll up HCP activities to the HCO account is disabled. Visit | Show territory setting and Roll up HCP activities to the HCO account are both enabled. | The name of the user who created the visit. Show territory setting is enabled but Roll up HCP activities to the HCO account is disabled. Show territory setting and Roll up HCP activities to the HCO account are both disabled. | The value of this field: Field to Display in Header. Show territory setting is disabled but Roll up HCP activities to the HCO account is enabled. | Rolled-Up Activity Header The first parameter of custom labels for Link Text for Body is replaced by the Body Text Field value. If there’s no value for Link Text for Body field, the Body Text Field value is used as the link text. For Life Science Email, the Link Text for Body is always replaced by the Body Text Field."
+      },
+      {
+        "name": "Second Parameter Usage",
+        "detail": "The custom label's second parameter ({1}) is typically used to provide account or territory context. The value used depends on these specific activity conditions: Inquiry and Assessment Task: {1} is replaced with the Account Name. Visits: If Show Territory is enabled, {1} displays the associated territory. If Show Territory disabled, it displays the Account Name. Life Science Email: {1} displays the Email Sender unless the status is Opened or Closed. Note If Roll up HCP activities to the HCO account is enabled, and Field to Display in Header is empty, the second parameter's value is displayed as the first parameter, and the second parameter becomes null. If a visit has a parent visit associated with it, the visit link in the activity timeline redirects users to the parent visit record."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_how_dynamic_text_in_custom_labels_works.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-configure-display-and-behavior",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Customize Activity Timeline Display and Behavior",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Customize how your users interact with and navigate activities in the Activity Timeline by configuring display behavior and activity filters. Define preferences for visits, calendars, and email actions, and set up filters for territories, affiliations, and account rollups to ensure engagement data...",
+    "findings": [
+      {
+        "name": "Customize Activity Timeline Display and Behavior",
+        "detail": "Customize how your users interact with and navigate activities in the Activity Timeline by configuring display behavior and activity filters. Define preferences for visits, calendars, and email actions, and set up filters for territories, affiliations, and account rollups to ensure engagement data is relevant and accessible."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Configure First Day of the Week in Your Calendar Align the weekly calendar view with your team's workweek. Setting the correct start day in the Calendar supports accurate planning and review of time-sensitive activities. Configure Email Settings for Activity Timeline Enable your users to reschedule or cancel scheduled emails directly from the Activity Timeline. Configure Activity Timeline General Settings Customize the Activity Timeline by setting a default view, enabling visit-related information, and managing activity filters. Determine how users view engagement history and navigate activities across accounts and territories. Understanding Activity Rollup for Healthcare Organizations Activity rollup provides a unified view of engagement by combining activities for a Healthcare Organization (HCO) and its affiliated Healthcare Professionals (HCPs) in a single timeline. This consolidation allows your users to see a full picture of interactions at the institution level, improving efficiency and coordination across accounts."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_configure_display_and_behavior.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-configure-first-day-of-week",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure First Day of the Week in Your Calendar",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Align the weekly calendar view with your team's workweek. Setting the correct start day in the Calendar supports accurate planning and review of time-sensitive",
+    "findings": [
+      {
+        "name": "Configure First Day of the Week in Your Calendar",
+        "detail": "Align the weekly calendar view with your team's workweek. Setting the correct start day in the Calendar supports accurate planning and review of time-sensitive activities."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access planner settings | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select Planner , and then select Planner Settings . In Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . For First Day of the Week, enter the day you want to use as the start of the week. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_configure_first_day_of_week.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-configure-email-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Email Settings for Activity Timeline",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Enable your users to reschedule or cancel scheduled emails directly from the Activity",
+    "findings": [
+      {
+        "name": "Configure Email Settings for Activity Timeline",
+        "detail": "Enable your users to reschedule or cancel scheduled emails directly from the Activity Timeline."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To access email settings | Life Sciences Commercial Admin permission set From the App Launcher, find and select Admin Console . Select Email Settings , and then select Settings . For Apply Settings To, select whether you want to apply the settings to all the profiles in your org or to a specific profile. To apply the settings to all the profiles in your org, select SOrg Default . To apply the settings to a specific profile in your org, select Profile . Select Schedule emails to send later . Save your changes. Note Rescheduling and cancelling emails from the activity timeline is available only on the desktop site."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_configure_email_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-activity-rollup",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Understanding Activity Rollup for Healthcare Organizations",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Activity rollup provides a unified view of engagement by combining activities for a Healthcare Organization (HCO) and its affiliated Healthcare Professionals (HCPs) in a single timeline. This consolidation allows your users to see a full picture of interactions at the institution level, improving...",
+    "findings": [
+      {
+        "name": "Understanding Activity Rollup for Healthcare Organizations",
+        "detail": "Activity rollup provides a unified view of engagement by combining activities for a Healthcare Organization (HCO) and its affiliated Healthcare Professionals (HCPs) in a single timeline. This consolidation allows your users to see a full picture of interactions at the institution level, improving efficiency and coordination across accounts."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. When configured, the Activity Timeline consolidates and shows activities from affiliated accounts directly within the HCO's activity timeline. On an HCO account, you can see activities from affiliated accounts, such as HCPs and child HCOs. This rollup offers a full picture of interactions at the institutional level. Note Rollup functionality works in one direction. HCP activities appear on the HCO's Activity Timeline, but HCO activities don't appear on the HCP's timeline."
+      },
+      {
+        "name": "Impact on Activity Timeline and Calendar Views Filters",
+        "detail": "Implementing activity rollup introduces an Affiliations filter on the Activity Timeline and Calendar views. Use this filter to narrow down activities based on affiliated accounts. The filter appears when provider affiliation records exist where a person account is affiliated with an HCO account. Admins can also configure the filter to only display activities from specific Affiliation Roles, such as Admitting or Staff. You can apply a maximum of five affiliation roles for filtering."
+      },
+      {
+        "name": "Customize Display of Rolled-Up Activities",
+        "detail": "To tell the difference between activities from various affiliated HCPs, you can customize the text for each activity. Salesforce admins set up custom labels that include details like the HCP’s name or account ID within the activity’s header or body. The custom label for the rollup activity header takes precedence over the standard header text label when the rollup feature is active. With this feature, you can create specific text customizations for rolled-up activities. With the rollup feature's filters and customization options, you get a more efficient understanding of all engagements tied to an HCO. Note The Activity Timeline can generate an error if the Rolled-Up Activity Header Custom Label is missing."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_activity_rollup.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline"
+    ]
+  },
+  {
+    "id": "lsc-help-activity-timeline-ind-lsc-activity-timeline-mobile-app-configuration",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Mobile App Configuration for Activity Timeline",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Make Activity Timeline available on the Life Sciences Cloud mobile app and give your mobile app users access activity-related data by configuring the required",
+    "findings": [
+      {
+        "name": "Mobile App Configuration for Activity Timeline",
+        "detail": "Make Activity Timeline available on the Life Sciences Cloud mobile app and give your mobile app users access activity-related data by configuring the required objects."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Configure Object Metadata Cache for Activity Objects",
+        "detail": "To enable Activity Timeline in the mobile app, create these object metadata cache configurations . Object | Type Assessment Task | Data Inquiry | Data LifeScience | Data Survey Response | Data Visit | Data"
+      },
+      {
+        "name": "Configure Object Metadata Cache for Supporting Objects",
+        "detail": "Create object metadata cache configurations for related objects that are required for Activity Timeline features on mobile but don’t appear as activities in the timeline. Object | Type Presentation | Data Product Disbursement | Data Provider Visit | Data Provider Visit Product Detailing | Data Note To show custom activities in the Activity Timeline on the mobile app, create metadata cache configuration of type Data for the custom container object and the associated custom activity source objects. After you create these configurations, generate metadata cache . This step is important because it makes sure that the mobile app accesses the latest metadata definitions, including any schema changes for supported objects."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_activity_timeline_mobile_app_configuration.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "activity-timeline",
+      "mobile"
+    ]
+  }
+]

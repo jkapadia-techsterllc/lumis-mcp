@@ -1,0 +1,110 @@
+[
+  {
+    "id": "gus-fb-001",
+    "category": "feature-boundaries",
+    "question": "What merge fields are supported in email templates on the programmatic/trigger send path?",
+    "answer": "The programmatic send path supports relationship/indexed merge fields for the recipient (Account) scalar fields plus 6 flattened child collections using syntax 'recipient.<collection>.<index>.<field>': healthcareproviders, healthcareproviderspecialties, contactpointemails, contactpointaddresses, contactpointphones, contactpointsocials. Arbitrary dot-walk paths (like recipient.Account.Owner.Name, Parent, Territory) and presentation tokens render as blank — they are not in the allowlist. Client-side JavaScript constructs (like consent tables built by renderConsentRows()) do NOT run on programmatic/trigger sends because there is no JS runtime on the server path.",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["email", "merge-fields", "programmatic-send", "trigger", "supported-tokens"]
+  },
+  {
+    "id": "gus-fb-002",
+    "category": "feature-boundaries",
+    "question": "What is the correct behavior of 'Send unless recipient opted out' (SendEmailWhenNoOptOut) setting?",
+    "answer": "When SendEmailWhenNoOptOut is ON: emails should be sent to HCPs that have NO consent record (IsConsentIgnored = true). Emails should only be cancelled for HCPs that have an explicit OptOut consent record. Prior to the fix, the behavior was inverted — emails were being cancelled for HCPs without consent records, which blocked legitimate outreach. The corrected behavior: no consent record = send (consent ignored), explicit opt-in = send (normal), explicit opt-out = cancel. This is the single most commonly misunderstood email consent setting.",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["email", "consent", "SendEmailWhenNoOptOut", "opt-out", "behavior"]
+  },
+  {
+    "id": "gus-fb-003",
+    "category": "feature-boundaries",
+    "question": "What are the known content presentation filtering differences between iPad and Web?",
+    "answer": "Three key differences persist between iPad and Web presentation filtering: (1) TERRITORY ALIGNMENT — Web lists only presentations shared with the active territory using PresentationShare and territory Group records. Those records are not synced to iPad, so iPad cannot filter by territory alignment. (2) RECENT PRESENTATIONS — Web uses server-side PresentationForum records. iPad uses a local list of presentations opened on that specific device, so plays on Web or other devices do not count. (3) DISPLAY ORDER — iPad shows up to 5 presentations: selected first, then recent, then library alphabetically. Custom presentations are always included regardless of targeting context.",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["content", "presentation", "ipad-web-parity", "territory", "filtering"]
+  },
+  {
+    "id": "gus-fb-004",
+    "category": "feature-boundaries",
+    "question": "How does content restriction mode behave differently on iPad vs Web?",
+    "answer": "In non-Restriction mode: the visit content accordion on iPad lists every synced presentation without account-based filtering. The account ID is passed to filterRestrictedPresentations, but that function is a no-op outside Restriction mode. In Restriction mode: only presentations targeted for the primary account are kept, and iPad also validates targeting against all attendees. Selected presentations that are not targeted may be filtered out. Web applies a hard client-side gate against account.targetedPresentations in Restriction mode.",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["content", "restriction-mode", "ipad", "web", "filtering-behavior"]
+  },
+  {
+    "id": "gus-fb-005",
+    "category": "feature-boundaries",
+    "question": "How does the offline sync prevent duplicate record creation during background sync?",
+    "answer": "The fix ensures sync transactions are NOT dropped until a manual sync runs. This allows the system to store offline unique IDs and avoid race conditions. During manual sync, the UI is refreshed so in-memory state and the database stay in sync. Background (Pin) sync pulls records down but retains Success transactions across sync cycles. Transactions are only dropped after a manual sync. The drop set during non-manual sync is limited to [canceled, manual] — Success transactions are excluded. This prevents the scenario where a background sync creates a duplicate because it does not know about an in-flight local edit.",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["sync", "offline", "duplicate-prevention", "background-sync", "transactions"]
+  },
+  {
+    "id": "gus-fb-006",
+    "category": "feature-boundaries",
+    "question": "What email template tokens from Veeva have no equivalent in the target platform?",
+    "answer": "Tokens with NO direct equivalent: (1) ISILink — links to Important Safety Information documents stored in Veeva Vault. (2) PILink — links to Prescribing Information documents in Vault. (3) PieceLink — links to specific content pieces in Vault. (4) Presentation tokens — dynamic references to CLM presentation content. For the target platform: use {!Object.Field} merge fields for supported paths. The allowlist includes recipient scalar fields and 6 child collections (healthcareproviders, specialties, emails, addresses, phones, socials). Arbitrary dot-walk beyond the allowlist renders blank.",
+    "gotcha_level": "warning",
+    "source": "gus-investigation",
+    "tags": ["email", "tokens", "veeva-migration", "merge-fields", "unsupported"]
+  },
+  {
+    "id": "gus-fb-007",
+    "category": "feature-boundaries",
+    "question": "Can consent tables in email templates work on programmatic/trigger send paths?",
+    "answer": "No. Consent tables built using client-side JavaScript (renderConsentRows() querying CommSubscriptionConsent / CommSubscriptionChannelType) do NOT execute on the programmatic/trigger send path because there is no JavaScript runtime on the server. These tables only render when the email is previewed or sent through the interactive web UI. For programmatic sends requiring consent information, the consent data must be resolved in Apex/Flow before template evaluation and passed as merge field values.",
+    "gotcha_level": "critical",
+    "source": "gus-investigation",
+    "tags": ["email", "consent-table", "javascript", "programmatic-send", "limitation"]
+  },
+  {
+    "id": "gus-fb-008",
+    "category": "feature-boundaries",
+    "question": "What is the email template testing verification workflow for consent-related changes?",
+    "answer": "Recommended testing steps: (1) Verify Org-Wide Email Address (OWEA) exists for the sender address, (2) Test account is owned by the verified-OWEA user, (3) Account has a ContactPointEmail pointing to a controlled mailbox, (4) Insert a CommSubscriptionConsent on the account (triggers CommSubscriptionConsentTrigger), (5) Schedule queue processor or call sendImmediately(recordId), (6) Confirm the platform email record flips from New/Scheduled to Sent/Success with SentDateTime populated. Test both: HCP with no consent record (should send when SendEmailWhenNoOptOut is ON) and HCP with explicit OptIn (should send regardless).",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["email", "testing", "consent", "verification", "workflow"]
+  },
+  {
+    "id": "gus-fb-009",
+    "category": "feature-boundaries",
+    "question": "What are the supported visit content display rules on mobile?",
+    "answer": "Mobile visit content displays up to 5 presentations following this priority: (1) Already-selected presentations always show first, (2) Recently-played presentations on that device, (3) Library presentations sorted alphabetically. Additional rules: expired presentations are excluded from non-selected slots. In Restriction mode, non-selected presentations must be targeted for the primary account AND every attendee. Custom presentations are always included regardless of targeting context. Selected presentations are never filtered out, even in Restriction mode.",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["visit", "content", "mobile", "display-rules", "presentation-priority"]
+  },
+  {
+    "id": "gus-fb-010",
+    "category": "feature-boundaries",
+    "question": "What root cause categories do engineering teams use to classify investigation findings?",
+    "answer": "Standard RCA classification tags: (1) [RCA][CAT] categories include: 'Missing / incomplete logic (edge case)', 'Sync / transaction / timing / reliability'. (2) [RCA][SUB] subcategories include: 'Edge case not handled', 'Offline/sync', 'Timing/race condition'. These tags are applied to work items after investigation to build a systematic understanding of defect patterns. The most common categories are edge cases not handled (configuration combinations the code didn't anticipate) and sync/timing issues (race conditions in the offline sync engine).",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["rca", "classification", "investigation", "root-cause", "methodology"]
+  },
+  {
+    "id": "gus-fb-011",
+    "category": "feature-boundaries",
+    "question": "When is a risky change appropriate for a patch release vs waiting for a monthly release?",
+    "answer": "Patch release criteria: (1) The fix addresses a customer-reported issue with an Org62 case attached, (2) The change is narrow and well-tested (specific code path, not broad refactor), (3) Engineering has validated in a scratch org AND a monthly org, (4) The risk of NOT patching exceeds the risk of the change. Red flags that delay to monthly: (1) Fix was reverted from a prior attempt (indicates insufficient understanding), (2) Product/Engineering priority disagreement (P2 vs P3), (3) CAB (Change Advisory Board) raises concerns about scope or risk, (4) The fix touches shared infrastructure like the email queue service or sync engine.",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["release", "patch", "monthly", "risk-assessment", "process"]
+  },
+  {
+    "id": "gus-fb-012",
+    "category": "feature-boundaries",
+    "question": "What objects and fields are involved in the email consent data model?",
+    "answer": "Core consent objects: CommSubscriptionConsent (stores individual consent records per HCP), CommSubscriptionChannelType (defines available communication channels). Key fields: ContactPointEmail (links consent to email address), IsConsentIgnored (true when no consent record exists but SendEmailWhenNoOptOut is ON). The email record object tracks: Status (New/Scheduled/Sent/Success/Cancelled), SentDateTime, and the consent evaluation outcome. The CommSubscriptionConsentTrigger fires on insert/update of consent records and can trigger automated email processing.",
+    "gotcha_level": "info",
+    "source": "gus-investigation",
+    "tags": ["email", "consent", "data-model", "CommSubscriptionConsent", "objects"]
+  }
+]

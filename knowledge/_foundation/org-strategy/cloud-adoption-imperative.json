@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fnd-cloud-001",
+    "category": "org-strategy",
+    "title": "Cloud Adoption Imperative for Life Sciences Organizations",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Strategic analysis of cloud adoption drivers in life sciences, including the role of cloud in accelerating new science (novel treatments), data integration, and cross-organization collaboration.",
+    "findings": {
+      "new_science_driver": "Novel treatments (high scientific novelty, unmet need, technology convergence) are projected to represent 67% of industry growth. These treatments require diverse data sources, cross-organization collaboration, and computational capabilities that on-premise infrastructure cannot efficiently provide.",
+      "data_integration_imperative": "Siloed data and incompatible technologies cause significant delays in bringing treatments to market. Cloud platforms enable: unified data lakes across R&D and commercial, real-time analytics on combined datasets, and scalable compute for genomics and real-world evidence workloads.",
+      "cloud_as_value_creator": "Cloud is positioned not as a cost optimization play but as a value creation enabler \u2014 faster time-to-market for treatments, better patient outcomes through data-driven decisions, and new business models built on data sharing and ecosystem collaboration.",
+      "compliance_considerations": "Life sciences cloud adoption must address: GxP validation of cloud infrastructure, data residency and sovereignty requirements across jurisdictions, 21 CFR Part 11 compliance for electronic records, and vendor qualification for cloud service providers.",
+      "ecosystem_collaboration": "Cloud platforms enable new collaboration models: sponsor-CRO data sharing for clinical trials, manufacturer-distributor supply chain visibility, and payer-provider outcomes-based contract management."
+    },
+    "source": "Strategic analysis of the cloud adoption imperative in life sciences covering data integration, new science, and compliance",
+    "tags": [
+      "cloud",
+      "strategy",
+      "data-integration",
+      "new-science",
+      "digital-transformation"
+    ]
+  }
+]

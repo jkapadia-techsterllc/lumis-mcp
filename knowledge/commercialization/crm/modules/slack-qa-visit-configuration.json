@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sq-vc-001",
+    "category": "visit-configuration",
+    "question": "How does visit record type routing work?",
+    "answer": "Visit record types control the visit form layout, available fields, and validation rules. Record type assignment is typically driven by visit type (In-Person, Remote/Phone, Group) combined with channel. The record type determines which page layout and field sets are displayed. Incorrect record type mapping is a common source of field visibility issues.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["visit", "record-type", "routing", "configuration"]
+  },
+  {
+    "id": "sq-vc-002",
+    "category": "visit-configuration",
+    "question": "Is expense tracking supported within visits?",
+    "answer": "Native visit expense tracking has limited OOTB support. The platform does not have a built-in expense line item object directly on visits for tracking meal costs, transportation, or other visit-related expenses. Implementations requiring per-visit expense tracking typically use custom objects or integration with an expense management system.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["visit", "expense", "gap", "custom-solution"]
+  },
+  {
+    "id": "sq-vc-003",
+    "category": "visit-configuration",
+    "question": "How does visitor management work for group visits?",
+    "answer": "Group visits use visit attendee junction records to track multiple HCPs in a single visit. Each attendee gets their own detailing, sample, and signature records. The platform supports pre-planned attendees (added during scheduling) and walk-in attendees (added during the visit). Attendee-level analytics aggregate separately from the parent visit.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["visit", "group-visit", "attendees", "junction"]
+  },
+  {
+    "id": "sq-vc-004",
+    "category": "visit-configuration",
+    "question": "What visit types and channels are supported?",
+    "answer": "Visit types include: Detail Call (In-Person), Phone Call (Remote), Video Call (Remote), Group Visit, Medical Visit, and custom types via record types. Channels include: In-Person, Phone, Email, Video. The channel field is separate from visit type and drives different validation and analytics rules. Implementations should map their legacy call types to both visit type and channel.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["visit", "types", "channels", "mapping"]
+  },
+  {
+    "id": "sq-vc-005",
+    "category": "visit-configuration",
+    "question": "How do homepage widgets display visit-related data?",
+    "answer": "Homepage supports multiple visit-related widgets: Top 10 Next Best Customers (AI-driven recommendations), Up Next (upcoming scheduled visits), Activity Plan attainment dashboard, and custom dashboards. Quick actions from the homepage can launch visit creation, insights review, email composition, and inquiry submission. Widget configuration is per-persona (sales vs. medical users may see different widgets).",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["visit", "homepage", "widgets", "personas"]
+  },
+  {
+    "id": "sq-vc-006",
+    "category": "visit-configuration",
+    "question": "What is the visit submission flow?",
+    "answer": "Visit submission triggers a chain of validations: (1) Required field checks, (2) Sample limit validation (if samples are disbursed), (3) Signature capture (if required by configuration), (4) Offline queue if no connectivity. Upon submission, Provider Visit Product Detailing records, sample transactions, and signature records are created as child records. The visit status changes to Submitted/Completed.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["visit", "submission", "validation-chain", "workflow"]
+  },
+  {
+    "id": "sq-vc-007",
+    "category": "visit-configuration",
+    "question": "How does the visit planner/calendar work?",
+    "answer": "The visit planner provides a calendar view with day, week, and month layouts. Visits can be created from the planner by selecting a time slot and account. The planner integrates with territory alignment to show only accounts the rep has access to. Filter options include account type, visit status, and territory. The planner also shows suggested visits from Next Best Customer recommendations.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["visit", "planner", "calendar", "scheduling"]
+  },
+  {
+    "id": "sq-vc-008",
+    "category": "visit-configuration",
+    "question": "What are common visit configuration issues during implementation?",
+    "answer": "Most frequent issues: (1) Missing record type assignments causing wrong form layouts, (2) Field sets not configured for the visit type, (3) Sample limit blocking visits when limits aren't fully configured, (4) Signature requirements not matching the visit channel (signature should not be required for phone visits), (5) Metadata cache not regenerated after visit configuration changes, (6) Account filter not showing expected accounts due to territory alignment gaps.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["visit", "troubleshooting", "common-issues", "implementation"]
+  }
+]

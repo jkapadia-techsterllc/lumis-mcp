@@ -1,0 +1,51 @@
+[
+  {
+    "id": "ip-reltio-001",
+    "category": "modules",
+    "title": "Reltio MDM Salesforce Integration Architecture",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Reltio provides bidirectional master data management integration with Salesforce through a metadata-driven synchronization architecture. The integration flow uses Salesforce triggers to capture entity and relationship events, routes them through a synchronization utility class to custom sync objects, and then a bidirectional sync service communicates with Reltio cloud APIs.",
+    "findings": {
+      "sync_flow": "The integration follows a six-step flow: (1) Entity/Relationship event occurs in Salesforce, (2) Entity Trigger fires, (3) ReltioSynchUtilityClass processes the event, (4) Event is persisted to Reltio Sync Custom Object, (5) Bidirectional Synch Service picks up pending sync records, (6) Reltio Entity/Relationship event API receives the update. The reverse flow from Reltio to Salesforce follows a similar pattern.",
+      "configuration_approach": "Bidirectional synchronization is metadata-driven via a JSON configuration document that specifies which entities, attributes, and relationship types to synchronize. This configuration resides in the Reltio cloud, allowing sync scope changes without code deployment.",
+      "deployment_packages": "Reltio provides two unmanaged Salesforce packages: Life Sciences for Veeva installations (includes Veeva-specific entity mappings) and Vanilla for standard Salesforce (out-of-box SFDC objects). Both packages include Apex triggers, custom objects for sync state management, and the sync utility classes.",
+      "search_before_create": "SBC (Search Before Create) is integrated with the Account and Contact creation process to prevent duplicate record creation during inbound sync from Reltio. This duplicate prevention layer fires before standard Salesforce duplicate rules.",
+      "license_requirements": "SFDC license must include Custom Apex Code capability (Enterprise Edition or higher). This is required for the trigger-based synchronization architecture."
+    },
+    "source": "Reltio Salesforce Integration architecture diagrams",
+    "tags": [
+      "reltio",
+      "mdm",
+      "integration",
+      "bidirectional-sync",
+      "master-data"
+    ]
+  },
+  {
+    "id": "ip-reltio-002",
+    "category": "modules",
+    "title": "Reltio Veeva Connector HCO/HCP Sync Capabilities",
+    "products": [
+      "oce"
+    ],
+    "summary": "The Reltio Veeva Connector provides out-of-box bidirectional synchronization for HCO and HCP entities with configurable attribute mapping. The connector supports simple attributes, one-to-many relationships, and many-to-many relationships with a profile-level sync disable flag.",
+    "findings": {
+      "hco_sync_capabilities": "HCO synchronization includes simple attributes (Name, Status, Types), one-to-many relationships (Specialty, Territory, Taxonomy, Identifiers, Phone), and many-to-many relationships (Location, Address).",
+      "hcp_sync_capabilities": "HCP synchronization includes simple attributes (Name, Status, Types), one-to-many relationships (Specialty, License, Territory, Taxonomy, Identifiers, Privacy Preferences, Phone), and many-to-many relationships (Location, Address).",
+      "sync_control": "A Veeva Synch flag at the profile level can disable synchronization for specific profiles without requiring system-wide sync shutdown. This allows selective sync management during data migration or quality remediation windows.",
+      "privacy_preference_handling": "HCP Privacy Preferences are synchronized as a one-to-many relationship, enabling Reltio to serve as the system of record for consent and communication preferences that are then pushed to the CRM."
+    },
+    "source": "Reltio Veeva Connector architecture diagram",
+    "tags": [
+      "reltio",
+      "veeva-connector",
+      "hco",
+      "hcp",
+      "mdm",
+      "sync"
+    ]
+  }
+]

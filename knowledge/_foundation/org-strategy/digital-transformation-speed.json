@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-digital-speed-001",
+    "category": "org-strategy",
+    "title": "Digital Transformation at Speed in Life Sciences \u2014 CDO Perspectives",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Insights from life sciences digital transformation leadership on how digital, data, and AI are accelerating drug development and commercial operations, with emphasis on mindset and culture as enablers.",
+    "findings": {
+      "digital_value_across_chain": "Digital innovation drives value across the entire life sciences value chain with three strategic priorities: improving health outcomes for patients, accelerating medicine delivery, and fueling future innovative therapies.",
+      "pandemic_as_catalyst": "The pandemic demonstrated that organizations with mature digital capabilities could adapt faster \u2014 vaccine development timelines compressed from years to months, enabled by digital trial management, data integration, and real-time decision-making tools.",
+      "data_and_ai_centrality": "Data and AI are at the center of digital strategy, not periphery. Successful organizations treat data as a strategic asset with: enterprise data platforms, self-service analytics for non-technical users, and AI/ML embedded in operational workflows.",
+      "mindset_and_culture": "Technology alone is insufficient. Lasting change requires: growth mindset across the organization, willingness to experiment and learn from failure, cross-functional collaboration breaking silos, and leaders who model digital-first behavior.",
+      "speed_as_differentiator": "Speed is the primary competitive differentiator in life sciences digital transformation. Organizations that can move from data insight to business action fastest \u2014 in clinical development, commercial launch, and supply chain response \u2014 capture disproportionate value."
+    },
+    "source": "CDO perspectives on digital transformation acceleration in life sciences covering data strategy, AI, organizational culture, and speed-to-value",
+    "tags": [
+      "digital-transformation",
+      "cdo",
+      "data-strategy",
+      "ai",
+      "organizational-culture",
+      "speed"
+    ]
+  }
+]

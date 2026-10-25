@@ -1,0 +1,317 @@
+[
+  {
+    "phase": "Phase 0: Pre-Migration Assessment",
+    "duration": "4-6 weeks",
+    "activities": [
+      {
+        "id": "p0-01",
+        "activity": "Legacy System Inventory",
+        "description": "Document all modules in use, customizations, integrations, user counts, and data volumes in the legacy CRM",
+        "deliverables": ["System inventory document", "Module usage report", "Customization catalog"],
+        "critical": true
+      },
+      {
+        "id": "p0-02",
+        "activity": "Data Volume Assessment",
+        "description": "Measure record counts for each object type. Account, Contact, Visit/Call, Sample Transaction, Order, Event, Content are the primary volume drivers",
+        "deliverables": ["Data volume report", "Growth rate projections"],
+        "critical": true
+      },
+      {
+        "id": "p0-03",
+        "activity": "Regulatory Requirements Matrix",
+        "description": "Map all applicable regulations (PDMA, Sunshine Act, GDPR, country-specific) to platform capabilities and migration requirements",
+        "deliverables": ["Regulatory matrix", "Compliance risk register"],
+        "critical": true
+      },
+      {
+        "id": "p0-04",
+        "activity": "Stakeholder Identification",
+        "description": "Identify all stakeholders: IT, Commercial Operations, Marketing, Medical Affairs, Compliance, Legal, Field Sales, Regional leads",
+        "deliverables": ["RACI matrix", "Communication plan"],
+        "critical": false
+      },
+      {
+        "id": "p0-05",
+        "activity": "Integration Inventory",
+        "description": "Document all systems integrated with legacy CRM: ERP, MDM, BI, compliance reporting, content management, signature capture, email service providers",
+        "deliverables": ["Integration map", "API contract documentation"],
+        "critical": true
+      },
+      {
+        "id": "p0-06",
+        "activity": "Content Audit",
+        "description": "Inventory all CLM/content assets. Classify as: migrate-as-is (PDF), needs conversion (HTML with proprietary JS), retire (unused >12 months)",
+        "deliverables": ["Content inventory", "Migration/retire/rebuild classification"],
+        "critical": false
+      }
+    ]
+  },
+  {
+    "phase": "Phase 1: Design and Architecture",
+    "duration": "6-8 weeks",
+    "activities": [
+      {
+        "id": "p1-01",
+        "activity": "Data Model Design",
+        "description": "Design the target data model. Map every legacy object to its target equivalent. Identify gaps requiring custom objects or fields",
+        "deliverables": ["Data model mapping document", "Custom object/field list", "ERD for target"],
+        "critical": true
+      },
+      {
+        "id": "p1-02",
+        "activity": "Security Model Design",
+        "description": "Design the target security model: Profiles, Permission Sets, Permission Set Groups, sharing rules, territory-based access",
+        "deliverables": ["Security model document", "Profile/Permission Set matrix", "Sharing rule specifications"],
+        "critical": true
+      },
+      {
+        "id": "p1-03",
+        "activity": "Integration Architecture",
+        "description": "Design all integration patterns: ERP sync, MDM feed, BI pipeline, compliance reporting. Define APIs, frequencies, error handling",
+        "deliverables": ["Integration architecture document", "API specifications", "Error handling playbook"],
+        "critical": true
+      },
+      {
+        "id": "p1-04",
+        "activity": "Migration Strategy",
+        "description": "Define the migration approach: big-bang vs. phased, data cutover plan, parallel run period, rollback strategy",
+        "deliverables": ["Migration strategy document", "Cutover plan", "Rollback plan"],
+        "critical": true
+      },
+      {
+        "id": "p1-05",
+        "activity": "Territory Model Design",
+        "description": "Design the target territory hierarchy. Flat (matching legacy) vs. hierarchical (leveraging platform capabilities). Phase 1 usually mirrors legacy",
+        "deliverables": ["Territory model design", "Assignment rules", "Territory alignment schedule"],
+        "critical": true
+      },
+      {
+        "id": "p1-06",
+        "activity": "Mobile Strategy",
+        "description": "Define mobile app configuration, offline data sets, sync behavior, conflict resolution rules",
+        "deliverables": ["Mobile configuration document", "Offline data strategy", "Sync rule specifications"],
+        "critical": true
+      },
+      {
+        "id": "p1-07",
+        "activity": "Consent Model Design",
+        "description": "Design the consent management model. Map legacy consent records to Individual + ContactPointConsent. Configure country-specific defaults",
+        "deliverables": ["Consent model design", "Country default matrix", "Consent migration rules"],
+        "critical": true
+      }
+    ]
+  },
+  {
+    "phase": "Phase 2: Build and Configure",
+    "duration": "8-12 weeks",
+    "activities": [
+      {
+        "id": "p2-01",
+        "activity": "Platform Configuration",
+        "description": "Configure the target platform: custom objects, fields, page layouts, record types, picklist values, validation rules, workflows",
+        "deliverables": ["Configuration workbook", "Deployed metadata"],
+        "critical": true
+      },
+      {
+        "id": "p2-02",
+        "activity": "Security Implementation",
+        "description": "Build and deploy profiles, permission sets, permission set groups, sharing rules, territory assignments",
+        "deliverables": ["Deployed security model", "Access test results"],
+        "critical": true
+      },
+      {
+        "id": "p2-03",
+        "activity": "Migration Script Development",
+        "description": "Build ETL scripts for each data object. Include transformation logic, validation, error handling, and rollback capability",
+        "deliverables": ["Migration scripts per object", "Transformation rules", "Validation queries"],
+        "critical": true
+      },
+      {
+        "id": "p2-04",
+        "activity": "Integration Development",
+        "description": "Build integration middleware connecting target platform to ERP, MDM, BI, and other systems. Test each integration independently",
+        "deliverables": ["Integration code", "Unit test results", "Integration test results"],
+        "critical": true
+      },
+      {
+        "id": "p2-05",
+        "activity": "Content Migration/Rebuild",
+        "description": "Migrate PDF content as-is. Convert or rebuild HTML content that used proprietary APIs. Retire unused content",
+        "deliverables": ["Migrated content library", "MLR review queue for rebuilt content"],
+        "critical": false
+      },
+      {
+        "id": "p2-06",
+        "activity": "Report and Dashboard Rebuilding",
+        "description": "Rebuild the top 20-30 most-used reports and dashboards from legacy system. Validate data accuracy against legacy reports",
+        "deliverables": ["Rebuilt reports and dashboards", "Comparison results vs. legacy"],
+        "critical": true
+      },
+      {
+        "id": "p2-07",
+        "activity": "Mobile App Configuration",
+        "description": "Configure mobile data sets, sync rules, offline capabilities, and field-level mobile visibility",
+        "deliverables": ["Mobile configuration", "Offline test scenarios"],
+        "critical": true
+      }
+    ]
+  },
+  {
+    "phase": "Phase 3: Data Migration",
+    "duration": "4-6 weeks",
+    "activities": [
+      {
+        "id": "p3-01",
+        "activity": "Data Extraction and Cleansing",
+        "description": "Extract data from legacy system. Cleanse: deduplicate accounts, standardize addresses, normalize picklist values, remove orphaned records",
+        "deliverables": ["Extracted data files", "Cleansing log", "Data quality report"],
+        "critical": true
+      },
+      {
+        "id": "p3-02",
+        "activity": "Trial Migration 1",
+        "description": "Load a representative subset (10-20%) into a sandbox. Validate referential integrity, field mapping accuracy, and data quality",
+        "deliverables": ["Trial migration results", "Issue log", "Fix list"],
+        "critical": true
+      },
+      {
+        "id": "p3-03",
+        "activity": "Trial Migration 2",
+        "description": "Full-volume trial migration into a sandbox. Measure load times, validate all objects, test integrations end-to-end",
+        "deliverables": ["Full trial results", "Performance metrics", "Updated issue log"],
+        "critical": true
+      },
+      {
+        "id": "p3-04",
+        "activity": "Data Validation",
+        "description": "Run all validation rules: referential integrity, sample audit trail, consent defaults, visit-account associations, user permissions",
+        "deliverables": ["Validation results per rule", "Exception reports", "Remediation actions"],
+        "critical": true
+      },
+      {
+        "id": "p3-05",
+        "activity": "Production Data Load",
+        "description": "Execute production data migration during the cutover window. Follow the documented load order: Reference Data → Accounts → Users → Visits → Samples → Orders → Events → Consent → Coaching",
+        "deliverables": ["Production load results", "Post-load validation results"],
+        "critical": true
+      }
+    ]
+  },
+  {
+    "phase": "Phase 4: Testing and Validation",
+    "duration": "4-6 weeks",
+    "activities": [
+      {
+        "id": "p4-01",
+        "activity": "System Integration Testing (SIT)",
+        "description": "Test all integrations end-to-end: ERP order flow, MDM account updates, BI data pipeline, compliance reporting",
+        "deliverables": ["SIT test results", "Defect log"],
+        "critical": true
+      },
+      {
+        "id": "p4-02",
+        "activity": "User Acceptance Testing (UAT)",
+        "description": "Business users test every key workflow: visit creation, sample drops, order entry, event management, content presentation, reporting",
+        "deliverables": ["UAT test results", "Sign-off from each user role"],
+        "critical": true
+      },
+      {
+        "id": "p4-03",
+        "activity": "Mobile and Offline Testing",
+        "description": "Test mobile workflows in both online and offline modes. Validate sync behavior, conflict resolution, and data completeness",
+        "deliverables": ["Mobile test results", "Offline scenario results", "Sync timing measurements"],
+        "critical": true
+      },
+      {
+        "id": "p4-04",
+        "activity": "Regulatory Compliance Validation",
+        "description": "Validate all regulatory requirements are met: sample audit trail, transparency reporting, consent management, electronic records",
+        "deliverables": ["Compliance validation results", "Regulatory sign-off"],
+        "critical": true
+      },
+      {
+        "id": "p4-05",
+        "activity": "Performance Testing",
+        "description": "Load test with expected concurrent users. Measure page load times, sync times, report generation times, API response times",
+        "deliverables": ["Performance test results", "Capacity planning recommendations"],
+        "critical": true
+      },
+      {
+        "id": "p4-06",
+        "activity": "Parallel Run",
+        "description": "Run both legacy and target systems simultaneously for 2-4 weeks. Compare outputs: reports, compliance data, inventory balances",
+        "deliverables": ["Parallel run comparison results", "Discrepancy analysis"],
+        "critical": true
+      }
+    ]
+  },
+  {
+    "phase": "Phase 5: Cutover and Go-Live",
+    "duration": "2-3 weeks",
+    "activities": [
+      {
+        "id": "p5-01",
+        "activity": "Go/No-Go Decision",
+        "description": "Executive review of all test results, outstanding defects, risk assessment. Formal go/no-go decision with documented criteria",
+        "deliverables": ["Go/No-Go decision document", "Risk acceptance forms"],
+        "critical": true
+      },
+      {
+        "id": "p5-02",
+        "activity": "Final Data Delta Load",
+        "description": "Load any data changes that occurred between the full migration and cutover. Validate delta load completeness",
+        "deliverables": ["Delta load results", "Validation results"],
+        "critical": true
+      },
+      {
+        "id": "p5-03",
+        "activity": "Legacy System Cutover",
+        "description": "Disable write access to legacy system. Redirect all users to the new platform. Keep legacy in read-only mode for reference period",
+        "deliverables": ["Cutover execution log", "Legacy system read-only configuration"],
+        "critical": true
+      },
+      {
+        "id": "p5-04",
+        "activity": "Day 1 Smoke Testing",
+        "description": "Verify every user role can log in, see their data, and complete their primary workflow within the first 2 hours of go-live",
+        "deliverables": ["Smoke test results per role", "Issue escalation log"],
+        "critical": true
+      },
+      {
+        "id": "p5-05",
+        "activity": "Hypercare Support",
+        "description": "Provide enhanced support for 2-4 weeks post go-live. War room staffing, escalation paths, rapid response team for critical issues",
+        "deliverables": ["Hypercare schedule", "Issue tracking dashboard", "Resolution SLAs"],
+        "critical": true
+      }
+    ]
+  },
+  {
+    "phase": "Phase 6: Post-Migration Optimization",
+    "duration": "4-8 weeks",
+    "activities": [
+      {
+        "id": "p6-01",
+        "activity": "Adoption Monitoring",
+        "description": "Track user adoption metrics: login frequency, feature usage, mobile adoption, report usage. Identify low-adoption areas for targeted training",
+        "deliverables": ["Adoption dashboard", "Training recommendations"],
+        "critical": false
+      },
+      {
+        "id": "p6-02",
+        "activity": "Legacy System Decommission",
+        "description": "After hypercare period and data validation, formally decommission the legacy system. Archive data per retention policy",
+        "deliverables": ["Decommission plan", "Data archive confirmation"],
+        "critical": false
+      },
+      {
+        "id": "p6-03",
+        "activity": "Phase 2 Enhancements",
+        "description": "Implement features that were deferred from the initial migration: hierarchical territories, advanced analytics, AI-driven insights",
+        "deliverables": ["Phase 2 roadmap", "Enhancement specifications"],
+        "critical": false
+      }
+    ]
+  }
+]

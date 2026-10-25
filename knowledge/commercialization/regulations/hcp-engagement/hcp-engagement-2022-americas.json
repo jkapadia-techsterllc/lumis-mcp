@@ -1,0 +1,70 @@
+[
+  {
+    "id": "hcp-engagement-2022-americas-1",
+    "category": "knowledge/commercialization/regulations/hcp-engagement",
+    "title": "HCP Engagement Regulations — Americas (2022)",
+    "products": [
+      "Life Sciences CRM",
+      "Compliance"
+    ],
+    "summary": "Country-by-country regulatory requirements for HCP/HCO engagement and meeting sponsorship across the Americas region, current as of September 2022. Covers contract requirements, notification/pre-approval obligations, meeting rules, meal thresholds, and additional compliance requirements.",
+    "findings": [
+      {
+        "name": "Argentina",
+        "detail": "Industry: Pharma. Competent authority: CAEMe, Fedefarma. Code-based regulation. Engagement: Written contract required ensuring legitimate need, appropriate number of consultants, reasonable compensation at fair market value. Notification/pre-approval: Not applicable. Meetings: Companies may sponsor or organize meetings including sponsoring HCPs, provided event is held in appropriate venue conducive to scientific/educational objectives; sponsorship limited to travel, meals, accommodation, registration fees. Meeting notification: No specific mechanism prescribed. Meeting timelines: No specific timelines defined. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Australia (Pharma)",
+        "detail": "Industry: Pharma. Competent authority: Medicines Australia (MA). Code-based regulation. Engagement: Written contract required ensuring legitimate need, appropriate number of HCPs, records maintained. Notification/pre-approval: Not applicable. Meetings: Same standard meeting sponsorship rules — appropriate venue, scientific objectives, sponsorship limited to travel/meals/accommodation/registration. Meeting notification: No specific mechanism prescribed. Meal thresholds: 120 AUD excluding VAT and gratuities."
+      },
+      {
+        "name": "Australia (Medical Devices)",
+        "detail": "Industry: Medical Devices. Competent authority: Medical Technology Association of Australia (MTAA). Code-based regulation. Engagement: Written contract ensuring legitimate need, fair market value compensation, written research protocol for clinical research services. Meetings: Company-sponsored training/education and medical technology demonstrations — companies can sponsor HCPs directly (travel and accommodation). Third-Party Educational Conferences — companies cannot sponsor HCPs directly but may provide sponsorship or grant directly to conference organiser. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Brazil",
+        "detail": "Industry: Pharma. Competent authority: INTERFARMA (Pharmaceutical Research Association). Code-based regulation. Engagement: Written contract ensuring legitimate need, compatible consultant selection criteria, appropriate number, records maintained. Notification/pre-approval: Not applicable. Meetings: Financial support for educational/scientific conferences including HCP sponsorship, event must be in appropriate venue conducive to scientific/educational objectives, sponsorship limited to travel, meals, accommodation, registration fees. Meeting notification: No specific mechanism prescribed. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Canada",
+        "detail": "Industry: Pharma. Competent authority: Innovative Medicines Canada (IMC). Code-based regulation. Engagement: Written contract ensuring legitimate need, appropriate number of consultants, reasonable compensation at fair market value. Notification/pre-approval: Not applicable. Meetings: Companies may sponsor third-party educational events hosted in Canada (but not individual HCPs attending such events). For international events hosted outside Canada, sponsorship to HCPs limited to travel, meals, accommodation, registration fees. Meeting notification: No specific mechanism prescribed. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Chile",
+        "detail": "Industry: Pharma. Competent authority: Camara de la Innovacion Farmaceutica (CIF). Code-based regulation. Engagement: Written contract ensuring legitimate need, compatible consultant criteria, appropriate number, compensation in line with fair market value, records maintained. Notification/pre-approval: Not applicable. Meetings: CIF member companies may organize or sponsor directly or through a third party meetings, congresses, conferences, symposiums, workshops, or any other type of similar activity with scientific purpose. Companies may provide financial support including sponsoring HCPs provided event in appropriate venue, sponsorship limited to travel, meals, accommodation, registration fees. Meeting notification: No specific mechanism prescribed. Meal thresholds: Snack/coffee break not specified; Lunch/Dinner 1.75 UF."
+      },
+      {
+        "name": "Colombia (AFIDRO)",
+        "detail": "Industry: Pharma. Competent authority: Association of Pharmaceutical Research and Development Laboratories (AFIDRO). Code-based regulation. Engagement: Written contract ensuring legitimate need, compatible consultant criteria, appropriate number, records maintained. Notification/pre-approval: Not applicable. Meetings: Financial support for educational/scientific events including HCP sponsorship, event must be in appropriate venue, sponsorship limited to travel, meals, accommodation, registration. Internal processes to document compliance with AFIDRO Code of Practice. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Colombia (ANDI)",
+        "detail": "Industry: Pharma. Competent authority: Asociacion Nacional de Empresarios de Colombia (ANDI). Engagement: Written contract ensuring legitimate need, compatible criteria, appropriate number, records maintained. Meetings: Financial support for educational/scientific events, compliance with ANDI Code requirements. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "Mexico",
+        "detail": "Industry: Pharma. Competent authority: The Council of Ethics and Transparency of the Pharmaceutical Industry (CETIFARMA). Code-based regulation. Engagement: Written contract ensuring payment is reasonable and based on fair market value. Notification/pre-approval: Not applicable. Meetings: Companies that organize or sponsor scientific/educational events must inform CETIFARMA about event at least two (2) months prior to its occurrence. Notification: CETIFARMA may verify that organization of event complies with Code of Good Practices. Meeting notification: Digital manual on CETIFARMA website. Meal thresholds: No thresholds set. Additional rules: Government employees or staff from institutions cannot be compensated for consultancy services when a conflict of interest is involved."
+      },
+      {
+        "name": "United States (Federal — Pharma)",
+        "detail": "Industry: Pharma. Competent authority: U.S. Department of Justice (DOJ), Federal Anti-Kickback Law, PhRMA. Code-based regulation. Engagement: Written contract ensuring legitimate need for services, correct criteria for consultant selection, appropriate number, records maintained, fair and reasonable event/circumstances. Notification/pre-approval: Not applicable. Meetings — Company Support for Third-Party Educational or Professional Meetings: Companies may provide financial support to a conference provided subsidy goes directly to conference organizer, the subsidy reduces overall conference registration fees for all attendees, the physician does not receive the subsidy directly. Speaker Programs: Compensation in conjunction with speaking arrangement should be reasonable, justified, and based on fair market value; must ensure speaking arrangements do not constitute inducements. Training & Business Meetings: Companies should select setting, duration, and manner in accordance with legitimate purpose. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "United States (Federal — Medical Devices)",
+        "detail": "Industry: Medical Devices. Competent authority: U.S. DOJ, Federal Anti-Kickback Law, AdvaMed. Same requirements as Pharma for written contracts. Meetings — Company Support for Third-Party Educational/Professional Meetings: Same rules as Pharma. Speaker Programs: Same compensation requirements. Meal thresholds: No thresholds set."
+      },
+      {
+        "name": "United States — New Jersey (State)",
+        "detail": "Industry: Pharma-Generics. Competent authority: State of New Jersey. Code-based regulation. Engagement: Written contract must specify among other elements legitimate need, connection between services and consultant's knowledge/expertise. Notification/pre-approval: Not applicable; however companies should consider prior to engaging whether services exceeded peer's norms (see additional specific rules). Meetings: Companies may organize promotional meetings or sponsor educational events; meetings/conferences subject to specific meal thresholds. Meal thresholds: Breakfast or Lunch $15; Dinner $30 excl. tax. Additional rules: A prescriber shall not accept more than $10,000 in the aggregate from all pharmaceutical manufacturers in any calendar year for the bona fide services of presentations at promotional meetings; participation on advisory boards and consulting meetings; only educational events are excluded. Payments for speaking at educational events and/or conducting research activities are NOT subject to this cap."
+      }
+    ],
+    "source": "Global HCP Engagement Regulations Snapshot, September 2022",
+    "tags": [
+      "regulations",
+      "hcp-engagement",
+      "compliance",
+      "americas",
+      "2022"
+    ]
+  }
+]

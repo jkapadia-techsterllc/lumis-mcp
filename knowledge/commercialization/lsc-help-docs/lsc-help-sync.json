@@ -1,0 +1,107 @@
+[
+  {
+    "id": "lsc-help-sync-ind-lsc-synchronization-management",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Synchronization Management",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Define device synchronization settings between the Life Sciences Cloud mobile app and your Salesforce org to support data management and control. Help your mobile app users keep their data current so they can make well-informed",
+    "findings": [
+      {
+        "name": "Synchronization Management",
+        "detail": "Define device synchronization settings between the Life Sciences Cloud mobile app and your Salesforce org to support data management and control. Help your mobile app users keep their data current so they can make well-informed decisions."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package."
+      },
+      {
+        "name": "Synchronization Process",
+        "detail": "This diagram shows the synchronization process between your Salesforce org and the Life Sciences Cloud mobile app."
+      },
+      {
+        "name": "Synchronization Types",
+        "detail": "Synchronization between the Life Sciences Cloud mobile app and your Salesforce org can happen in a few different ways: Full, Delta, and Upload Only. Sync Type | What it Does | When it Happens Full | Downloads all territory-specific data and metadata to the user’s mobile device and then uploads their transactions, logs, and statistics to Salesforce. After a full sync that includes metadata, changes take effect in the mobile app immediately without a restart. | Initial Sync: This happens after a user’s first login and territory selection (if applicable). Territory Switch Sync: This happens after a user switches to a different territory. Extended Offline Work: If a user works offline for longer than the configured Days Offline Limit (without an initial or territory switch). Admin-Forced Sync: If an admin enables Is Full Sync Enforced on a user’s Life Science Mobile App record, the user is notified on the next app launch that a full sync is required, and the app automatically starts the full sync during the next delta sync. Delta | Refreshes the app’s database, downloads the latest information and sends the user’s changes to the server, and downloads list views. This process can run in the foreground (which requires the user to wait before using the app) or in the background. After a delta sync that includes metadata, changes take effect in the mobile app immediately without a restart. | During Manual Sync after a user taps Sync Database. After a user unlocks the app with their passcode. If metadata has changed, the user is prompted to download the metadata (or skip). When users accept the download, changes take effect immediately after the sync. Upload Only | Uploads mobile app data, such as transactions, logs, and statistics, to Salesforce. It’s a one-way process, so no metadata or other data is downloaded to the user’s device. | After a user saves or deletes a record, the app initiates the upload in the background to sync all transactions currently in the queue. If a Wi-Fi connection isn’t available, the transaction stays in the queue until the next synchronization attempt."
+      },
+      {
+        "name": "Synchronization Management Data Model",
+        "detail": "Synchronization Management uses many objects and fields to help users synchronize data in your Salesforce org and the Life Sciences Cloud mobile app. Note Synchronization management objects aren’t accessible in Object Manager. However, you can access them through data tools. Life Sciences Cloud Mobile App Sync Best Practices Optimize sync performance and secure data in the Life Sciences Cloud mobile app. Configure DbSchema settings to control what data downloads to mobile devices, set appropriate sharing settings, and monitor sync transactions daily. Clone and Activate the Sync Processor Scheduler Flow To automate data synchronization from the Life Sciences Cloud mobile app to your Salesforce org, clone and activate the Sync Processor Scheduler flow. This flow automates the scheduling of the Sync Processor batch management job. The Scheduler flow runs daily at 1:00 AM UTC, processing Device Sync Transaction records from the past 60 days. Manage Sync Transactions View completed synchronization records and manually update or retry synchronization transactions in the Synchronization Admin Console. Configure Mobile Sync Settings Set the mobile sync settings at the org default or user profile level to determine the record synchronization details. Configure Sync Processor Settings Define comprehensive guidelines for managing records throughout their lifecycle. Descriptive record handling rules help to ensure regulatory compliance and are crucial for data integrity, efficient information management, and risk mitigation."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_synchronization_management.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "sync"
+    ]
+  },
+  {
+    "id": "lsc-help-sync-ind-lsc-synchronization-management-configure-mobile-sync-settings",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Configure Mobile Sync Settings",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Set the mobile sync settings at the org default or user profile level to determine the record synchronization",
+    "findings": [
+      {
+        "name": "Configure Mobile Sync Settings",
+        "detail": "Set the mobile sync settings at the org default or user profile level to determine the record synchronization details."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. User Permissions Needed To manage mobile sync settings: | Life Sciences Commercial Admin Note The Life Sciences Cloud mobile app compares the iPad's local time with the Salesforce user's time, allowing a tolerance of 120 seconds. If this tolerance is exceeded, the Device Sync Summary reports Error Code 420 (Time Mismatch). This error is informational and doesn't block sync operations. If you see this error, confirm that the iPad's date and time are set automatically under Date & Time settings, or that the timezone is explicit and correct if it's set manually. The user's TimeZoneSidKey is set correctly in Setup under Users. For example, America or New_York. From the App Launcher, find and select Life Sciences Commercial , and then select Admin Console . Select Synchronization , and then select Mobile Sync Settings . From the Select Type dropdown, select the type of settings to configure. You can configure mobile sync settings for the org default or specific user profiles. Note These settings use the Admin Console hierarchical framework. Before you configure them, review how precedence works and the related considerations in Hierarchical Settings in the Admin Console . Select processing options and enter values to meet your business needs. Setting | Description | Recommended Value Related Record Retrieve | Enables showing related record names for inaccessible records. The related record is read-only, preventing users from opening the inaccessible object. | Selected Mobile Non Wifi Data Limit in Megabytes | The limit in MB a user can download when not on wifi before a warning message is shown. | 25 Mobile Offline Days Limit | The maximum number of days a user can stay offline before they’re forced to synchronize. | 30 Mobile Timeout Period in Minutes | The number of minutes before the mobile app times out and returns the user to the PIN screen. | 60 Number of Items per Transaction | The maximum number of items to include in a transaction. | 10 Important Always keep Related Record Retrieve selected. When you deselect this setting, the mobile app doesn't sync the display names of related records to the device, and lookup fields, such as Account Name on an Account Plan, appear blank on the mobile app. This setting affects only the mobile app. The desktop site queries Salesforce directly, so its lookup fields are unaffected. If you deselect and later reselect Related Record Retrieve, users must run a full sync to repopulate the display names on the mobile app. Save your work. To push your changes to the Life Sciences Cloud mobile app, create a metadata cache. After users download the metadata cache, all changes appear in the mobile app immediately without a restart."
+      },
+      {
+        "name": "See Also",
+        "detail": "Create a Metadata Cache"
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_synchronization_management_configure_mobile_sync_settings.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "sync",
+      "mobile"
+    ]
+  },
+  {
+    "id": "lsc-help-sync-ind-lsc-sync-visit-expenses-to-concur",
+    "category": "knowledge/commercialization/lsc-help-docs",
+    "title": "Sync Visit Expenses to Concur",
+    "products": [
+      "Life Sciences Cloud"
+    ],
+    "summary": "Synchronize visit expenses to SAP Concur by linking them to an expense",
+    "findings": [
+      {
+        "name": "Sync Visit Expenses to Concur",
+        "detail": "Synchronize visit expenses to SAP Concur by linking them to an expense report."
+      },
+      {
+        "name": "Required Editions",
+        "detail": "Available in: Lightning Experience Available in: Enterprise and Unlimited Editions with Life Sciences Cloud, Life Sciences Cloud for Customer Engagement Add-on license, and the Life Sciences Customer Engagement managed package. Concur Expense Sync automatically pulls any unsubmitted, or rejected expense reports from SAP Concur to Life Sciences Cloud. After you sync the Life Sciences Cloud mobile app, the assigned expense reports appear in the dropdown menu when you create a visit expense. To link an expense to a new report, create the expense report on the desktop site, sync the Life Sciences Cloud mobile app, and then link the expense to the report."
+      },
+      {
+        "name": "See Also",
+        "detail": "Concur Expense Sync Setup"
+      },
+      {
+        "name": "Create an Expense Report",
+        "detail": "Create an expense report so you can associate it with visit expenses. Your admin can also create expense reports on your behalf and transfer ownership to you before syncing. Note You can’t create expense reports from the Life Sciences Cloud mobile app. Linking expenses to a report is required to automatically sync the records with SAP Concur. From the App Launcher, find and select Expense Reports . Click New . Enter a name and description for the expense report. Save your changes."
+      },
+      {
+        "name": "Create an Expense and Link it to the Report",
+        "detail": "To ensure that your expense automatically syncs to SAP Concur, create an expense record and link it to an expense report. From the Expenses tab on a visit record, click New . Select your reporting preference. To create an expense without the receipt, select Expense Only . To create an expense with the receipt, select Expense & Receipt . Note Capture or upload the image of the receipt before filling out the expense details. Enter the expense details. Select an expense type. Select an expense report. Expenses that aren't linked to a report won't sync to SAP Concur. Select a currency. Enter the expense amount. Optionally, enter a description. Save your changes."
+      }
+    ],
+    "source": "Salesforce Help — https://help.salesforce.com/s/articleView?id=ind.lsc_sync_visit_expenses_to_concur.htm&type=5",
+    "tags": [
+      "help-docs",
+      "lsc",
+      "sync",
+      "visits"
+    ]
+  }
+]

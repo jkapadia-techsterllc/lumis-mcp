@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sq-ap-001",
+    "category": "activity-plans-coaching",
+    "question": "What is the Activity Plan configuration architecture?",
+    "answer": "Activity Plans combine territory planning and activity planning into a single operating discipline. They convert brand strategy into field execution through intentional interactions. HCP interest, consent, and engagement boundaries are first-class inputs that constrain the plan. Plans define target interaction counts per account segment per time period.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["activity-plan", "architecture", "territory-planning"]
+  },
+  {
+    "id": "sq-ap-002",
+    "category": "activity-plans-coaching",
+    "question": "What entities are involved in Field Coaching?",
+    "answer": "Three core entities: Enablement Coaching, Coaching Session, and Coaching Attendee. These were introduced as data model additions. The feature requires API version 67.0 or later and completion of sharing keyword changes across all modules. Coaching forms support a list view of all prior coaching sessions for historical reference.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["coaching", "entities", "data-model", "api-version"]
+  },
+  {
+    "id": "sq-ap-003",
+    "category": "activity-plans-coaching",
+    "question": "Can Activity Plan criteria support multi-value filtering?",
+    "answer": "Multi-value criteria filtering for Activity Plans is a known gap. Combining platform entities (like products) with custom entities (like strategy or tactics) for filtering is complex and requires careful design of lookup filters and criteria JSON. Implementations needing multi-dimensional filtering often require custom solutions.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["activity-plan", "criteria", "multi-value", "gap"]
+  },
+  {
+    "id": "sq-ap-004",
+    "category": "activity-plans-coaching",
+    "question": "Why does the Activity Plan dashboard show empty activities?",
+    "answer": "When the Home page Activity Plan dashboard shows 'View Details > Activities' as empty despite active plans, check: (1) Usage Type matches 'Provider Plan Cycle', (2) Time Period configuration is correct, (3) Calculation is enabled in Admin Console, (4) Plan Status is 'In Progress', (5) Rep assignment and territory alignment are correct. Most commonly caused by Usage Type mismatch.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["activity-plan", "dashboard", "empty-activities", "troubleshooting"]
+  },
+  {
+    "id": "sq-ap-005",
+    "category": "activity-plans-coaching",
+    "question": "How does a Visit contribute to Activity Plan attainment?",
+    "answer": "A visit contributes to actual count and attainment if it meets ANY configured criteria. For example: Detail Call (In Person, Completed) and Touchpoint (In Person or Phone Call, Completed) both contribute. A single visit cannot have both Detail and Touchpoint values simultaneously. Attainment calculation runs based on configured criteria matching.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["activity-plan", "attainment", "visit-contribution", "criteria"]
+  },
+  {
+    "id": "sq-ap-006",
+    "category": "activity-plans-coaching",
+    "question": "What coaching extensibility options exist?",
+    "answer": "Coaching forms support a list view of all prior coaching forms. The Activity Plan review component is hardcoded to show only the current plan and the most recent prior plan, which is a limitation. Extensions beyond the coaching component are possible using related lists, custom actions, or custom LWC components on the record page.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["coaching", "extensibility", "related-lists", "lwc"]
+  },
+  {
+    "id": "sq-ap-007",
+    "category": "activity-plans-coaching",
+    "question": "What is the Activity Plan criteria JSON structure?",
+    "answer": "Activity Plan criteria are defined in a JSON structure that specifies which visit attributes contribute to plan attainment. The criteria JSON is stored on the Activity Plan Category/Criteria configuration. The JSON is disjointed from the OOTB Activity Plan batch calculation job, meaning custom criteria may not be automatically picked up by standard calculation logic.",
+    "gotcha_level": "warning",
+    "source": "implementation-qa",
+    "tags": ["activity-plan", "criteria-json", "batch-calculation", "configuration"]
+  },
+  {
+    "id": "sq-ap-008",
+    "category": "activity-plans-coaching",
+    "question": "What is the strategic vision for territory and activity planning?",
+    "answer": "The strategic direction combines territory planning and activity planning into a single operating discipline, with AI as an accelerant for translating field plays into workload assumptions and segment definitions. Near-term releases deliver the tactical foundation (manual planning, basic attainment tracking). Future releases build toward AI-assisted plan generation and optimization.",
+    "gotcha_level": "info",
+    "source": "implementation-qa",
+    "tags": ["activity-plan", "strategy", "ai", "roadmap"]
+  }
+]

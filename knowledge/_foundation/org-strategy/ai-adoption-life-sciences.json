@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fnd-ai-ls-001",
+    "category": "org-strategy",
+    "title": "AI Adoption Across the Life Sciences Value Chain",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Enterprise-wide AI adoption patterns across life sciences from R&D through commercial, including risk management applications and organizational readiness factors. Based on 2021-2022 industry research.",
+    "findings": {
+      "pandemic_acceleration": "COVID-19 increased AI focus across the full organization \u2014 from R&D (target identification, trial optimization) to manufacturing (yield prediction), supply chain (demand forecasting), and commercial (HCP engagement optimization).",
+      "enterprise_ai_approach": "Most mature organizations adopt enterprise-wide AI strategies rather than point solutions. This requires centralized data platforms, shared ML infrastructure, cross-functional governance, and a portfolio approach to use case prioritization.",
+      "ai_in_risk_management": "Emerging applications include: pharmacovigilance signal detection using NLP on unstructured reports, manufacturing quality prediction from process data, supply chain disruption forecasting, and compliance monitoring across promotional activities.",
+      "adoption_barriers": "Key barriers: data silos across functions, talent scarcity in domain-specific AI/ML, regulatory uncertainty about AI in GxP contexts, organizational resistance to AI-augmented decision-making, and difficulty measuring ROI for enterprise AI investments.",
+      "maturity_spectrum": "Organizations range from experimenters (isolated proofs of concept) to transformers (AI embedded in core workflows). Most life sciences firms are in the scaling phase \u2014 they have successful pilots but struggle to operationalize across the enterprise."
+    },
+    "source": "Industry research on scaling AI across the life sciences value chain with enterprise-wide and risk management perspectives",
+    "tags": [
+      "ai",
+      "machine-learning",
+      "enterprise-strategy",
+      "risk-management",
+      "digital-transformation"
+    ]
+  }
+]

@@ -1,0 +1,63 @@
+# Copyright (c) 2024-2026 Lumis AI. All rights reserved.
+# Licensed under the Lumis AI Proprietary Software License. See LICENSE.
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lumis-mcp"
+version = "1.0.1"
+description = "Life sciences CRM migration intelligence — an MCP server with 950+ curated knowledge entries for module mapping, regulatory compliance, validation, and go-live readiness."
+readme = "README.md"
+license = "LicenseRef-Proprietary"
+requires-python = ">=3.10"
+authors = [{ name = "Lumis AI", email = "hello@lumis-lifesciences.com" }]
+keywords = [
+    "mcp",
+    "life-sciences",
+    "pharma",
+    "crm-migration",
+    "regulatory-compliance",
+    "model-context-protocol",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dependencies = [
+    "mcp>=1.0,<3.0",
+    "pyyaml>=6.0",
+]
+
+[project.urls]
+Homepage = "https://lumis-lifesciences.com"
+Repository = "https://github.com/jkapadia-techsterllc/lumis-mcp"
+Documentation = "https://lumis-lifesciences.com"
+Issues = "https://github.com/jkapadia-techsterllc/lumis-mcp/issues"
+
+[project.scripts]
+lumis-mcp = "lumis_mcp:main"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "lumis_mcp/",
+    "knowledge/",
+    "agents/",
+    "prompts/",
+    "LICENSE",
+    "README.md",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["lumis_mcp"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"knowledge" = "lumis_mcp/knowledge"
+"agents" = "lumis_mcp/agents"
+"prompts" = "lumis_mcp/prompts"

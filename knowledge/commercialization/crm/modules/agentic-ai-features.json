@@ -1,0 +1,474 @@
+[
+  {
+    "id": "ai-001",
+    "feature": "Agentic AI Framework for Life Sciences",
+    "description": "Purpose-built agentic AI capabilities that bring intelligent, operational assistance directly into life sciences workflows. The framework analyzes complex clinical and patient data, aligns to regulated processes, and empowers teams from the clinic to the field to take real action. Each agent is composed of three parts: Skills (prebuilt flows for domain jobs), Topics (focus the agent on a defined task type), and Actions (executable steps like generating summaries, retrieving records, or updating data).",
+    "setup_steps": [
+      "Enable the agentic AI framework in your org",
+      "Assign the appropriate life sciences AI permission sets to users",
+      "Configure topics relevant to your use cases (clinical, patient, commercial)",
+      "Map standard and custom actions to each topic",
+      "Configure grounding data sources per topic using the data unification layer",
+      "Define human oversight rules for sensitive or irreversible actions",
+      "Test agent responses in sandbox before production deployment"
+    ],
+    "prerequisites": [
+      "Industry cloud licenses assigned to users",
+      "Data unification layer (Data 360) configured for cross-system data access",
+      "Permission sets for AI features assigned",
+      "Relevant data model objects populated (accounts, contacts, visits, products)",
+      "Trust layer configuration for data protection boundaries"
+    ],
+    "configuration_details": [
+      "Agents are configured with clicks by admins and extended by developers on the platform",
+      "Each agent has scoped Topics that constrain what it can discuss",
+      "Actions map to Flows, Apex classes, or API calls the agent can invoke",
+      "Grounding sources should be scoped per topic — a patient-support topic should not access commercial prescribing data",
+      "Agent actions run in user context — subject to the same field-level security and sharing rules as manual user actions",
+      "Separate suggest-only from act actions — read-only vs. write/external actions require different oversight levels",
+      "All agent actions are logged at the same fidelity as human user actions for audit trails"
+    ],
+    "objects_and_fields": [
+      "Agent Topic configuration",
+      "Agent Action definitions",
+      "Trust Layer policies",
+      "Data 360 grounding sources",
+      "Permission Set assignments for AI features"
+    ],
+    "integration_patterns": [
+      "Agent actions invoke the same governed automation (Flow, Apex, integration) that a human user would trigger",
+      "Grounding uses Data 360 federation — no need to copy all data into the platform",
+      "Agents sit above the application layer, not beside it — inheriting sharing rules and security",
+      "External data retrieved as context is treated as untrusted data, not as instructions (prompt injection defense)"
+    ],
+    "gotchas": [
+      "CRITICAL: Never give an agent broader access than the human user it acts on behalf of",
+      "Agent summarizations can create data leaks by aggregating across security boundaries a human user could not cross",
+      "Ground narrowly per topic — grounding against all data sources means every topic can surface every dataset",
+      "Prompt injection is a live threat — content from external sources (emails, documents) can contain instructions aimed at the model",
+      "Agents should not auto-communicate to patients or healthcare providers without human review",
+      "For clinical claims, never use open web grounding — only approved medical content",
+      "Do not reach for an agent just because it is available — use deterministic automation (Flows) when the task has one correct answer and full input data"
+    ],
+    "migration_relevance": "Veeva CRM has no native agentic AI layer — migration to the target platform adds AI-powered visit preparation, call summaries, benefits verification, and site selection that are absent in Veeva. The modular skill/topic/action architecture allows incremental adoption. Migration teams should map existing Veeva processes to determine which are candidates for AI augmentation vs. deterministic automation."
+  },
+  {
+    "id": "ai-002",
+    "feature": "Clinical Trial Site Selection AI",
+    "description": "AI-assisted site feasibility and selection for clinical trials. Helps site feasibility leads identify top sites and investigators for a research study by analyzing historical enrollment data, site capability, investigator history, and therapeutic expertise.",
+    "setup_steps": [
+      "Configure the Clinical Trial Management skill in the agentic AI framework",
+      "Set up the Site Selection Assistance topic",
+      "Enable the standard actions: Get site search filters, Add site search results, Summarize site and investigator, Send feasibility assessments",
+      "Populate site and investigator data in the platform",
+      "Configure grounding against historical enrollment and site capability data",
+      "Define human oversight rules — study team makes the final selection, agent narrows the list"
+    ],
+    "prerequisites": [
+      "Clinical trial data model objects populated (ResearchStudy, ResearchStudySite, etc.)",
+      "Historical enrollment data available for grounding",
+      "Site and investigator profiles maintained",
+      "Clinical AI permission sets assigned"
+    ],
+    "configuration_details": [
+      "Topic: Site Selection Assistance — assists site feasibility leads in identifying top sites and investigators",
+      "Actions include: Get site search filters for research study, Add site search results/site/investigators to research study, Summarize site and investigator, Send site feasibility assessments to site contacts",
+      "Agent narrows the list — human team makes the final selection",
+      "Grounding uses historical enrollment data, site capability data, and investigator history"
+    ],
+    "objects_and_fields": [
+      "ResearchStudy",
+      "ResearchStudySite",
+      "ResearchStudySiteInvestigator",
+      "Site feasibility assessment records",
+      "Investigator profiles"
+    ],
+    "integration_patterns": [
+      "Can integrate with external CTMS/EDC systems via scheduled batch or event-driven status updates",
+      "The platform orchestrates and tracks status — the EDC/CTMS remains system of record for clinical data",
+      "Platform Events for milestone-driven clinical trial status changes"
+    ],
+    "gotchas": [
+      "The platform is not the system of record for detailed clinical data — that belongs to the EDC/CTMS",
+      "Agent recommendations are suggestions — study team must review and approve site selections",
+      "Grounding must be scoped to clinical data only — commercial data should not bleed into clinical topics",
+      "Historical enrollment data quality directly impacts recommendation quality"
+    ],
+    "migration_relevance": "Veeva CRM does not natively support clinical trial site selection. This is a net-new capability that significantly accelerates trial startup. For organizations migrating from Veeva who also have clinical operations, this reduces dependency on separate CTMS tools for site feasibility assessment."
+  },
+  {
+    "id": "ai-003",
+    "feature": "Patient Services Benefits Reverification AI",
+    "description": "AI-assisted benefits reverification for patient services representatives. Helps reps reverify pharmacy benefits for program enrollees, draft or revise benefits verification emails, and summarize patient responses — accelerating time-consuming insurance verification processes.",
+    "setup_steps": [
+      "Configure the Patient Services skill in the agentic AI framework",
+      "Set up the Benefits Reverification topic",
+      "Enable standard actions: Draft or revise benefits verification email, Summarize patient response",
+      "Configure integration with payer/benefits data sources",
+      "Set up Pharmacy Benefits Verification tab on Care Program Enrollee records",
+      "Define human oversight rules — results shown to human agent, not auto-communicated to patient"
+    ],
+    "prerequisites": [
+      "Patient services data model configured (CareProgramEnrollee, VerificationRequest, BenefitInformation)",
+      "Integration with payer/benefits systems for real-time or cached lookups",
+      "Patient services permission sets assigned",
+      "Service Cloud components configured for case management and omni-channel routing"
+    ],
+    "configuration_details": [
+      "Topic: Benefits Reverification — assists patient services reps in reverifying benefits for program enrollees",
+      "Actions: Draft or revise benefits verification email, Summarize patient response",
+      "Pharmacy Benefits Verification tab displays verification requests and benefit information for a patient",
+      "Benefits data retrieved via governed integration — not stored permanently",
+      "Real-time formulary or benefits checks use synchronous external service calls, cached briefly",
+      "Results shown to human agent first — never auto-communicated to patients"
+    ],
+    "objects_and_fields": [
+      "CareProgramEnrollee",
+      "VerificationRequest",
+      "BenefitInformation",
+      "Pharmacy Benefits Verification tab"
+    ],
+    "integration_patterns": [
+      "Synchronous external service call for real-time formulary/benefits check, with brief caching",
+      "Governed integration for payer data — not stored permanently in the platform",
+      "Service Cloud underneath for case management and omni-channel routing",
+      "AI-generated case summaries from Service agents log outcomes and key details of patient support calls"
+    ],
+    "gotchas": [
+      "Benefits data should not be stored permanently — use caching with TTL",
+      "Full replication of payer data would always be stale — use real-time lookups",
+      "Patient support topic should not have healthcare provider prescribing data in its retrieval scope",
+      "Human agent handoff required for anything ambiguous or emotionally sensitive",
+      "Patient-identifiable data fields should use encryption (Shield Platform Encryption)"
+    ],
+    "migration_relevance": "Veeva CRM has limited patient services capabilities and no AI-assisted benefits verification. This is a significant upgrade for organizations that currently manage benefits verification manually or through disconnected systems. The automation can dramatically reduce time-to-therapy for patients."
+  },
+  {
+    "id": "ai-004",
+    "feature": "Commercial Visit Planning AI",
+    "description": "AI-powered visit preparation for key account managers, medical science liaisons (MSLs), and field representatives. Generates contextual summaries of healthcare providers including engagement history, consent status, recent content interactions, prescribing trends, and open items to help reps prepare for every interaction.",
+    "setup_steps": [
+      "Configure the Customer Engagement skill in the agentic AI framework",
+      "Set up the Visit Planning topic",
+      "Enable standard actions: Generate healthcare provider summary, Identify records by name",
+      "Configure grounding against engagement history, territory data, product data, and prior visit notes",
+      "Set up mobile access for field users",
+      "Define human oversight rules — agent suggests, rep reviews before the call"
+    ],
+    "prerequisites": [
+      "Commercial data model populated (Accounts, Visits, Products, Territory assignments)",
+      "Engagement history data available",
+      "Consent management configured for healthcare providers",
+      "Territory alignment configured",
+      "Mobile offline capabilities enabled"
+    ],
+    "configuration_details": [
+      "Topic: Visit Planning — helps reps prepare for visits with contextual summaries",
+      "Actions: Generate healthcare provider summary, Identify records by name",
+      "Pre-call summaries include: key affiliations, licensure, consent status, segmentation, engagement history, recent content interactions",
+      "Agent suggests talking points and open items — rep reviews before the call, agent does not message the provider directly",
+      "Can combine with Sales agent capabilities for drafting personalized, compliant follow-up messages after a visit",
+      "Smart Summary appears on Dashboard tab of healthcare provider accounts"
+    ],
+    "objects_and_fields": [
+      "Account (Healthcare Provider)",
+      "Visit / Interaction records",
+      "Product records",
+      "Territory alignment records",
+      "Consent records",
+      "Content engagement records",
+      "Affiliation records"
+    ],
+    "integration_patterns": [
+      "Grounding uses engagement history, consent status, recent content sent from platform data",
+      "Can federate external prescribing/market data via Data 360 without copying into the platform",
+      "Mobile-first design — field reps access on devices",
+      "Offline data cached locally with encryption at rest; syncs when connectivity returns"
+    ],
+    "gotchas": [
+      "Agent should not have write authority for summarization actions — read-only output for account summarization",
+      "Territory alignment is a business attribute, not a security mechanism — do not assume alignment implements sharing",
+      "Summarization must not aggregate across security boundaries (clinical + commercial data)",
+      "Offline validation rules are deferred, not skipped — design validation to tolerate offline ordering",
+      "Automation triggered by offline visits fires when device reconnects, not in real-time"
+    ],
+    "migration_relevance": "Veeva CRM provides call/visit tracking but has no native AI-powered visit preparation or HCP summarization. Migration to the target platform adds intelligent pre-call briefings that synthesize engagement history, consent status, and content interactions — capabilities that required manual effort or third-party tools in Veeva. The modular topic/action architecture means this can be enabled incrementally post-migration."
+  },
+  {
+    "id": "ai-005",
+    "feature": "Medical Information Request AI",
+    "description": "AI-assisted handling of medical information requests from healthcare providers. Accurately answers clinical questions using only approved medical content, with escalation to medical information specialists for anything outside approved content boundaries.",
+    "setup_steps": [
+      "Configure the Medical Information topic in the agentic AI framework",
+      "Load approved medical content into the grounding data source",
+      "CRITICAL: Disable open web grounding for clinical claims — only approved content",
+      "Configure escalation rules for medical information specialists",
+      "Set up audit logging for all medical information interactions"
+    ],
+    "prerequisites": [
+      "Approved medical content library maintained and loaded",
+      "Medical information specialist escalation path configured",
+      "Medical affairs permission sets assigned",
+      "Compliance and audit framework configured"
+    ],
+    "configuration_details": [
+      "Grounding MUST use only approved medical content — never open web for clinical claims",
+      "Escalation to medical information specialist for anything outside approved content",
+      "All interactions logged with full audit trail (what action ran, what data it touched, what output it returned)",
+      "Agent should not provide diagnoses or unsupported clinical guidance"
+    ],
+    "objects_and_fields": [
+      "Medical information request records",
+      "Approved content library",
+      "Escalation records",
+      "Audit trail records"
+    ],
+    "integration_patterns": [
+      "Content management system integration for approved medical content (metadata in platform, content in CMS)",
+      "Escalation workflow to medical affairs team",
+      "Full audit logging for regulatory compliance"
+    ],
+    "gotchas": [
+      "CRITICAL: Never use open web grounding for clinical claims — only approved medical content",
+      "All medical information responses require audit trail",
+      "Agent must not make unsupported clinical claims",
+      "Escalation path must be clearly defined and tested",
+      "Content from external sources treated as untrusted data for prompt injection defense"
+    ],
+    "migration_relevance": "Veeva CRM handles medical inquiries through Veeva Medical but without AI-powered response generation. The target platform adds AI-assisted response drafting grounded in approved content, reducing response time while maintaining compliance. This is particularly valuable for medical affairs teams handling high volumes of healthcare provider inquiries."
+  },
+  {
+    "id": "ai-006",
+    "feature": "AI-Powered Field Rep Assistance",
+    "description": "AI agent that assists field representatives with tasks like logging visits from voice notes, drafting follow-up communications, and updating records. The rep reviews and approves all generated content before it saves.",
+    "setup_steps": [
+      "Enable field rep assistance topic in the agentic AI framework",
+      "Configure voice-to-text capabilities for visit logging",
+      "Set up mobile agent access for field users",
+      "Configure human oversight rules — rep reviews and approves generated records before saving",
+      "Enable offline mode for field usage"
+    ],
+    "prerequisites": [
+      "Mobile app configured for field users",
+      "Visit/Interaction data model set up",
+      "Offline sync framework configured",
+      "Field rep permission sets assigned"
+    ],
+    "configuration_details": [
+      "Agent converts voice notes into structured visit records",
+      "Rep MUST review and approve the generated record before it saves — no auto-save",
+      "Works on mobile devices in field conditions",
+      "Integrates with visit/interaction tracking",
+      "During visits, reps can log insights, launch samples, or share approved content from mobile",
+      "Afterward, reps document the visit, update product ratings, and schedule follow-ups in one flow"
+    ],
+    "objects_and_fields": [
+      "Visit / Interaction records",
+      "Product ratings",
+      "Follow-up scheduling records",
+      "Sample drop records",
+      "Content engagement records"
+    ],
+    "integration_patterns": [
+      "Mobile-first with offline capability",
+      "Voice-to-text processing",
+      "Sync engine handles offline-created records",
+      "Platform Events for follow-up automation fire on reconnect"
+    ],
+    "gotchas": [
+      "Offline-created records sync with delay — automation fires on reconnect, not in real-time",
+      "Validation rules are deferred during offline use, not skipped",
+      "Conflict handling needs explicit policy — last-write-wins may not be appropriate for compliance-sensitive fields",
+      "Local device storage must be encrypted; remote wipe policy required for lost/stolen devices",
+      "Sync should limit data footprint — do not sync entire territory history to every device"
+    ],
+    "migration_relevance": "Veeva CRM mobile (iPad-focused) supports visit logging but has no AI-powered voice-to-visit or automated record generation. Migration adds voice-based visit capture, AI-drafted follow-ups, and intelligent next-best-action recommendations that are absent in the Veeva mobile experience."
+  },
+  {
+    "id": "ai-007",
+    "feature": "Platform AI Trust Layer",
+    "description": "Security and governance framework that mediates what the underlying AI model sees and returns. Ensures data protection, auditability, and policy-aware automation for all agentic AI interactions in regulated life sciences environments.",
+    "setup_steps": [
+      "Configure Trust Layer policies for data protection boundaries",
+      "Set up role-based access controls for AI features",
+      "Configure audit logging for all agent interactions",
+      "Define consent management rules for AI-driven outreach",
+      "Set up data masking for non-production environments"
+    ],
+    "prerequisites": [
+      "Security model designed (object/field-level security, record-level access, sharing rules)",
+      "Permission Set Groups configured for role-based access",
+      "Shield Platform Encryption enabled for sensitive fields",
+      "Event Monitoring configured for access auditing"
+    ],
+    "configuration_details": [
+      "Data stays within the platform trust boundary",
+      "Access controlled using role-based permissions and consent",
+      "Agents keep records of what they did, why, and which sources they used",
+      "Actions follow defined rules including disclosure tracking, electronic signatures, and retention policies",
+      "Agent actions must run in user context — same field-level security and sharing rules as manual actions",
+      "Separate suggest from act — irreversible actions require human confirmation",
+      "Log everything an agent does at the same fidelity as human user actions"
+    ],
+    "objects_and_fields": [
+      "Permission Set Groups (e.g., Field Rep - Oncology, Medical Science Liaison, Patient Services Agent)",
+      "Shield Platform Encryption fields",
+      "Event Monitoring logs",
+      "Consent management records",
+      "Agent audit trail records"
+    ],
+    "integration_patterns": [
+      "Integration users must follow least-privilege principle — only specific fields, not system admin",
+      "Data masking required in non-production environments",
+      "Event Monitoring detects bulk export of sensitive data outside normal patterns"
+    ],
+    "gotchas": [
+      "A service account with elevated privileges powering the agent defeats the entire access model",
+      "Grounding against all data because it is convenient means every topic can surface every dataset",
+      "Agent summarization that aggregates across a security boundary is a security failure even if no single query was unauthorized",
+      "Content ingested from external sources can contain prompt injection instructions",
+      "Do not treat all life sciences implementations as having the same regulatory requirements — GxP, GDPR, HIPAA, 21 CFR Part 11 applicability varies by organization, country, process, and data"
+    ],
+    "migration_relevance": "Veeva CRM has its own compliance framework but lacks an integrated AI trust layer. Migration to the target platform requires careful mapping of existing security models and compliance requirements. The built-in Trust Layer provides native support for GxP, GDPR, HIPAA, and 21 CFR Part 11 requirements that would need separate tooling in a Veeva environment."
+  },
+  {
+    "id": "ai-008",
+    "feature": "Advanced Therapy Management with AI Orchestration",
+    "description": "AI-supported management of advanced therapies such as cell and gene treatments. Supports multistep scheduling, digital chain of custody, electronic signatures, and care orchestration across stakeholders. Platform AI can assist with care coordination and status tracking.",
+    "setup_steps": [
+      "Configure Care Program and Care Program Enrollee objects",
+      "Set up multistep scheduling workflows",
+      "Enable digital chain of custody tracking",
+      "Configure electronic signature capabilities",
+      "Set up care orchestration automation",
+      "Optionally enable AI-assisted care coordination summaries"
+    ],
+    "prerequisites": [
+      "Care Program data model configured",
+      "Participant enrollment workflows set up",
+      "Electronic signature infrastructure configured",
+      "Chain of custody tracking objects enabled",
+      "Patient consent management configured"
+    ],
+    "configuration_details": [
+      "Care Program Enrollee records track patient progress through therapy stages (e.g., Apheresis stage for gene therapy)",
+      "Multistep scheduling coordinates across multiple stakeholders",
+      "Digital chain of custody provides full tracking of therapy materials",
+      "E-signatures satisfy audit and retention requirements",
+      "AI can generate coordination summaries and surface next steps",
+      "Secure portals allow patients to self-register and access pre-screening instructions"
+    ],
+    "objects_and_fields": [
+      "CareProgram",
+      "CareProgramEnrollee",
+      "CareProgramEnrolleeStage",
+      "ChainOfCustody records",
+      "ElectronicSignature records",
+      "ConsentDocument records"
+    ],
+    "integration_patterns": [
+      "Integration with laboratory systems for chain of custody",
+      "EHR/EMR integration for patient clinical data (synchronous REST, narrowly scoped)",
+      "Platform Events for milestone notifications",
+      "Regulatory/adverse-event reporting via synchronous API with confirmed receipt and audit log"
+    ],
+    "gotchas": [
+      "PHI-heavy data — retrieve only what is needed at the point of use",
+      "EHR integration should be synchronous REST, narrowly scoped — not bulk replication",
+      "Regulatory adverse-event reporting requires confirmed, timestamped submission — fire-and-forget events are not sufficient",
+      "Patient and healthcare provider data have different consent regimes and retention rules — keep graphs separate",
+      "E-signature and retention policies must satisfy specific regulatory audits"
+    ],
+    "migration_relevance": "Veeva CRM does not natively support advanced therapy management workflows. This is a net-new capability area for organizations migrating from Veeva. The platform provides purpose-built objects and workflows for cell and gene therapy coordination that would require extensive custom development on Veeva."
+  },
+  {
+    "id": "ai-009",
+    "feature": "Actionable Plans with AI Integration",
+    "description": "AI-enhanced actionable plans that generate standardized outreach and follow-up strategies. Clinical teams can use core capabilities to generate outreach plans for investigators identified during site selection, combining industry-specific AI skills with platform automation.",
+    "setup_steps": [
+      "Configure Actionable Plans feature",
+      "Set up plan templates for different use cases (clinical outreach, commercial follow-up)",
+      "Enable AI integration for plan generation",
+      "Configure automation triggers for plan execution",
+      "Set up monitoring and completion tracking"
+    ],
+    "prerequisites": [
+      "Actionable Plans feature enabled",
+      "Relevant data model objects populated",
+      "AI framework configured with appropriate topics",
+      "User permission sets assigned"
+    ],
+    "configuration_details": [
+      "Plans combine industry-specific AI skills with platform automation",
+      "Templates define standard outreach sequences and follow-up cadences",
+      "AI can suggest plan modifications based on historical engagement data",
+      "Plans execute through governed automation paths (Flow, Apex)",
+      "Completion tracking provides visibility into plan execution status"
+    ],
+    "objects_and_fields": [
+      "ActionablePlan",
+      "ActionablePlanStep",
+      "ActionablePlanTarget",
+      "Related engagement records"
+    ],
+    "integration_patterns": [
+      "Plans invoke the same governed automation as manual user actions",
+      "Can combine with email automation from Sales agent capabilities",
+      "Data 360 grounding for AI-suggested plan modifications"
+    ],
+    "gotchas": [
+      "Plans should follow the same sharing and security rules as manual actions",
+      "AI-suggested modifications should be reviewed before execution",
+      "Do not conflate plan execution authority with plan viewing authority"
+    ],
+    "migration_relevance": "Veeva CRM has Suggestions and MyInsights but lacks platform-native actionable plans with AI integration. Migration enables standardized, AI-enhanced outreach workflows that combine the best of deterministic automation with intelligent recommendations."
+  },
+  {
+    "id": "ai-010",
+    "feature": "Data 360 AI Grounding Layer",
+    "description": "The central data unification engine that powers agentic AI. Securely connects and harmonizes data from all sources including patient records, clinical trial data in data lakes, and information from external electronic health records (EHR) or lab systems. Provides the foundation for accurate AI by ensuring every agent action is informed by a complete and trusted data picture.",
+    "setup_steps": [
+      "Configure Data 360 data streams from relevant sources",
+      "Set up identity resolution rules for healthcare providers and organizations",
+      "Define golden record ownership and conflict handling",
+      "Configure federation for data that does not need to be copied into the platform",
+      "Set up data refresh schedules per source",
+      "Scope grounding sources per AI topic"
+    ],
+    "prerequisites": [
+      "Data 360 licenses assigned",
+      "Source system connectivity configured (EHR, CTMS, MDM, data lakes)",
+      "Identity resolution matching rules defined",
+      "Data governance framework established"
+    ],
+    "configuration_details": [
+      "Identity resolution handles noisy inputs — different spellings, manual entries, and NPI-linked records",
+      "Define matching rules, golden-record ownership, conflict handling, update frequency per source",
+      "Country-specific identifiers may require different matching strategies per region",
+      "Zero-copy federation for data you need to reason over but do not want to duplicate",
+      "Route high-volume analytical data into Data 360 rather than custom objects",
+      "Grounding sources should be scoped per AI topic — not blanket access to all data"
+    ],
+    "objects_and_fields": [
+      "Data Stream configurations",
+      "Identity Resolution rules",
+      "Data Model Objects (DMOs) for harmonized data",
+      "Calculated Insights",
+      "Segmentation definitions"
+    ],
+    "integration_patterns": [
+      "Zero-copy federation for external datasets — no replication needed for AI grounding",
+      "Batch/CDC via integration middleware for synchronized master data",
+      "Bulk API for large scheduled data loads into Data 360",
+      "Real-time lookups via synchronous external service calls with brief caching"
+    ],
+    "gotchas": [
+      "Data 360 is not a replacement for the object model — it is a companion to it",
+      "A matching strategy that works in one country may not work in another",
+      "Every replicated field is a future sync-conflict and drift risk — prefer federation",
+      "Do not assume 'we might need it later' is sufficient justification to store data permanently",
+      "Grounding an agent against all of Data 360 means every topic can surface every dataset — scope narrowly"
+    ],
+    "migration_relevance": "Veeva CRM relies on Veeva Network (now Veeva Compass) for master data management but has no equivalent of Data 360 for unified AI grounding. Migration should map existing Veeva Network data flows to Data 360 identity resolution and determine which external data sources to federate vs. replicate. This is the foundational layer that enables all AI capabilities on the target platform."
+  }
+]

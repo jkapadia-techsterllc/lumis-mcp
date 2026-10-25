@@ -1,0 +1,31 @@
+[
+  {
+    "id": "fnd-wearable-001",
+    "category": "modules",
+    "title": "Wearable Health Technology Landscape for Life Sciences",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Analysis of consumer wearable health technology capabilities and their implications for clinical trials, patient programs, and real-world evidence in life sciences.",
+    "findings": {
+      "consumer_wearable_health_capabilities": "Leading consumer wearable platforms now cover 17+ health and fitness areas including heart health (ECG, AFib detection, heart rate variability), mobility (fall detection, walking steadiness, gait analysis), respiratory metrics (blood oxygen, respiratory rate during sleep), hearing health (noise exposure monitoring), womens health (cycle tracking, fertility windows), and safety features (emergency SOS, crash detection). These are available in nearly 200 countries.",
+      "health_data_aggregation": "Consumer health apps aggregate 150+ different data types from wearables, connected devices, and third-party apps. Data includes clinical records from participating health institutions (immunizations, lab results, medications, conditions, procedures). This creates longitudinal patient health profiles that were previously impossible outside clinical settings.",
+      "research_platform_capabilities": "Device manufacturers have built research frameworks that enable large-scale virtual clinical studies. One major study enrolled the largest-ever virtual cardiac clinical trial cohort, demonstrating that wearable-based detection of irregular heart rhythms correlates with clinical AFib diagnosis. Additional studies cover hearing health, heart and movement patterns, and womens health.",
+      "clinical_trial_implications": "Wearable data offers continuous, passive monitoring between clinical visits \u2014 critical for decentralized trial designs. Relevant data streams include: continuous heart rate and rhythm for cardiac endpoints, mobility metrics for musculoskeletal and neurological studies, sleep architecture for CNS and behavioral health trials, activity levels for rehabilitation and chronic disease management.",
+      "privacy_and_data_control": "Consumer health platforms emphasize privacy-first architecture: on-device encryption, granular user consent for data sharing, prohibition on third-party advertising use, and HIPAA-compliant health record integration. These privacy standards set expectations for how life sciences organizations must handle patient-generated health data.",
+      "integration_opportunities": "Life sciences organizations can integrate wearable data through: published health data APIs for authorized research applications, direct-to-patient engagement through wellness and adherence programs, real-world evidence generation from continuous monitoring data, site-less or hybrid trial designs using remote patient monitoring.",
+      "market_evolution": "The trajectory moves from consumer fitness tracking toward clinically validated health monitoring. FDA-cleared ECG capability, fall detection algorithms validated through clinical studies with 100,000+ participants, and walking steadiness predictions trained on post-operative orthopedic data demonstrate the convergence of consumer and clinical-grade sensing."
+    },
+    "source": "Technology company health report, July 2022",
+    "tags": [
+      "wearables",
+      "remote-monitoring",
+      "digital-health",
+      "rwe",
+      "patient-engagement",
+      "decentralized-trials",
+      "ecg",
+      "fall-detection"
+    ]
+  }
+]

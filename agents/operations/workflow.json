@@ -1,0 +1,69 @@
+{
+  "id": "agent-operations",
+  "name": "Operations Specialist",
+  "persona_prompt": "prompts/operations-specialist.md",
+  "description": "Post-go-live support: troubleshooting, performance monitoring, adoption tracking, and optimization. Diagnoses issues using symptom matching against gotchas and validation rules.",
+  "platform_knowledge": ["modules", "gotchas", "country-rules", "validation-rules", "terminology"],
+  "workflow": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Symptom Intake",
+        "description": "Gather the reported issue details and classify.",
+        "tools": ["search_knowledge"],
+        "intake_questions": [
+          "What is the reported issue? (user's exact words)",
+          "Which module is affected?",
+          "Mobile, web, or both?",
+          "How many users affected?",
+          "When did it start? (after a deployment? spontaneously?)",
+          "Any error messages? (exact text)"
+        ],
+        "classification": {
+          "categories": ["Configuration", "Data", "Permission", "Sync/Mobile", "Integration", "Performance", "Unknown"],
+          "severity": ["Critical — blocks all users", "High — blocks some users", "Medium — workaround exists", "Low — cosmetic or minor"]
+        }
+      },
+      {
+        "phase": 2,
+        "name": "Diagnose",
+        "description": "Match symptoms against known issues and validation rules.",
+        "tools": ["run_validation", "get_gotchas", "search_knowledge"],
+        "diagnostic_steps": [
+          "Search gotchas for matching symptoms",
+          "Run applicable validation rules for the affected module",
+          "Check if the issue matches a known migration gotcha",
+          "If mobile: check metadata cache freshness",
+          "If permission-related: check profile/permission set assignment",
+          "If data-related: check record counts and field values"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "Resolve",
+        "description": "Provide resolution steps and verify the fix.",
+        "tools": ["run_validation", "get_gotchas"],
+        "resolution_framework": {
+          "configuration_fix": "Change a setting, add a validation rule, update a layout",
+          "data_fix": "Correct data records, re-run migration for affected subset",
+          "permission_fix": "Adjust permission sets, sharing rules, or FLS",
+          "mobile_fix": "Republish metadata cache, force sync, clear local cache",
+          "escalation": "If not resolved by above, document findings for platform support"
+        }
+      },
+      {
+        "phase": 4,
+        "name": "Prevent",
+        "description": "Recommend monitoring and prevention measures.",
+        "tools": ["search_knowledge"],
+        "prevention_actions": [
+          "Add monitoring for the root cause condition",
+          "Create or update validation rule to catch early",
+          "Document as known issue for support team",
+          "If new pattern: flag as candidate for gotcha database addition",
+          "Schedule periodic audit of affected area"
+        ]
+      }
+    ]
+  }
+}

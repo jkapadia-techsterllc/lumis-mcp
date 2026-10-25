@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "description": "Life sciences value chain taxonomy. Defines the phases, areas, and sub-areas that organize the Lumis knowledge base. Adding a new area here makes it discoverable by the server without code changes.",
+  "phases": [
+    {
+      "id": "discovery",
+      "name": "Drug Discovery",
+      "description": "Target identification, lead optimization, preclinical research, and candidate selection.",
+      "status": "planned",
+      "areas": [
+        {
+          "id": "target-id",
+          "name": "Target Identification & Validation",
+          "status": "planned"
+        },
+        {
+          "id": "lead-optimization",
+          "name": "Lead Optimization",
+          "status": "planned"
+        },
+        {
+          "id": "preclinical",
+          "name": "Preclinical Research",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "clinical",
+      "name": "Clinical Development",
+      "description": "Clinical trials (Phase I\u2013IV), regulatory submissions, CTMS, and patient recruitment.",
+      "status": "active",
+      "areas": [
+        {
+          "id": "ctms",
+          "name": "Clinical Trial Management System (CTMS)",
+          "description": "Site management, protocol tracking, enrollment monitoring, study startup, and clinical operations oversight.",
+          "status": "planned",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas",
+            "country-rules"
+          ]
+        },
+        {
+          "id": "etmf",
+          "name": "Electronic Trial Master File (eTMF)",
+          "description": "TMF reference model compliance, document lifecycle, inspection readiness, and regulatory archiving.",
+          "status": "planned",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas"
+          ]
+        },
+        {
+          "id": "digital-trials",
+          "name": "Digital Trials & Decentralized Clinical Trials",
+          "description": "Remote monitoring, ePRO/eCOA, wearable data integration, hybrid trial design, and virtual site models.",
+          "status": "planned",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas"
+          ]
+        },
+        {
+          "id": "clinical-trials",
+          "name": "Clinical Trials Operations",
+          "description": "Protocol design, patient recruitment, randomization, data management, safety reporting, and Phase I\u2013IV execution.",
+          "status": "active",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas",
+            "country-rules"
+          ]
+        },
+        {
+          "id": "hcp-payments",
+          "name": "HCP Payments & Transparency",
+          "description": "Investigator grants, fair market value, Sunshine Act / EFPIA disclosure, aggregate spend tracking, and payment reconciliation.",
+          "status": "planned",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas",
+            "country-rules"
+          ]
+        },
+        {
+          "id": "participant-management",
+          "name": "Participant Management",
+          "description": "Patient recruitment, enrollment, consent, FHIR/USCDI alignment, and advanced therapy management.",
+          "status": "active",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas"
+          ]
+        },
+        {
+          "id": "patient-programs",
+          "name": "Patient Programs",
+          "description": "Care programs, financial assistance, benefit verification, electronic signatures for consent, and patient outcome tracking.",
+          "status": "active",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "commercialization",
+      "name": "Commercialization",
+      "description": "Go-to-market, field operations, safety monitoring, and market access after regulatory approval.",
+      "status": "active",
+      "areas": [
+        {
+          "id": "crm",
+          "name": "CRM & Field Operations",
+          "description": "Field sales, medical affairs, KAM, CLM, events, samples, consent, territory management, and mobile CRM.",
+          "status": "active",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas",
+            "validation-rules",
+            "country-rules"
+          ]
+        },
+        {
+          "id": "safety-pv",
+          "name": "Safety & Pharmacovigilance",
+          "description": "Adverse event reporting, signal detection, ICSR/CIOMS, risk management, and post-market surveillance.",
+          "status": "planned",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas",
+            "country-rules"
+          ]
+        },
+        {
+          "id": "regulated-content",
+          "name": "Regulated Content Management",
+          "description": "MLR/PRC review workflows, promotional and medical content lifecycle, digital asset management, claims and references, and regulatory submission content.",
+          "status": "planned",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees",
+            "gotchas",
+            "country-rules"
+          ]
+        },
+        {
+          "id": "market-access",
+          "name": "Market Access & HEOR",
+          "description": "Payer engagement, health economics, outcomes research, formulary management, and reimbursement.",
+          "status": "planned",
+          "knowledge_categories": [
+            "modules",
+            "decision-trees"
+          ]
+        }
+      ]
+    }
+  ],
+  "foundation": {
+    "id": "_foundation",
+    "description": "Cross-cutting knowledge that applies across all phases and areas. Always included in search results regardless of phase/area filter.",
+    "categories": [
+      "org-strategy",
+      "country-rules",
+      "decision-trees",
+      "terminology",
+      "validation"
+    ]
+  },
+  "category_schema": {
+    "modules": "Feature descriptions, field mappings, configuration guides, and module-to-module comparisons.",
+    "decision-trees": "Structured decision logic with gates, branches, and recommendation nodes.",
+    "gotchas": "Non-obvious pitfalls, implementation gaps, and troubleshooting guides.",
+    "country-rules": "Regulatory requirements, country-specific configuration, and compliance rules.",
+    "validation-rules": "Configuration validation checklists and automated rule definitions.",
+    "terminology": "Correct vs. incorrect terminology to prevent hallucinations and ensure consistency."
+  }
+}

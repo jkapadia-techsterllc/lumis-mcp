@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fnd-personalization-001",
+    "category": "org-strategy",
+    "title": "Personalization in the Patient Care Journey and Readmission Reduction",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Research on personalized patient engagement approaches during care transitions, with evidence on how tailored discharge planning and follow-up can reduce readmissions and unnecessary healthcare costs.",
+    "findings": {
+      "personalization_value": "Personalized care engagement leads to better member experience, higher quality of care, and reduction of avoidable healthcare costs. COVID-19 increased urgency as care delivery shifted and consumers became open to engaging in different ways.",
+      "discharge_planning_focus": "Research examined practical applications of personalization in discharge planning, specifically how post-admission engagement could reduce unnecessary readmissions. Transitions of care are a high-impact intervention point.",
+      "consumer_research_findings": "Consumer research reveals that patients respond to engagement that matches their communication preferences, health literacy level, and social determinant context. One-size-fits-all follow-up programs show significantly lower adherence.",
+      "implications_for_patient_platforms": "Patient engagement platforms must support: multi-channel outreach (text, call, app, portal), content personalization based on condition, health literacy, and language, care plan adherence tracking, and social determinant-aware resource recommendations.",
+      "readmission_reduction_evidence": "Supported discharge programs with personalized follow-up demonstrate measurable readmission reduction. Success correlates with: timeliness of first post-discharge contact, appropriateness of communication channel, and integration with primary care follow-up."
+    },
+    "source": "Consumer research examining personalization applications in discharge planning and care transitions for readmission reduction",
+    "tags": [
+      "personalization",
+      "patient-engagement",
+      "readmission",
+      "care-transitions",
+      "consumer-health"
+    ]
+  }
+]

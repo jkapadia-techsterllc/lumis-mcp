@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ci-clinical-supply-001",
+    "category": "competitive-intelligence",
+    "title": "Clinical Supply Chain Management and IMP Lifecycle Tracking Landscape",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Landscape of clinical supply chain management solutions including CMOs/CDMOs, IRT vendors, and IMP lifecycle tracking capabilities for drug supply in clinical trials.",
+    "findings": {
+      "cmo_cdmo_landscape": "Major CDMOs offer integrated IRT, ERP, and forecasting platforms. Key differentiators: cold chain capabilities, just-in-time processing, global reach, regulatory track record. Revenue ranges $700M to multi-billion.",
+      "irt_and_imp_tracking": "IMP tracking requires: 24/7 shipment visibility, temperature monitoring, dispensation/return tracking, workflow management, and AI/ML demand forecasting. Few vendors offer all capabilities integrated.",
+      "econsent_adjacency": "eConsent providers offer remote consent with video, e-signature, and patient recruitment portals. Integration between consent and supply systems ensures enrolled patients receive study materials.",
+      "integration_with_crm": "Supply chain data feeds engagement platforms: supply status informs site communication priorities, stockout risks trigger proactive outreach, supply analytics support feasibility assessments.",
+      "market_consolidation": "PE firms acquiring IRT and supply chain technology companies, creating integrated platforms mirroring CRM space consolidation."
+    },
+    "source": "Competitive landscape assessments of clinical supply chain management, IMP tracking, and eConsent providers",
+    "tags": [
+      "competitive-intelligence",
+      "clinical-supply-chain",
+      "irt",
+      "cmo-cdmo",
+      "econsent"
+    ]
+  }
+]

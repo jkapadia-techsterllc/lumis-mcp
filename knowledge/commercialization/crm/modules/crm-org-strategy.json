@@ -1,0 +1,27 @@
+[
+  {
+    "id": "mod-org-001",
+    "category": "modules",
+    "title": "CRM Org Strategy and Deployment Methodology",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Implementing life sciences CRM across global organizations requires a structured org strategy to balance standardization with local market flexibility. The recommended approach uses a maximum of two configuration levels: a core data model layer (global standards) and a local configuration layer (market-specific adaptations). A single Salesforce org per market is generally recommended, though multi-market orgs are possible with profile-level separation for different lines of business.",
+    "findings": {
+      "implementation_phases": "Kickoff workshop to define global requirements and naming conventions, followed by core data model build, local configuration adaptation, UAT, and phased market rollout. A governance board oversees configuration standards and change approval",
+      "org_consolidation": "Consolidating multiple existing orgs into a single org is a major undertaking requiring data migration, user re-training, and integration reconfiguration. The decision to consolidate should weigh long-term maintenance savings against short-term migration costs",
+      "configuration_governance": "Naming conventions must be established upfront for custom fields, objects, and metadata. Profile-based access control separates different business units within a shared org. Admin access cannot be restricted at the Salesforce license level \u2014 governance must be enforced through process, not technology",
+      "deployment_tools": "Metadata deployment uses change sets, IDE tooling, or CI/CD pipelines. Unmanaged packages serve as deployment units for reusable configuration bundles. Version control and sandbox-based testing are essential for multi-market rollouts"
+    },
+    "source": "CRM Org Strategy and Deployment Methodology (implementation methodology, Sept 2017)",
+    "tags": [
+      "org-strategy",
+      "deployment",
+      "governance",
+      "multi-market",
+      "configuration",
+      "implementation"
+    ]
+  }
+]

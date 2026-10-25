@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fnd-plat-001",
+    "category": "modules",
+    "title": "Force.com Platform Feature Adoption for Life Sciences CRM",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "A comparative analysis of Force.com platform features relevant to life sciences CRM, assessing which capabilities were adopted by legacy CRM implementations versus what the platform natively provides. Key underutilized features in legacy implementations include Field Sets (for upgrade-transparent configuration), Custom Metadata Types (for packageable configuration), Permission Sets (for flexible user access), OAUTH authentication (for secure mobile login), Named Credentials (for encrypted endpoint storage), and Managed Packages (for deployment isolation with separate governor limits).",
+    "findings": {
+      "configuration_gaps": "Legacy CRM used custom objects for configuration data that Custom Metadata Types could handle natively with packageable deployment. Field Sets provide grouped field configuration modifiable by customers without breaking upgrades, yet custom tables were used instead",
+      "security_improvements": "OAUTH eliminates the need for custom login pages that handle raw passwords. Named Credentials replace storing authentication tokens in custom fields. Permission Sets enable many-to-many user-to-permission relationships versus the one-to-many limitation of Profiles alone",
+      "platform_capabilities": "Streaming API and Platform Events enable event-driven architectures for sync optimization. Apex Flex Queue supports up to 100 queued batch jobs (up from 5). Managed package governor limit isolation prevents customer customizations from competing with CRM package limits",
+      "data_management": "Skinny Tables (enabled by Salesforce support) reduce I/O and improve cache utilization for high-volume objects. Custom State/Country Picklists provide standardized address picklists globally. Large Data Volume objects and archiving features support enterprise-scale implementations"
+    },
+    "source": "Force.com features.xlsx (platform feature assessment, March 2019)",
+    "tags": [
+      "force-com",
+      "platform-features",
+      "custom-metadata",
+      "permission-sets",
+      "managed-packages",
+      "governor-limits"
+    ]
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "crm-mod-040",
+    "category": "modules",
+    "title": "CRM User Personas and Role Archetypes",
+    "products": [
+      "lsc",
+      "oce"
+    ],
+    "summary": "Consolidated user persona definitions for life sciences CRM platforms, covering the primary field roles that drive commercial operations. Derived from user research interviews and archetype analysis across multiple geographies.",
+    "findings": {
+      "persona_categories": "Seven primary CRM user archetypes: Traditional Sales Rep, Specialty Sales Rep, Key Account Manager (KAM), Medical Science Liaison (MSL), OTC/RX Sales Rep, Consumer Health (CHC) Rep, and Clinical Site Manager (CRO persona). Each persona operates with distinct goals, activities, pain points, and CRM feature requirements.",
+      "traditional_sales_rep": "Primary care representatives who promote and guide products to general practitioners. Goals: efficient multi-channel call capture, integrated CLM and email, sample management with regulatory compliance, route planning. Challenges: large territories requiring 6+ visits per day, time pressure for order capture, network limitations in rural areas, work-life balance concerns with after-hours data entry.",
+      "specialty_sales_rep": "Representatives focused on specialized therapeutic areas targeting HCPs with high prescribing potential. Goals: impact the right contacts through segmented targeting, execute rapid transactions with HCPs, maximize face-to-face time. Key activities: review goals and follow up on activity against objectives, plan and execute targeted calls, use dashboards and reports for current status, present approved content and capture details afterward to keep focus on the interaction, capture consent and obtain HCP signatures.",
+      "key_account_manager": "Strategic relationship managers focused on institutional accounts. Five-step KAM framework: Goal Setting (strategic business objectives per product with tactics), Targeting (segmentation and identification of key accounts), Strategic Planning (account plans with SWOT analysis and account objectives), Execution (to-dos for each account objective, calls with key stakeholders), Reporting (account movement tracking, tactical execution reports, goal recalibration). Features: Account Plan with objectives, situational analysis, team members, stakeholder mapping. Sprint-based tactic management with Kanban view. Gantt chart reporting.",
+      "medical_science_liaison": "Field medical professionals who serve as trusted scientific partners to KOLs and HCPs. Four value propositions across commercialization lifecycle: (1) trusted partner for KOL interactions answering scientific questions, (2) consistent communication of unbiased scientific and medical information, (3) insight gathering and dissemination from HCP interactions and advisory boards, (4) medical education and post-launch HCP updates. Core competencies: scientific expertise, relationship management, analytical thinking, digital and omnichannel expertise, cross-functional collaboration. Activities: pre-call preparation with deep KOL background research, scheduling interactions across live and virtual channels, scientific content communication, insight capture and review, mentoring other field personnel.",
+      "otc_rx_consumer_health_rep": "Over-the-counter and prescription sales representatives who visit pharmacies for order taking and product promotion. Goals: quick and accurate order capture (performance is the top priority), propose adapted products and quantities based on client needs, focus on right customers, obtain precise sales analytics. Pain points: interrupted meetings due to customer foot traffic, device performance issues in pharmacy environments, limited workspace for device usage, network connectivity challenges, battery management concerns. Requires streamlined UI optimized for speed over feature depth.",
+      "clinical_site_manager": "CRO personas building relationships with clinical trial stakeholders to improve site engagement. Goals: establish strategic partnerships with top-performing sites, engage with sites specializing in relevant therapeutic areas. Activities: site research (review past trials, website information), planning and collaboration (define business objectives with sites), site engagement (interact via email, conferences, site visits, surveys). Features needed: insight capture with tagging and objective linking, business objectives with tactics and to-dos, site segmentation with customer ratings, site account plans with hierarchical objectives and approval workflows.",
+      "research_methodology": "Persona definitions derived from 30-minute interview sessions with at least 4 participants per persona from existing client organizations across US, Europe, and global geographies. Research covered behavioral patterns, attitudes, skills, goals, and motivations. Key research themes: (1) Medical Affairs touches almost every step of the commercialization journey, (2) MSLs and KAMs build deep relationships in complex stakeholder networks, (3) CRM learning curve is a critical adoption barrier, (4) specialty sales roles are highly collaborative, (5) event planning involves significant administrative burden across all roles.",
+      "cross_persona_feature_mapping": "Common CRM features across personas: Account and Contact Management (profiles, search, filtering, network visualization), Call Execution (pre-call prep, in-call capture, post-call reporting), Planning (call plans, route planning, activity plans, territory goals), Content (CLM presentations, approved messaging, email), Compliance (consent capture, sample management, regulatory adherence), Reporting (dashboards, territory analytics, objective tracking). Differentiated features: KAM requires Account Plans with SWOT and sprint-based tactics. MSL requires scientific content management and KOL interaction tracking. Site Manager requires site segmentation and engagement objective workflows."
+    },
+    "source": "Consolidated from archetype presentations (Dec 2022 - Oct 2023), persona research reports (Aug-Oct 2023, Project ID 2304_OCEPER), and consumer health persona documentation",
+    "tags": [
+      "personas",
+      "user-research",
+      "archetypes",
+      "field-roles",
+      "specialty-sales",
+      "kam",
+      "msl",
+      "traditional-sales",
+      "otc",
+      "clinical-site-manager",
+      "ux-research"
+    ]
+  }
+]

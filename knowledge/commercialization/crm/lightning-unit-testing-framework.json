@@ -1,0 +1,31 @@
+[
+  {
+    "id": "crm-bp-011",
+    "category": "commercialization/crm",
+    "title": "Lightning Component Unit Testing Framework",
+    "products": [
+      "oce",
+      "lsc"
+    ],
+    "summary": "Architecture and usage guide for the Lightning Testing Service (LTS) framework covering Jasmine-based unit testing of Lightning components, component structure, deployment, and known limitations for SI and ISV development teams.",
+    "findings": {
+      "architecture_overview": "The Lightning Testing Service uses a layered architecture: the Lightning Platform hosts the Lightning Test Service, which provides static resources (Jasmine library, boot script, test utilities) loaded by a Base Test Runner component inside a Wrapper Test App. Tests and components under test live in the Lightning Component Bundle.",
+      "runtime_flow": "A user navigates to the Wrapper Test App, which creates a BaseTestRunner component with a list of test files. BaseTestRunner loads all required static resources (Jasmine, test utilities, test specs), initiates Jasmine test execution, and the Jasmine framework runs tests and displays results.",
+      "key_components": "The framework includes: the Jasmine library (static resource), a JavaScript IIFE boot script that launches Jasmine in the LTS context, a test utilities collection providing Lightning component-specific test helper functions, a simple front-end app that includes the test runner and test suite list, and a Jasmine runner component that references all required resources and fires the test runner.",
+      "code_structure": "Test code lives in a resource-bundles directory containing the test resource with test spec files. Source code lives in the standard src directory with aura components and static resources for the Jasmine framework files.",
+      "deployment_steps": "Prepare static resources using the build tool, copy files from the temp directory to the src staticresources directory, and deploy the static resource from the IDE.",
+      "test_execution": "Currently manual: open the developer console, navigate to the test app URL, and click preview. The test results display in the browser window.",
+      "limitations": "The LTS does not provide an isolated test context or transaction wrapper \u2014 DML operations in tests are not rolled back. Tests can only access public component attributes. Methods must be defined in the component before they can be called from unit tests.",
+      "pending_improvements": "Integration with existing CI/CD pipelines, code coverage reporting, and a separate build target for simplified deployment are planned but not yet implemented."
+    },
+    "source": "SI/ISV Lightning unit test considerations documentation",
+    "tags": [
+      "lightning",
+      "unit-testing",
+      "jasmine",
+      "lts",
+      "aura",
+      "si-isv"
+    ]
+  }
+]

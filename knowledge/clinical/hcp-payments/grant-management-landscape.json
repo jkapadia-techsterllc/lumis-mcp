@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ci-grant-mgmt-001",
+    "category": "competitive-intelligence",
+    "title": "Grant Management Software Landscape for Clinical Trials",
+    "products": [
+      "lsc"
+    ],
+    "summary": "Competitive landscape of grant management and clinical trial budgeting software covering investigator payment and study budget workflows.",
+    "findings": {
+      "market_overview": "Grant management software addresses clinical trial budget creation, negotiation, FMV data, and investigator payment workflows. Dominated by specialized PE-backed vendors with $55-65M revenue for leaders.",
+      "fmv_data_differentiator": "Leading vendors derive FMV benchmarks from actual negotiated clinical trial agreements across hundreds of clients, more accurate than survey-based approaches.",
+      "integration_requirements": "Tools integrate with CTMS for study milestones, finance/ERP for payment processing, IRT for visit completion triggers, and CRM for investigator relationship context.",
+      "market_dynamics": "PE investment driving consolidation. Leading vendor acquired for $1.1B. Growth rates exceed 100% over 3 years for market leaders.",
+      "hcp_payment_connection": "Directly connects to HCP payment transparency reporting. CRM systems managing HCP relationships need visibility into investigator payment data for compliance."
+    },
+    "source": "Competitive landscape of grant management software providers for clinical trials",
+    "tags": [
+      "competitive-intelligence",
+      "grant-management",
+      "clinical-budgets",
+      "fmv",
+      "investigator-payments"
+    ]
+  }
+]
