@@ -2,7 +2,7 @@
 # Licensed under the Lumis AI Proprietary Software License. See LICENSE.
 """Lumis MCP Server — Life Sciences CRM Migration Intelligence."""
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 import importlib.resources
 import sys

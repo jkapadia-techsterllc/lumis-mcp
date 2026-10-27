@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lumis-mcp"
-version = "1.0.2"
+version = "1.0.3"
 description = "Life sciences CRM migration intelligence — an MCP server with 950+ curated knowledge entries for module mapping, regulatory compliance, validation, and go-live readiness."
 readme = "README.md"
 license = "LicenseRef-Proprietary"

@@ -1,0 +1,96 @@
+{
+  "id": "fnd-sample-regulatory-001",
+  "category": "compliance",
+  "title": "Pharmaceutical Sample Management — Regulatory Requirements by Region",
+  "products": ["Life Sciences Cloud"],
+  "summary": "Comprehensive regulatory requirements for pharmaceutical sample management across US, EU, Japan, and Brazil, covering distribution controls, signature capture, inventory reconciliation, reporting obligations, and CRM configuration implications.",
+  "regulations": {
+    "us_pdma": {
+      "name": "Prescription Drug Marketing Act (PDMA) — 21 CFR Part 203",
+      "scope": "United States",
+      "requirements": [
+        "Complete chain of custody from manufacturer to healthcare provider — every sample must be traceable",
+        "Written request from HCP required before sample distribution (can be electronic)",
+        "HCP signature at point of receipt — must be captured and retained for 3 years",
+        "Annual physical inventory reconciliation for every field representative",
+        "Lot tracking with expiration date enforcement — expired samples cannot be distributed",
+        "Loss or theft reporting to FDA within 5 business days of discovery",
+        "Manufacturer must verify HCP license status before distribution"
+      ],
+      "crm_configuration": [
+        "Sample Transaction object must capture: HCP identity, products/quantities, lot numbers, signature, timestamp, and GPS coordinates (optional but recommended)",
+        "Inventory counting workflow with discrepancy resolution and mandatory reason codes",
+        "Sample limit enforcement at the product and rep level — configurable per business rules",
+        "Lot management with automatic expiration blocking",
+        "Signature capture on mobile device with tamper-evident storage",
+        "Reconciliation reports exportable for FDA audit"
+      ]
+    },
+    "eu_framework": {
+      "name": "EU Directive 2001/83/EC (as amended) + Country-Specific Implementations",
+      "scope": "European Union member states",
+      "requirements": [
+        "Each EU member state implements sample distribution rules differently — there is no single EU-wide sample regulation",
+        "Germany: maximum one smallest package per product per HCP per visit, maximum two per product per year",
+        "France: sample distribution is prohibited for certain drug categories; mandatory reporting to ANSM",
+        "Italy: AIFA requires sample request forms and limits per product per HCP",
+        "Spain: sample distribution limited to products marketed in the last 2 years with authorized promotional materials",
+        "Most EU countries require samples to be marked 'FREE MEDICAL SAMPLE — NOT FOR SALE'"
+      ],
+      "crm_configuration": [
+        "Country-specific sample limit rules — the target platform must support different limit configurations per country",
+        "Sample labeling compliance tracking (free sample marking)",
+        "Per-country reporting exports matching local authority requirements",
+        "Multi-language sample request form support",
+        "Country-level product eligibility rules (some products cannot be sampled in certain countries)"
+      ]
+    },
+    "japan_mhlw": {
+      "name": "Ministry of Health, Labour and Welfare (MHLW) + JPMA Guidelines",
+      "scope": "Japan",
+      "requirements": [
+        "Samples classified as 'trial-use drugs' with specific handling and documentation requirements",
+        "JPMA self-regulatory guidelines limit sample quantities and require detailed distribution logging",
+        "MR (Medical Representative) certification must be verified before allowing sample distribution",
+        "Lot tracking with Japanese regulatory lot number format",
+        "Distribution records must be retained and available for MHLW inspection"
+      ],
+      "crm_configuration": [
+        "MR certification status validation before sample transactions are allowed",
+        "Japanese lot number format support",
+        "JPMA-compliant sample quantity limits",
+        "Distribution reports in MHLW-required format",
+        "Integration point for trial-use drug classification data"
+      ]
+    },
+    "brazil_anvisa": {
+      "name": "ANVISA RDC Regulations + CFF Rules",
+      "scope": "Brazil",
+      "requirements": [
+        "ANVISA regulates sample distribution as part of pharmaceutical promotion oversight",
+        "Nota Fiscal (tax document) required for interstate movement of sample shipments",
+        "Samples must be labeled with ANVISA registration number and 'AMOSTRA GRÁTIS' marking",
+        "Distribution records must be available for ANVISA inspection",
+        "State-level ICMS tax implications for sample logistics"
+      ],
+      "crm_configuration": [
+        "Nota Fiscal reference field on sample shipment records",
+        "ANVISA registration number on product/lot records",
+        "Portuguese-language sample forms and reports",
+        "State-level compliance tracking for interstate sample movement",
+        "ANVISA-specific reporting exports"
+      ]
+    }
+  },
+  "cross_region_migration_considerations": [
+    "Source platform sample data structures vary by region — US implementations have different fields and workflows than EU or Japan implementations",
+    "Sample transaction history is regulatory data and cannot be selectively migrated — complete history migration is required for all regions",
+    "Signature data must be migrated with cryptographic integrity intact — re-signing is not an option",
+    "Lot expiration dates must be preserved exactly — timezone handling during migration can shift dates and invalidate lots",
+    "Sample limit configurations are the most country-specific part of the CRM — plan separate configuration and testing per country",
+    "Reconciliation reports generated from the source platform should be archived before migration and compared against target platform reports post-migration",
+    "For multi-country migrations, Phase 1 should include the US market (most mature sample management requirements) to establish the baseline configuration"
+  ],
+  "source": "Lumis Knowledge Base — compiled from FDA PDMA (21 CFR 203), EU Directive 2001/83/EC, MHLW guidelines, ANVISA regulations",
+  "tags": ["samples", "pdma", "regulatory", "compliance", "fda", "anvisa", "mhlw", "eu-directive", "chain-of-custody"]
+}
