@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lumis-mcp"
-version = "1.0.1"
+version = "1.0.2"
 description = "Life sciences CRM migration intelligence — an MCP server with 950+ curated knowledge entries for module mapping, regulatory compliance, validation, and go-live readiness."
 readme = "README.md"
 license = "LicenseRef-Proprietary"
@@ -61,3 +61,4 @@ packages = ["lumis_mcp"]
 "knowledge" = "lumis_mcp/knowledge"
 "agents" = "lumis_mcp/agents"
 "prompts" = "lumis_mcp/prompts"
+"server.py" = "lumis_mcp/_server_impl.py"
