@@ -1,0 +1,70 @@
+{
+  "id": "fnd-gdpr-appi-comparison",
+  "category": "compliance",
+  "title": "GDPR vs APPI: Privacy Regulation Comparison for Life Sciences CRM",
+  "products": ["Life Sciences Cloud"],
+  "summary": "Side-by-side comparison of EU GDPR and Japan APPI privacy regulations as they apply to life sciences CRM deployments, covering legal basis, consent requirements, data subject rights, cross-border transfers, penalties, and CRM configuration implications.",
+  "comparison": {
+    "dimensions": [
+      {
+        "dimension": "Legal Basis for Processing",
+        "gdpr": "Requires one of six legal bases: consent, contract, legal obligation, vital interests, public task, or legitimate interest. Every processing activity must document its legal basis.",
+        "appi": "No enumerated legal basis requirement. Organizations must specify the purpose of use and notify or publish it. Consent is needed to use data beyond the stated purpose or to provide data to third parties.",
+        "crm_implication": "For GDPR markets, store a lawful-basis field per activity on each HCP record. For APPI markets, store the stated purpose of use and any purpose-change consents."
+      },
+      {
+        "dimension": "Consent Model",
+        "gdpr": "Explicit opt-in required for marketing. Consent must be freely given, specific, informed, and unambiguous. Pre-ticked boxes and silence do not constitute consent. Consent can be withdrawn at any time.",
+        "appi": "Consent is required for: (1) handling sensitive personal information, (2) providing personal data to third parties, and (3) cross-border data transfers. General data collection does not require consent if the purpose is publicly stated.",
+        "crm_implication": "GDPR markets: configure all communication channels as opt-in by default. APPI markets: opt-in is required for sensitive data (medical history) and third-party sharing, but not necessarily for all CRM-tracked interactions. A single CRM deployment covering both regions should default to the stricter GDPR standard."
+      },
+      {
+        "dimension": "Sensitive Data",
+        "gdpr": "Article 9 defines special categories: racial/ethnic origin, political opinions, religious beliefs, trade union membership, genetic data, biometric data, health data, and sex life/orientation. Requires explicit consent or another Article 9(2) exception.",
+        "appi": "Defines 'special care-required personal information': race, creed, social status, medical history, criminal record, and fact of having suffered damage by a crime. Requires consent before acquisition (not just before processing).",
+        "crm_implication": "HCP medical specialty and prescribing data are not sensitive under either regulation. However, patient program data (disease state, treatment history) is sensitive under both. CRM modules handling patient data must have explicit consent workflows regardless of region."
+      },
+      {
+        "dimension": "Data Subject Rights",
+        "gdpr": "Broad rights: access, rectification, erasure (right to be forgotten), restriction of processing, data portability, objection to processing, and rights related to automated decision-making.",
+        "appi": "Rights include: disclosure of retained personal data, correction/addition/deletion of inaccurate data, cessation of use and erasure, and cessation of third-party provision. No explicit data portability right. The 2022 amendments expanded these rights.",
+        "crm_implication": "GDPR: build data export and complete erasure workflows across all CRM modules. APPI: erasure workflows are narrower — focus on cessation of use and third-party provision controls. For global deployments, implement the full GDPR erasure capability as it covers APPI requirements."
+      },
+      {
+        "dimension": "Cross-Border Data Transfer",
+        "gdpr": "Transfers outside the EEA require: adequacy decision, Standard Contractual Clauses (SCCs), Binding Corporate Rules, or explicit consent. Japan has an EU adequacy decision (since 2019), enabling transfers between EU and Japan without SCCs.",
+        "appi": "Cross-border transfers require: (1) consent of the data subject, (2) transfer to a country with equivalent data protection, or (3) the recipient has a system meeting APPI standards. The EU-Japan mutual adequacy agreement simplifies EU-Japan transfers.",
+        "crm_implication": "EU-Japan data flows benefit from the mutual adequacy agreement — no SCCs needed between these two regions. However, transfers from either region to the US, China, or other non-adequate countries still require appropriate safeguards. CRM data residency decisions should account for where HCP data physically resides."
+      },
+      {
+        "dimension": "Breach Notification",
+        "gdpr": "Mandatory notification to supervisory authority within 72 hours of becoming aware of a breach. Notification to affected individuals required when breach poses high risk to their rights and freedoms.",
+        "appi": "The 2022 amendments made breach notification mandatory (previously voluntary). Notification to the Personal Information Protection Commission (PPC) and affected individuals is required when the breach involves sensitive data, more than 1,000 individuals, or data likely to cause property damage.",
+        "crm_implication": "Both regulations now require breach notification. CRM audit logging and data access tracking must be comprehensive enough to determine breach scope within the notification window. Enable Field Audit Trail for all modules containing personal data."
+      },
+      {
+        "dimension": "Penalties",
+        "gdpr": "Up to EUR 20 million or 4% of annual global turnover, whichever is higher. Supervisory authorities can also impose processing bans.",
+        "appi": "Up to JPY 100 million for corporations (approximately EUR 600K). Criminal penalties for individuals: up to 1 year imprisonment or JPY 500K fine. The 2022 amendments significantly increased these from prior levels.",
+        "crm_implication": "GDPR penalties are orders of magnitude larger. For organizations operating in both regions, GDPR compliance standards should be the baseline — meeting GDPR requirements will generally satisfy APPI requirements, with minor additions for APPI-specific consent rules."
+      },
+      {
+        "dimension": "Enforcement Authority",
+        "gdpr": "Each EU member state has a Data Protection Authority (DPA). Lead supervisory authority model for cross-border processing.",
+        "appi": "Personal Information Protection Commission (PPC) is the single national authority.",
+        "crm_implication": "In the EU, the DPA of the country where your main establishment is located leads enforcement. In Japan, PPC handles all enforcement. For CRM compliance, this means EU deployments may face scrutiny from multiple DPAs while Japan has a single point of regulatory contact."
+      }
+    ],
+    "key_differences_summary": [
+      "GDPR requires explicit legal basis for every processing activity; APPI requires a stated purpose but not a specific legal basis",
+      "GDPR consent must be opt-in for marketing; APPI consent is primarily needed for third-party sharing and sensitive data",
+      "GDPR penalties (up to 4% global revenue) are far larger than APPI penalties (up to JPY 100M)",
+      "GDPR includes data portability rights; APPI does not",
+      "Both have mutual adequacy recognition, simplifying EU-Japan data transfers",
+      "The 2022 APPI amendments moved Japan closer to GDPR standards by making breach notification mandatory and expanding individual rights"
+    ],
+    "recommendation": "For organizations deploying a CRM across both EU and Japan markets, implement GDPR-level controls as the baseline. This covers most APPI requirements. Add APPI-specific configurations for: (1) pre-acquisition consent for sensitive data, (2) Japan-specific purpose-of-use documentation, and (3) PPC notification procedures separate from EU DPA procedures."
+  },
+  "source": "Lumis Knowledge Base — compiled from EU GDPR text, Japan APPI (amended 2022), and EU-Japan adequacy decision (2019)",
+  "tags": ["gdpr", "appi", "japan", "eu", "data-privacy", "consent", "comparison", "cross-border"]
+}

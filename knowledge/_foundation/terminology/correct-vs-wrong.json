@@ -54,14 +54,38 @@
     {
       "context": "Feature",
       "correct": "Next Best (NBC/NBA/NBM)",
-      "wrong": ["Suggestions", "MyInsights"],
-      "note": "Source-platform AI features have different branding. Target uses 'Next Best' umbrella: Next Best Channel, Next Best Action, Next Best Message."
+      "wrong": ["Suggestions", "MyInsights", "CRM Analytics dashboards in source platform"],
+      "note": "Source-platform AI features have different branding. Target uses 'Next Best' umbrella: Next Best Channel, Next Best Action, Next Best Message. Source-platform embedded analytics are replaced by CRM Analytics on the target platform."
     },
     {
       "context": "Platform",
       "correct": "target platform",
       "wrong": ["vendor-specific cloud names", "vendor abbreviations", "platform vendor name"],
       "note": "In customer-facing Lumis content, use generic 'target platform' to stay vendor-neutral. Module names are specific enough for implementation guidance."
+    },
+    {
+      "context": "Planning Concepts",
+      "correct": "Activity Plan",
+      "wrong": ["Call Plan", "Call Cycle Plan", "Call Planning"],
+      "note": "Source platform uses 'Call Plan' for structured HCP visit planning. Target platform uses 'Activity Plan', which supports visits, emails, and other engagement types beyond just calls."
+    },
+    {
+      "context": "Planning Concepts",
+      "correct": "Activity Category / Activity Criteria",
+      "wrong": ["Call Goal", "Call Target", "Call Frequency"],
+      "note": "Source platform defines numeric call frequency targets per account segment. Target platform uses hierarchical 'Activity Categories' with 'Activity Criteria' rules that define engagement frequency, channel mix, and prioritization."
+    },
+    {
+      "context": "Planning Concepts",
+      "correct": "Visit Plan (scheduled visits)",
+      "wrong": ["Call Schedule", "Call Calendar"],
+      "note": "Source platform uses 'Call Schedule' for daily/weekly planned calls. Target platform uses 'Visit Plan' for the same concept — the calendar view of scheduled HCP engagements."
+    },
+    {
+      "context": "Module Names",
+      "correct": "Medical Information Request",
+      "wrong": ["Medical Inquiry", "Med Inquiry", "MedInquiry"],
+      "note": "Source platform tracks unsolicited medical questions as 'Medical Inquiries'. Target platform uses 'Medical Information Request' with a structured intake and response workflow."
     }
   ],
   "citation": {

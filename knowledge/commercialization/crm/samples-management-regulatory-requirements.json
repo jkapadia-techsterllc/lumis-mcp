@@ -1,0 +1,96 @@
+{
+  "id": "crm-samples-regulatory-requirements",
+  "category": "regulatory-compliance",
+  "title": "Sample Management Regulatory Requirements — Multi-Region Deep Dive",
+  "products": ["Life Sciences Cloud"],
+  "summary": "Comprehensive regulatory requirements for pharmaceutical sample management across major markets. Covers PDMA (US), EU/member state rules, Japan MHLW, and Brazil ANVISA requirements. Includes CRM implementation guidance for each regulation.",
+  "regions": [
+    {
+      "region": "United States",
+      "regulation": "Prescription Drug Marketing Act (PDMA) of 1987, as amended",
+      "agency": "FDA (Food and Drug Administration)",
+      "requirements": [
+        {
+          "requirement": "Sample Request Documentation",
+          "description": "PDMA Section 503(d) requires a written request signed by a licensed prescriber before samples are distributed. The request must specify the product name, quantity, and the prescriber's name, address, and professional designation. Verbal requests are not compliant.",
+          "crm_implementation": "Sample Management must enforce: (1) Mandatory signature capture on every sample transaction, (2) Electronic signatures must meet 21 CFR Part 11 requirements (unique user identification, signature meaning, date/time stamp), (3) Pre-printed request forms populated with prescriber data from the HCP master, (4) Signature image storage with tamper-evident controls."
+        },
+        {
+          "requirement": "Sample Accountability and Inventory",
+          "description": "PDMA requires complete chain-of-custody documentation for all samples. Each sample unit must be tracked from manufacturer to field representative to final disposition (dispensed to HCP, returned, destroyed, or lost/stolen). Annual physical inventory reconciliation is mandatory. Significant losses or thefts must be reported to FDA.",
+          "crm_implementation": "Sample Management must track: (1) Lot-level inventory per field representative, (2) All transactions: receipt, transfer between reps, dispensing, return, and destruction, (3) Automated inventory reconciliation workflow triggered on a configurable schedule, (4) Discrepancy detection and escalation when physical count does not match system records, (5) Lost/stolen sample reporting workflow with configurable thresholds."
+        },
+        {
+          "requirement": "Storage and Handling",
+          "description": "Samples must be stored under conditions consistent with the product labeling (temperature, light, humidity). Cold-chain products require documented temperature monitoring. Sample closets at offices and vehicles used for transport must meet storage requirements.",
+          "crm_implementation": "Sample Management should support: (1) Product-level storage requirement fields (temperature range, special handling), (2) Storage location tracking per representative, (3) Cold-chain acknowledgment workflows for temperature-sensitive products, (4) Expiration date tracking with automated alerts before expiry."
+        },
+        {
+          "requirement": "Practitioner Eligibility Verification",
+          "description": "Samples may only be distributed to licensed practitioners authorized to prescribe. Companies must verify prescriber status — not all healthcare professionals with an NPI can receive samples. DEA registration is required for controlled substance samples.",
+          "crm_implementation": "HCP master data must include: (1) License type and status (active, expired, restricted), (2) Prescribing authority by state, (3) DEA number for controlled substance eligibility, (4) Sample Management must validate eligibility before allowing a sample transaction — rejected transactions should log the reason."
+        },
+        {
+          "requirement": "Annual Reporting",
+          "description": "PDMA requires manufacturers to submit annual reports documenting sample distribution. Reports must include: total samples distributed by product, number of practitioners receiving samples, and any significant losses or thefts.",
+          "crm_implementation": "Sample Management reporting must support: (1) Aggregate distribution by product, time period, and geography, (2) Unique prescriber count per product, (3) Exception reports for discrepancies, returns, and destructions, (4) Export format compatible with FDA submission requirements."
+        }
+      ]
+    },
+    {
+      "region": "European Union",
+      "regulation": "Directive 2001/83/EC (Community Code for Medicinal Products), Member State transpositions",
+      "agency": "EMA (European Medicines Agency) and national competent authorities",
+      "requirements": [
+        {
+          "requirement": "EU-Wide Baseline Rules (Directive 2001/83/EC Article 96)",
+          "description": "EU pharmaceutical law establishes baseline rules applicable across all member states: (1) Samples may only be provided to persons qualified to prescribe, (2) Each sample must be no larger than the smallest presentation on the market, (3) Each sample must be marked 'free medical sample — not for sale', (4) Samples of products containing psychotropic or narcotic substances are prohibited, (5) A written, signed, and dated request from the HCP is required.",
+          "crm_implementation": "Sample Management must enforce: (1) Smallest-package-size validation per product per country, (2) 'Free sample' label generation or verification, (3) Narcotic/psychotropic product exclusion list, (4) Signed request workflow."
+        },
+        {
+          "requirement": "Member State Variations",
+          "description": "Individual EU member states transpose the directive with country-specific limits: Germany limits to 2 samples per product per HCP per year; France limits to the first 2 years after market authorization and maximum 4 samples per product per HCP per year; UK (post-Brexit) has similar limits under the ABPI Code. Multi-country implementations must support per-country limit configuration.",
+          "crm_implementation": "Sample Management must support: (1) Country-level sample limit configuration (quantity per product per HCP per time period), (2) Time-window restrictions (e.g., France's market-authorization age check), (3) Country-specific exception handling and override workflows with audit trail, (4) Per-country reporting formats for national authority submissions."
+        }
+      ]
+    },
+    {
+      "region": "Japan",
+      "regulation": "Pharmaceutical Affairs Act, MHLW Regulations, JPMA Code",
+      "agency": "MHLW (Ministry of Health, Labour and Welfare)",
+      "requirements": [
+        {
+          "requirement": "Trial-Use Drug Classification",
+          "description": "Japan classifies pharmaceutical samples as 'trial-use drugs' (試用医薬品) with specific regulatory requirements distinct from the US PDMA framework. Samples may only be provided to physicians and pharmacists who specifically request them. Narcotic and psychotropic samples are prohibited.",
+          "crm_implementation": "Sample Management must support: (1) Trial-use drug classification field with separate business rules from US/EU categories, (2) Mandatory request documentation before sample provision, (3) Product-category exclusion for narcotics/psychotropics."
+        },
+        {
+          "requirement": "MHLW Logging and Reporting",
+          "description": "Distribution must be logged with product name, quantity, lot number, destination HCP, and date. Companies must submit annual sample distribution reports to MHLW. Per-product per-HCP quantity limits apply.",
+          "crm_implementation": "Sample Management must track: (1) All fields required for MHLW annual reporting, (2) Per-product per-HCP quantity limits (configurable), (3) Lot-level traceability including expiration, (4) MHLW-compatible export format for annual reporting."
+        }
+      ]
+    },
+    {
+      "region": "Brazil",
+      "regulation": "ANVISA RDC 96/2008, Pharmaceutical Affairs Regulations",
+      "agency": "ANVISA (Agência Nacional de Vigilância Sanitária)",
+      "requirements": [
+        {
+          "requirement": "ANVISA Sample Registration and Traceability",
+          "description": "ANVISA requires pharmaceutical companies to register sample distribution programs and maintain complete traceability from manufacturing to final disposition. Sample lot registration is required before distribution begins.",
+          "crm_implementation": "Sample Management must support: (1) ANVISA lot registration reference per product, (2) Complete distribution chain documentation, (3) Nota Fiscal (tax invoice) reference fields for interstate sample shipments — Brazil requires tax documentation for pharmaceutical product movement between states."
+        }
+      ]
+    }
+  ],
+  "cross_region_guidance": [
+    "Global companies should implement the strictest requirements as the baseline and then relax per-country where permitted — this is easier than maintaining lowest-common-denominator with per-country additions",
+    "Signature capture requirements vary: US requires 21 CFR Part 11-compliant electronic signatures; EU requires signed written requests; Japan requires HCP request documentation. A unified e-signature workflow should be configurable per-region.",
+    "Sample quantity limits vary dramatically: US has no per-product-per-HCP-per-year statutory limit (company policy-driven); Germany limits to 2; France limits to 4 within first 2 years of market authorization. Build configurable limits, not hardcoded ones.",
+    "Narcotic/psychotropic sample prohibitions are universal — implement a global product-level flag that blocks sample transactions regardless of country.",
+    "Annual reporting formats differ by country — build export templates rather than a single report format."
+  ],
+  "source": "Lumis Knowledge Base — compiled from PDMA text, EU Directive 2001/83/EC, MHLW regulations, ANVISA RDC 96/2008, and industry implementation experience",
+  "tags": ["samples", "sample-management", "pdma", "regulatory", "compliance", "fda", "ema", "mhlw", "anvisa", "multi-region"]
+}

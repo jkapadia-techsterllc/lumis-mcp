@@ -1,0 +1,45 @@
+{
+  "id": "country-de-bdsg",
+  "region": "Europe",
+  "countries": ["Germany"],
+  "regulation": "GDPR (as implemented), BDSG (Bundesdatenschutzgesetz), AMG (Arzneimittelgesetz), HWG (Heilmittelwerbegesetz), FSA Code, Works Council (Betriebsrat) Requirements",
+  "modules_affected": ["Consent Management", "Visit Management", "Sample Management", "Field Email", "Events Management", "Content Management", "User Management"],
+  "rules": [
+    {
+      "rule": "BDSG — Federal Data Protection Act Specifics",
+      "description": "Germany's BDSG supplements the EU GDPR with additional national requirements. Key additions: (1) The DPA threshold is stricter — a Data Protection Officer (Datenschutzbeauftragter) must be appointed if 20+ employees regularly process personal data (lower than GDPR's general threshold). (2) Employee data processing has specific rules under BDSG Section 26 — processing employee personal data is only allowed for employment-related purposes. (3) Data processing for scoring and credit decisions has additional transparency requirements. (4) Video surveillance in publicly accessible spaces requires signage and purpose limitation.",
+      "implementation": "CRM configuration must support: (1) DPO designation and contact information visible in privacy notices, (2) Strict purpose limitation on employee data — field force manager access to rep performance data must have documented justification, (3) Enhanced audit logging for all personal data access to satisfy Landesdatenschutzbehörde (state DPA) inspection requirements.",
+      "penalty": "GDPR penalties apply (up to EUR 20M or 4% global turnover). Additionally, BDSG specifies criminal penalties for willful unauthorized data processing: up to 2 years imprisonment. Germany's DPAs are among the most active in the EU."
+    },
+    {
+      "rule": "Works Council (Betriebsrat) Co-Determination Rights",
+      "description": "Under the Works Constitution Act (Betriebsverfassungsgesetz), the Works Council has co-determination rights over the introduction of IT systems that monitor employee behavior or performance. A CRM system that tracks field rep activities (visit frequency, call reports, territory coverage) is subject to Betriebsrat approval. This is a unique German requirement with no direct equivalent in other EU countries.",
+      "implementation": "Before deploying a life sciences CRM in Germany: (1) The Works Council must be consulted and must approve the system introduction — this can take 3-6 months and should be planned into the migration timeline, (2) A Betriebsvereinbarung (works agreement) must be negotiated defining exactly what employee data is captured, who has access, retention periods, and what is NOT tracked, (3) Features like GPS tracking, screen monitoring, or real-time activity dashboards may be restricted or prohibited by the works agreement, (4) Manager reports showing individual rep performance metrics may require anonymization or aggregation. This is NOT optional — deploying without Works Council approval can result in the system being shut down.",
+      "affected_modules": ["Visit Management", "User Management"]
+    },
+    {
+      "rule": "AMG — Pharmaceutical Law and HWG — Advertising Law",
+      "description": "Germany's Arzneimittelgesetz (Pharmaceutical Act) and Heilmittelwerbegesetz (Therapeutic Advertising Act) regulate pharmaceutical promotion. Key provisions: (1) HWG Section 7 — gifts, samples, and other inducements to HCPs are restricted. Samples may only be provided in the smallest available package size, limited to 2 per product per HCP per year. (2) Prescription drug advertising may only target healthcare professionals — no consumer-facing promotion allowed. (3) All promotional materials must include the mandatory legal text (SmPC summary, side effects, manufacturer information). (4) Off-label promotion is strictly prohibited and can result in criminal prosecution.",
+      "implementation": "Content Management must enforce: (1) Mandatory legal text inclusion in all promotional materials — missing required text is an HWG violation, (2) Audience restriction — promotional content for Rx drugs must be flagged as HCP-only. Sample Management must enforce: (1) Germany-specific 2-per-product-per-HCP-per-year limit (stricter than many other EU countries), (2) Smallest package size validation, (3) Written request documentation from the HCP.",
+      "affected_modules": ["Content Management", "Sample Management"]
+    },
+    {
+      "rule": "FSA Code of Conduct (Freiwillige Selbstkontrolle der Arzneimittelindustrie)",
+      "description": "The FSA is the German pharmaceutical industry's self-regulatory body. The FSA Code supplements legal requirements with stricter guidelines: (1) Hospitality — meals may not exceed EUR 60 per person (as of current guidelines), venue must be appropriate (no luxury or entertainment venues), (2) Speaker fees must be at fair market value with documented justification, (3) Consulting agreements with HCPs must serve a legitimate business need and be pre-approved, (4) Continuing medical education (CME) sponsorship has specific rules on format and transparency, (5) All transfers of value to HCPs must be documented for transparency reporting under the EFPIA Disclosure Code (Germany implements this as EFPIA-aligned FSA transparency).",
+      "implementation": "Events Management must enforce: (1) Per-person meal caps (configurable — currently EUR 60), (2) Venue classification and restriction rules, (3) Speaker fee tracking with fair-market-value documentation, (4) CME sponsorship compliance checks. Visit Management must capture: (1) Hospitality spend per interaction, (2) Transfers of value for EFPIA/FSA transparency reporting. Finance integration should support annual transparency publication in FSA-compatible format.",
+      "affected_modules": ["Events Management", "Visit Management"]
+    },
+    {
+      "rule": "State-Level DPA Variations",
+      "description": "Germany has 17 state-level DPAs (Landesdatenschutzbehörden), each with enforcement authority. While the BDSG provides the federal baseline, interpretation and enforcement vary by state. Notable variations: (1) Bavaria (BayLDA) is particularly active in health data enforcement, (2) Hamburg (HmbBfDI) has issued specific guidance on cloud computing that affects CRM deployments, (3) Berlin (BlnBDI) has strict interpretation of consent requirements for commercial communication. The Datenschutzkonferenz (DSK — conference of all DPAs) publishes joint guidance that is influential but not legally binding.",
+      "implementation": "CRM deployments serving multiple German states should implement the strictest interpretation across all state DPA guidance. Consent Management should be configured to meet the most conservative requirements (Berlin-level) rather than a general EU baseline. Audit logs must be detailed enough to satisfy any state DPA's inspection standards.",
+      "affected_modules": ["Consent Management"]
+    }
+  ],
+  "migration_notes": "Germany implementations require more lead time than most EU countries due to Works Council requirements. Key migration considerations: (1) START Works Council engagement 3-6 months before planned go-live — this is the most common source of German CRM deployment delays, (2) Draft the Betriebsvereinbarung early and align it with the CRM's data model — renegotiating after configuration is expensive, (3) Sample management rules (2 per product per HCP per year) are stricter than US PDMA and many EU countries — verify sample tracking enforces German limits, (4) FSA hospitality caps require Events Management configuration that may differ from global settings, (5) German-language UI and content localization is mandatory — German pharma users expect native-language interfaces, (6) Data residency: confirm target platform EU data center location (Frankfurt preferred). BDSG and state DPAs may challenge non-EU data storage even under Standard Contractual Clauses, (7) Many German pharma companies have strong internal compliance departments — expect detailed security questionnaires and data processing impact assessments (DPIA) before deployment approval.",
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Country Rules / Germany BDSG",
+    "confidence": "High — based on current BDSG, AMG/HWG, FSA Code, and Betriebsrat requirements"
+  }
+}

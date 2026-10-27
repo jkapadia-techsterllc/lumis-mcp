@@ -41,24 +41,41 @@
     {
       "country": "Germany",
       "additional_rules": [
-        "Bundesdatenschutzgesetz (BDSG) adds restrictions on employee data processing",
-        "Works council (Betriebsrat) may need to approve CRM data processing",
-        "Stricter interpretation of legitimate interest — lean toward explicit consent"
-      ]
+        "Bundesdatenschutzgesetz (BDSG) supplements GDPR with stricter employee data processing rules and a lower DPO threshold (20+ persons regularly processing personal data)",
+        "Works council (Betriebsrat) may need to approve CRM systems that track rep activity — start this approval process early as it can delay deployment by months",
+        "Stricter interpretation of legitimate interest — default to explicit opt-in consent for all HCP marketing communications",
+        "HWG (Heilmittelwerbegesetz) pharmaceutical advertising law requires mandatory content elements (Pflichtangaben) on every promotional material distributed via Field Email or Content Management",
+        "FSA Transparency Code requires annual disclosure of all transfers of value to HCPs/HCOs — Events Management must capture sufficient detail for FSA reporting",
+        "Sample limits are stricter than most EU countries: one smallest package per product per HCP per visit, maximum two per product per year"
+      ],
+      "see_also": "germany-bdsg.json for comprehensive Germany-specific pharmaceutical rules"
     },
     {
       "country": "France",
       "additional_rules": [
-        "CNIL requires specific cookie consent mechanisms",
-        "Transparency Code (Loi Bertrand) requires disclosure of HCP payments/transfers of value",
-        "Anti-gift law restricts certain types of HCP engagement tracking"
+        "CNIL requires specific cookie consent mechanisms — banner must allow granular per-purpose acceptance/rejection",
+        "Transparency Code (Loi Bertrand / Sunshine Act) requires public disclosure of all HCP/HCO payments above EUR 10 — integrated with the Base Transparence Santé database",
+        "Anti-gift law (Loi anti-cadeaux) restricts hospitality, gifts, and benefits to HCPs — Events Management must enforce strict value caps and purpose documentation",
+        "ANSM (Agence nationale de sécurité du médicament) requires sample distribution reporting and imposes category-specific restrictions on sample quantities",
+        "French pharma industry code (LEEM) adds self-regulatory requirements on top of statutory rules"
       ]
     },
     {
       "country": "Italy",
       "additional_rules": [
-        "Garante per la protezione dei dati personali has additional marketing consent requirements",
-        "AIFA regulations on pharmaceutical rep interactions require specific visit logging"
+        "Garante per la protezione dei dati personali enforces additional marketing consent requirements — separate consent needed per channel (email, phone, SMS)",
+        "AIFA (Agenzia Italiana del Farmaco) regulations require specific visit logging fields for pharmaceutical rep interactions",
+        "Farmindustria transparency code requires disclosure of HCP transfers of value — CRM must track amounts in EUR with AIFA-compatible categories",
+        "Sample distribution is regulated by AIFA with per-product annual limits and mandatory request documentation from HCPs"
+      ]
+    },
+    {
+      "country": "Spain",
+      "additional_rules": [
+        "AEMPS (Agencia Española de Medicamentos y Productos Sanitarios) regulates pharmaceutical promotion — promotional materials restricted to products marketed within the last 2 years",
+        "Farmaindustria self-regulatory code requires HCP payment transparency reporting",
+        "Regional (Comunidad Autónoma) variations exist for healthcare regulation — some regions have additional pharmaceutical rep registration requirements",
+        "Sample distribution limited to products with authorized promotional materials currently in force"
       ]
     }
   ],

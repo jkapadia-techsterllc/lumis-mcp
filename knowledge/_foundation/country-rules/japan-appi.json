@@ -1,39 +1,51 @@
 {
   "id": "country-jp-appi",
-  "region": "Japan",
+  "region": "Asia-Pacific",
   "countries": ["Japan"],
-  "regulation": "APPI (Act on the Protection of Personal Information), JPMA Code, MR Certification",
-  "modules_affected": ["Consent Management", "Visit Management", "Sample Management", "Field Email"],
+  "regulation": "APPI (Act on the Protection of Personal Information, 2022 Amendment), JPMA Code of Practice, MR Education and Certification, Pharmaceutical Affairs Act",
+  "modules_affected": ["Consent Management", "Visit Management", "Sample Management", "Field Email", "Events Management", "Content Management", "User Management"],
   "rules": [
     {
-      "rule": "APPI Consent Requirements",
-      "description": "Personal information requires consent for collection and use. Cross-border data transfer requires additional consent or equivalent safeguards.",
-      "implementation": "Consent Management must track: purpose of use, cross-border transfer consent separately. Data residency may require Japan-based data center or additional contractual safeguards.",
-      "penalty": "Up to ¥100M for corporations, criminal penalties for individuals"
+      "rule": "APPI Consent and Data Handling",
+      "description": "The APPI (amended 2022) requires explicit consent for collection, use, and third-party sharing of personal information. Japan classifies data into personal information, personal data (in databases), and retained personal data (held for 6+ months). Cross-border data transfer requires one of: (a) consent from the individual specifying the destination country, (b) the recipient country having equivalent data protection standards (EU is recognized, US is not by default), or (c) the recipient entity implementing equivalent protections via contract or binding corporate rules.",
+      "implementation": "Consent Management must track: (1) Purpose of use specified at collection time — changes require re-consent, (2) Separate cross-border transfer consent with destination country named, (3) Third-party provision records (who, what data, when) retained for 3 years, (4) Opt-out mechanism for non-sensitive third-party sharing (separate from cross-border). Data residency: target platform must confirm Japan data center availability or contractual safeguards for APPI cross-border rules. The Personal Information Protection Commission (PPC) is the supervisory authority.",
+      "penalty": "Up to JPY 100M (approx. USD 700K) for corporations violating orders, up to JPY 500K for individuals. Criminal penalties include imprisonment up to 1 year. The 2022 amendment significantly increased penalties from prior maximums."
     },
     {
-      "rule": "MR Certification (Medical Representative)",
-      "description": "Medical Representatives (MRs) must be certified by MR Education Center. CRM must support MR certification tracking and visit compliance.",
-      "implementation": "User Management must track MR certification status and expiration. Visit Management should validate that only certified MRs conduct product detailing visits.",
+      "rule": "MR Certification and Compliance",
+      "description": "Medical Representatives (MRs) in Japan must be certified by the MR Education Center of Japan (MR認定センター). Certification requires passing the MR certification exam after completing manufacturer-provided education (the standard is 300+ hours in the first year, though this varies by company). Certification is renewed every 5 years through continuing education. The MR role in Japan is culturally distinct — MRs are expected to provide balanced scientific information (not just promotional messaging) and often serve as a bridge between the pharmaceutical company and the prescribing physician.",
+      "implementation": "User Management must track: (1) MR certification number and status (active, expired, pending renewal), (2) Certification expiration date with automated renewal reminders, (3) Continuing education credit completion. Visit Management should validate that only MRs with active certification conduct product detailing visits. Reporting must be able to filter visit activity by certified vs. uncertified users for compliance audits.",
       "affected_modules": ["User Management", "Visit Management"]
     },
     {
       "rule": "JPMA Code of Practice",
-      "description": "Japan Pharmaceutical Manufacturers Association self-regulatory code governs HCP interactions, hospitality, and promotional activities.",
-      "implementation": "Visit Management and Events Management must enforce: (1) Meal/hospitality caps per interaction, (2) Promotional material approval tracking, (3) Off-label discussion prohibition enforcement.",
+      "description": "The Japan Pharmaceutical Manufacturers Association (JPMA) self-regulatory Code of Practice (updated 2024) governs all interactions between pharmaceutical companies and HCPs. Key provisions: (1) Hospitality must be modest and directly related to the informational purpose — meal caps of approximately JPY 5,000 per person, (2) All promotional materials must be reviewed and approved by an internal review committee before use, (3) Off-label promotion is strictly prohibited — MRs may only discuss approved indications, (4) Consulting fees and honoraria for HCPs must be at fair market value and disclosed, (5) Post-marketing surveillance (PMS) data collection has specific compliance requirements.",
+      "implementation": "Visit Management must enforce: (1) Hospitality spend tracking per interaction with JPMA-defined caps, (2) Visit purpose categorization (detailing, PMS, MSL, etc.) with different compliance rules per category. Events Management must enforce: (1) Meal/refreshment caps per attendee, (2) Speaker honorarium tracking at fair market value, (3) Venue appropriateness guidelines (no luxury venues). Content Management must enforce: (1) Review and approval workflow with compliance committee sign-off before any material is distributed, (2) Off-label content flagging and prohibition, (3) Fair balance requirements in all promotional materials.",
       "affected_modules": ["Visit Management", "Events Management", "Content Management"]
     },
     {
-      "rule": "Sample Distribution Regulations",
-      "description": "Japan's pharmaceutical sample regulations differ from US PDMA. Samples classified as 'trial-use drugs' have specific handling requirements.",
-      "implementation": "Sample Management must support: (1) Trial-use drug classification, (2) Ministry of Health, Labour and Welfare reporting requirements, (3) Different lot tracking granularity than US/EU.",
+      "rule": "Sample Distribution (Trial-Use Drugs)",
+      "description": "Pharmaceutical samples in Japan are classified as 'trial-use drugs' (試用医薬品) under the Pharmaceutical Affairs Act. Distribution is regulated by the Ministry of Health, Labour and Welfare (MHLW). Key rules: (1) Samples may only be provided to physicians and pharmacists who request them, (2) Distribution must be logged with product name, quantity, lot number, destination, and date, (3) Narcotic and psychotropic substance samples are prohibited, (4) Maximum quantity limits apply per product per HCP, (5) Companies must submit annual sample distribution reports to MHLW.",
+      "implementation": "Sample Management must support: (1) Trial-use drug classification distinct from US PDMA categories, (2) Mandatory request documentation from the receiving HCP before sample provision, (3) MHLW-compatible reporting format for annual sample distribution reports, (4) Per-product per-HCP quantity tracking with configurable limits, (5) Lot-level traceability including expiration date tracking, (6) Prohibition enforcement for narcotic/psychotropic product categories.",
       "affected_modules": ["Sample Management"]
+    },
+    {
+      "rule": "Transparency Reporting",
+      "description": "JPMA Code requires member companies to disclose payments and transfers of value to HCPs and HCOs. Categories include: research and development expenses, academic/educational expenses, manuscript/consulting fees, informational provision expenses, and other expenses. Disclosure is published annually on each company's website. Unlike the US Sunshine Act, Japan's transparency reporting is industry self-regulated through JPMA rather than government-mandated, but compliance is considered essential for market participation.",
+      "implementation": "Events Management and Visit Management must capture transfers of value with JPMA disclosure categories. Finance integration should support export in JPMA-compatible format for annual publication. Track: (1) Recipient (individual HCP or HCO with Japanese registration), (2) Category of payment per JPMA guidelines, (3) Amount in JPY, (4) Date and purpose. Companies must publish aggregated and individual data annually.",
+      "affected_modules": ["Events Management", "Visit Management"]
+    },
+    {
+      "rule": "Field Email and Digital Engagement",
+      "description": "Japan's Act on Regulation of Transmission of Specified Electronic Mail (Anti-Spam Act) requires opt-in consent for commercial electronic messages. Combined with APPI, this means: (1) Prior opt-in consent required before sending any commercial email to HCPs, (2) Sender identification must include company name and contact information, (3) Unsubscribe mechanism must be provided and honored within 10 business days, (4) Records of consent and unsubscribe requests must be retained. Japan's digital engagement in pharma is growing but still heavily weighted toward in-person MR visits compared to Western markets.",
+      "implementation": "Field Email must enforce: (1) Opt-in verification before any email send — no legitimate interest basis available for commercial messaging, (2) Japanese-language sender identification and company details in every email, (3) Functional unsubscribe mechanism, (4) Consent record retention with timestamp. Consent Management should track email opt-in separately from other consent types (visit, data processing).",
+      "affected_modules": ["Field Email", "Consent Management"]
     }
   ],
-  "migration_notes": "Japan implementations often have unique customizations due to MR culture and JPMA requirements. Key migration considerations: (1) MR visit patterns (high-frequency, short-duration) may require different Activity Plan configuration than Western markets, (2) Language/localization: full Japanese UI and data support required, (3) Data residency: confirm target platform's data center location meets APPI cross-border requirements.",
+  "migration_notes": "Japan implementations are among the most customized markets due to the distinct MR culture and layered regulatory requirements. Key migration considerations: (1) MR visit patterns differ significantly from Western markets — high-frequency, short-duration visits (often 5-10 minutes) focused on scientific exchange rather than promotional detailing. Activity Plan configuration should reflect 10-20+ visits per day per MR. (2) Full Japanese UI, data, and content localization is mandatory — machine translation is not acceptable for regulatory or promotional materials. (3) Data residency: confirm target platform Japan data center location (Tokyo/Osaka). Cross-border transfer without a Japan data center requires explicit APPI cross-border consent naming the destination country. (4) JPMA transparency reporting data from the source platform must be migrated or archived for disclosure continuity. (5) MR certification records are critical business data — migrate with active/expired status and renewal dates. (6) Japan's fiscal year runs April to March, which affects reporting period configuration. (7) Many Japan implementations use custom objects for PMS (post-marketing surveillance) tracking — evaluate whether to migrate these as custom objects or map to standard platform features.",
   "citation": {
     "source": "Lumis Knowledge Base",
     "section": "Country Rules / Japan APPI",
-    "confidence": "Medium — fewer production deployments to reference"
+    "confidence": "High — comprehensive coverage of APPI 2022 amendments and JPMA requirements"
   }
 }

@@ -1,0 +1,118 @@
+{
+  "id": "dt-migration-strategy",
+  "title": "Migration Strategy Decision Tree: Big-Bang vs Phased",
+  "description": "Decision tree for choosing between big-bang (all modules at once) and phased (incremental module rollout) migration strategies for life sciences CRM. Factors include organizational complexity, risk tolerance, module interdependencies, and operational constraints.",
+  "nodes": [
+    {
+      "id": "start",
+      "question": "How many countries will go live on the target platform?",
+      "guidance": "Country count is the primary driver of migration complexity. Each country adds regulatory configuration, localization, user training, and data migration scope.",
+      "options": [
+        {"label": "1 country", "next": "module_count_single"},
+        {"label": "2-5 countries", "next": "module_count_multi"},
+        {"label": "6+ countries", "next": "phased_recommended"}
+      ]
+    },
+    {
+      "id": "module_count_single",
+      "question": "How many modules are in scope for migration?",
+      "guidance": "Count distinct functional modules: Visit Management, Sample Management, Consent Management, Content Management, Field Email, Events Management, Territory Alignment, Activity Plans, Medical Information, etc.",
+      "options": [
+        {"label": "1-3 modules", "next": "user_count_simple"},
+        {"label": "4-6 modules", "next": "risk_tolerance_moderate"},
+        {"label": "7+ modules", "next": "phased_recommended"}
+      ]
+    },
+    {
+      "id": "module_count_multi",
+      "question": "How many modules are in scope for migration?",
+      "guidance": "With multiple countries, module count amplifies complexity — each module needs per-country configuration and testing.",
+      "options": [
+        {"label": "1-3 modules", "next": "risk_tolerance_moderate"},
+        {"label": "4+ modules", "next": "phased_recommended"}
+      ]
+    },
+    {
+      "id": "user_count_simple",
+      "question": "How many end users will be migrated?",
+      "guidance": "User count affects training logistics, data migration volume, and rollback complexity.",
+      "options": [
+        {"label": "Under 200 users", "next": "bigbang_viable"},
+        {"label": "200-1000 users", "next": "risk_tolerance_moderate"},
+        {"label": "Over 1000 users", "next": "phased_recommended"}
+      ]
+    },
+    {
+      "id": "risk_tolerance_moderate",
+      "question": "What is the organization's tolerance for a parallel-run period?",
+      "guidance": "A parallel-run period means running both source and target platforms simultaneously. This reduces risk but increases cost and user burden. Consider whether the source platform contract timeline forces a hard cutover date.",
+      "options": [
+        {"label": "No parallel run — hard cutover date required", "next": "bigbang_with_safeguards"},
+        {"label": "Willing to run parallel for 2-4 weeks", "next": "hybrid_approach"},
+        {"label": "Can run parallel for 1-3 months", "next": "phased_recommended"}
+      ]
+    },
+    {
+      "id": "phased_recommended",
+      "requirements": [
+        "Phase 1: Core modules first — Visit Management + Territory Alignment + Activity Plans (these are tightly coupled and should migrate together)",
+        "Phase 2: Compliance modules — Sample Management + Consent Management (these have regulatory dependencies that benefit from a stable core)",
+        "Phase 3: Communication modules — Field Email + Content Management (depend on consent configuration from Phase 2)",
+        "Phase 4: Advanced modules — Events Management, Medical Information, Analytics",
+        "Each phase should include: data migration dry run, user acceptance testing, training, and a go/no-go gate",
+        "Plan 4-8 weeks per phase depending on module complexity",
+        "Maintain data synchronization between source and target during transition",
+        "Define clear criteria for decommissioning the source platform"
+      ],
+      "risk_level": "lower",
+      "recommendation": "Phased migration is recommended. The combination of country count, module count, or user count creates too much simultaneous change risk for a big-bang approach. Phased migration allows learning from early phases, limits blast radius of issues, and gives users time to adapt."
+    },
+    {
+      "id": "bigbang_viable",
+      "requirements": [
+        "Big-bang migration is viable for this scope",
+        "Plan a single cutover weekend with pre-migrated data and pre-tested configuration",
+        "Conduct at least 2 full data migration dry runs before the cutover",
+        "Prepare a documented rollback plan with a decision deadline (e.g., 4 hours post-cutover)",
+        "Train all users before cutover — do not rely on post-go-live training",
+        "Staff a war room for the first 2 weeks post-go-live with dedicated support",
+        "Pre-configure all reports and dashboards — users expect day-one parity"
+      ],
+      "risk_level": "moderate",
+      "recommendation": "Big-bang migration is feasible given the limited scope. The key risk is that any misconfiguration affects all users simultaneously. Mitigate with thorough dry runs and a clear rollback plan."
+    },
+    {
+      "id": "bigbang_with_safeguards",
+      "requirements": [
+        "Big-bang migration under a hard cutover deadline requires additional safeguards",
+        "Start data migration dry runs at least 8 weeks before cutover",
+        "Run a minimum of 3 full dry runs, fixing issues between each",
+        "Establish a go/no-go decision gate 48 hours before cutover with defined criteria",
+        "Build a rollback plan that can execute within 4 hours — test the rollback plan itself",
+        "Pre-stage all user training and have floor-walker support for the first week",
+        "Over-staff the support desk for 2 weeks post-cutover",
+        "Validate every integration point (downstream systems, data warehouses, third-party tools) in a staging environment that mirrors production"
+      ],
+      "risk_level": "high",
+      "recommendation": "Big-bang migration is necessary given the hard cutover constraint, but carry elevated risk. The lack of parallel-run means the rollback plan is the primary safety net — invest heavily in testing it."
+    },
+    {
+      "id": "hybrid_approach",
+      "requirements": [
+        "Hybrid approach: migrate all modules in a single cutover but run parallel systems for a transition period",
+        "During parallel-run: source platform is read-only (historical reference), target platform is the system of record",
+        "Do NOT allow data entry in both systems simultaneously — this creates reconciliation nightmares",
+        "Use the parallel period for: issue discovery, user support escalation, data validation, and report comparison",
+        "Set a firm end-date for parallel-run — open-ended parallel periods erode adoption",
+        "Plan data migration in a single batch, not incrementally, to avoid synchronization complexity"
+      ],
+      "risk_level": "moderate",
+      "recommendation": "The hybrid approach balances risk and timeline. Migrating everything at once simplifies data integrity, while the parallel-run period provides a safety net. The critical discipline is keeping the source platform read-only during parallel-run."
+    }
+  ],
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Decision Trees / Migration Strategy",
+    "confidence": "High"
+  }
+}

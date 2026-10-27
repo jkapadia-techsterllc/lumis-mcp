@@ -1,0 +1,39 @@
+{
+  "id": "country-br-lgpd",
+  "region": "Latin America",
+  "countries": ["Brazil"],
+  "regulation": "LGPD (Lei Geral de Proteção de Dados), ANVISA Regulations, CFF (Federal Pharmacy Council) Rules",
+  "modules_affected": ["Consent Management", "Visit Management", "Sample Management", "Field Email", "Events Management"],
+  "rules": [
+    {
+      "rule": "LGPD Consent and Legal Basis",
+      "description": "Brazil's LGPD (effective September 2020) requires a legal basis for processing personal data. Ten legal bases are defined, with consent and legitimate interest being the most relevant for life sciences CRM. Unlike GDPR, LGPD does not restrict cross-border transfers to adequacy countries — it allows transfers under multiple mechanisms including consent, contractual necessity, and standard contractual clauses.",
+      "implementation": "Consent Management must track the specific legal basis used for each HCP's data. Consent records must include: purpose of processing, granular channel preferences, and withdrawal mechanism. LGPD requires a Data Protection Officer (Encarregado) to be appointed.",
+      "penalty": "Up to 2% of revenue in Brazil, capped at R$50 million per violation. ANPD (National Data Protection Authority) can also impose daily fines, public disclosure of violations, and data processing suspension."
+    },
+    {
+      "rule": "ANVISA Pharmaceutical Regulations",
+      "description": "ANVISA (Agência Nacional de Vigilância Sanitária) regulates pharmaceutical promotion and sample distribution. RDC 96/2008 governs pharmaceutical advertising and restricts promotion of prescription drugs to healthcare professionals only. Sample distribution requires detailed logging and traceability.",
+      "implementation": "Content Management must enforce: (1) Promotional materials shown only to verified HCPs, (2) Mandatory inclusion of contraindications and adverse effects, (3) Prohibition of promotional materials for restricted-class drugs. Sample Management must track ANVISA-required fields for sample lot registration and distribution records.",
+      "affected_modules": ["Content Management", "Sample Management"]
+    },
+    {
+      "rule": "CFF and State Pharmacy Council Rules",
+      "description": "The Federal Pharmacy Council (CFF) and state-level Regional Pharmacy Councils (CRFs) regulate pharmaceutical professional conduct. Representatives interacting with pharmacists must comply with CFF Resolution 585/2013 and state-specific rules.",
+      "implementation": "Visit Management should support tracking of interactions with pharmacists vs physicians, as CFF rules differ from medical council (CFM) rules. Events Management must enforce state-level rules on hospitality and educational event sponsorship.",
+      "affected_modules": ["Visit Management", "Events Management"]
+    },
+    {
+      "rule": "Tax and Fiscal Requirements (Nota Fiscal)",
+      "description": "Sample shipments in Brazil require Nota Fiscal (tax invoice) documentation for interstate movement. Each state has its own ICMS tax requirements that affect sample logistics.",
+      "implementation": "Sample Management must integrate with or reference Nota Fiscal requirements for sample shipments. Interstate sample transfers require additional documentation fields beyond what US/EU implementations need.",
+      "affected_modules": ["Sample Management"]
+    }
+  ],
+  "migration_notes": "Brazil implementations have unique requirements: (1) Portuguese language support is mandatory — full UI and data localization including date formats (DD/MM/YYYY) and number formats (comma as decimal separator), (2) LGPD consent records from source platform must be migrated with original consent dates and legal basis documentation, (3) ANVISA promotional compliance rules are stricter than US FDA for certain drug classes — verify content approval workflows cover Brazilian requirements, (4) Tax/fiscal integration for sample logistics does not exist in most source platform deployments and may require new custom development, (5) Brazil's large geographic territory and state-level regulatory variation means territory configuration is more complex than single-jurisdiction markets.",
+  "citation": {
+    "source": "Lumis Knowledge Base",
+    "section": "Country Rules / Brazil LGPD",
+    "confidence": "Medium — regulatory framework is well-documented but fewer production CRM deployments to reference"
+  }
+}
